@@ -5,6 +5,6 @@ import it.polimi.se2018.model.Cards.ToolCard;
 import it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 public class Board {
-    private ArrayList<ToolCard> toolcardlist;
-    private ArrayList<PublicObjectiveCard> publiccardlist;
+    private ArrayList<ToolCard> toolCardList;
+    private ArrayList<PublicObjectiveCard> publicCardList;
 }
