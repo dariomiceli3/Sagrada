@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DiceBag {
     private int capacity;
-    private Dice Dice;
+    private Dice dice;
     private ArrayList<Dice> listDice;
 
 }

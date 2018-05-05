@@ -1,16 +1,13 @@
-package it.polimi.se2018.model.Cards;
+package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Player;
 
-public class PrivateObjectiveCard {
-    private int counter;
-    private String colour;
+public class DifferentShadeRow implements PublicEffects {
 
+    @Override
     public int RunPoint(Player player){
         int points = 0;
 
         return points ;
     }
-
-
 }
