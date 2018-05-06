@@ -1,6 +1,6 @@
 package it.polimi.se2018.model;
 
-public enum DiceColour {
+public enum DiceColor {
     Red,
     Yellow,
     Blue,

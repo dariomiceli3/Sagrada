@@ -1,6 +1,6 @@
 package it.polimi.se2018.model;
 
-public enum PlayerColour {
+public enum PlayerColor {
     Red,
     Green,
     Blue,
