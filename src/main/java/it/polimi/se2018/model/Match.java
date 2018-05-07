@@ -8,4 +8,5 @@ public class Match {
     private ArrayList<ToolCard> toolCards;
     private ArrayList<PublicObjectiveCard> publicCard;
 
+
 }
