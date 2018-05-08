@@ -6,19 +6,29 @@ public class GlassCoord {
 
 }
 
-public int getCoordX() {
+
+public GlassCord(int coordX, int coordY)
+{
+    this.coordX = coordX;
+    this.coordY = coordY;
+}
+public int getCoordX()
+{
     return coordX;
 }
 
-public void setCoordX(int coordX) {
+public void setCoordX(int coordX)
+{
     this.coordX = coordX;
 }
 
-public int getCoordY() {
+public int getCoordY()
+{
     return coordY;
 }
 
-public void setCoordY(int coordY) {
+public void setCoordY(int coordY)
+{
     this.coordY  = coordY;
 }
 
