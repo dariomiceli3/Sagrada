@@ -1,8 +1,7 @@
 package it.polimi.se2018.model.Cards;
 
-import it.polimi.se2018.model.GlassBox;
+import it.polimi.se2018.model.Components.GlassBox;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PatternCard {

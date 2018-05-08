@@ -1,4 +1,4 @@
-package it.polimi.se2018.model;
+package it.polimi.se2018.model.Components;
 
 public class Player {
     private String playerID;

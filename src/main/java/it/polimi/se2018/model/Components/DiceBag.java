@@ -1,4 +1,4 @@
-package it.polimi.se2018.model;
+package it.polimi.se2018.model.Components;
 
 
 
@@ -7,15 +7,14 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class
-DiceBag {
+public class DiceBag {
     private final int TOP = 0;
     private final int MAX_VALUE = 6;
     private final int NUMBER = 90;
     private Dice dice;
     private ArrayList<Dice> listDice;
     private int value;
-    private DiceColour colour;
+    private DiceColor colour;
 //gestione eccezioni da dichiarare e controlli da fare
 
     public DiceBag() {
@@ -25,11 +24,11 @@ DiceBag {
         Random random = new Random();
         for (int i = 0; i < (NUMBER / 5); i++) {
 
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColour.YELLOW));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColour.PURPLE));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColour.RED));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColour.GREEN));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColour.BLUE));
+            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.YELLOW));
+            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.PURPLE));
+            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.RED));
+            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.GREEN));
+            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.BLUE));
         }
 
         /*controllo numero elementi

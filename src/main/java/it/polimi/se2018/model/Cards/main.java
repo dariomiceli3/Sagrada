@@ -3,13 +3,6 @@ package it.polimi.se2018.model.Cards;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.se2018.model.GlassBox;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class main {

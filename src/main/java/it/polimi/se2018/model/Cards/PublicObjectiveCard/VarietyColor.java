@@ -1,6 +1,6 @@
 package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
-import it.polimi.se2018.model.Player;
+import it.polimi.se2018.model.Components.Player;
 
 public class VarietyColor implements PublicEffects {
 
