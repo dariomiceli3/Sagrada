@@ -1,0 +1,14 @@
+{
+  "name": "Virtus",
+  "difficulty": 4,
+  "pattern": [{
+    "constraintValue": 2,
+    "constraintCol": "Blue"
+
+  },
+    {
+      "constraintValue": 1,
+      "constraintCol": "Green"
+    }
+  ]
+}

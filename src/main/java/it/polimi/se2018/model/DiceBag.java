@@ -6,8 +6,9 @@ package it.polimi.se2018.model;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
-// da deifnire come singleton
-public class DiceBag {
+
+public class
+DiceBag {
     private final int TOP = 0;
     private final int MAX_VALUE = 6;
     private final int NUMBER = 90;
@@ -42,25 +43,23 @@ public class DiceBag {
 
     }
 
-    //ritorna una copia dell'arraylist associatio alla Bag,clone necessaria
+    //ritorna l'arraylist associatio alla Bag
+
     public ArrayList<Dice> getListBag() {
 
         return listDice;
     }
 
-    //restituisce e rimuove il primo dado dalla dicebag
+    //restituisce e rimuove un dado dalla dicebag
     public Dice getDice() {
-        return listDice.remove(TOP);
+        dice = listDice.remove(TOP);
+        return dice;
     }
 
     //aggiunge un dado alla dicebag e la mischia
     public void setDice(Dice dice) {
         listDice.add(dice);
         Collections.shuffle(listDice);
-    }
-    //ritorna il numero di dadi presenti nella dicebag
-    public int getNowNumber(){
-        return listDice.size();
     }
 
 }
