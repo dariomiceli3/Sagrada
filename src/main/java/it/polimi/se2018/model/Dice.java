@@ -25,6 +25,11 @@ public class Dice {
         return value;
     }
 
+    public void setValue(int v){
+
+        value = v;
+
+    }
 
 
 

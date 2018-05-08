@@ -5,4 +5,6 @@ public class GlassBox {
     private Dice dice;
     private int constraintValue;
     private String constraintCol;
+
+
 }
