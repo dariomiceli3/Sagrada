@@ -18,7 +18,7 @@ public int getCoordY() {
     return coordY;
 }
 
-public void setCoordY() {
+public void setCoordY(int coordY) {
     this.coordY  = coordY;
 }
 
