@@ -18,7 +18,6 @@ DiceBag {
     private DiceColour colour;
 //gestione eccezioni da dichiarare e controlli da fare
 
-
     public DiceBag() {
         this.listDice = new ArrayList<Dice>();
 
@@ -43,8 +42,7 @@ DiceBag {
 
     }
 
-    //ritorna l'arraylist associatio alla Bag
-
+    //ritorna la copia dell'arraylist associatio alla Bag------------
     public ArrayList<Dice> getListBag() {
 
         return listDice;

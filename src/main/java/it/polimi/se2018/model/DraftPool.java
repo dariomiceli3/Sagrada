@@ -7,6 +7,7 @@ import java.util.Iterator;
 public class DraftPool {
 
     private final int DEFAULT = 0;
+    //NUMERO DEI GIOCATORI
     private int number;
     private DiceBag diceBag;
     private ArrayList<Dice> dicePlay;
@@ -43,16 +44,18 @@ public class DraftPool {
         return dicePlay.remove(DEFAULT);
     }
 
+    //passare una copia della lista dei dadi della pool-------------------
     public ArrayList<Dice> getDraftPool() {//clone necessaria
         return dicePlay;
     }
+
     //aggiunge un dado alla draftpool
     public void setDice(Dice dice){
         dicePlay.add(dice);
     }
 
     public ArrayList<Dice> getListDice(){
-        listDice = new ArrayList<Dice>();
+        listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();
         while(it.hasNext()){
             listDice.add(it.next());

@@ -10,4 +10,15 @@ public class PatternCard {
      private int difficulty;
      private List<GlassBox> pattern;
 
+     public int getDifficulty(){
+          return difficulty;
+     }
+
+     public String getName(){
+          return name;
+     }
+
+     public List<GlassBox> getPattern() {//rivista, passare una copia di pattern card-----------
+          return pattern;
+     }
 }

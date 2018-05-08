@@ -22,9 +22,11 @@ public class RoundTracker {
         this.listDice[IN] = listDice;
     }
 
+    //aggiunge un set di dadi nella posizione round
     public void setTracker(int round, ArrayList<Dice> listDice){
         this.listDice[round] = listDice;
     }
+
     //rimuove il dado in posizione pos del roundracker del round round
     public Dice getDice(int round, int pos){
 
@@ -36,6 +38,13 @@ public class RoundTracker {
 
         listDice[round].add(dice);
     }
+
+    //restituisce una copia della lista di dadi del round indicato se gia giocato----------------
+    //eccezioni e controlli ancora da gestire
+    public ArrayList<Dice> getRoundDice(int round){
+        return listDice[round];
+    }
+
 
 
 
