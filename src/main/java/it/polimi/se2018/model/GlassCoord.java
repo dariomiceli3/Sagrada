@@ -1,8 +1,8 @@
 package it.polimi.se2018.model;
 
 public class GlassCoord {
-    private int coordX;
-    private int coordY;
+    private final int coordX;
+    private final int coordY;
 
 
     public GlassCoord(int coordX, int coordY) {
