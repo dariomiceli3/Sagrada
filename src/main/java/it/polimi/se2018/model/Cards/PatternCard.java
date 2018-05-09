@@ -20,4 +20,6 @@ public class PatternCard {
      public List<GlassBox> getPattern() {//rivista, passare una copia di pattern card-----------
           return pattern;
      }
+
+
 }

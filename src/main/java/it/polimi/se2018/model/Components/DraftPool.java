@@ -10,11 +10,9 @@ import java.util.Iterator;
 public class DraftPool {
 
     private final int DEFAULT = 0;
-    //NUMERO DEI GIOCATORI
     private int number;
     private DiceBag diceBag;
     private ArrayList<Dice> dicePlay;
-    private ArrayList<Dice> listDice;
 
     /**
      * Default class constructor
@@ -74,7 +72,7 @@ public class DraftPool {
      @return the list of dice present in the pool atm
      */
     public ArrayList<Dice> cleanListDice(){
-        listDice = new ArrayList<>();
+        ArrayList<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();
         while(it.hasNext()){
             listDice.add(it.next());
