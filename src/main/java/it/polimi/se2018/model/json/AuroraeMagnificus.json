@@ -1,0 +1,71 @@
+{
+  "name": "AuroraeMagnificus",
+  "difficulty": 5,
+  "pattern": [{
+    "constraintValue": 5
+
+  },
+    {
+      "constraintColor": "Green"
+    },
+    {
+      "constraintColor": "Blue"
+    },
+    {
+      "constraintColor": "Purple"
+
+    },
+    {
+      "constraintValue": 2
+
+    },
+    {
+      "constraintColor": "Purple"
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+      "constraintColor": "Yellow"
+
+    },
+    {
+      "constraintColor": "Yellow"
+    },
+    {
+    },
+    {
+
+      "constraintValue": 6
+
+    },
+    {
+
+    },
+    {
+      "constraintColor": "Purple"
+    },
+    {
+      "constraintValue": 1
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+      "constraintColor": "Green"
+    },
+    {
+      "constraintValue": 4
+    }
+  ]
+}

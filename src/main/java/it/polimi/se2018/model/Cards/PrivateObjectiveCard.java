@@ -1,12 +1,12 @@
 package it.polimi.se2018.model.Cards;
 
-import it.polimi.se2018.model.Components.DiceColour;
+import it.polimi.se2018.model.Components.DiceColor;
 
 public class PrivateObjectiveCard {
 
     private final int DEF = 0;
     private int counter;
-    private DiceColour colour;
+    private DiceColor colour;
 
 
 
@@ -15,7 +15,7 @@ public class PrivateObjectiveCard {
         this.counter = DEF;
     }
 
-    public PrivateObjectiveCard(int counter, DiceColour colour){
+    public PrivateObjectiveCard(int counter, DiceColor colour){
         this.counter = counter;
         this.colour = colour;
     }
@@ -24,7 +24,7 @@ public class PrivateObjectiveCard {
         return counter;
     }
 
-    public DiceColour getColour(){
+    public DiceColor getColour(){
         return colour;
     }
 
