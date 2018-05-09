@@ -1,17 +1,34 @@
 package it.polimi.se2018.model.Components;
 
 public class GlassBox {
-    private GlassCoord coord;
+    //private GlassCoord coord; nel caso la reinseriamo, ma con tale implementazione non sembra avere senso
     private Dice dice;
     private int constraintValue;
     private String constraintColor;
 
-    public GlassBox(GlassCoord coord, Dice dice, int constraintValue, String constraintColor)
+
+    // constructor for box with no constraint value and color
+    public GlassBox()
     {
-        this.coord = coord;
+        setDice(null);
+        this.constraintValue = 0;
+        this.constraintColor = null;
+    }
+    // constructor for box with a constraint value
+    public GlassBox(int constraintValue)
+    {
+        //this.coord = coord;
+        setDice(null);
+        this.constraintColor = null;
+        this.constraintValue = constraintValue;
+    }
+
+    // constructor for box with a constraint color
+    public GlassBox(String constraintColor)
+    {
         setDice(null);
         this.constraintColor = constraintColor;
-        this.constraintValue = constraintValue;
+        this.constraintValue = 0;
     }
 
     public Dice getDice()
@@ -41,10 +58,6 @@ public class GlassBox {
             return false;
     }
 
-    public GlassCoord getCoord()
-    {
-        return coord;
-    }
 
     public int getConstraintValue()
     {
@@ -66,6 +79,22 @@ public class GlassBox {
         this.constraintColor = constraintColor;
     }
 
+    public boolean isValidMove(Dice dice)
+    {
+        if (isEmpty())
+        {
+            if (this.constraintColor.equals(dice.getColor().toString()))
+            {
+                if (this.constraintValue == dice.getValue())
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
+        }
+        else return false;
+    }
 
 }
 
