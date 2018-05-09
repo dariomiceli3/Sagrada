@@ -1,6 +1,6 @@
 package it.polimi.se2018.model.Cards;
 
-import it.polimi.se2018.model.DiceColour;
+import it.polimi.se2018.model.Components.DiceColour;
 
 public class PrivateObjectiveCard {
 

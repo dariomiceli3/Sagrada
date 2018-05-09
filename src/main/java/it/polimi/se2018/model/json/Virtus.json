@@ -2,12 +2,13 @@
   "name": "Virtus",
   "difficulty": 4,
   "pattern": [{
-    "constraintColor": "Blue"
+    "constraintValue": 2,
+    "constraintCol": "Blue"
 
   },
     {
       "constraintValue": 1,
-      "constraintColor": "Green"
+      "constraintCol": "Green"
     }
   ]
 }

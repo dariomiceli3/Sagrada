@@ -1,7 +1,6 @@
-package it.polimi.se2018.model;
+package it.polimi.se2018.model.Components;
 
 import java.util.ArrayList;
-import
 
 import com.google.gson.Gson;
 import it.polimi.se2018.model.Cards.ToolCards.ToolCard;
