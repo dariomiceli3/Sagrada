@@ -2,13 +2,17 @@ package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PatternCard;
 
+/**
+ * Class DifferentColorRow: PubblicCard
+ * @author Salvatrore Fadda
+ */
 public class DifferentColorRow implements PublicEffects {
     private final int  VPOINTS = 6;
 
     @Override
     public int RunPublic(PatternCard pattern){
         int points = 0;
-        for (int i = 0; i < pattern.getPattern().size(); i = i +5)
+        for (int i = 0; i < pattern.getPattern().size(); i = i +5) {
             if (
                     pattern.getPattern().get(i).getDice().getColor() != pattern.getPattern().get(i + 1).getDice().getColor() &&
                             pattern.getPattern().get(i).getDice().getColor() != pattern.getPattern().get(i + 2).getDice().getColor() &&
@@ -25,6 +29,7 @@ public class DifferentColorRow implements PublicEffects {
                     ) {
                 points = points + VPOINTS;
             }
+        }
 
         return points ;
     }

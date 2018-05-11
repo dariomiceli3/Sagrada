@@ -2,6 +2,10 @@ package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PatternCard;
 
+/**
+ * Class PublicObjectiveCard(DP Strategy)
+ * @author Salvatrore Fadda
+ */
 public class PublicObjectiveCard {
     private PublicEffects effect;
 

@@ -29,7 +29,7 @@ public class LightShade implements PublicEffects{
         }
         else points = setOf2*2;
 
-        return points*2 ;
+        return points;
     }
 
 }
