@@ -25,9 +25,9 @@ public class LightShade implements PublicEffects{
             }
         }
         if ( setOf1 < setOf2) {
-            points = setOf1;
+            points = setOf1*2;
         }
-        else points = setOf2;
+        else points = setOf2*2;
 
         return points*2 ;
     }

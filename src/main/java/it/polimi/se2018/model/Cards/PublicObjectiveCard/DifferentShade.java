@@ -60,7 +60,7 @@ public class DifferentShade implements PublicEffects {
         temp2 = min(setOf3, setOf4);
         temp3 = min(setOf5, setOf6);
         temp4 = min(temp1, temp2 );
-        points = min(temp3, temp4);
+        points = min(temp3, temp4) * 5;
 
         return points*5 ;
     }

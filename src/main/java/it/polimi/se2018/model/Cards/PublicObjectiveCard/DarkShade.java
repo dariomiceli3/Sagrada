@@ -35,9 +35,9 @@ public class DarkShade implements PublicEffects {
             }
         }
         if ( setOf5 < setOf6) {
-            points = setOf5;
+            points = setOf5 * 2;
         }
-        else points = setOf6;
+        else points = setOf6 * 2;
 
         return points*2 ;
     }

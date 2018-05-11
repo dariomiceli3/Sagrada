@@ -33,9 +33,9 @@ public class MediumShade implements PublicEffects {
             }
         }
         if ( setOf3 < setOf4) {
-            points = setOf3;
+            points = setOf3*2;
         }
-        else points = setOf4;
+        else points = setOf4*2;
 
         return points*2 ;
     }
