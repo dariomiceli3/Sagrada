@@ -5,8 +5,16 @@ import it.polimi.se2018.model.Components.GlassBox;
 
 import java.util.Iterator;
 
+/**
+ * class used to count the number of sets of 3&4
+ * @author Dario Miceli
+ */
 public class MediumShade implements PublicEffects {
 
+    /**
+     * @param pattern scheme card of a player
+     * @return number of sets of 3&4
+     */
     @Override
     public int RunPublic(PatternCard pattern){
         int points;

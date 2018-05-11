@@ -2,11 +2,19 @@ package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PatternCard;
 import it.polimi.se2018.model.Components.GlassBox;
-
 import java.util.Iterator;
 
+/**
+ * class used to count the number of sets of 1&2
+ * @author Dario Miceli
+ */
 public class LightShade implements PublicEffects {
 
+    /**
+     *
+     * @param pattern scheme card of a player
+     * @return number of sets of 1&2
+     */
     @Override
     public int RunPublic(PatternCard pattern){
         int points;
