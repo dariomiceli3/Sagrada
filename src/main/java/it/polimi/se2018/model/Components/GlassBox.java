@@ -1,7 +1,6 @@
 package it.polimi.se2018.model.Components;
 
 public class GlassBox {
-    //private GlassCoord coord; nel caso la reinseriamo, ma con tale implementazione non sembra avere senso
     private Dice dice;
     private int constraintValue;
     private String constraintColor;
@@ -17,7 +16,6 @@ public class GlassBox {
     // constructor for box with a constraint value
     public GlassBox(int constraintValue)
     {
-        //this.coord = coord;
         setDice(null);
         this.constraintColor = null;
         this.constraintValue = constraintValue;
@@ -79,20 +77,39 @@ public class GlassBox {
         this.constraintColor = constraintColor;
     }
 
-    public boolean isValidMove(Dice dice)
+    public boolean isBoxValid(Dice dice)
     {
-        if (isEmpty())
-        {
-            if (this.constraintColor.equals(dice.getColor().toString()))
-            {
-                if (this.constraintValue == dice.getValue())
-                {
+        if (isEmpty()) {
+
+            // si color no value case
+            if (this.constraintColor != null) {
+                if (this.constraintColor.equals(dice.getColor().toString())) {
+                    setDice(dice);
                     return true;
                 }
-                else return false;
+                else {
+                    return false;
+                }
             }
-            else return false;
+            // no color si value case
+            else {
+                if (this.constraintValue != 0) {
+                    if (this.constraintValue == dice.getValue()) {
+                        setDice(dice);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                // value = 0 e color = null case
+                else {
+                    setDice(dice);
+                    return true;
+                }
+            }
         }
+        // box full case
         else return false;
     }
 

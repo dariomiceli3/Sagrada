@@ -24,7 +24,7 @@ public class PatternCard {
           return name;
      }
 
-     public List<GlassBox> getPattern() {//rivista, passare una copia di pattern card-----------
+     public ArrayList<GlassBox> getPattern() {//rivista, passare una copia di pattern card-----------
           return pattern;
      }
 
