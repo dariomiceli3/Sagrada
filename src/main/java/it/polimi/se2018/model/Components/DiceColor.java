@@ -2,7 +2,7 @@ package it.polimi.se2018.model.Components;
 
 import java.io.Serializable;
 
-public enum DiceColor implements Serializable {
+public enum DiceColor{
     RED, YELLOW, PURPLE, GREEN, BLUE;
 
     @Override

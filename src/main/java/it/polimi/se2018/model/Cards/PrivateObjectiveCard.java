@@ -1,6 +1,10 @@
 package it.polimi.se2018.model.Cards;
 
+
 import it.polimi.se2018.model.Components.DiceColor;
+import it.polimi.se2018.model.Components.GlassBox;
+
+import java.util.Iterator;
 
 public class PrivateObjectiveCard {
 
@@ -13,7 +17,7 @@ public class PrivateObjectiveCard {
         this.colour = null;
     }
 
-    public PrivateObjectiveCard(int counter, DiceColor colour){
+    public PrivateObjectiveCard(DiceColor colour){
         this.colour = colour;
     }
 
@@ -21,9 +25,17 @@ public class PrivateObjectiveCard {
         return colour;
     }
 
-    public int RunPoint(PatternCard pattern){
-        int count = 0;
+    public int RunPoint(PatternCard pattern) {
+        int count = DEF;
+        GlassBox box;
+        Iterator<GlassBox> it = pattern.getPattern().iterator();
+        while (it.hasNext()) {
+            box = it.next();
+            if (box.getDice().getColor() == colour){
+                count++;
+            }
 
+        }
         return count;
     }
 
