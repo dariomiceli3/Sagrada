@@ -1,0 +1,57 @@
+{
+  "name": "Aurora Sagradis",
+  "difficulty": 4,
+  "pattern": [
+    {
+      "constraintColor" : "Red"
+    },
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+    }
+  ]
+}

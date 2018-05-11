@@ -1,0 +1,58 @@
+{
+  "name": "Chromatic Splender",
+  "difficulty": 4,
+  "pattern": [
+    {
+    },
+    {
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintColor:": "Purple"
+    },
+    {
+    },
+    {
+      "constrainValue" : 1
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+      "constraintValue" : 4
+    }
+  ]
+}

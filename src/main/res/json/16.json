@@ -1,0 +1,59 @@
+{
+  "name": Industria,
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintColor" : "Red"
+    }
+  ]
+}

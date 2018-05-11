@@ -1,0 +1,58 @@
+{
+  "name": "Gravitas",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue": 1
+    },
+    {
+    },
+    {
+      "constraintValue": 3
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue": 2
+    },
+    {
+      "constraintColor": "Blue"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue": 6
+    },
+    {
+      "constraintColor": "Blue"
+    },
+    {
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue": 5
+    },
+    {
+      "constraintValue": 2
+    },
+    {
+    },
+    {
+      "constraintValue": 1
+    }
+  ]
+}

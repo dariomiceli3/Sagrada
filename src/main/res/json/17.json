@@ -1,0 +1,59 @@
+{
+  "name": "Shadow Thief",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintValue" : 3
+    }
+  ]
+}

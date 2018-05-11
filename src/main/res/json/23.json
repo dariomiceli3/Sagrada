@@ -1,0 +1,60 @@
+{
+  "name": "Suns Glory",
+  "difficulty": 6,
+  "pattern": [
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+       "constraintValue" : 3
+    },
+    {
+    },
+    {
+      "constraintValue": 5
+    },
+    {
+      "constraintValue": 4
+    },
+    {
+      "constraintValue": 2
+    },
+    {
+      "constraintValue": 1
+    }
+  ]
+}

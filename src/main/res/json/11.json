@@ -1,0 +1,59 @@
+{
+  "name": "Firelight",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 6
+    }
+  ]
+}

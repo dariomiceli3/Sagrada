@@ -1,0 +1,59 @@
+{
+  "name": "Firmitas",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : "6"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : 4
+    }
+  ]
+}

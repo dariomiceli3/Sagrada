@@ -14,7 +14,7 @@ public class PatternCard {
      private final int NUMBER_OF_CARDS = 24;
      private String name;
      private int difficulty;
-     private List<GlassBox> pattern;
+     private ArrayList<GlassBox> pattern;
 
      public int getDifficulty(){
           return difficulty;

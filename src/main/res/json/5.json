@@ -1,9 +1,9 @@
 {
-  "name": "SunCatcher",
+  "name": "Sun Catcher",
   "difficulty": 3,
-  "pattern": [{
-
-  },
+  "pattern": [
+    {
+    },
     {
       "constraintColor": "Blue"
     },
@@ -11,60 +11,43 @@
       "constraintValue": 2
     },
     {
-
     },
     {
       "constraintColor": "Yellow"
-
     },
     {
-
     },
     {
       "constraintValue": 4
     },
     {
-
     },
     {
       "constraintColor": "Red"
-
     },
     {
-
     },
     {
-
     },
     {
-
     },
     {
-
       "constraintValue": 5
-
     },
     {
       "constraintColor": "Yellow"
-
     },
     {
-
     },
     {
       "constraintColor": "Green"
-
     },
     {
       "constraintValue": 3
-
     },
     {
-
-
     },
     {
-
     },
     {
       "constraintColor": "Purple"

@@ -1,0 +1,60 @@
+{
+  "name": "Lux Mundi",
+  "difficulty": 6,
+  "pattern": [
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintColor" :  "Blue"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+    }
+  ]
+}

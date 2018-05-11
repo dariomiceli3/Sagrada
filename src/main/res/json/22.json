@@ -1,0 +1,58 @@
+{
+  "name": "Comitas",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+      "constraintValue:" : 4
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "Water of Life",
+  "difficulty": 6,
+  "pattern": [
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+      "constraintColor" :"Green"
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintColor" : "Purple"
+    }
+  ]
+}

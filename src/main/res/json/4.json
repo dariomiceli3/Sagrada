@@ -1,37 +1,31 @@
 {
-  "name": "Vialux",
+  "name": "Via Lux",
   "difficulty": 4,
-  "pattern": [{
-    "constraintColor": "Yellow"
-
-  },
+  "pattern": [
+    {
+      "constraintColor": "Yellow"
+    },
     {
     },
     {
       "constraintValue": 6
     },
     {
-
     },
     {
-
     },
     {
-
     },
     {
       "constraintValue": 1
     },
     {
       "constraintValue": 5
-
     },
     {
-
     },
     {
       "constraintValue": 2
-
     },
     {
       "constraintValue": 3
@@ -40,26 +34,19 @@
       "constraintColor": "Yellow"
     },
     {
-
       "constraintColor": "Red"
-
     },
     {
       "constraintColor": "Purple"
-
     },
     {
-
     },
     {
-
     },
     {
-
     },
     {
       "constraintValue": 4
-
     },
     {
       "constraintValue": 3

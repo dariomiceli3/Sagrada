@@ -1,10 +1,10 @@
 {
   "name": "Virtus",
   "difficulty": 5,
-  "pattern": [{
-    "constraintValue": 4
-
-  },
+  "pattern": [
+    {
+      "constraintValue": 4
+    },
     {
     },
     {
@@ -12,65 +12,48 @@
     },
     {
       "constraintValue": 5
-
     },
     {
       "constraintColor": "Green"
-
     },
     {
-
     },
     {
-
     },
     {
       "constraintValue": 6
-
     },
     {
       "constraintColor": "Green"
-
     },
     {
       "constraintValue": 2
-
     },
     {
-
     },
     {
       "constraintValue": 3
     },
     {
-
       "constraintColor": "Green"
-
     },
     {
       "constraintValue": 4
-
     },
     {
-
     },
     {
       "constraintValue": 5
-
     },
     {
       "constraintColor": "Green"
-
     },
     {
       "constraintValue": 1
-
     },
     {
-
     },
     {
-
     }
   ]
 }

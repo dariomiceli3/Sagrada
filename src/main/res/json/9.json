@@ -1,0 +1,60 @@
+{
+  "name": "Lux Astram",
+  "difficulty": 5,
+  "pattern": [
+    {
+    },
+    {
+      "constraintValue": 1
+    },
+    {
+      "constraintColor": "Green"
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue": 4
+    },
+    {
+      "constraintValue": 6
+    },
+    {
+      "constrainColor": "Purple"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constrainColor" : "Purple"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    }
+  ]
+}

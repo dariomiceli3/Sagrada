@@ -1,0 +1,56 @@
+{
+  "name": "Fractal Drops",
+  "difficulty": 3,
+  "pattern": [
+    {
+    },
+    {
+      "constraintValue": 4
+    },
+    {
+    },
+    {
+      "constraintColor": "Yellow"
+    },
+    {
+      "constraintValue": 6
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+    },
+    {
+      "constraintValue": 2
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+      "constraintColor": "Purple"
+    },
+    {
+      "constraintValue": 1
+    },
+    {
+      "constraintColor": "Blue"
+    },
+    {
+      "constrainColor": "Yellow"
+    },
+    {
+    },
+    {
+    },
+    {
+    }
+  ]
+}

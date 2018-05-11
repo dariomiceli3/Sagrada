@@ -1,66 +1,52 @@
 {
-  "name": "KaleidoscopicDream",
+  "name": "Kaleidoscopic Dream",
   "difficulty": 4,
-  "pattern": [{
-    "constraintColor": "Yellow"
-
+  "pattern": [
+    {
+      "constraintColor": "Yellow"
     },
     {
       "constraintColor": "Blue"
     },
     {
-
     },
     {
-
     },
     {
-      "constraintValue": 1
-
+      "constraintValue": "1"
     },
     {
       "constraintColor": "Green"
     },
     {
-
     },
     {
       "constraintValue": 5
-
     },
     {
-
     },
     {
       "constraintValue": 4
-
     },
     {
       "constraintValue": 3
     },
     {
-
     },
     {
-
       "constraintColor": "Red"
-
     },
     {
-
     },
     {
       "constraintColor": "Green"
     },
     {
       "constraintValue": 2
-
     },
     {
-
     },
     {
-
     },
     {
       "constraintColor": "Blue"

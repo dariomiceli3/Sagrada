@@ -1,0 +1,60 @@
+{
+  "name": "Batllo",
+  "difficulty": 5,
+  "pattern": [
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+    },
+    {
+      "constraintValue": 3
+    },
+    {
+      "constraintColor" : "Green"
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+      "constraintValue" : 1
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 3
+    }
+  ]
+}

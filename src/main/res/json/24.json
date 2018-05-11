@@ -1,0 +1,59 @@
+{
+  "name": "Fulgor del Cielo",
+  "difficulty": 5,
+  "pattern": [
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintColor" : "Red"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintValue" : 4
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+      "constraintValue": 3
+    },
+    {
+      "constraintValue": 1
+    },
+    {
+    }
+  ]
+}

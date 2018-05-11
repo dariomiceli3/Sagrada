@@ -1,0 +1,56 @@
+{
+  "name": "Luz Celestial",
+  "difficulty": 3,
+  "pattern": [
+    {
+    },
+    {
+    },
+    {
+      "constraintColor": "Red"
+    },
+    {
+      "constraintValue" : 5
+    },
+    {
+    },
+    {
+      "constraintColor" : "Purple"
+    },
+    {
+      "constraintColor" : 4
+    },
+    {
+    },
+    {
+      "constraintColor:" : "Green"
+    },
+    {
+      "constraintValue" : 3
+    },
+    {
+      "constraintValue" : 6
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor" : "Blue"
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor" : "Yellow"
+    },
+    {
+      "constraintValue" : 2
+    },
+    {
+    },
+    {
+    }
+  ]
+}
