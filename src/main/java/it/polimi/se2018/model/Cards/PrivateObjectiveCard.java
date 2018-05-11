@@ -25,7 +25,7 @@ public class PrivateObjectiveCard {
         return colour;
     }
 
-    public int RunPoint(PatternCard pattern) {
+    public int RunPrivate(PatternCard pattern) {
         int count = DEF;
         GlassBox box;
         Iterator<GlassBox> it = pattern.getPattern().iterator();
