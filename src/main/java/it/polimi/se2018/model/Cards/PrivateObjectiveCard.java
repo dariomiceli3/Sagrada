@@ -32,7 +32,7 @@ public class PrivateObjectiveCard {
         while (it.hasNext()) {
             box = it.next();
             if (box.getDice().getColor() == colour){
-                count++;
+                count = count + box.getDice().getValue();
             }
 
         }
