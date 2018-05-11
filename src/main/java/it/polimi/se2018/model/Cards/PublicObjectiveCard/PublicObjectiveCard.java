@@ -6,8 +6,8 @@ public class PublicObjectiveCard {
     private int vicoryPoint;
     private PublicEffects effect;
 
-    public PublicObjectiveCard(PublicEffects strategy) {
-        this.effect = strategy;
+    public PublicObjectiveCard(PublicEffects effect) {
+        this.effect = effect;
     }
 
     public int executeEffect(PatternCard pattern){
