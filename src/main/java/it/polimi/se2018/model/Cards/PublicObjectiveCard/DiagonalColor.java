@@ -5,7 +5,7 @@ import it.polimi.se2018.model.Cards.PatternCard;
 public class DiagonalColor implements PublicEffects {
 
    @Override
-   public int RunPoint(PatternCard pattern){
+   public int RunPublic(PatternCard pattern){
       int points = 0;
 
       return points ;
