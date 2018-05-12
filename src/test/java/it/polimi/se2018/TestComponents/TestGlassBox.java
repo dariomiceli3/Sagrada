@@ -55,11 +55,11 @@ public class TestGlassBox {
         GlassBox glassBox = new GlassBox();
         Dice dice = new Dice(3, DiceColor.PURPLE);
 
-        assertEquals(true, glassBox.isEmpty());
+        assertEquals(true, glassBox.isBoxEmpty());
 
         glassBox.setDice(dice);
 
-        assertEquals(false, glassBox.isEmpty());
+        assertEquals(false, glassBox.isBoxEmpty());
     }
 
     @Test

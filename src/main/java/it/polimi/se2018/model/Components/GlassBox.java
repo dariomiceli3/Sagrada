@@ -47,15 +47,6 @@ public class GlassBox {
         return diceReturned;
     }
 
-    public boolean isEmpty() {
-        if (this.dice == null)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
 
     public int getConstraintValue()
     {
@@ -77,9 +68,19 @@ public class GlassBox {
         this.constraintColor = constraintColor;
     }
 
+    public boolean isBoxEmpty()
+    {
+        if (this.dice == null)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
     public boolean isBoxValid(Dice dice)
     {
-        if (isEmpty()) {
+        if (isBoxEmpty()) {
 
             // si color no value case
             if (this.constraintColor != null) {
