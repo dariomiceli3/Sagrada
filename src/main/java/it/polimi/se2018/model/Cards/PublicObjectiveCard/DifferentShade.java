@@ -6,7 +6,7 @@ import java.util.Iterator;
 import static java.lang.Math.min;
 
 /**
- * class used to count the number of sets of one of each value
+ * class used to count the number of points
  * @author Dario Miceli
  */
 
@@ -15,7 +15,7 @@ public class DifferentShade implements PublicEffects {
     /**
      *
      * @param pattern scheme card of a player
-     * @return number of sets of one of each value
+     * @return number of sets of one of each value multiplied by value of victory point
      */
     @Override
     public int RunPublic(PatternCard pattern){

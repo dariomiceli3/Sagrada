@@ -7,7 +7,7 @@ import it.polimi.se2018.model.Components.Player;
 import java.util.Iterator;
 
 /**
- * class used to count the number of sets of 5&6
+ * class used to count the number of points
  * @author Dario Miceli
  */
 public class DarkShade implements PublicEffects {
@@ -15,7 +15,7 @@ public class DarkShade implements PublicEffects {
     /**
      *
      * @param pattern scheme card of a player
-     * @return number of sets of 5&6
+     * @return number of sets of 5&6 multiplied by value of victory point
      */
     @Override
     public int RunPublic(PatternCard pattern){
