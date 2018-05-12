@@ -63,6 +63,6 @@ public class TestDiceBag {
         assertEquals(88, diceBag.getListBag().size());
         diceBag.setDice(dice);
         assertEquals(89, diceBag.getListBag().size());
-        
+
     }
 }
