@@ -77,8 +77,8 @@ public class TestGlassBox {
 
         assertEquals(false, glassBox.isBoxValid(dice));
         assertEquals(true, glassBox.isBoxValid(dice1));
-        assertEquals(true, glassBox1.isBoxValid(dice));
         assertEquals(false, glassBox1.isBoxValid(dice1));
+        assertEquals(true, glassBox1.isBoxValid(dice));
         assertEquals(true, glassBox2.isBoxValid(dice));
         glassBox2.unsetDice();
         assertEquals(true, glassBox2.isBoxValid(dice1));
