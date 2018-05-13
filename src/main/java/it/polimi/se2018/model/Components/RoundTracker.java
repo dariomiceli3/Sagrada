@@ -1,5 +1,7 @@
 package it.polimi.se2018.model.Components;
 
+import it.polimi.se2018.Exceptions.InvalidMoveException;
+
 import java.util.ArrayList;
 /**
  * Class RoundTracker: the round tracker is the table used to keep track of the current round and the die or dice not used in each round
@@ -54,9 +56,10 @@ public class RoundTracker {
      * @param dice the die to add
      * @param round the round where the die has been extracted
      */
-    public void addDice(Dice dice, int round){
-
-        listDice.get(round).add(dice);
+    public void addDice(Dice dice, int round) throws InvalidMoveException {
+        if (round < listDice.size()) {
+            listDice.get(round).add(dice);
+        } else throw new InvalidMoveException("Round ancora non giocato");
     }
 
     public ArrayList<ArrayList<Dice>> getRoundTracker(){
