@@ -112,5 +112,80 @@ public class TestPatternCard {
         }
     }
 
+    @Test
+    public void testGetDice() {
+        PatternCard patternCard = new PatternCard();
+        Dice dice = new Dice(3, DiceColor.YELLOW);
+        //Dice dice1 = new Dice(3, DiceColor.RED);
+        try {
+            ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+            try {
+                patternCardArrayList.get(0).putDice(dice, 2);
+                Dice dice1 = patternCardArrayList.get(0).getDice(2);
+            }
+            catch (InvalidMoveException e){
+                fail();
+            }
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testRemoveDice() {
+        PatternCard patternCard = new PatternCard();
+        Dice dice = new Dice(3, DiceColor.YELLOW);
+        //Dice dice1 = new Dice(3, DiceColor.RED);
+        try {
+            ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+            try {
+                patternCardArrayList.get(0).putDice(dice, 2);
+                patternCardArrayList.get(0).removeDice(dice,2);
+                }
+            catch (InvalidMoveException e){
+                fail();
+            }
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+    }
+
+    @Test (expected = InvalidMoveException.class)
+    public void testPutDiceOnPattern() throws InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice dice = new Dice(3, DiceColor.YELLOW);
+        Dice dice1 = new Dice(4, DiceColor.BLUE);
+        Dice dice2 = new Dice(5, DiceColor.RED);
+        Dice dice3 = new Dice(6, DiceColor.BLUE);
+
+
+        try {
+            ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+            PatternCard patternCard1 = patternCardArrayList.remove(1);
+
+            patternCard1.putDiceOnPattern(dice,6,patternCard1);
+            patternCard1.putDiceOnPattern(dice,7,patternCard1);
+            patternCard1.putDiceOnPattern(dice1,0,patternCard1);
+            patternCard1.putDiceOnPattern(dice,19,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,18,patternCard1);
+            patternCard1.putDiceOnPattern(dice1,1,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,2,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,6,patternCard1);
+
+
+
+            //Dice dice4 = patternCard1.getDice(0);
+            //assertEquals(3,dice4.getValue());
+            /*patternCard1.putDiceOnPattern(dice1,1,patternCard1);
+            patternCard1.putDiceOnPattern(dice2,7,patternCard1);
+            patternCard1.putDiceOnPattern(dice1, 11, patternCard1);
+            patternCard1.putDiceOnPattern(dice1, 16, patternCard1);
+            patternCard1.putDiceOnPattern(dice1, 16, patternCard1);
+            patternCard1.putDiceOnPattern(dice3, 5, patternCard1);*/
+
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+    }
 
     }
