@@ -52,6 +52,17 @@ public class TestRoundTracker {
         assertEquals(10, roundTracker.getRoundDice(1).size());
 
     }
+
+    @Test
+    public void testGetDice()  {
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(4,diceBag);
+        ArrayList<Dice> list = draftPool.cleanListDice();
+        RoundTracker roundTracker = new RoundTracker(list);
+        assertEquals(9, roundTracker.getRoundDice(0).size());
+        Dice dice = roundTracker.getDice(0, 8);
+    }
+
 }
 
 

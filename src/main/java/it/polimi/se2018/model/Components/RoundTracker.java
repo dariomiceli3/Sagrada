@@ -9,17 +9,14 @@ import java.util.ArrayList;
  */
 public class RoundTracker {
 
-    private final int IN = 0;
-    private final int ROUND = 10;
     private ArrayList<ArrayList<Dice>> listDice;
-    private Dice dice;
+
 
     /**
      * Default class constructor
      */
     public RoundTracker(){
         this.listDice = null;
-        this.dice = null;
     }
 
     /**
@@ -45,13 +42,11 @@ public class RoundTracker {
      * @param pos the die position in the list of dice (from bottom to top)
      * @return the die whitch has been removed
      */
-    public Dice getDice(int round, int pos) throws InvalidMoveException {
+    public Dice getDice(int round, int pos){
 
-        if (round < listDice.size() && pos < listDice.get(round).size()) {
             return listDice.get(round).remove(pos);
-        }
-        else throw new InvalidMoveException("Stai cercando un dado non presente nella round tracker");
-    }
+
+            }
 
     /**
      * Add a die from the top of the list of dice not used in the specified round
