@@ -1,7 +1,5 @@
 package it.polimi.se2018.model.Components;
 
-import it.polimi.se2018.Exceptions.UncleanedPoolException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -75,7 +73,7 @@ public class DraftPool {
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
      */
-    public ArrayList<Dice> cleanListDice() throws UncleanedPoolException {
+    public ArrayList<Dice> cleanListDice() {
 
         ArrayList<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();
@@ -84,7 +82,6 @@ public class DraftPool {
                 it.remove();
 
             }
-            if (dicePlay.size() != DEFAULT) throw new UncleanedPoolException("Errore Draft Pool non pulita");
         return listDice;
     }
 
