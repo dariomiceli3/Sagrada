@@ -59,6 +59,10 @@ public class RoundTracker {
         listDice.get(round).add(dice);
     }
 
+    public ArrayList<ArrayList<Dice>> getRoundTracker(){
+        return listDice;
+    }
+
     //restituisce una copia della lista di dadi del round indicato se gia giocato----------------
     //eccezioni e controlli ancora da gestire
     public ArrayList<Dice> getRoundDice(int round){

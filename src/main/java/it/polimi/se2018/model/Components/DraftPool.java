@@ -27,7 +27,7 @@ public class DraftPool {
     /**
      * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
      * @param number number of players in the match
-     * @param dicebag the dicebag from whitch to take the dice
+     * @param dicebag the dicebag from which to take the dice
      */
     public DraftPool(int number, DiceBag dicebag) {
         this.number = number;

@@ -1,5 +1,6 @@
 package it.polimi.se2018.TestComponents;
 
+
 import it.polimi.se2018.model.Components.*;
 import org.junit.Test;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-/*public class TestRoundTracker {
+public class TestRoundTracker {
 
     @Test
     public void testConstructor() {
@@ -18,21 +19,24 @@ import static org.junit.Assert.assertEquals;
         RoundTracker roundTracker = new RoundTracker(list);
 
         assertEquals(9,roundTracker.getRoundDice(0).size());
+        assertEquals(1,roundTracker.getRoundTracker().size());
 
     }
 
     @Test
-    public void testSetRoundTracker() {
+    public void testSetTracker() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         ArrayList<Dice> list = draftPool.cleanListDice();
 
         RoundTracker roundTracker = new RoundTracker(list);
-        roundTracker.setTracker(1,list);
-        roundTracker.setTracker(2,list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
 
         assertEquals(9, roundTracker.getRoundDice(1).size());
         assertEquals(9, roundTracker.getRoundDice(2).size());
+        assertEquals(2,roundTracker.getRoundTracker().size());
+        assertEquals(3,roundTracker.getRoundTracker().size());
     }
 
     @Test
@@ -61,4 +65,5 @@ import static org.junit.Assert.assertEquals;
 
     }
 }
-*/
+
+
