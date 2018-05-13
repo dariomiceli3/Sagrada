@@ -262,19 +262,20 @@ public class PatternCard {
 
      public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException
      {
-          final int NUMBER_OF_CARDS = 24;
-          ArrayList<PatternCard> patternList = new ArrayList<>();
 
-          File file = new File("./");
-          String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
+              final int NUMBER_OF_CARDS = 24;
+              ArrayList<PatternCard> patternList = new ArrayList<>();
 
-          for(int i = 1; i <= NUMBER_OF_CARDS; i++){
+              File file = new File("./");
+              String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
 
-               patternList.add(loadCard(filePath + i + ".json"));
-          }
+              for (int i = 1; i <= NUMBER_OF_CARDS; i++) {
 
-          return patternList;
-     }
+                  patternList.add(loadCard(filePath + i + ".json"));
+              }
+
+              return patternList;
+              }
 
      private PatternCard loadCard(String fileName) throws FileNotFoundException
      {
