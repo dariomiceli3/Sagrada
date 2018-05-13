@@ -370,8 +370,7 @@ public class PatternCard {
      }*/
 
 
-     public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException
-     {
+     public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException {
 
               final int NUMBER_OF_CARDS = 24;
               ArrayList<PatternCard> patternList = new ArrayList<>();
