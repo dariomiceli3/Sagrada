@@ -74,8 +74,8 @@ public class PatternCard {
 
                if (index == 0){
 
-                    if ((checkNearDice(dice, index + 1)) &&
-                            (checkNearDice(dice, index + 5)) &&
+                    if ((checkNearDice(dice, index + 1)) ||
+                            (checkDiagonalDice(dice, index + 5)) ||
                             (checkNearDice(dice, index + 6))) {
 
                          patternCard.putDice(dice, index);
@@ -85,11 +85,11 @@ public class PatternCard {
 
                else if ((index == 1) || (index == 2) || (index == 3)) {
 
-                    if ((checkNearDice(dice, index - 1)) &&
-                            (checkNearDice(dice, index + 1)) &&
-                            (checkNearDice(dice, index + 4)) &&
-                            (checkNearDice(dice, index + 5)) &&
-                            (checkNearDice(dice, index + 6)) ) {
+                    if ((checkNearDice(dice, index - 1)) ||
+                            (checkNearDice(dice, index + 1)) ||
+                            (checkDiagonalDice(dice, index + 4)) ||
+                            (checkNearDice(dice, index + 5)) ||
+                            (checkDiagonalDice(dice, index + 6)) ) {
 
                          patternCard.putDice(dice, index);
                     }
@@ -99,8 +99,8 @@ public class PatternCard {
 
                else if (index == 4) {
 
-                    if ((checkNearDice(dice, index - 1)) &&
-                            (checkNearDice(dice, index + 4)) &&
+                    if ((checkNearDice(dice, index - 1)) ||
+                            (checkDiagonalDice(dice, index + 4)) ||
                             (checkNearDice(dice, index + 5)) ) {
 
                          patternCard.putDice(dice, index);
@@ -111,11 +111,11 @@ public class PatternCard {
 
                else if ((index == 5) || (index == 10)) {
 
-                    if ((checkNearDice(dice, index - 5)) &&
-                            (checkNearDice(dice, index -4)) &&
-                            (checkNearDice(dice, index + 1)) &&
-                            (checkNearDice(dice, index + 5)) &&
-                            (checkNearDice(dice, index + 6)) ) {
+                    if ((checkNearDice(dice, index - 5)) ||
+                            (checkDiagonalDice(dice, index -4)) ||
+                            (checkNearDice(dice, index + 1)) ||
+                            (checkNearDice(dice, index + 5)) ||
+                            (checkDiagonalDice(dice, index + 6)) ) {
 
                          patternCard.putDice(dice, index);
                     }
@@ -126,14 +126,14 @@ public class PatternCard {
 
                else if ((index == 6) || (index == 7) || (index == 8) || (index == 11) || (index == 12) || (index == 13)) {
 
-                    if ((checkNearDice(dice, index - 6)) &&
-                            (checkNearDice(dice, index - 5)) &&
-                            (checkNearDice(dice, index - 4)) &&
-                            (checkNearDice(dice, index - 1)) &&
-                            (checkNearDice(dice, index + 1)) &&
-                            (checkNearDice(dice, index + 4)) &&
-                            (checkNearDice(dice, index + 5)) &&
-                            (checkNearDice(dice, index + 6)) ) {
+                    if ((checkDiagonalDice(dice, index - 6)) ||
+                            (checkNearDice(dice, index - 5)) ||
+                            (checkDiagonalDice(dice, index - 4)) ||
+                            (checkNearDice(dice, index - 1)) ||
+                            (checkNearDice(dice, index + 1)) ||
+                            (checkDiagonalDice(dice, index + 4)) ||
+                            (checkNearDice(dice, index + 5)) ||
+                            (checkDiagonalDice(dice, index + 6)) ) {
 
                          patternCard.putDice(dice, index);
                     }
@@ -144,10 +144,10 @@ public class PatternCard {
 
                else if ((index == 9) || (index == 14)) {
 
-                    if ((checkNearDice(dice, index - 6)) &&
-                            (checkNearDice(dice, index - 5)) &&
-                            (checkNearDice(dice, index - 1)) &&
-                            (checkNearDice(dice, index + 4)) &&
+                    if ((checkDiagonalDice(dice, index - 6)) ||
+                            (checkNearDice(dice, index - 5)) ||
+                            (checkNearDice(dice, index - 1)) ||
+                            (checkDiagonalDice(dice, index + 4)) ||
                             (checkNearDice(dice, index + 5)) ) {
 
                          patternCard.putDice(dice, index);
@@ -159,8 +159,8 @@ public class PatternCard {
 
                else if (index == 15) {
 
-                    if ((checkNearDice(dice, index - 5)) &&
-                            (checkNearDice(dice, index - 4)) &&
+                    if ((checkNearDice(dice, index - 5)) ||
+                            (checkDiagonalDice(dice, index - 4)) ||
                             (checkNearDice(dice, index + 1)) ) {
 
                          patternCard.putDice(dice, index);
@@ -171,10 +171,10 @@ public class PatternCard {
 
                else if ((index == 16) || (index == 17) || (index == 18)) {
 
-                    if ((checkNearDice(dice, index - 6)) &&
-                            (checkNearDice(dice, index - 5)) &&
-                            (checkNearDice(dice, index - 4)) &&
-                            (checkNearDice(dice, index - 1)) &&
+                    if ((checkDiagonalDice(dice, index - 6)) ||
+                            (checkNearDice(dice, index - 5)) ||
+                            (checkDiagonalDice(dice, index - 4)) ||
+                            (checkNearDice(dice, index - 1)) ||
                             (checkNearDice(dice, index + 1)) ) {
 
                          patternCard.putDice(dice, index);
@@ -185,8 +185,8 @@ public class PatternCard {
 
                else if (index == 19) {
 
-                    if ((checkNearDice(dice, index - 6)) &&
-                            (checkNearDice(dice, index - 5)) &&
+                    if ((checkDiagonalDice(dice, index - 6)) ||
+                            (checkNearDice(dice, index - 5)) ||
                             (checkNearDice(dice, index - 1)) ) {
 
                          patternCard.putDice(dice, index);
@@ -218,6 +218,19 @@ public class PatternCard {
                }
           }
           else return false;
+     }
+
+     private boolean checkDiagonalDice(Dice dice, int index) {
+
+          GlassBox box = pattern.get(index);
+
+          if (!(box.isBoxEmpty())) {
+               return true;
+          }
+          else {
+               return false;
+          }
+
      }
 
      // check if the first dice is placed on an edge or corner
