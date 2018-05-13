@@ -36,30 +36,20 @@ public class TestRoundTracker {
 
         assertEquals(9, roundTracker.getRoundDice(1).size());
         assertEquals(9, roundTracker.getRoundDice(2).size());
-        assertEquals(2,roundTracker.getRoundTracker().size());
         assertEquals(3,roundTracker.getRoundTracker().size());
     }
 
     @Test (expected = InvalidMoveException.class)
-    public void testAddDice() {
+    public void testAddDice() throws InvalidMoveException {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         ArrayList<Dice> list = draftPool.cleanListDice();
         Dice dice = new Dice(3, DiceColor.PURPLE);
         Dice dice1 = new Dice(3, DiceColor.PURPLE);
         RoundTracker roundTracker = new RoundTracker(list);
-        roundTracker.setTracker(list);
         roundTracker.addDice(dice, 0);
-        roundTracker.addDice(dice1, 1);
-        //roundTracker.addDice(dice2, 2);
-        //roundTracker.addDice(dice3, 3);
-        //roundTracker.addDice(dice4, 4);
-
-        //assertEquals(11,roundTracker.getRoundDice(0).size());
-        //assertEquals(1,roundTracker.getRoundDice(1).size());
-        //assertEquals(1,roundTracker.getRoundDice(2).size());
-        //assertEquals(1,roundTracker.getRoundDice(3).size());
-        //assertEquals(1,roundTracker.getRoundDice(4).size());
+        roundTracker.addDice(dice1, 2);
+        assertEquals(10, roundTracker.getRoundDice(1).size());
 
     }
 }
