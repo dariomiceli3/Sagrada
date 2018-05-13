@@ -8,7 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class TestGlassBox {
-
     @Test
     public void testConstructorDefault() {
         GlassBox glassBox = new GlassBox();

@@ -36,7 +36,6 @@ public class DraftPool {
         for(int i=0; i <= (2*number); i++) {
             this.dicePlay.add(this.diceBag.getDice());
         }
-        if (dicePlay.size() != (2*number));
 
     }
 

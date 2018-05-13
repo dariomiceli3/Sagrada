@@ -21,7 +21,7 @@ public class RoundTracker {
     }
 
     /**
-     * Class constructor, create the round tracker whith 10 round signals where every round signals have its list of dice, only the first dice list is set
+     * Class constructor, create the round tracker where the first dice list is set
      * @param listDice dice not used in the first round
      */
     public RoundTracker(ArrayList<Dice> listDice){
@@ -30,7 +30,7 @@ public class RoundTracker {
     }
 
     /**
-     * Class constructor
+     * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
      * @param listDice dice not used in the round
      */
     public void setTracker(ArrayList<Dice> listDice){
