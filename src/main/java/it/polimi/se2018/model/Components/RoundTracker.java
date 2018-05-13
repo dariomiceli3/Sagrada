@@ -45,10 +45,12 @@ public class RoundTracker {
      * @param pos the die position in the list of dice (from bottom to top)
      * @return the die whitch has been removed
      */
-    public Dice getDice(int round, int pos){
+    public Dice getDice(int round, int pos) throws InvalidMoveException {
 
-        return listDice.get(round).remove(pos);
-
+        if (round < listDice.size() && pos < listDice.get(round).size()) {
+            return listDice.get(round).remove(pos);
+        }
+        else throw new InvalidMoveException("Stai cercando un dado non presente nella round tracker");
     }
 
     /**
