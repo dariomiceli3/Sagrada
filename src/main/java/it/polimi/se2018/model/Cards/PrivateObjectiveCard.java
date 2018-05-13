@@ -31,7 +31,7 @@ public class PrivateObjectiveCard {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
-            if (box.isBoxEmpty() == false)
+            if (!box.isBoxEmpty())
                 if(box.getDice().getColor() == colour){
                 count = count + box.getDice().getValue();
             }

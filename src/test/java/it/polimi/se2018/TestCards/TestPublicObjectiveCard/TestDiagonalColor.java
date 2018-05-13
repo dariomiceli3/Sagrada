@@ -1,4 +1,4 @@
-/*package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
+package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PublicObjectiveCard.DiagonalColor;
 import it.polimi.se2018.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
@@ -40,4 +40,4 @@ public class TestDiagonalColor {
         }
 
     }
-}*/
+}
