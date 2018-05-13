@@ -20,6 +20,7 @@ public class DiagonalColor implements PublicEffects {
 
 
 
+
       return points;
    }
 
