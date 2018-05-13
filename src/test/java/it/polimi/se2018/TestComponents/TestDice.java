@@ -29,7 +29,7 @@ public class TestDice {
         dice.setColor(DiceColor.BLUE);
 
         assertEquals(6, dice.getValue());
-        //assertEquals(DiceColor.BLUE,dice.getColor());
+        assertEquals(DiceColor.BLUE,dice.getColor());
 
     }
 }

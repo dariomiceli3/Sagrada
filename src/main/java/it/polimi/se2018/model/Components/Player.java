@@ -39,9 +39,18 @@ public class Player {
         this.pattern = pattern;
     }
 
+    public String getPlayerID(){
+        return playerID;
+    }
+
+    public PlayerColour getColour() {
+        return colour;
+    }
+
     public PatternCard getPattern(){
         return pattern;
     }
+
 
     /**
      * Class setPrivate, set at the player his private objective card
