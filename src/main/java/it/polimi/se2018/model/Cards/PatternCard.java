@@ -59,6 +59,7 @@ public class PatternCard {
           return diceRemoved;
      }
 
+
      public void putDiceOnPattern(Dice dice, int index, PatternCard patternCard) throws InvalidMoveException {
 
          if (isPatternEmpty(patternCard)) {
@@ -347,11 +348,14 @@ public class PatternCard {
      // check if the pattern scheme is empty (no dice placed) or not
      private boolean isPatternEmpty(PatternCard patternCard) {
 
-          GlassBox box;
-          Iterator<GlassBox> it = patternCard.getPattern().iterator();
-          while (it.hasNext()) {
-               box = it.next();
-               if (!(box.isBoxEmpty())) return false;
+          ArrayList <GlassBox> patternCopy = patternCard.getPattern();
+
+          for(GlassBox box : patternCopy) {
+
+              if (!(box.isBoxEmpty())) {
+                  return false;
+              }
+
           }
           return true;
 
