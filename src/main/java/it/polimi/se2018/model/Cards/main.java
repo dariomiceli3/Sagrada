@@ -6,24 +6,24 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.util.ArrayList;
 
 
 public class main {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args)  {
 
-        File file = new File("./");
-        String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
+        ArrayList list = new ArrayList();
 
-        String stampa = filePath + "Virtus" + ".json";
+        for (int i = 0; i < 10; i++) {
+            list.add(null);
+        }
 
-        Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new FileReader(stampa));
-        PatternCard patternCardObject = gson.fromJson(reader, PatternCard.class);
+        list.set(3, 1);
+        list.set(6,2);
 
-        System.out.println("path:");
-        System.out.println(stampa);
+        System.out.println(list.size());
+        System.out.println(list);
 
-        System.out.println(patternCardObject.getDifficulty());
 
 
     }

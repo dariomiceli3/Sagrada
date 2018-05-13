@@ -43,8 +43,7 @@ public class PatternCard {
           GlassBox box = pattern.get(index);
 
           if (box.isBoxValid(dice)) {
-               box.setDice(dice);
-               pattern.add(index, box);
+               pattern.set(index, box);
           }
           else
                throw new InvalidMoveException("Invalid Dice Position");
@@ -247,6 +246,18 @@ public class PatternCard {
           return true;
 
      }
+
+     /* fill the pattern card with all null values
+     public void fillPattern() {
+
+          final int NUMBER_OF_BOX = 20;
+          GlassBox nullBox = new GlassBox();
+
+          for (int i = 0; i < NUMBER_OF_BOX; i++) {
+               pattern.add(nullBox);
+          }
+
+     }*/
 
 
      public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException
