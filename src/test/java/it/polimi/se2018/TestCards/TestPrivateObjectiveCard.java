@@ -26,9 +26,11 @@ public class TestPrivateObjectiveCard {
         PatternCard pattern = new PatternCard();
         try {
             Dice dice = new Dice(5, DiceColor.BLUE);
+            Dice dice1 = new Dice(4, DiceColor.YELLOW);
             ArrayList<PatternCard> patternList = pattern.loadPatternList();
-            pattern = patternList.get(5);
-            pattern.putDice(dice, 2);
+            pattern = patternList.get(4);
+            pattern.putDiceOnPattern(dice, 10, pattern);
+            pattern.putDiceOnPattern(dice1, 11, pattern);
             PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.BLUE);
             assertEquals(5,privateCard.RunPrivate(pattern));
         } catch(FileNotFoundException e) {
