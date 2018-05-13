@@ -3,6 +3,8 @@ package it.polimi.se2018.model.Components;
 
 
 
+import it.polimi.se2018.Exceptions.NotValidBagException;
+
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class DiceBag {
     /**
      * DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
      */
-    public DiceBag() {
+    public DiceBag() throws NotValidBagException {
         this.listDice = new ArrayList<Dice>();
 
         //creazione dadi casuali, 18 per ogni colore
@@ -38,9 +40,8 @@ public class DiceBag {
             this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.BLUE));
         }
 
-        /*controllo numero elementi
-        if (listDice.size() == NUMBER)
-        ....... */
+        //controllo numero elementi
+        if (listDice.size() != NUMBER) throw new NotValidBagException("It's not a complete bag");
 
         //mischio la Bag
         Collections.shuffle(this.listDice);

@@ -1,5 +1,8 @@
 package it.polimi.se2018.model.Components;
 
+import it.polimi.se2018.Exceptions.NotValidPoolException;
+import it.polimi.se2018.Exceptions.UncleanedPoolException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,13 +32,15 @@ public class DraftPool {
      * @param number number of players in the match
      * @param dicebag the dicebag from whitch to take the dice
      */
-    public DraftPool(int number, DiceBag dicebag) {
+    public DraftPool(int number, DiceBag dicebag) throws NotValidPoolException {
         this.number = number;
         this.diceBag = dicebag;
         this.dicePlay = new ArrayList<>();
         for(int i=0; i <= (2*number); i++) {
             this.dicePlay.add(this.diceBag.getDice());
         }
+        if (dicePlay.size() != (2*number)) throw new NotValidPoolException("Draft Pool non valida");
+
     }
 
     /**
@@ -71,14 +76,16 @@ public class DraftPool {
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
      */
-    public ArrayList<Dice> cleanListDice(){
-        ArrayList<Dice> listDice = new ArrayList<>();
-        Iterator<Dice> it = dicePlay.iterator();
-        while(it.hasNext()){
-            listDice.add(it.next());
-            it.remove();
+    public ArrayList<Dice> cleanListDice() throws UncleanedPoolException {
 
-        }
+        ArrayList<Dice> listDice = new ArrayList<>();
+        Iterator<Dice> it = dicePlay.iterator()
+        while (it.hasNext()) {
+                listDice.add(it.next());
+                it.remove();
+
+            }
+            if (dicePlay.size() != DEFAULT) throw new UncleanedPoolException("Errore Draft Pool non pulita");
         return listDice;
     }
 

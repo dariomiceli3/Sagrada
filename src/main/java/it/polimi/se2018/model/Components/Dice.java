@@ -1,5 +1,7 @@
 package it.polimi.se2018.model.Components;
 
+import it.polimi.se2018.Exceptions.NotValidDiceValueException;
+
 /**
  * Class Dice: the die
  * @author Salvatrore Fadda
@@ -23,8 +25,11 @@ public class Dice {
      * @param value die face number
      * @param color die colour
      */
-    public Dice (int value, DiceColor color){
+    public Dice (int value, DiceColor color) throws NotValidDiceValueException {
+        if (value > 0 && value < 7){
         this.value = value;
+        }
+        else new NotValidDiceValueException("Creazione del dado non possibile per via del valore assegnato");
         this.color = color;
     }
 
