@@ -1,6 +1,9 @@
 package it.polimi.se2018.TestCards;
 
+import it.polimi.se2018.Exceptions.InvalidMoveException;
 import it.polimi.se2018.model.Cards.PatternCard;
+import it.polimi.se2018.model.Components.Dice;
+import it.polimi.se2018.model.Components.DiceColor;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -88,12 +91,26 @@ public class TestPatternCard {
             assertEquals("Fulgor del Cielo",patternCardArrayList.get(23).getName());
             assertEquals(5,patternCardArrayList.get(23).getDifficulty());
             assertEquals(20, patternCardArrayList.get(23).getPattern().size());
-
         }
         catch (FileNotFoundException e){
             fail();
         }
-
     }
 
-}
+    @Test(expected = InvalidMoveException.class)
+    public void testPutDice() throws InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice dice = new Dice(3, DiceColor.YELLOW);
+        Dice dice1 = new Dice(3, DiceColor.RED);
+        try {
+            ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+            patternCardArrayList.get(0).putDice(dice, 2);
+            patternCardArrayList.get(0).putDice(dice1, 0);
+
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+    }
+
+        
+    }

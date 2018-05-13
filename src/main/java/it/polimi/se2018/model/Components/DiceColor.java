@@ -19,7 +19,7 @@ public enum DiceColor{
             case YELLOW:
                 return "Yellow";
         }
-        return null;
+        return "";
     }
 
 

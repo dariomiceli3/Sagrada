@@ -51,4 +51,12 @@ public class TestDraftPool {
         assertEquals(null, draftPool.getDraftPool());
     }
 
+    @Test
+    public void testGetDice() {
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(4, diceBag);
+        draftPool.getDice();
+        assertEquals(8, draftPool.getNowNumber());
+    }
+
 }

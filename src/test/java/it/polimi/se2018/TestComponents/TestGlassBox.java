@@ -83,4 +83,15 @@ public class TestGlassBox {
         assertEquals(true, glassBox2.isBoxValid(dice1));
         assertEquals(false, glassBox3.isBoxValid(dice1));
     }
+
+    @Test
+    public void testSetter() {
+        GlassBox glassBox = new GlassBox();
+
+        glassBox.setConstraintColor("Green");
+        glassBox.setConstraintValue(2);
+
+        assertEquals(2, glassBox.getConstraintValue());
+        assertEquals("Green", glassBox.getConstraintColor());
+    }
 }
