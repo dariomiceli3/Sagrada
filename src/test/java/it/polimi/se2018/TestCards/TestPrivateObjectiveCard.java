@@ -30,7 +30,7 @@ public class TestPrivateObjectiveCard {
             ArrayList<PatternCard> patternList = pattern.loadPatternList();
             pattern = patternList.get(4);
             pattern.putDiceOnPattern(dice, 10, pattern);
-            pattern.putDiceOnPattern(dice1, 11, pattern);
+            //pattern.putDiceOnPattern(dice1, 11, pattern);
             PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.BLUE);
             assertEquals(5,privateCard.RunPrivate(pattern));
         } catch(FileNotFoundException e) {

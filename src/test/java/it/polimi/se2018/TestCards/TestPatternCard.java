@@ -162,8 +162,17 @@ public class TestPatternCard {
         try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             PatternCard patternCard1 = patternCardArrayList.remove(1);
+            //patternCard1.putDice(dice,19);
+            patternCard1.putDiceOnPattern(dice,7,patternCard1);
+            patternCard1.putDiceOnPattern(dice1,0,patternCard1);
+            patternCard1.putDiceOnPattern(dice,19,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,18,patternCard1);
+            patternCard1.putDiceOnPattern(dice1,1,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,2,patternCard1);
+            patternCard1.putDiceOnPattern(dice3,6,patternCard1);
 
-            patternCard1.putDiceOnPattern(dice,6,patternCard1);
+            //assertEquals(true, patternCard1.isPatternEmpty(patternCard1));
+           /* patternCard1.putDiceOnPattern(dice,6,patternCard1);
             patternCard1.putDiceOnPattern(dice,7,patternCard1);
             patternCard1.putDiceOnPattern(dice1,0,patternCard1);
             patternCard1.putDiceOnPattern(dice,19,patternCard1);
@@ -174,8 +183,8 @@ public class TestPatternCard {
 
 
 
-            //Dice dice4 = patternCard1.getDice(0);
-            //assertEquals(3,dice4.getValue());
+            Dice dice4 = patternCard1.getDice(0);
+            assertEquals(3,dice4.getValue());
             /*patternCard1.putDiceOnPattern(dice1,1,patternCard1);
             patternCard1.putDiceOnPattern(dice2,7,patternCard1);
             patternCard1.putDiceOnPattern(dice1, 11, patternCard1);

@@ -346,7 +346,7 @@ public class PatternCard {
 
 
      // check if the pattern scheme is empty (no dice placed) or not
-     private boolean isPatternEmpty(PatternCard patternCard) {
+     public boolean isPatternEmpty(PatternCard patternCard) {
 
           ArrayList <GlassBox> patternCopy = patternCard.getPattern();
 
