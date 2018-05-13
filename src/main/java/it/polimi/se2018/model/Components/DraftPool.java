@@ -1,6 +1,5 @@
 package it.polimi.se2018.model.Components;
 
-import it.polimi.se2018.Exceptions.NotValidPoolException;
 import it.polimi.se2018.Exceptions.UncleanedPoolException;
 
 import java.util.ArrayList;
@@ -32,14 +31,14 @@ public class DraftPool {
      * @param number number of players in the match
      * @param dicebag the dicebag from whitch to take the dice
      */
-    public DraftPool(int number, DiceBag dicebag) throws NotValidPoolException {
+    public DraftPool(int number, DiceBag dicebag) {
         this.number = number;
         this.diceBag = dicebag;
         this.dicePlay = new ArrayList<>();
         for(int i=0; i <= (2*number); i++) {
             this.dicePlay.add(this.diceBag.getDice());
         }
-        if (dicePlay.size() != (2*number)) throw new NotValidPoolException("Draft Pool non valida");
+        if (dicePlay.size() != (2*number));
 
     }
 
@@ -79,7 +78,7 @@ public class DraftPool {
     public ArrayList<Dice> cleanListDice() throws UncleanedPoolException {
 
         ArrayList<Dice> listDice = new ArrayList<>();
-        Iterator<Dice> it = dicePlay.iterator()
+        Iterator<Dice> it = dicePlay.iterator();
         while (it.hasNext()) {
                 listDice.add(it.next());
                 it.remove();
