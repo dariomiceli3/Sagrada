@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class PrivateObjectiveCard {
 
-    private final int DEF = 0;
+    private static final int DEF = 0;
     private DiceColor colour;
 
 
@@ -31,8 +31,8 @@ public class PrivateObjectiveCard {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
-            if (!box.isBoxEmpty())
-                if(box.getDice().getColor() == colour){
+            if(!box.isBoxEmpty())
+            if (box.getDice().getColor() == colour) {
                 count = count + box.getDice().getValue();
             }
 

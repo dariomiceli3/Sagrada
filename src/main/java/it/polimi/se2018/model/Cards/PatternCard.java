@@ -75,8 +75,8 @@ public class PatternCard {
              if (index == 0) {
 
                  if ((checkNearEmpty(index + 1)) &&
-                         (checkNearEmpty(index + 6))) {
-                     if (checkNearEmpty(index + 5)) {
+                         (checkNearEmpty(index + 5))) {
+                     if (checkNearEmpty(index + 6)) {
                          throw new InvalidMoveException("Invalid position");
                      }
                      else {
@@ -85,7 +85,7 @@ public class PatternCard {
                  }
                  else {
                      if ((checkNearConstraint(dice, index + 1)) &&
-                             (checkNearConstraint(dice, index + 6)) ) {
+                             (checkNearConstraint(dice, index + 5)) ) {
                          patternCard.putDice(dice, index);
                      }
                      else {
@@ -300,19 +300,20 @@ public class PatternCard {
      // check if the constraint of the near dice are respected
      private boolean checkNearConstraint(Dice dice, int index) {
 
-          GlassBox box = pattern.get(index);
-
-          if ((box.getDice().getColor().toString()).equals(dice.getColor().toString())) {
-              return false;
-          }
-          else {
-              if ((box.getDice().getValue()) == (dice.getValue())) {
-                  return false;
-              }
-              else {
-                  return true;
-              }
-          }
+         GlassBox box = pattern.get(index);
+         if (box.isBoxEmpty()) {
+             return true;
+         } else {
+             if ((box.getDice().getColor() == dice.getColor())) {
+                 return false;
+             } else {
+                 if ((box.getDice().getValue()) == (dice.getValue())) {
+                     return false;
+                 } else {
+                     return true;
+                 }
+             }
+         }
      }
 
 

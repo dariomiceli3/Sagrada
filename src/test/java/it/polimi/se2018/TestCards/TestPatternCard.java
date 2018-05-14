@@ -170,6 +170,8 @@ public class TestPatternCard {
             patternCard1.putDiceOnPattern(dice1,1,patternCard1);
             patternCard1.putDiceOnPattern(dice3,2,patternCard1);
             patternCard1.putDiceOnPattern(dice3,6,patternCard1);
+            assertEquals(3, patternCard1.getPattern().get(19).getDice().getValue());
+            assertEquals(3, patternCard1.getPattern().get(7).getDice().getValue());
 
             //assertEquals(true, patternCard1.isPatternEmpty(patternCard1));
            /* patternCard1.putDiceOnPattern(dice,6,patternCard1);
