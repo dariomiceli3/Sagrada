@@ -25,11 +25,13 @@ public class MediumShade implements PublicEffects {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
-            if (box.getDice().getValue() == 3 ) {
-                setOf3++;
-            }
-            if (box.getDice().getValue() == 4){
-                setOf4++;
+            if(!box.isBoxEmpty()) {
+                if (box.getDice().getValue() == 3) {
+                    setOf3++;
+                }
+                if (box.getDice().getValue() == 4) {
+                    setOf4++;
+                }
             }
         }
         if ( setOf3 < setOf4) {
@@ -41,3 +43,4 @@ public class MediumShade implements PublicEffects {
     }
 
 }
+

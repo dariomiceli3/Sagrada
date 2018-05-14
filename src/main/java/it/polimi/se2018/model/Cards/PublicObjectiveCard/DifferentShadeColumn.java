@@ -12,8 +12,9 @@ public class DifferentShadeColumn implements PublicEffects {
     @Override
     public int RunPublic(PatternCard pattern) {
         int points = 0;
-        for (int i = 0; i < pattern.getPattern().size(); i++) {
-            if (
+        for (int i = 0; i < 5; i++) {
+            if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+5).isBoxEmpty() || pattern.getPattern().get(i+10).isBoxEmpty() || pattern.getPattern().get(i+15).isBoxEmpty())){
+             if (
                     pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 5).getDice().getValue() &&
                             pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 10).getDice().getValue() &&
                             pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 15).getDice().getValue() &&
@@ -23,6 +24,7 @@ public class DifferentShadeColumn implements PublicEffects {
 
                     ) {
                 points = points + VPOINTS;
+             }
             }
         }
 

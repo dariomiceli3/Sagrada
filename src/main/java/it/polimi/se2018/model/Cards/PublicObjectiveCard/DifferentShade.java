@@ -36,6 +36,7 @@ public class DifferentShade implements PublicEffects {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
+            if (!box.isBoxEmpty()){
             if (box.getDice().getValue() == 1 ) {
                 setOf1++;
             }
@@ -53,6 +54,7 @@ public class DifferentShade implements PublicEffects {
             }
             if (box.getDice().getValue() == 6){
                 setOf6++;
+            }
             }
         }
 

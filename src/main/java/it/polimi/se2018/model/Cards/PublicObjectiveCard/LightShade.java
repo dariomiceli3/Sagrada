@@ -27,11 +27,13 @@ public class LightShade implements PublicEffects{
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
+            if(!box.isBoxEmpty()){
             if (box.getDice().getValue() == 1 ) {
                 setOf1++;
             }
             if (box.getDice().getValue() == 2){
                 setOf2++;
+            }
             }
         }
         if ( setOf1 < setOf2) {
@@ -43,3 +45,5 @@ public class LightShade implements PublicEffects{
     }
 
 }
+
+

@@ -27,11 +27,13 @@ public class DarkShade implements PublicEffects {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
+            if(!box.isBoxEmpty()){
             if (box.getDice().getValue() == 5 ) {
                 setOf5++;
             }
             if (box.getDice().getValue() == 6){
                 setOf6++;
+            }
             }
         }
         if ( setOf5 < setOf6) {

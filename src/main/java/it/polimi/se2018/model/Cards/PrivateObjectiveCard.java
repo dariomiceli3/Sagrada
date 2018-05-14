@@ -12,11 +12,6 @@ public class PrivateObjectiveCard {
     private DiceColor colour;
 
 
-
-    public PrivateObjectiveCard(){
-        this.colour = null;
-    }
-
     public PrivateObjectiveCard(DiceColor colour){
         this.colour = colour;
     }

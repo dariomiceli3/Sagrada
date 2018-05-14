@@ -1,7 +1,8 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
-import it.polimi.se2018.model.Cards.PublicObjectiveCard.DiagonalColor;
+
 import it.polimi.se2018.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.model.Cards.PublicObjectiveCard.VarietyColor;
 import it.polimi.se2018.model.Components.Dice;
 import it.polimi.se2018.model.Components.DiceColor;
 import it.polimi.se2018.Exceptions.InvalidMoveException;
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestDiagonalColor {
-   @Test
+public class TestVarietyColor {
+    @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
         try {
@@ -48,8 +49,8 @@ public class TestDiagonalColor {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DiagonalColor());
-            assertEquals(11, publicCard.executeEffect(pattern));
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor());
+            assertEquals(8, publicCard.executeEffect(pattern));
 
 
         } catch(FileNotFoundException e) {

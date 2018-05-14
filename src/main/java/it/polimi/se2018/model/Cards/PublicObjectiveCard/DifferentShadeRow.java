@@ -12,21 +12,23 @@ public class DifferentShadeRow implements PublicEffects {
     public int RunPublic(PatternCard pattern) {
         int points = 0;
         for (int i = 0; i < pattern.getPattern().size(); i = i + 5){
-            if (
-                    pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 1).getDice().getValue() &&
-                            pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 2).getDice().getValue() &&
-                            pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
-                            pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
-                            pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 2).getDice().getValue() &&
-                            pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
-                            pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
-                            pattern.getPattern().get(i + 2).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
-                            pattern.getPattern().get(i + 2).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
-                            pattern.getPattern().get(i + 3).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue()
+            if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+1).isBoxEmpty() || pattern.getPattern().get(i+2).isBoxEmpty() || pattern.getPattern().get(i+3).isBoxEmpty() || pattern.getPattern().get(i+4).isBoxEmpty())) {
+                if (
+                        pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 1).getDice().getValue() &&
+                                pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 2).getDice().getValue() &&
+                                pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
+                                pattern.getPattern().get(i).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
+                                pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 2).getDice().getValue() &&
+                                pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
+                                pattern.getPattern().get(i + 1).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
+                                pattern.getPattern().get(i + 2).getDice().getValue() != pattern.getPattern().get(i + 3).getDice().getValue() &&
+                                pattern.getPattern().get(i + 2).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue() &&
+                                pattern.getPattern().get(i + 3).getDice().getValue() != pattern.getPattern().get(i + 4).getDice().getValue()
 
 
-                    ) {
-                points = points + VPOINTS;
+                        ) {
+                    points = points + VPOINTS;
+                }
             }
         }
 

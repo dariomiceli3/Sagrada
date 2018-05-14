@@ -36,27 +36,29 @@ public class VarietyColor implements PublicEffects {
         Iterator<GlassBox> it = pattern.getPattern().iterator();
         while (it.hasNext()) {
             box = it.next();
-            if (box.getDice().getColor() == DiceColor.YELLOW) {
-                setOfY++;
-            }
-            if (box.getDice().getColor() == DiceColor.PURPLE){
-                setOfP++;
-            }
-            if (box.getDice().getColor() == DiceColor.GREEN) {
-                setOfG++;
-            }
-            if (box.getDice().getColor() == DiceColor.BLUE){
-                setOfB++;
-            }
-            if (box.getDice().getColor() == DiceColor.RED) {
-                setOfR++;
+            if(!box.isBoxEmpty()) {
+                if (box.getDice().getColor() == DiceColor.YELLOW) {
+                    setOfY++;
+                }
+                if (box.getDice().getColor() == DiceColor.PURPLE) {
+                    setOfP++;
+                }
+                if (box.getDice().getColor() == DiceColor.GREEN) {
+                    setOfG++;
+                }
+                if (box.getDice().getColor() == DiceColor.BLUE) {
+                    setOfB++;
+                }
+                if (box.getDice().getColor() == DiceColor.RED) {
+                    setOfR++;
+                }
             }
         }
 
         temp1 = min(setOfY, setOfP);
         temp2 = min(setOfG, setOfB);
         temp3 = min(setOfR, temp1);
-        points = min(temp3, temp2) * 5;
+        points = min(temp3, temp2) * 4;
 
         return points;
     }

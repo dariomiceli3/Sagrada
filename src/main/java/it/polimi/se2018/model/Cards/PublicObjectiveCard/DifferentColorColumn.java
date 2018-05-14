@@ -12,8 +12,9 @@ public class DifferentColorColumn implements PublicEffects {
     @Override
     public int RunPublic(PatternCard pattern) {
         int points = 0;
-        for (int i = 0; i < pattern.getPattern().size(); i++) {
-            if (
+        for (int i = 0; i < 5; i++) {
+            if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+5).isBoxEmpty() || pattern.getPattern().get(i+10).isBoxEmpty() || pattern.getPattern().get(i+15).isBoxEmpty())){
+               if (
                     pattern.getPattern().get(i).getDice().getColor() != pattern.getPattern().get(i + 5).getDice().getColor() &&
                             pattern.getPattern().get(i).getDice().getColor() != pattern.getPattern().get(i + 10).getDice().getColor() &&
                             pattern.getPattern().get(i).getDice().getColor() != pattern.getPattern().get(i + 15).getDice().getColor() &&
@@ -21,8 +22,10 @@ public class DifferentColorColumn implements PublicEffects {
                             pattern.getPattern().get(i + 5).getDice().getColor() != pattern.getPattern().get(i + 15).getDice().getColor() &&
                             pattern.getPattern().get(i + 10).getDice().getColor() != pattern.getPattern().get(i + 15).getDice().getColor()
 
-                    ) {
-                points = points + VPOINTS;
+                    ){
+
+                   points = points + VPOINTS;
+               }
             }
         }
 
