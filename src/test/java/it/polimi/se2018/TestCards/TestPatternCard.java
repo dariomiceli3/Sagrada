@@ -150,53 +150,180 @@ public class TestPatternCard {
         }
     }
 
-    @Test (expected = InvalidMoveException.class)
+    @Test
     public void testPutDiceOnPattern() throws InvalidMoveException {
         PatternCard patternCard = new PatternCard();
-        Dice dice = new Dice(3, DiceColor.YELLOW);
-        Dice dice1 = new Dice(4, DiceColor.BLUE);
-        Dice dice2 = new Dice(5, DiceColor.RED);
-        Dice dice3 = new Dice(6, DiceColor.BLUE);
-
+        PatternCard patternCard2 = new PatternCard();
 
         try {
+            Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
+            Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
+            Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
+            Dice diceYellow4 = new Dice(4, DiceColor.YELLOW);
+            Dice diceYellow5 = new Dice(5, DiceColor.YELLOW);
+            Dice diceYellow6 = new Dice(6, DiceColor.YELLOW);
+            Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+            Dice diceBlue2 = new Dice(2, DiceColor.BLUE);
+            Dice diceBlue3 = new Dice(3, DiceColor.BLUE);
+            Dice diceBlue4 = new Dice(4, DiceColor.BLUE);
+            Dice diceBlue5 = new Dice(5, DiceColor.BLUE);
+            Dice diceBlue6 = new Dice(6, DiceColor.BLUE);
+            Dice diceRed1 = new Dice(1, DiceColor.RED);
+            Dice diceRed2 = new Dice(2, DiceColor.RED);
+            Dice diceRed3 = new Dice(3, DiceColor.RED);
+            Dice diceRed4 = new Dice(4, DiceColor.RED);
+            Dice diceRed5 = new Dice(5, DiceColor.RED);
+            Dice diceRed6 = new Dice(6, DiceColor.RED);
+            Dice dicePurple1 = new Dice(1,DiceColor.PURPLE);
+            Dice dicePurple2 = new Dice(2,DiceColor.PURPLE);
+            Dice dicePurple3 = new Dice(3,DiceColor.PURPLE);
+            Dice dicePurple4 = new Dice(4,DiceColor.PURPLE);
+            Dice dicePurple5 = new Dice(5,DiceColor.PURPLE);
+            Dice dicePurple6 = new Dice(6,DiceColor.PURPLE);
+            Dice diceGreen1 = new Dice(1, DiceColor.GREEN);
+            Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+            Dice diceGreen3 = new Dice(3, DiceColor.GREEN);
+            Dice diceGreen4 = new Dice(4, DiceColor.GREEN);
+            Dice diceGreen5 = new Dice(5, DiceColor.GREEN);
+            Dice diceGreen6 = new Dice(6, DiceColor.GREEN);
+
+
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
-            PatternCard patternCard1 = patternCardArrayList.remove(1);
-            //patternCard1.putDice(dice,19);
-            patternCard1.putDiceOnPattern(dice,7,patternCard1);
-            patternCard1.putDiceOnPattern(dice1,0,patternCard1);
-            patternCard1.putDiceOnPattern(dice,19,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,18,patternCard1);
-            patternCard1.putDiceOnPattern(dice1,1,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,2,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,6,patternCard1);
-            assertEquals(3, patternCard1.getPattern().get(19).getDice().getValue());
-            assertEquals(3, patternCard1.getPattern().get(7).getDice().getValue());
+            patternCard = patternCardArrayList.get(1);
 
-            //assertEquals(true, patternCard1.isPatternEmpty(patternCard1));
-           /* patternCard1.putDiceOnPattern(dice,6,patternCard1);
-            patternCard1.putDiceOnPattern(dice,7,patternCard1);
-            patternCard1.putDiceOnPattern(dice1,0,patternCard1);
-            patternCard1.putDiceOnPattern(dice,19,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,18,patternCard1);
-            patternCard1.putDiceOnPattern(dice1,1,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,2,patternCard1);
-            patternCard1.putDiceOnPattern(dice3,6,patternCard1);
+            patternCard.putDiceOnPattern(diceBlue4,0,patternCard);
+            patternCard.putDiceOnPattern(diceYellow1, 1, patternCard);
+            patternCard.putDiceOnPattern(diceBlue2, 2, patternCard);
+            patternCard.putDiceOnPattern(diceBlue2, 6, patternCard);
+            patternCard.putDiceOnPattern(diceYellow3, 5, patternCard);
+            patternCard.putDiceOnPattern(dicePurple6,7, patternCard);
+            patternCard.putDiceOnPattern(diceGreen1, 8, patternCard);
+            patternCard.putDiceOnPattern(dicePurple2,9,patternCard);
+            patternCard.putDiceOnPattern(diceGreen1, 4,patternCard);
+            patternCard.putDiceOnPattern(diceYellow5, 3, patternCard);
+            patternCard.putDiceOnPattern(dicePurple4, 13, patternCard);
+            patternCard.putDiceOnPattern(diceBlue6, 14, patternCard);
+            patternCard.putDiceOnPattern(diceGreen5, 19, patternCard);
+            patternCard.putDiceOnPattern(dicePurple4, 10, patternCard);
+            patternCard.putDiceOnPattern(diceGreen2, 12, patternCard);
+            patternCard.putDiceOnPattern(dicePurple1, 17, patternCard);
+            patternCard.putDiceOnPattern(diceYellow3, 18, patternCard);
+            patternCard.putDiceOnPattern(diceYellow3, 11, patternCard);
+            patternCard.putDiceOnPattern(diceRed5, 15, patternCard);
+            patternCard.putDiceOnPattern(diceGreen6, 16, patternCard);
+
+            patternCard2 = patternCardArrayList.get(2);
+
+            patternCard2.putDiceOnPattern(diceBlue2,2, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen3,7, patternCard2);
+            //patternCard2.putDiceOnPattern(diceGreen6,12, patternCard2);
+            //patternCard2.putDiceOnPattern(diceRed3, 12, patternCard2);
+            patternCard2.putDiceOnPattern(diceBlue6, 12, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen2, 18, patternCard2);
+            patternCard2.putDiceOnPattern(diceRed4,19,patternCard2);
+            patternCard2.putDiceOnPattern(dicePurple1, 14, patternCard2);
+            patternCard2.putDiceOnPattern(diceRed3,13, patternCard2);
+            patternCard2.putDiceOnPattern(diceYellow5,17, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen1,11, patternCard2);
+            patternCard2.putDiceOnPattern(diceBlue1,15, patternCard2);
+            patternCard2.putDiceOnPattern(diceYellow3, 10, patternCard2);
+            patternCard2.putDiceOnPattern(dicePurple2, 5, patternCard2);
+            patternCard2.putDiceOnPattern(diceBlue5, 6, patternCard2);
+            patternCard2.putDiceOnPattern(dicePurple3, 16, patternCard2);
+            patternCard2.putDiceOnPattern(diceYellow6, 9, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen2, 4,patternCard2);
+            patternCard2.putDiceOnPattern(dicePurple4, 3, patternCard2);
+            patternCard2.putDiceOnPattern(diceBlue5, 8, patternCard2);
+            patternCard2.putDiceOnPattern(diceRed5, 0, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen4, 1 , patternCard2);
 
 
-
-            Dice dice4 = patternCard1.getDice(0);
-            assertEquals(3,dice4.getValue());
-            /*patternCard1.putDiceOnPattern(dice1,1,patternCard1);
-            patternCard1.putDiceOnPattern(dice2,7,patternCard1);
-            patternCard1.putDiceOnPattern(dice1, 11, patternCard1);
-            patternCard1.putDiceOnPattern(dice1, 16, patternCard1);
-            patternCard1.putDiceOnPattern(dice1, 16, patternCard1);
-            patternCard1.putDiceOnPattern(dice3, 5, patternCard1);*/
 
         } catch (FileNotFoundException e) {
             fail();
         }
     }
+
+
+    @Test (expected = InvalidMoveException.class)
+    public void testPutDiceOnPatternException() throws InvalidMoveException {
+
+        PatternCard patternCard = new PatternCard();
+
+        try {
+            Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
+            Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
+            Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
+            Dice diceYellow4 = new Dice(4, DiceColor.YELLOW);
+            Dice diceYellow5 = new Dice(5, DiceColor.YELLOW);
+            Dice diceYellow6 = new Dice(6, DiceColor.YELLOW);
+            Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+            Dice diceBlue2 = new Dice(2, DiceColor.BLUE);
+            Dice diceBlue3 = new Dice(3, DiceColor.BLUE);
+            Dice diceBlue4 = new Dice(4, DiceColor.BLUE);
+            Dice diceBlue5 = new Dice(5, DiceColor.BLUE);
+            Dice diceBlue6 = new Dice(6, DiceColor.BLUE);
+            Dice diceRed1 = new Dice(1, DiceColor.RED);
+            Dice diceRed2 = new Dice(2, DiceColor.RED);
+            Dice diceRed3 = new Dice(3, DiceColor.RED);
+            Dice diceRed4 = new Dice(4, DiceColor.RED);
+            Dice diceRed5 = new Dice(5, DiceColor.RED);
+            Dice diceRed6 = new Dice(6, DiceColor.RED);
+            Dice dicePurple1 = new Dice(1,DiceColor.PURPLE);
+            Dice dicePurple2 = new Dice(2,DiceColor.PURPLE);
+            Dice dicePurple3 = new Dice(3,DiceColor.PURPLE);
+            Dice dicePurple4 = new Dice(4,DiceColor.PURPLE);
+            Dice dicePurple5 = new Dice(5,DiceColor.PURPLE);
+            Dice dicePurple6 = new Dice(6,DiceColor.PURPLE);
+            Dice diceGreen1 = new Dice(1, DiceColor.GREEN);
+            Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+            Dice diceGreen3 = new Dice(3, DiceColor.GREEN);
+            Dice diceGreen4 = new Dice(4, DiceColor.GREEN);
+            Dice diceGreen5 = new Dice(5, DiceColor.GREEN);
+            Dice diceGreen6 = new Dice(6, DiceColor.GREEN);
+
+
+            ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+            patternCard = patternCardArrayList.get(1);
+
+            patternCard.putDiceOnPattern(diceBlue3, 15, patternCard);
+            patternCard.putDiceOnPattern(diceBlue1, 4, patternCard);
+            patternCard.putDiceOnPattern(diceYellow5,3,patternCard);
+            patternCard.putDiceOnPattern(diceGreen4, 0, patternCard);
+            patternCard.putDiceOnPattern(diceBlue2, 2, patternCard);
+            patternCard.putDiceOnPattern(dicePurple6, 7, patternCard);
+            patternCard.putDiceOnPattern(diceBlue2, 6, patternCard);
+            patternCard.putDiceOnPattern(diceGreen4, 0, patternCard);
+            patternCard.putDiceOnPattern(diceBlue4, 5, patternCard);
+            patternCard.putDiceOnPattern(dicePurple4, 10, patternCard);
+
+
+            PatternCard patternCard2 = new PatternCard();
+            patternCard2 = patternCardArrayList.get(2);
+
+            patternCard2 = patternCardArrayList.get(2);
+
+            patternCard2.putDiceOnPattern(diceBlue2,2, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen3,7, patternCard2);
+            patternCard2.putDiceOnPattern(diceGreen6,12, patternCard2);
+            patternCard2.putDiceOnPattern(diceRed3, 12, patternCard2);
+
+
+
+
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+
+
+
+
+    }
+
+
+
+
+
+
 
     }
