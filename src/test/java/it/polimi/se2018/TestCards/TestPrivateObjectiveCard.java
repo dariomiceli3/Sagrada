@@ -41,12 +41,10 @@ public class TestPrivateObjectiveCard {
             pattern.putDiceOnPattern(dice, 2, pattern);
             pattern.putDiceOnPattern(dice3, 3, pattern);
             pattern.putDiceOnPattern(dice4, 4, pattern);
-            pattern.putDiceOnPattern(dice1, 19, pattern);
             pattern.putDiceOnPattern(dice1, 6, pattern);
             pattern.putDiceOnPattern(dice2, 7, pattern);
             pattern.putDiceOnPattern(dice4, 8, pattern);
             pattern.putDiceOnPattern(dice5, 9, pattern);
-            pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice, 11, pattern);
             pattern.putDiceOnPattern(dice3, 12, pattern);
             pattern.putDiceOnPattern(dice1, 13, pattern);
@@ -54,6 +52,8 @@ public class TestPrivateObjectiveCard {
             pattern.putDiceOnPattern(dice6, 15, pattern);
             pattern.putDiceOnPattern(dice2, 16, pattern);
             pattern.putDiceOnPattern(dice5, 17, pattern);
+            pattern.putDiceOnPattern(dice2, 18, pattern);
+            pattern.putDiceOnPattern(dice1, 19, pattern);
 
             PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.GREEN);
             assertEquals(16,privateCard.RunPrivate(pattern));
