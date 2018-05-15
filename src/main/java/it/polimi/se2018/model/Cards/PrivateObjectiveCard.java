@@ -6,12 +6,19 @@ import it.polimi.se2018.model.Components.GlassBox;
 
 import java.util.Iterator;
 
+/**
+ * Class PrivateObjectiveCard: Public Objective Card
+ * @author Salvatrore Fadda
+ */
 public class PrivateObjectiveCard {
 
     private static final int DEF = 0;
     private DiceColor colour;
 
-
+    /**
+     * Class Constructor
+     * @param colour color of the card
+     */
     public PrivateObjectiveCard(DiceColor colour){
         this.colour = colour;
     }
@@ -20,6 +27,10 @@ public class PrivateObjectiveCard {
         return colour;
     }
 
+    /**
+     * @param pattern scheme card of a player
+     * @return sum of values on ,color of the card, dice
+     */
     public int RunPrivate(PatternCard pattern) {
         int count = DEF;
         GlassBox box;

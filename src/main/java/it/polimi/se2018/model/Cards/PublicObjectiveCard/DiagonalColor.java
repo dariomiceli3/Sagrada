@@ -4,7 +4,10 @@ import it.polimi.se2018.model.Cards.PatternCard;
 
 import java.util.Arrays;
 
-
+/**
+ * Class DiagonalColor: Public Objective Card
+ * @author Salvatrore Fadda
+ */
 public class DiagonalColor implements PublicEffects {
 
 
