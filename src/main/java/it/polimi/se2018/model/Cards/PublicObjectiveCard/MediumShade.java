@@ -2,7 +2,7 @@ package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PatternCard;
 import it.polimi.se2018.model.Components.GlassBox;
-
+import static java.lang.Math.min;
 import java.util.Iterator;
 
 /**
@@ -34,12 +34,9 @@ public class MediumShade implements PublicEffects {
                 }
             }
         }
-        if ( setOf3 < setOf4) {
-            points = setOf3*2;
-        }
-        else points = setOf4*2;
+        points = min(setOf3, setOf4);
 
-        return points;
+        return points*2;
     }
 
 }

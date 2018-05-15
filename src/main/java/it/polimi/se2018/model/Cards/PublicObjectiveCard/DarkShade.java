@@ -2,8 +2,7 @@ package it.polimi.se2018.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.model.Cards.PatternCard;
 import it.polimi.se2018.model.Components.GlassBox;
-import it.polimi.se2018.model.Components.Player;
-
+import static java.lang.Math.min;
 import java.util.Iterator;
 
 /**
@@ -36,12 +35,10 @@ public class DarkShade implements PublicEffects {
             }
             }
         }
-        if ( setOf5 < setOf6) {
-            points = setOf5 * 2;
-        }
-        else points = setOf6 * 2;
+        points = min(setOf5, setOf6);
 
-        return points;
+
+        return points*2;
     }
 
 }
