@@ -26,16 +26,13 @@ public class DraftPool {
 
     /**
      * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
-     * @param number number of players in the match
+     * @param number number of player
      * @param dicebag the dicebag from which to take the dice
      */
     public DraftPool(int number, DiceBag dicebag) {
         this.number = number;
         this.diceBag = dicebag;
         this.dicePlay = new ArrayList<>();
-        for(int i=0; i <= (2*number); i++) {
-            this.dicePlay.add(this.diceBag.getDice());
-        }
 
     }
 
@@ -55,6 +52,14 @@ public class DraftPool {
         return dicePlay.remove(DEFAULT);
     }
 
+    /**
+     * Set the inizial size of draftpool
+     * @param number  the number of dice to rake from bag
+     */
+    public void setNumber(int number){
+        this.number = number;
+    }
+
     //passare una copia della lista dei dadi della pool-------------------
     public ArrayList<Dice> getDraftPool() {//clone necessaria
         return dicePlay;
@@ -68,6 +73,15 @@ public class DraftPool {
         dicePlay.add(dice);
     }
 
+    public void createListDice(){
+        if(dicePlay.isEmpty()){
+        this.dicePlay = new ArrayList<>();
+        for(int i=0; i <= (number*2); i++) {
+            this.dicePlay.add(this.diceBag.getDice());
+        }
+        }
+    }
+
     /**
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
@@ -77,12 +91,13 @@ public class DraftPool {
         ArrayList<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();
         while (it.hasNext()) {
-                listDice.add(it.next());
-                it.remove();
+            listDice.add(it.next());
+            it.remove();
 
-            }
+        }
         return listDice;
     }
 
 
 }
+

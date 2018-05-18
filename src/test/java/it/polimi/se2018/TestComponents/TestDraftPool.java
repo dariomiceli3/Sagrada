@@ -18,8 +18,8 @@ public class TestDraftPool {
 
         DraftPool draftPool = new DraftPool(5, diceBag);
 
-        assertEquals(11, draftPool.getNowNumber());
-        assertEquals(79, diceBag.getListBag().size());
+        assertEquals(0, draftPool.getNowNumber());
+        assertEquals(90, diceBag.getListBag().size());
 
     }
 
@@ -28,6 +28,7 @@ public class TestDraftPool {
         DiceBag diceBag = new DiceBag();
 
         DraftPool draftPool = new DraftPool(3, diceBag );
+        draftPool.createListDice();
         ArrayList<Dice> listDice = draftPool.cleanListDice();
 
         assertEquals(0, draftPool.getDraftPool().size());
@@ -35,9 +36,21 @@ public class TestDraftPool {
     }
 
     @Test
+    public void testCreateListDice () {
+        DiceBag diceBag = new DiceBag();
+
+        DraftPool draftPool = new DraftPool(3, diceBag );
+        draftPool.createListDice();
+
+        assertEquals(7, draftPool.getDraftPool().size());
+        assertEquals(83, diceBag.getListBag().size());
+    }
+
+    @Test
     public void testSetDice() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4, diceBag);
+        draftPool.createListDice();
         Dice dice = new Dice(4, DiceColor.YELLOW);
 
         draftPool.setDice(dice);
@@ -55,8 +68,19 @@ public class TestDraftPool {
     public void testGetDice() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4, diceBag);
+        draftPool.createListDice();
         draftPool.getDice();
         assertEquals(8, draftPool.getNowNumber());
+    }
+
+    @Test
+    public void testsetNumber() {
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(4, diceBag);
+        draftPool.setNumber(3);
+        draftPool.createListDice();
+
+        assertEquals(7, draftPool.getNowNumber());
     }
 
 }

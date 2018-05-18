@@ -12,20 +12,12 @@ public class RoundTracker {
     private ArrayList<ArrayList<Dice>> listDice;
 
 
-    /**
-     * Default class constructor
-     */
-    public RoundTracker(){
-        this.listDice = null;
-    }
 
     /**
      * Class constructor, create the round tracker where the first dice list is set
-     * @param listDice dice not used in the first round
      */
-    public RoundTracker(ArrayList<Dice> listDice){
+    public RoundTracker(){
         this.listDice = new ArrayList();
-        this.listDice.add(listDice);
     }
 
     /**
