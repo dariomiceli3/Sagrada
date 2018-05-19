@@ -9,6 +9,11 @@ import it.polimi.se2018.model.Cards.PatternCard;
 public class DifferentColorColumn implements PublicEffects {
     public final int VPOINTS = 5;
 
+    /**
+     * class used to count the number of points
+      * @param pattern scheme card of a player
+     * @return number of columns with no repeated color multiplied by value of victory points
+     */
     @Override
     public int RunPublic(PatternCard pattern) {
         int points = 0;

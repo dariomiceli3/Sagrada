@@ -10,7 +10,7 @@ import java.util.Iterator;
  * Class PrivateObjectiveCard: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class PrivateObjectiveCard {
+public class    PrivateObjectiveCard {
 
     private static final int DEF = 0;
     private DiceColor colour;

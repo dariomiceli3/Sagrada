@@ -7,7 +7,7 @@ import java.util.Iterator;
  * Class DrafPool: the pool of dice from where the players take the die to be placed on their turn
  * @author Salvatrore Fadda
  */
-public class DraftPool {
+public class    DraftPool {
 
     private final int DEFAULT = 0;
     private int number;

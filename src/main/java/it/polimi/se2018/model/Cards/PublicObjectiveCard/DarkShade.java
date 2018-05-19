@@ -38,7 +38,7 @@ public class DarkShade implements PublicEffects {
         points = min(setOf5, setOf6);
 
 
-        return points*2;
+        return points*2 ;
     }
 
 }
