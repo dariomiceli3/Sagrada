@@ -33,7 +33,7 @@ public class Player {
 
     /**
      * Class setPattern, set at the player his pattern card
-     * @param pattern
+     * @param pattern pattern card
      */
     public void setPattern(PatternCard pattern){
         this.pattern = pattern;
@@ -54,7 +54,7 @@ public class Player {
 
     /**
      * Class setPrivate, set at the player his private objective card
-     * @param privateCard
+     * @param privateCard pattern card
      */
     public void setPrivate(PrivateObjectiveCard privateCard){
         this.privateCard = privateCard;

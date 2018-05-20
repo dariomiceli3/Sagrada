@@ -12,11 +12,7 @@ import java.util.Iterator;
 
 public class LightShade implements PublicEffects{
 
-    /**
-     *
-     * @param pattern scheme card of a player
-     * @return number of sets of 1&2 multiplied by value of victory point
-     */
+
     @Override
     public int RunPublic(PatternCard pattern){
         int points;
@@ -37,7 +33,9 @@ public class LightShade implements PublicEffects{
             }
         }
         points = min(setOf1, setOf2);
-        return points*2;
+        points = points * 2;
+
+        return points;
     }
 
 }

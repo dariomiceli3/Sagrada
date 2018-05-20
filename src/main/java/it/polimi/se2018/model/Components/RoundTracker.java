@@ -44,6 +44,7 @@ public class RoundTracker {
      * Add a die from the top of the list of dice not used in the specified round
      * @param dice the die to add
      * @param round the round where the die has been extracted
+     * @throws InvalidMoveException if the insert in not valid
      */
     public void addDice(Dice dice, int round) throws InvalidMoveException {
         if (round < listDice.size()) {

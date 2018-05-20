@@ -11,10 +11,7 @@ import java.util.Iterator;
  */
 public class MediumShade implements PublicEffects {
 
-    /**
-     * @param pattern scheme card of a player
-     * @return number of sets of 3&4 multiplied by value of victory point
-     */
+
     @Override
     public int RunPublic(PatternCard pattern){
         int points;
@@ -35,8 +32,9 @@ public class MediumShade implements PublicEffects {
             }
         }
         points = min(setOf3, setOf4);
+        points = points*2;
 
-        return points*2;
+        return points;
     }
 
 }
