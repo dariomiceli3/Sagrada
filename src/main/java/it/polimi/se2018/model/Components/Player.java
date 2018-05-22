@@ -12,6 +12,7 @@ public class Player {
     private PlayerColour colour;
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;
+    private int tokensNumber;
 
     /**
      * Default class constructor
@@ -51,6 +52,10 @@ public class Player {
         return pattern;
     }
 
+    public int getTokensNumber() {
+        return tokensNumber;
+    }
+
 
     /**
      * Class setPrivate, set at the player his private objective card
@@ -62,5 +67,9 @@ public class Player {
 
     public PrivateObjectiveCard getPrivate(){
         return privateCard;
+    }
+
+    public void setTokensNumber(int tokensNumber){
+        this.tokensNumber = tokensNumber;
     }
 }

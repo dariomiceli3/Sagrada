@@ -4,20 +4,28 @@ import it.polimi.se2018.Exceptions.InvalidMoveException;
 
 import java.util.ArrayList;
 /**
- * Class RoundTracker: the round tracker is the table used to keep track of the current round and the die or dice not used in each round
+ * Class RoundTracker: DP Singleton, the round tracker is the table used to keep track of the current round and the die or dice not used in each round
  * @author Salvatrore Fadda
  */
 public class RoundTracker {
 
+    private static RoundTracker istanceRT;
     private ArrayList<ArrayList<Dice>> listDice;
 
 
 
     /**
-     * Class constructor, create the round tracker where the first dice list is set
+     * Private Class constructor, create the round tracker where the first dice list is set
      */
-    public RoundTracker(){
+    private RoundTracker(){
         this.listDice = new ArrayList();
+    }
+
+    public static RoundTracker getIstanceRT(){
+        if (istanceRT == null){
+            istanceRT = new RoundTracker();
+        }
+        return istanceRT;
     }
 
     /**

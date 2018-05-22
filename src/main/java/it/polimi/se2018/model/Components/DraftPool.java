@@ -4,23 +4,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Class DrafPool: the pool of dice from where the players take the die to be placed on their turn
+ * Class DrafPool: DP Singleton, the pool of dice from where the players take the die to be placed on their turn
  * @author Salvatrore Fadda
  */
-public class    DraftPool {
+public class DraftPool {
 
+    private static DraftPool istanceDP;
     private final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
     private ArrayList<Dice> dicePlay;
 
     /**
-     * Default class constructor
+     * Private Default class constructor
      */
-    public DraftPool(){
+    private DraftPool(){
         this.number = DEFAULT;
         this.dicePlay = null;
         this.diceBag = null;
+
+    }
+
+    public static DraftPool getIstanceDP(){
+        if (istanceDP == null){
+            istanceDP = new DraftPool();
+        }
+        return istanceDP;
 
     }
 

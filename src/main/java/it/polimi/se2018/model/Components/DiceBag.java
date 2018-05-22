@@ -8,10 +8,11 @@ import java.util.Random;
 import java.util.ArrayList;
 
 /**
- * Class DiceBag: the bag used for dice extraction
+ * Class DiceBag:DP Singleton, the bag used for dice extraction
  * @author Salvatrore Fadda
  */
 public class DiceBag {
+    private static DiceBag istanceDB;
     private final int TOP = 0;
     private final int MAX_VALUE = 6;
     private final int NUMBER = 90;
@@ -19,12 +20,20 @@ public class DiceBag {
     private ArrayList<Dice> listDice;
     private int value;
     private DiceColor colour;
-//gestione eccezioni da dichiarare e controlli da fare
+//TODO gestione eccezioni da dichiarare e controlli da fare
+
+
+    public static DiceBag getIstanceDB(){
+        if (istanceDB == null){
+            istanceDB = new DiceBag();
+        }
+        return istanceDB;
+    }
 
     /**
-     * DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
+     * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
      */
-    public DiceBag(){
+    private DiceBag(){
         this.listDice = new ArrayList<Dice>();
 
         //creazione dadi casuali, 18 per ogni colore
