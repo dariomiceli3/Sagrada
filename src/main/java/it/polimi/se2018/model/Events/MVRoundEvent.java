@@ -17,7 +17,7 @@ public class MVRoundEvent implements Event {
         return roundTracker;
     }
 
-    public DraftPool draftPool(){
+    public DraftPool getDraftPool(){
         return draftPool;
     }
 
