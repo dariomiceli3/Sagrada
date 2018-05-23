@@ -7,7 +7,7 @@ import it.polimi.se2018.model.Cards.PatternCard;
  * @author Salvatrore Fadda
  */
 public class DifferentColorColumn implements PublicEffects {
-    public final int VPOINTS = 5;
+    private final int VPOINTS = 5;
 
     /**
      * class used to count the number of points

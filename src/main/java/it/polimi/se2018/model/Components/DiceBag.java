@@ -33,7 +33,7 @@ public class DiceBag {
     /**
      * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
      */
-    private DiceBag(){
+    private void DiceBag(){
         this.listDice = new ArrayList<Dice>();
 
         //creazione dadi casuali, 18 per ogni colore
