@@ -13,6 +13,8 @@ public class Player {
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;
     private int tokensNumber;
+    private  int finalPoints;
+    private  int privatePoints;
 
     /**
      * Default class constructor
@@ -20,6 +22,16 @@ public class Player {
     public Player(){
         this.colour = null;
         this.playerID = null;
+    }
+
+    public Player(Player player) {
+        this.playerID = player.playerID;
+        this.colour = player.colour;
+        this.pattern = player.pattern;
+        this.privateCard = player.privateCard;
+        this.tokensNumber = player.tokensNumber;
+        this.finalPoints = player.finalPoints;
+        this.privatePoints= player.privatePoints;
     }
 
     /**
@@ -72,4 +84,17 @@ public class Player {
     public void setTokensNumber(int tokensNumber){
         this.tokensNumber = tokensNumber;
     }
+
+    public void setFinalPoints(int finalPoints){
+        this.finalPoints = finalPoints;
+    }
+
+    public void setPrivatePoints(int privatePoints){
+        this.privatePoints = privatePoints;
+    }
+
+    public int getFinalPoints() {return finalPoints;}
+
+    public int getPrivatePoints() { return privatePoints;}
+
 }

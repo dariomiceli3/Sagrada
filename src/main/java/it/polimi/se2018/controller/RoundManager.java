@@ -7,10 +7,9 @@ import it.polimi.se2018.model.Components.DraftPool;
 import it.polimi.se2018.model.Components.GlassBox;
 import it.polimi.se2018.model.Components.Player;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
-public class RoundManager {
+public class RoundManager  {
 
 
     /*public void createDraftPool() {
@@ -25,6 +24,7 @@ public class RoundManager {
         for (int i = 0; i < playerArrayList.size(); i++) {
             int result;
             result = playerArrayList.get(i).getPrivate().RunPrivate(playerArrayList.get(i).getPattern());
+            playerArrayList.get(i).setPrivatePoints(result);
             results.add(result);
         }
         return results;
@@ -82,6 +82,79 @@ public class RoundManager {
 
     }
 
+ public ArrayList<Player> calculatePoints (ArrayList<Player> playerArrayList, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList ) {
+        ArrayList<Integer> result1;
+        ArrayList<Integer> result2;
+        ArrayList<Integer> result3;
+        ArrayList<Integer> result4;
 
-    
-}
+
+
+        result1 = calculateEmptyBox(playerArrayList);
+        result2 = calculatePrivate(playerArrayList);
+        result3 = calculateTokens(playerArrayList);
+        result4 = calculatePublic(playerArrayList, publicObjectiveCardArrayList );
+
+        for (int i=0; i < result1.size(); i++) {
+            int sum;
+            sum = result1.get(i) + result2.get(i) + result3.get(i) + result4.get(i);
+            playerArrayList.get(i).setFinalPoints(sum);
+        }
+
+        return playerArrayList;
+
+     }
+        //TODO aggiungere ultima funzionalità dopo aver creato round
+ public ArrayList<Player> checkPoints (ArrayList<Player> playerArrayList) {
+        for (int i=0; i < playerArrayList.size()-1; i++) {
+            if (playerArrayList.get(i).getFinalPoints() == playerArrayList.get(i+1).getFinalPoints()) {
+
+                if (playerArrayList.get(i).getPrivatePoints() < playerArrayList.get(i+1).getPrivatePoints()) {
+
+                    Player player = new Player(playerArrayList.get(i));
+
+                    playerArrayList.set(i, playerArrayList.get(i+1));
+                    playerArrayList.set(i+1, player);
+
+
+                }
+            }
+        }
+
+     for (int i=0; i < playerArrayList.size()-1; i++) {
+         if (playerArrayList.get(i).getPrivatePoints() == playerArrayList.get(i+1).getPrivatePoints()) {
+
+             if (playerArrayList.get(i).getTokensNumber() < playerArrayList.get(i+1).getTokensNumber()) {
+
+                 Player player = new Player(playerArrayList.get(i));
+
+                 playerArrayList.set(i, playerArrayList.get(i+1));
+                 playerArrayList.set(i+1, player);
+
+
+             }
+         }
+     }
+    return playerArrayList;
+
+ }
+
+ public ArrayList<Player> calculateWinner (ArrayList<Player> playerArrayList, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList) {
+        ArrayList<Player> unsortedPlayers;
+        ArrayList<Player> sortedPlayers;
+
+        unsortedPlayers = calculatePoints( playerArrayList, publicObjectiveCardArrayList );
+
+
+        Collections.sort(unsortedPlayers, new PointsComparator());
+
+        sortedPlayers = checkPoints(unsortedPlayers);
+
+
+
+        return  sortedPlayers;
+    }
+
+ }
+
+
