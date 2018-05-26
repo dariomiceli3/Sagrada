@@ -3,11 +3,11 @@ package it.polimi.se2018.TestComponents;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-import it.polimi.se2018.model.Cards.PatternCard;
-import it.polimi.se2018.model.Cards.PrivateObjectiveCard;
-import it.polimi.se2018.model.Components.DiceColor;
-import it.polimi.se2018.model.Components.Player;
-import it.polimi.se2018.model.Components.PlayerColour;
+import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
+import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Components.PlayerColour;
 import  org.junit.Test;
 
 import java.io.FileNotFoundException;

@@ -1,11 +1,11 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
-import it.polimi.se2018.Exceptions.InvalidMoveException;
-import it.polimi.se2018.model.Cards.PatternCard;
-import it.polimi.se2018.model.Cards.PublicObjectiveCard.LightShade;
-import it.polimi.se2018.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.model.Components.Dice;
-import it.polimi.se2018.model.Components.DiceColor;
+import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceColor;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

@@ -1,9 +1,9 @@
 package it.polimi.se2018.TestComponents;
 
-import it.polimi.se2018.model.Components.Dice;
-import it.polimi.se2018.model.Components.DiceBag;
-import it.polimi.se2018.model.Components.DiceColor;
-import it.polimi.se2018.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceBag;
+import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.DraftPool;
 import org.junit.Test;
 
 import java.util.ArrayList;

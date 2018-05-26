@@ -3,12 +3,10 @@ package it.polimi.se2018.TestComponents;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import it.polimi.se2018.model.Components.Dice;
-import it.polimi.se2018.model.Components.DiceBag;
-import it.polimi.se2018.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceBag;
+import it.polimi.se2018.server.model.Components.DiceColor;
 import org.junit.Test;
-
-import java.util.Iterator;
 
 public class TestDiceBag {
 

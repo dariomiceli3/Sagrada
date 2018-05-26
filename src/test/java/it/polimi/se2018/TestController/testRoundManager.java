@@ -1,10 +1,10 @@
 package it.polimi.se2018.TestController;
 
-import it.polimi.se2018.model.Cards.PatternCard;
-import it.polimi.se2018.model.Cards.PrivateObjectiveCard;
-import it.polimi.se2018.model.Components.Dice;
-import it.polimi.se2018.model.Components.DiceColor;
-import it.polimi.se2018.model.Components.Player;
+import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
+import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.Player;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

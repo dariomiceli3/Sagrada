@@ -1,6 +1,6 @@
 package it.polimi.se2018.TestComponents;
 
-import it.polimi.se2018.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.DiceColor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

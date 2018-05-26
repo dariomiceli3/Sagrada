@@ -1,8 +1,8 @@
 package it.polimi.se2018.TestComponents;
 
 
-import it.polimi.se2018.Exceptions.InvalidMoveException;
-import it.polimi.se2018.model.Components.*;
+import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.model.Components.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
