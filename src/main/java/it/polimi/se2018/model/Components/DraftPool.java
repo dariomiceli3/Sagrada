@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class DraftPool {
 
-    private static DraftPool istanceDP;
+    //private static DraftPool istanceDP;
     private final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
@@ -18,20 +18,20 @@ public class DraftPool {
     /**
      * Private Default class constructor
      */
-    private DraftPool(){
+    public DraftPool(){
         this.number = DEFAULT;
         this.dicePlay = null;
         this.diceBag = null;
 
     }
 
-    public static DraftPool getIstanceDP(){
+    /*public static DraftPool getIstanceDP(){
         if (istanceDP == null){
             istanceDP = new DraftPool();
         }
         return istanceDP;
 
-    }
+    }*/
 
     /**
      * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
@@ -44,13 +44,24 @@ public class DraftPool {
         this.dicePlay = new ArrayList<>();
 
     }
+    /*public static DraftPool getIstanceDPWithParam(int number, DiceBag diceBag){
+        if (istanceDP == null){
+            istanceDP = new DraftPool(number, diceBag);
+        }
+        return istanceDP;
+
+    }*/
+
 
     /**
      * Get number of dice content in the pool atm
      * @return number of dice
      */
     public int getNowNumber(){
-        return dicePlay.size();
+        if (dicePlay == null) {
+            return 0;
+        }
+        else return dicePlay.size();
     }
 
     /**

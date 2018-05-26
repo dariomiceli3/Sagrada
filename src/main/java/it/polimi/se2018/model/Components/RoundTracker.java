@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class RoundTracker {
 
-    private static RoundTracker istanceRT;
+    //private static RoundTracker istanceRT;
     private ArrayList<ArrayList<Dice>> listDice;
 
 
@@ -17,16 +17,16 @@ public class RoundTracker {
     /**
      * Private Class constructor, create the round tracker where the first dice list is set
      */
-    private RoundTracker(){
+    public RoundTracker(){
         this.listDice = new ArrayList();
     }
 
-    public static RoundTracker getIstanceRT(){
+   /* public static RoundTracker getIstanceRT(){
         if (istanceRT == null){
             istanceRT = new RoundTracker();
         }
         return istanceRT;
-    }
+    }*/
 
     /**
      * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn

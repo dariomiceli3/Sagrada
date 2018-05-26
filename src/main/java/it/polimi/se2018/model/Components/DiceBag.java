@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Salvatrore Fadda
  */
 public class DiceBag {
-    private static DiceBag istanceDB;
+    //private static DiceBag istanceDB;
     private final int TOP = 0;
     private final int MAX_VALUE = 6;
     private final int NUMBER = 90;
@@ -23,17 +23,17 @@ public class DiceBag {
 //TODO gestione eccezioni da dichiarare e controlli da fare
 
 
-    public static DiceBag getIstanceDB(){
+    /*public static DiceBag getIstanceDB(){
         if (istanceDB == null){
             istanceDB = new DiceBag();
         }
         return istanceDB;
-    }
+    }*/
 
     /**
      * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
      */
-    private void DiceBag(){
+    public  DiceBag(){
         this.listDice = new ArrayList<Dice>();
 
         //creazione dadi casuali, 18 per ogni colore
@@ -53,7 +53,7 @@ public class DiceBag {
 
     }
 
-    //ritorna la copia dell'arraylist associatio alla Bag------------
+    //ritorna la copia dell'arraylist associata alla Bag------------
     public ArrayList<Dice> getListBag() {
 
         return listDice;

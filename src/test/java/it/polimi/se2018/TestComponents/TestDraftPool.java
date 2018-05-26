@@ -16,7 +16,7 @@ public class TestDraftPool {
     public void testConstructor() {
         DiceBag diceBag = new DiceBag();
 
-        DraftPool draftPool = new DraftPool(5, diceBag);
+        DraftPool draftPool = new DraftPool();
 
         assertEquals(0, draftPool.getNowNumber());
         assertEquals(90, diceBag.getListBag().size());

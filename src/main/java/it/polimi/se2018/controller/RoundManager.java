@@ -12,10 +12,10 @@ import java.util.*;
 public class RoundManager  {
 
 
-    /*public void createDraftPool() {
+    public void createDraftPool() {
         DraftPool draftPool = new DraftPool();
 
-    }*/
+    }
 
 
     public ArrayList<Integer> calculatePrivate(ArrayList<Player> playerArrayList) {

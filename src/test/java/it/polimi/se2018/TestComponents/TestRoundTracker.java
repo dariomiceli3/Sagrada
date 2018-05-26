@@ -58,7 +58,7 @@ public class TestRoundTracker {
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
         ArrayList<Dice> list = draftPool.cleanListDice();
-        RoundTracker roundTracker = new RoundTracker();
+        RoundTracker roundTracker =new RoundTracker();
         roundTracker.setTracker(list);
         assertEquals(9, roundTracker.getRoundDice(0).size());
         Dice dice = roundTracker.getDice(0, 8);
