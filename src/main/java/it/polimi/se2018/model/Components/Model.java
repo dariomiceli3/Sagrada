@@ -11,7 +11,7 @@ public class Model extends java.util.Observable {
     private DraftPool draftPool;
     private DiceBag diceBag;
     private Player player;
-    private PublicObjectiveCard publicObjectiveCard;
+    private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
 
@@ -42,8 +42,12 @@ public class Model extends java.util.Observable {
         return player;
     }
 
-    public PublicObjectiveCard getPublicObjectiveCard() {
-        return publicObjectiveCard;
+    public List<PublicObjectiveCard> getPublicList() {
+        return publicList;
+    }
+
+    public void setPublicList(List<PublicObjectiveCard> publicList){
+        this.publicList = publicList;
     }
 
     public List<Player> getPlayerList() {

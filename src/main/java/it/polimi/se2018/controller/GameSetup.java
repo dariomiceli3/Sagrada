@@ -6,6 +6,7 @@ import it.polimi.se2018.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.model.Components.DiceColor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameSetup {
     private Game game;
@@ -14,15 +15,9 @@ public class GameSetup {
         this.game = game;
     }
 
-    protected void setupPlayer(int ID){
+    protected void setupPlayer(String ID){
 //setta i player della partita con i rispettivi dati e li aggiunge nel vettore dei player presente in model
-    }
-
-    protected void numberOfPlayers(){
-        int n;
-        n = game.getModel().getPlayerList().size();
-        game.getModel().setNumberPlayer(n);
-
+        //e aumenta di uno il numberofplayers
     }
 
     protected ArrayList<PrivateObjectiveCard> loadPrivate(){
@@ -32,6 +27,7 @@ public class GameSetup {
         list.add(new PrivateObjectiveCard(DiceColor.GREEN));
         list.add(new PrivateObjectiveCard(DiceColor.PURPLE));
         list.add(new PrivateObjectiveCard(DiceColor.YELLOW));
+        Collections.shuffle(list);
         return list;
 
     }
@@ -48,6 +44,7 @@ public class GameSetup {
         list.add(new PublicObjectiveCard(new LightShade()));
         list.add(new PublicObjectiveCard(new MediumShade()));
         list.add(new PublicObjectiveCard(new VarietyColor()));
+        Collections.shuffle(list);
         return list;
     }
 
