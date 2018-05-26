@@ -4,7 +4,7 @@ import it.polimi.se2018.server.model.Events.Event;
 
 import java.util.Scanner;
 
-public class CliView extends View implements Runnable{
+/*public class CliView extends View implements Runnable{
 
     private Scanner scanner;
     // aggiungere la communicationtype
@@ -38,4 +38,4 @@ public class CliView extends View implements Runnable{
 
 
 
-}
+}*/

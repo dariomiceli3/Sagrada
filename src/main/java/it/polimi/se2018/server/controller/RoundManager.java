@@ -95,7 +95,7 @@ public class RoundManager  {
 
         for (int i=0; i < result1.size(); i++) {
             int sum;
-            sum = result1.get(i) + result2.get(i) + result3.get(i) + result4.get(i);
+            sum = result1.get(i) + result2.get(i) - result3.get(i) + result4.get(i);
             playerArrayList.get(i).setFinalPoints(sum);
         }
 
