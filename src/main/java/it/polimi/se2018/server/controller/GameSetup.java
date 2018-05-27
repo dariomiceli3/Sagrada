@@ -16,11 +16,6 @@ public class GameSetup {
         this.game = game;
     }
 
-    protected void setupPlayer(String ID){
-
-        game.getModel().getPlayer().setPlayerID(ID);
-
-    }
 
     protected ArrayList<PrivateObjectiveCard> loadPrivate(){
         ArrayList<PrivateObjectiveCard> list = new ArrayList<>();

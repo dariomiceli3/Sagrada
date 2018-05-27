@@ -1,4 +1,61 @@
 package it.polimi.se2018.server;
 
-public class VirtualView {
+import it.polimi.se2018.server.model.Components.Model;
+import it.polimi.se2018.server.model.Events.Event;
+
+import java.util.Observable;
+import java.util.Observer;
+
+public abstract class VirtualView extends Observable implements Observer {
+
+    // TODO controllare se metodi privati o protected o vanno bene public
+
+    private String name;
+    private Model model;
+    private final Server server;
+
+    public VirtualView() {
+        this.name = null;
+        this.model = null;
+        this.server = null;
+    }
+
+    public VirtualView(String name, Server server) {
+        this.name = name;
+        this.server = server;
+
+    }
+
+    // metodo che manda al client la richiesta di eventi aggiornati, va a prenderle dal model
+    // eventi che non passano dal controller
+    public void sendUpdate (Event eventUpdate) {
+
+        //if (eventUpdate instanceof )
+
+    }
+
+    public abstract void sendEvent(Event event);
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+
+
+
+
+
+
 }

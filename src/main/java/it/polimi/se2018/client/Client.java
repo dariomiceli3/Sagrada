@@ -4,7 +4,6 @@ import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.CliView;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.network.socket.SocketServerInterface;
 
 import java.util.Scanner;
 

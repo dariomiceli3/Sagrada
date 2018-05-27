@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.MVPlayerNameEvent;
+import it.polimi.se2018.server.model.Events.MVPlayerNameUpdateEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -83,8 +84,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     // metodo per leggere evento chiamato dal socket INPUT e in base all'evento fare la cosa giusta
     public void readEvent(Event event) {
 
-        if (event instanceof MVPlayerNameEvent) { //add controllo se nome diverso null
-            view.setPlayerName(((MVPlayerNameEvent) event).getName());
+        if (event instanceof MVPlayerNameUpdateEvent) { //add controllo se nome diverso null
+            view.setPlayerName(((MVPlayerNameUpdateEvent) event).getName());
             System.out.println("Player name set" + view.getPlayerName());
         }
         else {
@@ -106,19 +107,6 @@ public class SocketHandler implements ClientInterface, Runnable {
         }
     }
 
-    // close the socket connection, useful(?)
-    public synchronized void stopConnection() {
-        if (!clientConnection.isClosed()) {
-            try {
-                this.clientConnection.close();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Connection socket closed");
-        }
-    }
 
 
     // ----socket client impl----------------override methods callable by the client------------------------------
