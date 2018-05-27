@@ -4,6 +4,7 @@ package it.polimi.se2018.server.model.Components;
 
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class DiceBag {
     private final int MAX_VALUE = 6;
     private final int NUMBER = 90;
     private Dice dice;
-    private ArrayList<Dice> listDice;
+    private List<Dice> listDice;
     private int value;
     private DiceColor colour;
 //TODO gestione eccezioni da dichiarare e controlli da fare
@@ -54,7 +55,7 @@ public class DiceBag {
     }
 
     //ritorna la copia dell'arraylist associata alla Bag------------
-    public ArrayList<Dice> getListBag() {
+    public List<Dice> getListBag() {
 
         return listDice;
     }

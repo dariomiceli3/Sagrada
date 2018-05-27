@@ -11,13 +11,15 @@ import java.util.Collections;
 public class GameSetup {
     private Game game;
 
-    private GameSetup(Game game){
+
+    protected GameSetup(Game game){
         this.game = game;
     }
 
     protected void setupPlayer(String ID){
-//setta i player della partita con i rispettivi dati e li aggiunge nel vettore dei player presente in model
-        //e aumenta di uno il numberofplayers
+
+        game.getModel().getPlayer().setPlayerID(ID);
+
     }
 
     protected ArrayList<PrivateObjectiveCard> loadPrivate(){

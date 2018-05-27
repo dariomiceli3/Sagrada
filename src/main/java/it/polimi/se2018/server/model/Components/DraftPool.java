@@ -2,6 +2,7 @@ package it.polimi.se2018.server.model.Components;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Class DrafPool: DP Singleton, the pool of dice from where the players take the die to be placed on their turn
@@ -13,7 +14,7 @@ public class DraftPool {
     private final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
-    private ArrayList<Dice> dicePlay;
+    private List<Dice> dicePlay;
 
     /**
      * Private Default class constructor
@@ -81,7 +82,7 @@ public class DraftPool {
     }
 
     //passare una copia della lista dei dadi della pool-------------------
-    public ArrayList<Dice> getDraftPool() {//clone necessaria
+    public List<Dice> getDraftPool() {//clone necessaria
         return dicePlay;
     }
 
@@ -106,7 +107,7 @@ public class DraftPool {
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
      */
-    public ArrayList<Dice> cleanListDice() {
+    public List<Dice> cleanListDice() {
 
         ArrayList<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();

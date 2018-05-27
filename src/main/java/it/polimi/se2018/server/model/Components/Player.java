@@ -68,6 +68,10 @@ public class Player {
         return tokensNumber;
     }
 
+    public void setPlayerID(String ID) {
+        this.playerID = ID;
+    }
+
 
     /**
      * Class setPrivate, set at the player his private objective card
