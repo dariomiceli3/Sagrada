@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view;
 
+import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.model.Events.Event;
 
 public abstract class View implements Runnable {
@@ -26,9 +27,9 @@ public abstract class View implements Runnable {
 
     public abstract void readEvent(Event event);
 
-    public abstract void setConnection(); //aggiungere attributo connessione
+    public abstract void setConnection(ClientInterface client);
 
-    public abstract void showGameStart(); //aggiungere attributo
+    /*public abstract void showGameStart(); //aggiungere attributo
 
     public abstract void showGameEnd(); //aggiungere attributo
 
@@ -47,7 +48,7 @@ public abstract class View implements Runnable {
     public abstract void showDraftPool();
 
     public abstract void showOthersPlayer();
-
+*/
 
 
 }
