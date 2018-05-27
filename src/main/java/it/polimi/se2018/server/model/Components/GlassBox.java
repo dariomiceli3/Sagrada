@@ -1,5 +1,10 @@
 package it.polimi.se2018.server.model.Components;
 
+/**
+ * Representation of a single box of a Pattern Card
+ * @author adrianomundo
+ */
+
 public class GlassBox {
     private Dice dice;
     private int constraintValue;

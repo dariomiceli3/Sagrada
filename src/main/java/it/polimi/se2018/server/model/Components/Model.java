@@ -5,6 +5,11 @@ import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCa
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class that store reference to the model components and getter/setter methods for them
+ * @author adrianomundo
+ */
+
 public class Model extends java.util.Observable {
 
     private RoundTracker roundTracker;

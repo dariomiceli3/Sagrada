@@ -12,6 +12,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The class responsible of the representation of the Pattern Card, adding dice on it and load from json
+ * @author adrianomundo
+ */
+
 public class PatternCard {
      private String name;
      private int difficulty;
