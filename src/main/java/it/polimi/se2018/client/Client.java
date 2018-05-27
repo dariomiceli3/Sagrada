@@ -29,6 +29,7 @@ public class Client {
 
         if (textView.equalsIgnoreCase("Gui")) {
 
+            // TODO correct this
             view = new CliView(reader, username);
 
         }
@@ -41,6 +42,7 @@ public class Client {
 
         else {
             reader.close();
+            // TODO correct this
             view = new CliView(reader, username); // sistemare in modo che viewReal sia inizializzata
         }
 
@@ -53,7 +55,16 @@ public class Client {
 
             serverSocket = new SocketHandler(host, SOCKETPORT, view);
 
-            // attesa degli altri giocatori poi partenza
+            // non so se necessario
+            view.setConnection(serverSocket);
+
+            //decidere se così o dentro sockethandler
+            Thread socketThread = new Thread(serverSocket);
+            socketThread.start();
+
+            // start of the thread of the selected view
+            Thread viewThread = new Thread(view);
+            viewThread.start();
 
 
         }

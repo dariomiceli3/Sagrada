@@ -33,7 +33,7 @@ public class SocketHandler implements ClientInterface, Runnable {
             this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
             this.view = view;
 
-            new Thread(this).start();
+            //new Thread(this).start();
 
         }
         catch (IOException e) {
@@ -46,7 +46,7 @@ public class SocketHandler implements ClientInterface, Runnable {
     /**
      * The method run is a thread that generate a loop waiting for new object input
      * to read, then call the method responsible for the proper behaviour
-     * @author Adriano Mundo
+     * @author adrianomundo
      */
     // socket handler INPUT che legge oggetto e chiama read per capire come comportarsi
     @Override
@@ -62,6 +62,9 @@ public class SocketHandler implements ClientInterface, Runnable {
 
                 if (object instanceof Event) {
                     readEvent((Event) object);
+                }
+                else {
+                    System.out.println("Not received an object");
                 }
 
             }
@@ -83,6 +86,9 @@ public class SocketHandler implements ClientInterface, Runnable {
         if (event instanceof MVPlayerNameEvent) { //add controllo se nome diverso null
             view.setPlayerName(((MVPlayerNameEvent) event).getName());
             System.out.println("Player name set" + view.getPlayerName());
+        }
+        else {
+            System.out.println("Not understood the message");
         }
 
     }

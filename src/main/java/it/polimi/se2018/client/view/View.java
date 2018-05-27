@@ -6,7 +6,7 @@ import it.polimi.se2018.server.model.Events.Event;
 public abstract class View implements Runnable {
 
     protected  String playerName;
-    protected boolean isGameStarted;
+    protected boolean isStarted;
 
 
     public String getPlayerName() {
@@ -17,15 +17,15 @@ public abstract class View implements Runnable {
         this.playerName = username;
     }
 
-    public boolean isGameStarted() {
-        return isGameStarted;
+    public boolean isStarted() {
+        return isStarted;
     }
 
-    public void setGameStarted(boolean isGameStarted) {
-        this.isGameStarted = isGameStarted;
+    public void setStarted(boolean isStarted) {
+        this.isStarted = isStarted;
     }
 
-    public abstract void readEvent(Event event);
+    public abstract void toStringEvent(Event event);
 
     public abstract void setConnection(ClientInterface client);
 
