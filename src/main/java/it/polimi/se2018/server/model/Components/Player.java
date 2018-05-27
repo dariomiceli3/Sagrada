@@ -44,6 +44,10 @@ public class Player {
         this.colour = colour;
     }
 
+    public Player(String playerID) {
+        this.playerID = playerID;
+    }
+
     /**
      * Class setPattern, set at the player his pattern card
      * @param pattern pattern card

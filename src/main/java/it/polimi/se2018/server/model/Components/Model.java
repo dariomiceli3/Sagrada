@@ -21,7 +21,7 @@ public class Model extends java.util.Observable {
     private int numberPlayer;
 
     public Model(){
-        this. roundTracker = new RoundTracker();
+        this.roundTracker = new RoundTracker();
         this.draftPool = new DraftPool();
         this.diceBag = new DiceBag();
         this.playerList = new ArrayList<>();
