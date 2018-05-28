@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Components.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,16 +1,19 @@
 package it.polimi.se2018.server.model.Components;
 
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Events.Event;
+import it.polimi.se2018.server.model.Events.EventsObservable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * class that store reference to the model components and getter/setter methods for them
  * @author adrianomundo
  */
 
-public class Model extends java.util.Observable {
+public class Model extends Observable {
 
     private RoundTracker roundTracker;
     private DraftPool draftPool;
@@ -19,12 +22,16 @@ public class Model extends java.util.Observable {
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
+    private EventsObservable event;
 
     public Model(){
         this.roundTracker = new RoundTracker();
         this.draftPool = new DraftPool();
         this.diceBag = new DiceBag();
         this.playerList = new ArrayList<>();
+        this.event = new EventsObservable();
+
+
     }
 
     public int getNumberPlayer(){

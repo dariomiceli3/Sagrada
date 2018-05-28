@@ -9,10 +9,12 @@ public class CliView extends View implements Runnable {
 
     private Scanner scanner;
     private ClientInterface communication;
+    private boolean singlePlayer;
 
-    public CliView(Scanner scanner, String username) {
+    public CliView(Scanner scanner, String username, boolean singlePlayer) {
         super.setPlayerName(username);
         this.scanner = scanner;
+        this.singlePlayer = singlePlayer;
     }
 
     @Override
@@ -22,6 +24,7 @@ public class CliView extends View implements Runnable {
 
         while (loop) {
 
+            System.out.println("Enter a command");
             String command = scanner.nextLine();
 
             if (!isStarted) {

@@ -1,6 +1,5 @@
 package it.polimi.se2018.server;
 
-import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.network.rmi.RmiGatherer;
 import it.polimi.se2018.server.network.socket.SocketGatherer;
 import it.polimi.se2018.server.network.socket.VirtualSocket;
@@ -25,6 +24,7 @@ public class Server {
     public Server() {
 
         //this.serverSocket = new SocketServerImpl(this);
+        this.maxPlayers = 4;
         socketGatherer = new SocketGatherer(this, SOCKETPORT);
 
         Thread socketThread = new Thread(socketGatherer);
@@ -70,6 +70,25 @@ public class Server {
     /*public synchronized void SocketServerInterface getImplementation() {
         return this.serverSocket;
     }*/
+
+    public synchronized void waitingOtherPlayers() {
+
+        // TODO sostituire 1 con 4
+        if (clients.size() == 1) {
+            List<VirtualView> viewGame = new ArrayList<>();
+            viewGame.addAll(clients);
+            new GameServer(viewGame);
+        }
+
+        //if (clients.size() == 2){
+
+            // TODO completare waiting connection
+            // far partire il timer
+            // finchè sono > 2 e < 4
+            // poi new Game Server
+
+       // }
+    }
 
 
     public static void main(String[] args) {

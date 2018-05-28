@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +30,7 @@ public class TestDraftPool {
 
         DraftPool draftPool = new DraftPool(3, diceBag );
         draftPool.createListDice();
-        ArrayList<Dice> listDice = draftPool.cleanListDice();
+        List<Dice> listDice = draftPool.cleanListDice();
 
         assertEquals(0, draftPool.getDraftPool().size());
         assertEquals(7,listDice.size());

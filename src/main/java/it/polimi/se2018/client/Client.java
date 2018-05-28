@@ -13,6 +13,7 @@ public class Client {
     private  static final String host = "localhost";
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
+    private static boolean singlePlay;
 
     public static void main(String[] args) {
 
@@ -22,30 +23,46 @@ public class Client {
         System.out.println("Enter your username");
         String username = reader.nextLine();
 
-        System.out.println("How do you prefer to play: GUI or CLI?");
+        System.out.println("Enter the gameplay mode: Single or Multi?");
+        String mode = reader.nextLine();
+
+        if (mode.equalsIgnoreCase("Single")) {
+            singlePlay = true;
+        }
+
+        else if (mode.equalsIgnoreCase("Multi")) {
+            singlePlay = false;
+        }
+
+        else {
+            reader.close();
+        }
+
+        System.out.println("How do you prefer to play: Gui or Cli?");
         String textView = reader.nextLine();
         View view;
 
         if (textView.equalsIgnoreCase("Gui")) {
 
             // TODO correct this
-            view = new CliView(reader, username);
+            view = new CliView(reader, username, singlePlay);
 
         }
 
         else if (textView.equalsIgnoreCase("Cli")){
 
-            view = new CliView(reader, username);
+            view = new CliView(reader, username, singlePlay);
 
         }
 
         else {
             reader.close();
             // TODO correct this
-            view = new CliView(reader, username); // sistemare in modo che viewReal sia inizializzata
+            view = new CliView(reader, username, singlePlay); // sistemare in modo che view sia inizializzata
         }
 
-        System.out.println("Enter the IP address of the Server");
+
+        //System.out.println("Enter the IP address of the Server");
 
         System.out.println("Choose the connection type:Socket or RMI?");
         String connectionType = reader.nextLine();
@@ -77,19 +94,5 @@ public class Client {
         }
 
 
-        System.out.println("Enter the gameplay mode: Single or Multi?");
-        String mode = reader.nextLine();
-
-        if (mode.equalsIgnoreCase("single")) {
-
-        }
-
-        else if (mode.equalsIgnoreCase("multi")) {
-
-        }
-
-        else {
-            reader.close();
-        }
     }
 }

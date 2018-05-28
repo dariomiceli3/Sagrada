@@ -8,7 +8,8 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
  * @author Salvatrore Fadda
  */
 public class Player {
-    private String playerID;
+    private String playerName;
+    private int playerID;
     private PlayerColour colour;
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;
@@ -21,30 +22,37 @@ public class Player {
      */
     public Player(){
         this.colour = null;
-        this.playerID = null;
+        this.playerName = null;
     }
 
     public Player(Player player) {
-        this.playerID = player.playerID;
+        this.playerName = player.playerName;
         this.colour = player.colour;
         this.pattern = player.pattern;
         this.privateCard = player.privateCard;
         this.tokensNumber = player.tokensNumber;
         this.finalPoints = player.finalPoints;
         this.privatePoints= player.privatePoints;
+        this.playerID = player.playerID;
     }
+
 
     /**
      * Class constructor, create a die with face number and colour specified
-     * @param playerID the player identifier
+     * @param playerName the player identifier
      * @param colour player colour
      */
-    public Player(String playerID, PlayerColour colour){
-        this.playerID = playerID;
+    public Player(String playerName, PlayerColour colour){
+        this.playerName = playerName;
         this.colour = colour;
     }
 
-    public Player(String playerID) {
+    public Player(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public Player(int playerID)
+    {
         this.playerID = playerID;
     }
 
@@ -56,8 +64,8 @@ public class Player {
         this.pattern = pattern;
     }
 
-    public String getPlayerID(){
-        return playerID;
+    public String getPlayerName(){
+        return playerName;
     }
 
     public PlayerColour getColour() {
@@ -72,8 +80,16 @@ public class Player {
         return tokensNumber;
     }
 
-    public void setPlayerID(String ID) {
-        this.playerID = ID;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int ID) {
+        this.playerID = playerID;
     }
 
 

@@ -8,7 +8,6 @@ public abstract class View implements Runnable {
     protected  String playerName;
     protected boolean isStarted;
 
-
     public String getPlayerName() {
         return playerName;
     }

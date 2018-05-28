@@ -18,13 +18,15 @@ public class VirtualSocket extends VirtualView implements Runnable {
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
     private boolean running;
+    private int playerID;
 
-    public VirtualSocket(Socket clientConnection, Server server) {
+    public VirtualSocket(Socket clientConnection, Server server, int ID) {
 
         try {
             this.server = server;
             this.clientConnection = clientConnection;
             this.running = true;
+            this.playerID = ID;
             this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
             this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
         }
@@ -41,8 +43,9 @@ public class VirtualSocket extends VirtualView implements Runnable {
     public void run() {
 
         try {
-            while(this.isRunning()) {
+            while (this.isRunning()) {
 
+                System.out.println("Virtual Socket ok");
                 Object received = socketIn.readObject();
 
                 if (received instanceof MVPlayerNameEvent) {

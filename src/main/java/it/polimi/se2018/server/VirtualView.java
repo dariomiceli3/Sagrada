@@ -13,6 +13,7 @@ public abstract class VirtualView extends Observable implements Observer {
     private String name;
     private Model model;
     private final Server server;
+    private int playerID;
 
     public VirtualView() {
         this.name = null;
@@ -20,9 +21,10 @@ public abstract class VirtualView extends Observable implements Observer {
         this.server = null;
     }
 
-    public VirtualView(String name, Server server) {
+    public VirtualView(String name, Server server, int ID) {
         this.name = name;
         this.server = server;
+        this.playerID = ID;
 
     }
 

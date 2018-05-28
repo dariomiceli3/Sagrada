@@ -30,8 +30,9 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         try {
             this.clientConnection = new Socket(host, port);
-            this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
-            this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
+            // TODO DANNO errore input stream e gli output stream, causa (?) -> provato ad inserirli sotto, controllare se va
+            //this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
+            //this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
             this.view = view;
 
             //new Thread(this).start();
@@ -59,6 +60,8 @@ public class SocketHandler implements ClientInterface, Runnable {
         while (loop) { // maybe add controllo se clientConnection isClose
 
             try {
+
+                socketIn = new ObjectInputStream(clientConnection.getInputStream());
                 Object object = socketIn.readObject();
 
                 if (object instanceof Event) {
@@ -98,6 +101,7 @@ public class SocketHandler implements ClientInterface, Runnable {
     public synchronized void sendEvent(Event event) {
 
         try {
+            socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
             socketOut.writeObject(event);
             socketOut.flush();
         }

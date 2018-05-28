@@ -1,6 +1,7 @@
 package it.polimi.se2018.server.network.socket;
 
 import it.polimi.se2018.server.Server;
+import it.polimi.se2018.server.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,10 +12,12 @@ public class SocketGatherer implements Runnable {
     private ServerSocket serverSocket;
     private final Server server;
     private final int port;
+    private int counter;
 
     public SocketGatherer(Server server, int port) {
         this.server = server;
         this.port = port;
+        this.counter = 0;
 
         try {
             this.serverSocket = new ServerSocket(port);
@@ -43,7 +46,8 @@ public class SocketGatherer implements Runnable {
                 clientConnection = serverSocket.accept();
                 System.out.println("New socket connected");
 
-                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, this.server);
+                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, counter);
+                counter++;
 
                 // add arraylist di socket
                 server.addSocketClient(virtualSocket);
@@ -51,7 +55,8 @@ public class SocketGatherer implements Runnable {
                 // add arraylist unico
                 server.getClients().add(virtualSocket);
 
-                // TODO waiting other connections method!!
+                server.waitingOtherPlayers();
+                //  TODO waiting other connections method!!
 
                 Thread vsThread = new Thread(virtualSocket);
                 vsThread.start();
@@ -67,4 +72,7 @@ public class SocketGatherer implements Runnable {
 
 
     }
+
+
+
 }

@@ -14,7 +14,7 @@ public class DraftPool {
     private final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
-    private List<Dice> dicePlay;
+    private ArrayList<Dice> dicePlay;
 
     /**
      * Private Default class constructor
@@ -82,7 +82,7 @@ public class DraftPool {
     }
 
     //passare una copia della lista dei dadi della pool-------------------
-    public List<Dice> getDraftPool() {//clone necessaria
+    public ArrayList<Dice> getDraftPool() {//clone necessaria
         return dicePlay;
     }
 
@@ -107,7 +107,7 @@ public class DraftPool {
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
      */
-    public List<Dice> cleanListDice() {
+    public ArrayList<Dice> cleanListDice() {
 
         ArrayList<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();

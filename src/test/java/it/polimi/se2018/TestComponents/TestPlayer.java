@@ -18,7 +18,7 @@ public class TestPlayer {
     public void testConstructor() {
         String ID = "Buonasera";
         Player player = new Player(ID, PlayerColour.BLUE);
-        assertEquals("Buonasera", player.getPlayerID());
+        assertEquals("Buonasera", player.getPlayerName());
         assertEquals(PlayerColour.BLUE, player.getColour());
     }
 
