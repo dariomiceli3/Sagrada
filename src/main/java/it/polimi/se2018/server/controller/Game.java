@@ -22,6 +22,8 @@ public class Game implements Observer {
     }
 
 
+    // ogni metodo che modifica il model deve essere gestito da update (unico metodo pubblico), e chiamare il metodo
+    // protected relativo al cambiamento
 
     protected Model getModel(){
         return model;
@@ -33,16 +35,16 @@ public class Game implements Observer {
         VirtualView virtualView = (VirtualView) o;
 
         if (arg instanceof MVPlayerNameEvent) {
+            setPlayerID(virtualView, ((MVPlayerNameEvent) arg).getName());
 
         }
 
     }
 
-    protected void setPlayerID(VirtualView virtualView, String name) {
+    protected void setPlayerID(VirtualView view, String name) {
 
-        //model.getPlayerList()
+        model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
 
-        // TODO completare metodo controller per settare nome
     }
 
 }

@@ -54,6 +54,14 @@ public abstract class VirtualView extends Observable implements Observer {
         this.model = model;
     }
 
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int ID) {
+        this.playerID = ID;
+    }
+
 
 
 

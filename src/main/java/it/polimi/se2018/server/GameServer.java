@@ -9,9 +9,9 @@ import java.util.List;
 
 public class GameServer {
 
-    private final Model model;
+    private Model model;
     private List<VirtualView> viewList;
-    private final Game controller;
+    private Game controller;
     private List<Player> playerList;
 
     public GameServer(List<VirtualView> viewList) {
@@ -26,7 +26,7 @@ public class GameServer {
         this.model = new Model();
 
         for(VirtualView view : viewList) {
-            Player player = new Player(view.getName());
+            Player player = new Player(view.getPlayerID());
             playerList.add(player);
         }
 
@@ -42,7 +42,6 @@ public class GameServer {
         }
 
         //TODO fare start del game su controller
-
 
 
 

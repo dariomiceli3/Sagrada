@@ -77,5 +77,17 @@ public class Model extends Observable {
     }
 
 
+    public Player getPlayerFromID(int ID) {
+
+        for (Player player : playerList)
+        {
+            if (player.getPlayerID() == ID) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+
     //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)
 }
