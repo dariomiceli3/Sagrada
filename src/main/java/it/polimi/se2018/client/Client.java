@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    private static final int SOCKETPORT = 8888;
+    private static final int SOCKETPORT = 7777;
     private  static final String host = "localhost";
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
@@ -20,8 +20,8 @@ public class Client {
         System.out.println("Welcome to the game of SAGRADA");
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Enter your username");
-        String username = reader.nextLine();
+        //System.out.println("Enter your username");
+        //String username = reader.nextLine();
 
         System.out.println("Enter the gameplay mode: Single or Multi?");
         String mode = reader.nextLine();
@@ -45,20 +45,20 @@ public class Client {
         if (textView.equalsIgnoreCase("Gui")) {
 
             // TODO correct this
-            view = new CliView(reader, username, singlePlay);
+            view = new CliView(singlePlay);
 
         }
 
         else if (textView.equalsIgnoreCase("Cli")){
 
-            view = new CliView(reader, username, singlePlay);
+            view = new CliView(singlePlay);
 
         }
 
         else {
             reader.close();
             // TODO correct this
-            view = new CliView(reader, username, singlePlay); // sistemare in modo che view sia inizializzata
+            view = new CliView(singlePlay); // sistemare in modo che view sia inizializzata
         }
 
 
@@ -71,7 +71,7 @@ public class Client {
 
             serverSocket = new SocketHandler(host, SOCKETPORT, view);
 
-            // non so se necessario
+            // necessario
             view.setConnection(serverSocket);
 
             //decidere se così o dentro sockethandler
@@ -86,7 +86,6 @@ public class Client {
         }
 
         else if (connectionType.equalsIgnoreCase("Rmi")) {
-
             serverRmi = new RmiHandler();
         }
         else {

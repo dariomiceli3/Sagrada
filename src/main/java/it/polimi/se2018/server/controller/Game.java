@@ -4,7 +4,7 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Events.MVPlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 
 import java.util.List;
 import java.util.Observable;
@@ -34,17 +34,17 @@ public class Game implements Observer {
 
         VirtualView virtualView = (VirtualView) o;
 
-        if (arg instanceof MVPlayerNameEvent) {
-            setPlayerID(virtualView, ((MVPlayerNameEvent) arg).getName());
+        if (arg instanceof PlayerNameEvent) {
+            setPlayerModelName(virtualView, ((PlayerNameEvent) arg).getName());
 
         }
 
     }
 
-    protected void setPlayerID(VirtualView view, String name) {
+    protected void setPlayerModelName(VirtualView view, String name) {
 
-        model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
-
+        //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
+        model.setPlayerAndNotify((view.getPlayerID()), name);
     }
 
 }

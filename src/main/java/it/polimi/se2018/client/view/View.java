@@ -7,14 +7,19 @@ public abstract class View implements Runnable {
 
     protected  String playerName;
     protected boolean isStarted;
+    protected int playerID;
 
-    public String getPlayerName() {
-        return playerName;
+    public int getPlayerID() {
+        return playerID;
     }
 
-    public void setPlayerName(String username) {
-        this.playerName = username;
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
     }
+
+    public abstract String getPlayerName();
+
+    public abstract void setPlayerName(String username);
 
     public boolean isStarted() {
         return isStarted;
@@ -27,6 +32,8 @@ public abstract class View implements Runnable {
     public abstract void toStringEvent(Event event);
 
     public abstract void setConnection(ClientInterface client);
+
+    public abstract ClientInterface getConnection();
 
     /*public abstract void showGameStart(); //aggiungere attributo
 

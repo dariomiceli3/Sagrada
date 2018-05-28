@@ -3,6 +3,7 @@ package it.polimi.se2018.server.model.Components;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.EventsObservable;
+import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,12 @@ public class Model extends Observable {
     private int numberPlayer;
     private EventsObservable event;
 
-    public Model(){
+    public Model() {
         this.roundTracker = new RoundTracker();
         this.draftPool = new DraftPool();
         this.diceBag = new DiceBag();
         this.playerList = new ArrayList<>();
         this.event = new EventsObservable();
-
 
     }
 
@@ -86,6 +86,14 @@ public class Model extends Observable {
             }
         }
         return null;
+    }
+
+    public void setPlayerAndNotify(int ID, String name) {
+
+        getPlayerFromID(ID).setPlayerName(name);
+        setChanged();
+        notifyObservers(new PlayerNameUpdateEvent(name).getName());
+
     }
 
 

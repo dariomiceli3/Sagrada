@@ -2,8 +2,9 @@ package it.polimi.se2018.server.network.socket;
 
 import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.MVPlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.PlayerIDEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,13 +28,15 @@ public class VirtualSocket extends VirtualView implements Runnable {
             this.clientConnection = clientConnection;
             this.running = true;
             this.playerID = ID;
-            //this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
-            //this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
-        //}
-        //catch (IOException e) {
-         //   System.out.println("Error in virtual socket");
-          //  e.printStackTrace();
-        //}
+            sendEvent(new PlayerIDEvent(this.playerID));
+            System.out.println("Send id to the player");
+            /*this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
+            this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
+        }
+        catch (IOException e) {
+            System.out.println("Error in virtual socket");
+            e.printStackTrace();
+        }*/
 
     }
 
@@ -49,10 +52,10 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 socketIn = new ObjectInputStream(clientConnection.getInputStream());
                 Object received = socketIn.readObject();
 
-                if (received instanceof MVPlayerNameEvent) {
-                    super.setName(((MVPlayerNameEvent) received).getName());
+                if (received instanceof PlayerNameEvent) {
+                    super.setName(((PlayerNameEvent) received).getName());
                     setChanged();
-                    notifyObservers(received);
+                    notifyObservers(received); // necessario argomento tra parentesi (?)
                 }
                 // TODO add the other msg from the client:
                 // if the msg is a modification of the model, notify, ecc.
@@ -94,10 +97,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
     }
 
+    // invocato dopo notify del model, e chiama sendEvent che la manda al client (run->readEvent->clientView)
     @Override
     public void update(Observable o, Object arg) {
 
         if (this.isRunning()) {
+
             if (arg instanceof Event) {
                 sendEvent((Event) arg);
             }

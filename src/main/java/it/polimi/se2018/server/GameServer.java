@@ -20,7 +20,7 @@ public class GameServer {
         // decidere per ordine, se casuale oppure fare la domanda della cattedrale
 
         this.viewList = new ArrayList<>();
-        this.viewList = viewList;
+        this.viewList.addAll(viewList);
         this.playerList = new ArrayList<>();
 
         this.model = new Model();

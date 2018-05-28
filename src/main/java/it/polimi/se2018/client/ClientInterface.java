@@ -7,7 +7,7 @@ public interface ClientInterface extends Remote {
 
     // metodi chiamabili lato client
 
-    public void setPlayerName(String username) throws RemoteException;
+    public void setPlayerNameToServer(String username) throws RemoteException;
 
 
 

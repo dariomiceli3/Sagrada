@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Server {
 
-    private static final int SOCKETPORT = 8888;
+    private static final int SOCKETPORT = 7777;
     private static final int RMIPORT = 1099;
 
     private int maxPlayers;
