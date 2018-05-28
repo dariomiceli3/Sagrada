@@ -89,7 +89,7 @@ public class Player {
     }
 
     public void setPlayerID(int ID) {
-        this.playerID = playerID;
+        this.playerID = ID;
     }
 
 

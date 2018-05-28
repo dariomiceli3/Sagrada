@@ -2,6 +2,8 @@ package it.polimi.se2018.TestComponents;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -42,11 +44,36 @@ public class TestPlayer {
         player.setTokensNumber(tokens);
         player.setFinalPoints(finalPoints);
         player.setPrivatePoints(privatePoints);
+        player.setPlayerID(2);
+        player.setPlayerName("Dario");
 
         assertEquals(pattern, player.getPattern());
         assertEquals(privateCard, player.getPrivate());
         assertEquals(tokens, player.getTokensNumber());
         assertEquals(finalPoints, player.getFinalPoints());
         assertEquals(privatePoints, player.getPrivatePoints());
+        assertEquals(2, player.getPlayerID());
+        assertEquals("Dario", player.getPlayerName());
+    }
+
+    @Test
+    public void testNewConstructor() {
+        String string = "Dario";
+        //PlayerColour playerColour = PlayerColour.BLUE;
+        int ID = 1;
+
+        Player player = new Player(string);
+        Player player1 = new Player(ID);
+        Player player2 = new Player(player1);
+
+
+        assertEquals("Dario", player.getPlayerName());
+        assertEquals(1, player1.getPlayerID());
+        assertEquals(1,player2.getPlayerID());
+        assertEquals(0,player2.getTokensNumber());
+        assertEquals(0,player2.getFinalPoints());
+        assertEquals(0,player2.getPrivatePoints());
+        assertNull(player2.getPrivate());
+
     }
 }
