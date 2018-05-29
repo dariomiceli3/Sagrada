@@ -30,10 +30,10 @@ public class CliView extends View implements Runnable {
     @Override
     public void run() {
 
-        boolean loop = true;
+        //boolean loop = true;
         Scanner reader = new Scanner(System.in);
 
-        while (loop) {
+        //while (loop) {
 
             System.out.println("Enter a command");
             String command = reader.nextLine();
@@ -66,7 +66,7 @@ public class CliView extends View implements Runnable {
 
 
 
-    }
+   // }
 
     @Override
     public void setPlayerName(String username)  {

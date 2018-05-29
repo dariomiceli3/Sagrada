@@ -21,6 +21,10 @@ public abstract class View implements Runnable {
 
     public abstract void setPlayerName(String username);
 
+    public void setNameView(String nameView){
+        this.playerName = nameView;
+    }
+
     public boolean isStarted() {
         return isStarted;
     }

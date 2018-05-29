@@ -92,7 +92,7 @@ public class Model extends Observable {
 
         getPlayerFromID(ID).setPlayerName(name);
         setChanged();
-        notifyObservers(new PlayerNameUpdateEvent(name).getName());
+        notifyObservers(new PlayerNameUpdateEvent(name));
 
     }
 
