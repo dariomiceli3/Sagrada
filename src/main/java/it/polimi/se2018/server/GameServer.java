@@ -44,7 +44,10 @@ public class GameServer {
         //TODO fare start del game su controller
 
 
+    }
 
 
+    public List<VirtualView> getViewList() {
+        return viewList;
     }
 }

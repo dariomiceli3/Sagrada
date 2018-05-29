@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    private static final int SOCKETPORT = 7777;
+    private static final int SOCKETPORT = 6666;
     private  static final String host = "localhost";
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;

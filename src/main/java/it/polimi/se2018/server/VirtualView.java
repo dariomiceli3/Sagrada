@@ -8,8 +8,6 @@ import java.util.Observer;
 
 public abstract class VirtualView extends Observable implements Observer {
 
-    // TODO controllare se metodi privati o protected o vanno bene public
-
     private String name;
     private Model model;
     private final Server server;
