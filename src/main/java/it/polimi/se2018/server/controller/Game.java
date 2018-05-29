@@ -1,6 +1,7 @@
 package it.polimi.se2018.server.controller;
 
 
+import it.polimi.se2018.server.GameServer;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
@@ -14,11 +15,15 @@ public class Game implements Observer {
 
     private Model model;
     private List<Player> playerListGame;
+    private List<VirtualView> viewListGame;
+    private GameSetup setup;
     // add timer
 
-    public Game(Model model) {
+    public Game(Model model, List<VirtualView> viewList) {
         this.model = model;
         this.playerListGame = model.getPlayerList();
+        this.setup = new GameSetup(this);
+        this.viewListGame = viewList;
     }
 
 
@@ -39,12 +44,19 @@ public class Game implements Observer {
 
         }
 
+
     }
 
     protected void setPlayerModelName(VirtualView view, String name) {
 
         //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
+    }
+
+
+    protected void startGame(){
+
+
     }
 
 }

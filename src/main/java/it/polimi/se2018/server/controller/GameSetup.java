@@ -1,23 +1,29 @@
 package it.polimi.se2018.server.controller;
 
 
+import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class GameSetup {
     private Game game;
-
+    private List<PrivateObjectiveCard> listPrivateCard;
+    List<PublicObjectiveCard> listPublicCard;
 
     protected GameSetup(Game game){
         this.game = game;
+        this.listPrivateCard = this.loadPrivate();
+        this.listPublicCard = this.loadPublic();
     }
 
 
-    protected ArrayList<PrivateObjectiveCard> loadPrivate(){
+    private ArrayList<PrivateObjectiveCard> loadPrivate(){
         ArrayList<PrivateObjectiveCard> list = new ArrayList<>();
         list.add(new PrivateObjectiveCard(DiceColor.BLUE));
         list.add(new PrivateObjectiveCard(DiceColor.RED));
@@ -29,7 +35,7 @@ public class GameSetup {
 
     }
 
-    protected ArrayList<PublicObjectiveCard> loadPublic(){
+    private ArrayList<PublicObjectiveCard> loadPublic(){
         ArrayList<PublicObjectiveCard> list = new ArrayList<>();
         list.add(new PublicObjectiveCard(new DarkShade()));
         list.add(new PublicObjectiveCard(new DiagonalColor()));
@@ -45,9 +51,27 @@ public class GameSetup {
         return list;
     }
 
-    protected void setPatternCard(){
-        //chiama al suo interno drow pattern e aspetta le risposte per settare le pattern al singolo player
+    protected void setPrivateCard(VirtualView view, Player player){
+
+
+        game.getModel().setPrivateAndNotify(view.getPlayerID(), listPrivateCard.remove(0));
+
     }
+
+    protected void setPublicCard(List<VirtualView> listView){
+
+        List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
+        listPublic1.add(listPublicCard.remove(0));
+        listPublic1.add(listPublicCard.remove(0));
+        listPublic1.add(listPublicCard.remove(0));
+
+
+        game.getModel().setPublicAndNotify(listPublic1);
+
+
+    }
+
+
 
 
 

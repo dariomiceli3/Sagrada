@@ -74,7 +74,7 @@ public class Server {
     public synchronized void waitingOtherPlayers() {
 
         // TODO sostituire 1 con 4
-        if (clients.size() == 1) {
+        if (clients.size() == 2) {
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
             new GameServer(viewGame);

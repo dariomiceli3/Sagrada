@@ -32,7 +32,7 @@ public class GameServer {
 
         model.setPlayerList(playerList);
 
-        this.controller = new Game(model);
+        this.controller = new Game(model, this.viewList);
 
         for(VirtualView view : viewList) {
 
@@ -46,8 +46,4 @@ public class GameServer {
 
     }
 
-
-    public List<VirtualView> getViewList() {
-        return viewList;
-    }
 }

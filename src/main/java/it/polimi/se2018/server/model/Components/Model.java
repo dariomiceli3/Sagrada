@@ -1,9 +1,12 @@
 package it.polimi.se2018.server.model.Components;
 
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.EventsObservable;
 import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.PlayerPrivateUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.PublicDrawEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +98,19 @@ public class Model extends Observable {
         notifyObservers(new PlayerNameUpdateEvent(name));
 
     }
+
+    public void setPrivateAndNotify(int ID, PrivateObjectiveCard privateCard){
+        getPlayerFromID(ID).setPrivate(privateCard);
+        setChanged();
+        notifyObservers(new PlayerPrivateUpdateEvent(privateCard));
+    }//TODO network/cli
+
+
+    public void setPublicAndNotify(List<PublicObjectiveCard> publicList){
+        this.publicList = publicList;
+        setChanged();
+        notifyObservers(new PublicDrawEvent(this.publicList));
+    }//TODO network/cli
 
 
     //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)
