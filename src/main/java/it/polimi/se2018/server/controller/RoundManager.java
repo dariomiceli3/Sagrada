@@ -200,7 +200,7 @@ public class RoundManager  {
         int sum=0;
         int finalSum=0;
 
-        for (int i=0; i < 10; i++) {
+        for (int i=0; i < roundTracker.getRoundTracker().size(); i++) {
             for (int j=0; j< roundTracker.getRoundDice(i).size(); j++ ) {
                 sum = roundTracker.getRoundDice(i).get(j).getValue();
                 finalSum = finalSum + sum;

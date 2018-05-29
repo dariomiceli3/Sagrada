@@ -17,6 +17,7 @@ import it.polimi.se2018.server.model.Components.RoundTracker;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TestRoundManager {
@@ -497,7 +498,7 @@ public class TestRoundManager {
     }
 
 
-    /*@Test
+    @Test
     public void testCalculatePointsRoundTrackerSinglePlayer() throws InvalidMoveException {
         RoundTracker roundTracker = new RoundTracker();
         RoundManager roundManager = new RoundManager();
@@ -506,31 +507,109 @@ public class TestRoundManager {
         Dice dice1 = new Dice(4, DiceColor.GREEN);
         Dice dice2 = new Dice(5, DiceColor.BLUE);
 
-        roundTracker.addDice(dice, 0);
+        ArrayList<Dice> arrayList = new ArrayList<>();
+        arrayList.add(dice);
+        ArrayList<Dice> arrayList1 = new ArrayList<>();
+        arrayList1.add(dice);
+        ArrayList<Dice> arrayList2 = new ArrayList<>();
+        arrayList2.add(dice);
+        //roundTracker.setTracker(arrayList);
+
+        roundTracker.setTracker(arrayList);
+        roundTracker.setTracker(arrayList1);
+        roundTracker.setTracker(arrayList2);
         roundTracker.addDice(dice1, 0);
         roundTracker.addDice(dice, 1);
-        roundTracker.addDice(dice1, 1);
-        roundTracker.addDice(dice, 2);
-        roundTracker.addDice(dice1, 2);
-        roundTracker.addDice(dice, 3);
-        roundTracker.addDice(dice1, 3);
-        roundTracker.addDice(dice, 4);
-        roundTracker.addDice(dice1, 4);
-        roundTracker.addDice(dice, 5);
-        roundTracker.addDice(dice1, 5);
-        roundTracker.addDice(dice, 6);
-        roundTracker.addDice(dice1, 6);
-        roundTracker.addDice(dice, 7);
-        roundTracker.addDice(dice1, 7);
-        roundTracker.addDice(dice, 8);
-        roundTracker.addDice(dice1, 8);
-        roundTracker.addDice(dice, 9);
-        roundTracker.addDice(dice1, 9);
 
         int sum;
         sum = roundManager.calculatePointsRoundTrackerSinglePlayer(roundTracker);
 
-        assertEquals(70, sum);
+        assertEquals(16, sum);
 
-    }*/
+    }
+
+    @Test
+    public void testCalculateWinnerSinglePlayer() throws FileNotFoundException, InvalidMoveException {
+        Player player = new Player();
+        RoundTracker roundTracker = new RoundTracker();
+        RoundManager roundManager = new RoundManager();
+
+        PatternCard patternCard = new PatternCard();
+        PatternCard patternCard2;
+        ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+        patternCard2 = patternCardArrayList.get(1);
+
+        ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
+        PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor());
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade());
+
+        publicObjectiveCards.add(publicObjectiveCard);
+        publicObjectiveCards.add(publicObjectiveCard1);
+
+        PrivateObjectiveCard privateObjectiveCard = new PrivateObjectiveCard(DiceColor.YELLOW);
+        PrivateObjectiveCard privateObjectiveCard1 = new PrivateObjectiveCard(DiceColor.GREEN);
+        ArrayList<PrivateObjectiveCard> privateObjectiveCardArrayList = new ArrayList<>();
+        privateObjectiveCardArrayList.add(privateObjectiveCard);
+        privateObjectiveCardArrayList.add(privateObjectiveCard1);
+
+        Dice dice = new Dice(3, DiceColor.YELLOW);
+        Dice dice1 = new Dice(4, DiceColor.GREEN);
+        Dice dice2 = new Dice(5, DiceColor.BLUE);
+
+        patternCard2.putDiceOnPattern(dice1, 4, patternCard2);
+        patternCard2.putDiceOnPattern(dice1, 8, patternCard2);
+        patternCard2.putDiceOnPattern(dice1, 12, patternCard2);
+        patternCard2.putDiceOnPattern(dice1, 16, patternCard2);
+        patternCard2.putDiceOnPattern(dice, 11, patternCard2);
+        patternCard2.putDiceOnPattern(dice2, 3, patternCard2);
+        patternCard2.putDiceOnPattern(dice2, 15, patternCard2);
+
+        player.setPattern(patternCard2);
+        /*int i = roundManager.calculateEmptyBoxSinglePLayer(player);
+        int j = roundManager.calculatePrivateSinglePlayer(player, privateObjectiveCardArrayList);
+        int k = roundManager.calculatePublicSinglePlayer(player, publicObjectiveCards);
+        assertEquals(39, i);
+        assertEquals(19, j);
+        assertEquals(4, k);*/
+
+        ArrayList<Dice> arrayList = new ArrayList<>();
+        arrayList.add(dice);
+       /* ArrayList<Dice> arrayList1 = new ArrayList<>();
+        arrayList1.add(dice);
+        ArrayList<Dice> arrayList2 = new ArrayList<>();
+        arrayList2.add(dice);
+        //roundTracker.setTracker(arrayList);*/
+
+        roundTracker.setTracker(arrayList);
+        //roundTracker.setTracker(arrayList1);
+        //roundTracker.setTracker(arrayList2);
+        //roundTracker.addDice(dice1, 0);
+        //roundTracker.addDice(dice, 1);
+
+        int result = roundManager.calculateWinnerSinglePlayer(player, publicObjectiveCards, privateObjectiveCardArrayList, roundTracker);
+
+        assertEquals(0, result);
+
+        patternCard2.putDiceOnPattern(dice, 5, patternCard2);
+        patternCard2.putDiceOnPattern(dice1, 0, patternCard2);
+        patternCard2.putDiceOnPattern(dice2, 1, patternCard2);
+        patternCard2.putDiceOnPattern(dice2, 14, patternCard2);
+
+        //player.setPrivate(patternCard2);
+
+        int i = roundManager.calculateEmptyBoxSinglePLayer(player);
+        int j = roundManager.calculatePrivateSinglePlayer(player, privateObjectiveCardArrayList);
+        int k = roundManager.calculatePublicSinglePlayer(player, publicObjectiveCards);
+        assertEquals(27, i);
+        assertEquals(26, j);
+        assertEquals(6, k);
+
+        int result1 = roundManager.calculateWinnerSinglePlayer(player, publicObjectiveCards, privateObjectiveCardArrayList, roundTracker);
+
+        assertEquals(1, result1);
+
+
+
+
+    }
 }
