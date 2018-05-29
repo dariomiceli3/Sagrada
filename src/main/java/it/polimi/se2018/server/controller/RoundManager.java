@@ -1,19 +1,17 @@
 package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.util.*;
 
 public class RoundManager  {
 
 
-    public void createDraftPool() {
-        DraftPool draftPool = new DraftPool();
-
-    }
 
 
     public ArrayList<Integer> calculatePrivate(ArrayList<Player> playerArrayList) {
@@ -119,7 +117,8 @@ public class RoundManager  {
                     }
                 }
             }
-
+        }
+     for (int k=0; k < playerArrayList.size(); k++) {
             for (int i = 0; i < playerArrayList.size() - 1; i++) {
                 if (playerArrayList.get(i).getPrivatePoints() == playerArrayList.get(i + 1).getPrivatePoints()) {
 
@@ -154,6 +153,79 @@ public class RoundManager  {
         return  sortedPlayers;
     }
 
- }
+
+
+
+    public int calculatePrivateSinglePlayer(Player player, ArrayList<PrivateObjectiveCard> privateObjectiveCards) {
+        int results=0;
+
+        for (int i = 0; i <privateObjectiveCards.size(); i++) {
+            int result;
+            result = privateObjectiveCards.get(i).RunPrivate(player.getPattern());
+            results = results + result;
+
+        }
+        player.setPrivatePoints(results);
+        return results;
+
+    }
+
+    public int calculatePublicSinglePlayer(Player player, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList) {
+        int results=0;
+
+            for (int j = 0; j < publicObjectiveCardArrayList.size(); j++) {
+                int result;
+                result = publicObjectiveCardArrayList.get(j).executeEffect(player.getPattern());
+                results = results + result;
+            }
+
+        return results;
+
+    }
+
+    public int calculateEmptyBoxSinglePLayer(Player player) {
+        int boxEmptyCounter=0;
+        for (int i=0; i < player.getPattern().getPattern().size(); i++) {
+
+            if (player.getPattern().getPattern().get(i).isBoxEmpty()) {
+                boxEmptyCounter++;
+            }
+        }
+        boxEmptyCounter = boxEmptyCounter * 3;
+
+        return boxEmptyCounter;
+    }
+
+    public  int calculatePointsRoundTrackerSinglePlayer(RoundTracker roundTracker) {
+        int sum=0;
+        int finalSum=0;
+
+        for (int i=0; i < 10; i++) {
+            for (int j=0; j< roundTracker.getRoundDice(i).size(); j++ ) {
+                sum = roundTracker.getRoundDice(i).get(j).getValue();
+                finalSum = finalSum + sum;
+            }
+        }
+        return finalSum;
+    }
+
+    public int calculateWinnerSinglePlayer(Player player, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList, ArrayList<PrivateObjectiveCard> privateObjectiveCardArrayList, RoundTracker roundTracker ){
+        int i = calculateEmptyBoxSinglePLayer(player);
+        int j = calculatePrivateSinglePlayer(player, privateObjectiveCardArrayList);
+        int k = calculatePublicSinglePlayer(player, publicObjectiveCardArrayList);
+        int roundTrackerPoints = calculatePointsRoundTrackerSinglePlayer(roundTracker);
+
+        int totalPoints = j + k - i;
+
+        if (totalPoints > roundTrackerPoints ) {
+            return 1;
+        }
+        else return 0;
+
+    }
+
+
+}
+
 
 
