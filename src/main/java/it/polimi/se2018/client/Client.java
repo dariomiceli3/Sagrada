@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    private static final int SOCKETPORT = 6666;
+    private static final int SOCKETPORT = 5555;
     private  static final String host = "localhost";
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
@@ -71,17 +71,21 @@ public class Client {
 
             serverSocket = new SocketHandler(host, SOCKETPORT, view);
 
-            // necessario
+            //  necessario
             view.setConnection(serverSocket);
 
             //decidere se così o dentro sockethandler
             Thread socketThread = new Thread(serverSocket);
             socketThread.start();
 
-            // start of the thread of the selected view
-            Thread viewThread = new Thread(view);
-            viewThread.start();
+            // todo esemplificativo il 3, da correggere
+            if (view.getPlayerID() != 3) {
 
+                // start of the thread of the selected view
+                Thread viewThread = new Thread(view);
+                viewThread.start();
+
+            }
 
         }
 

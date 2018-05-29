@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PublicDrawEvent implements Event {
 
-    private static final long serialVersionUID = 58458L;
+    private static final long serialVersionUID = 65475L;
 
     private final List<PublicObjectiveCard> publicList;
 

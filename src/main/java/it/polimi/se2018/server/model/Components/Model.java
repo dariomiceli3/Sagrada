@@ -95,11 +95,12 @@ public class Model extends Observable {
 
         getPlayerFromID(ID).setPlayerName(name);
         setChanged();
-        notifyObservers(new PlayerNameUpdateEvent(name));
+        notifyObservers(new PlayerNameUpdateEvent(name, ID));
 
     }
 
     public void setPrivateAndNotify(int ID, PrivateObjectiveCard privateCard){
+
         getPlayerFromID(ID).setPrivate(privateCard);
         setChanged();
         notifyObservers(new PlayerPrivateUpdateEvent(privateCard));

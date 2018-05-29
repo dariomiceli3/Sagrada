@@ -5,9 +5,9 @@ import java.rmi.RemoteException;
 
 public interface ClientInterface extends Remote {
 
-    // metodi chiamabili lato client
+    // metodi chiamabili lato client per inoltrare poi gli eventi
 
-    public void setPlayerNameToServer(String username) throws RemoteException;
+    public void setPlayerNameToServer(String username, int iD) throws RemoteException;
 
 
 

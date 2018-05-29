@@ -9,41 +9,36 @@ import java.util.Scanner;
 
 public class CliView extends View implements Runnable {
 
-    //private Scanner scanner;
-    private ClientInterface communication;
+    // ovveride dei metodi dell'interfaccia view con gli show per metodi comportamentali
+    // metodi che in base alla scelta dell'utente mandano usando socket handler
+
     private boolean singlePlayer;
+    //private Scanner reader;
 
-    // TODO controllare utilita di questo costruttore
-    public CliView(String username, boolean singlePlayer) {
-        //super.setPlayerName(username);
-        //this.scanner = scanner;
+
+    public CliView(boolean singlePlayer) {
+        //this.reader = scanner;
         this.singlePlayer = singlePlayer;
     }
-
-    public CliView( boolean singlePlayer) {
-        //this.scanner = scanner;
-        this.singlePlayer = singlePlayer;
-    }
-
 
 
     @Override
     public void run() {
 
-        //boolean loop = true;
+        boolean loop = true;
         Scanner reader = new Scanner(System.in);
 
-        //while (loop) {
+        /*while (loop) {
 
-            System.out.println("Enter a command");
-            String command = reader.nextLine();
+        System.out.println("Enter a command");
+        String command = reader.nextLine();
 
-            if (command.equalsIgnoreCase("name")) {
-
-                System.out.println("Enter a username:");
-                String username = reader.nextLine();
-                this.setPlayerName(username);
-            }
+        if (command.equalsIgnoreCase("name")) {
+*/
+            System.out.println("Enter a username:");
+            String username = reader.nextLine();
+            setPlayerName(username);
+        //}
             /*System.out.println("Enter a command");
             String command = scanner.nextLine();
 
@@ -62,44 +57,25 @@ public class CliView extends View implements Runnable {
             //TODO inserire le varie azioni che il giocatore può fare (anche switch va bene)
             // TODO oltre a se serializzare o passare le stringhe(classe Parser)
             */
-        }
+        //}
 
 
+         //}
 
-   // }
+    }
 
-    @Override
-    public void setPlayerName(String username)  {
+    public void setPlayerName(String username) {
 
         try {
-            getConnection().setPlayerNameToServer(username);
-        }
-
-        catch (RemoteException e) {
+            // todo provare con this anziche super
+            super.getConnection().setPlayerNameToServer(username, this.getPlayerID());
+        } catch (RemoteException e) {
             System.out.println("Error in setting name");
             e.printStackTrace();
         }
     }
-
-    @Override
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    @Override
-    public void toStringEvent(Event event) {
-        System.out.println(event.toString());
-    }
-
-
-    @Override
-    public void setConnection(ClientInterface client) {
-        this.communication = client;
-
-    }
-
-    @Override
-    public ClientInterface getConnection() {
-        return communication;
-    }
 }
+
+
+
+

@@ -14,9 +14,9 @@ public abstract class VirtualView extends Observable implements Observer {
     private int playerID;
 
     public VirtualView() {
-        this.name = null;
-        this.model = null;
-        this.server = null;
+       this.name = null;
+       this.model = null;
+       this.server = null;
     }
 
     public VirtualView(String name, Server server, int ID) {

@@ -10,7 +10,7 @@ import java.util.List;
 public class GameServer {
 
     private Model model;
-    private List<VirtualView> viewList;
+    private List<VirtualView> viewGame;
     private Game controller;
     private List<Player> playerList;
 
@@ -19,22 +19,23 @@ public class GameServer {
         // creazione arraylist di view e player correnti
         // decidere per ordine, se casuale oppure fare la domanda della cattedrale
 
-        this.viewList = new ArrayList<>();
-        this.viewList.addAll(viewList);
-        this.playerList = new ArrayList<>();
-
         this.model = new Model();
 
-        for(VirtualView view : viewList) {
+        this.viewGame = new ArrayList<>(viewList);
+        //this.viewList.addAll(viewList);
+        this.playerList = new ArrayList<>();
+
+        for(VirtualView view : viewGame) {
             Player player = new Player(view.getPlayerID());
+            System.out.println("Player id in Game server"+ player.getPlayerID());
             playerList.add(player);
         }
 
         model.setPlayerList(playerList);
 
-        this.controller = new Game(model, this.viewList);
+        this.controller = new Game(model, this.viewGame);
 
-        for(VirtualView view : viewList) {
+        for(VirtualView view : viewGame) {
 
             view.addObserver(controller);
             view.setModel(model);

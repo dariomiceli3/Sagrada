@@ -14,7 +14,7 @@ import java.util.List;
 public class GameSetup {
     private Game game;
     private List<PrivateObjectiveCard> listPrivateCard;
-    List<PublicObjectiveCard> listPublicCard;
+    private List<PublicObjectiveCard> listPublicCard;
 
     protected GameSetup(Game game){
         this.game = game;
@@ -51,10 +51,12 @@ public class GameSetup {
         return list;
     }
 
-    protected void setPrivateCard(VirtualView view, Player player){
+    protected void setPrivateCardModel(VirtualView view){
+
+        game.getModel().setPrivateAndNotify( (view.getPlayerID()), listPrivateCard.remove(0) ) ;
 
 
-        game.getModel().setPrivateAndNotify(view.getPlayerID(), listPrivateCard.remove(0));
+        //game.getModel().setPrivateAndNotify(view.getPlayerID(), listPrivateCard.remove(0));
 
     }
 

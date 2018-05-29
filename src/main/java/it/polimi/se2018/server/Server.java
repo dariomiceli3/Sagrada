@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Server {
 
-    private static final int SOCKETPORT = 6666;
+    private static final int SOCKETPORT = 5555;
     private static final int RMIPORT = 1099;
 
     private int maxPlayers;
@@ -75,10 +75,14 @@ public class Server {
 
         // TODO sostituire 1 con 4
         if (clients.size() == 2) {
-            List<VirtualView> viewGame = new ArrayList<>();
-            viewGame.addAll(clients);
+            System.out.println("Due client connessi");
+            List<VirtualView> viewGame = new ArrayList<>(clients);
+            //viewGame.addAll(clients);
             new GameServer(viewGame);
         }
+
+
+
 
         //if (clients.size() == 2){
 

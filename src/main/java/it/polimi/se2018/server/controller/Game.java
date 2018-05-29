@@ -40,14 +40,14 @@ public class Game implements Observer {
         VirtualView virtualView = (VirtualView) o;
 
         if (arg instanceof PlayerNameEvent) {
-            setPlayerModelName(virtualView, ((PlayerNameEvent) arg).getName());
-
+            setPlayerNameModel(virtualView, ((PlayerNameEvent) arg).getName());
         }
+
 
 
     }
 
-    protected void setPlayerModelName(VirtualView view, String name) {
+    protected void setPlayerNameModel(VirtualView view, String name) {
 
         //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
@@ -56,6 +56,7 @@ public class Game implements Observer {
 
     protected void startGame(){
 
+        //setup.setPrivateCardModel();
 
     }
 

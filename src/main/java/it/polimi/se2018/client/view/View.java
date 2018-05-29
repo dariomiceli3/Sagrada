@@ -5,9 +5,12 @@ import it.polimi.se2018.server.model.Events.Event;
 
 public abstract class View implements Runnable {
 
-    protected  String playerName;
+    //qui metodi generici comportamentabili, ovveride nelle varie view e chiamati da fuori
+
+    protected String playerName;
     protected boolean isStarted;
     protected int playerID;
+    protected ClientInterface connection;
 
     public int getPlayerID() {
         return playerID;
@@ -17,12 +20,17 @@ public abstract class View implements Runnable {
         this.playerID = playerID;
     }
 
-    public abstract String getPlayerName();
-
-    public abstract void setPlayerName(String username);
+    public String getPlayerName() {
+        return playerName;
+    }
 
     public void setNameView(String nameView){
         this.playerName = nameView;
+    }
+
+    public void setNameView(String name, int ID) {
+        this.playerName = name;
+
     }
 
     public boolean isStarted() {
@@ -33,13 +41,17 @@ public abstract class View implements Runnable {
         this.isStarted = isStarted;
     }
 
-    public abstract void toStringEvent(Event event);
+    public  void setConnection(ClientInterface client) {
+        this.connection = client;
+    }
 
-    public abstract void setConnection(ClientInterface client);
+    public  ClientInterface getConnection() {
+        return connection;
+    }
 
-    public abstract ClientInterface getConnection();
+    /*public abstract void toStringEvent(Event event);
 
-    /*public abstract void showGameStart(); //aggiungere attributo
+    public abstract void showGameStart(); //aggiungere attributo
 
     public abstract void showGameEnd(); //aggiungere attributo
 

@@ -5,6 +5,7 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.PlayerIDEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -106,6 +107,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
             if (arg instanceof Event) {
                 sendEvent((Event) arg);
             }
+
+
+            /*if (arg instanceof Event) {
+                sendEvent((Event) arg);
+            }*/
 
             // aggiungere il resto e nel caso oggetto ricevuto non sia messaggio
         }

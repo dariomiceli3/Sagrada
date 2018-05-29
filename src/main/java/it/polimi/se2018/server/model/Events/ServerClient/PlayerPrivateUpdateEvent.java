@@ -4,7 +4,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 
 public class PlayerPrivateUpdateEvent implements Event {
-    private static final long serialVersionUID = 58458L;
+    private static final long serialVersionUID = 534534L;
 
     private final PrivateObjectiveCard privateCard;
 

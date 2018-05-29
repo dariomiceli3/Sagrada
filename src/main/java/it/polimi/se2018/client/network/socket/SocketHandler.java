@@ -94,10 +94,16 @@ public class SocketHandler implements ClientInterface, Runnable {
         }
 
         else if (event instanceof PlayerNameUpdateEvent) {
-            //view.setPlayerName(((PlayerNameUpdateEvent) event).getName());
 
-            view.setNameView(((PlayerNameUpdateEvent) event).getName());
-            System.out.println("Player name set " + view.getPlayerName());
+            //if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
+                view.setNameView(((PlayerNameUpdateEvent) event).getName());
+                System.out.println("Player name set " + view.getPlayerName() + "for player id" + view.getPlayerID());
+                System.out.println("My name is:" + view.getPlayerName());
+            //}
+
+            //else {
+            //    System.out.println("ERROR ID ");
+            //}
 
         }
 
@@ -137,9 +143,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     // ----socket client impl----------------override methods callable by the client------------------------------
 
 
+    // todo vedere se id effettivamente necessario -> stessa cosa nell'evento
     @Override
-    public void setPlayerNameToServer(String name) {
-        sendEvent(new PlayerNameEvent(name));
+    public void setPlayerNameToServer(String name, int ID) {
+        sendEvent(new PlayerNameEvent(name, ID));
     }
 
 
