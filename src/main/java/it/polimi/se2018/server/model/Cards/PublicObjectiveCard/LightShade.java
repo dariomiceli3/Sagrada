@@ -11,7 +11,7 @@ import java.util.Iterator;
  */
 
 public class LightShade implements PublicEffects{
-
+    private final static int VPOINTS = 2;
 
     @Override
     public int RunPublic(PatternCard pattern){
@@ -33,7 +33,7 @@ public class LightShade implements PublicEffects{
             }
         }
         points = min(setOf1, setOf2);
-        points = points * 2;
+        points = points * VPOINTS;
 
         return points;
     }
