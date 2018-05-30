@@ -14,6 +14,7 @@ public class    PrivateObjectiveCard {
 
     private static final int DEF = 0;
     private DiceColor colour;
+    private static final String name = "Shade of ";
 
     /**
      * Class Constructor
@@ -44,6 +45,13 @@ public class    PrivateObjectiveCard {
 
         }
         return count;
+    }
+
+    @Override
+    public String toString(){
+        return "Private card : " + this.name + this.colour + "\n" +
+                "Sum of values on " + this.colour + " dice"
+                ;
     }
 
 

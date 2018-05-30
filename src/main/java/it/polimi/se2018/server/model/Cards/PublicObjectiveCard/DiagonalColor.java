@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class DiagonalColor implements PublicEffects {
 
-
+private static final String name = "Color Diagonals";
    @Override
    public int RunPublic(PatternCard pattern) {
       int points = 0;
@@ -45,6 +45,13 @@ public class DiagonalColor implements PublicEffects {
       }
 
       return points;
+   }
+
+   @Override
+   public String toString(){
+      return this.name + "\n"
+              + "Count of diagonally adjacent same color dice" + "\n"
+              + "VP : #";
    }
 }
 

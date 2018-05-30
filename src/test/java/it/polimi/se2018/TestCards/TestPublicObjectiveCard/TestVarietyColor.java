@@ -2,6 +2,7 @@ package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.VarietyColor;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -57,5 +58,10 @@ public class TestVarietyColor {
             fail();
         }
 
+    }
+    @Test
+    public void testToString(){
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor());
+        System.out.println(publicCard.toString());
     }
 }

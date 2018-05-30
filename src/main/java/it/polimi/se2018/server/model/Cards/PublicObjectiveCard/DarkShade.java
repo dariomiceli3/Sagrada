@@ -11,6 +11,7 @@ import java.util.Iterator;
  */
 public class DarkShade implements PublicEffects {
     private final static int VPOINTS = 2;
+    private final static String name = "Deep Shades ";
 
     @Override
     public int RunPublic(PatternCard pattern){
@@ -36,6 +37,13 @@ public class DarkShade implements PublicEffects {
 
 
         return points;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "\n"
+                + "Set of 5 & 6 values anywhere" + "\n"
+                + "VP : " + VPOINTS;
     }
 
 }

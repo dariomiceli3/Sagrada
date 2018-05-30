@@ -11,15 +11,15 @@ public enum DiceColor{
     public String toString() {
         switch(this){
             case RED:
-                return "Red";
+                return "red";
             case BLUE:
-                return  "Blue";
+                return  "blue";
             case GREEN:
-                return "Green";
+                return "green";
             case PURPLE:
-                return "Purple";
+                return "purple";
             case YELLOW:
-                return "Yellow";
+                return "yellow";
         }
         return "";
     }

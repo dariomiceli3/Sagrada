@@ -2,6 +2,7 @@ package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorColumn;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorRow;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -57,6 +58,13 @@ public class TestDifferentColorRow {
             fail();
         }
 
+    }
+
+
+    @Test
+    public void testToString(){
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorRow());
+        System.out.println(publicCard.toString());
     }
 }
 

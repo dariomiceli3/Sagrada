@@ -58,4 +58,10 @@ public class TestDifferentShadeColumn {
         }
 
     }
+
+    @Test
+    public void testToString(){
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeColumn());
+        System.out.println(publicCard.toString());
+    }
 }

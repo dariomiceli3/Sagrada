@@ -11,7 +11,8 @@ import static java.lang.Math.min;
  */
 
 public class DifferentShade implements PublicEffects {
-    private final static int VPOINTS = 5;
+    private static final int VPOINTS = 5;
+    private static final String name = "Shade Variety";
     /**
      *
      * @param pattern scheme card of a player
@@ -65,6 +66,13 @@ public class DifferentShade implements PublicEffects {
         points = min(temp3, temp4) * VPOINTS;
 
         return points;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Sets of one of each value anywhere" + "\n"
+                + "VP : " + VPOINTS;
     }
 
 }

@@ -63,4 +63,11 @@ public class TestPrivateObjectiveCard {
         }
 
     }
+
+    @Test
+    public void testToString(){
+        PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.BLUE);
+        System.out.println(privateCard.toString());
+
+    }
 }

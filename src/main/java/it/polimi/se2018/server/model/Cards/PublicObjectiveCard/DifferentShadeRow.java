@@ -7,7 +7,10 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
  * @author Salvatrore Fadda
  */
 public class DifferentShadeRow implements PublicEffects {
-    private final int VPOINTS = 5;
+
+    private static final int VPOINTS = 5;
+    private static final String name = "Row Shade Variety";
+
     @Override
     public int RunPublic(PatternCard pattern) {
         int points = 0;
@@ -33,5 +36,12 @@ public class DifferentShadeRow implements PublicEffects {
         }
 
         return points ;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Rows with no repeated colors" + "\n"
+                + "VP : " + VPOINTS;
     }
 }

@@ -13,7 +13,8 @@ import static java.lang.Math.min;
  * @author Salvatrore Fadda
  */
 public class VarietyColor implements PublicEffects {
-
+    private static final int VPOINTS = 4;
+    private static final String name = "Color Variety";
     /**
      *
      * @param pattern scheme card of a player
@@ -58,8 +59,15 @@ public class VarietyColor implements PublicEffects {
         temp1 = min(setOfY, setOfP);
         temp2 = min(setOfG, setOfB);
         temp3 = min(setOfR, temp1);
-        points = min(temp3, temp2) * 4;
+        points = min(temp3, temp2) * VPOINTS;
 
         return points;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Sets of one of each color anywhere" + "\n"
+                + "VP : " + VPOINTS;
     }
 }

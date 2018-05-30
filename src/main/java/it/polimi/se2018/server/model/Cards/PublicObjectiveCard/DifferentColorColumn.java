@@ -7,7 +7,8 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
  * @author Salvatrore Fadda
  */
 public class DifferentColorColumn implements PublicEffects {
-    private final int VPOINTS = 5;
+    private static final int VPOINTS = 5;
+    private static final String name = "Column Color Variety";
 
     /**
      * class used to count the number of points
@@ -36,6 +37,13 @@ public class DifferentColorColumn implements PublicEffects {
 
 
         return points;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Columns with no repeated colors" + "\n"
+                + "VP : " + VPOINTS;
     }
 
 }

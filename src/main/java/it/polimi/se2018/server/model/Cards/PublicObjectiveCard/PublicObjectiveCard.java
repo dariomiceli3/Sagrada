@@ -16,4 +16,9 @@ public class PublicObjectiveCard {
     public int executeEffect(PatternCard pattern){
             return effect.RunPublic(pattern);
         }
+
+        @Override
+    public String toString(){
+        return "Public Card : " + effect.toString();
+        }
 }

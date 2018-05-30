@@ -3,6 +3,7 @@ package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorRow;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentShade;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -58,5 +59,11 @@ public class TestDifferentShade {
             fail();
         }
 
+    }
+
+    @Test
+    public void testToString(){
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShade());
+        System.out.println(publicCard.toString());
     }
 }

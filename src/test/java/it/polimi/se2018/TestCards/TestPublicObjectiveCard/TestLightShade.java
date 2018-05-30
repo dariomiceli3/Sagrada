@@ -2,6 +2,7 @@ package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentShadeColumn;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -57,4 +58,12 @@ public class TestLightShade {
         }
 
     }
+
+    @Test
+    public void testToString(){
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new LightShade());
+        System.out.println(publicCard.toString());
+    }
+
+
 }

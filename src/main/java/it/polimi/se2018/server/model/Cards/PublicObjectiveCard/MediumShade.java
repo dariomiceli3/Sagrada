@@ -10,7 +10,9 @@ import java.util.Iterator;
  * @author Dario Miceli
  */
 public class MediumShade implements PublicEffects {
-    private final static int VPOINTS = 2;
+
+    private static final int VPOINTS = 2;
+    private static final String name = "Medium Shades";
 
     @Override
     public int RunPublic(PatternCard pattern){
@@ -35,6 +37,13 @@ public class MediumShade implements PublicEffects {
         points = points * VPOINTS;
 
         return points;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Sets of 3 & 4 values anywhere" + "\n"
+                + "VP : " + VPOINTS;
     }
 
 }

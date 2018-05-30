@@ -8,7 +8,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
  */
 public class DifferentColorRow implements PublicEffects {
     private final int  VPOINTS = 6;
-
+    private final String name = "Row Color Variety";
     /**
      * class used to count the number of points
      * @param pattern scheme card of a player
@@ -40,5 +40,12 @@ public class DifferentColorRow implements PublicEffects {
         }
 
         return points ;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + "\n"
+                + "Rows with no repeated colors" + "\n"
+                + "VP : " + VPOINTS;
     }
 }
