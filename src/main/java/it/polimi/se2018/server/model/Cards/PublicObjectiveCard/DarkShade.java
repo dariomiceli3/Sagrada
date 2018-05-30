@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @author Dario Miceli
  */
 public class DarkShade implements PublicEffects {
-
+    private final static int VPOINTS = 2;
 
     @Override
     public int RunPublic(PatternCard pattern){
@@ -32,7 +32,7 @@ public class DarkShade implements PublicEffects {
             }
         }
         points = min(setOf5, setOf6);
-        points = points * 2;
+        points = points * VPOINTS;
 
 
         return points;
