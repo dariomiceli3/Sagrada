@@ -19,7 +19,7 @@ public class Game implements Observer {
     // add timer
 
     public Game(List<VirtualView> viewList) {
-        
+
         this.model = new Model();
         this.viewGame = new ArrayList<>(viewList);
         this.playerList = new ArrayList<>();
