@@ -85,7 +85,7 @@ public class Server {
                 @Override
                 public void run() {
 
-                    if(clients.size() >= 2 && clients.size() < MAXPLAYERS) {
+                    if (clients.size() >= 2 && clients.size() <= MAXPLAYERS) {
                         List<VirtualView> viewGame = new ArrayList<>();
                         viewGame.addAll(clients);
                         new Game(viewGame);
