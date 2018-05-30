@@ -64,15 +64,22 @@ public class CliView extends View implements Runnable {
 
     }
 
+    @Override
     public void setPlayerName(String username) {
 
         try {
-            // todo provare con this anziche super
-            super.getConnection().setPlayerNameToServer(username, this.getPlayerID());
-        } catch (RemoteException e) {
+            super.getConnection().setPlayerNameToServer(username, super.getPlayerID());
+        }
+        catch (RemoteException e) {
             System.out.println("Error in setting name");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void showNameView(String name) {
+        System.out.println("My name is" + name);
+
     }
 }
 

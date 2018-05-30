@@ -15,20 +15,19 @@ import java.util.Observable;
 
 public class VirtualSocket extends VirtualView implements Runnable {
 
-    private Server server;
     private Socket clientConnection;
     private ObjectInputStream socketIn;
     private ObjectOutputStream socketOut;
     private boolean running;
-    private int playerID;
+    private Server server;
 
     public VirtualSocket(Socket clientConnection, Server server, int ID) {
 
         //try {
+            super(ID);
             this.server = server;
             this.clientConnection = clientConnection;
             this.running = true;
-            this.playerID = ID;
             sendEvent(new PlayerIDEvent(this.playerID));
             System.out.println("Send id to the player");
             /*this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
@@ -56,6 +55,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 if (received instanceof PlayerNameEvent) {
                     super.setName(((PlayerNameEvent) received).getName());
                     setChanged();
+                    //System.out.println("Sto nofity controller" + super.getName() + super.getPlayerID());
                     notifyObservers(received); // necessario argomento tra parentesi (?)
                 }
                 // TODO add the other msg from the client:

@@ -51,6 +51,7 @@ public class Game implements Observer {
 
         //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
+        //System.out.println("Sto modificando model" + view.getPlayerID() + "name" + name);
     }
 
 

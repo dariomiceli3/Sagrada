@@ -8,23 +8,20 @@ import java.util.Observer;
 
 public abstract class VirtualView extends Observable implements Observer {
 
-    private String name;
-    private Model model;
-    private final Server server;
-    private int playerID;
+    protected String name;
+    protected Model model;
+    protected int playerID;
 
-    public VirtualView() {
-       this.name = null;
-       this.model = null;
-       this.server = null;
+    public VirtualView(int playerID) {
+       this.playerID = playerID;
     }
 
-    public VirtualView(String name, Server server, int ID) {
+    /*public VirtualView(String name, Server server, int ID) {
         this.name = name;
         this.server = server;
         this.playerID = ID;
 
-    }
+    }*/
 
     // metodo che manda al client la richiesta di eventi aggiornati, va a prenderle dal model
     // eventi che non passano dal controller

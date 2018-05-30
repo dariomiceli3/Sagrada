@@ -2,7 +2,6 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.PlayerIDEvent;
@@ -92,26 +91,25 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());
             System.out.println("Player id set " + view.getPlayerID());
         }
-
         else if (event instanceof PlayerNameUpdateEvent) {
 
-            //if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
-                view.setNameView(((PlayerNameUpdateEvent) event).getName());
-                System.out.println("Player name set " + view.getPlayerName() + "for player id" + view.getPlayerID());
-                System.out.println("My name is:" + view.getPlayerName());
-            //}
-
-            //else {
-            //    System.out.println("ERROR ID ");
-            //}
-
+            if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
+               view.setNameView(((PlayerNameUpdateEvent) event).getName());
+               System.out.println("Name set" + view.getPlayerName());
+              //  view.showNameView(((PlayerNameUpdateEvent) event).getName());
+                //System.out.println("Player name set " + view.getPlayerName() + "for player id" + view.getPlayerID());
+                //System.out.println("My name is:" + view.getPlayerName());
+            }
+            else {
+                System.out.println("Other name" + ((PlayerNameUpdateEvent) event).getName());
+            }
         }
 
-        else {
-            System.out.println("Not understood the message");
-        }
+            else {
+                System.out.println("Not understood the message");
+            }
 
-    }
+        }
 
 
     /**
@@ -145,8 +143,9 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     // todo vedere se id effettivamente necessario -> stessa cosa nell'evento
     @Override
-    public void setPlayerNameToServer(String name, int ID) {
-        sendEvent(new PlayerNameEvent(name, ID));
+    public void setPlayerNameToServer(String name, int id) {
+        sendEvent(new PlayerNameEvent(name, id));
+        //System.out.println("sto chiedendo di impostare" + name + "come id" + id);
     }
 
 

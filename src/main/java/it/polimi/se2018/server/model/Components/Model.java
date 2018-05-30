@@ -94,6 +94,7 @@ public class Model extends Observable {
     public void setPlayerAndNotify(int ID, String name) {
 
         getPlayerFromID(ID).setPlayerName(name);
+        //System.out.println("prima di notify view id mandato"+ ID + "id settato" + getPlayerFromID(ID).getPlayerID());
         setChanged();
         notifyObservers(new PlayerNameUpdateEvent(name, ID));
 

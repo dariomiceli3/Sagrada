@@ -78,14 +78,10 @@ public class Client {
             Thread socketThread = new Thread(serverSocket);
             socketThread.start();
 
-            // todo esemplificativo il 3, da correggere
-            if (view.getPlayerID() != 3) {
-
-                // start of the thread of the selected view
-                Thread viewThread = new Thread(view);
-                viewThread.start();
-
-            }
+            // accertarsi che abbia ricevuto ID e poi startare
+            // start of the thread of the selected view
+            Thread viewThread = new Thread(view);
+            viewThread.start();
 
         }
 

@@ -28,10 +28,14 @@ public abstract class View implements Runnable {
         this.playerName = nameView;
     }
 
-    public void setNameView(String name, int ID) {
+    /*public void setNameView(String name, int ID) {
         this.playerName = name;
 
-    }
+    }*/
+
+    public abstract void setPlayerName(String username);
+
+    public abstract void showNameView(String name);
 
     public boolean isStarted() {
         return isStarted;
