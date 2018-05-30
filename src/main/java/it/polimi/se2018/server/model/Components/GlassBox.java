@@ -6,6 +6,7 @@ package it.polimi.se2018.server.model.Components;
  */
 
 public class GlassBox {
+    private static final int DEFAULT = 0;
     private Dice dice;
     private int constraintValue;
     private String constraintColor;
@@ -15,7 +16,7 @@ public class GlassBox {
     public GlassBox()
     {
         setDice(null);
-        this.constraintValue = 0;
+        this.constraintValue = DEFAULT;
         this.constraintColor = null;
     }
     // constructor for box with a constraint value
@@ -31,7 +32,7 @@ public class GlassBox {
     {
         setDice(null);
         this.constraintColor = constraintColor;
-        this.constraintValue = 0;
+        this.constraintValue = DEFAULT;
     }
 
     public Dice getDice()
@@ -99,7 +100,7 @@ public class GlassBox {
             }
             // no color si value case
             else {
-                if (this.constraintValue != 0) {
+                if (this.constraintValue != DEFAULT) {
                     if (this.constraintValue == dice.getValue()) {
                         setDice(dice);
                         return true;

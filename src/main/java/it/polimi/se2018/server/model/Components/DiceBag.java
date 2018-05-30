@@ -14,9 +14,10 @@ import java.util.ArrayList;
  */
 public class DiceBag {
     //private static DiceBag istanceDB;
-    private final int TOP = 0;
-    private final int MAX_VALUE = 6;
-    private final int NUMBER = 90;
+    private static final int TOP = 0;
+    private static final int MAX_VALUE = 6;
+    private static final int NUMBER = 90;
+    private static final int DIV = 5;
     private Dice dice;
     private List<Dice> listDice;
     private int value;
@@ -39,7 +40,7 @@ public class DiceBag {
 
         //creazione dadi casuali, 18 per ogni colore
         Random random = new Random();
-        for (int i = 0; i < (NUMBER / 5); i++) {
+        for (int i = 0; i < (NUMBER / DIV); i++) {
 
             this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.YELLOW));
             this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.PURPLE));

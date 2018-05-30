@@ -11,7 +11,7 @@ import java.util.List;
 public class DraftPool {
 
     //private static DraftPool istanceDP;
-    private final int DEFAULT = 0;
+    private static final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
     private ArrayList<Dice> dicePlay;
@@ -60,7 +60,7 @@ public class DraftPool {
      */
     public int getNowNumber(){
         if (dicePlay == null) {
-            return 0;
+            return DEFAULT;
         }
         else return dicePlay.size();
     }
@@ -97,7 +97,7 @@ public class DraftPool {
     public void createListDice(){
         if(dicePlay.isEmpty()){
         this.dicePlay = new ArrayList<>();
-        for(int i=0; i <= (number*2); i++) {
+        for(int i= DEFAULT; i <= (number*2); i++) {
             this.dicePlay.add(this.diceBag.getDice());
         }
         }

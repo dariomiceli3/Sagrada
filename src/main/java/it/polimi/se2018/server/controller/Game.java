@@ -57,7 +57,6 @@ public class Game implements Observer {
 
     protected void startGame(){
 
-        //setup.setPrivateCardModel();
 
     }
 

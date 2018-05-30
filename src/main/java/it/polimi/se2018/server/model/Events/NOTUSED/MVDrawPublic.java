@@ -1,6 +1,7 @@
-package it.polimi.se2018.server.model.Events;
+package it.polimi.se2018.server.model.Events.NOTUSED;
 
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Events.Event;
 
 import java.util.List;
 

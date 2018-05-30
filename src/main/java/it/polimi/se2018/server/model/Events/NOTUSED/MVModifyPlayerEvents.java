@@ -1,6 +1,7 @@
-package it.polimi.se2018.server.model.Events;
+package it.polimi.se2018.server.model.Events.NOTUSED;
 
 import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Events.Event;
 
 public class MVModifyPlayerEvents implements Event {
 
