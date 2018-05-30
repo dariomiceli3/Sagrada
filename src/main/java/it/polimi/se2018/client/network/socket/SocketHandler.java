@@ -105,11 +105,10 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
-            else {
-                System.out.println("Not understood the message");
-            }
-
+        else {
+            System.out.println("Not understood the message");
         }
+    }
 
 
     /**

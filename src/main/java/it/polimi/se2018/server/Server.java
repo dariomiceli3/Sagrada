@@ -1,5 +1,6 @@
 package it.polimi.se2018.server;
 
+import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.network.rmi.RmiGatherer;
 import it.polimi.se2018.server.network.socket.SocketGatherer;
 import it.polimi.se2018.server.network.socket.VirtualSocket;
@@ -78,7 +79,7 @@ public class Server {
             System.out.println("Due client connessi");
             List<VirtualView> viewGame = new ArrayList<>(clients);
             //viewGame.addAll(clients);
-            new GameServer(viewGame);
+            new Game(viewGame);
         }
 
 

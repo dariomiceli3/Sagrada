@@ -62,6 +62,7 @@ public class Client {
         }
 
 
+        // todo chiedere utente indirizzo server e porta
         //System.out.println("Enter the IP address of the Server");
 
         System.out.println("Choose the connection type:Socket or RMI?");
