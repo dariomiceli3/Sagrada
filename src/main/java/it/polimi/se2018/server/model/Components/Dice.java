@@ -64,4 +64,17 @@ public class Dice {
         this.color = color;
     }
 
+
+    @Override
+    public String toString() {
+        System.out.println("Dice Color: " + getColor().toString());
+        System.out.println("Dice value: " + getValue());
+        return "";
+    }
+    public static void main(String args[])  {
+        Dice dice = new Dice();
+        dice.setColor(DiceColor.YELLOW);
+        dice.setValue(4);
+        dice.toString();
+    }
 }

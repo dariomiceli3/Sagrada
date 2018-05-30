@@ -79,5 +79,17 @@ public class DiceBag {
         Collections.shuffle(listDice);
     }
 
+    @Override
+    public String toString() {
+        System.out.println("DiceBag");
+        System.out.println("Size: " + getListBag().size());
+        return "";
+    }
+    public static void main(String args[])  {
+        DiceBag diceBag = new DiceBag();
+        diceBag.toString();
+        diceBag.getDice();
+        diceBag.toString();
+    }
 }
 

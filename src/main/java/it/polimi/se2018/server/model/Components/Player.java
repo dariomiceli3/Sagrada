@@ -3,6 +3,8 @@ package it.polimi.se2018.server.model.Components;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 
+import java.io.FileNotFoundException;
+
 /**
  * Class Player: descive the player settings and own his privete objctive and pattern cards
  * @author Salvatrore Fadda
@@ -109,6 +111,10 @@ public class Player {
         this.tokensNumber = tokensNumber;
     }
 
+    public void setPlayerColor(PlayerColour colour){
+        this.colour = colour;
+    }
+
     public void setFinalPoints(int finalPoints){
         this.finalPoints = finalPoints;
     }
@@ -121,4 +127,26 @@ public class Player {
 
     public int getPrivatePoints() { return privatePoints;}
 
+    @Override
+    public String toString() {
+        System.out.println("Player name: " + getPlayerName());
+        System.out.println("Player ID: " + getPlayerID());
+        System.out.println("Player Color: " + getColour().toString());
+        System.out.println("Player pattern: " + getPattern().getName());
+        System.out.println("Player Tokens: " + getTokensNumber());
+
+        return "";
+    }
+
+    public static void main(String args[]) throws FileNotFoundException {
+        Player player = new Player();
+        PatternCard patternCard = new PatternCard();
+        PatternCard patternCard1 = patternCard.loadPatternList().get(0);
+        player.setPlayerName("Dario");
+        player.setPlayerID(11);
+        player.setTokensNumber(3);
+        player.setPattern(patternCard1);
+        player.setPlayerColor(PlayerColour.RED);
+        player.toString();
+    }
 }

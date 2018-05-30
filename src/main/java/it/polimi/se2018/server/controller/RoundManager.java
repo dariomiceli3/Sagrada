@@ -10,8 +10,7 @@ import it.polimi.se2018.server.model.Components.RoundTracker;
 import java.util.*;
 
 public class RoundManager  {
-
-
+    private final static int VPOINTS = 3;
 
 
     public ArrayList<Integer> calculatePrivate(ArrayList<Player> playerArrayList) {
@@ -191,13 +190,13 @@ public class RoundManager  {
                 boxEmptyCounter++;
             }
         }
-        boxEmptyCounter = boxEmptyCounter * 3;
+        boxEmptyCounter = boxEmptyCounter * VPOINTS;
 
         return boxEmptyCounter;
     }
 
     public  int calculatePointsRoundTrackerSinglePlayer(RoundTracker roundTracker) {
-        int sum=0;
+        int sum;
         int finalSum=0;
 
         for (int i=0; i < roundTracker.getRoundTracker().size(); i++) {
