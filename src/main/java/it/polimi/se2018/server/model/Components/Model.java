@@ -2,9 +2,8 @@ package it.polimi.se2018.server.model.Components;
 
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.EventsObservable;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.PlayerPrivateUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.PublicDrawEvent;
 

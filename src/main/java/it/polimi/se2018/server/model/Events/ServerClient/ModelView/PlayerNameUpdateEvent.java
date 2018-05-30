@@ -1,4 +1,4 @@
-package it.polimi.se2018.server.model.Events.ServerClient;
+package it.polimi.se2018.server.model.Events.ServerClient.ModelView;
 
 import it.polimi.se2018.server.model.Events.Event;
 

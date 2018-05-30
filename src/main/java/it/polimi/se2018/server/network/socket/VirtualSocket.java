@@ -4,8 +4,7 @@ import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerIDEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

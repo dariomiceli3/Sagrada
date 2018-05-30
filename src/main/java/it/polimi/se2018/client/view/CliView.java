@@ -35,9 +35,9 @@ public class CliView extends View implements Runnable {
 
         if (command.equalsIgnoreCase("name")) {
 */
-            System.out.println("Enter a username:");
-            String username = reader.nextLine();
-            setPlayerName(username);
+        System.out.println("Enter a username:");
+        String username = reader.nextLine();
+        setPlayerName(username);
         //}
             /*System.out.println("Enter a command");
             String command = scanner.nextLine();
@@ -60,7 +60,7 @@ public class CliView extends View implements Runnable {
         //}
 
 
-         //}
+        //}
 
     }
 
@@ -69,18 +69,12 @@ public class CliView extends View implements Runnable {
 
         try {
             super.getConnection().setPlayerNameToServer(username, super.getPlayerID());
-        }
-        catch (RemoteException e) {
+        } catch (RemoteException e) {
             System.out.println("Error in setting name");
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void showNameView(String name) {
-        System.out.println("My name is" + name);
-
-    }
 }
 
 

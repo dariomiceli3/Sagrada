@@ -4,8 +4,8 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerIDEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerNameUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -140,7 +140,6 @@ public class SocketHandler implements ClientInterface, Runnable {
     // ----socket client impl----------------override methods callable by the client------------------------------
 
 
-    // todo vedere se id effettivamente necessario -> stessa cosa nell'evento
     @Override
     public void setPlayerNameToServer(String name, int id) {
         sendEvent(new PlayerNameEvent(name, id));

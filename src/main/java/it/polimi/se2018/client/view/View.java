@@ -35,8 +35,6 @@ public abstract class View implements Runnable {
 
     public abstract void setPlayerName(String username);
 
-    public abstract void showNameView(String name);
-
     public boolean isStarted() {
         return isStarted;
     }

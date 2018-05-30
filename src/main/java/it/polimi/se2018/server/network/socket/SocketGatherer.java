@@ -12,12 +12,11 @@ public class SocketGatherer implements Runnable {
     private ServerSocket serverSocket;
     private final Server server;
     private final int port;
-    private int counter;
+    private int counter = 0;
 
     public SocketGatherer(Server server, int port) {
         this.server = server;
         this.port = port;
-        this.counter = 0;
 
         try {
             this.serverSocket = new ServerSocket(port);
@@ -48,6 +47,11 @@ public class SocketGatherer implements Runnable {
 
                 VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, counter);
                 counter++;
+
+                /*if (counter == 4) {
+                    System.out.println("Max connection reached");
+                    virtualSocket.stopConnection();
+                }*/
 
                 // add arraylist di socket
                 server.addSocketClient(virtualSocket);

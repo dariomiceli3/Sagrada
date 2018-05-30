@@ -7,14 +7,16 @@ import it.polimi.se2018.server.network.socket.VirtualSocket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Server {
 
     private static final int SOCKETPORT = 5555;
     private static final int RMIPORT = 1099;
+    private static final int MAXPLAYERS = 4;
+    private static final int SECONDS = 20;
 
-    private int maxPlayers;
-    //private SocketServerInterface serverSocket;
     private SocketGatherer socketGatherer;
     private RmiGatherer rmiGatherer;
     private List<VirtualView> socketClients = new ArrayList<>();
@@ -24,14 +26,12 @@ public class Server {
 
     public Server() {
 
-        //this.serverSocket = new SocketServerImpl(this);
-        this.maxPlayers = 4;
         socketGatherer = new SocketGatherer(this, SOCKETPORT);
 
         Thread socketThread = new Thread(socketGatherer);
         socketThread.start();
 
-        //rmi gatherer add for starting its server
+        //todo rmi gatherer add for starting its server
 
     }
 
@@ -77,22 +77,32 @@ public class Server {
         // TODO sostituire 1 con 4
         if (clients.size() == 2) {
             System.out.println("Due client connessi");
-            List<VirtualView> viewGame = new ArrayList<>(clients);
-            //viewGame.addAll(clients);
+            System.out.println("Starting timer before the game");
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask()
+            {
+                @Override
+                public void run() {
+
+                    if(clients.size() >= 2 && clients.size() < MAXPLAYERS) {
+                        List<VirtualView> viewGame = new ArrayList<>();
+                        viewGame.addAll(clients);
+                        new Game(viewGame);
+                        System.out.println("Started game");
+                    }
+
+                }
+            }, SECONDS * 1000);
+
+        }
+
+        if (clients.size() == MAXPLAYERS) {
+            List<VirtualView> viewGame = new ArrayList<>();
+            viewGame.addAll(clients);
             new Game(viewGame);
         }
 
-
-
-
-        //if (clients.size() == 2){
-
-            // TODO completare waiting connection
-            // far partire il timer
-            // finchè sono > 2 e < 4
-            // poi new Game Server
-
-       // }
     }
 
 

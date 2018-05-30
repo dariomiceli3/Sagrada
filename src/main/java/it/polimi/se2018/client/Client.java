@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Client {
 
     private static final int SOCKETPORT = 5555;
-    private  static final String host = "localhost";
+    private static String host;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
     private static boolean singlePlay;
@@ -62,8 +62,19 @@ public class Client {
         }
 
 
-        // todo chiedere utente indirizzo server e porta
-        //System.out.println("Enter the IP address of the Server");
+        System.out.println("Enter the IP address of the Server : write localhost to play on your local machine");
+        String address = reader.nextLine();
+
+        if (address.equalsIgnoreCase("localhost")) {
+            host = "localhost";
+        }
+
+        else {
+            System.out.println("You're writing something not expected, please re-enter the host");
+        }
+        // todo chiedere utente porta
+
+
 
         System.out.println("Choose the connection type:Socket or RMI?");
         String connectionType = reader.nextLine();
