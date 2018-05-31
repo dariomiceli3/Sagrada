@@ -17,6 +17,7 @@ public class Game implements Observer {
     private Model model;
     private List<Player> playerList;
     private List<VirtualView> viewGame;
+    private GameSetup setup;
     // add timer
 
     public Game(List<VirtualView> viewList) {
@@ -24,6 +25,7 @@ public class Game implements Observer {
         this.model = new Model();
         this.viewGame = new ArrayList<>(viewList);
         this.playerList = new ArrayList<>();
+        this.setup = new GameSetup(this);
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -104,6 +106,11 @@ public class Game implements Observer {
         for(VirtualView view : viewGame) {
             view.sendEvent(new GameStartedEvent(true));
         }
+        for(VirtualView view : viewGame){
+            setup.setPrivateCardModel(view);
+        }
+
+
 
 
 

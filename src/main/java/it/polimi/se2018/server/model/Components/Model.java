@@ -4,8 +4,8 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.EventsObservable;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.PlayerPrivateUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.PublicDrawEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PublicDrawEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class Model extends Observable {
 
         getPlayerFromID(ID).setPrivate(privateCard);
         setChanged();
-        notifyObservers(new PlayerPrivateUpdateEvent(privateCard));
+        notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(ID).getPlayerID(), privateCard));
     }//TODO network/cli
 
 

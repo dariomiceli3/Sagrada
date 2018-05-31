@@ -70,10 +70,4 @@ public class Dice {
         return "Dice value: " + this.value + " color: " + this.color.toString() + "\n";
     }
 
-    public static void main(String args[])  {
-        Dice dice = new Dice();
-        dice.setColor(DiceColor.YELLOW);
-        dice.setValue(4);
-        dice.toString();
-    }
 }
