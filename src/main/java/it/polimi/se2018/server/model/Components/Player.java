@@ -16,13 +16,13 @@ public class Player {
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;
     private int tokensNumber;
-    private  int finalPoints;
-    private  int privatePoints;
+    private int finalPoints;
+    private int privatePoints;
 
     /**
      * Default class constructor
      */
-    public Player(){
+    public Player() {
         this.colour = null;
         this.playerName = null;
     }
@@ -34,17 +34,18 @@ public class Player {
         this.privateCard = player.privateCard;
         this.tokensNumber = player.tokensNumber;
         this.finalPoints = player.finalPoints;
-        this.privatePoints= player.privatePoints;
+        this.privatePoints = player.privatePoints;
         this.playerID = player.playerID;
     }
 
 
     /**
      * Class constructor, create a die with face number and colour specified
+     *
      * @param playerName the player identifier
-     * @param colour player colour
+     * @param colour     player colour
      */
-    public Player(String playerName, PlayerColour colour){
+    public Player(String playerName, PlayerColour colour) {
         this.playerName = playerName;
         this.colour = colour;
     }
@@ -53,20 +54,20 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public Player(int playerID)
-    {
+    public Player(int playerID) {
         this.playerID = playerID;
     }
 
     /**
      * Class setPattern, set at the player his pattern card
+     *
      * @param pattern pattern card
      */
-    public void setPattern(PatternCard pattern){
+    public void setPattern(PatternCard pattern) {
         this.pattern = pattern;
     }
 
-    public String getPlayerName(){
+    public String getPlayerName() {
         return playerName;
     }
 
@@ -74,7 +75,7 @@ public class Player {
         return colour;
     }
 
-    public PatternCard getPattern(){
+    public PatternCard getPattern() {
         return pattern;
     }
 
@@ -97,56 +98,52 @@ public class Player {
 
     /**
      * Class setPrivate, set at the player his private objective card
+     *
      * @param privateCard pattern card
      */
-    public void setPrivate(PrivateObjectiveCard privateCard){
+    public void setPrivate(PrivateObjectiveCard privateCard) {
         this.privateCard = privateCard;
     }
 
-    public PrivateObjectiveCard getPrivate(){
+    public PrivateObjectiveCard getPrivate() {
         return privateCard;
     }
 
-    public void setTokensNumber(int tokensNumber){
+    public void setTokensNumber(int tokensNumber) {
         this.tokensNumber = tokensNumber;
     }
 
-    public void setPlayerColor(PlayerColour colour){
+    public void setPlayerColor(PlayerColour colour) {
         this.colour = colour;
     }
 
-    public void setFinalPoints(int finalPoints){
+    public void setFinalPoints(int finalPoints) {
         this.finalPoints = finalPoints;
     }
 
-    public void setPrivatePoints(int privatePoints){
+    public void setPrivatePoints(int privatePoints) {
         this.privatePoints = privatePoints;
     }
 
-    public int getFinalPoints() {return finalPoints;}
+    public int getFinalPoints() {
+        return finalPoints;
+    }
 
-    public int getPrivatePoints() { return privatePoints;}
+    public int getPrivatePoints() {
+        return privatePoints;
+    }
 
     @Override
     public String toString() {
-        System.out.println("Player name: " + getPlayerName());
-        System.out.println("Player ID: " + getPlayerID());
-        System.out.println("Player Color: " + getColour().toString());
-        System.out.println("Player pattern: " + getPattern().getName());
-        System.out.println("Player Tokens: " + getTokensNumber());
 
-        return "";
+        return "Player name: " + getPlayerName() + "\n" +
+                "Player ID: " + getPlayerID() + "\n" +
+                "Player Color: " + getColour().toString() + "\n" +
+              //  "Player pattern: " + getPattern().getName() + "\n" +
+                "Player Tokens: " + getTokensNumber();
+
+
     }
 
-    public static void main(String args[]) throws FileNotFoundException {
-        Player player = new Player();
-        PatternCard patternCard = new PatternCard();
-        PatternCard patternCard1 = patternCard.loadPatternList().get(0);
-        player.setPlayerName("Dario");
-        player.setPlayerID(11);
-        player.setTokensNumber(3);
-        player.setPattern(patternCard1);
-        player.setPlayerColor(PlayerColour.RED);
-        player.toString();
-    }
 }
+

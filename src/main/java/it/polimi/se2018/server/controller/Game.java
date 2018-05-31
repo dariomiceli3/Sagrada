@@ -38,6 +38,8 @@ public class Game implements Observer {
             model.addObserver(view);
         }
 
+        startGame();
+
     }
 
 
@@ -49,6 +51,13 @@ public class Game implements Observer {
         return model;
     }
 
+
+
+
+
+
+
+    //------------------- update in base alle notify dellka view-------------------
     @Override
     public void update(Observable o, Object arg){
 
@@ -87,6 +96,7 @@ public class Game implements Observer {
 
 
     protected void startGame(){
+
 
 
     }

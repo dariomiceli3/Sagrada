@@ -76,4 +76,19 @@ public class TestPlayer {
         assertNull(player2.getPrivate());
 
     }
+
+    @Test
+    public void testToString(){
+
+        String string = "Dario";
+        //PlayerColour playerColour = PlayerColour.BLUE;
+        int ID = 1;
+
+        Player player1 = new Player(string, PlayerColour.BLUE);
+        player1.setPlayerID(ID);
+        player1.setPrivate(new PrivateObjectiveCard(DiceColor.RED));
+        player1.setTokensNumber(6);
+        //player1.setFinalPoints(61);
+        System.out.println(player1.toString());
+    }
 }
