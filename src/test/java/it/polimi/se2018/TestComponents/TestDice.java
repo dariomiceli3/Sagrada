@@ -32,4 +32,12 @@ public class TestDice {
         assertEquals(DiceColor.BLUE,dice.getColor());
 
     }
+
+    @Test
+    public void testToString() {
+        Dice dice = new Dice(5, DiceColor.RED);
+        //Dice dice78 = new Dice(9, DiceColor.YELLOW);
+        System.out.println(dice.toString());
+        //System.out.println(dice78.toString());
+    }
 }

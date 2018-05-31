@@ -24,8 +24,8 @@ public class Dice {
      * @param color die colour
      */
     public Dice (int value, DiceColor color) {
-        this.value = value;
         this.color = color;
+        this.value = value;
     }
 
     /**
@@ -67,10 +67,9 @@ public class Dice {
 
     @Override
     public String toString() {
-        System.out.println("Dice Color: " + getColor().toString());
-        System.out.println("Dice value: " + getValue());
-        return "";
+        return "Dice value: " + this.value + " color: " + this.color.toString() + "\n";
     }
+
     public static void main(String args[])  {
         Dice dice = new Dice();
         dice.setColor(DiceColor.YELLOW);

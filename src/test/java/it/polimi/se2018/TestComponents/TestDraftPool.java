@@ -84,4 +84,14 @@ public class TestDraftPool {
         assertEquals(7, draftPool.getNowNumber());
     }
 
+    @Test
+    public void testToString() {
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(4, diceBag);
+        draftPool.createListDice();
+
+        System.out.println(draftPool.toString());
+
+    }
+
 }

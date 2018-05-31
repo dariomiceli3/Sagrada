@@ -119,6 +119,10 @@ public class DraftPool {
         return listDice;
     }
 
+    @Override
+    public String toString() {
+        return "Draft Pool: \n" + dicePlay.toString();
+    }
 
 }
 
