@@ -101,13 +101,14 @@ public class Game implements Observer {
 
     //---------------------------------logica applicativa---------------------------
 
-    protected void startGame(){
+    private void startGame(){
 
         for(VirtualView view : viewGame) {
             view.sendEvent(new GameStartedEvent(true));
         }
         for(VirtualView view : viewGame){
             setup.setPrivateCardModel(view);
+            setup.startPatternCard(view);
         }
 
 

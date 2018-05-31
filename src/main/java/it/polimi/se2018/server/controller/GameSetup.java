@@ -2,24 +2,37 @@ package it.polimi.se2018.server.controller;
 
 
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
 
+import java.util.Random;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class GameSetup {
+    private static final int VALUE = 12;
     private Game game;
     private List<PrivateObjectiveCard> listPrivateCard;
     private List<PublicObjectiveCard> listPublicCard;
+    private List<PatternCard> listPattern;
+    private boolean[] control;
 
     protected GameSetup(Game game){
         this.game = game;
         this.listPrivateCard = this.loadPrivate();
         this.listPublicCard = this.loadPublic();
+        this.listPattern = this.loadPatternCard();
+        this.control = new boolean[VALUE];
+        Arrays.fill(control, Boolean.FALSE);
     }
 
 
@@ -60,7 +73,7 @@ public class GameSetup {
 
     }
 
-    protected void setPublicCard(List<VirtualView> listView){
+    protected void setPublicCardModel(){
 
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
         listPublic1.add(listPublicCard.remove(0));
@@ -72,6 +85,46 @@ public class GameSetup {
 
 
     }
+
+    private List<PatternCard> loadPatternCard(){
+        PatternCard pattern = new PatternCard();
+        try{
+            listPattern = pattern.loadPatternList();
+        }catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return listPattern;
+    }
+
+    protected void startPatternCard(VirtualView view){
+
+        List<PatternCard> patternList = new ArrayList<>();
+        Random random = new Random();
+        int a;
+        for(int i = 0; i < 2; i++ ){
+
+            a = ricorsiveMethod(random.nextInt(VALUE));
+            patternList.add(listPattern.get(a));
+            patternList.add(listPattern.get(a+VALUE));
+        }
+
+
+        view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
+    }
+
+    private int ricorsiveMethod(int a){
+        Random random = new Random();
+        if(!control[a]){
+            control[a] = true;
+            return a;
+        }else return ricorsiveMethod(random.nextInt(VALUE));
+    }
+
+    protected void setPatternCardModel(){
+
+    }
+
+
 
 
 

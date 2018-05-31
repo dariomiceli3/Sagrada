@@ -9,6 +9,7 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,7 +18,7 @@ import java.util.Arrays;
  * @author adrianomundo
  */
 
-public class PatternCard {
+public class PatternCard implements Serializable {
      private String name;
      private int difficulty;
      private ArrayList<GlassBox> pattern;
@@ -401,5 +402,10 @@ public class PatternCard {
           JsonReader reader = new JsonReader(new FileReader(fileName));
           return gson.fromJson(reader, PatternCard.class);
 
+     }
+
+     @Override
+    public String toString(){
+         return "Patterncard Name: " + this.name;
      }
 }

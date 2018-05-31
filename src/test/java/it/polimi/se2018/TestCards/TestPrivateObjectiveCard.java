@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
@@ -70,4 +71,5 @@ public class TestPrivateObjectiveCard {
         System.out.println(privateCard.toString());
 
     }
+
 }
