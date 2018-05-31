@@ -4,13 +4,14 @@ package it.polimi.se2018.server.model.Cards;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.GlassBox;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * Class PrivateObjectiveCard: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class    PrivateObjectiveCard {
+public class PrivateObjectiveCard implements Serializable {
 
     private static final int DEF = 0;
     private DiceColor colour;

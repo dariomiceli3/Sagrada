@@ -1,6 +1,8 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 
 public abstract class View implements Runnable {
@@ -51,28 +53,28 @@ public abstract class View implements Runnable {
         return connection;
     }
 
-    /*public abstract void toStringEvent(Event event);
+    //public abstract void toStringEvent(Event event);
 
-    public abstract void showGameStart(); //aggiungere attributo
+    //public abstract void showGameStart(); //aggiungere attributo
 
-    public abstract void showGameEnd(); //aggiungere attributo
+    //public abstract void showGameEnd(); //aggiungere attributo
 
-    public abstract void showPrivateCard(); // aggiungere attributo
+    public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard); // aggiungere attributo
 
-    public abstract void showPatternChoose(); //aggiungere attributo
+    //public abstract void showPatternChoose(); //aggiungere attributo
 
-    public abstract void showPattern(); //aggiungere attributo
+    //public abstract void showPattern(); //aggiungere attributo
 
-    public abstract void showToolCards(); //aggiungere attributo
+    //public abstract void showToolCards(); //aggiungere attributo
 
-    public abstract void showPublicCard(); //aggiungere attributo
+    //public abstract void showPublicCard(); //aggiungere attributo
 
-    public abstract void showRoundTracker();
+    //public abstract void showRoundTracker();
 
-    public abstract void showDraftPool();
+    //public abstract void showDraftPool();
 
-    public abstract void showOthersPlayer();
-*/
+    //public abstract void showOthersPlayer();
+
 
 
 }

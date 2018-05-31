@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
@@ -55,6 +56,14 @@ public class CliView extends View implements Runnable {
             System.out.println("Error in setting name");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
+
+        System.out.println(privateObjectiveCard.toString());
+
+
     }
 
 }
