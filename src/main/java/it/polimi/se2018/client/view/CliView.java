@@ -28,39 +28,21 @@ public class CliView extends View implements Runnable {
         boolean loop = true;
         Scanner reader = new Scanner(System.in);
 
-        /*while (loop) {
+        while (loop) {
 
         System.out.println("Enter a command");
         String command = reader.nextLine();
 
-        if (command.equalsIgnoreCase("name")) {
-*/
         System.out.println("Enter a username:");
         String username = reader.nextLine();
         setPlayerName(username);
-        //}
-            /*System.out.println("Enter a command");
-            String command = scanner.nextLine();
 
+        if (!isStarted) {
+            System.out.println("Please wait, the game will start soon");
+        }
 
-
-            if (!isStarted) {
-                System.out.println("Please wait, the game will start soon");
-            }
-            else if (command.equalsIgnoreCase("exit")) {
-                break;
-            }
-            else if (command.equalsIgnoreCase("Tool")){
-
-            }
-
-            //TODO inserire le varie azioni che il giocatore può fare (anche switch va bene)
-            // TODO oltre a se serializzare o passare le stringhe(classe Parser)
-            */
-        //}
-
-
-        //}
+        //TODO inserire le varie azioni che il giocatore può fare (anche switch va bene)
+        }
 
     }
 

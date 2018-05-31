@@ -5,6 +5,7 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class Game implements Observer {
 
 
 
-    //------------------- update in base alle notify dellka view-------------------
+    //------------------- update in base alla notify della view-------------------
     @Override
     public void update(Observable o, Object arg){
 
@@ -95,7 +96,15 @@ public class Game implements Observer {
     }
 
 
+
+    //---------------------------------logica applicativa---------------------------
+
     protected void startGame(){
+
+        for(VirtualView view : viewGame) {
+            view.sendEvent(new GameStartedEvent(true));
+        }
+
 
 
 

@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
 
@@ -103,6 +104,11 @@ public class SocketHandler implements ClientInterface, Runnable {
             else {
                 System.out.println("Other name" + ((PlayerNameUpdateEvent) event).getName());
             }
+        }
+
+        else if (event instanceof GameStartedEvent) {
+            view.setStarted(((GameStartedEvent) event).isStarted());
+            System.out.println("Game started" + view.isStarted());
         }
 
         else {
