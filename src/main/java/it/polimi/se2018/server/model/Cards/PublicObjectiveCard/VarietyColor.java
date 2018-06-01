@@ -4,6 +4,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.GlassBox;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import static java.lang.Math.min;
@@ -12,7 +13,7 @@ import static java.lang.Math.min;
  * Class VarietyColor: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class VarietyColor implements PublicEffects {
+public class VarietyColor implements PublicEffects, Serializable {
     private static final int VPOINTS = 4;
     private static final String name = "Color Variety";
     /**

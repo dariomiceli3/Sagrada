@@ -2,13 +2,14 @@ package it.polimi.se2018.server.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Class DiagonalColor: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class DiagonalColor implements PublicEffects {
+public class DiagonalColor implements PublicEffects, Serializable {
 
 private static final String name = "Color Diagonals";
    @Override

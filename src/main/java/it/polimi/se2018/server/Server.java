@@ -15,7 +15,7 @@ public class Server {
     private static final int SOCKETPORT = 5555;
     private static final int RMIPORT = 1099;
     private static final int MAXPLAYERS = 4;
-    private static final int SECONDS = 20;
+    private static final int SECONDS = 10;
 
     private SocketGatherer socketGatherer;
     private RmiGatherer rmiGatherer;

@@ -3,13 +3,15 @@ package it.polimi.se2018.server.model.Cards.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
 import static java.lang.Math.min;
+
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * class used to count the number of points
  * @author Dario Miceli
  */
-public class MediumShade implements PublicEffects {
+public class MediumShade implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 2;
     private static final String name = "Medium Shades";

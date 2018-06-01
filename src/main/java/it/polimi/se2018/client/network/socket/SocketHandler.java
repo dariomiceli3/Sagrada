@@ -9,6 +9,7 @@ import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPat
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PublicDrawEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -125,7 +126,11 @@ public class SocketHandler implements ClientInterface, Runnable {
                 view.showPatternList(((StartPatternEvent) event).getPatternListEvent());
             }
 
+        }
 
+        else if (event instanceof PublicDrawEvent) {
+            
+            view.showPublicCard(((PublicDrawEvent) event).getCard());
         }
 
         else {
@@ -168,6 +173,11 @@ public class SocketHandler implements ClientInterface, Runnable {
         sendEvent(new PlayerNameEvent(name, id));
         //System.out.println("sto chiedendo di impostare" + name + "come id" + id);
     }
+
+    /*@Override
+    public void setPatternCardToServer() {
+
+    }*/
 
 
 

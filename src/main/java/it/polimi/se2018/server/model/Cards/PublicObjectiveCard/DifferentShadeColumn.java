@@ -2,11 +2,13 @@ package it.polimi.se2018.server.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
+import java.io.Serializable;
+
 /**
  * Class DifferentShadeColoum: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class DifferentShadeColumn implements PublicEffects {
+public class DifferentShadeColumn implements PublicEffects, Serializable {
     public static final int VPOINTS = 4;
     public static final String name = "Column Shade Variety ";
 

@@ -2,6 +2,8 @@ package it.polimi.se2018.server.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
+
+import java.io.Serializable;
 import java.util.Iterator;
 import static java.lang.Math.min;
 
@@ -10,7 +12,7 @@ import static java.lang.Math.min;
  * @author Dario Miceli
  */
 
-public class DifferentShade implements PublicEffects {
+public class DifferentShade implements PublicEffects, Serializable {
     private static final int VPOINTS = 5;
     private static final String name = "Shade Variety";
     /**

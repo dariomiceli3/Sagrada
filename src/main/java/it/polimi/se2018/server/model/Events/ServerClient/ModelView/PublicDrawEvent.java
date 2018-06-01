@@ -10,6 +10,7 @@ public class PublicDrawEvent implements Event {
     private static final long serialVersionUID = 65475L;
 
     private final List<PublicObjectiveCard> publicList;
+    private int id;
 
     public PublicDrawEvent(List<PublicObjectiveCard> publicList) {
         this.publicList = publicList;
@@ -18,5 +19,6 @@ public class PublicDrawEvent implements Event {
     public List<PublicObjectiveCard> getCard(){
         return publicList;
     }
+
 
 }

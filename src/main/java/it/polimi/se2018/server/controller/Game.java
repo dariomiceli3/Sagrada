@@ -120,6 +120,7 @@ public class Game implements Observer {
 
         for(VirtualView view : viewGame){
             setup.setPrivateCardModel(view);
+            setup.setPublicCardModel();
             setup.startPatternCard(view);
         }
 

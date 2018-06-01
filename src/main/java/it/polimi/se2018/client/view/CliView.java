@@ -3,6 +3,7 @@ package it.polimi.se2018.client.view;
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
@@ -55,7 +56,7 @@ public class CliView extends View implements Runnable {
 
 
 
-    //------------------------ metodi chiamabili client override---------------------------
+    //---------------------------ovveride metodi mostrano su view---------------------------------
 
     @Override
     public void setPlayerName(String username) {
@@ -68,9 +69,6 @@ public class CliView extends View implements Runnable {
         }
     }
 
-
-
-    //---------------------------ovveride metodi mostrano su view---------------------------------
     @Override
     public void showNameChoose() {
 
@@ -81,11 +79,19 @@ public class CliView extends View implements Runnable {
 
     }
 
-
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
 
         System.out.println(privateObjectiveCard.toString());
+
+    }
+
+    @Override
+    public void showPublicCard(List<PublicObjectiveCard> publicList) {
+
+        for (PublicObjectiveCard publicCard : publicList) {
+            System.out.println(publicCard.toString());
+        }
 
     }
 
@@ -97,6 +103,26 @@ public class CliView extends View implements Runnable {
         }
 
     }
+
+    @Override
+    public void showPatternChoose() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
+        int num = reader.nextInt();
+
+
+
+
+    }
+
+    /*@Override
+    public void setPatternCard(PatternCard patternCard) {
+
+    }*/
+
+
+
 }
 
 

@@ -2,11 +2,13 @@ package it.polimi.se2018.server.model.Cards.PublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
+import java.io.Serializable;
+
 /**
  * Class DifferentColourColoum: Public Objective Card
  * @author Salvatrore Fadda
  */
-public class DifferentColorColumn implements PublicEffects {
+public class DifferentColorColumn implements PublicEffects, Serializable {
     private static final int VPOINTS = 5;
     private static final String name = "Column Color Variety";
 
