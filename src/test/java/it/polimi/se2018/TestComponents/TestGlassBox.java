@@ -98,8 +98,6 @@ public class TestGlassBox {
     @Test
     public void testToString() {
 
-        System.setProperty("jansi.passthrough", "true");
-
         GlassBox glassBox = new GlassBox();
         GlassBox glassBox1 = new GlassBox();
         GlassBox glassBox2 = new GlassBox();

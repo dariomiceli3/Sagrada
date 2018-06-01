@@ -27,7 +27,7 @@
     {
     },
     {
-      "constraintColor" : "Yellow"
+      "constraintColor" : "yellow"
     },
     {
     },
@@ -36,10 +36,10 @@
     {
     },
     {
-      "constraintColor" : "Yellow"
+      "constraintColor" : "yellow"
     },
     {
-      "constraintColor" : "Red"
+      "constraintColor" : "red"
     },
     {
       "constraintValue" : 5
@@ -47,10 +47,10 @@
     {
     },
     {
-      "constraintColor" : "Yellow"
+      "constraintColor" : "yellow"
     },
     {
-      "constraintColor" : "Red"
+      "constraintColor" : "red"
     },
     {
       "constraintValue" : 6

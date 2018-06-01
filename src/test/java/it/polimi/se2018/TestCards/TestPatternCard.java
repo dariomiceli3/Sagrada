@@ -380,9 +380,12 @@ public class TestPatternCard {
     @Test
     public void testToString() throws IOException {
 
+        System.setProperty("jansi.passthrough", "true");
+
+
         PatternCard patternCard = new PatternCard();
         ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
-        patternCard = patternCardArrayList.get(1);
+        patternCard = patternCardArrayList.get(7);
 
         System.out.println(patternCard.toString());
 

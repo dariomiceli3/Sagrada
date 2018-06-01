@@ -9,7 +9,7 @@
     {
     },
     {
-      "constraintColor" : "Red"
+      "constraintColor" : "red"
     },
     {
       "constraintValue" : 5
@@ -19,42 +19,42 @@
     {
     },
     {
-      "constraintColor": "Purple"
+      "constraintColor": "purple"
     },
     {
       "constraintValue" : 4
     },
     {
-      "constraintColor" : "Blue"
+      "constraintColor" : "blue"
     },
     {
     },
     {
-      "constraintColor" : "Blue"
+      "constraintColor" : "blue"
     },
     {
       "constraintValue" : 3
     },
     {
-      "constraintColor" : "Yellow"
+      "constraintColor" : "yellow"
     },
     {
       "constraintValue" : 6
     },
     {
-      "constraintColor" : "Yellow"
+      "constraintColor" : "yellow"
     },
     {
       "constraintValue" : 2
     },
     {
-      "constraintColor" : "Green"
+      "constraintColor" : "green"
     },
     {
       "constraintValue" : 1
     },
     {
-      "constraintColor" : "Red"
+      "constraintColor" : "red"
     }
   ]
 }

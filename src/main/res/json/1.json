@@ -3,10 +3,10 @@
   "difficulty": 4,
   "pattern": [
     {
-      "constraintColor": "Yellow"
+      "constraintColor": "yellow"
     },
     {
-      "constraintColor": "Blue"
+      "constraintColor": "blue"
     },
     {
     },
@@ -16,7 +16,7 @@
       "constraintValue": "1"
     },
     {
-      "constraintColor": "Green"
+      "constraintColor": "green"
     },
     {
     },
@@ -34,12 +34,12 @@
     {
     },
     {
-      "constraintColor": "Red"
+      "constraintColor": "red"
     },
     {
     },
     {
-      "constraintColor": "Green"
+      "constraintColor": "green"
     },
     {
       "constraintValue": 2
@@ -49,10 +49,10 @@
     {
     },
     {
-      "constraintColor": "Blue"
+      "constraintColor": "blue"
     },
     {
-      "constraintColor": "Yellow"
+      "constraintColor": "yellow"
     }
   ]
 }

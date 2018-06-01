@@ -407,8 +407,14 @@ public class PatternCard implements Serializable {
      @Override
     public String toString(){
 
-         return "Patterncard Name: " + this.name + "\n" +
+         return "Pattern Card Name: " + this.name + "\n" +
+                 "Difficulty: " + this.difficulty + "\n" +
 
-                 "\u2015" + "\u007C";
+                 pattern.get(0).toString() + " " + pattern.get(1).toString() + " " + pattern.get(2).toString() + " " + pattern.get(3).toString() + " " + pattern.get(4).toString() + "\n" +
+                 pattern.get(5).toString() + " " + pattern.get(6).toString() + " " + pattern.get(7).toString() + " " + pattern.get(8).toString() + " " + pattern.get(9).toString() + "\n" +
+                 pattern.get(10).toString() + " " + pattern.get(11).toString() + " " + pattern.get(12).toString() + " " + pattern.get(13).toString() + " " + pattern.get(14).toString() + "\n" +
+                 pattern.get(15).toString() + " " + pattern.get(16).toString() + " " + pattern.get(17).toString() + " " + pattern.get(18).toString() + " " + pattern.get(19).toString();
+
+
      }
 }
