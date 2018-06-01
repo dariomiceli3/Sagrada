@@ -102,18 +102,35 @@ public class CliView extends View implements Runnable {
             System.out.println(patternCard.toString());
         }
 
-    }
-
-    @Override
-    public void showPatternChoose() {
-
         Scanner reader = new Scanner(System.in);
         System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
         int num = reader.nextInt();
 
+        showPatternChoose(num, patternCards);
 
 
+    }
 
+    @Override
+    public void showPatternChoose(int num, List<PatternCard> patternCards) {
+
+        PatternCard patternCard = patternCards.get(num - 1);
+
+        try {
+            super.getConnection().setPatternCardToServer(patternCard, super.getPlayerID());
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting pattern card");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void showPattern(PatternCard patternCard) {
+
+        System.out.println("This is your choosed PatternCard");
+        System.out.println(patternCard.toString());
     }
 
     /*@Override

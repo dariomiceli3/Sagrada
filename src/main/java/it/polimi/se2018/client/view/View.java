@@ -63,8 +63,9 @@ public abstract class View implements Runnable {
 
     public abstract void showPatternList(List<PatternCard> patternCards);
 
-    public abstract void showPatternChoose();
+    public abstract void showPatternChoose(int choose, List<PatternCard> patternCards);
 
+    public abstract void showPattern(PatternCard patternCard);
 
     //public abstract void toStringEvent(Event event);
 

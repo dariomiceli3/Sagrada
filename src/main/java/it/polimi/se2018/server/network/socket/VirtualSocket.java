@@ -3,6 +3,7 @@ package it.polimi.se2018.server.network.socket;
 import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 
@@ -54,8 +55,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 if (received instanceof PlayerNameEvent) {
                     super.setName(((PlayerNameEvent) received).getName());
                     setChanged();
-                    //System.out.println("Sto nofity controller" + super.getName() + super.getPlayerID());
-                    notifyObservers(received); // necessario argomento tra parentesi (?)
+                    notifyObservers(received);
+                }
+
+                if (received instanceof PlayerPatternEvent) {
+                    setChanged();
+                    notifyObservers(received);
                 }
                 // TODO add the other msg from the client:
                 // if the msg is a modification of the model, notify, ecc.

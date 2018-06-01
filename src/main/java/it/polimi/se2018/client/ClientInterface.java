@@ -11,7 +11,7 @@ public interface ClientInterface extends Remote {
 
     public void setPlayerNameToServer(String username, int iD) throws RemoteException;
 
-    //public void setPatternCardToServer(PatternCard patternCard) throws RemoteException;
+    public void setPatternCardToServer(PatternCard patternCard, int ID) throws RemoteException;
 
 
 

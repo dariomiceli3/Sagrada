@@ -2,14 +2,13 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PublicDrawEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -133,6 +132,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showPublicCard(((PublicDrawEvent) event).getCard());
         }
 
+        else if (event instanceof PlayerPrivateUpdateEvent) {
+
+            if((view.getPlayerID()) == ((PlayerPrivateUpdateEvent) event).getID()) {
+                view.showPattern(((PlayerPatternUpdateEvent) event).getCard());
+            }
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -174,10 +180,11 @@ public class SocketHandler implements ClientInterface, Runnable {
         //System.out.println("sto chiedendo di impostare" + name + "come id" + id);
     }
 
-    /*@Override
-    public void setPatternCardToServer() {
+    @Override
+    public void setPatternCardToServer(PatternCard patternCard, int id) {
+        sendEvent(new PlayerPatternEvent(id, patternCard));
 
-    }*/
+    }
 
 
 
