@@ -74,7 +74,6 @@ public class Server {
 
     public synchronized void waitingOtherPlayers() {
 
-        // TODO sostituire 1 con 4
         if (clients.size() == 2) {
             System.out.println("Due client connessi");
             System.out.println("Starting timer before the game");

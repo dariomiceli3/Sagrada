@@ -35,16 +35,6 @@ public class CliView extends View implements Runnable {
             System.out.println("Please wait, the game will start soon");
         }
 
-        while (loop) {
-
-
-            System.out.println("Enter your name: ");
-            String username = reader.nextLine();
-            setPlayerName(username);
-
-            System.out.println("Choose one of the 4 pattern card");
-
-        }
 
     }
 
@@ -78,6 +68,20 @@ public class CliView extends View implements Runnable {
         }
     }
 
+
+
+    //---------------------------ovveride metodi mostrano su view---------------------------------
+    @Override
+    public void showNameChoose() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your name");
+        String name = reader.nextLine();
+        setPlayerName(name);
+
+    }
+
+
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
 
@@ -88,7 +92,9 @@ public class CliView extends View implements Runnable {
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
 
-        System.out.println(patternCards.toString());
+        for (PatternCard patternCard : patternCards) {
+            System.out.println(patternCard.toString());
+        }
 
     }
 }

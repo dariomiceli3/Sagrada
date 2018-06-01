@@ -59,7 +59,9 @@ public abstract class View implements Runnable {
         return connection;
     }
 
-    //public abstract void toStringEvent(Event event);
+    public abstract void showNameChoose();
+
+        //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo
 

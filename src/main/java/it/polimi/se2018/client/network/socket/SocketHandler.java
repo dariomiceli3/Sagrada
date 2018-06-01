@@ -108,7 +108,8 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         else if (event instanceof GameStartedEvent) {
             view.setStarted(((GameStartedEvent) event).isStarted());
-            System.out.println("Game started" + view.isStarted());
+            System.out.println("Game started: " + view.isStarted());
+            view.showNameChoose();
         }
 
         else if (event instanceof PlayerPrivateUpdateEvent) {

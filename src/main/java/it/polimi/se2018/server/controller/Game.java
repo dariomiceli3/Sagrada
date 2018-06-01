@@ -96,7 +96,8 @@ public class Game implements Observer {
 
         //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
-        if(model.getNumberPlayer() == (viewGame.size()-1)){
+
+        if(model.getNumberPlayer() == (viewGame.size())){
             startCard();
         }
         //System.out.println("Sto modificando model" + view.getPlayerID() + "name" + name);
