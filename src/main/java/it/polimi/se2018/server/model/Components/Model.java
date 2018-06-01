@@ -1,9 +1,11 @@
 package it.polimi.se2018.server.model.Components;
 
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.EventsObservable;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPatternUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PublicDrawEvent;
 
@@ -115,6 +117,13 @@ public class Model extends Observable {
         setChanged();
         notifyObservers(new PublicDrawEvent(this.publicList));
     }//TODO network/cli
+
+    public void setPatternAndNotify(int ID, PatternCard pattern){
+        numberPlayer++;
+        getPlayerFromID(ID).setPattern(pattern);
+        setChanged();
+        notifyObservers(new PlayerPatternUpdateEvent(ID, getPlayerFromID(ID).getPattern()));
+    }
 
 
     //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)

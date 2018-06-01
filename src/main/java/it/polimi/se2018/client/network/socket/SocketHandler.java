@@ -132,9 +132,9 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showPublicCard(((PublicDrawEvent) event).getCard());
         }
 
-        else if (event instanceof PlayerPrivateUpdateEvent) {
+        else if (event instanceof PlayerPatternUpdateEvent) {
 
-            if((view.getPlayerID()) == ((PlayerPrivateUpdateEvent) event).getID()) {
+            if((view.getPlayerID()) == ((PlayerPatternUpdateEvent) event).getID()) {
                 view.showPattern(((PlayerPatternUpdateEvent) event).getCard());
             }
         }

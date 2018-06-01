@@ -120,9 +120,7 @@ public class GameSetup {
         }else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
-    protected void setPatternCardModel(){
 
-    }
 
 
 

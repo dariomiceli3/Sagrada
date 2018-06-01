@@ -2,9 +2,11 @@ package it.polimi.se2018.server.controller;
 
 
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 
 import java.util.ArrayList;
@@ -56,6 +58,9 @@ public class Game implements Observer {
         return model;
     }
 
+    protected List<VirtualView> getViewGame(){
+        return viewGame;
+    }
 
 
 
@@ -70,6 +75,10 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerNameEvent) {
             setPlayerNameModel(virtualView, ((PlayerNameEvent) arg).getName());
+        }
+
+        if (arg instanceof PlayerPatternEvent){
+            setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
         }
 
 
@@ -103,6 +112,15 @@ public class Game implements Observer {
         //System.out.println("Sto modificando model" + view.getPlayerID() + "name" + name);
     }
 
+    protected void setPatternCardModel(VirtualView view, PatternCard pattern){
+
+        model.setPatternAndNotify(view.getPlayerID(), pattern);
+
+        if(model.getNumberPlayer() == (getViewGame().size())){
+            startRound();
+        }
+    }
+
 
 
     //---------------------------------logica applicativa---------------------------
@@ -118,6 +136,7 @@ public class Game implements Observer {
 
     private void startCard(){
 
+        model.setNumberPlayer(0);
         setup.setPublicCardModel();
         for(VirtualView view : viewGame){
             setup.setPrivateCardModel(view);
@@ -125,4 +144,9 @@ public class Game implements Observer {
         }
 
     }
+
+    private void startRound(){
+
+    }
+
 }
