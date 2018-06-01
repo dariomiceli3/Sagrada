@@ -1,9 +1,15 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
+import it.polimi.se2018.server.model.Cards.PatternCard;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Scanner;
 
 public abstract class View implements Runnable {
 
@@ -59,11 +65,11 @@ public abstract class View implements Runnable {
 
     //public abstract void showGameEnd(); //aggiungere attributo
 
-    public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard); // aggiungere attributo
+    public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard);
 
-    //public abstract void showPatternChoose(); //aggiungere attributo
+    //public abstract void showPatternChoose(List<> patternCardList);
 
-    //public abstract void showPattern(); //aggiungere attributo
+    public abstract void showPatternList(List<PatternCard> patternCards);
 
     //public abstract void showToolCards(); //aggiungere attributo
 

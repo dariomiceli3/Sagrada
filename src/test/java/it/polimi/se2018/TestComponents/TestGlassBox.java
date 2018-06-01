@@ -94,4 +94,20 @@ public class TestGlassBox {
         assertEquals(2, glassBox.getConstraintValue());
         assertEquals("Green", glassBox.getConstraintColor());
     }
+
+    @Test
+    public void testToString() {
+
+        System.setProperty("jansi.passthrough", "true");
+
+        GlassBox glassBox = new GlassBox();
+
+        glassBox.setConstraintColor("Green");
+        glassBox.setConstraintValue(2);
+
+        System.out.println(glassBox.toString());
+
+        Dice dice = new Dice(2, DiceColor.RED);
+        System.out.println(dice.toString());
+    }
 }

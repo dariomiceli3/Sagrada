@@ -1,8 +1,11 @@
 package it.polimi.se2018.TestComponents;
 
+import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.Assert.assertEquals;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 import  org.junit.Test;
 
 public class TestDice {
@@ -35,9 +38,28 @@ public class TestDice {
 
     @Test
     public void testToString() {
-        Dice dice = new Dice(5, DiceColor.RED);
-        //Dice dice78 = new Dice(9, DiceColor.YELLOW);
+        System.setProperty("jansi.passthrough", "true");
+
+
+        AnsiConsole.systemInstall();
+
+        Dice dice = new Dice(1, DiceColor.RED);
+        Dice dice2 = new Dice(2, DiceColor.RED);
+        Dice dice3 = new Dice(3, DiceColor.RED);
+        Dice dice4 = new Dice(4, DiceColor.RED);
+        Dice dice5 = new Dice(5, DiceColor.RED);
+        Dice dice6 = new Dice(6, DiceColor.RED);
+
         System.out.println(dice.toString());
-        //System.out.println(dice78.toString());
+        System.out.println(dice2.toString());
+        System.out.println(dice3.toString());
+        System.out.println(dice4.toString());
+        System.out.println(dice5.toString());
+        System.out.println(dice6.toString());
+
+        //System.out.println( ansi().eraseScreen().fg(Ansi.Color.RED).a("Hello").reset());
+        //System.out.println("\\033[48:2:255:165:0m%s\\033[m\\n" + "Helloword");
+
+        AnsiConsole.systemUninstall();
     }
 }

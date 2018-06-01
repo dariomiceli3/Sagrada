@@ -1,11 +1,13 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CliView extends View implements Runnable {
@@ -14,12 +16,12 @@ public class CliView extends View implements Runnable {
     // metodi che in base alla scelta dell'utente mandano usando socket handler
 
     private boolean singlePlayer;
-    //private Scanner reader;
 
 
     public CliView(boolean singlePlayer) {
         //this.reader = scanner;
         this.singlePlayer = singlePlayer;
+
     }
 
 
@@ -31,21 +33,38 @@ public class CliView extends View implements Runnable {
 
         while (loop) {
 
-        System.out.println("Enter a command");
-        String command = reader.nextLine();
+            System.out.println("Enter your name: ");
+            String username = reader.nextLine();
+            setPlayerName(username);
 
-        System.out.println("Enter a username:");
-        String username = reader.nextLine();
-        setPlayerName(username);
+            if (!isStarted) {
+                System.out.println("Please wait, the game will start soon");
+            }
 
-        if (!isStarted) {
-            System.out.println("Please wait, the game will start soon");
-        }
+            //System.out.println("Enter a command:");
 
-        //TODO inserire le varie azioni che il giocatore può fare (anche switch va bene)
         }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //------------------------ metodi chiamabili client override---------------------------
 
     @Override
     public void setPlayerName(String username) {
@@ -63,9 +82,14 @@ public class CliView extends View implements Runnable {
 
         System.out.println(privateObjectiveCard.toString());
 
-
     }
 
+    @Override
+    public void showPatternList(List<PatternCard> patternCards) {
+
+        System.out.println(patternCards.toString());
+
+    }
 }
 
 

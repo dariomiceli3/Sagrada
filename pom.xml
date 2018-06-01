@@ -32,6 +32,12 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>org.fusesource.jansi</groupId>
+      <artifactId>jansi</artifactId>
+      <version>1.17.1</version>
+    </dependency>
+
     <!-- JUnit provides unit testing for Java applications -->
     <dependency>
       <groupId>junit</groupId>

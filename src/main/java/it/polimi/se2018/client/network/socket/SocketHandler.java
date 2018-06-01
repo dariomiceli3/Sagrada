@@ -5,6 +5,7 @@ import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
@@ -92,15 +93,13 @@ public class SocketHandler implements ClientInterface, Runnable {
         if (event instanceof PlayerIDEvent) {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());
             System.out.println("Player id set " + view.getPlayerID());
+
         }
         else if (event instanceof PlayerNameUpdateEvent) {
 
             if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
                view.setNameView(((PlayerNameUpdateEvent) event).getName());
                System.out.println("Name set" + view.getPlayerName());
-              //  view.showNameView(((PlayerNameUpdateEvent) event).getName());
-                //System.out.println("Player name set " + view.getPlayerName() + "for player id" + view.getPlayerID());
-                //System.out.println("My name is:" + view.getPlayerName());
             }
             else {
                 System.out.println("Other name" + ((PlayerNameUpdateEvent) event).getName());
@@ -117,6 +116,15 @@ public class SocketHandler implements ClientInterface, Runnable {
             if((view.getPlayerID()) == ((PlayerPrivateUpdateEvent) event).getID()) {
                 view.showPrivateCard(((PlayerPrivateUpdateEvent) event).getCard());
             }
+        }
+
+        else if (event instanceof StartPatternEvent) {
+
+            if((view.getPlayerID()) == ((StartPatternEvent) event).getID()) {
+                view.showPatternList(((StartPatternEvent) event).getPatternListEvent());
+            }
+
+
         }
 
         else {

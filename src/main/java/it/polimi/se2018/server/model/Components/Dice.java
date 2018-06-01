@@ -1,10 +1,19 @@
 package it.polimi.se2018.server.model.Components;
 
+import java.io.Serializable;
+
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.Ansi.*;
+import org.fusesource.jansi.Ansi.Color.*;
+import org.fusesource.jansi.AnsiConsole;
+
+import static org.fusesource.jansi.Ansi.ansi;
+
 /**
  * Class Dice: the die
  * @author Salvatrore Fadda
  */
-public class Dice {
+public class Dice implements Serializable {
 
     private final int DEFAULT = 0;
     private int value;
@@ -67,7 +76,28 @@ public class Dice {
 
     @Override
     public String toString() {
-        return "Dice value: " + this.value + " color: " + this.color.toString() + "\n";
+        // todo nei test mettere la stringa qui sotto (workaround per intellij)
+        //System.setProperty("jansi.passthrough", "true");
+
+        if (this.getValue() == 1) {
+            return "\u2680";
+        }
+        else if (this.getValue() == 2 && this.getColor().toString() == "red") {
+            return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2681").reset());
+        }
+        else if (this.getValue() == 3) {
+            return "\u2682";
+        }
+        else if (this.getValue() == 4) {
+            return "\u2683";
+        }
+        else if (this.getValue() == 5) {
+            return "\u2684";
+        }
+        else {
+            return "\u2685";
+        }
+
     }
 
 }

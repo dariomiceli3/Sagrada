@@ -1,11 +1,17 @@
 package it.polimi.se2018.server.model.Components;
 
+import org.fusesource.jansi.Ansi;
+
+import java.io.Serializable;
+
+import static org.fusesource.jansi.Ansi.ansi;
+
 /**
  * Representation of a single box of a Pattern Card
  * @author adrianomundo
  */
 
-public class GlassBox {
+public class GlassBox implements Serializable {
     private static final int DEFAULT = 0;
     private Dice dice;
     private int constraintValue;
@@ -118,6 +124,17 @@ public class GlassBox {
         }
         // box full case
         else return false;
+    }
+
+    @Override
+    public String toString() {
+
+        return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u25FC").reset());
+
+        //2610
+
+
+
     }
 
 }

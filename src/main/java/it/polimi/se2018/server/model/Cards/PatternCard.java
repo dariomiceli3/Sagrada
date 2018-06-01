@@ -406,6 +406,7 @@ public class PatternCard implements Serializable {
 
      @Override
     public String toString(){
+
          return "Patterncard Name: " + this.name;
      }
 }

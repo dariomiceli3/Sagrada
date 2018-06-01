@@ -20,8 +20,6 @@ public class Client {
         System.out.println("Welcome to the game of SAGRADA");
         Scanner reader = new Scanner(System.in);
 
-        //System.out.println("Enter your username");
-        //String username = reader.nextLine();
 
         System.out.println("Enter the gameplay mode: Single or Multi?");
         String mode = reader.nextLine();
