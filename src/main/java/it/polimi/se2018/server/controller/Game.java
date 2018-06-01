@@ -118,9 +118,9 @@ public class Game implements Observer {
 
     private void startCard(){
 
+        setup.setPublicCardModel();
         for(VirtualView view : viewGame){
             setup.setPrivateCardModel(view);
-            setup.setPublicCardModel();
             setup.startPatternCard(view);
         }
 

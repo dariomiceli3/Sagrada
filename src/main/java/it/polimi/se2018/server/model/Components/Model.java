@@ -110,7 +110,8 @@ public class Model extends Observable {
 
 
     public void setPublicAndNotify(List<PublicObjectiveCard> publicList){
-        this.publicList = publicList;
+
+        this.setPublicList(publicList);
         setChanged();
         notifyObservers(new PublicDrawEvent(this.publicList));
     }//TODO network/cli
