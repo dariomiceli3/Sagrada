@@ -36,10 +36,6 @@ public abstract class View implements Runnable {
         this.playerName = nameView;
     }
 
-    /*public void setNameView(String name, int ID) {
-        this.playerName = name;
-
-    }*/
 
     public abstract void setPlayerName(String username);
 
@@ -61,21 +57,26 @@ public abstract class View implements Runnable {
 
     public abstract void showNameChoose();
 
-        //public abstract void toStringEvent(Event event);
+    public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard);
+
+    public abstract void showPublicCard(List<PublicObjectiveCard> publicList);
+
+    public abstract void showPatternList(List<PatternCard> patternCards);
+
+    public abstract void showPatternChoose();
+
+
+    //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo
 
     //public abstract void showGameEnd(); //aggiungere attributo
 
-    public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard);
 
-    //public abstract void showPatternChoose(List<> patternCardList);
 
-    public abstract void showPatternList(List<PatternCard> patternCards);
 
     //public abstract void showToolCards(); //aggiungere attributo
 
-    //public abstract void showPublicCard(); //aggiungere attributo
 
     //public abstract void showRoundTracker();
 

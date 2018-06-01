@@ -129,7 +129,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         }
 
         else if (event instanceof PublicDrawEvent) {
-            
+
             view.showPublicCard(((PublicDrawEvent) event).getCard());
         }
 
