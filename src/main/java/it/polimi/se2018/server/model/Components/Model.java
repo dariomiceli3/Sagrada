@@ -33,6 +33,7 @@ public class Model extends Observable {
         this.diceBag = new DiceBag();
         this.playerList = new ArrayList<>();
         this.event = new EventsObservable();
+        this.numberPlayer = 0;
 
     }
 
@@ -91,7 +92,7 @@ public class Model extends Observable {
     }
 
     public void setPlayerAndNotify(int ID, String name) {
-
+        numberPlayer++;
         getPlayerFromID(ID).setPlayerName(name);
         //System.out.println("prima di notify view id mandato"+ ID + "id settato" + getPlayerFromID(ID).getPlayerID());
         setChanged();

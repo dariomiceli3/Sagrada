@@ -44,6 +44,7 @@ public class Game implements Observer {
         startGame();
 
 
+
     }
 
 
@@ -95,6 +96,9 @@ public class Game implements Observer {
 
         //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
+        if(model.getNumberPlayer() == (viewGame.size()-1)){
+            startCard();
+        }
         //System.out.println("Sto modificando model" + view.getPlayerID() + "name" + name);
     }
 
@@ -102,21 +106,21 @@ public class Game implements Observer {
 
     //---------------------------------logica applicativa---------------------------
 
-    private void startGame(){
+    private void startGame() {
 
-        for(VirtualView view : viewGame) {
+        model.setNumberPlayer(0);
+        for (VirtualView view : viewGame) {
             view.sendEvent(new GameStartedEvent(true));
         }
+
+    }
+
+    private void startCard(){
+
         for(VirtualView view : viewGame){
             setup.setPrivateCardModel(view);
             setup.startPatternCard(view);
         }
 
-
-
-
-
-
     }
-
 }
