@@ -72,6 +72,13 @@ public class RoundTracker {
 
 
 
-
+    @Override
+    public String toString() {
+        System.out.println("Roundtracker:");
+        for (int i =0; i < listDice.size(); i++) {
+            System.out.println("Round "+ (i+1) + ": "+ listDice.get(i).toString());
+        }
+        return "";
+    }
 
 }

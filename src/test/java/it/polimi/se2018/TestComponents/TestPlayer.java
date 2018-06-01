@@ -46,6 +46,7 @@ public class TestPlayer {
         player.setPrivatePoints(privatePoints);
         player.setPlayerID(2);
         player.setPlayerName("Dario");
+        player.setPlayerColor(PlayerColour.RED);
 
         assertEquals(pattern, player.getPattern());
         assertEquals(privateCard, player.getPrivate());
@@ -54,6 +55,7 @@ public class TestPlayer {
         assertEquals(privatePoints, player.getPrivatePoints());
         assertEquals(2, player.getPlayerID());
         assertEquals("Dario", player.getPlayerName());
+        assertEquals("RED", player.getColour().toString());
     }
 
     @Test

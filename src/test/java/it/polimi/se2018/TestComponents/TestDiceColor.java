@@ -9,11 +9,11 @@ public class TestDiceColor {
 
     @Test
     public void testDiceColor() {
-        assertEquals("Red", DiceColor.RED.toString());
-        assertEquals("Yellow", DiceColor.YELLOW.toString());
-        assertEquals("Blue", DiceColor.BLUE.toString());
-        assertEquals("Green", DiceColor.GREEN.toString());
-        assertEquals("Purple", DiceColor.PURPLE.toString());
+        assertEquals("red", DiceColor.RED.toString());
+        assertEquals("yellow", DiceColor.YELLOW.toString());
+        assertEquals("blue", DiceColor.BLUE.toString());
+        assertEquals("green", DiceColor.GREEN.toString());
+        assertEquals("purple", DiceColor.PURPLE.toString());
 
     }
 }

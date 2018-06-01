@@ -63,7 +63,7 @@ public class TestGlassBox {
 
     @Test
     public void testIsBoxValid() {
-        GlassBox glassBox = new GlassBox("Red");
+        GlassBox glassBox = new GlassBox("red");
         GlassBox glassBox1 = new GlassBox(3);
         GlassBox glassBox2 = new GlassBox();
         GlassBox glassBox3 = new GlassBox();

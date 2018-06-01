@@ -18,7 +18,7 @@ public class TestPrivateObjectiveCard {
     @Test
     public void testConstructor() {
         PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.BLUE);
-        assertEquals("Blue", privateCard.getColour().toString());
+        assertEquals("blue", privateCard.getColour().toString());
 
     }
 
