@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -370,6 +371,21 @@ public class TestPatternCard {
         } catch (FileNotFoundException e) {
             fail();
         }
+
+
+
+
+    }
+
+    @Test
+    public void testToString() throws IOException {
+
+        PatternCard patternCard = new PatternCard();
+        ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
+        patternCard = patternCardArrayList.get(1);
+
+        System.out.println(patternCard.toString());
+
 
 
 

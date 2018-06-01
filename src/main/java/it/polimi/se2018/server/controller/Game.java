@@ -43,6 +43,7 @@ public class Game implements Observer {
 
         startGame();
 
+
     }
 
 

@@ -31,17 +31,18 @@ public class CliView extends View implements Runnable {
         boolean loop = true;
         Scanner reader = new Scanner(System.in);
 
+        if (!isStarted) {
+            System.out.println("Please wait, the game will start soon");
+        }
+
         while (loop) {
+
 
             System.out.println("Enter your name: ");
             String username = reader.nextLine();
             setPlayerName(username);
 
-            if (!isStarted) {
-                System.out.println("Please wait, the game will start soon");
-            }
-
-            //System.out.println("Enter a command:");
+            System.out.println("Choose one of the 4 pattern card");
 
         }
 

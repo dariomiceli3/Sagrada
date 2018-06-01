@@ -407,6 +407,8 @@ public class PatternCard implements Serializable {
      @Override
     public String toString(){
 
-         return "Patterncard Name: " + this.name;
+         return "Patterncard Name: " + this.name + "\n" +
+
+                 "\u2015" + "\u007C";
      }
 }

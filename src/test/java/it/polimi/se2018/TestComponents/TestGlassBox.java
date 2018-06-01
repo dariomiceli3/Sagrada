@@ -101,13 +101,19 @@ public class TestGlassBox {
         System.setProperty("jansi.passthrough", "true");
 
         GlassBox glassBox = new GlassBox();
+        GlassBox glassBox1 = new GlassBox();
+        GlassBox glassBox2 = new GlassBox();
+        GlassBox glassBox3 = new GlassBox();
 
-        glassBox.setConstraintColor("Green");
-        glassBox.setConstraintValue(2);
+        glassBox.setConstraintColor("red");
+        glassBox1.setConstraintColor("purple");
+        glassBox2.setConstraintValue(2);
+        glassBox3.setConstraintValue(6);
 
         System.out.println(glassBox.toString());
+        System.out.println(glassBox1.toString());
+        System.out.println(glassBox2.toString());
+        System.out.println(glassBox3.toString());
 
-        Dice dice = new Dice(2, DiceColor.RED);
-        System.out.println(dice.toString());
     }
 }

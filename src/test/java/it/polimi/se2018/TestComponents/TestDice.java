@@ -41,13 +41,13 @@ public class TestDice {
         System.setProperty("jansi.passthrough", "true");
 
 
-        AnsiConsole.systemInstall();
+        //AnsiConsole.systemInstall();
 
         Dice dice = new Dice(1, DiceColor.RED);
-        Dice dice2 = new Dice(2, DiceColor.RED);
-        Dice dice3 = new Dice(3, DiceColor.RED);
-        Dice dice4 = new Dice(4, DiceColor.RED);
-        Dice dice5 = new Dice(5, DiceColor.RED);
+        Dice dice2 = new Dice(2, DiceColor.PURPLE);
+        Dice dice3 = new Dice(3, DiceColor.BLUE);
+        Dice dice4 = new Dice(4, DiceColor.YELLOW);
+        Dice dice5 = new Dice(5, DiceColor.GREEN);
         Dice dice6 = new Dice(6, DiceColor.RED);
 
         System.out.println(dice.toString());
@@ -57,9 +57,7 @@ public class TestDice {
         System.out.println(dice5.toString());
         System.out.println(dice6.toString());
 
-        //System.out.println( ansi().eraseScreen().fg(Ansi.Color.RED).a("Hello").reset());
-        //System.out.println("\\033[48:2:255:165:0m%s\\033[m\\n" + "Helloword");
 
-        AnsiConsole.systemUninstall();
+        //AnsiConsole.systemUninstall();
     }
 }
