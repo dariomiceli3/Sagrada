@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Events.Event;
 
@@ -179,7 +180,6 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showDraftPool(DraftPool draftPool) {
-
         System.out.println(draftPool.toString());
     }
 }

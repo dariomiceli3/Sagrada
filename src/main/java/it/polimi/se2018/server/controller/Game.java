@@ -5,6 +5,7 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
@@ -88,6 +89,10 @@ public class Game implements Observer {
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
         }
 
+        if (arg instanceof PlayerDraftPoolEvent){
+
+            setDraftPoolModel();
+        }
 
 
     }
@@ -136,6 +141,12 @@ public class Game implements Observer {
         model.setTokenAndNotify(view.getPlayerID());
 
 
+    }
+
+    protected void setDraftPoolModel(){
+
+
+        model.setDraftPoolAndNotify();
     }
 
 

@@ -1,5 +1,6 @@
 package it.polimi.se2018.server.model.Components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * Class DrafPool: DP Singleton, the pool of dice from where the players take the die to be placed on their turn
  * @author Salvatrore Fadda
  */
-public class DraftPool {
+public class DraftPool implements Serializable {
 
     //private static DraftPool istanceDP;
     private static final int DEFAULT = 0;
@@ -41,6 +42,16 @@ public class DraftPool {
      */
     public DraftPool(int number, DiceBag dicebag) {
         this.number = number;
+        this.diceBag = dicebag;
+        this.dicePlay = new ArrayList<>();
+
+    }
+
+    /**
+     * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
+     * @param dicebag the dicebag from which to take the dice
+     */
+    public DraftPool(DiceBag dicebag) {
         this.diceBag = dicebag;
         this.dicePlay = new ArrayList<>();
 

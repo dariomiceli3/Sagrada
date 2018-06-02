@@ -1,8 +1,12 @@
 package it.polimi.se2018.server.model.Events.ServerClient.ModelView;
 
+import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Events.Event;
 
-public class PlayerDraftPoolUpdateEvent {
+import java.util.List;
+
+public class PlayerDraftPoolUpdateEvent implements Event {
 
     private static final long serialVersionUID = 347834873L;
     private DraftPool draftPool;

@@ -7,4 +7,5 @@ public class PlayerDraftPoolEvent implements Event {
     private static final long serialVersionUID = 4784L;
 
 
+
 }

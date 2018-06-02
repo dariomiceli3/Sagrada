@@ -87,7 +87,10 @@ public class TestDraftPool {
     @Test
     public void testToString() {
         DiceBag diceBag = new DiceBag();
-        DraftPool draftPool = new DraftPool(4, diceBag);
+        //DraftPool draftPool = new DraftPool(4, diceBag);
+         DraftPool draftPool = new DraftPool(diceBag);
+
+        draftPool.setNumber(3);
         draftPool.createListDice();
 
         System.out.println(draftPool.toString());

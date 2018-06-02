@@ -49,7 +49,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
         try {
             while (this.isRunning()) {
 
-                System.out.println("Virtual Socket ok");
+
                 socketIn = new ObjectInputStream(clientConnection.getInputStream());
                 Object received = socketIn.readObject();
 

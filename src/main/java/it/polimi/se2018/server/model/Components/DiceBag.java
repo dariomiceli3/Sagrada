@@ -3,6 +3,7 @@ package it.polimi.se2018.server.model.Components;
 
 
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * Class DiceBag:DP Singleton, the bag used for dice extraction
  * @author Salvatrore Fadda
  */
-public class DiceBag {
+public class DiceBag implements Serializable {
     //private static DiceBag istanceDB;
     private static final int TOP = 0;
     private static final int MAX_VALUE = 6;

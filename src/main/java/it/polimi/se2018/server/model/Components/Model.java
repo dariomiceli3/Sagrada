@@ -28,8 +28,8 @@ public class Model extends Observable {
 
     public Model() {
         this.roundTracker = new RoundTracker();
-        this.draftPool = new DraftPool();
         this.diceBag = new DiceBag();
+        this.draftPool = new DraftPool(diceBag);
         this.playerList = new ArrayList<>();
         this.event = new EventsObservable();
         this.numberPlayer = 0;
@@ -105,7 +105,7 @@ public class Model extends Observable {
         getPlayerFromID(ID).setPrivate(privateCard);
         setChanged();
         notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(ID).getPlayerID(), privateCard));
-    }//TODO network/cli
+    }
 
 
     public void setPublicAndNotify(List<PublicObjectiveCard> publicList){
@@ -113,7 +113,7 @@ public class Model extends Observable {
         this.setPublicList(publicList);
         setChanged();
         notifyObservers(new PublicDrawEvent(this.publicList));
-    }//TODO network/cli
+    }
 
     public void setPatternAndNotify(int ID, PatternCard pattern){
         numberPlayer++;
@@ -128,6 +128,14 @@ public class Model extends Observable {
         player.setTokensNumber(player.getPattern().getDifficulty());
         setChanged();
         notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
+    }
+
+    public void setDraftPoolAndNotify(){
+
+        this.draftPool.setNumber(playerList.size());
+        this.draftPool.createListDice();
+        setChanged();
+        notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
     }
 
 
