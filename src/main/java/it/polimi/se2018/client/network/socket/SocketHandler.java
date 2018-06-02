@@ -3,6 +3,7 @@ package it.polimi.se2018.client.network.socket;
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
@@ -168,6 +169,11 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof PlayerDraftPoolUpdateEvent) {
+
+            view.showDraftPool(((PlayerDraftPoolUpdateEvent) event).getDraftPool());
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -213,6 +219,11 @@ public class SocketHandler implements ClientInterface, Runnable {
     public void setPatternCardToServer(PatternCard patternCard, int id) {
         sendEvent(new PlayerPatternEvent(id, patternCard));
 
+    }
+
+    @Override
+    public void setDraftPoolToServer() {
+        sendEvent(new PlayerDraftPoolEvent());
     }
 
 

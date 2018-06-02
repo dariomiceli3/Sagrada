@@ -13,7 +13,7 @@ public interface ClientInterface extends Remote {
 
     public void setPatternCardToServer(PatternCard patternCard, int ID) throws RemoteException;
 
-
+    public void setDraftPoolToServer() throws RemoteException;
 
 
 }

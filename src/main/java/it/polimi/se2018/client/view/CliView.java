@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
@@ -165,7 +166,21 @@ public class CliView extends View implements Runnable {
         System.out.println("Write the command ROLL to casually roll the draft pool");
         String command = scanner.nextLine();
 
+        if (command.equalsIgnoreCase("roll")) {
+            try {
+                super.getConnection().setDraftPoolToServer();
+            }
+            catch (RemoteException e)  {
+                System.out.println("error in inserting roll");
+                e.printStackTrace();
+            }
+        }
+    }
 
+    @Override
+    public void showDraftPool(DraftPool draftPool) {
+
+        System.out.println(draftPool.toString());
     }
 }
 

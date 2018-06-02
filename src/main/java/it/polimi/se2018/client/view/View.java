@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
@@ -77,6 +78,8 @@ public abstract class View implements Runnable {
 
     public abstract void showRollCommand();
 
+    public abstract void showDraftPool(DraftPool draftPool);
+
     //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo
@@ -91,7 +94,6 @@ public abstract class View implements Runnable {
 
     //public abstract void showRoundTracker();
 
-    //public abstract void showDraftPool();
 
     //public abstract void showOthersPlayer();
 
