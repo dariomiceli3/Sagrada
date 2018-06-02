@@ -54,6 +54,27 @@ public class PatternCard implements Serializable {
                throw new InvalidMoveException("Invalid Dice Position");
      }
 
+    public void putDiceEglomise(Dice dice, int index) throws InvalidMoveException {
+
+        GlassBox box = pattern.get(index);
+
+        if (box.isBoxValidEglomise(dice)) {
+            pattern.set(index, box);
+        }
+        else
+            throw new InvalidMoveException("Invalid Dice Position");
+    }
+    public void putDiceCopper(Dice dice, int index) throws InvalidMoveException {
+
+        GlassBox box = pattern.get(index);
+
+        if (box.isBoxValidCopper(dice)) {
+            pattern.set(index, box);
+        }
+        else
+            throw new InvalidMoveException("Invalid Dice Position");
+    }
+
      // remove dice from the box
      public Dice removeDice(Dice dice, int index) {
 
@@ -300,9 +321,478 @@ public class PatternCard implements Serializable {
          }
      }
 
+    public void putDiceOnPatternEglomise(Dice dice, int index, PatternCard patternCard) throws InvalidMoveException {
+
+        if (isPatternEmpty(patternCard)) {
+            if (checkFirstDice(index)) {
+                patternCard.putDiceEglomise(dice, index);
+            }
+            else {
+                throw  new InvalidMoveException("Invalid initial position");
+            }
+        }
+        else {
+
+            if (index == 0) {
+
+                if ((checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5))) {
+                    if (checkNearEmpty(index + 6)) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index + 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 1) || (index == 2) || (index == 3)) {
+
+                if ((checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index + 4)) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+
+            }
+
+            if (index == 4) {
+
+                if ((checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if (checkNearEmpty(index + 4)) {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 5) || (index == 10)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 4)) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+
+                }
+                else {
+                    if ((checkNearConstraint(dice,index - 5)) &&
+                            (checkNearConstraint(dice,index + 1)) &&
+                            (checkNearConstraint(dice,index + 5)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 6) || (index == 7) || (index == 8) || (index == 11) || (index == 12) || (index == 13)) {
+
+                if ((checkNearEmpty(index - 5 )) &&
+                        (checkNearEmpty(index - 1 )) &&
+                        (checkNearEmpty(index + 1 )) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 6)) &&
+                            (checkNearEmpty(index - 4)) &&
+                            (checkNearEmpty(index + 4 )) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice,index - 5)) &&
+                            (checkNearConstraint(dice,index - 1)) &&
+                            (checkNearConstraint(dice,index + 1)) &&
+                            (checkNearConstraint(dice,index + 5))) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 9) || (index == 14)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 6)) &&
+                            (checkNearEmpty(index + 4))) {
+                        throw  new InvalidMoveException("Invalid position");
+
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ){
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if (index == 15) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index + 1)) ) {
+                    if (checkNearEmpty(index - 4 )) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index + 1)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 16) || (index == 17) || (index == 18)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 1)) ) {
+                    if ((checkNearEmpty(index - 6 )) &&
+                            (checkNearEmpty(index - 4)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 1)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if (index == 19) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) ) {
+                    if (checkNearEmpty(index - 6 )) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) ) {
+                        patternCard.putDiceEglomise(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+        }
+    }
+
+    public void putDiceOnPatternCopper(Dice dice, int index, PatternCard patternCard) throws InvalidMoveException {
+
+        if (isPatternEmpty(patternCard)) {
+            if (checkFirstDice(index)) {
+                patternCard.putDiceCopper(dice, index);
+            }
+            else {
+                throw  new InvalidMoveException("Invalid initial position");
+            }
+        }
+        else {
+
+            if (index == 0) {
+
+                if ((checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5))) {
+                    if (checkNearEmpty(index + 6)) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index + 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 1) || (index == 2) || (index == 3)) {
+
+                if ((checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index + 4)) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+
+            }
+
+            if (index == 4) {
+
+                if ((checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if (checkNearEmpty(index + 4)) {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 5) || (index == 10)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index + 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 4)) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+
+                }
+                else {
+                    if ((checkNearConstraint(dice,index - 5)) &&
+                            (checkNearConstraint(dice,index + 1)) &&
+                            (checkNearConstraint(dice,index + 5)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 6) || (index == 7) || (index == 8) || (index == 11) || (index == 12) || (index == 13)) {
+
+                if ((checkNearEmpty(index - 5 )) &&
+                        (checkNearEmpty(index - 1 )) &&
+                        (checkNearEmpty(index + 1 )) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 6)) &&
+                            (checkNearEmpty(index - 4)) &&
+                            (checkNearEmpty(index + 4 )) &&
+                            (checkNearEmpty(index + 6)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice,index - 5)) &&
+                            (checkNearConstraint(dice,index - 1)) &&
+                            (checkNearConstraint(dice,index + 1)) &&
+                            (checkNearConstraint(dice,index + 5))) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw  new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 9) || (index == 14)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 5)) ) {
+                    if ((checkNearEmpty(index - 6)) &&
+                            (checkNearEmpty(index + 4))) {
+                        throw  new InvalidMoveException("Invalid position");
+
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 5)) ){
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if (index == 15) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index + 1)) ) {
+                    if (checkNearEmpty(index - 4 )) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index + 1)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if ((index == 16) || (index == 17) || (index == 18)) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) &&
+                        (checkNearEmpty(index + 1)) ) {
+                    if ((checkNearEmpty(index - 6 )) &&
+                            (checkNearEmpty(index - 4)) ) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) &&
+                            (checkNearConstraint(dice, index + 1)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+            if (index == 19) {
+
+                if ((checkNearEmpty(index - 5)) &&
+                        (checkNearEmpty(index - 1)) ) {
+                    if (checkNearEmpty(index - 6 )) {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                    else {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                }
+                else {
+                    if ((checkNearConstraint(dice, index - 5)) &&
+                            (checkNearConstraint(dice, index - 1)) ) {
+                        patternCard.putDiceCopper(dice, index);
+                    }
+                    else {
+                        throw new InvalidMoveException("Invalid position");
+                    }
+                }
+            }
+
+        }
+    }
 
 
-     // check if the constraint of the near dice are respected
+    // check if the constraint of the near dice are respected
      private boolean checkNearConstraint(Dice dice, int index) {
 
          GlassBox box = pattern.get(index);

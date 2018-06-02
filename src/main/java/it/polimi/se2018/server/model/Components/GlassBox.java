@@ -126,6 +126,83 @@ public class GlassBox implements Serializable {
         else return false;
     }
 
+    public boolean isBoxValidEglomise(Dice dice)
+    {
+        if (isBoxEmpty()) {
+
+            // si color no value case
+            if (this.constraintColor != null) {
+                if (this.constraintColor.equals(dice.getColor().toString())) {
+                    setDice(dice);
+                    return true;
+                }
+                else {
+                    setDice(dice);
+                    return true;
+                }
+            }
+            // no color si value case
+            else {
+                if (this.constraintValue != DEFAULT) {
+                    if (this.constraintValue == dice.getValue()) {
+                        setDice(dice);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                // value = 0 e color = null case
+                else {
+                    setDice(dice);
+                    return true;
+
+                }
+            }
+        }
+        // box full case
+        else return false;
+    }
+
+    public boolean isBoxValidCopper(Dice dice)
+    {
+        if (isBoxEmpty()) {
+
+            // si color no value case
+            if (this.constraintColor != null) {
+                if (this.constraintColor.equals(dice.getColor().toString())) {
+                    setDice(dice);
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            // no color si value case
+            else {
+                if (this.constraintValue != DEFAULT) {
+                    if (this.constraintValue == dice.getValue()) {
+                        setDice(dice);
+                        return true;
+                    }
+                    else {
+                        setDice(dice);
+                        return true;
+                    }
+                }
+                // value = 0 e color = null case
+                else {
+                    setDice(dice);
+                    return true;
+                }
+            }
+        }
+        // box full case
+        else return false;
+    }
+
+
+
     @Override
     public String toString() {
 
