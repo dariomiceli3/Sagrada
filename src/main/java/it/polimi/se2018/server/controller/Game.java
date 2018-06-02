@@ -8,6 +8,9 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.RollDraftPoolEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartRoundEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartTurnEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +19,13 @@ import java.util.Observer;
 
 public class Game implements Observer {
 
+    private static final int START = 0;
     private Model model;
     private List<Player> playerList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
+    private static int turn = START;
+    private static int round = START;
     // add timer
 
     public Game(List<VirtualView> viewList) {
@@ -79,7 +85,6 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
-            setTokensModel(virtualView);
         }
 
 
@@ -117,14 +122,18 @@ public class Game implements Observer {
 
         model.setPatternAndNotify(view.getPlayerID(), pattern);
 
+        setTokensModel(view);
+
         if(model.getNumberPlayer() == (getViewGame().size())){
-            startRound();
+            startTurn();
         }
+
     }
 
     protected void setTokensModel(VirtualView view) {
 
         model.setTokenAndNotify(view.getPlayerID());
+
 
     }
 
@@ -152,8 +161,32 @@ public class Game implements Observer {
 
     }
 
-    private void startRound(){
+    private void startTurn(){
+        if(turn == 0){
+            for (VirtualView view : viewGame) {
+                view.sendEvent(new StartRoundEvent(round));
+                //view.sendEvent(new StartTurnEvent(setup.calculatePlayerTurn(turn, viewGame.size())));
+                //view.sendEvent(new RollDraftPoolEvent(setup.calculatePlayerTurn(turn, viewGame.size())));
+
+            }
+
+        }
+    }
+
+    private void Move(){
 
     }
 
+    private void Tool(){
+
+    }
+
+    private void endRound(){
+
+
+    }
+
+    private void endMatch(){
+
+    }
 }

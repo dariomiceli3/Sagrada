@@ -139,10 +139,11 @@ public class CliView extends View implements Runnable {
         System.out.println("This your number of favor tokens available: " + tokensNumber);
     }
 
-    /*@Override
-    public void setPatternCard(PatternCard patternCard) {
+    @Override
+    public void showCurrentRound(int round) {
 
-    }*/
+        System.out.println("Round " + round + "is started");
+    }
 
 
 

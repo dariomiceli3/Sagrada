@@ -120,6 +120,16 @@ public class GameSetup {
         }else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
+    protected int calculatePlayerTurn(int turn, int numberOfPlayers){
+        if(turn > (numberOfPlayers-1) && turn < ((numberOfPlayers*2)-1)){
+            return (turn - ((2*(turn-numberOfPlayers-1))-1));
+        }else if(turn == ((numberOfPlayers*2)-1)){
+            return 0;
+        }else {
+            return turn;
+        }
+    }
+
 
 
 

@@ -8,6 +8,7 @@ import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartRoundEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.io.IOException;
@@ -144,6 +145,11 @@ public class SocketHandler implements ClientInterface, Runnable {
             if ((view.getPlayerID()) == ((PlayerTokensUpdateEvent) event).getID()) {
                 view.showTokens(((PlayerTokensUpdateEvent) event).getTokensNumber());
             }
+        }
+
+        else if (event instanceof StartRoundEvent) {
+
+            view.showCurrentRound(((StartRoundEvent) event).getRound());
         }
 
         else {
