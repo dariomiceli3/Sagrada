@@ -6,9 +6,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartRoundEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.io.IOException;
@@ -150,6 +148,24 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof StartRoundEvent) {
 
             view.showCurrentRound(((StartRoundEvent) event).getRound());
+        }
+
+        else if (event instanceof StartTurnEvent) {
+
+            if ((view.getPlayerID()) == ((StartTurnEvent) event).getID()) {
+                view.showCurrentTurn();
+            }
+
+            else {
+                view.showOtherCurrentTurn(((StartTurnEvent) event).getName());
+            }
+        }
+
+        else if (event instanceof RollDraftPoolEvent) {
+
+            if ((view.getPlayerID()) == ((RollDraftPoolEvent) event).getId()) {
+                view.showRollCommand();
+            }
         }
 
         else {

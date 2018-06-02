@@ -19,12 +19,13 @@ import java.util.Observer;
 
 public class Game implements Observer {
 
-    private static final int START = 0;
+    private static final int STARTTURN = 0;
+    private static final int START = 1;
     private Model model;
     private List<Player> playerList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
-    private static int turn = START;
+    private static int turn = STARTTURN;
     private static int round = START;
     // add timer
 
@@ -165,8 +166,9 @@ public class Game implements Observer {
         if(turn == 0){
             for (VirtualView view : viewGame) {
                 view.sendEvent(new StartRoundEvent(round));
-                //view.sendEvent(new StartTurnEvent(setup.calculatePlayerTurn(turn, viewGame.size())));
-                //view.sendEvent(new RollDraftPoolEvent(setup.calculatePlayerTurn(turn, viewGame.size())));
+                int currID = setup.calculatePlayerTurn(turn, viewGame.size());
+                view.sendEvent(new StartTurnEvent(currID, this.model.getPlayerFromID(currID).getPlayerName()));
+                view.sendEvent(new RollDraftPoolEvent(setup.calculatePlayerTurn(turn, viewGame.size())));
 
             }
 

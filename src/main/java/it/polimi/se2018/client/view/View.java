@@ -71,6 +71,12 @@ public abstract class View implements Runnable {
 
     public abstract void showCurrentRound(int round);
 
+    public abstract void showCurrentTurn();
+
+    public abstract void showOtherCurrentTurn(String username);
+
+    public abstract void showRollCommand();
+
     //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo

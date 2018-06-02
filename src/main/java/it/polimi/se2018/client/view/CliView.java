@@ -142,11 +142,31 @@ public class CliView extends View implements Runnable {
     @Override
     public void showCurrentRound(int round) {
 
-        System.out.println("Round " + round + "is started");
+        System.out.println("Round " + round + " is started");
     }
 
+    @Override
+    public void showCurrentTurn() {
+
+        System.out.println("It's your turn");
+    }
+
+    @Override
+    public void showOtherCurrentTurn(String username) {
+
+        System.out.println("It's " + username + "'s turn");
+
+    }
+
+    @Override
+    public void showRollCommand() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write the command ROLL to casually roll the draft pool");
+        String command = scanner.nextLine();
 
 
+    }
 }
 
 
