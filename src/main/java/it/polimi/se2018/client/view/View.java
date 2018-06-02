@@ -67,6 +67,8 @@ public abstract class View implements Runnable {
 
     public abstract void showPattern(PatternCard patternCard);
 
+    public abstract void showTokens(int tokensNumber);
+
     //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo

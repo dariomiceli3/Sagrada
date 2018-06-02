@@ -79,6 +79,7 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
+            setTokensModel(virtualView);
         }
 
 
@@ -119,6 +120,12 @@ public class Game implements Observer {
         if(model.getNumberPlayer() == (getViewGame().size())){
             startRound();
         }
+    }
+
+    protected void setTokensModel(VirtualView view) {
+
+        model.setTokenAndNotify(view.getPlayerID());
+
     }
 
 

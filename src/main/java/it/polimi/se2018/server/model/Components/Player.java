@@ -133,6 +133,15 @@ public class Player {
         return privatePoints;
     }
 
+    public int getTokensPlay() {
+        return this.getPattern().getDifficulty();
+    }
+
+    public void setTokensPlay(int tokensNumber) {
+        this.tokensNumber = tokensNumber;
+    }
+
+
     @Override
     public String toString() {
 
@@ -143,6 +152,11 @@ public class Player {
                 "Player Tokens: " + getTokensNumber();
 
 
+    }
+
+    public String toStringTokens() {
+
+        return "Player Tokens" + this.getTokensNumber();
     }
 
 }

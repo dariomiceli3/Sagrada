@@ -139,6 +139,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof PlayerTokensUpdateEvent) {
+
+            if ((view.getPlayerID()) == ((PlayerTokensUpdateEvent) event).getID()) {
+                view.showTokens(((PlayerTokensUpdateEvent) event).getTokensNumber());
+            }
+        }
+
         else {
             System.out.println("Not understood the message");
         }

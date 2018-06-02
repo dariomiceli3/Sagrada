@@ -4,10 +4,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Events.EventsObservable;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerNameUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPatternUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPrivateUpdateEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PublicDrawEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +120,14 @@ public class Model extends Observable {
         getPlayerFromID(ID).setPattern(pattern);
         setChanged();
         notifyObservers(new PlayerPatternUpdateEvent(ID, getPlayerFromID(ID).getPattern()));
+    }
+
+    public void setTokenAndNotify(int ID) {
+
+        Player player = getPlayerFromID(ID);
+        player.setTokensNumber(player.getPattern().getDifficulty());
+        setChanged();
+        notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
     }
 
 
