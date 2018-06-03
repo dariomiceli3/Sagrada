@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.Event;
 
@@ -241,6 +242,26 @@ public class CliView extends View implements Runnable {
         System.out.println("End of the round");
         System.out.println(roundTracker.toString());
 
+    }
+
+    @Override
+    public void showFinalRank(List<Player> playerList) {
+
+        System.out.println("Final Rank:");
+        System.out.println(playerList.toString());
+
+    }
+
+    @Override
+    public void showWinner() {
+
+        System.out.println("You win !!!!!!!!!");
+    }
+
+    @Override
+    public void showLosers() {
+
+        System.out.println("You lose maaaan!");
     }
 }
 

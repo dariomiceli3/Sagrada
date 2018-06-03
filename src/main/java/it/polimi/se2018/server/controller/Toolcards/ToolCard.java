@@ -2,7 +2,9 @@ package it.polimi.se2018.server.controller.Toolcards;
 
 import it.polimi.se2018.server.model.Components.DiceColor;
 
-public class ToolCard {
+import java.io.Serializable;
+
+public class ToolCard implements Serializable {
     private String name;
     private DiceColor color;
 
@@ -11,10 +13,13 @@ public class ToolCard {
         this.color = color;
     }
 
-    public DiceColor getCOLOR() {
+    public DiceColor getColor() {
         return color;
     }
 
+    public String getName() {
+        return name;
+    }
 
 
 }

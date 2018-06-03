@@ -203,6 +203,20 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof PlayerPointsUpdateEvent) {
+
+            view.showFinalRank(((PlayerPointsUpdateEvent) event).getPlayerList());
+        }
+
+        else if (event instanceof WinnerEvent) {
+
+            if ((view.getPlayerID()) == ((WinnerEvent) event).getID()) {
+                view.showWinner();
+            } else {
+                view.showLosers();
+            }
+        }
+
         else {
             System.out.println("Not understood the message");
         }
