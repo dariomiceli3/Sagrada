@@ -3,10 +3,7 @@ package it.polimi.se2018.client.network.socket;
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerMoveEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
@@ -249,5 +246,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setMoveToServer(int indexPool, int indexPattern) {
         sendEvent(new PlayerMoveEvent(indexPool, indexPattern));
+    }
+
+    @Override
+    public void setStartToolToServer() {
+        sendEvent(new PlayerStartToolEvent());
     }
 }

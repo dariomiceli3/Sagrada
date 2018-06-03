@@ -17,5 +17,6 @@ public interface ClientInterface extends Remote {
 
     public void setMoveToServer(int indexPool, int indexPattern) throws RemoteException;
 
+    public void setStartToolToServer();
 
 }

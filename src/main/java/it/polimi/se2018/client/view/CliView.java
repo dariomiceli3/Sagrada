@@ -228,6 +228,8 @@ public class CliView extends View implements Runnable {
 
         if (response.equalsIgnoreCase("no")) {
 
+            super.getConnection().setStartToolToServer();
+
         }
 
     }
