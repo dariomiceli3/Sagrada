@@ -130,13 +130,21 @@ public class TestGlassBox {
 
         glassBox.setConstraintColor("red");
         glassBox1.setConstraintColor("purple");
-        glassBox2.setConstraintValue(2);
+        glassBox2.setConstraintValue(5);
         glassBox3.setConstraintValue(6);
 
+        //System.out.println(glassBox.toString());
+        //System.out.println(glassBox1.toString());
+        //System.out.println(glassBox2.toString());
+        //System.out.println(glassBox3.toString());
+
+        Dice dice = new Dice(6, DiceColor.GREEN);
+        glassBox.setDice(dice);
+        Dice dice2 = new Dice(5, DiceColor.YELLOW);
+        glassBox2.setDice(dice2);
+
         System.out.println(glassBox.toString());
-        System.out.println(glassBox1.toString());
         System.out.println(glassBox2.toString());
-        System.out.println(glassBox3.toString());
 
     }
 }

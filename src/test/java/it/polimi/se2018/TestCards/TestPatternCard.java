@@ -378,7 +378,7 @@ public class TestPatternCard {
     }
 
     @Test
-    public void testToString() throws IOException {
+    public void testToString() throws IOException, InvalidMoveException {
 
         System.setProperty("jansi.passthrough", "true");
 
@@ -387,8 +387,12 @@ public class TestPatternCard {
         ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
         patternCard = patternCardArrayList.get(7);
 
-        System.out.println(patternCard.toString());
+        Dice dice = new Dice(4, DiceColor.RED);
+        Dice dice2 = new Dice(5, DiceColor.YELLOW);
+        patternCard.putDiceOnPattern(dice, 1, patternCard);
+        patternCard.putDiceOnPattern(dice2, 2, patternCard);
 
+        System.out.println(patternCard.toString());
 
 
 

@@ -206,54 +206,186 @@ public class GlassBox implements Serializable {
     @Override
     public String toString() {
 
-        if (this.constraintColor != null) {
+        if (isBoxEmpty()) {
 
-            if (this.constraintColor.equals("red")) {
-
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u25FC").reset());
-
-            } else if (this.constraintColor.equals("green")) {
-
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u25FC").reset());
-
-            } else if (this.constraintColor.equals("yellow")) {
-
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u25FC").reset());
-
-            } else if (this.constraintColor.equals("blue")) {
-
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u25FC").reset());
-
-            } else {
-
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u25FC").reset());
+            if (this.constraintColor != null) {
+                if (this.constraintColor.equals("red")) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u25FC").reset());
+                } else if (this.constraintColor.equals("green")) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u25FC").reset());
+                } else if (this.constraintColor.equals("yellow")) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u25FC").reset());
+                } else if (this.constraintColor.equals("blue")) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u25FC").reset());
+                } else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u25FC").reset());
+                }
 
             }
 
-
-        }
-
-        else if (this.constraintValue != DEFAULT) {
-
-            if (this.constraintValue == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2680").reset());
-            } else if (this.constraintValue == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2681").reset());
-            } else if (this.constraintValue == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2682").reset());
-            } else if (this.constraintValue == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2683").reset());
-            } else if (this.constraintValue == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2684").reset());
+            else if (this.constraintValue != DEFAULT) {
+                if (this.constraintValue == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2680").reset());
+                } else if (this.constraintValue == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2681").reset());
+                } else if (this.constraintValue == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2682").reset());
+                } else if (this.constraintValue == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2683").reset());
+                } else if (this.constraintValue == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2684").reset());
+                } else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2685").reset());
+                }
             } else {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u25FC").reset());
+
             }
         }
 
         else {
 
-            return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u25FC").reset());
+            if (this.getDice().getColor().toString().equals("red")) {
 
+                if (this.getDice().getValue() == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2680").reset());
+                }
+
+                else if (this.getDice().getValue() == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2681").reset());
+                }
+
+                else if (this.getDice().getValue() == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2682").reset());
+                }
+
+                else if (this.getDice().getValue() == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2683").reset());
+                }
+
+                else if (this.getDice().getValue() == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2684").reset());
+                }
+
+                else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2685").reset());
+                }
+
+
+
+            }
+
+            else if (this.getDice().getColor().toString().equals("yellow")) {
+
+                if (this.getDice().getValue() == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2680").reset());
+                }
+
+                else if (this.getDice().getValue() == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2681").reset());
+                }
+
+                else if (this.getDice().getValue() == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2682").reset());
+                }
+
+                else if (this.getDice().getValue() == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2683").reset());
+                }
+
+                else if (this.getDice().getValue() == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2684").reset());
+                }
+
+                else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2685").reset());
+                }
+
+            }
+
+            else if (this.getDice().getColor().toString().equalsIgnoreCase("green")) {
+
+                if (this.getDice().getValue() == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2680").reset());
+                }
+
+                else if (this.getDice().getValue() == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2681").reset());
+                }
+
+                else if (this.getDice().getValue() == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2682").reset());
+                }
+
+                else if (this.getDice().getValue() == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2683").reset());
+                }
+
+                else if (this.getDice().getValue() == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2684").reset());
+                }
+
+                else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2685").reset());
+                }
+
+            }
+
+            else if (this.getDice().getColor().toString().equalsIgnoreCase("blue")) {
+
+                if (this.getDice().getValue() == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2680").reset());
+                }
+
+                else if (this.getDice().getValue() == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2681").reset());
+                }
+
+                else if (this.getDice().getValue() == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2682").reset());
+                }
+
+                else if (this.getDice().getValue() == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2683").reset());
+                }
+
+                else if (this.getDice().getValue() == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2684").reset());
+                }
+
+                else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2685").reset());
+                }
+
+            }
+
+            // purple case
+            else  {
+
+                if (this.getDice().getValue() == 1) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2680").reset());
+                }
+
+                else if (this.getDice().getValue() == 2) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2681").reset());
+                }
+
+                else if (this.getDice().getValue() == 3) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2682").reset());
+                }
+
+                else if (this.getDice().getValue() == 4) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2683").reset());
+                }
+
+                else if (this.getDice().getValue() == 5) {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2684").reset());
+                }
+
+                else {
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2685").reset());
+                }
+            }
 
         }
     }
