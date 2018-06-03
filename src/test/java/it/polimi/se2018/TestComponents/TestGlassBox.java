@@ -84,6 +84,31 @@ public class TestGlassBox {
         assertEquals(false, glassBox3.isBoxValid(dice1));
     }
 
+
+
+    @Test
+    public void testIsBoxValidEglomise() {
+        GlassBox glassBox = new GlassBox("red");
+        GlassBox glassBox1 = new GlassBox(3);
+        GlassBox glassBox2 = new GlassBox();
+        GlassBox glassBox3 = new GlassBox();
+        Dice dice = new Dice(3, DiceColor.PURPLE);
+        Dice dice1 = new Dice(4, DiceColor.RED);
+
+        glassBox3.setDice(dice);
+
+
+
+        assertEquals(true, glassBox.isBoxValidEglomise(dice));
+        assertEquals(false, glassBox.isBoxValid(dice1));
+        assertEquals(false, glassBox1.isBoxValid(dice1));
+        assertEquals(true, glassBox1.isBoxValid(dice));
+        assertEquals(true, glassBox2.isBoxValid(dice));
+        glassBox2.unsetDice();
+        assertEquals(true, glassBox2.isBoxValid(dice1));
+        assertEquals(false, glassBox3.isBoxValid(dice1));
+    }
+
     @Test
     public void testSetter() {
         GlassBox glassBox = new GlassBox();

@@ -1,6 +1,6 @@
 package it.polimi.se2018.server.controller.Toolcards;
 
-import com.sun.xml.internal.bind.v2.TODO;
+
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
 
