@@ -138,7 +138,7 @@ public class GameSetup {
             return numberOfPlayers-1;
         }
         else {
-            return (2 * numberOfPlayers) - (turn - 1);
+            return (2 * numberOfPlayers) - (turn + 1);
         }
     }
 

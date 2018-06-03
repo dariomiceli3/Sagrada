@@ -4,12 +4,10 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerMoveEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 
 import java.util.ArrayList;
@@ -104,6 +102,11 @@ public class Game implements Observer {
                 startMove(virtualView);
             }
         }
+        if (arg instanceof PlayerStartToolEvent){
+
+            turn++; //non presente
+            startTurn(); //è startTool(view);
+        }
 
 
 
@@ -166,6 +169,13 @@ public class Game implements Observer {
     protected void setMoveModel(VirtualView view, int indexPool, int indexPattern) throws InvalidMoveException {
 
         model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
+        turn++;
+        startTurn(); //in relatà sarebbe startTool(view)
+    }
+
+    protected void setEndRoundModel(int round){
+
+        model.setEndRoundAndNotify(round);
     }
 
 
@@ -204,6 +214,25 @@ public class Game implements Observer {
             }
 
         }
+        else if (turn > 0 && turn < (viewGame.size()*2)){
+            for (VirtualView view : viewGame) {
+
+                //System.out.println(turn);
+                this.position = setup.calculatePlayerTurn(turn, viewGame.size());
+                //System.out.println(position);
+                this.currID = model.getPlayerList().get(position).getPlayerID();
+                //System.out.println(currID);
+                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                if (currID == view.getPlayerID()) {
+                    startMove(view);
+                }
+
+            }
+        }else {
+
+            endRound();
+        }
+
 
     }
 
@@ -213,13 +242,18 @@ public class Game implements Observer {
 
     }
 
-    //private void startTool(VirtualView view){
+    /*private void startTool(VirtualView view){
 
-       // view.sendEvent(new StartToolEvent(view.getPlayerID()));
-    //}
+       view.sendEvent(new StartToolEvent(view.getPlayerID()));
+    }
 
+
+    fa turn = 0, round++, e se round >10, allora
+    chiama endMatch; gestisce inoltre tutti gli eventi della fine del round */
     private void endRound(){
 
+
+        System.out.println("fine round dio cane");
 
     }
 

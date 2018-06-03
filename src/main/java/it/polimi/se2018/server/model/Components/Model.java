@@ -140,14 +140,24 @@ public class Model extends Observable {
     }
 
     public void setMoveAndNotify(int ID, int indexPool, int indexPattern) throws InvalidMoveException {
-        System.out.println(indexPattern);
+
         getPlayerFromID(ID).getPattern().putDiceOnPattern(draftPool.removeDice(indexPool), indexPattern, getPlayerFromID(ID).getPattern());
         setChanged();
         notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
-        //setChanged();
-        //notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+        setChanged();
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+    }
+
+    public void setEndRoundAndNotify(){
+
+        roundTracker.setTracker(draftPool.cleanListDice());
+        setChanged();
+        notifyObservers(new RoundTrackerUpdateEvent(this.getRoundTracker()));
+        setChanged();
+        notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
+
     }
 
 
