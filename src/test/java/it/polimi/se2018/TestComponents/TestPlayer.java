@@ -28,7 +28,7 @@ public class TestPlayer {
     public void testSet() {
         Player player = new Player();
         PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.BLUE);
-        int tokens = 4;
+        int tokens = 6;
         int finalPoints = 110;
         int privatePoints = 34;
         PatternCard pattern = new PatternCard();
@@ -48,14 +48,16 @@ public class TestPlayer {
         player.setPlayerName("Dario");
         player.setPlayerColor(PlayerColour.RED);
 
+
         assertEquals(pattern, player.getPattern());
         assertEquals(privateCard, player.getPrivate());
-        assertEquals(tokens, player.getTokensNumber());
+        assertEquals(6, player.getTokensNumber());
         assertEquals(finalPoints, player.getFinalPoints());
         assertEquals(privatePoints, player.getPrivatePoints());
         assertEquals(2, player.getPlayerID());
         assertEquals("Dario", player.getPlayerName());
         assertEquals("RED", player.getColour().toString());
+        assertEquals("Player Tokens6",player.toStringTokens());
     }
 
     @Test

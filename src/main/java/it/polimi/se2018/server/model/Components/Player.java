@@ -133,13 +133,9 @@ public class Player {
         return privatePoints;
     }
 
-    public int getTokensPlay() {
-        return this.getPattern().getDifficulty();
-    }
 
-    public void setTokensPlay(int tokensNumber) {
-        this.tokensNumber = tokensNumber;
-    }
+
+
 
 
     @Override
