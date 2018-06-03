@@ -4,16 +4,17 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 
 public class ToolCard {
     private String name;
-    private DiceColor COLOR;
+    private DiceColor color;
 
     public ToolCard (String name, DiceColor color) {
         this.name = name;
-        this.COLOR = color;
+        this.color = color;
     }
 
     public DiceColor getCOLOR() {
-        return COLOR;
+        return color;
     }
+
 
 
 }

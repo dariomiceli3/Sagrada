@@ -132,14 +132,8 @@ public class GlassBox implements Serializable {
 
             // si color no value case
             if (this.constraintColor != null) {
-                if (this.constraintColor.equals(dice.getColor().toString())) {
                     setDice(dice);
                     return true;
-                }
-                else {
-                    setDice(dice);
-                    return true;
-                }
             }
             // no color si value case
             else {

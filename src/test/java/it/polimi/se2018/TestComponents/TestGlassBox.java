@@ -100,13 +100,39 @@ public class TestGlassBox {
 
 
         assertEquals(true, glassBox.isBoxValidEglomise(dice));
-        assertEquals(false, glassBox.isBoxValid(dice1));
-        assertEquals(false, glassBox1.isBoxValid(dice1));
-        assertEquals(true, glassBox1.isBoxValid(dice));
-        assertEquals(true, glassBox2.isBoxValid(dice));
+        glassBox.unsetDice();
+        assertEquals(true, glassBox.isBoxValidEglomise(dice1));
+
+        assertEquals(false, glassBox1.isBoxValidEglomise(dice1));
+        assertEquals(true, glassBox1.isBoxValidEglomise(dice));
+        assertEquals(true, glassBox2.isBoxValidEglomise(dice));
         glassBox2.unsetDice();
-        assertEquals(true, glassBox2.isBoxValid(dice1));
-        assertEquals(false, glassBox3.isBoxValid(dice1));
+        assertEquals(true, glassBox2.isBoxValidEglomise(dice1));
+        assertEquals(false, glassBox3.isBoxValidEglomise(dice1));
+    }
+
+    @Test
+    public void testIsBoxValidCopper() {
+        GlassBox glassBox = new GlassBox("red");
+        GlassBox glassBox1 = new GlassBox(3);
+        GlassBox glassBox2 = new GlassBox();
+        GlassBox glassBox3 = new GlassBox();
+        Dice dice = new Dice(3, DiceColor.PURPLE);
+        Dice dice1 = new Dice(4, DiceColor.RED);
+
+        glassBox3.setDice(dice);
+
+
+
+        assertEquals(false, glassBox.isBoxValidCopper(dice));
+        assertEquals(true, glassBox.isBoxValidCopper(dice1));
+        assertEquals(true, glassBox1.isBoxValidCopper(dice1));
+        glassBox1.unsetDice();
+        assertEquals(true, glassBox1.isBoxValidCopper(dice));
+        assertEquals(true, glassBox2.isBoxValidCopper(dice));
+        glassBox2.unsetDice();
+        assertEquals(true, glassBox2.isBoxValidCopper(dice1));
+        assertEquals(false, glassBox3.isBoxValidCopper(dice1));
     }
 
     @Test

@@ -10,7 +10,7 @@ public class UseDiceEffect {
 
     public Dice grozingPliersEffect(Dice dice) throws InvalidMoveException {
         int value = dice.getValue();
-        if (value != 1 && value != 6) {
+        if (value != 6) {
             int i = value + 1;
             dice.setValue(i);
         }
@@ -40,7 +40,7 @@ public class UseDiceEffect {
         dice.setValue(newValue);
         return dice;
     }
-
+    //TODO assumo che i due dadi mi vengano dati da RoundTracker e DraftPool e il metodo li restituisce nell'ordine inverso
     public ArrayList<Dice> lensCutterEffect(Dice diceFromRoundTracker, Dice diceFromDraftPool) {
         ArrayList<Dice> diceArrayList = new ArrayList<>();
         diceArrayList.add(diceFromDraftPool);
