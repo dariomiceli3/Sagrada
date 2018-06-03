@@ -13,8 +13,8 @@ public class RoundManager  {
     private final static int VPOINTS = 3;
 
 
-    public ArrayList<Integer> calculatePrivate(ArrayList<Player> playerArrayList) {
-        ArrayList<Integer> results = new ArrayList<>();
+    private List<Integer> calculatePrivate(List<Player> playerArrayList) {
+        List<Integer> results = new ArrayList<>();
 
         for (int i = 0; i < playerArrayList.size(); i++) {
             int result;
@@ -26,8 +26,8 @@ public class RoundManager  {
 
     }
 
-    public ArrayList<Integer> calculateTokens(ArrayList<Player> playerArrayList) {
-        ArrayList<Integer> results = new ArrayList<>();
+    private List<Integer> calculateTokens(List<Player> playerArrayList) {
+        List<Integer> results = new ArrayList<>();
 
         for (int i = 0; i < playerArrayList.size(); i++) {
             int result;
@@ -38,9 +38,9 @@ public class RoundManager  {
 
     }
 
-    public ArrayList<Integer> calculateEmptyBox(ArrayList<Player> playerArrayList) {
+    private List<Integer> calculateEmptyBox(List<Player> playerArrayList) {
         PatternCard result;
-        ArrayList<Integer> results = new ArrayList<>();
+        List<Integer> results = new ArrayList<>();
 
         for (int i = 0; i < playerArrayList.size(); i++) {
             result = playerArrayList.get(i).getPattern();
@@ -59,8 +59,8 @@ public class RoundManager  {
 
     }
 
-    public ArrayList<Integer> calculatePublic(ArrayList<Player> playerArrayList, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList) {
-        ArrayList<Integer> results = new ArrayList<>();
+    private List<Integer> calculatePublic(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+        List<Integer> results = new ArrayList<>();
 
         for (int i = 0; i < playerArrayList.size(); i++) {
             PatternCard result;
@@ -77,11 +77,11 @@ public class RoundManager  {
 
     }
 
- public ArrayList<Player> calculatePoints (ArrayList<Player> playerArrayList, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList ) {
-        ArrayList<Integer> result1;
-        ArrayList<Integer> result2;
-        ArrayList<Integer> result3;
-        ArrayList<Integer> result4;
+ private List<Player> calculatePoints (List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList ) {
+        List<Integer> result1;
+        List<Integer> result2;
+        List<Integer> result3;
+        List<Integer> result4;
 
 
 
@@ -100,7 +100,7 @@ public class RoundManager  {
 
      }
         //TODO aggiungere ultima funzionalità dopo aver creato round
- public ArrayList<Player> checkPoints (ArrayList<Player> playerArrayList) {
+ private List<Player> checkPoints (List<Player> playerArrayList) {
         for (int k=0; k < playerArrayList.size(); k++) {
             for (int i = 0; i < playerArrayList.size() - 1; i++) {
                 if (playerArrayList.get(i).getFinalPoints() == playerArrayList.get(i + 1).getFinalPoints()) {
@@ -137,9 +137,9 @@ public class RoundManager  {
      return playerArrayList;
  }
 
- public ArrayList<Player> calculateWinner (ArrayList<Player> playerArrayList, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList) {
-        ArrayList<Player> unsortedPlayers;
-        ArrayList<Player> sortedPlayers;
+ protected List<Player> calculateWinner (List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+        List<Player> unsortedPlayers;
+        List<Player> sortedPlayers;
 
 
         unsortedPlayers = calculatePoints( playerArrayList, publicObjectiveCardArrayList );
@@ -155,7 +155,7 @@ public class RoundManager  {
 
 
 
-    public int calculatePrivateSinglePlayer(Player player, ArrayList<PrivateObjectiveCard> privateObjectiveCards) {
+    public int calculatePrivateSinglePlayer(Player player, List<PrivateObjectiveCard> privateObjectiveCards) {
         int results=0;
 
         for (int i = 0; i <privateObjectiveCards.size(); i++) {
@@ -169,7 +169,7 @@ public class RoundManager  {
 
     }
 
-    public int calculatePublicSinglePlayer(Player player, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList) {
+    public int calculatePublicSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
         int results=0;
 
             for (int j = 0; j < publicObjectiveCardArrayList.size(); j++) {
@@ -208,7 +208,7 @@ public class RoundManager  {
         return finalSum;
     }
 
-    public int calculateWinnerSinglePlayer(Player player, ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList, ArrayList<PrivateObjectiveCard> privateObjectiveCardArrayList, RoundTracker roundTracker ){
+    public int calculateWinnerSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList, List<PrivateObjectiveCard> privateObjectiveCardArrayList, RoundTracker roundTracker ){
         int i = calculateEmptyBoxSinglePLayer(player);
         int j = calculatePrivateSinglePlayer(player, privateObjectiveCardArrayList);
         int k = calculatePublicSinglePlayer(player, publicObjectiveCardArrayList);

@@ -15,7 +15,7 @@ public class DraftPool implements Serializable {
     private static final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
-    private ArrayList<Dice> dicePlay;
+    private List<Dice> dicePlay;
 
     /**
      * Private Default class constructor
@@ -93,8 +93,15 @@ public class DraftPool implements Serializable {
     }
 
     //passare una copia della lista dei dadi della pool-------------------
-    public ArrayList<Dice> getDraftPool() {//clone necessaria
+    public List<Dice> getDraftPool() {//clone necessaria
         return dicePlay;
+    }
+
+    public void setDraftPool(List<Dice> diceList){
+        if(dicePlay.isEmpty()){
+            this.dicePlay = diceList;
+        }
+
     }
 
     /**
@@ -118,9 +125,9 @@ public class DraftPool implements Serializable {
      Get the list of dice present in the pool and clean the pool
      @return the list of dice present in the pool atm
      */
-    public ArrayList<Dice> cleanListDice() {
+    public List<Dice> cleanListDice() {
 
-        ArrayList<Dice> listDice = new ArrayList<>();
+        List<Dice> listDice = new ArrayList<>();
         Iterator<Dice> it = dicePlay.iterator();
         while (it.hasNext()) {
             listDice.add(it.next());
@@ -136,4 +143,3 @@ public class DraftPool implements Serializable {
     }
 
 }
-
