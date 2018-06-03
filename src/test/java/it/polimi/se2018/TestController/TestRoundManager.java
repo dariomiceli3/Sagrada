@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class TestRoundManager {
 
-    @Test
+    /* @Test
     public void testCalculatePrivate() {
         Player player = new Player();
         Player player1 = new Player();
@@ -572,7 +572,7 @@ public class TestRoundManager {
         assertEquals(19, j);
         assertEquals(4, k);*/
 
-        ArrayList<Dice> arrayList = new ArrayList<>();
+   /*     ArrayList<Dice> arrayList = new ArrayList<>();
         arrayList.add(dice);
        /* ArrayList<Dice> arrayList1 = new ArrayList<>();
         arrayList1.add(dice);
@@ -580,7 +580,7 @@ public class TestRoundManager {
         arrayList2.add(dice);
         //roundTracker.setTracker(arrayList);*/
 
-        roundTracker.setTracker(arrayList);
+     /*   roundTracker.setTracker(arrayList);
         //roundTracker.setTracker(arrayList1);
         //roundTracker.setTracker(arrayList2);
         //roundTracker.addDice(dice1, 0);
@@ -611,5 +611,5 @@ public class TestRoundManager {
 
 
 
-    }
+    } */
 }

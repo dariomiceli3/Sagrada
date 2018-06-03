@@ -19,7 +19,7 @@ public class Game implements Observer {
 
     private static final int STARTTURN = 0;
     private static final int START = 1;
-    private static final int END = 4;
+    private static final int END = 10;
     private Model model;
     private List<Player> playerList;
     private List<VirtualView> viewGame;
@@ -181,6 +181,11 @@ public class Game implements Observer {
         model.setEndRoundAndNotify();
     }
 
+    protected void setFinalPointsModel(List<Player> playerList){
+
+        model.setFinalPointsAndNotify(playerList);
+    }
+
 
 
     //---------------------------------logica applicativa---------------------------
@@ -273,10 +278,10 @@ public class Game implements Observer {
 
     private void endMatch(){
 
-       model.setPlayerList(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
-        for (VirtualView view : viewGame) {
-            view.sendEvent(new PlayerPointsEvent(view.getPlayerID(), model.getPlayerFromID(view.getPlayerID()).getFinalPoints()));
-            view.sendEvent(new PlayerFinalRank(model.getPlayerList()));
+        setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
+        for (VirtualView view : viewGame){
+            view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
         }
+
     }
 }

@@ -4,6 +4,8 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class RoundTracker: DP Singleton, the round tracker is the table used to keep track of the current round and the die or dice not used in each round
  * @author Salvatrore Fadda
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public class RoundTracker implements Serializable {
 
     //private static RoundTracker istanceRT;
-    private ArrayList<ArrayList<Dice>> listDice;
+    private List<List<Dice>> listDice;
 
 
 
@@ -33,7 +35,7 @@ public class RoundTracker implements Serializable {
      * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
      * @param listDice dice not used in the round
      */
-    public void setTracker(ArrayList<Dice> listDice){
+    public void setTracker(List<Dice> listDice){
         this.listDice.add(listDice);
     }
 
@@ -61,13 +63,13 @@ public class RoundTracker implements Serializable {
         } else throw new InvalidMoveException("Round ancora non giocato");
     }
 
-    public ArrayList<ArrayList<Dice>> getRoundTracker(){
+    public List<List<Dice>> getRoundTracker(){
         return listDice;
     }
 
     //restituisce una copia della lista di dadi del round indicato se gia giocato----------------
     //eccezioni e controlli ancora da gestire
-    public ArrayList<Dice> getRoundDice(int round){
+    public List<Dice> getRoundDice(int round){
         return listDice.get(round);
     }
 

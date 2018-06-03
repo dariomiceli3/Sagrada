@@ -4,12 +4,13 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 
 /**
  * Class Player: descive the player settings and own his privete objctive and pattern cards
  * @author Salvatrore Fadda
  */
-public class Player {
+public class Player implements Serializable {
     private String playerName;
     private int playerID;
     private PlayerColour colour;
@@ -153,6 +154,11 @@ public class Player {
     public String toStringTokens() {
 
         return "Player Tokens" + this.getTokensNumber();
+    }
+
+    public String toStringPoints(){
+
+        return "The player " + getPlayerName() + " totalized " + this.getFinalPoints() + " points" + "\n";
     }
 
 }

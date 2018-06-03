@@ -1,5 +1,6 @@
 package it.polimi.se2018.server.model.Components;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -158,6 +159,13 @@ public class Model extends Observable {
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
 
+    }
+
+    public void setFinalPointsAndNotify(List<Player> playerList){
+
+        setPlayerList(playerList);
+        setChanged();
+        notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList()));
     }
 
 

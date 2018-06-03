@@ -26,7 +26,7 @@ public class TestRoundTracker {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
-        ArrayList<Dice> list = draftPool.cleanListDice();
+        List<Dice> list = draftPool.cleanListDice();
 
         RoundTracker roundTracker = new RoundTracker();
         roundTracker.setTracker(list);
@@ -42,7 +42,7 @@ public class TestRoundTracker {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
-        ArrayList<Dice> list = draftPool.cleanListDice();
+        List<Dice> list = draftPool.cleanListDice();
         Dice dice = new Dice(3, DiceColor.PURPLE);
         Dice dice1 = new Dice(3, DiceColor.PURPLE);
         RoundTracker roundTracker = new RoundTracker();
@@ -58,7 +58,7 @@ public class TestRoundTracker {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
-        ArrayList<Dice> list = draftPool.cleanListDice();
+        List<Dice> list = draftPool.cleanListDice();
         RoundTracker roundTracker =new RoundTracker();
         roundTracker.setTracker(list);
         assertEquals(9, roundTracker.getRoundDice(0).size());
@@ -70,7 +70,7 @@ public class TestRoundTracker {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
-        ArrayList<Dice> list = draftPool.cleanListDice();
+        List<Dice> list = draftPool.cleanListDice();
 
         RoundTracker roundTracker = new RoundTracker();
         roundTracker.setTracker(list);
