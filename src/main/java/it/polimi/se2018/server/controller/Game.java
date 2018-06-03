@@ -19,6 +19,7 @@ public class Game implements Observer {
 
     private static final int STARTTURN = 0;
     private static final int START = 1;
+    private static final int END = 10;
     private Model model;
     private List<Player> playerList;
     private List<VirtualView> viewGame;
@@ -173,9 +174,9 @@ public class Game implements Observer {
         startTurn(); //in relatà sarebbe startTool(view)
     }
 
-    protected void setEndRoundModel(int round){
+    protected void setEndRoundModel(){
 
-        model.setEndRoundAndNotify(round);
+        model.setEndRoundAndNotify();
     }
 
 
@@ -252,12 +253,17 @@ public class Game implements Observer {
     chiama endMatch; gestisce inoltre tutti gli eventi della fine del round */
     private void endRound(){
 
-
-        System.out.println("fine round dio cane");
+        setEndRoundModel();
+        round++;
+        turn = 0;
+        if (round > END){
+            endMatch();
+        }
 
     }
 
     private void endMatch(){
 
+        System.out.println("Fine partita dio cane");
     }
 }
