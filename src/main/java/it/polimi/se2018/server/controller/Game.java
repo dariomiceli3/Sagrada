@@ -204,18 +204,21 @@ public class Game implements Observer {
     }
 
     private void startTurn(){
-        if(turn == 0){
+        if(turn == STARTTURN){
             for (VirtualView view : viewGame) {
                 view.sendEvent(new StartRoundEvent(round));
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                if(round > START){
+                    view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                }
                 view.sendEvent(new RollDraftPoolEvent(this.currID));
 
             }
 
         }
-        else if (turn > 0 && turn < (viewGame.size()*2)){
+        else if (turn > STARTTURN && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
                 //System.out.println(turn);
@@ -224,6 +227,7 @@ public class Game implements Observer {
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 //System.out.println(currID);
                 view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                 if (currID == view.getPlayerID()) {
                     startMove(view);
                 }
@@ -255,9 +259,12 @@ public class Game implements Observer {
 
         setEndRoundModel();
         round++;
-        turn = 0;
         if (round > END){
             endMatch();
+        }else {
+            turn = STARTTURN;
+            setup.changeBagger();
+            startTurn();
         }
 
     }

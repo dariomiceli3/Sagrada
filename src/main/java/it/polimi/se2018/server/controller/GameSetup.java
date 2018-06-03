@@ -142,6 +142,11 @@ public class GameSetup {
         }
     }
 
+    protected void changeBagger(){
+
+        game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
+    }
+
 
 
 

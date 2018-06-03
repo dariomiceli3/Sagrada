@@ -90,23 +90,9 @@ public abstract class View implements Runnable {
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
-    //public abstract void toStringEvent(Event event);
-
-    //public abstract void showGameStart(); //aggiungere attributo
-
     //public abstract void showGameEnd(); //aggiungere attributo
 
-
-
-
     //public abstract void showToolCards(); //aggiungere attributo
-
-
-    //public abstract void showRoundTracker();
-
-
-    //public abstract void showOthersPlayer();
-
 
 
 }

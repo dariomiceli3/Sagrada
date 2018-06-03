@@ -2,12 +2,13 @@ package it.polimi.se2018.server.model.Components;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * Class RoundTracker: DP Singleton, the round tracker is the table used to keep track of the current round and the die or dice not used in each round
  * @author Salvatrore Fadda
  */
-public class RoundTracker {
+public class RoundTracker implements Serializable {
 
     //private static RoundTracker istanceRT;
     private ArrayList<ArrayList<Dice>> listDice;

@@ -132,7 +132,7 @@ public class DraftPool implements Serializable {
 
     @Override
     public String toString() {
-        return "Draft Pool: \n" + dicePlay.toString();
+        return "Draft Pool: " + dicePlay.toString();
     }
 
 }
