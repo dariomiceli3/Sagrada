@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
@@ -87,6 +88,7 @@ public abstract class View implements Runnable {
 
     public abstract void showMove();
 
+    public abstract void showRoundTracker(RoundTracker roundTracker);
 
     //public abstract void toStringEvent(Event event);
 

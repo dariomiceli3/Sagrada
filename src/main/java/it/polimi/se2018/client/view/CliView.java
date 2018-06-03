@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
@@ -231,6 +232,14 @@ public class CliView extends View implements Runnable {
             super.getConnection().setStartToolToServer();
 
         }
+
+    }
+
+    @Override
+    public void showRoundTracker(RoundTracker roundTracker) {
+
+        System.out.println("End of the round");
+        System.out.println(roundTracker.toString());
 
     }
 }

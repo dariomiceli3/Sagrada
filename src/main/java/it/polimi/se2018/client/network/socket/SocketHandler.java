@@ -191,6 +191,11 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         }
 
+        else if (event instanceof RoundTrackerUpdateEvent) {
+
+            view.showRoundTracker(((RoundTrackerUpdateEvent) event).getRoundTracker());
+        }
+
         else {
             System.out.println("Not understood the message");
         }
