@@ -70,7 +70,7 @@ public class TestDraftPool {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4, diceBag);
         draftPool.createListDice();
-        draftPool.getDice();
+        draftPool.removeDice(0);
         assertEquals(8, draftPool.getNowNumber());
     }
 

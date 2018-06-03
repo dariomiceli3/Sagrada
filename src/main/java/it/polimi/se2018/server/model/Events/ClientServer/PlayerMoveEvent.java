@@ -11,7 +11,7 @@ public class PlayerMoveEvent implements Event {
 
     public PlayerMoveEvent(int indexPool, int indexPattern) {
         this.indexPool = indexPool;
-        this.indexPool = indexPattern;
+        this.indexPattern = indexPattern;
     }
 
     public int getIndexPattern() {

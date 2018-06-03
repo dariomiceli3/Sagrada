@@ -80,8 +80,8 @@ public class DraftPool implements Serializable {
      * Get a selected die from the pool and remove it from pool
      * @return the selected die
      */
-    public Dice getDice() {
-        return dicePlay.remove(DEFAULT);
+    public Dice removeDice(int a) {
+        return dicePlay.remove(a);
     }
 
     /**

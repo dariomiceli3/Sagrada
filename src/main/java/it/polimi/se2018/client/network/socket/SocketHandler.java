@@ -183,6 +183,17 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof PatternUpdateEvent) {
+
+            if((view.getPlayerID()) == ((PatternUpdateEvent) event).getID()) {
+                view.showPatternUpdate(((PatternUpdateEvent) event).getPatternCard());
+            }
+            else {
+                view.showOtherPattern(((PatternUpdateEvent) event).getPatternCard(), ((PatternUpdateEvent) event).getName());
+            }
+
+        }
+
         else {
             System.out.println("Not understood the message");
         }

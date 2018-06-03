@@ -69,6 +69,10 @@ public abstract class View implements Runnable {
 
     public abstract void showPattern(PatternCard patternCard);
 
+    public abstract void showOtherPattern(PatternCard patternCard, String playerName);
+
+    public abstract void showPatternUpdate(PatternCard patternCard);
+
     public abstract void showTokens(int tokensNumber);
 
     public abstract void showCurrentRound(int round);

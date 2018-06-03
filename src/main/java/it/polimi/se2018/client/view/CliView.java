@@ -137,6 +137,22 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
+    public void showOtherPattern(PatternCard patternCard, String name) {
+
+        System.out.println("Now Pattern of" + name + "is:");
+        System.out.println(patternCard.toString());
+
+    }
+
+    @Override
+    public void showPatternUpdate(PatternCard patternCard) {
+
+        System.out.println("Now you're Pattern Card is");
+        System.out.println(patternCard.toString());
+
+    }
+
+    @Override
     public void showTokens(int tokensNumber) {
 
         System.out.println("This your number of favor tokens available: " + tokensNumber);
