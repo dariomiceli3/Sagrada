@@ -3,6 +3,7 @@ package it.polimi.se2018.server.network.socket;
 import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerMoveEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
@@ -65,6 +66,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 }
 
                 if (received instanceof PlayerDraftPoolEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof PlayerMoveEvent) {
                     setChanged();
                     notifyObservers(received);
                 }

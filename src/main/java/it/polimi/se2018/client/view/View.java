@@ -81,6 +81,8 @@ public abstract class View implements Runnable {
 
     public abstract void showDraftPool(DraftPool draftPool);
 
+    public abstract void showMove();
+
     //public abstract void toStringEvent(Event event);
 
     //public abstract void showGameStart(); //aggiungere attributo

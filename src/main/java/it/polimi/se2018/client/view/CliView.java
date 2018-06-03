@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
@@ -181,6 +182,38 @@ public class CliView extends View implements Runnable {
     @Override
     public void showDraftPool(DraftPool draftPool) {
         System.out.println(draftPool.toString());
+    }
+
+    @Override
+    public void showMove()   {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
+        String response = reader.nextLine();
+
+        if (response.equalsIgnoreCase("yes")) {
+
+            System.out.println("Enter the index of the dice from the pool - from 1 to N");
+            int indexPool = reader.nextInt();
+            indexPool--;
+
+            System.out.println("Enter the index of the Pattern Card - from 1 to 20");
+            int indexPattern = reader.nextInt();
+            indexPattern--;
+
+            try {
+                super.getConnection().setMoveToServer(indexPool, indexPattern);
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting dice");
+                e.printStackTrace();
+            }
+        }
+
+        if (response.equalsIgnoreCase("no")) {
+
+        }
+
     }
 }
 

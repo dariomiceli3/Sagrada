@@ -4,6 +4,7 @@ import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerDraftPoolEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.PlayerMoveEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerNameEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.PlayerPatternEvent;
 import it.polimi.se2018.server.model.Events.Event;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
 // this class must do:
 // create the new socket connection and get the input/output stream
@@ -174,6 +176,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showDraftPool(((PlayerDraftPoolUpdateEvent) event).getDraftPool());
         }
 
+        else if (event instanceof StartMoveEvent) {
+
+            if ((view.getPlayerID()) == ((StartMoveEvent) event).getID()) {
+                view.showMove();
+            }
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -226,6 +235,8 @@ public class SocketHandler implements ClientInterface, Runnable {
         sendEvent(new PlayerDraftPoolEvent());
     }
 
-
-
+    @Override
+    public void setMoveToServer(int indexPool, int indexPattern) {
+        sendEvent(new PlayerMoveEvent(indexPool, indexPattern));
+    }
 }
