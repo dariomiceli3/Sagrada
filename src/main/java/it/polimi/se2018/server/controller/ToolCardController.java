@@ -2,7 +2,9 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Events.ClientServer.EglomiseBrushEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.EglomiseBrushRequestEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GrozingPliersRequestEvent;
 
 import java.util.Observable;
@@ -24,11 +26,11 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID()));
 
-        }/* else if (n == 2) {
+        } else if (n == 2) {
 
-            view.sendEvent(new EglimiseBlushRequestEvent(view.getPlayerID()));
+            view.sendEvent(new EglomiseBrushRequestEvent(view.getPlayerID()));
 
-        } else if (n == 3) {
+        }/* else if (n == 3) {
 
             view.sendEvent(new CopperFoilBurnisherRequestEvent(view.getPlayerID()));
 
@@ -79,19 +81,24 @@ public class ToolCardController implements Observer {
         if (arg instanceof GrozingPliersEvent) {
 
             try {
-                toolCardEffect.grozingPliersEffect(((GrozingPliersEvent) arg).getIndexPool(), ((GrozingPliersEvent) arg).getIncrease());
+                toolCardEffect.grozingPliersEffect(virtualView.getPlayerID(), ((GrozingPliersEvent) arg).getIndexPool(), ((GrozingPliersEvent) arg).getIncrease());
             }catch (InvalidMoveException e ){
                 e.printStackTrace();
             }
 
         }
 
-      /*  if (arg instanceof EglimiseBlushEvent) {
+        if (arg instanceof EglomiseBrushEvent) {
 
-            toolCardEffect.eglomiseBrushEffect();
+            try {
+                System.out.println("chiamo brusheffect");
+                toolCardEffect.eglomiseBrushEffect(virtualView.getPlayerID(), ((EglomiseBrushEvent) arg).getIndexStart(), ((EglomiseBrushEvent) arg).getIndexEnd());
+            }catch(InvalidMoveException e){
+                e.printStackTrace();
+            }
         }
 
-        if (arg instanceof CopperFoilBurnisherEvent) {
+        /*if (arg instanceof CopperFoilBurnisherEvent) {
 
             toolCardEffect.copperFoilBurnisherEffect();
         }

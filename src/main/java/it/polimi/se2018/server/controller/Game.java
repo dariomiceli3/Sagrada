@@ -127,7 +127,6 @@ public class Game implements Observer {
 
             checkCost(virtualView, ((ToolCardStartEvent) arg).getIndexTool());
 
-
         }
 
 
@@ -200,6 +199,7 @@ public class Game implements Observer {
     protected void setFinalPointsModel(List<Player> playerList){
 
         model.setFinalPointsAndNotify(playerList);
+
     }
 
 

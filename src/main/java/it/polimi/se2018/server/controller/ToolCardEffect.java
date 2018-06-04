@@ -19,7 +19,8 @@ public class ToolCardEffect {
         this.game = game;
     }
 
-    public void grozingPliersEffect(int indexPool, int increase) throws InvalidMoveException {
+    //toolcard 1
+    public void grozingPliersEffect(int iD, int indexPool, int increase) throws InvalidMoveException {
 
         Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
         // case decrease
@@ -34,9 +35,20 @@ public class ToolCardEffect {
             game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() + 1);
         }
 
-        game.getModel().UpdateBoardAndNotify();
+        game.getModel().updateBoardAndNotify();
+        game.getModel().updateTokenAndNotify(iD);
         game.nextTurn();
 
+    }
+
+    //toolcard 2
+    public void eglomiseBrushEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
+
+        Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
+        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternEglomise(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
+        game.getModel().updatePatternAndNotify(iD);
+        game.getModel().updateTokenAndNotify(iD);
+        game.nextTurn();
     }
 
     public Dice fluxBrushEffect (Dice dice){
@@ -83,20 +95,15 @@ public class ToolCardEffect {
 
     }
 
-    public void eglomiseBrushEffect(PatternCard patternCard, Dice dice, int i) throws InvalidMoveException {
-        patternCard.putDiceOnPatternEglomise(dice, i, patternCard);
-    }
-
     public void copperFoilBurnisherEffect(PatternCard patternCard, Dice dice, int i) throws InvalidMoveException {
         patternCard.putDiceOnPatternCopper(dice, i, patternCard);
     }
 
 
     public void lathekinEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove, ArrayList<Integer>PositionToArrive ) throws InvalidMoveException {
-        Dice dice = patternCard.getDice(PositionDiceToMove.get(0));
-        Dice dice1 = patternCard.removeDice(dice, PositionDiceToMove.get(0));
-        Dice dice2 = patternCard.getDice(PositionDiceToMove.get(1));
-        Dice dice3 = patternCard.removeDice(dice2, PositionDiceToMove.get(1));
+
+        Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(0));
+        Dice dice3 = patternCard.removeDice(PositionDiceToMove.get(1));
         patternCard.putDiceOnPattern(dice1, PositionToArrive.get(0), patternCard);
         patternCard.putDiceOnPattern(dice3, PositionToArrive.get(1), patternCard);
     }
@@ -108,8 +115,7 @@ public class ToolCardEffect {
                 break;
             }
             else {
-                Dice dice = patternCard.getDice(PositionDiceToMove.get(i));
-                Dice dice1 = patternCard.removeDice(dice, PositionDiceToMove.get(i));
+                Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(i));
                 patternCard.putDiceOnPattern(dice1, PositionToArrive.get(i), patternCard);
             }
         }

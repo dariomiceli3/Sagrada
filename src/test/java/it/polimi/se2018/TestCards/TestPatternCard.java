@@ -141,7 +141,7 @@ public class TestPatternCard {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             try {
                 patternCardArrayList.get(0).putDice(dice, 2);
-                patternCardArrayList.get(0).removeDice(dice,2);
+                patternCardArrayList.get(0).removeDice(2);
                 }
             catch (InvalidMoveException e){
                 fail();

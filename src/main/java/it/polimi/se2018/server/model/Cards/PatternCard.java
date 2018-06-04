@@ -76,7 +76,7 @@ public class PatternCard implements Serializable {
     }
 
      // remove dice from the box
-     public Dice removeDice(Dice dice, int index) {
+     public Dice removeDice(int index) {
 
           GlassBox box = pattern.get(index);
 

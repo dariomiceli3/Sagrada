@@ -172,11 +172,22 @@ public class Model extends Observable {
         notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList()));
     }
 
-    public void UpdateBoardAndNotify(){
+    public void updateBoardAndNotify(){
 
         setChanged();
         notifyObservers(new UpdateBoardEvent(this.getRoundTracker(), this.getDraftPool()));
     }
+
+    public void updatePatternAndNotify(int ID){
+        setChanged();
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
+    }
+
+    public void updateTokenAndNotify(int iD){
+        setChanged();
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
+    }
+
 
 
     //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)
