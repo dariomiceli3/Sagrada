@@ -219,9 +219,9 @@ public class CliView extends View implements Runnable {
             }
         }, (long) 5*1000);
 
-
+*/
         System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
-        */
+
 
 
         Scanner reader = new Scanner(System.in);
