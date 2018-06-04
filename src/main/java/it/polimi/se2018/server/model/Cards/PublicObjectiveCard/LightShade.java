@@ -15,10 +15,10 @@ import java.util.Iterator;
 public class LightShade implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 2;
-    private static final String name = "Light Shades";
+    private static final String NAME = "Light Shades";
 
     @Override
-    public int RunPublic(PatternCard pattern){
+    public int runPublic(PatternCard pattern){
         int points;
         int setOf1= 0;
         int setOf2 = 0;
@@ -44,7 +44,7 @@ public class LightShade implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Sets of 1 & 2 values anywhere" + "\n"
                 + "VP : " + VPOINTS;
     }

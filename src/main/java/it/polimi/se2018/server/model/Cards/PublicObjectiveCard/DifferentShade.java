@@ -14,14 +14,14 @@ import static java.lang.Math.min;
 
 public class DifferentShade implements PublicEffects, Serializable {
     private static final int VPOINTS = 5;
-    private static final String name = "Shade Variety";
+    private static final String NAME = "Shade Variety";
     /**
      *
      * @param pattern scheme card of a player
      * @return number of sets of one of each value multiplied by value of victory point
      */
     @Override
-    public int RunPublic(PatternCard pattern){
+    public int runPublic(PatternCard pattern){
         int points;
         int setOf1= 0;
         int setOf2 = 0;
@@ -72,7 +72,7 @@ public class DifferentShade implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Sets of one of each value anywhere" + "\n"
                 + "VP : " + VPOINTS;
     }

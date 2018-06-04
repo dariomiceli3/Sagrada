@@ -11,10 +11,10 @@ import java.io.Serializable;
 public class DifferentShadeRow implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 5;
-    private static final String name = "Row Shade Variety";
+    private static final String NAME = "Row Shade Variety";
 
     @Override
-    public int RunPublic(PatternCard pattern) {
+    public int runPublic(PatternCard pattern) {
         int points = 0;
         for (int i = 0; i < pattern.getPattern().size(); i = i + 5){
             if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+1).isBoxEmpty() || pattern.getPattern().get(i+2).isBoxEmpty() || pattern.getPattern().get(i+3).isBoxEmpty() || pattern.getPattern().get(i+4).isBoxEmpty())) {
@@ -42,7 +42,7 @@ public class DifferentShadeRow implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Rows with no repeated colors" + "\n"
                 + "VP : " + VPOINTS;
     }

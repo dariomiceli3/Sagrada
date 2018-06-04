@@ -1,6 +1,5 @@
 package it.polimi.se2018.server.model.Components;
 
-import java.io.Serializable;
 
 
 

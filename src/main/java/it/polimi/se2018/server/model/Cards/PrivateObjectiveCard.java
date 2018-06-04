@@ -15,7 +15,7 @@ public class PrivateObjectiveCard implements Serializable {
 
     private static final int DEF = 0;
     private DiceColor colour;
-    private static final String name = "Shade of ";
+    private static final String NAME = "Shade of ";
 
     /**
      * Class Constructor
@@ -33,7 +33,7 @@ public class PrivateObjectiveCard implements Serializable {
      * @param pattern scheme card of a player
      * @return sum of values on ,color of the card, dice
      */
-    public int RunPrivate(PatternCard pattern) {
+    public int runPrivate(PatternCard pattern) {
         int count = DEF;
         GlassBox box;
         Iterator<GlassBox> it = pattern.getPattern().iterator();
@@ -50,7 +50,7 @@ public class PrivateObjectiveCard implements Serializable {
 
     @Override
     public String toString(){
-        return "Private card : " + this.name + this.colour + "\n" +
+        return "Private card : " + NAME + this.colour + "\n" +
                 "Sum of values on " + this.colour + " dice"
                 ;
     }

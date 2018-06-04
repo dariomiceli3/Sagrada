@@ -7,5 +7,5 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
  * @author Salvatrore Fadda
  */
 public interface PublicEffects  {
-    int RunPublic(PatternCard pattern);
+    int runPublic(PatternCard pattern);
 }

@@ -12,11 +12,11 @@ import java.util.Iterator;
  * @author Dario Miceli
  */
 public class DarkShade implements PublicEffects, Serializable {
-    private final static int VPOINTS = 2;
-    private final static String name = "Deep Shades ";
+    private static final int VPOINTS = 2;
+    private static final String NAME = "Deep Shades ";
 
     @Override
-    public int RunPublic(PatternCard pattern){
+    public int runPublic(PatternCard pattern){
         int points;
         int setOf5= 0;
         int setOf6 = 0;
@@ -43,7 +43,7 @@ public class DarkShade implements PublicEffects, Serializable {
 
     @Override
     public String toString() {
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Set of 5 & 6 values anywhere" + "\n"
                 + "VP : " + VPOINTS;
     }

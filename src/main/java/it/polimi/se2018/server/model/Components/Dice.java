@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class Dice implements Serializable {
 
-    private final int DEFAULT = 0;
+    private static final int DEFAULT = 0;
     private int value;
     private DiceColor color;
 

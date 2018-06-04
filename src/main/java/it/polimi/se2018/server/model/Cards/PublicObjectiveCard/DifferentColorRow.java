@@ -9,15 +9,15 @@ import java.io.Serializable;
  * @author Salvatrore Fadda
  */
 public class DifferentColorRow implements PublicEffects, Serializable {
-    private final int  VPOINTS = 6;
-    private final String name = "Row Color Variety";
+    private static final int  VPOINTS = 6;
+    private static final String NAME = "Row Color Variety";
     /**
      * class used to count the number of points
      * @param pattern scheme card of a player
      * @return number of rows with no repeated color multiplied by value of victory points
      */
     @Override
-    public int RunPublic(PatternCard pattern){
+    public int runPublic(PatternCard pattern){
         int points = 0;
         for (int i = 0; i < pattern.getPattern().size(); i = i +5) {
             if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+1).isBoxEmpty() || pattern.getPattern().get(i+2).isBoxEmpty() || pattern.getPattern().get(i+3).isBoxEmpty() || pattern.getPattern().get(i+4).isBoxEmpty())){
@@ -46,7 +46,7 @@ public class DifferentColorRow implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Rows with no repeated colors" + "\n"
                 + "VP : " + VPOINTS;
     }

@@ -19,10 +19,7 @@ public class DiceBag implements Serializable {
     private static final int MAX_VALUE = 6;
     private static final int NUMBER = 90;
     private static final int DIV = 5;
-    private Dice dice;
     private List<Dice> listDice;
-    private int value;
-    private DiceColor colour;
 //TODO gestione eccezioni da dichiarare e controlli da fare
 
 
@@ -37,17 +34,17 @@ public class DiceBag implements Serializable {
      * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
      */
     public  DiceBag(){
-        this.listDice = new ArrayList<Dice>();
+        this.listDice = new ArrayList<>();
 
         //creazione dadi casuali, 18 per ogni colore
         Random random = new Random();
         for (int i = 0; i < (NUMBER / DIV); i++) {
 
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.YELLOW));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.PURPLE));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.RED));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.GREEN));
-            this.listDice.add(dice = new Dice(value = random.nextInt(MAX_VALUE) + 1, colour = DiceColor.BLUE));
+            this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.YELLOW));
+            this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.PURPLE));
+            this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.RED));
+            this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.GREEN));
+            this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.BLUE));
         }
 
         //mischio la Bag
@@ -67,6 +64,7 @@ public class DiceBag implements Serializable {
      * @return the die to get and remove
      */
     public Dice getDice() {
+        Dice dice;
         dice = listDice.remove(TOP);
         return dice;
     }

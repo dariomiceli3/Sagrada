@@ -16,7 +16,7 @@ public class PublicObjectiveCard implements Serializable {
     }
 
     public int executeEffect(PatternCard pattern){
-            return effect.RunPublic(pattern);
+            return effect.runPublic(pattern);
         }
 
         @Override

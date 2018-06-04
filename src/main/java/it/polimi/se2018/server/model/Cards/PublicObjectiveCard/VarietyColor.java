@@ -15,14 +15,14 @@ import static java.lang.Math.min;
  */
 public class VarietyColor implements PublicEffects, Serializable {
     private static final int VPOINTS = 4;
-    private static final String name = "Color Variety";
+    private static final String NAME = "Color Variety";
     /**
      *
      * @param pattern scheme card of a player
      * @return number of sets of one of each value
      */
     @Override
-    public int RunPublic(PatternCard pattern){
+    public int runPublic(PatternCard pattern){
         int points;
         int setOfY= 0;
         int setOfP = 0;
@@ -67,7 +67,7 @@ public class VarietyColor implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Sets of one of each color anywhere" + "\n"
                 + "VP : " + VPOINTS;
     }

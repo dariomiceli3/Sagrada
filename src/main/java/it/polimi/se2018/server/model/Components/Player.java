@@ -3,7 +3,7 @@ package it.polimi.se2018.server.model.Components;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 
-import java.io.FileNotFoundException;
+
 import java.io.Serializable;
 
 /**

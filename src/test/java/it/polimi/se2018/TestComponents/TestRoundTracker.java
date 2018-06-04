@@ -68,11 +68,19 @@ public class TestRoundTracker {
     @Test
     public void testToString() {
         DiceBag diceBag = new DiceBag();
-        DraftPool draftPool = new DraftPool(4,diceBag);
+        DraftPool draftPool = new DraftPool(4, diceBag);
         draftPool.createListDice();
         List<Dice> list = draftPool.cleanListDice();
 
         RoundTracker roundTracker = new RoundTracker();
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
+        roundTracker.setTracker(list);
         roundTracker.setTracker(list);
         roundTracker.setTracker(list);
 

@@ -4,7 +4,6 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
@@ -25,8 +24,8 @@ public class Game implements Observer {
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
-    private static int turn = STARTTURN;
-    private static int round = START;
+    private int turn = STARTTURN;
+    private int round = START;
     private int position;
     private int currID;
 
@@ -133,13 +132,11 @@ public class Game implements Observer {
     //--------metodi che modificano model e mandano la notify alla view----------
     protected void setPlayerNameModel(VirtualView view, String name) {
 
-        //model.getPlayerFromID(view.getPlayerID()).setPlayerName(name);
         model.setPlayerAndNotify((view.getPlayerID()), name);
 
         if(model.getNumberPlayer() == (viewGame.size())){
             startCard();
         }
-        //System.out.println("Sto modificando model" + view.getPlayerID() + "name" + name);
     }
 
     protected void setPatternCardModel(VirtualView view, PatternCard pattern){
@@ -228,11 +225,8 @@ public class Game implements Observer {
         else if (turn > STARTTURN && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
-                //System.out.println(turn);
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
-                //System.out.println(position);
                 this.currID = model.getPlayerList().get(position).getPlayerID();
-                //System.out.println(currID);
                 view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                 view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                 if (currID == view.getPlayerID()) {

@@ -1,6 +1,6 @@
 package it.polimi.se2018.server.model.Components;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -83,10 +83,10 @@ public class Model extends Observable {
 
     public Player getPlayerFromID(int ID) {
 
-        for (Player player : playerList)
+        for (Player player1 : playerList)
         {
-            if (player.getPlayerID() == ID) {
-                return player;
+            if (player1.getPlayerID() == ID) {
+                return player1;
             }
         }
         return null;
@@ -126,8 +126,8 @@ public class Model extends Observable {
 
     public void setTokenAndNotify(int ID) {
 
-        Player player = getPlayerFromID(ID);
-        player.setTokensNumber(player.getPattern().getDifficulty());
+        Player player1 = getPlayerFromID(ID);
+        player1.setTokensNumber(player1.getPattern().getDifficulty());
         setChanged();
         notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
     }

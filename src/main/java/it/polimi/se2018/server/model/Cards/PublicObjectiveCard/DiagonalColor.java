@@ -11,9 +11,9 @@ import java.util.Arrays;
  */
 public class DiagonalColor implements PublicEffects, Serializable {
 
-private static final String name = "Color Diagonals";
+private static final String NAME = "Color Diagonals";
    @Override
-   public int RunPublic(PatternCard pattern) {
+   public int runPublic(PatternCard pattern) {
       int points = 0;
       boolean[] control = new boolean[20];
       Arrays.fill(control, Boolean.FALSE);
@@ -50,7 +50,7 @@ private static final String name = "Color Diagonals";
 
    @Override
    public String toString(){
-      return this.name + "\n"
+      return NAME + "\n"
               + "Count of diagonally adjacent same color dice" + "\n"
               + "VP : #";
    }

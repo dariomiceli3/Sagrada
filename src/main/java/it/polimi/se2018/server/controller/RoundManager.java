@@ -3,14 +3,13 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.util.*;
 
 public class RoundManager  {
-    private final static int VPOINTS = 3;
+    private static final int VPOINTS = 3;
 
 
     private List<Integer> calculatePrivate(List<Player> playerArrayList) {
@@ -18,7 +17,7 @@ public class RoundManager  {
 
         for (int i = 0; i < playerArrayList.size(); i++) {
             int result;
-            result = playerArrayList.get(i).getPrivate().RunPrivate(playerArrayList.get(i).getPattern());
+            result = playerArrayList.get(i).getPrivate().runPrivate(playerArrayList.get(i).getPattern());
             playerArrayList.get(i).setPrivatePoints(result);
             results.add(result);
         }
@@ -160,7 +159,7 @@ public class RoundManager  {
 
         for (int i = 0; i <privateObjectiveCards.size(); i++) {
             int result;
-            result = privateObjectiveCards.get(i).RunPrivate(player.getPattern());
+            result = privateObjectiveCards.get(i).runPrivate(player.getPattern());
             results = results + result;
 
         }

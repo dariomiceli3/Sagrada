@@ -58,7 +58,7 @@ public class TestPrivateObjectiveCard {
             pattern.putDiceOnPattern(dice1, 19, pattern);
 
             PrivateObjectiveCard privateCard = new PrivateObjectiveCard(DiceColor.GREEN);
-            assertEquals(16,privateCard.RunPrivate(pattern));
+            assertEquals(16,privateCard.runPrivate(pattern));
         } catch(FileNotFoundException e) {
             fail();
         }

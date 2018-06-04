@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class DifferentColorColumn implements PublicEffects, Serializable {
     private static final int VPOINTS = 5;
-    private static final String name = "Column Color Variety";
+    private static final String NAME = "Column Color Variety";
 
     /**
      * class used to count the number of points
@@ -18,7 +18,7 @@ public class DifferentColorColumn implements PublicEffects, Serializable {
      * @return number of columns with no repeated color multiplied by value of victory points
      */
     @Override
-    public int RunPublic(PatternCard pattern) {
+    public int runPublic(PatternCard pattern) {
         int points = 0;
         for (int i = 0; i < 5; i++) {
             if(!(pattern.getPattern().get(i).isBoxEmpty() || pattern.getPattern().get(i+5).isBoxEmpty() || pattern.getPattern().get(i+10).isBoxEmpty() || pattern.getPattern().get(i+15).isBoxEmpty())){
@@ -43,7 +43,7 @@ public class DifferentColorColumn implements PublicEffects, Serializable {
 
     @Override
     public String toString(){
-        return this.name + "\n"
+        return NAME + "\n"
                 + "Columns with no repeated colors" + "\n"
                 + "VP : " + VPOINTS;
     }

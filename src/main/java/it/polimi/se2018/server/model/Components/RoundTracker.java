@@ -77,11 +77,97 @@ public class RoundTracker implements Serializable {
 
     @Override
     public String toString() {
-        System.out.println("Roundtracker:");
-        for (int i =0; i < listDice.size(); i++) {
-            System.out.println("Round "+ (i+1) + ": "+ listDice.get(i).toString());
+
+        if (listDice.size() == 1) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString();
         }
-        return "";
+        else if (listDice.size() == 2) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString();
+
+        }
+        else if (listDice.size() == 3) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString();
+        }
+        else if (listDice.size() == 4) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString();
+        }
+        else if (listDice.size() == 5) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString();
+        }
+        else if (listDice.size() == 6) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString() + "\n" +
+                    "Round 6 " + listDice.get(5).toString();
+        }
+        else if (listDice.size() == 7) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString() + "\n" +
+                    "Round 6 " + listDice.get(5).toString() + "\n" +
+                    "Round 7 " + listDice.get(6).toString();
+
+        }
+        else if (listDice.size() == 8) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString() + "\n" +
+                    "Round 6 " + listDice.get(5).toString() + "\n" +
+                    "Round 7 " + listDice.get(6).toString() + "\n" +
+                    "Round 8 " + listDice.get(7).toString();
+
+        }
+        else if (listDice.size() == 9) {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString() + "\n" +
+                    "Round 6 " + listDice.get(5).toString() + "\n" +
+                    "Round 7 " + listDice.get(6).toString() + "\n" +
+                    "Round 8 " + listDice.get(7).toString() + "\n" +
+                    "Round 9 " + listDice.get(8).toString();
+        }
+        else {
+            return "Round Tracker : " + "\n" +
+                    "Round 1 " + listDice.get(0).toString() + "\n" +
+                    "Round 2 " + listDice.get(1).toString() + "\n" +
+                    "Round 3 " + listDice.get(2).toString() + "\n" +
+                    "Round 4 " + listDice.get(3).toString() + "\n" +
+                    "Round 5 " + listDice.get(4).toString() + "\n" +
+                    "Round 6 " + listDice.get(5).toString() + "\n" +
+                    "Round 7 " + listDice.get(6).toString() + "\n" +
+                    "Round 8 " + listDice.get(7).toString() + "\n" +
+                    "Round 9 " + listDice.get(8).toString() + "\n" +
+                    "Round 10 " + listDice.get(9).toString();
+
+        }
+
     }
 
 }
