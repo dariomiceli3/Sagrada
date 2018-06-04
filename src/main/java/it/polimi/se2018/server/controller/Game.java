@@ -20,6 +20,7 @@ public class Game implements Observer {
     private static final int END = 10;
     private Model model;
     private List<Player> playerList;
+    private List<ToolCard> toolCardList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
@@ -29,6 +30,7 @@ public class Game implements Observer {
     private int currID;
     private final int timePlayer;
     private Timer timer;
+    private ToolCardController toolController;
 
     public Game(List<VirtualView> viewList) {
 
@@ -38,6 +40,8 @@ public class Game implements Observer {
         this.setup = new GameSetup(this);
         this.roundManager = new RoundManager();
         this.timePlayer = model.getTimeToPlay();
+        this.toolController = new ToolCardController(this);
+        this.toolCardList = setup.setToolCard();
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -49,6 +53,7 @@ public class Game implements Observer {
 
         for (VirtualView view : viewGame) {
             view.addObserver(this);
+            view.addObserver(toolController);
             view.setModel(model);
             model.addObserver(view);
         }
@@ -63,6 +68,11 @@ public class Game implements Observer {
     // ogni metodo che modifica il model deve essere gestito da update (unico metodo pubblico), e chiamare il metodo
     // protected relativo al cambiamento
     // update gestisce
+
+    protected List<ToolCard> getToolCardList(){
+
+        return toolCardList;
+    }
 
     protected Model getModel(){
         return model;
@@ -114,6 +124,10 @@ public class Game implements Observer {
         if (arg instanceof PlayerNextTurnEvent) {
 
             nextTurn();
+        }
+        if (arg instanceof ToolCardStartEvent){
+
+            ((ToolCardStartEvent) arg).getToolCard().toolCardEffectRequest(((ToolCardStartEvent) arg).getNumber(), virtualView);
         }
 
 
@@ -207,6 +221,7 @@ public class Game implements Observer {
         model.setNumberPlayer(0);
         setup.setPublicCardModel();
         for(VirtualView view : viewGame){
+            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));
             setup.setPrivateCardModel(view);
             setup.startPatternCard(view);
         }

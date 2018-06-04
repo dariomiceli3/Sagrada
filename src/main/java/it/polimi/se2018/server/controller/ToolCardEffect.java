@@ -4,6 +4,7 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceBag;
 import it.polimi.se2018.server.model.Components.DraftPool;
 
 import java.util.ArrayList;
@@ -116,4 +117,10 @@ public class ToolCardEffect {
     public void corckBackedStraightedgeEffect(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
         patternCard.putDice(dice, position);
     }
+
+    public Dice fluxRemoverEffect(Dice dice, DiceBag diceBag){
+               diceBag.setDice(dice);
+               Dice dice1 = diceBag.getDice();
+               return dice1;
+           }
 }
