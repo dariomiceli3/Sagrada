@@ -329,8 +329,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void useToolCardToServer(int id) {
-        sendEvent(new ToolCardStartEvent(id));
+    public void useToolCardToServer(int indexTool) {
+        sendEvent(new ToolCardStartEvent(indexTool));
     }
 
     @Override

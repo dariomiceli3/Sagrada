@@ -318,6 +318,7 @@ public class Game implements Observer {
 
         }else {
 
+
             toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
             if (toolCardList.get(indexTool).getCost() == 1) {
 

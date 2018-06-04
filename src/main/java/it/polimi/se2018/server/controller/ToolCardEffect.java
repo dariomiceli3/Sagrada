@@ -19,23 +19,23 @@ public class ToolCardEffect {
         this.game = game;
     }
 
-    public Dice grozingPliersEffect(Dice dice, boolean increase) throws InvalidMoveException {
+    public void grozingPliersEffect(int indexPool, int increase) throws InvalidMoveException {
 
-        int diceValue = dice.getValue();
+        Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
         // case decrease
-        if (!increase) {
+        if (increase == 0) {
 
-            if (diceValue == 1) throw new InvalidMoveException("not valid move");
-            diceValue--;
-            dice.setValue(diceValue);
+            if (dice.getValue() == 1) throw new InvalidMoveException("not valid move");
+            game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() - 1);
         }
         // case increase
         else {
-            if (diceValue == 6) throw new InvalidMoveException("not valid move");
-            diceValue++;
-            dice.setValue(diceValue);
+            if (dice.getValue() == 6) throw new InvalidMoveException("not valid move");
+            game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() + 1);
         }
-        return dice;
+
+        game.getModel().UpdateBoardAndNotify();
+        game.nextTurn();
 
     }
 

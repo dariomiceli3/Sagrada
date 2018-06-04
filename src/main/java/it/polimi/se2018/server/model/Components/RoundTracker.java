@@ -78,7 +78,11 @@ public class RoundTracker implements Serializable {
     @Override
     public String toString() {
 
-        if (listDice.size() == 1) {
+        if (listDice.isEmpty()) {
+            return "Round Tracker not generated";
+        }
+
+        else if (listDice.size() == 1) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString();
         }

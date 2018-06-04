@@ -172,6 +172,12 @@ public class Model extends Observable {
         notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList()));
     }
 
+    public void UpdateBoardAndNotify(){
+
+        setChanged();
+        notifyObservers(new UpdateBoardEvent(this.getRoundTracker(), this.getDraftPool()));
+    }
+
 
     //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)
 }

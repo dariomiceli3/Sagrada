@@ -275,10 +275,10 @@ public class CliView extends View implements Runnable {
         }, (long) 5*1000);*/
 
 
+        Scanner reader = new Scanner(System.in);
+
         System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
 
-
-        Scanner reader = new Scanner(System.in);
         String response = reader.nextLine();
 
         if (response.equalsIgnoreCase("yes")) {
@@ -288,11 +288,15 @@ public class CliView extends View implements Runnable {
             int indexTool = reader.nextInt();
             indexTool--;
 
-            System.out.println("Do you want to use" + toolCards.get(indexTool).getCost() + "to use this card?");
-            String reply = reader.nextLine();
+            System.out.println("Do you want to use " + toolCards.get(indexTool).getCost() + " to use this card?");
+            Scanner scanner = new Scanner(System.in);
+            String reply = scanner.nextLine();
+
 
             if (reply.equalsIgnoreCase("yes")) {
+
                 try {
+
                     super.getConnection().useToolCardToServer(indexTool);
                 }
                 catch (RemoteException e) {
@@ -300,12 +304,6 @@ public class CliView extends View implements Runnable {
                     e.printStackTrace();
                 }
             }
-
-            else {
-
-                // todo decidere cosa fare
-            }
-
 
 
         }
@@ -386,6 +384,7 @@ public class CliView extends View implements Runnable {
         Scanner reader = new Scanner(System.in);
         System.out.println("Select a die from the pool - Enter a number between 1 and N");
         int index = reader.nextInt();
+        index--;
 
         System.out.println("Do you want to increase (1) or decrease (0");
         int increase = reader.nextInt();

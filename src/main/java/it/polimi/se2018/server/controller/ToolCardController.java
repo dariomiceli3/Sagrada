@@ -1,6 +1,9 @@
 package it.polimi.se2018.server.controller;
 
+import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GrozingPliersRequestEvent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -17,11 +20,11 @@ public class ToolCardController implements Observer {
 
     public void toolCardEffectRequest(int n, VirtualView view) {
 
-       /*if (n == 1) {
+       if (n == 1) {
 
             view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID()));
 
-        } else if (n == 2) {
+        }/* else if (n == 2) {
 
             view.sendEvent(new EglimiseBlushRequestEvent(view.getPlayerID()));
 
@@ -70,15 +73,20 @@ public class ToolCardController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+
         VirtualView virtualView = (VirtualView) o;
 
-   /*     if (arg instanceof GrozingPliersEvent) {
+        if (arg instanceof GrozingPliersEvent) {
 
-            toolCardEffect.grozingPliersEffect();
+            try {
+                toolCardEffect.grozingPliersEffect(((GrozingPliersEvent) arg).getIndexPool(), ((GrozingPliersEvent) arg).getIncrease());
+            }catch (InvalidMoveException e ){
+                e.printStackTrace();
+            }
 
         }
 
-        if (arg instanceof EglimiseBlushEvent) {
+      /*  if (arg instanceof EglimiseBlushEvent) {
 
             toolCardEffect.eglomiseBrushEffect();
         }
