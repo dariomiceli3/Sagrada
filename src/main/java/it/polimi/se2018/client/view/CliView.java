@@ -277,7 +277,7 @@ public class CliView extends View implements Runnable {
 
         System.out.println("Final Rank:");
         for (Player player : playerList) {
-            player.toStringPoints();
+            System.out.println(player.toStringPoints());
         }
 
     }
