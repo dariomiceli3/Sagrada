@@ -400,6 +400,27 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
+    public void showEglomiseRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
+        int indexStart = reader.nextInt();
+        indexStart--;
+
+        System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
+        int indexEnd = reader.nextInt();
+        indexEnd--;
+
+        try {
+            super.getConnection().useEglomiseToolCard(indexStart, indexEnd);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting index");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
         System.out.println("Now Round Tracker is:");
         System.out.println(roundTracker.toString());

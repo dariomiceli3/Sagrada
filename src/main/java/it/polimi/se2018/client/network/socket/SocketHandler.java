@@ -258,6 +258,13 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         }
 
+        else if (event instanceof EglomiseBrushRequestEvent) {
+
+            if ((view.getPlayerID()) == ((EglomiseBrushRequestEvent) event).getId()) {
+                view.showEglomiseRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -336,5 +343,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useGrozingToolCard(int indexPool, int increase) {
         sendEvent(new GrozingPliersEvent(indexPool,increase));
+    }
+
+    @Override
+    public void useEglomiseToolCard(int indexStart, int indexEnd) {
+        sendEvent(new EglomiseBrushEvent(indexStart, indexEnd));
     }
 }

@@ -23,4 +23,6 @@ public interface ClientInterface extends Remote {
 
     public void useGrozingToolCard(int indexPool, int increase) throws RemoteException;
 
+    public void useEglomiseToolCard(int indexStart, int indexEnd) throws RemoteException;
+
 }

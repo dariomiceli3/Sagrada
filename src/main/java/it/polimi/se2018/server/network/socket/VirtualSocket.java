@@ -91,6 +91,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     setChanged();
                     notifyObservers(received);
                 }
+
+                if (received instanceof EglomiseBrushEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
                 // TODO add the other msg from the client:
                 // if the msg is a modification of the model, notify, ecc.
                 // if the msg is an update, access the model to get the latest information
