@@ -2,6 +2,7 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
@@ -234,6 +235,11 @@ public class SocketHandler implements ClientInterface, Runnable {
             else {
                 view.showOtherTimer(((TimerEndedEvent) event).getName());
             }
+        }
+
+        else if (event instanceof ToolCardUpdateEvent) {
+
+            view.showToolCards(((ToolCardUpdateEvent) event).getToolCardList());
         }
 
         else {

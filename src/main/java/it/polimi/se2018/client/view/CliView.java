@@ -2,6 +2,7 @@ package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
@@ -343,6 +344,14 @@ public class CliView extends View implements Runnable {
     public void showOtherTimer(String playerName) {
 
         System.out.println(playerName + "timer is ended");
+    }
+
+    @Override
+    public  void showToolCards(List<ToolCard> toolCardList) {
+
+        for (ToolCard toolCard : toolCardList) {
+            System.out.println(toolCard.toString());
+        }
     }
 }
 

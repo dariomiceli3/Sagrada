@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
@@ -103,9 +104,6 @@ public abstract class View implements Runnable {
 
     public abstract void showOtherTimer(String playerName);
 
-    //public abstract void showGameEnd(); //aggiungere attributo
-
-    //public abstract void showToolCards(); //aggiungere attributo
-
+    public abstract void showToolCards(List<ToolCard> toolCardList);
 
 }
