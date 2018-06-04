@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 public class Server {
 
-    private static final int SOCKETPORT = 5555;
+    private static final int SOCKETPORT = 4444;
     private static final int RMIPORT = 1099;
     private static final int MAXPLAYERS = 4;
     private static final int SECONDS = 10;

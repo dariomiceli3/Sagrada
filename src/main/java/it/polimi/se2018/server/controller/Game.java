@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
+import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.network.socket.VirtualSocket;
 
@@ -25,7 +26,7 @@ public class Game implements Observer {
     private static int turn = STARTTURN;
     private int round = START;
     private int position;
-    private static int currID;
+    private int currID;
     private final int timePlayer;
     private Timer timer;
 
@@ -88,21 +89,16 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
 
-            startTimer();
-
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
         }
 
         if (arg instanceof PlayerDraftPoolEvent){
-
-            startTimer();
 
             setDraftPoolModel(virtualView);
         }
         if (arg instanceof PlayerMoveEvent) {
 
             try {
-                startTimer();
 
                 setMoveModel(virtualView, ((PlayerMoveEvent) arg).getIndexPool(), ((PlayerMoveEvent) arg).getIndexPattern());
             }
@@ -119,7 +115,6 @@ public class Game implements Observer {
 
             nextTurn();
         }
-
 
 
     }
@@ -219,6 +214,8 @@ public class Game implements Observer {
     }
 
     private void startTurn(){
+        //startTimer();
+
         if(turn == STARTTURN){
             for (VirtualView view : viewGame) {
                 view.sendEvent(new StartRoundEvent(round));
@@ -256,12 +253,15 @@ public class Game implements Observer {
     private void startMove(VirtualView view){
 
         view.sendEvent(new StartMoveEvent(view.getPlayerID()));
+        //startTimer();
 
     }
 
     private void startTool(VirtualView view) {
 
         view.sendEvent(new StartToolEvent(view.getPlayerID()));
+        //startTimer();
+
     }
 
 
@@ -297,7 +297,8 @@ public class Game implements Observer {
     }
 
 
-    protected void startTimer() {
+    /*protected void startTimer() {
+
         if (timer != null) {
             timer.cancel();
         }
@@ -307,16 +308,11 @@ public class Game implements Observer {
         {
             @Override
             public void run() {
-
-                for (VirtualView view : viewGame) {
-                    view.sendEvent(new TimerEndedEvent(currID, model.getPlayerFromID(currID).getPlayerName()));
-                    //nextTurn();
-                }
                 nextTurn();
             }
 
-        }, (long) 5 * 1000);
-    }
+        }, (long) 10 * 1000);
+    }*/
 
 
 

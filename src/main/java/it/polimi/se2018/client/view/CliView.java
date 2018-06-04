@@ -15,6 +15,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CliView extends View implements Runnable {
 
@@ -22,6 +24,7 @@ public class CliView extends View implements Runnable {
     // metodi che in base alla scelta dell'utente mandano usando socket handler
 
     private boolean singlePlayer;
+
 
 
     public CliView(boolean singlePlayer) {
@@ -205,11 +208,27 @@ public class CliView extends View implements Runnable {
     @Override
     public void showMoveCommand()   {
 
-        Scanner reader = new Scanner(System.in);
+        /*Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                getConnection().setStartToolToServer();
+
+            }
+        }, (long) 5*1000);
+
+
         System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
+        */
+
+
+        Scanner reader = new Scanner(System.in);
         String response = reader.nextLine();
 
         if (response.equalsIgnoreCase("yes")) {
+
+            //timer.cancel();
 
             System.out.println("Enter the index of the dice from the pool - from 1 to N");
             int indexPool = reader.nextInt();
@@ -220,6 +239,7 @@ public class CliView extends View implements Runnable {
             indexPattern--;
 
             try {
+
                 super.getConnection().setMoveToServer(indexPool, indexPattern);
             }
             catch (RemoteException e) {
@@ -230,6 +250,7 @@ public class CliView extends View implements Runnable {
 
         if (response.equalsIgnoreCase("no")) {
 
+            //timer.cancel();
             super.getConnection().setStartToolToServer();
 
         }
@@ -239,12 +260,29 @@ public class CliView extends View implements Runnable {
     @Override
     public void showToolCommand() {
 
-        Scanner reader = new Scanner(System.in);
+        /*Timer timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run() {
+                try {
+                    getConnection().setNextTurnToServer();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, (long) 5*1000);*/
+
+
         System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+
+
+        Scanner reader = new Scanner(System.in);
         String response = reader.nextLine();
 
         if (response.equalsIgnoreCase("yes")) {
 
+            //timer.cancel();
             System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
             int indexTool = reader.nextInt();
             indexTool--;
@@ -254,6 +292,7 @@ public class CliView extends View implements Runnable {
         if (response.equalsIgnoreCase("no")) {
 
             try {
+                //timer.cancel();
                 super.getConnection().setNextTurnToServer();
             }
             catch (RemoteException e) {
