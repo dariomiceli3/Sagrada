@@ -2,8 +2,9 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
@@ -257,6 +258,10 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         }
 
+        else if (event instanceof UpdateBoardEvent) {
+            view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -329,7 +334,7 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void useGrozingToolCard(int indexPool) {
-        sendEvent(new GrozingPliersEvent(indexPool));
+    public void useGrozingToolCard(int indexPool, int increase) {
+        sendEvent(new GrozingPliersEvent(indexPool,increase));
     }
 }

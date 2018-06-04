@@ -387,14 +387,27 @@ public class CliView extends View implements Runnable {
         System.out.println("Select a die from the pool - Enter a number between 1 and N");
         int index = reader.nextInt();
 
+        System.out.println("Do you want to increase (1) or decrease (0");
+        int increase = reader.nextInt();
+
         try {
-            super.getConnection().useGrozingToolCard(index);
+            super.getConnection().useGrozingToolCard(index, increase);
         }
         catch (RemoteException e) {
             System.out.println("error in setting index");
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
+        System.out.println("Now Round Tracker is:");
+        System.out.println(roundTracker.toString());
+
+        System.out.println("\n");
+        System.out.println("Now Draft Pool is: ");
+        System.out.println(draftPool.toString());
     }
 }
 

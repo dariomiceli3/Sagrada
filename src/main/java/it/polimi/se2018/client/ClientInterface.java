@@ -21,8 +21,6 @@ public interface ClientInterface extends Remote {
 
     public void useToolCardToServer(int id) throws RemoteException;
 
-    public void useGrozingToolCard(int indexPool) throws RemoteException;
-
-
+    public void useGrozingToolCard(int indexPool, int increase) throws RemoteException;
 
 }

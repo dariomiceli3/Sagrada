@@ -110,6 +110,8 @@ public abstract class View implements Runnable {
 
     public abstract void showGrozingRequest();
 
+    public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
+
 
 
 }
