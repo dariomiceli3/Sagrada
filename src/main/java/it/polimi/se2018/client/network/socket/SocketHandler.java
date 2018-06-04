@@ -287,7 +287,6 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setPlayerNameToServer(String name, int id) {
         sendEvent(new PlayerNameEvent(name, id));
-        //System.out.println("sto chiedendo di impostare" + name + "come id" + id);
     }
 
     @Override

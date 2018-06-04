@@ -7,9 +7,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
-import it.polimi.se2018.server.network.socket.VirtualSocket;
 
 import java.util.*;
 
@@ -127,8 +125,11 @@ public class Game implements Observer {
         }
         if (arg instanceof ToolCardStartEvent){
 
-            ((ToolCardStartEvent) arg).getToolCard().toolCardEffectRequest(((ToolCardStartEvent) arg).getNumber(), virtualView);
+            checkCost(virtualView, ((ToolCardStartEvent) arg).getIndexTool());
+
+
         }
+
 
 
     }
@@ -189,8 +190,6 @@ public class Game implements Observer {
 
         model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
         startTool(view);
-        //turn++;
-        //startTurn(); //in relatà sarebbe startTool(view)
     }
 
     protected void setEndRoundModel(){
@@ -274,7 +273,7 @@ public class Game implements Observer {
 
     private void startTool(VirtualView view) {
 
-        view.sendEvent(new StartToolEvent(view.getPlayerID()));
+        view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
         //startTimer();
 
     }
@@ -311,6 +310,26 @@ public class Game implements Observer {
         startTurn();
     }
 
+    protected void checkCost(VirtualView view, int indexTool){
+        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < toolCardList.get(indexTool).getCost()){
+
+            view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
+            startTool(view);
+
+        }else {
+
+            toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
+            if (toolCardList.get(indexTool).getCost() == 1) {
+
+                toolCardList.get(indexTool).setCost(2);
+            }
+            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
+            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - toolCardList.get(indexTool).getCost());
+
+            //TODO verificare che i token siano madati giusti insieme alla pattern dopo l'uso della toolcard o nel round successivo
+
+        }
+    }
 
     /*protected void startTimer() {
 

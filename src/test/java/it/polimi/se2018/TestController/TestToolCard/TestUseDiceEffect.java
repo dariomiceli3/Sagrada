@@ -1,4 +1,4 @@
-package it.polimi.se2018.TestController.TestToolCard;
+/*package it.polimi.se2018.TestController.TestToolCard;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.controller.Toolcards.UseDiceEffect;
@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals; */
 
-public class TestUseDiceEffect {
+//public class TestUseDiceEffect {
 
 
    /* @Test(expected = InvalidMoveException.class)
@@ -75,5 +75,5 @@ public class TestUseDiceEffect {
 
         assertEquals(3, diceArrayList.get(1).getValue());
         assertEquals(6, diceArrayList.get(0).getValue());
-    }*/
-}
+    }
+} */

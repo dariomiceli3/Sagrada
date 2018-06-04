@@ -11,12 +11,15 @@ public class ToolCard implements Serializable{
     private String name;
     private DiceColor color;
     private int number;
+    private int cost;
+    private static final int DEFAULT = 1;
 
 
     protected ToolCard (String name, DiceColor color, int number) {
         this.name = name;
         this.color = color;
         this.number = number;
+        this.cost = DEFAULT;
     }
 
     public DiceColor getColor() {
@@ -31,10 +34,18 @@ public class ToolCard implements Serializable{
         return number;
     }
 
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getCost() {
+        return cost;
+    }
 
     @Override
     public String toString(){
         return name;
+        //TODO fare toString vero
     }
 
 

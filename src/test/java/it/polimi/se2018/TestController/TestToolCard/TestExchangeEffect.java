@@ -1,4 +1,4 @@
-package it.polimi.se2018.TestController.TestToolCard;
+/*package it.polimi.se2018.TestController.TestToolCard;
 
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
@@ -16,4 +16,4 @@ public class TestExchangeEffect {
         dice = exchangeEffct.fluxRemoverEffect(dice, diceBag);
         System.out.println(dice.toString());
     }
-}
+}*/

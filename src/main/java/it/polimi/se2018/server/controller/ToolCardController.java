@@ -17,7 +17,7 @@ public class ToolCardController implements Observer {
 
     public void toolCardEffectRequest(int n, VirtualView view) {
 
-        if (n == 1) {
+       /*if (n == 1) {
 
             view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID()));
 
@@ -65,14 +65,14 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new TapWheelRequestEvent(view.getPlayerID()));
 
-        }
+        }*/
     }
 
     @Override
     public void update(Observable o, Object arg) {
         VirtualView virtualView = (VirtualView) o;
 
-        if (arg instanceof GrozingPliersEvent) {
+   /*     if (arg instanceof GrozingPliersEvent) {
 
             toolCardEffect.grozingPliersEffect();
 
@@ -131,7 +131,7 @@ public class ToolCardController implements Observer {
         if (arg instanceof TapWheelEvent) {
 
             toolCardEffect.tapWheelEffect();
-        }
+        } */
 
     }
 }

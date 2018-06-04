@@ -1,4 +1,4 @@
-package it.polimi.se2018.TestController.TestToolCard;
+/*package it.polimi.se2018.TestController.TestToolCard;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.controller.Toolcards.UseDiceEffect;
@@ -140,4 +140,4 @@ public class TestDiceOnPatternEffect {
     }
 
 
-}
+} */
