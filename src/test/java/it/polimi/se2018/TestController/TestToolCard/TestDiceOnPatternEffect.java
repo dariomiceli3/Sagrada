@@ -1,7 +1,6 @@
 package it.polimi.se2018.TestController.TestToolCard;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.controller.Toolcards.DiceOnPatternEffect;
 import it.polimi.se2018.server.controller.Toolcards.UseDiceEffect;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
