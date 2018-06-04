@@ -13,7 +13,7 @@ public class DiceOnPatternEffect {
         patternCard.putDiceOnPatternEglomise(dice, i, patternCard);
     }
 
-    public void copperFoilBurnisher(PatternCard patternCard, Dice dice, int i) throws InvalidMoveException {
+    public void copperFoilBurnisherEffect(PatternCard patternCard, Dice dice, int i) throws InvalidMoveException {
         patternCard.putDiceOnPatternCopper(dice, i, patternCard);
     }
 
@@ -28,7 +28,7 @@ public class DiceOnPatternEffect {
     }
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
-    public void tapWheel(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove,ArrayList<Integer>PositionToArrive) throws InvalidMoveException {
+    public void tapWheelEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove,ArrayList<Integer>PositionToArrive) throws InvalidMoveException {
         for (int i=0; i<PositionDiceToMove.size(); i++){
             if (i==2) {
                 break;
@@ -40,7 +40,7 @@ public class DiceOnPatternEffect {
             }
         }
     }
-    public void corckBackedStraightedge(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
+    public void corckBackedStraightedgeEffect(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
         patternCard.putDice(dice, position);
     }
 }
