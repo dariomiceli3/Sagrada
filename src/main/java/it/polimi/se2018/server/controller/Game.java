@@ -8,6 +8,7 @@ import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.network.socket.VirtualSocket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Game implements Observer {
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
-    private int turn = STARTTURN;
+    private static int turn = STARTTURN;
     private int round = START;
     private int position;
     private int currID;
@@ -106,8 +107,12 @@ public class Game implements Observer {
         }
         if (arg instanceof PlayerStartToolEvent){
 
-            turn++; //non presente
-            startTurn(); //è startTool(view);
+            startTool(virtualView);
+        }
+
+        if (arg instanceof PlayerNextTurnEvent) {
+
+            nextTurn();
         }
 
 
@@ -169,8 +174,9 @@ public class Game implements Observer {
     protected void setMoveModel(VirtualView view, int indexPool, int indexPattern) throws InvalidMoveException {
 
         model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
-        turn++;
-        startTurn(); //in relatà sarebbe startTool(view)
+        startTool(view);
+        //turn++;
+        //startTurn(); //in relatà sarebbe startTool(view)
     }
 
     protected void setEndRoundModel(){
@@ -248,14 +254,15 @@ public class Game implements Observer {
 
     }
 
-    /*private void startTool(VirtualView view){
+    private void startTool(VirtualView view) {
 
-       view.sendEvent(new StartToolEvent(view.getPlayerID()));
+        view.sendEvent(new StartToolEvent(view.getPlayerID()));
     }
 
 
-    fa turn = 0, round++, e se round >10, allora
-    chiama endMatch; gestisce inoltre tutti gli eventi della fine del round */
+
+    //fa turn = 0, round++, e se round >10, allora
+    //chiama endMatch; gestisce inoltre tutti gli eventi della fine del round
     private void endRound(){
 
         setEndRoundModel();
@@ -277,5 +284,10 @@ public class Game implements Observer {
             view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
         }
 
+    }
+
+    protected void nextTurn() {
+        turn++;
+        startTurn();
     }
 }

@@ -97,7 +97,6 @@ public class Model extends Observable {
         numberPlayer++;
         getPlayerFromID(ID).setPlayerName(name);
         setChanged();
-        // todo nell'evento prendere le cose da mandare dal MODEL, non i parametri ingresso
         notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(ID).getPlayerName(), ID));
 
     }

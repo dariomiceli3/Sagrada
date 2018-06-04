@@ -203,7 +203,7 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showMove()   {
+    public void showMoveCommand()   {
 
         Scanner reader = new Scanner(System.in);
         System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
@@ -234,6 +234,34 @@ public class CliView extends View implements Runnable {
 
         }
 
+    }
+
+    @Override
+    public void showToolCommand() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+        String response = reader.nextLine();
+
+        if (response.equalsIgnoreCase("yes")) {
+
+            System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
+            int indexTool = reader.nextInt();
+            indexTool--;
+
+        }
+
+        if (response.equalsIgnoreCase("no")) {
+
+            try {
+                super.getConnection().setNextTurnToServer();
+            }
+            catch (RemoteException e) {
+                System.out.println("Error in turning around");
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override

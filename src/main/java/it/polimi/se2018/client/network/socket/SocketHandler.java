@@ -176,7 +176,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof StartMoveEvent) {
 
             if ((view.getPlayerID()) == ((StartMoveEvent) event).getID()) {
-                view.showMove();
+                view.showMoveCommand();
             }
         }
 
@@ -201,6 +201,14 @@ public class SocketHandler implements ClientInterface, Runnable {
             if((view.getPlayerID()) == ((TurnPatternEvent) event).getID()) {
                 view.showPatternUpdate(((TurnPatternEvent) event).getPatternCard());
             }
+        }
+
+        else if (event instanceof StartToolEvent) {
+
+            if((view.getPlayerID()) == ((StartToolEvent) event).getId()) {
+                view.showToolCommand();
+            }
+
         }
 
         else if (event instanceof PlayerPointsUpdateEvent) {
@@ -277,5 +285,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setStartToolToServer() {
         sendEvent(new PlayerStartToolEvent());
+    }
+
+    @Override
+    public void setNextTurnToServer() {
+        sendEvent(new PlayerNextTurnEvent());
     }
 }

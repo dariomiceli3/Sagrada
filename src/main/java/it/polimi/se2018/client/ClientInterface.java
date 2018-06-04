@@ -19,4 +19,7 @@ public interface ClientInterface extends Remote {
 
     public void setStartToolToServer();
 
+    public void setNextTurnToServer() throws RemoteException;
+
+
 }

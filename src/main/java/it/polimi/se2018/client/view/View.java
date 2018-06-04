@@ -87,7 +87,9 @@ public abstract class View implements Runnable {
 
     public abstract void showDraftPool(DraftPool draftPool);
 
-    public abstract void showMove();
+    public abstract void showMoveCommand();
+
+    public abstract void showToolCommand();
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
