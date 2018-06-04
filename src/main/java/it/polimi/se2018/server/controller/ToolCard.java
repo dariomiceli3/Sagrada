@@ -22,19 +22,19 @@ public class ToolCard implements Serializable{
         this.cost = DEFAULT;
     }
 
-    public DiceColor getColor() {
+    protected DiceColor getColor() {
         return color;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public int getNumber() {
+    protected int getNumber() {
         return number;
     }
 
-    public void setCost(int cost) {
+    protected void setCost(int cost) {
         this.cost = cost;
     }
 
@@ -44,7 +44,7 @@ public class ToolCard implements Serializable{
 
     @Override
     public String toString(){
-        return name;
+        return "Tool Card: " + name;
         //TODO fare toString vero
     }
 

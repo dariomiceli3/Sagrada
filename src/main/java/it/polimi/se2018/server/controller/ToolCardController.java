@@ -2,8 +2,10 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Events.ClientServer.CopperFoilEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.EglomiseBrushEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.CopperFoilRequestEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.EglomiseBrushRequestEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GrozingPliersRequestEvent;
 
@@ -20,7 +22,7 @@ public class ToolCardController implements Observer {
         this.toolCardEffect = new ToolCardEffect(game);
     }
 
-    public void toolCardEffectRequest(int n, VirtualView view) {
+    protected void toolCardEffectRequest(int n, VirtualView view) {
 
        if (n == 1) {
 
@@ -30,11 +32,11 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new EglomiseBrushRequestEvent(view.getPlayerID()));
 
-        }/* else if (n == 3) {
+        }else if (n == 3) {
 
-            view.sendEvent(new CopperFoilBurnisherRequestEvent(view.getPlayerID()));
+            view.sendEvent(new CopperFoilRequestEvent(view.getPlayerID()));
 
-        } else if (n == 4) {
+        } /*else if (n == 4) {
 
             view.sendEvent(new LathekinRequestEvent(view.getPlayerID()));
 
@@ -91,19 +93,22 @@ public class ToolCardController implements Observer {
         if (arg instanceof EglomiseBrushEvent) {
 
             try {
-                System.out.println("chiamo brusheffect");
                 toolCardEffect.eglomiseBrushEffect(virtualView.getPlayerID(), ((EglomiseBrushEvent) arg).getIndexStart(), ((EglomiseBrushEvent) arg).getIndexEnd());
             }catch(InvalidMoveException e){
                 e.printStackTrace();
             }
         }
 
-        /*if (arg instanceof CopperFoilBurnisherEvent) {
+        if (arg instanceof CopperFoilEvent) {
 
-            toolCardEffect.copperFoilBurnisherEffect();
+            try {
+                toolCardEffect.copperFoilBurnisherEffect(virtualView.getPlayerID(), ((CopperFoilEvent)arg).getIndexStart(), ((CopperFoilEvent) arg).getIndexEnd());
+            }catch(InvalidMoveException e){
+                e.printStackTrace();
+            }
         }
 
-        if (arg instanceof LathekinEvent) {
+        /*if (arg instanceof LathekinEvent) {
 
             toolCardEffect.lathekinEffect();
         }

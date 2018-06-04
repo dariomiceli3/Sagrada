@@ -1,7 +1,6 @@
 package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
@@ -15,12 +14,12 @@ public class ToolCardEffect {
 
     private Game game;
 
-    public ToolCardEffect(Game game){
+    protected ToolCardEffect(Game game){
         this.game = game;
     }
 
     //toolcard 1
-    public void grozingPliersEffect(int iD, int indexPool, int increase) throws InvalidMoveException {
+    protected void grozingPliersEffect(int iD, int indexPool, int increase) throws InvalidMoveException {
 
         Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
         // case decrease
@@ -42,7 +41,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 2
-    public void eglomiseBrushEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
+    protected void eglomiseBrushEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
 
         Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
         game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternEglomise(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
@@ -51,7 +50,17 @@ public class ToolCardEffect {
         game.nextTurn();
     }
 
-    public Dice fluxBrushEffect (Dice dice){
+    //toolcard 3
+    protected void copperFoilBurnisherEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
+
+        Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
+        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternCopper(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
+        game.getModel().updatePatternAndNotify(iD);
+        game.getModel().updateTokenAndNotify(iD);
+        game.nextTurn();
+    }
+
+    protected Dice fluxBrushEffect (Dice dice){
 
         Random random = new Random();
         int newValue = random.nextInt(6) + 1;
@@ -60,7 +69,7 @@ public class ToolCardEffect {
     }
 
 
-    public DraftPool glazingHammerEffect(int turn, int numberPlayers, DraftPool draftPool) throws InvalidMoveException{
+    protected DraftPool glazingHammerEffect(int turn, int numberPlayers, DraftPool draftPool) throws InvalidMoveException{
 
         if (turn > (numberPlayers - 1)) {
             List<Dice> newDicePlay;
@@ -80,7 +89,7 @@ public class ToolCardEffect {
         return draftPool;
     }
 
-    public Dice grindingStoneEffect(Dice dice) {
+    protected Dice grindingStoneEffect(Dice dice) {
 
         int newValue = 7 - dice.getValue();
         dice.setValue(newValue);
@@ -90,17 +99,13 @@ public class ToolCardEffect {
 
 
     // todo cambiare in base alla cli, e decidere cosa passarle
-    public void lensCutterEffect(Dice diceTracker, Dice dicePool) {
+    protected void lensCutterEffect(Dice diceTracker, Dice dicePool) {
         List<Dice> diceArrayList = new ArrayList<>();
 
     }
 
-    public void copperFoilBurnisherEffect(PatternCard patternCard, Dice dice, int i) throws InvalidMoveException {
-        patternCard.putDiceOnPatternCopper(dice, i, patternCard);
-    }
 
-
-    public void lathekinEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove, ArrayList<Integer>PositionToArrive ) throws InvalidMoveException {
+    protected void lathekinEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove, ArrayList<Integer>PositionToArrive ) throws InvalidMoveException {
 
         Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(0));
         Dice dice3 = patternCard.removeDice(PositionDiceToMove.get(1));
@@ -109,7 +114,7 @@ public class ToolCardEffect {
     }
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
-    public void tapWheelEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove,ArrayList<Integer>PositionToArrive) throws InvalidMoveException {
+    protected void tapWheelEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove,ArrayList<Integer>PositionToArrive) throws InvalidMoveException {
         for (int i=0; i<PositionDiceToMove.size(); i++){
             if (i==2) {
                 break;
@@ -120,11 +125,11 @@ public class ToolCardEffect {
             }
         }
     }
-    public void corckBackedStraightedgeEffect(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
+    protected void corckBackedStraightedgeEffect(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
         patternCard.putDice(dice, position);
     }
 
-    public Dice fluxRemoverEffect(Dice dice, DiceBag diceBag){
+    protected Dice fluxRemoverEffect(Dice dice, DiceBag diceBag){
                diceBag.setDice(dice);
                Dice dice1 = diceBag.getDice();
                return dice1;

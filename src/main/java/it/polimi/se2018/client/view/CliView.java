@@ -252,7 +252,13 @@ public class CliView extends View implements Runnable {
         if (response.equalsIgnoreCase("no")) {
 
             //timer.cancel();
-            super.getConnection().setStartToolToServer();
+            try {
+                super.getConnection().setStartToolToServer();
+            }
+            catch (RemoteException e) {
+                System.out.println(" error in sending tool");
+                e.printStackTrace();
+            }
 
         }
 
