@@ -379,6 +379,23 @@ public class CliView extends View implements Runnable {
     public void showTokenError() {
         System.out.println("You have not enough favor tokens to use this tool card");
     }
+
+    @Override
+    public void showGrozingRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select a die from the pool - Enter a number between 1 and N");
+        int index = reader.nextInt();
+
+        try {
+            super.getConnection().useGrozingToolCard(index);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting index");
+            e.printStackTrace();
+        }
+
+    }
 }
 
 

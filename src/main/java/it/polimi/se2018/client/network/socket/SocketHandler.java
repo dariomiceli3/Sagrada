@@ -249,6 +249,14 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showToolCards(((ToolCardUpdateEvent) event).getToolCardList());
         }
 
+        else if (event instanceof GrozingPliersRequestEvent) {
+
+            if ((view.getPlayerID()) == ((GrozingPliersRequestEvent) event).getId()) {
+                view.showGrozingRequest();
+            }
+
+        }
+
         else {
             System.out.println("Not understood the message");
         }

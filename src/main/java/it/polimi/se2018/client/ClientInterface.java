@@ -7,8 +7,6 @@ import java.rmi.RemoteException;
 
 public interface ClientInterface extends Remote {
 
-    // metodi chiamabili lato client per inoltrare poi gli eventi
-
     public void setPlayerNameToServer(String username, int iD) throws RemoteException;
 
     public void setPatternCardToServer(PatternCard patternCard, int ID) throws RemoteException;
@@ -22,6 +20,9 @@ public interface ClientInterface extends Remote {
     public void setNextTurnToServer() throws RemoteException;
 
     public void useToolCardToServer(int id) throws RemoteException;
+
+    public void useGrozingToolCard(int indexPool) throws RemoteException;
+
 
 
 }
