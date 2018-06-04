@@ -276,7 +276,6 @@ public class CliView extends View implements Runnable {
 
 
         Scanner reader = new Scanner(System.in);
-
         System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
 
         String response = reader.nextLine();
@@ -386,7 +385,7 @@ public class CliView extends View implements Runnable {
         int index = reader.nextInt();
         index--;
 
-        System.out.println("Do you want to increase (1) or decrease (0");
+        System.out.println("Do you want to increase (1) or decrease (0)");
         int increase = reader.nextInt();
 
         try {
@@ -413,6 +412,27 @@ public class CliView extends View implements Runnable {
 
         try {
             super.getConnection().useEglomiseToolCard(indexStart, indexEnd);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting index");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showCopperFoilRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
+        int indexStart = reader.nextInt();
+        indexStart--;
+
+        System.out.println("Enter the index where you want to move it - Enter a number");
+        int indexEnd = reader.nextInt();
+        indexEnd--;
+
+        try {
+            super.getConnection().useCopperFoilToolCard(indexStart, indexEnd);
         }
         catch (RemoteException e) {
             System.out.println("error in setting index");

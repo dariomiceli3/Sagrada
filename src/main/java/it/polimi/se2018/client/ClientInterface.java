@@ -15,7 +15,7 @@ public interface ClientInterface extends Remote {
 
     public void setMoveToServer(int indexPool, int indexPattern) throws RemoteException;
 
-    public void setStartToolToServer();
+    public void setStartToolToServer() throws RemoteException;
 
     public void setNextTurnToServer() throws RemoteException;
 
@@ -24,5 +24,7 @@ public interface ClientInterface extends Remote {
     public void useGrozingToolCard(int indexPool, int increase) throws RemoteException;
 
     public void useEglomiseToolCard(int indexStart, int indexEnd) throws RemoteException;
+
+    public void useCopperFoilToolCard(int indexStart, int indexEnd) throws RemoteException;
 
 }

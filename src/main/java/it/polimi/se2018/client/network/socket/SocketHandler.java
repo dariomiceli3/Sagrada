@@ -265,6 +265,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof CopperFoilRequestEvent) {
+
+            if ((view.getPlayerID()) == ((CopperFoilRequestEvent) event).getId()) {
+                view.showCopperFoilRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -348,5 +355,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useEglomiseToolCard(int indexStart, int indexEnd) {
         sendEvent(new EglomiseBrushEvent(indexStart, indexEnd));
+    }
+
+    @Override
+    public void useCopperFoilToolCard(int indexStart, int indexEnd) {
+        sendEvent(new CopperFoilEvent(indexStart, indexEnd));
     }
 }

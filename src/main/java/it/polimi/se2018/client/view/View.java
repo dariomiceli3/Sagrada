@@ -112,6 +112,8 @@ public abstract class View implements Runnable {
 
     public abstract void showEglomiseRequest();
 
+    public abstract void showCopperFoilRequest();
+
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 
 
