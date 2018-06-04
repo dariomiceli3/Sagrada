@@ -327,4 +327,9 @@ public class SocketHandler implements ClientInterface, Runnable {
     public void useToolCardToServer(int id) {
         sendEvent(new ToolCardStartEvent(id));
     }
+
+    @Override
+    public void useGrozingToolCard(int indexPool) {
+        sendEvent(new GrozingPliersEvent(indexPool));
+    }
 }
