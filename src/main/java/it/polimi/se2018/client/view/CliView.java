@@ -259,7 +259,7 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showToolCommand() {
+    public void showToolCommand(List<ToolCard> toolCards) {
 
         /*Timer timer = new Timer();
         timer.schedule(new TimerTask()
@@ -287,6 +287,26 @@ public class CliView extends View implements Runnable {
             System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
             int indexTool = reader.nextInt();
             indexTool--;
+
+            System.out.println("Do you want to use" + toolCards.get(indexTool).getCost() + "to use this card?");
+            String reply = reader.nextLine();
+
+            if (reply.equalsIgnoreCase("yes")) {
+                try {
+                    super.getConnection().useToolCardToServer(indexTool);
+                }
+                catch (RemoteException e) {
+                    System.out.println("Error in choosing tool");
+                    e.printStackTrace();
+                }
+            }
+
+            else {
+
+                // todo decidere cosa fare
+            }
+
+
 
         }
 
@@ -352,6 +372,12 @@ public class CliView extends View implements Runnable {
         for (ToolCard toolCard : toolCardList) {
             System.out.println(toolCard.toString());
         }
+
+    }
+
+    @Override
+    public void showTokenError() {
+        System.out.println("You have not enough favor tokens to use this tool card");
     }
 }
 

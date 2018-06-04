@@ -21,5 +21,7 @@ public interface ClientInterface extends Remote {
 
     public void setNextTurnToServer() throws RemoteException;
 
+    public void useToolCardToServer(int id) throws RemoteException;
+
 
 }

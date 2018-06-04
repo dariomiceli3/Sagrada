@@ -207,9 +207,16 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof StartToolEvent) {
 
             if((view.getPlayerID()) == ((StartToolEvent) event).getId()) {
-                view.showToolCommand();
+                view.showToolCommand(((StartToolEvent) event).getToolCardList());
             }
 
+        }
+
+        else if (event instanceof OutOfTokenEvent) {
+
+            if ((view.getPlayerID()) == ((OutOfTokenEvent) event).getId()) {
+                view.showTokenError();
+            }
         }
 
         else if (event instanceof PlayerPointsUpdateEvent) {
@@ -307,5 +314,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setNextTurnToServer() {
         sendEvent(new PlayerNextTurnEvent());
+    }
+
+    @Override
+    public void useToolCardToServer(int id) {
+        sendEvent(new ToolCardStartEvent(id));
     }
 }

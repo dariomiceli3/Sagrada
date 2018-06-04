@@ -90,7 +90,7 @@ public abstract class View implements Runnable {
 
     public abstract void showMoveCommand();
 
-    public abstract void showToolCommand();
+    public abstract void showToolCommand(List<ToolCard> toolCards);
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
@@ -105,5 +105,7 @@ public abstract class View implements Runnable {
     public abstract void showOtherTimer(String playerName);
 
     public abstract void showToolCards(List<ToolCard> toolCardList);
+
+    public abstract void showTokenError();
 
 }
