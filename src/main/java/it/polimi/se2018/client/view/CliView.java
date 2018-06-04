@@ -276,7 +276,9 @@ public class CliView extends View implements Runnable {
     public void showFinalRank(List<Player> playerList) {
 
         System.out.println("Final Rank:");
-        System.out.println(playerList.toString());
+        for (Player player : playerList) {
+            player.toStringPoints();
+        }
 
     }
 
@@ -290,6 +292,18 @@ public class CliView extends View implements Runnable {
     public void showLosers() {
 
         System.out.println("You lose maaaan!");
+    }
+
+    @Override
+    public void showTimer() {
+
+        System.out.println("You'r time is over");
+    }
+
+    @Override
+    public void showOtherTimer(String playerName) {
+
+        System.out.println(playerName + "timer is ended");
     }
 }
 

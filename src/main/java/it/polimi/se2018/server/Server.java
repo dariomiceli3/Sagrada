@@ -92,7 +92,7 @@ public class Server {
                     }
 
                 }
-            }, SECONDS * 1000);
+            }, (long) SECONDS * 1000);
 
         }
 

@@ -99,6 +99,10 @@ public abstract class View implements Runnable {
 
     public abstract void showLosers();
 
+    public abstract void showTimer();
+
+    public abstract void showOtherTimer(String playerName);
+
     //public abstract void showGameEnd(); //aggiungere attributo
 
     //public abstract void showToolCards(); //aggiungere attributo

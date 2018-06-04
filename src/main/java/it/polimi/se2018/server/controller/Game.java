@@ -10,10 +10,7 @@ import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.network.socket.VirtualSocket;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class Game implements Observer {
 
@@ -28,9 +25,9 @@ public class Game implements Observer {
     private static int turn = STARTTURN;
     private int round = START;
     private int position;
-    private int currID;
-
-    // add timer
+    private static int currID;
+    private final int timePlayer;
+    private Timer timer;
 
     public Game(List<VirtualView> viewList) {
 
@@ -39,6 +36,7 @@ public class Game implements Observer {
         this.playerList = new ArrayList<>();
         this.setup = new GameSetup(this);
         this.roundManager = new RoundManager();
+        this.timePlayer = model.getTimeToPlay();
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -89,16 +87,23 @@ public class Game implements Observer {
         }
 
         if (arg instanceof PlayerPatternEvent){
+
+            startTimer();
+
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
         }
 
         if (arg instanceof PlayerDraftPoolEvent){
+
+            startTimer();
 
             setDraftPoolModel(virtualView);
         }
         if (arg instanceof PlayerMoveEvent) {
 
             try {
+                startTimer();
+
                 setMoveModel(virtualView, ((PlayerMoveEvent) arg).getIndexPool(), ((PlayerMoveEvent) arg).getIndexPattern());
             }
             catch (InvalidMoveException e) {
@@ -290,4 +295,30 @@ public class Game implements Observer {
         turn++;
         startTurn();
     }
+
+
+    protected void startTimer() {
+        if (timer != null) {
+            timer.cancel();
+        }
+
+        timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run() {
+
+                for (VirtualView view : viewGame) {
+                    view.sendEvent(new TimerEndedEvent(currID, model.getPlayerFromID(currID).getPlayerName()));
+                    //nextTurn();
+                }
+                nextTurn();
+            }
+
+        }, (long) 5 * 1000);
+    }
+
+
+
+
 }

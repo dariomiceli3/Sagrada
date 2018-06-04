@@ -27,6 +27,7 @@ public class Model extends Observable {
     private List<Player> playerList;
     private int numberPlayer;
     private EventsObservable event;
+    private int timeToPlay;
 
     public Model() {
         this.roundTracker = new RoundTracker();
@@ -35,6 +36,7 @@ public class Model extends Observable {
         this.playerList = new ArrayList<>();
         this.event = new EventsObservable();
         this.numberPlayer = 0;
+        this.timeToPlay = 20;
 
     }
 
@@ -74,7 +76,10 @@ public class Model extends Observable {
         this.playerList = playerList;
     }
 
-
+    // todo gestione da file del timer
+    public int getTimeToPlay() {
+        return timeToPlay;
+    }
 
     public DiceBag getDiceBag() {
         return diceBag;

@@ -225,6 +225,17 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof TimerEndedEvent) {
+
+            if ((view.getPlayerID()) == ((TimerEndedEvent) event).getId()) {
+                view.showTimer();
+            }
+
+            else {
+                view.showOtherTimer(((TimerEndedEvent) event).getName());
+            }
+        }
+
         else {
             System.out.println("Not understood the message");
         }
