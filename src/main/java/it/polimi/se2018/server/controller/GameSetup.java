@@ -24,7 +24,7 @@ public class GameSetup {
     private List<PatternCard> listPattern;
     private boolean[] control;
 
-    protected GameSetup(Game game){
+    protected GameSetup(Game game) {
         this.game = game;
         this.listPrivateCard = this.loadPrivate();
         this.listPublicCard = this.loadPublic();
@@ -34,8 +34,8 @@ public class GameSetup {
     }
 
 
-    private ArrayList<PrivateObjectiveCard> loadPrivate(){
-        ArrayList<PrivateObjectiveCard> list = new ArrayList<>();
+    private List<PrivateObjectiveCard> loadPrivate() {
+        List<PrivateObjectiveCard> list = new ArrayList<>();
         list.add(new PrivateObjectiveCard(DiceColor.BLUE));
         list.add(new PrivateObjectiveCard(DiceColor.RED));
         list.add(new PrivateObjectiveCard(DiceColor.GREEN));
@@ -46,8 +46,8 @@ public class GameSetup {
 
     }
 
-    private ArrayList<PublicObjectiveCard> loadPublic(){
-        ArrayList<PublicObjectiveCard> list = new ArrayList<>();
+    private List<PublicObjectiveCard> loadPublic() {
+        List<PublicObjectiveCard> list = new ArrayList<>();
         list.add(new PublicObjectiveCard(new DarkShade()));
         list.add(new PublicObjectiveCard(new DiagonalColor()));
         list.add(new PublicObjectiveCard(new DifferentColorColumn()));
@@ -62,14 +62,14 @@ public class GameSetup {
         return list;
     }
 
-    protected void setPrivateCardModel(VirtualView view){
+    protected void setPrivateCardModel(VirtualView view) {
 
-        game.getModel().setPrivateAndNotify( (view.getPlayerID()), listPrivateCard.remove(0) ) ;
+        game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
 
 
     }
 
-    protected void setPublicCardModel(){
+    protected void setPublicCardModel() {
 
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
         listPublic1.add(listPublicCard.remove(0));
@@ -82,38 +82,38 @@ public class GameSetup {
 
     }
 
-    private List<PatternCard> loadPatternCard(){
+    private List<PatternCard> loadPatternCard() {
         PatternCard pattern = new PatternCard();
-        try{
+        try {
             listPattern = pattern.loadPatternList();
-        }catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return listPattern;
     }
 
-    protected void startPatternCard(VirtualView view){
+    protected void startPatternCard(VirtualView view) {
 
         List<PatternCard> patternList = new ArrayList<>();
         Random random = new Random();
         int a;
-        for(int i = 0; i < 2; i++ ){
+        for (int i = 0; i < 2; i++) {
 
             a = ricorsiveMethod(random.nextInt(VALUE));
             patternList.add(listPattern.get(a));
-            patternList.add(listPattern.get(a+VALUE));
+            patternList.add(listPattern.get(a + VALUE));
         }
 
 
         view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
     }
 
-    private int ricorsiveMethod(int a){
+    private int ricorsiveMethod(int a) {
         Random random = new Random();
-        if(!control[a]){
+        if (!control[a]) {
             control[a] = true;
             return a;
-        }else return ricorsiveMethod(random.nextInt(VALUE));
+        } else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
     /*protected int calculatePlayerTurn(int turn, int numberOfPlayers){
@@ -129,30 +129,61 @@ public class GameSetup {
     protected int calculatePlayerTurn(int turn, int numberOfPlayers) {
         if (turn < numberOfPlayers) {
             return turn;
-        }
-        else if (turn == numberOfPlayers) {
-            return numberOfPlayers-1;
-        }
-        else {
+        } else if (turn == numberOfPlayers) {
+            return numberOfPlayers - 1;
+        } else {
             return (2 * numberOfPlayers) - (turn + 1);
         }
     }
 
-    protected void changeBagger(){
+    protected void changeBagger() {
 
         game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
     }
 
+    private List<ToolCard> loadToolCard() {
+        List<ToolCard> list = new ArrayList<>();
+
+        list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1, game));
+        list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2, game));
+        list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3, game));
+        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4, game));
+        list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 4, game));
+        list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6, game));
+        list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7, game));
+        list.add(new ToolCard("Running Pliers", DiceColor.RED, 8, game));
+        list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9, game));
+        list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10, game));
+        list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11, game));
+        list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12, game));
 
 
+        Collections.shuffle(list);
+        return list;
 
+    }
 
+    protected void setToolCard() {
 
-
-
-
-
-
-
-
+        List<ToolCard> toolCardList = this.loadToolCard();
+        List<ToolCard> toolCardList1 = new ArrayList<>();
+        toolCardList1.add(toolCardList.remove(0));
+        toolCardList1.add(toolCardList.remove(0));
+        toolCardList1.add(toolCardList.remove(0));
+        game.setToolCardList(toolCardList1);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

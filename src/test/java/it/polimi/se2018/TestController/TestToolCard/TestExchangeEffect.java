@@ -1,6 +1,5 @@
 package it.polimi.se2018.TestController.TestToolCard;
 
-import it.polimi.se2018.server.controller.Toolcards.ExchangeEffct;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
 import org.junit.Test;
