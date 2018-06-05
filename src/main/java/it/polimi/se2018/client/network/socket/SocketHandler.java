@@ -475,4 +475,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     public void useFluxRemoverToolCard(int indexPool) {
         sendEvent(new FluxRemoverEvent(indexPool));
     }
+
+    @Override
+    public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+        sendEvent(new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
+
+    }
 }

@@ -637,6 +637,58 @@ public class CliView extends View implements Runnable {
     @Override
     public void showTapWheelRequest() {
 
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
+        int number = reader.nextInt();
+
+        if (number == 1) {
+
+            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+            int indexStarOne = reader.nextInt();
+            indexStarOne--;
+
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            int indexEndOne = reader.nextInt();
+            indexEndOne--;
+
+            try {
+                super.getConnection().useTapWheelToolCard(number, indexStarOne, indexEndOne, 0, 0);
+            }
+            catch (RemoteException e) {
+                System.out.println("Error in setting first dice");
+                e.printStackTrace();
+            }
+
+        }
+
+        else {
+
+            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+            int indexStarOne = reader.nextInt();
+            indexStarOne--;
+
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            int indexEndOne = reader.nextInt();
+            indexEndOne--;
+
+            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+            int indexStartTwo = reader.nextInt();
+            indexStartTwo--;
+
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            int indexEndTwo = reader.nextInt();
+            indexEndTwo--;
+
+            try {
+                super.getConnection().useTapWheelToolCard(number, indexStarOne, indexEndOne, indexStarOne, indexEndTwo);
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting second dice");
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     @Override

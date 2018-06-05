@@ -127,7 +127,7 @@ public class ToolCardController implements Observer {
             game.nextStepTool(virtualView);
         }
 
-        /*if (arg instanceof FluxBrushEvent) {
+        if (arg instanceof FluxBrushEvent) {
 
             toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
             game.nextTurn();
@@ -135,33 +135,46 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof GlazingHammerEvent) {
 
-            toolCardEffect.glazingHammerEffect();
+            try {
+                toolCardEffect.glazingHammerEffect(virtualView.getPlayerID());
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
         }
 
-        if (arg instanceof RunningPliersEvent) {
+      /*  if (arg instanceof RunningPliersEvent) {
 
             toolCardEffect.
-        }
+        }*/
 
         if (arg instanceof CorkBackedEvent) {
 
-            toolCardEffect.corckBackedStraightedgeEffect();
+            try {
+                toolCardEffect.corkBackedStraightedgeEffect(virtualView.getPlayerID(), ((CorkBackedEvent)arg).getIndexPool(), ((CorkBackedEvent)arg).getIndexPattern() );
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
         }
 
         if (arg instanceof GrindingStoneEvent) {
 
-            toolCardEffect.grindingStoneEffect();
+            toolCardEffect.grindingStoneEffect(virtualView.getPlayerID(), ((GrindingStoneEvent)arg).getIndexPool());
         }
 
-        if (arg instanceof FluxRemoverEvent) {
+        /*if (arg instanceof FluxRemoverEvent) {
 
             toolCardEffect.fluxRemoverEffect();
-        }
+        }*/
 
         if (arg instanceof TapWheelEvent) {
 
-            toolCardEffect.tapWheelEffect();
-        } */
+            try {
+                toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
+                        ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }

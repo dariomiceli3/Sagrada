@@ -45,7 +45,7 @@ public interface ClientInterface extends Remote {
 
     public void useFluxRemoverToolCard(int indexPool) throws RemoteException;
 
-    //public void useTapWheelToolCard() throws RemoteException;
+    public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
 
 
 

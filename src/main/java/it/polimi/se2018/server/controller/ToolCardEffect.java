@@ -122,7 +122,7 @@ public class ToolCardEffect {
 
 
     //toolcard 9
-    protected void corckBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
+    protected void corkBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         if(game.getStep() == 1) {
             Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
