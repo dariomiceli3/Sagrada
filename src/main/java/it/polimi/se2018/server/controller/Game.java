@@ -90,6 +90,11 @@ public class Game implements Observer {
         return step;
     }
 
+    protected void setStep(int step){
+        this.step = step;
+    }
+
+
 
 
 
@@ -261,13 +266,13 @@ public class Game implements Observer {
         else if (turn > DEFAULT && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
-                this.position = setup.calculatePlayerTurn(turn, viewGame.size());
-                this.currID = model.getPlayerList().get(position).getPlayerID();
-                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
-                if (currID == view.getPlayerID()) {
-                    startChoose(view);
-                }
+                    this.position = setup.calculatePlayerTurn(turn, viewGame.size());
+                    this.currID = model.getPlayerList().get(position).getPlayerID();
+                    view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                    view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                    if (currID == view.getPlayerID()) {
+                        startChoose(view);
+                    }
 
             }
         }else {

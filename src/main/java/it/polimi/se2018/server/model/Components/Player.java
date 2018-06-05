@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class Player implements Serializable {
     private String playerName;
     private int playerID;
+    private boolean runningP;
     private PlayerColour colour;
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;

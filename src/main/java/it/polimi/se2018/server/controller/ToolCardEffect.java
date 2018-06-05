@@ -119,16 +119,10 @@ public class ToolCardEffect {
         }
     }
 
-    //todo toolcard 8
+   /* //todo toolcard 8
     protected void runningPliers(VirtualView view) throws InvalidMoveException {
-        if (game.getStep() == 0) {
-            game.startMove(view);
-            game.setRunningP(0);
-        }else{
 
-            throw new InvalidMoveException(("First do a move, only after that you can use this tool card"));
-        }
-    }
+    }*/
 
 
     //toolcard 9
