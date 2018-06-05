@@ -129,12 +129,8 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof FluxBrushEvent) {
 
-            try {
-                toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
-            game.nextTurn();
+            toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
+            game.nextStepTool(virtualView);
         }
 
         if (arg instanceof GlazingHammerEvent) {
