@@ -127,11 +127,11 @@ public class ToolCardController implements Observer {
             game.nextStepTool(virtualView);
         }
 
-        if (arg instanceof FluxBrushEvent) {
+        /*if (arg instanceof FluxBrushEvent) {
 
             toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
             game.nextTurn();
-        }/*
+        }
 
         if (arg instanceof GlazingHammerEvent) {
 

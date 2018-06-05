@@ -87,7 +87,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 6
-    protected void poolToolEffect (int iD, int indexPool){
+    protected void fluxBrushEffect(int iD, int indexPool){
 
         Random random = new Random();
         int newValue = random.nextInt(6) + 1;
@@ -147,9 +147,18 @@ public class ToolCardEffect {
     }
 
     //toolcard 11
-    protected void fluxRemoverEffect(int iD, int indexPool, int num){
+    protected void fluxRemoverEffect(int iD, int indexPool, int value){
 
-        Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
+        Dice dice = game.getModel().getDraftPool().getDraftPool().set(0, );
+
+
+
+
+    }
+
+    protected void fluxRemoverNumberRequest(int id, int indexPool){
+
+        Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
         game.getModel().getDiceBag().setDice(dice);
         Dice dice1 = game.getModel().getDiceBag().getDice();
 
