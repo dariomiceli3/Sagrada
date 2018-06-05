@@ -13,16 +13,17 @@ import java.util.*;
 
 public class Game implements Observer {
 
-    private static final int STARTTURN = 0;
+    private static final int DEFAULT = 0;
     private static final int START = 1;
     private static final int END = 10;
+    private static final int SET = 2;
     private Model model;
     private List<Player> playerList;
     private List<ToolCard> toolCardList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
-    private static int turn = STARTTURN;
+    private static int turn = DEFAULT;
     private int round = START;
     private int position;
     private int currID;
@@ -193,11 +194,7 @@ public class Game implements Observer {
     protected void setMoveModel(VirtualView view, int indexPool, int indexPattern) throws InvalidMoveException {
 
         model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
-        if(step == 0){
-            startTool(view);
-        }else {
-            nextTurn();
-        }
+        nextStepMove(view);
     }
 
     protected void setEndRoundModel(){
@@ -239,7 +236,7 @@ public class Game implements Observer {
     private void startTurn(){
         //startTimer();
 
-        if(turn == STARTTURN){
+        if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
                 view.sendEvent(new StartRoundEvent(round));
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
@@ -253,7 +250,7 @@ public class Game implements Observer {
             }
 
         }
-        else if (turn > STARTTURN && turn < (viewGame.size()*2)){
+        else if (turn > DEFAULT && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
@@ -303,7 +300,7 @@ public class Game implements Observer {
         if (round > END){
             endMatch();
         }else {
-            turn = STARTTURN;
+            turn = DEFAULT;
             setup.changeBagger();
             startTurn();
         }
@@ -320,6 +317,7 @@ public class Game implements Observer {
     }
 
     protected void nextTurn() {
+        step = SET;
         turn++;
         startTurn();
     }
@@ -334,9 +332,9 @@ public class Game implements Observer {
 
 
             toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
-            if (toolCardList.get(indexTool).getCost() == 1) {
+            if (toolCardList.get(indexTool).getCost() == START) {
 
-                toolCardList.get(indexTool).setCost(2);
+                toolCardList.get(indexTool).setCost(SET);
             }
             int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
             model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - toolCardList.get(indexTool).getCost());
@@ -348,20 +346,20 @@ public class Game implements Observer {
 
     protected void stepController(VirtualView view, int step){
 
-        if(step == 0){
-            this.step = 0;
+        if(step == DEFAULT){
+            this.step = step;
             startMove(view);
 
         }else{
 
-            this.step = 1;
+            this.step = step;
             startTool(view);
         }
     }
 
     protected void nextStepTool(VirtualView view){
 
-        if(step == 1){
+        if(step == START){
 
             startMove(view);
             step++;
@@ -374,7 +372,7 @@ public class Game implements Observer {
 
     protected void nextStepMove(VirtualView view){
 
-        if(step == 0){
+        if(step == DEFAULT){
 
             startTool(view);
 
