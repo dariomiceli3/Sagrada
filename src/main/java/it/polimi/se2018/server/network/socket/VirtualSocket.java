@@ -122,6 +122,33 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                if (received instanceof GlazingHammerEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof RunningPliersEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof CorkBackedEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof GrindingStoneEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof FluxRemoverEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+
+
                 // TODO add the other msg from the client:
                 // if the msg is a modification of the model, notify, ecc.
                 // if the msg is an update, access the model to get the latest information

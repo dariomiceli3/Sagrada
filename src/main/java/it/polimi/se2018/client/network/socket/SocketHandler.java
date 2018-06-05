@@ -300,6 +300,48 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof GlazingHammerRequestEvent) {
+
+            if ((view.getPlayerID()) == ((GlazingHammerRequestEvent) event).getId()) {
+                view.showGlazingHammerRequest();
+            }
+        }
+
+        else if (event instanceof RunningPliersRequestEvent) {
+
+            if ((view.getPlayerID()) == ((RunningPliersRequestEvent) event).getId()) {
+                view.showRunningPliersRequest();
+            }
+        }
+
+        else if (event instanceof CorkBackedRequestEvent) {
+
+            if ((view.getPlayerID()) == ((CorkBackedRequestEvent) event).getId()) {
+                view.showCorkBackedRequest();
+            }
+        }
+
+        else if (event instanceof GrindingStoneRequestEvent) {
+
+            if ((view.getPlayerID()) == ((GrindingStoneRequestEvent) event).getId()) {
+                view.showGrindingStoneRequest();
+            }
+        }
+
+        else if (event instanceof FluxRemoverRequestEvent) {
+
+            if ((view.getPlayerID()) == ((FluxRemoverRequestEvent) event).getId()) {
+                view.showFluxRemoverRequest();
+            }
+        }
+
+        else if (event instanceof TapWheelRequestEvent) {
+
+            if ((view.getPlayerID()) == ((TapWheelRequestEvent) event).getId()) {
+                view.showTapWheelRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -347,7 +389,6 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setPatternCardToServer(PatternCard patternCard, int id) {
         sendEvent(new PlayerPatternEvent(id, patternCard));
-
     }
 
     @Override
@@ -403,5 +444,35 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition) {
         sendEvent(new LensCutterEvent(indexPool, indexRound, indexPosition));
+    }
+
+    @Override
+    public void useFluxBrushToolCard(int indexPool) {
+        sendEvent(new FluxBrushEvent(indexPool));
+    }
+
+    @Override
+    public void useGlazingHammerToolCard() {
+        sendEvent(new GlazingHammerEvent());
+    }
+
+    @Override
+    public void useRunningPliersToolCard(int indexPool) {
+        sendEvent(new RunningPliersEvent(indexPool));
+    }
+
+    @Override
+    public void useCorkBackedToolCard(int indexPool, int indexPattern) {
+        sendEvent(new CorkBackedEvent(indexPool, indexPattern));
+    }
+
+    @Override
+    public void useGrindingStoneToolCard(int indexPool) {
+        sendEvent(new GrindingStoneEvent(indexPool));
+    }
+
+    @Override
+    public void useFluxRemoverToolCard(int indexPool) {
+        sendEvent(new FluxRemoverEvent(indexPool));
     }
 }

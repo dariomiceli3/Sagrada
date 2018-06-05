@@ -33,6 +33,20 @@ public interface ClientInterface extends Remote {
 
     public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition) throws RemoteException;
 
+    public void useFluxBrushToolCard(int indexPool) throws RemoteException;
+
+    public void useGlazingHammerToolCard() throws RemoteException;
+
+    public void useRunningPliersToolCard(int indexPool) throws RemoteException;
+
+    public void useCorkBackedToolCard(int indexPool, int indexPattern) throws RemoteException;
+
+    public void useGrindingStoneToolCard(int indexPool) throws RemoteException;
+
+    public void useFluxRemoverToolCard(int indexPool) throws RemoteException;
+
+    //public void useTapWheelToolCard() throws RemoteException;
+
 
 
 }

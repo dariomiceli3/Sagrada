@@ -122,6 +122,18 @@ public abstract class View implements Runnable {
 
     public abstract void showFluxBrushRequest();
 
+    public abstract void showGlazingHammerRequest();
+
+    public abstract void showRunningPliersRequest();
+
+    public abstract void showCorkBackedRequest();
+
+    public abstract void showGrindingStoneRequest();
+
+    public abstract void showFluxRemoverRequest();
+
+    public abstract void showTapWheelRequest();
+
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 
 

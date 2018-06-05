@@ -535,6 +535,108 @@ public class CliView extends View implements Runnable {
     @Override
     public void showFluxBrushRequest() {
 
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and N");
+        int indexPool = reader.nextInt();
+        indexPool--;
+
+        try {
+            super.getConnection().useFluxBrushToolCard(indexPool);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting dice");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showGlazingHammerRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter START to roll the dice of the draft pool" );
+        String reply = reader.nextLine();
+
+        if (reply.equalsIgnoreCase("start")) {
+
+            try  {
+                super.getConnection().useGlazingHammerToolCard();
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting start");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void showRunningPliersRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Selected a dice from the pool, but you'll skip your next turnr - Enter a number from 1 to N");
+        int indexPool = reader.nextInt();
+        indexPool--;
+
+        try {
+            super.getConnection().useRunningPliersToolCard(indexPool);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting index pool");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void showCorkBackedRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select a die from the pool - Enter a number from 1 to N");
+        int indexPool = reader.nextInt();
+        indexPool--;
+
+        System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
+        int indexPattern = reader.nextInt();
+        indexPattern--;
+
+        try {
+            super.getConnection().useCorkBackedToolCard(indexPool, indexPattern);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in tool 9");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void showGrindingStoneRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to N");
+        int indexPool = reader.nextInt();
+        indexPool--;
+
+        try {
+            super.getConnection().useGrindingStoneToolCard(indexPool);
+        }
+        catch (RemoteException e) {
+            System.out.println("Error in tool 10");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void showFluxRemoverRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println();
+
+    }
+
+    @Override
+    public void showTapWheelRequest() {
+
     }
 
     @Override
