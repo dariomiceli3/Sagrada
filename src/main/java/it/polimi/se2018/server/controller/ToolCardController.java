@@ -22,7 +22,7 @@ public class ToolCardController implements Observer {
 
        if (n == 1) {
 
-            view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID()));
+            view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         } else if (n == 2) {
 
@@ -38,11 +38,11 @@ public class ToolCardController implements Observer {
 
         }else if (n == 5) {
 
-            view.sendEvent(new LensCutterRequestEvent(view.getPlayerID()));
+            view.sendEvent(new LensCutterRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         }else if (n == 6) {
 
-            view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID()));
+            view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         } else if (n == 7) {
 
@@ -50,15 +50,15 @@ public class ToolCardController implements Observer {
 
         } else if (n == 8) {
 
-            view.sendEvent(new RunningPliersRequestEvent(view.getPlayerID()));
+            view.sendEvent(new RunningPliersRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         } else if (n == 9) {
 
-            view.sendEvent(new CorkBackedRequestEvent(view.getPlayerID()));
+            view.sendEvent(new CorkBackedRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         } else if (n == 10) {
 
-            view.sendEvent(new GrindingStoneRequestEvent(view.getPlayerID()));
+            view.sendEvent(new GrindingStoneRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
 
         }else if (n == 11) {
 

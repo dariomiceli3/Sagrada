@@ -6,12 +6,18 @@ public class FluxBrushRequestEvent implements Event {
 
     private static final long serialVersionUID = 349043L;
     private int id;
+    private int poolSize;
 
-    public FluxBrushRequestEvent(int id) {
+    public FluxBrushRequestEvent(int id, int poolSize) {
         this.id = id;
+        this.poolSize = poolSize;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getPoolSize() {
+        return poolSize;
     }
 }

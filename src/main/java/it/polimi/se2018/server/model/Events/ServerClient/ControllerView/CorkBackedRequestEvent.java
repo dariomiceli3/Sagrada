@@ -6,9 +6,11 @@ public class CorkBackedRequestEvent implements Event {
 
     private static final long serialVersionUID = 4454678L;
     private  int id;
+    private int poolSize;
 
-    public CorkBackedRequestEvent(int id) {
+    public CorkBackedRequestEvent(int id, int poolSize) {
         this.id = id;
+        this.poolSize = poolSize;
     }
 
 
@@ -16,5 +18,7 @@ public class CorkBackedRequestEvent implements Event {
         return id;
     }
 
-
+    public int getPoolSize() {
+        return poolSize;
+    }
 }
