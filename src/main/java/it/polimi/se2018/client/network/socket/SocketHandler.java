@@ -279,6 +279,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof LensCutterRequestEvent) {
+
+            if ((view.getPlayerID()) == ((LensCutterRequestEvent) event).getId()) {
+                view.showLensCutterRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -372,5 +379,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new LathekinEvent(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
+    }
+
+    @Override
+    public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition) {
+        sendEvent(new LensCutterEvent(indexPool, indexRound, indexPosition));
     }
 }

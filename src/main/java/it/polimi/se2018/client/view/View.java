@@ -116,6 +116,8 @@ public abstract class View implements Runnable {
 
     public abstract void showLathekinRequest();
 
+    public abstract void showLensCutterRequest();
+
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 
 

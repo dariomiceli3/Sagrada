@@ -476,6 +476,31 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
+    public void showLensCutterRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to N");
+        int indexPool = reader.nextInt();
+        indexPool--;
+
+        System.out.println("Select the number of the round where you want to change - Enter a number from 1 to N");
+        int indexRound = reader.nextInt();
+        indexRound--;
+
+        System.out.println("Selected the die of the round selected - Enter a number from 1 to N");
+        int indexPosition = reader.nextInt();
+        indexPosition--;
+
+        try {
+            super.getConnection().useLensCutterToolCard(indexPool, indexRound, indexPosition);
+        }
+        catch (RemoteException e) {
+            System.out.println("error ins setting index lens cutter");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
         System.out.println("Now Round Tracker is:");
         System.out.println(roundTracker.toString());

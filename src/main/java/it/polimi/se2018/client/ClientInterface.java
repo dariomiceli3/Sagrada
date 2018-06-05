@@ -29,4 +29,8 @@ public interface ClientInterface extends Remote {
 
     public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
 
+    public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition) throws RemoteException;
+
+
+
 }
