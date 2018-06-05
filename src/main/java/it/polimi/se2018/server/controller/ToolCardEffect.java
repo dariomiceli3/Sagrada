@@ -1,6 +1,7 @@
 package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
@@ -119,6 +120,15 @@ public class ToolCardEffect {
     }
 
     //todo toolcard 8
+    protected void runningPliers(VirtualView view) throws InvalidMoveException {
+        if (game.getStep() == 0) {
+            game.startMove(view);
+            game.setRunningP(0);
+        }else{
+
+            throw new InvalidMoveException(("First do a move, only after that you can use this tool card"));
+        }
+    }
 
 
     //toolcard 9

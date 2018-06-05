@@ -283,7 +283,7 @@ public class Game implements Observer {
         view.sendEvent(new StartChooseEvent(view.getPlayerID()));
     }
 
-    private void startMove(VirtualView view){
+    protected void startMove(VirtualView view){
 
         view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
         //startTimer();

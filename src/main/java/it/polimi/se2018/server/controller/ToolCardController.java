@@ -38,7 +38,7 @@ public class ToolCardController implements Observer {
 
         }else if (n == 5) {
 
-            view.sendEvent(new LensCutterRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
+            view.sendEvent(new LensCutterRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber(), game.getModel().getRoundTracker().getRoundsSizes()));
 
         }else if (n == 6) {
 
@@ -142,10 +142,14 @@ public class ToolCardController implements Observer {
             }
         }
 
-      /*  if (arg instanceof RunningPliersEvent) {
+        if (arg instanceof RunningPliersEvent) {
 
-            toolCardEffect.
-        }*/
+            try {
+                toolCardEffect.runningPliers(virtualView);
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (arg instanceof CorkBackedEvent) {
 

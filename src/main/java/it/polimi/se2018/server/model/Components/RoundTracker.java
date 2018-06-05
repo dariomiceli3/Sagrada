@@ -31,6 +31,16 @@ public class RoundTracker implements Serializable {
         return istanceRT;
     }*/
 
+   public List<Integer> getRoundsSizes(){
+       List<Integer> listSizes = new ArrayList<>();
+       for(int i = 0; i < this.getRoundTracker().size(); i++) {
+           listSizes.add(this.getRoundDice(i).size());
+
+       }
+
+       return listSizes;
+   }
+
     /**
      * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
      * @param listDice dice not used in the round
