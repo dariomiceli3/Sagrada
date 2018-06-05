@@ -147,6 +147,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                if (received instanceof TapWheelEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
 
 
                 // TODO add the other msg from the client:

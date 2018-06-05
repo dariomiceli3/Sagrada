@@ -171,9 +171,11 @@ public class ToolCardEffect {
 
         int c = 0;
         for(int i = 0; i < game.getModel().getRoundTracker().getRoundTracker().size(); i++) {
-            for(int j = 0; i < game.getModel().getRoundTracker().getRoundDice(i).size(); j++ ){
+            for(int j = 0; j < game.getModel().getRoundTracker().getRoundDice(i).size(); j++ ){
+                System.out.println("entro nel ciclo");
                 if(game.getModel().getRoundTracker().getRoundDice(i).get(j).getColor().equals(game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart1).getColor())){
                     c++;
+                    System.out.println("sommo c");
                 }
             }
 

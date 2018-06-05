@@ -44,7 +44,7 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID()));
 
-        }/* else if (n == 7) {
+        } else if (n == 7) {
 
             view.sendEvent(new GlazingHammerRequestEvent(view.getPlayerID()));
 
@@ -60,7 +60,7 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new GrindingStoneRequestEvent(view.getPlayerID()));
 
-        } else if (n == 11) {
+        }else if (n == 11) {
 
             view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID()));
 
@@ -68,7 +68,7 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new TapWheelRequestEvent(view.getPlayerID()));
 
-        }*/
+        }
     }
 
     @Override
@@ -169,6 +169,7 @@ public class ToolCardController implements Observer {
         if (arg instanceof TapWheelEvent) {
 
             try {
+                System.out.println("entro nell effetto");
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
             } catch (InvalidMoveException e) {
