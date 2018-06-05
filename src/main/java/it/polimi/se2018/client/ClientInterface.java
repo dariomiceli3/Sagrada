@@ -27,4 +27,6 @@ public interface ClientInterface extends Remote {
 
     public void useCopperFoilToolCard(int indexStart, int indexEnd) throws RemoteException;
 
+    public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
+
 }

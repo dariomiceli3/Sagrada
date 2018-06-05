@@ -433,7 +433,7 @@ public class CliView extends View implements Runnable {
         int indexStart = reader.nextInt();
         indexStart--;
 
-        System.out.println("Enter the index where you want to move it - Enter a number");
+        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
         int indexEnd = reader.nextInt();
         indexEnd--;
 
@@ -442,6 +442,35 @@ public class CliView extends View implements Runnable {
         }
         catch (RemoteException e) {
             System.out.println("error in setting index");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showLathekinRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Select the first die to move - Enter a number from 1 to 20");
+        int indexStartOne = reader.nextInt();
+        indexStartOne--;
+
+        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        int indexEndOne = reader.nextInt();
+        indexEndOne--;
+
+        System.out.println("Select the second die to move - Enter a number from 1 to 20");
+        int indexStartTwo = reader.nextInt();
+        indexStartTwo--;
+
+        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        int indexEndTwo = reader.nextInt();
+        indexEndTwo--;
+
+        try {
+            super.getConnection().useLathekinToolCard(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+        }
+        catch (RemoteException e) {
+            System.out.println("Error in setting index");
             e.printStackTrace();
         }
     }

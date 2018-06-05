@@ -272,6 +272,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof LathekinRequestEvent) {
+
+            if ((view.getPlayerID()) == ((LathekinRequestEvent) event).getId()) {
+                view.showLathekinRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -360,5 +367,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useCopperFoilToolCard(int indexStart, int indexEnd) {
         sendEvent(new CopperFoilEvent(indexStart, indexEnd));
+    }
+
+    @Override
+    public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+        sendEvent(new LathekinEvent(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
     }
 }
