@@ -26,12 +26,8 @@ public class CliView extends View implements Runnable {
 
     private boolean singlePlayer;
 
-
-
     public CliView(boolean singlePlayer) {
-        //this.reader = scanner;
         this.singlePlayer = singlePlayer;
-
     }
 
 
@@ -39,28 +35,12 @@ public class CliView extends View implements Runnable {
     public void run() {
 
         boolean loop = true;
-        Scanner reader = new Scanner(System.in);
 
         if (!isStarted) {
             System.out.println("Please wait, the game will start soon");
         }
 
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -72,7 +52,8 @@ public class CliView extends View implements Runnable {
 
         try {
             super.getConnection().setPlayerNameToServer(username, super.getPlayerID());
-        } catch (RemoteException e) {
+        }
+        catch (RemoteException e) {
             System.out.println("Error in setting name");
             e.printStackTrace();
         }
@@ -112,8 +93,13 @@ public class CliView extends View implements Runnable {
         }
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
-        int num = reader.nextInt();
+        int num;
+        do {
+
+            System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
+            num = reader.nextInt();
+        }
+        while (! ((num == 1) || (num == 2) || (num == 3) || (num == 4)  )) ;
 
         showPatternChoose(num, patternCards);
 
@@ -187,10 +173,16 @@ public class CliView extends View implements Runnable {
     public void showRollCommand() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Write the command ROLL to casually roll the draft pool");
-        String command = scanner.nextLine();
+        String command;
+        do {
+
+            System.out.println("Write the command ROLL to casually roll the draft pool");
+            command = scanner.nextLine();
+        }
+        while (!(command.equalsIgnoreCase("roll") )) ;
 
         if (command.equalsIgnoreCase("roll")) {
+
             try {
                 super.getConnection().setDraftPoolToServer();
             }
@@ -210,8 +202,12 @@ public class CliView extends View implements Runnable {
     public void showChooseCommand() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
-        int request = reader.nextInt();
+        int request;
+        do {
+            System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
+            request = reader.nextInt();
+        }
+        while (!( (request == 0) || (request == 1) ) ) ;
 
         if (request == 0) {
 
@@ -224,7 +220,7 @@ public class CliView extends View implements Runnable {
             }
         }
 
-        else {
+        if (request == 1) {
 
             try {
                 super.getConnection().setChooseToServer(request);
@@ -239,40 +235,38 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showMoveCommand()   {
-
-        /*Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                getConnection().setStartToolToServer();
-
-            }
-        }, (long) 5*1000);
-
-*/
-        System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
-
-
+    public void showMoveCommand(int poolSize)   {
 
         Scanner reader = new Scanner(System.in);
-        String response = reader.nextLine();
+        String response;
+        do {
+            System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
+            response = reader.nextLine();
+        }
+        while (!( (response.equalsIgnoreCase("yes")) || (response.equalsIgnoreCase("no")) ) );
 
         if (response.equalsIgnoreCase("yes")) {
 
-            //timer.cancel();
 
-            System.out.println("Enter the index of the dice from the pool - from 1 to N");
-            int indexPool = reader.nextInt();
+            int indexPool;
+            do {
+                System.out.println("Enter the index of the dice from the pool - from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            while ( (indexPool < 1) || (indexPool > poolSize) );
             indexPool--;
 
-            System.out.println("Enter the index of the Pattern Card - from 1 to 20");
-            int indexPattern = reader.nextInt();
+
+
+            int indexPattern;
+            do {
+                System.out.println("Enter the index of the Pattern Card - from 1 to 20");
+                indexPattern = reader.nextInt();
+            }
+            while ( (indexPattern < 1) || (indexPattern > 20) );
             indexPattern--;
 
             try {
-
                 super.getConnection().setMoveToServer(indexPool, indexPattern);
             }
             catch (RemoteException e) {
@@ -283,7 +277,6 @@ public class CliView extends View implements Runnable {
 
         if (response.equalsIgnoreCase("no")) {
 
-            //timer.cancel();
             try {
                 super.getConnection().setStartToolToServer();
             }
@@ -299,41 +292,36 @@ public class CliView extends View implements Runnable {
     @Override
     public void showToolCommand(List<ToolCard> toolCards) {
 
-        /*Timer timer = new Timer();
-        timer.schedule(new TimerTask()
-        {
-            @Override
-            public void run() {
-                try {
-                    getConnection().setNextTurnToServer();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, (long) 5*1000);*/
-
-
         Scanner reader = new Scanner(System.in);
-        System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
-
-        String response = reader.nextLine();
+        String response;
+        do {
+            System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+            response = reader.nextLine();
+        }
+        while (!( (response.equalsIgnoreCase("yes")) || (response.equalsIgnoreCase("no")) ) );
 
         if (response.equalsIgnoreCase("yes")) {
 
-            //timer.cancel();
-            System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
-            int indexTool = reader.nextInt();
+            int indexTool;
+            do {
+                System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
+                indexTool = reader.nextInt();
+            }
+            while (! ( (indexTool == 1) || (indexTool == 2) || (indexTool == 3)  )) ;
             indexTool--;
 
-            System.out.println("Do you want to use " + toolCards.get(indexTool).getCost() + " Tockens to use this card? - Enter yes or no");
             Scanner scanner = new Scanner(System.in);
-            String reply = scanner.nextLine();
+            String reply;
+            do {
+                System.out.println("Do you want to use " + toolCards.get(indexTool).getCost() + " Tokens to use this card? - Enter yes or no");
+                reply = scanner.nextLine();
+            }
+            while (!( (reply.equalsIgnoreCase("yes")) || (reply.equalsIgnoreCase("no")) ) );
 
 
             if (reply.equalsIgnoreCase("yes")) {
 
                 try {
-
                     super.getConnection().useToolCardToServer(indexTool);
                 }
                 catch (RemoteException e) {
@@ -342,13 +330,11 @@ public class CliView extends View implements Runnable {
                 }
             }
 
-
         }
 
         if (response.equalsIgnoreCase("no")) {
 
             try {
-                //timer.cancel();
                 super.getConnection().setNextTurnToServer();
             }
             catch (RemoteException e) {

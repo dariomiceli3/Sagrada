@@ -90,7 +90,7 @@ public abstract class View implements Runnable {
 
     public abstract void showChooseCommand();
 
-    public abstract void showMoveCommand();
+    public abstract void showMoveCommand(int poolSize);
 
     public abstract void showToolCommand(List<ToolCard> toolCards);
 

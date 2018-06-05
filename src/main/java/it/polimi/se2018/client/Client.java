@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Client {
 
-    private static final int SOCKETPORT = 4444;
-    private static String host;
+    private static final int SOCKETPORT = 8888;
+    private static String host = "localhost";
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
     private static boolean singlePlay;
@@ -21,61 +21,58 @@ public class Client {
         Scanner reader = new Scanner(System.in);
 
 
-        System.out.println("Enter the gameplay mode: Single or Multi?");
-        String mode = reader.nextLine();
+
+        //---------------------------------------modalità di gioco---------------------------------------------------
+
+        String mode;
+        do {
+            System.out.println("Enter the gameplay mode: Single or Multi?");
+            mode = reader.nextLine();
+        } while (!((mode.equalsIgnoreCase("single") || mode.equalsIgnoreCase("multi")))) ;
 
         if (mode.equalsIgnoreCase("Single")) {
             singlePlay = true;
         }
-
         else if (mode.equalsIgnoreCase("Multi")) {
             singlePlay = false;
         }
-
         else {
+            System.out.println("something went wrong in setting modality");
             reader.close();
         }
 
-        System.out.println("How do you prefer to play: Gui or Cli?");
-        String textView = reader.nextLine();
+
+        //-------------------------------view creation--------------------------------------------------------------
+
+        String textView;
         View view;
+        do {
+            System.out.println("How do you prefer to play: Gui or Cli?");
+            textView = reader.nextLine();
+        } while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli")))) ;
 
         if (textView.equalsIgnoreCase("Gui")) {
-
-            // TODO correct this
             view = new CliView(singlePlay);
-
         }
-
-        else if (textView.equalsIgnoreCase("Cli")){
-
+        else if (textView.equalsIgnoreCase("Cli")) {
             view = new CliView(singlePlay);
-
         }
-
         else {
+            System.out.println("something went wrong in setting view");
+            view = new CliView(singlePlay);
             reader.close();
-            // TODO correct this
-            view = new CliView(singlePlay); // sistemare in modo che view sia inizializzata
         }
 
 
-        System.out.println("Enter the IP address of the Server : write localhost to play on your local machine");
-        String address = reader.nextLine();
 
-        if (address.equalsIgnoreCase("localhost")) {
-            host = "localhost";
+        //-------------------------------connectivity creation----------------------------------------------------------
+
+        String connectionType;
+        do {
+            System.out.println("Choose the connection type:Socket or RMI?");
+            connectionType = reader.nextLine();
         }
-
-        else {
-            System.out.println("You're writing something not expected, please re-enter the host");
-        }
-        // todo chiedere utente porta
-
-
-
-        System.out.println("Choose the connection type:Socket or RMI?");
-        String connectionType = reader.nextLine();
+         while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi")))) ;
 
         if (connectionType.equalsIgnoreCase("Socket")) {
 
@@ -99,6 +96,7 @@ public class Client {
             serverRmi = new RmiHandler();
         }
         else {
+            System.out.println("something went wrong in setting connection");
             reader.close();
         }
 

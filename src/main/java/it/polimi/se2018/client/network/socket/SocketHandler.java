@@ -185,7 +185,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof StartMoveEvent) {
 
             if ((view.getPlayerID()) == ((StartMoveEvent) event).getID()) {
-                view.showMoveCommand();
+                view.showMoveCommand( ((StartMoveEvent) event).getPoolSize());
             }
         }
 
