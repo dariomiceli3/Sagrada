@@ -147,7 +147,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 11
-    protected void fluxRemoverEffect(int iD, int indexPool, int value){
+    /*protected void fluxRemoverEffect(int iD, int indexPool, int value){
 
         Dice dice = game.getModel().getDraftPool().getDraftPool().set(0, );
 
@@ -163,22 +163,46 @@ public class ToolCardEffect {
         Dice dice1 = game.getModel().getDiceBag().getDice();
 
 
-    }
+    }*/
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
     //toolcard 12
-    protected void tapWheelEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
-        /*for (int i=0; i<PositionDiceToMove.size(); i++){
-            if (i==2) {
-                break;
+    protected void tapWheelEffect(int iD,int numberOfDice, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
+
+        int c = 0;
+        for(int i = 0; i < game.getModel().getRoundTracker().getRoundTracker().size(); i++) {
+            for(int j = 0; i < game.getModel().getRoundTracker().getRoundDice(i).size(); j++ ){
+                if(game.getModel().getRoundTracker().getRoundDice(i).get(j).getColor().equals(game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart1).getColor())){
+                    c++;
+                }
+            }
+
+
+        }
+        if(numberOfDice > 1 && c > 0){
+
+            if (game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart1).getColor().equals(game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart2).getColor()))
+            {
+            Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+            Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
             }
             else {
-                game.getModel()
-                Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(i));
-                patternCard.putDiceOnPattern(dice1, PositionToArrive.get(i), patternCard);
+                throw new InvalidMoveException("you choose dice with different color");
             }
-        }*/
+        }else if (c > 0){
+            Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+        }else {
+            throw new InvalidMoveException("color of dice not in RoundTracker");
+        }
+
+        game.getModel().updatePatternAndNotify(iD);
+        game.getModel().updateTokenAndNotify(iD);
     }
+
 
 
 
