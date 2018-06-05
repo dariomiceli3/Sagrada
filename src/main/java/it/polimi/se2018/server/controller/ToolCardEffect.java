@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//todo unire metodi di toolcard(somigliano 10-11-6-7   12-4-3)
 public class ToolCardEffect {
 
     private Game game;
@@ -86,64 +87,90 @@ public class ToolCardEffect {
     }
 
     //toolcard 6
-
-
-    protected Dice fluxBrushEffect (Dice dice){
+    protected void poolToolEffect (int iD, int indexPool){
 
         Random random = new Random();
         int newValue = random.nextInt(6) + 1;
-        dice.setValue(newValue);
-        return dice;
+        game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(newValue);
+        game.getModel().updateBoardAndNotify();
+        game.getModel().updateTokenAndNotify(iD);
     }
 
+    //toolcard 7
+    protected void glazingHammerEffect(int iD) throws InvalidMoveException{
 
-    protected DraftPool glazingHammerEffect(int turn, int numberPlayers, DraftPool draftPool) throws InvalidMoveException{
-
-        if (turn > (numberPlayers - 1)) {
+        if (game.getTurn() > (game.getViewGame().size() - 1)) {
             List<Dice> newDicePlay;
-            newDicePlay = draftPool.cleanListDice();
+            newDicePlay = game.getModel().getDraftPool().cleanListDice();
 
             for (Dice dice : newDicePlay) {
                 Random random = new Random();
                 int newValue = random.nextInt(6) + 1;
                 dice.setValue(newValue);
-                draftPool.setDice(dice);
+                game.getModel().getDraftPool().setDice(dice);
             }
+            game.getModel().updateBoardAndNotify();
+            game.getModel().updateTokenAndNotify(iD);
         }
 
         else {
             throw new InvalidMoveException("not allowed now");
         }
-        return draftPool;
     }
 
-    protected Dice grindingStoneEffect(Dice dice) {
+    //todo toolcard 8
 
-        int newValue = 7 - dice.getValue();
-        dice.setValue(newValue);
-        return dice;
+
+    //toolcard 9
+    protected void corckBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
+
+        if(game.getStep() == 1) {
+            Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
+            game.getModel().getPlayerFromID(iD).getPattern().putDice(dice, indexPattern);
+            game.getModel().updatePatternAndNotify(iD);
+            game.getModel().updateBoardAndNotify();
+            game.getModel().updateTokenAndNotify(iD);
+        } else {
+            System.out.println("Non puoi usarla ora");//Todo cancellare il println
+            throw new InvalidMoveException("you just got a move");
+        }
+    }
+
+    //toolcard 10
+    protected void grindingStoneEffect(int iD, int indexPool) {
+
+        int value = game.getModel().getDraftPool().getDraftPool().get(indexPool).getValue();
+        game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(7 - value);
+        game.getModel().updateBoardAndNotify();
+        game.getModel().updateTokenAndNotify(iD);
+
+    }
+
+    //toolcard 11
+    protected void fluxRemoverEffect(int iD, int indexPool, int num){
+
+        Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
+        game.getModel().getDiceBag().setDice(dice);
+        Dice dice1 = game.getModel().getDiceBag().getDice();
+
 
     }
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
-    protected void tapWheelEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove,ArrayList<Integer>PositionToArrive) throws InvalidMoveException {
-        for (int i=0; i<PositionDiceToMove.size(); i++){
+    //toolcard 12
+    protected void tapWheelEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
+        /*for (int i=0; i<PositionDiceToMove.size(); i++){
             if (i==2) {
                 break;
             }
             else {
+                game.getModel()
                 Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(i));
                 patternCard.putDiceOnPattern(dice1, PositionToArrive.get(i), patternCard);
             }
-        }
-    }
-    protected void corckBackedStraightedgeEffect(PatternCard patternCard, Dice dice, int position) throws InvalidMoveException {
-        patternCard.putDice(dice, position);
+        }*/
     }
 
-    protected Dice fluxRemoverEffect(Dice dice, DiceBag diceBag){
-               diceBag.setDice(dice);
-               Dice dice1 = diceBag.getDice();
-               return dice1;
-           }
+
+
 }

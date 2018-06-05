@@ -40,11 +40,11 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new LensCutterRequestEvent(view.getPlayerID()));
 
-        }/* else if (n == 6) {
+        }else if (n == 6) {
 
             view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID()));
 
-        } else if (n == 7) {
+        }/* else if (n == 7) {
 
             view.sendEvent(new GlazingHammerRequestEvent(view.getPlayerID()));
 
@@ -125,12 +125,13 @@ public class ToolCardController implements Observer {
                 e.printStackTrace();
             }
             game.nextStepTool(virtualView);
-        }/*
+        }
 
         if (arg instanceof FluxBrushEvent) {
 
-            toolCardEffect.fluxBrushEffect();
-        }
+            toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
+            game.nextTurn();
+        }/*
 
         if (arg instanceof GlazingHammerEvent) {
 

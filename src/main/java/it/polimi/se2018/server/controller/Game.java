@@ -82,6 +82,14 @@ public class Game implements Observer {
         return viewGame;
     }
 
+    protected int getTurn(){
+        return turn;
+    }
+
+    protected int getStep(){
+        return step;
+    }
+
 
 
 
