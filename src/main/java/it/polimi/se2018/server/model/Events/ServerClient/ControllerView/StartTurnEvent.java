@@ -7,6 +7,7 @@ public class StartTurnEvent implements Event {
     private static final long serialVersionUID = 8348L;
     private int ID;
     private String name;
+    private int turn;
 
     public StartTurnEvent(int ID, String name) {
 
@@ -22,4 +23,5 @@ public class StartTurnEvent implements Event {
     public String getName() {
         return name;
     }
+
 }

@@ -26,6 +26,7 @@ public class Game implements Observer {
     private int round = START;
     private int position;
     private int currID;
+    private int step;
     private final int timePlayer;
     private Timer timer;
     private ToolCardController toolController;
@@ -116,17 +117,21 @@ public class Game implements Observer {
         }
         if (arg instanceof PlayerStartToolEvent){
 
-            startTool(virtualView);
+            nextStepMove(virtualView);
         }
 
         if (arg instanceof PlayerNextTurnEvent) {
 
-            nextTurn();
+            nextStepTool(virtualView);
         }
         if (arg instanceof ToolCardStartEvent){
 
             checkCost(virtualView, ((ToolCardStartEvent) arg).getIndexTool());
 
+        }
+        if (arg instanceof PlayerChooseEvent){
+
+            stepController(virtualView, ((PlayerChooseEvent)arg).getStep());
         }
 
 
@@ -181,14 +186,18 @@ public class Game implements Observer {
 
 
         model.setDraftPoolAndNotify();
-        startMove(view);
+        startChoose(view);
 
     }
 
     protected void setMoveModel(VirtualView view, int indexPool, int indexPattern) throws InvalidMoveException {
 
         model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
-        startTool(view);
+        if(step == 0){
+            startTool(view);
+        }else {
+            nextTurn();
+        }
     }
 
     protected void setEndRoundModel(){
@@ -252,7 +261,7 @@ public class Game implements Observer {
                 view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                 view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                 if (currID == view.getPlayerID()) {
-                    startMove(view);
+                    startChoose(view);
                 }
 
             }
@@ -262,6 +271,11 @@ public class Game implements Observer {
         }
 
 
+    }
+
+    private void startChoose(VirtualView view){
+
+        view.sendEvent(new StartChooseEvent(view.getPlayerID()));
     }
 
     private void startMove(VirtualView view){
@@ -331,6 +345,45 @@ public class Game implements Observer {
 
         }
     }
+
+    protected void stepController(VirtualView view, int step){
+
+        if(step == 0){
+            this.step = 0;
+            startMove(view);
+
+        }else{
+
+            this.step = 1;
+            startTool(view);
+        }
+    }
+
+    protected void nextStepTool(VirtualView view){
+
+        if(step == 1){
+
+            startMove(view);
+            step++;
+        }
+        else {
+            nextTurn();
+        }
+
+    }
+
+    protected void nextStepMove(VirtualView view){
+
+        if(step == 0){
+
+            startTool(view);
+
+        }
+        else {
+            nextTurn();
+        }
+    }
+
 
     /*protected void startTimer() {
 

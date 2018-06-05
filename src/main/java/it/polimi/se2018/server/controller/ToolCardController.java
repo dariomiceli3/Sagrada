@@ -2,14 +2,8 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
-import it.polimi.se2018.server.model.Events.ClientServer.CopperFoilEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.EglomiseBrushEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.LathekinEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.CopperFoilRequestEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.EglomiseBrushRequestEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GrozingPliersRequestEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.LathekinRequestEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.*;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -42,11 +36,11 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new LathekinRequestEvent(view.getPlayerID()));
 
-        } /*else if (n == 5) {
+        }else if (n == 5) {
 
             view.sendEvent(new LensCutterRequestEvent(view.getPlayerID()));
 
-        } else if (n == 6) {
+        }/* else if (n == 6) {
 
             view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID()));
 
@@ -89,6 +83,7 @@ public class ToolCardController implements Observer {
             }catch (InvalidMoveException e ){
                 e.printStackTrace();
             }
+            game.nextStepTool(virtualView);
 
         }
 
@@ -99,6 +94,7 @@ public class ToolCardController implements Observer {
             }catch(InvalidMoveException e){
                 e.printStackTrace();
             }
+            game.nextStepTool(virtualView);
         }
 
         if (arg instanceof CopperFoilEvent) {
@@ -108,6 +104,7 @@ public class ToolCardController implements Observer {
             }catch(InvalidMoveException e){
                 e.printStackTrace();
             }
+            game.nextStepTool(virtualView);
         }
 
         if (arg instanceof LathekinEvent) {
@@ -117,12 +114,18 @@ public class ToolCardController implements Observer {
            }catch(InvalidMoveException e){
                e.printStackTrace();
            }
+           game.nextStepTool(virtualView);
         }
 
-        /*if (arg instanceof LensCutterEvent) {
+        if (arg instanceof LensCutterEvent) {
 
-            toolCardEffect.lensCutterEffect();
-        }
+            try {
+                toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent)arg).getIndexPool(), ((LensCutterEvent)arg).getIndexRound(), ((LensCutterEvent)arg).getIndexPosition());
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
+            game.nextStepTool(virtualView);
+        }/*
 
         if (arg instanceof FluxBrushEvent) {
 

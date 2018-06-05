@@ -156,7 +156,6 @@ public class SocketHandler implements ClientInterface, Runnable {
 
             if ((view.getPlayerID()) == ((StartTurnEvent) event).getID()) {
                 view.showCurrentTurn();
-                view.showChooseCommand();
             }
 
             else {
@@ -174,6 +173,13 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof PlayerDraftPoolUpdateEvent) {
 
             view.showDraftPool(((PlayerDraftPoolUpdateEvent) event).getDraftPool());
+        }
+
+        else if(event instanceof StartChooseEvent){
+
+            if ((view.getPlayerID()) == ((StartChooseEvent) event).getID()) {
+                view.showChooseCommand();
+            }
         }
 
         else if (event instanceof StartMoveEvent) {
