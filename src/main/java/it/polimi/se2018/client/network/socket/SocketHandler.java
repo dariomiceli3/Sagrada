@@ -260,7 +260,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof GrozingPliersRequestEvent) {
 
             if ((view.getPlayerID()) == ((GrozingPliersRequestEvent) event).getId()) {
-                view.showGrozingRequest();
+                view.showGrozingRequest( ((GrozingPliersRequestEvent) event).getPoolSize());
             }
 
         }
@@ -289,14 +289,14 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof LensCutterRequestEvent) {
 
             if ((view.getPlayerID()) == ((LensCutterRequestEvent) event).getId()) {
-                view.showLensCutterRequest();
+                view.showLensCutterRequest( ((LensCutterRequestEvent) event).getPoolSize(), ((LensCutterRequestEvent) event).getRoundSizes());
             }
         }
 
         else if (event instanceof FluxBrushRequestEvent) {
 
             if ((view.getPlayerID()) == ((FluxBrushRequestEvent) event).getId()) {
-                view.showFluxBrushRequest();
+                view.showFluxBrushRequest( ((FluxBrushRequestEvent)event).getPoolSize());
             }
         }
 
@@ -310,21 +310,21 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof RunningPliersRequestEvent) {
 
             if ((view.getPlayerID()) == ((RunningPliersRequestEvent) event).getId()) {
-                view.showRunningPliersRequest();
+                view.showRunningPliersRequest( ((RunningPliersRequestEvent) event).getPoolSize());
             }
         }
 
         else if (event instanceof CorkBackedRequestEvent) {
 
             if ((view.getPlayerID()) == ((CorkBackedRequestEvent) event).getId()) {
-                view.showCorkBackedRequest();
+                view.showCorkBackedRequest( ((CorkBackedRequestEvent) event).getPoolSize());
             }
         }
 
         else if (event instanceof GrindingStoneRequestEvent) {
 
             if ((view.getPlayerID()) == ((GrindingStoneRequestEvent) event).getId()) {
-                view.showGrindingStoneRequest();
+                view.showGrindingStoneRequest( ((GrindingStoneRequestEvent) event).getPoolSize());
             }
         }
 

@@ -110,7 +110,7 @@ public abstract class View implements Runnable {
 
     public abstract void showTokenError();
 
-    public abstract void showGrozingRequest();
+    public abstract void showGrozingRequest(int poolSize);
 
     public abstract void showEglomiseRequest();
 
@@ -118,17 +118,17 @@ public abstract class View implements Runnable {
 
     public abstract void showLathekinRequest();
 
-    public abstract void showLensCutterRequest();
+    public abstract void showLensCutterRequest(int poolSize, List<Integer> round);
 
-    public abstract void showFluxBrushRequest();
+    public abstract void showFluxBrushRequest(int poolSize);
 
     public abstract void showGlazingHammerRequest();
 
-    public abstract void showRunningPliersRequest();
+    public abstract void showRunningPliersRequest(int poolSize);
 
-    public abstract void showCorkBackedRequest();
+    public abstract void showCorkBackedRequest(int poolSize);
 
-    public abstract void showGrindingStoneRequest();
+    public abstract void showGrindingStoneRequest(int poolSize);
 
     public abstract void showFluxRemoverRequest();
 

@@ -402,15 +402,23 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showGrozingRequest() {
+    public void showGrozingRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select a die from the pool - Enter a number between 1 and N");
-        int index = reader.nextInt();
+        int index;
+        do {
+            System.out.println("Select a die from the pool - Enter a number between 1 and" + poolSize);
+            index = reader.nextInt();
+        }
+        while ( (index < 1) || (index > poolSize) );
         index--;
 
-        System.out.println("Do you want to increase (1) or decrease (0)");
-        int increase = reader.nextInt();
+        int increase;
+        do {
+            System.out.println("Do you want to increase (1) or decrease (0)");
+            increase = reader.nextInt();
+        }
+        while (! ( (increase == 0) || (increase == 1)));
 
         try {
             super.getConnection().useGrozingToolCard(index, increase);
@@ -426,12 +434,20 @@ public class CliView extends View implements Runnable {
     public void showEglomiseRequest() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
-        int indexStart = reader.nextInt();
+        int indexStart;
+        do {
+            System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
+            indexStart = reader.nextInt();
+        }
+        while ( (indexStart < 1) || (indexStart > 20) );
         indexStart--;
 
-        System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
-        int indexEnd = reader.nextInt();
+        int indexEnd;
+        do {
+            System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
+            indexEnd = reader.nextInt();
+        }
+        while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
 
         try {
@@ -447,12 +463,20 @@ public class CliView extends View implements Runnable {
     public void showCopperFoilRequest() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
-        int indexStart = reader.nextInt();
+        int indexStart;
+        do {
+            System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
+            indexStart = reader.nextInt();
+        }
+        while ( (indexStart < 1) || (indexStart > 20) );
         indexStart--;
 
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-        int indexEnd = reader.nextInt();
+        int indexEnd;
+        do {
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            indexEnd = reader.nextInt();
+        }
+        while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
 
         try {
@@ -468,20 +492,37 @@ public class CliView extends View implements Runnable {
     public void showLathekinRequest() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select the first die to move - Enter a number from 1 to 20");
-        int indexStartOne = reader.nextInt();
+        int indexStartOne;
+        do {
+
+            System.out.println("Select the first die to move - Enter a number from 1 to 20");
+            indexStartOne = reader.nextInt();
+        }
+        while ( (indexStartOne < 1) || (indexStartOne > 20) );
         indexStartOne--;
 
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-        int indexEndOne = reader.nextInt();
+        int indexEndOne;
+        do {
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            indexEndOne = reader.nextInt();
+        }
+        while ( (indexEndOne < 1) || (indexEndOne > 20) );
         indexEndOne--;
 
-        System.out.println("Select the second die to move - Enter a number from 1 to 20");
-        int indexStartTwo = reader.nextInt();
+        int indexStartTwo;
+        do {
+            System.out.println("Select the second die to move - Enter a number from 1 to 20");
+            indexStartTwo = reader.nextInt();
+        }
+        while ( (indexStartTwo < 1) || (indexStartTwo > 20) );
         indexStartTwo--;
 
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-        int indexEndTwo = reader.nextInt();
+        int indexEndTwo;
+        do {
+            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+            indexEndTwo = reader.nextInt();
+        }
+        while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
         indexEndTwo--;
 
         try {
@@ -494,36 +535,52 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showLensCutterRequest() {
+    public void showLensCutterRequest(int poolSize, List<Integer> round) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to N");
-        int indexPool = reader.nextInt();
+        int indexPool;
+        do {
+            System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to " + poolSize);
+            indexPool = reader.nextInt();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        System.out.println("Select the number of the round where you want to change - Enter a number from 1 to N");
-        int indexRound = reader.nextInt();
+        int indexRound;
+        do {
+            System.out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
+            indexRound = reader.nextInt();
+        }
+        while ( (indexRound < 1) || (indexRound > round.size()) );
         indexRound--;
 
-        System.out.println("Selected the die of the round selected - Enter a number from 1 to N");
-        int indexPosition = reader.nextInt();
+        int indexPosition;
+        do {
+            System.out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(indexRound).toString());
+            indexPosition = reader.nextInt();
+        }
+        while ( (indexPosition < 1) || (indexPosition > round.get(indexRound)) );
         indexPosition--;
 
         try {
             super.getConnection().useLensCutterToolCard(indexPool, indexRound, indexPosition);
         }
         catch (RemoteException e) {
-            System.out.println("error ins setting index lens cutter");
+            System.out.println("error in setting index lens cutter");
             e.printStackTrace();
         }
     }
 
     @Override
-    public void showFluxBrushRequest() {
+    public void showFluxBrushRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and N");
-        int indexPool = reader.nextInt();
+        int indexPool;
+        do {
+            System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and " + poolSize);
+            indexPool = reader.nextInt();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
         try {
@@ -555,11 +612,15 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showRunningPliersRequest() {
+    public void showRunningPliersRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Selected a dice from the pool, but you'll skip your next turnr - Enter a number from 1 to N");
-        int indexPool = reader.nextInt();
+        int indexPool;
+        do {
+            System.out.println("Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + poolSize);
+            indexPool = reader.nextInt();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
         try {
@@ -573,15 +634,24 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showCorkBackedRequest() {
+    public void showCorkBackedRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select a die from the pool - Enter a number from 1 to N");
-        int indexPool = reader.nextInt();
+
+        int indexPool;
+        do {
+            System.out.println("Select a die from the pool - Enter a number from 1 to " + poolSize);
+            indexPool = reader.nextInt();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
-        int indexPattern = reader.nextInt();
+        int indexPattern;
+        do {
+            System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
+            indexPattern = reader.nextInt();
+        }
+        while ( (indexPattern < 1) || (indexPattern > 20) );
         indexPattern--;
 
         try {
@@ -595,11 +665,15 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showGrindingStoneRequest() {
+    public void showGrindingStoneRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to N");
-        int indexPool = reader.nextInt();
+        int indexPool;
+        do {
+            System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to " + poolSize);
+            indexPool = reader.nextInt();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
         try {
@@ -624,17 +698,30 @@ public class CliView extends View implements Runnable {
     public void showTapWheelRequest() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
-        int number = reader.nextInt();
+        int number;
+        do {
+            System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
+            number = reader.nextInt();
+        }
+        while (! ( (number == 1) || (number == 2)));
+
 
         if (number == 1) {
 
-            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-            int indexStarOne = reader.nextInt();
+            int indexStarOne;
+            do {
+                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                indexStarOne = reader.nextInt();
+            }
+            while ( (indexStarOne < 1) || (indexStarOne > 20) );
             indexStarOne--;
 
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            int indexEndOne = reader.nextInt();
+            int indexEndOne;
+            do {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEndOne = reader.nextInt();
+            }
+            while ( (indexEndOne < 1) || (indexEndOne > 20) );
             indexEndOne--;
 
             try {
@@ -647,26 +734,42 @@ public class CliView extends View implements Runnable {
 
         }
 
-        else {
+        if (number == 2) {
 
-            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-            int indexStarOne = reader.nextInt();
-            indexStarOne--;
+            int indexStartOne;
+            do {
+                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                indexStartOne = reader.nextInt();
+            }
+            while ( (indexStartOne < 1) || (indexStartOne > 20) );
+            indexStartOne--;
 
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            int indexEndOne = reader.nextInt();
+            int indexEndOne;
+            do {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEndOne = reader.nextInt();
+            }
+            while ( (indexEndOne < 1) || (indexEndOne > 20) );
             indexEndOne--;
 
-            System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-            int indexStartTwo = reader.nextInt();
+            int indexStartTwo;
+            do {
+                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                indexStartTwo = reader.nextInt();
+            }
+            while ( (indexStartTwo < 1) || (indexStartTwo > 20) );
             indexStartTwo--;
 
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            int indexEndTwo = reader.nextInt();
+            int indexEndTwo;
+            do {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEndTwo = reader.nextInt();
+            }
+            while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
             indexEndTwo--;
 
             try {
-                super.getConnection().useTapWheelToolCard(number, indexStarOne, indexEndOne, indexStarOne, indexEndTwo);
+                super.getConnection().useTapWheelToolCard(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
             }
             catch (RemoteException e) {
                 System.out.println("error in setting second dice");
