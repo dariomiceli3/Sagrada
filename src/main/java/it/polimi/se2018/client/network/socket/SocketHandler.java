@@ -156,6 +156,7 @@ public class SocketHandler implements ClientInterface, Runnable {
 
             if ((view.getPlayerID()) == ((StartTurnEvent) event).getID()) {
                 view.showCurrentTurn();
+                view.showChooseCommand();
             }
 
             else {
@@ -286,6 +287,13 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof FluxBrushRequestEvent) {
+
+            if ((view.getPlayerID()) == ((FluxBrushRequestEvent) event).getId()) {
+                view.showFluxBrushRequest();
+            }
+        }
+
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
         }
@@ -339,6 +347,11 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setDraftPoolToServer() {
         sendEvent(new PlayerDraftPoolEvent());
+    }
+
+    @Override
+    public void setChooseToServer(int step) {
+        sendEvent(new PlayerChooseEvent(step));
     }
 
     @Override

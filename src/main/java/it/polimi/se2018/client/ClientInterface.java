@@ -13,6 +13,8 @@ public interface ClientInterface extends Remote {
 
     public void setDraftPoolToServer() throws RemoteException;
 
+    public void setChooseToServer(int step) throws RemoteException;
+
     public void setMoveToServer(int indexPool, int indexPattern) throws RemoteException;
 
     public void setStartToolToServer() throws RemoteException;

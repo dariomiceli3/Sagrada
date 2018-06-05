@@ -67,6 +67,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                if (received instanceof PlayerChooseEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
                 if (received instanceof PlayerMoveEvent) {
                     setChanged();
                     notifyObservers(received);
@@ -111,6 +116,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     setChanged();
                     notifyObservers(received);
                 }
+
+                if (received instanceof FluxBrushEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
                 // TODO add the other msg from the client:
                 // if the msg is a modification of the model, notify, ecc.
                 // if the msg is an update, access the model to get the latest information

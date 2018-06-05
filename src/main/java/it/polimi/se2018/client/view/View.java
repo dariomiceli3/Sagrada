@@ -88,6 +88,8 @@ public abstract class View implements Runnable {
 
     public abstract void showDraftPool(DraftPool draftPool);
 
+    public abstract void showChooseCommand();
+
     public abstract void showMoveCommand();
 
     public abstract void showToolCommand(List<ToolCard> toolCards);
@@ -117,6 +119,8 @@ public abstract class View implements Runnable {
     public abstract void showLathekinRequest();
 
     public abstract void showLensCutterRequest();
+
+    public abstract void showFluxBrushRequest();
 
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 

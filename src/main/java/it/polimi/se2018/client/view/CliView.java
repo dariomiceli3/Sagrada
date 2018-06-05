@@ -207,6 +207,38 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
+    public void showChooseCommand() {
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
+        int request = reader.nextInt();
+
+        if (request == 0) {
+
+            try {
+                super.getConnection().setChooseToServer(request);
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting request");
+                e.printStackTrace();
+            }
+        }
+
+        else {
+
+            try {
+                super.getConnection().setChooseToServer(request);
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting request");
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    @Override
     public void showMoveCommand()   {
 
         /*Timer timer = new Timer();
@@ -498,6 +530,11 @@ public class CliView extends View implements Runnable {
             System.out.println("error ins setting index lens cutter");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void showFluxBrushRequest() {
+
     }
 
     @Override
