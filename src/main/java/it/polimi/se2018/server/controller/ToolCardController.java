@@ -129,7 +129,11 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof FluxBrushEvent) {
 
-            toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
+            try {
+                toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
+            } catch (InvalidMoveException e) {
+                e.printStackTrace();
+            }
             game.nextTurn();
         }
 
@@ -140,16 +144,17 @@ public class ToolCardController implements Observer {
             } catch (InvalidMoveException e) {
                 e.printStackTrace();
             }
+            game.nextStepTool(virtualView);
         }
 
-        if (arg instanceof RunningPliersEvent) {
+      /*  if (arg instanceof RunningPliersEvent) {
 
             try {
                 toolCardEffect.runningPliers(virtualView);
             } catch (InvalidMoveException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         if (arg instanceof CorkBackedEvent) {
 
@@ -158,6 +163,8 @@ public class ToolCardController implements Observer {
             } catch (InvalidMoveException e) {
                 e.printStackTrace();
             }
+            game.nextTurn();
+
         }
 
         if (arg instanceof GrindingStoneEvent) {

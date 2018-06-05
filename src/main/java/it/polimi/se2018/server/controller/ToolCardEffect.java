@@ -88,13 +88,18 @@ public class ToolCardEffect {
     }
 
     //toolcard 6
-    protected void fluxBrushEffect(int iD, int indexPool){
+    protected void fluxBrushEffect(int iD, int indexPool) throws InvalidMoveException {
 
+       // if (game.getStep() == 1){
         Random random = new Random();
         int newValue = random.nextInt(6) + 1;
         game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(newValue);
         game.getModel().updateBoardAndNotify();
         game.getModel().updateTokenAndNotify(iD);
+       // } else {
+          //  System.out.println("Non puoi usarla ora");//Todo cancellare il println
+           // throw new InvalidMoveException("you just got a move");
+      //  }
     }
 
     //toolcard 7
