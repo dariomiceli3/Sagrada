@@ -145,7 +145,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showOtherPattern(PatternCard patternCard, String name) {
 
-        System.out.println("Now Pattern of" + name + "is:");
+        System.out.println("Now Pattern of" + name + "is: ");
         System.out.println(patternCard.toString());
 
     }
@@ -325,7 +325,7 @@ public class CliView extends View implements Runnable {
             int indexTool = reader.nextInt();
             indexTool--;
 
-            System.out.println("Do you want to use " + toolCards.get(indexTool).getCost() + " to use this card?");
+            System.out.println("Do you want to use " + toolCards.get(indexTool).getCost() + " Tockens to use this card? - Enter yes or no");
             Scanner scanner = new Scanner(System.in);
             String reply = scanner.nextLine();
 

@@ -100,10 +100,10 @@ public class SocketHandler implements ClientInterface, Runnable {
 
             if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
                view.setNameView(((PlayerNameUpdateEvent) event).getName());
-               System.out.println("Name set" + view.getPlayerName());
+               System.out.println("Name set: " + view.getPlayerName());
             }
             else {
-                System.out.println("Other name" + ((PlayerNameUpdateEvent) event).getName());
+                System.out.println("Other name: " + ((PlayerNameUpdateEvent) event).getName());
             }
         }
 
