@@ -60,6 +60,18 @@ public class ToolCardEffect {
         game.nextTurn();
     }
 
+    //toolcard 4
+    protected void lathekinEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
+
+        Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
+        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+        Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
+        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+        game.getModel().updatePatternAndNotify(iD);
+        game.getModel().updateTokenAndNotify(iD);
+        game.nextTurn();
+    }
+
     protected Dice fluxBrushEffect (Dice dice){
 
         Random random = new Random();
@@ -102,15 +114,6 @@ public class ToolCardEffect {
     protected void lensCutterEffect(Dice diceTracker, Dice dicePool) {
         List<Dice> diceArrayList = new ArrayList<>();
 
-    }
-
-
-    protected void lathekinEffect(PatternCard patternCard, ArrayList<Integer> PositionDiceToMove, ArrayList<Integer>PositionToArrive ) throws InvalidMoveException {
-
-        Dice dice1 = patternCard.removeDice(PositionDiceToMove.get(0));
-        Dice dice3 = patternCard.removeDice(PositionDiceToMove.get(1));
-        patternCard.putDiceOnPattern(dice1, PositionToArrive.get(0), patternCard);
-        patternCard.putDiceOnPattern(dice3, PositionToArrive.get(1), patternCard);
     }
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)

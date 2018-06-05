@@ -5,9 +5,11 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.CopperFoilEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.EglomiseBrushEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.LathekinEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.CopperFoilRequestEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.EglomiseBrushRequestEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GrozingPliersRequestEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.LathekinRequestEvent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -36,11 +38,11 @@ public class ToolCardController implements Observer {
 
             view.sendEvent(new CopperFoilRequestEvent(view.getPlayerID()));
 
-        } /*else if (n == 4) {
+        }else if (n == 4) {
 
             view.sendEvent(new LathekinRequestEvent(view.getPlayerID()));
 
-        } else if (n == 5) {
+        } /*else if (n == 5) {
 
             view.sendEvent(new LensCutterRequestEvent(view.getPlayerID()));
 
@@ -108,12 +110,16 @@ public class ToolCardController implements Observer {
             }
         }
 
-        /*if (arg instanceof LathekinEvent) {
+        if (arg instanceof LathekinEvent) {
 
-            toolCardEffect.lathekinEffect();
+           try {
+               toolCardEffect.lathekinEffect(virtualView.getPlayerID(), ((LathekinEvent)arg).getIndexStartOne(), ((LathekinEvent) arg).getIndexEndOne(), ((LathekinEvent)arg).getIndexStartTwo(), ((LathekinEvent) arg).getIndexEndTwo());
+           }catch(InvalidMoveException e){
+               e.printStackTrace();
+           }
         }
 
-        if (arg instanceof LensCutterEvent) {
+        /*if (arg instanceof LensCutterEvent) {
 
             toolCardEffect.lensCutterEffect();
         }
