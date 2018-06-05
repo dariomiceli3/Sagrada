@@ -249,7 +249,7 @@ public class Game implements Observer {
                 view.sendEvent(new StartRoundEvent(round));
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
-                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName(), model.getDraftPool().getNowNumber()));
                 if(round > START){
                     view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                 }
@@ -263,7 +263,7 @@ public class Game implements Observer {
 
                 this.position = setup.calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
-                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName(), model.getDraftPool().getNowNumber()));
                 view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                 if (currID == view.getPlayerID()) {
                     startChoose(view);

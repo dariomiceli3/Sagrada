@@ -169,7 +169,6 @@ public class ToolCardController implements Observer {
         if (arg instanceof TapWheelEvent) {
 
             try {
-                System.out.println("entro nell effetto");
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
             } catch (InvalidMoveException e) {
