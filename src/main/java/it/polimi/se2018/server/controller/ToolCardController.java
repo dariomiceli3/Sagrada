@@ -166,6 +166,7 @@ public class ToolCardController implements Observer {
         if (arg instanceof GrindingStoneEvent) {
 
             toolCardEffect.grindingStoneEffect(virtualView.getPlayerID(), ((GrindingStoneEvent)arg).getIndexPool());
+            game.nextStepTool(virtualView);
         }
 
         /*if (arg instanceof FluxRemoverEvent) {

@@ -191,7 +191,6 @@ public class ToolCardEffect {
             Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
             game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
             Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
-            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
             game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
             }
             else {
@@ -203,7 +202,6 @@ public class ToolCardEffect {
         }else {
             throw new InvalidMoveException("color of dice not in RoundTracker");
         }
-
         game.getModel().updatePatternAndNotify(iD);
         game.getModel().updateTokenAndNotify(iD);
     }
