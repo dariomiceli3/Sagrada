@@ -223,7 +223,7 @@ public class Game implements Observer {
 
 
 
-    //---------------------------------logica applicativa---------------------------
+    //---------------------------------logica applicativa multiplayer---------------------------
 
     private void startGame() {
 
@@ -268,10 +268,15 @@ public class Game implements Observer {
 
                     this.position = setup.calculatePlayerTurn(turn, viewGame.size());
                     this.currID = model.getPlayerList().get(position).getPlayerID();
-                    view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                    view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
-                    if (currID == view.getPlayerID()) {
-                        startChoose(view);
+                    if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()){
+                        System.out.println("hai usato la running pliers e il turno dle giocatore " + currID + "salta");
+                        nextTurn();
+                    }else {
+                        view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                        view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                        if (currID == view.getPlayerID()) {
+                            startChoose(view);
+                        }
                     }
 
             }

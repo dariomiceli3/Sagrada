@@ -5,7 +5,6 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Events.EventsObservable;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class Model extends Observable {
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
-    private EventsObservable event;
     private int timeToPlay;
 
     public Model() {
@@ -34,7 +32,6 @@ public class Model extends Observable {
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool(diceBag);
         this.playerList = new ArrayList<>();
-        this.event = new EventsObservable();
         this.numberPlayer = 0;
         this.timeToPlay = 20;
 

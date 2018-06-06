@@ -37,7 +37,7 @@ public interface ClientInterface extends Remote {
 
     public void useGlazingHammerToolCard() throws RemoteException;
 
-    public void useRunningPliersToolCard(int indexPool) throws RemoteException;
+    public void useRunningPliersToolCard(int indexPool, int indexPattern) throws RemoteException;
 
     public void useCorkBackedToolCard(int indexPool, int indexPattern) throws RemoteException;
 

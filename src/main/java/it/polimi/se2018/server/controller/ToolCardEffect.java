@@ -120,10 +120,23 @@ public class ToolCardEffect {
         }
     }
 
-   /* //todo toolcard 8
-    protected void runningPliers(VirtualView view) throws InvalidMoveException {
+   //toolcard 8
+    protected void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
-    }*/
+        if(game.getStep() == 0){
+            Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, game.getModel().getPlayerFromID(iD).getPattern());
+            game.getModel().getPlayerFromID(iD).setRunningP(true);
+            game.getModel().updatePatternAndNotify(iD);
+            game.getModel().updateBoardAndNotify();
+            game.getModel().updateTokenAndNotify(iD);
+
+        }else {
+            System.out.println("Non puoi usarla ora");//Todo cancellare il println
+            throw new InvalidMoveException("First got a move");
+        }
+
+    }
 
 
     //toolcard 9
@@ -166,7 +179,7 @@ public class ToolCardEffect {
 
         }
 
-    //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
+
     //toolcard 12
     protected void tapWheelEffect(int iD,int numberOfDice, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
 

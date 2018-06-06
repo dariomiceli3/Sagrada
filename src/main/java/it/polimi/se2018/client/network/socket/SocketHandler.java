@@ -457,8 +457,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void useRunningPliersToolCard(int indexPool) {
-        sendEvent(new RunningPliersEvent(indexPool));
+    public void useRunningPliersToolCard(int indexPool, int indexPattern) {
+        sendEvent(new RunningPliersEvent(indexPool, indexPattern));
     }
 
     @Override

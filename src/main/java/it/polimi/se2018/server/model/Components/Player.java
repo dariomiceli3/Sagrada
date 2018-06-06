@@ -97,6 +97,13 @@ public class Player implements Serializable {
         this.playerID = ID;
     }
 
+    public void setRunningP(boolean runningP) {
+        this.runningP = runningP;
+    }
+
+    public boolean isRunningP() {
+        return runningP;
+    }
 
     /**
      * Class setPrivate, set at the player his private objective card

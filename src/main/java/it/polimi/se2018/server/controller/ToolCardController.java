@@ -146,14 +146,15 @@ public class ToolCardController implements Observer {
             game.nextStepTool(virtualView);
         }
 
-      /*  if (arg instanceof RunningPliersEvent) {
+        if (arg instanceof RunningPliersEvent) {
 
             try {
-                toolCardEffect.runningPliers(virtualView);
+                toolCardEffect.runningPliers(virtualView.getPlayerID(), ((RunningPliersEvent)arg).getIndexPool(), ((RunningPliersEvent)arg).getIndexPattern());
+                game.nextTurn();
             } catch (InvalidMoveException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 
         if (arg instanceof CorkBackedEvent) {
 

@@ -739,8 +739,23 @@ public class CliView extends View implements Runnable {
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
+        int indexPattern = INITIALIZE;
+        do {
+            try {
+                System.out.println("Enter the index where you want to put the dice - Enter a number between 1 and 20");
+                indexPattern = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering something wrong, not the index of the pattern card");
+            }
+            reader.nextLine();
+
+        }
+        while ( (indexPattern < 1 ) || (indexPattern > 20) );
+        indexPattern--;
+
         try {
-            super.getConnection().useRunningPliersToolCard(indexPool);
+            super.getConnection().useRunningPliersToolCard(indexPool, indexPattern);
         }
         catch (RemoteException e) {
             System.out.println("error in setting index pool");
