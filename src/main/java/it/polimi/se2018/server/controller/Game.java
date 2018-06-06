@@ -30,6 +30,7 @@ public class Game implements Observer {
     private int position;
     private int currID;
     private int step;
+    private boolean singlePlayer;
     private final int timePlayer;
     private Timer timer;
     private ToolCardController toolController;
@@ -94,6 +95,10 @@ public class Game implements Observer {
 
     protected void setStep(int step){
         this.step = step;
+    }
+
+    protected boolean isSinglePlayer(){
+        return singlePlayer;
     }
 
 
@@ -230,7 +235,7 @@ public class Game implements Observer {
 
 
 
-    //---------------------------------logica applicativa multiplayer---------------------------
+    //---------------------------------logica applicativa---------------------------
 
     private void startGame() {
 
@@ -245,12 +250,30 @@ public class Game implements Observer {
 
         model.setNumberPlayer(0);
         setup.setPublicCardModel();
-        for(VirtualView view : viewGame){
-            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));//todo gestire la consegna delle toolcard in singleplayer e rimuovere il fatto che i token non esistano
             setup.setPrivateCardModel(view);
-            setup.startPatternCard(view);
-        }
 
+        }
+    }
+
+    private void singlePlayerTurn(){
+        if(turn == DEFAULT){
+            viewGame.get(0).sendEvent(new StartRoundEvent(round));
+            if(round > START){
+                viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
+            }
+            viewGame.get(0).sendEvent(new RollDraftPoolEvent(viewGame.get(0).getPlayerID()));
+
+
+
+        }else if(turn == START) {
+
+            viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
+            startChoose(viewGame.get(0));
+        }else {
+            endRound();
+        }
     }
 
     private void startTurn(){
@@ -273,19 +296,19 @@ public class Game implements Observer {
         else if (turn > DEFAULT && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
-                    this.position = setup.calculatePlayerTurn(turn, viewGame.size());
-                    this.currID = model.getPlayerList().get(position).getPlayerID();
-                    if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()){
-                        System.out.println("hai usato la running pliers e il turno dle giocatore " + currID + "salta");
-                        model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
-                        nextTurn();
-                    }else {
-                        view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                        view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
-                        if (currID == view.getPlayerID()) {
-                            startChoose(view);
-                        }
+                this.position = setup.calculatePlayerTurn(turn, viewGame.size());
+                this.currID = model.getPlayerList().get(position).getPlayerID();
+                if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()){
+                    System.out.println("hai usato la running pliers e il turno dle giocatore " + currID + "salta");
+                    model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
+                    nextTurn();
+                }else {
+                    view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                    view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                    if (currID == view.getPlayerID()) {
+                        startChoose(view);
                     }
+                }
 
             }
         }else {
@@ -327,17 +350,27 @@ public class Game implements Observer {
             endMatch();
         }else {
             turn = DEFAULT;
-            setup.changeBagger();
-            startTurn();
+            if(!singlePlayer) {
+                setup.changeBagger();
+                startTurn();
+            }else {
+                singlePlayerTurn();
+            }
         }
 
     }
 
     private void endMatch(){
 
-        setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
-        for (VirtualView view : viewGame){
-            view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+        if(!singlePlayer) {
+            setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
+            for (VirtualView view : viewGame){
+                view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+            }
+        }else {
+
+            viewGame.sendEvent(new WinnerSinglePlayerEvent(roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateCard(), model.getRoundTracker())));
+
         }
 
     }
@@ -345,7 +378,11 @@ public class Game implements Observer {
     protected void nextTurn() {
         step = SET;
         turn++;
-        startTurn();
+        if(!singlePlayer) {
+            startTurn();
+        }else {
+            singlePlayerTurn();
+        }
     }
 
     protected void checkCost(VirtualView view, int indexTool){

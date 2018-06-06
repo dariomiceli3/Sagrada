@@ -5,6 +5,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Class Player: descive the player settings and own his privete objctive and pattern cards
@@ -16,7 +17,7 @@ public class Player implements Serializable {
     private boolean runningP;
     private PlayerColour colour;
     private PatternCard pattern;
-    private PrivateObjectiveCard privateCard;
+    private List<PrivateObjectiveCard> privateCard;
     private int tokensNumber;
     private int finalPoints;
     private int privatePoints;
@@ -111,10 +112,18 @@ public class Player implements Serializable {
      * @param privateCard pattern card
      */
     public void setPrivate(PrivateObjectiveCard privateCard) {
-        this.privateCard = privateCard;
+        this.privateCard.add(privateCard);
     }
 
     public PrivateObjectiveCard getPrivate() {
+        return privateCard.get(0);
+    }
+
+    public void setPrivateSinglePlayer(List<PrivateObjectiveCard> privateCard){
+        this.privateCard = privateCard;
+    }
+
+    public List<PrivateObjectiveCard> getPrivateCard(){
         return privateCard;
     }
 
@@ -153,7 +162,7 @@ public class Player implements Serializable {
         return "Player name: " + getPlayerName() + "\n" +
                 "Player ID: " + getPlayerID() + "\n" +
                 "Player Color: " + getColour().toString() + "\n" +
-              //  "Player pattern: " + getPattern().getName() + "\n" +
+                //  "Player pattern: " + getPattern().getName() + "\n" +
                 "Player Tokens: " + getTokensNumber();
 
 

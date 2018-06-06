@@ -195,4 +195,10 @@ public class Model extends Observable {
         notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
     }
 
+    public void setPrivateSinglePlayerAndNotify(List<PrivateObjectiveCard> listPrivate){
+        playerList.get(0).setPrivateSinglePlayer(listPrivate);
+        setChanged();
+        notifyObservers(new SinglePlayerPrivateUpdateEvent(playerList.get(0).getPrivateCard()));
+    }
+
 }

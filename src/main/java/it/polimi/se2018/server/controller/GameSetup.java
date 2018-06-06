@@ -64,6 +64,12 @@ public class GameSetup {
 
     protected void setPrivateCardModel(VirtualView view) {
 
+        if (game.isSinglePlayer()){
+            List<PrivateObjectiveCard> listPrivate = new ArrayList<>();
+            listPrivate.add(listPrivateCard.remove(0));
+            listPrivate.add(listPrivateCard.remove(0));
+            game.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
+        }
         game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
 
 
@@ -74,8 +80,9 @@ public class GameSetup {
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
         listPublic1.add(listPublicCard.remove(0));
         listPublic1.add(listPublicCard.remove(0));
-        listPublic1.add(listPublicCard.remove(0));
-
+        if(!game.isSinglePlayer()) {
+            listPublic1.add(listPublicCard.remove(0));
+        }
 
         game.getModel().setPublicAndNotify(listPublic1);
 
@@ -145,17 +152,19 @@ public class GameSetup {
         List<ToolCard> list = new ArrayList<>();
 
         //list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
-        list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
-        list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
-        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
-        list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
+        //list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
+        //list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
+        //list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
+        //list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         //list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
         //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
-        //list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
+        if(!game.isSinglePlayer()) {
+            list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
+        }
         //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
-        //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
-        //list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
+        list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
+        list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
 
 
         Collections.shuffle(list);
