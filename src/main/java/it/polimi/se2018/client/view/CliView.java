@@ -210,7 +210,7 @@ public class CliView extends View implements Runnable {
                 request = reader.nextInt();
             }
             catch (InputMismatchException e) {
-                System.out.println("You are not choosing what to do, please enter a unmber");
+                System.out.println("You are not choosing what to do, please enter a number");
 
             }
             reader.nextLine();
@@ -943,7 +943,7 @@ public class CliView extends View implements Runnable {
             int indexStartOne = INITIALIZE;
             do {
                 try {
-                    System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                    System.out.println("Enter the index of the dice first dice you want to move - Enter a number from 1 to 20");
                     indexStartOne = reader.nextInt();
                 }
                 catch (InputMismatchException e) {
@@ -957,7 +957,7 @@ public class CliView extends View implements Runnable {
             int indexEndOne = INITIALIZE;
             do {
                 try {
-                    System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                    System.out.println("Enter the index where you want to move the 1st dice - Enter a number from 1 to 20");
                     indexEndOne = reader.nextInt();
                 }
                 catch (InputMismatchException e) {
@@ -971,7 +971,7 @@ public class CliView extends View implements Runnable {
             int indexStartTwo = INITIALIZE;
             do {
                 try {
-                    System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                    System.out.println("Enter the index of the second dice you want to move - Enter a number from 1 to 20");
                     indexStartTwo = reader.nextInt();
                 }
                 catch (InputMismatchException e) {
@@ -985,7 +985,7 @@ public class CliView extends View implements Runnable {
             int indexEndTwo = INITIALIZE;
             do {
                 try {
-                    System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                    System.out.println("Enter the index where you want to move the 2nd dice - Enter a number from 1 to 20");
                     indexEndTwo = reader.nextInt();
                 }
                 catch (InputMismatchException e){
@@ -1016,6 +1016,12 @@ public class CliView extends View implements Runnable {
         System.out.println("\n");
         System.out.println("Now Draft Pool is: ");
         System.out.println(draftPool.toString());
+    }
+
+    @Override
+    public void showInvalidMove(String msg) {
+
+        System.out.println("ERROR" + msg);
     }
 }
 

@@ -133,6 +133,8 @@ public abstract class View implements Runnable {
 
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 
+    public abstract void showInvalidMove(String msg);
+
 
 
 }

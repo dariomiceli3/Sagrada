@@ -17,10 +17,14 @@ public class Client {
 
     public static void main(String[] args) {
 
-        System.out.println("Welcome to the game of SAGRADA");
+        System.out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n"  +
+                " ####      #      ###     ###     #     ###      #        " +  "\n" +
+                "#         # #    #   #    #  #   # #    #  #    # #       " +  "\n" +
+                " ####    #####   #        ###   #####   #   #  #####      " +  "\n" +
+                "     #   #   #   #  ###   # #   #   #   #  #   #   #      " +  "\n" +
+                " ####    #   #    ###     #  #  #   #   ###    #   #      " + "\n");
+
         Scanner reader = new Scanner(System.in);
-
-
 
         //---------------------------------------modalità di gioco---------------------------------------------------
 

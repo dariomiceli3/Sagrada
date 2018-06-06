@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
+import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
@@ -344,6 +345,13 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         else if (event instanceof UpdateBoardEvent) {
             view.showBoard(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
+        }
+
+        else if (event instanceof InvalidMoveEvent) {
+
+            if ((view.getPlayerID()) == ((InvalidMoveEvent) event).getId()) {
+                view.showInvalidMove(((InvalidMoveEvent) event).getErrorMsg());
+            }
         }
 
         else {

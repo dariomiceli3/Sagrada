@@ -5,6 +5,8 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 
 import java.util.ArrayList;
@@ -141,15 +143,23 @@ public class Model extends Observable {
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
     }
 
-    public void setMoveAndNotify(int ID, int indexPool, int indexPattern) throws InvalidMoveException {
+    public void setMoveAndNotify(int ID, int indexPool, int indexPattern)  {
 
-        getPlayerFromID(ID).getPattern().putDiceOnPattern(draftPool.removeDice(indexPool), indexPattern, getPlayerFromID(ID).getPattern());
-        setChanged();
-        notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
-        setChanged();
-        notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
-        setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+        try {
+            getPlayerFromID(ID).getPattern().putDiceOnPattern(draftPool.removeDice(indexPool), indexPattern, getPlayerFromID(ID).getPattern());
+            setChanged();
+            notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
+            setChanged();
+            notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
+            setChanged();
+            notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+        }
+        catch (InvalidMoveException e) {
+            setChanged();
+            notifyObservers(new InvalidMoveEvent(e.getMessage(), ID));
+            setChanged();
+            notifyObservers(new StartMoveEvent(ID, this.getDraftPool().getNowNumber()));
+        }
     }
 
     public void setEndRoundAndNotify(){
