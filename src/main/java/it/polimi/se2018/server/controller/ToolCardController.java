@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.UpdatePoolEvent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -84,10 +85,15 @@ public class ToolCardController implements Observer {
 
             try {
                 toolCardEffect.grozingPliersEffect(virtualView.getPlayerID(), ((GrozingPliersEvent) arg).getIndexPool(), ((GrozingPliersEvent) arg).getIncrease());
-            }catch (InvalidMoveException e ){
-                e.printStackTrace();
+                game.nextStepTool(virtualView);
             }
-            game.nextStepTool(virtualView);
+            catch (InvalidMoveException e ){
+
+                virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                virtualView.sendEvent(new UpdatePoolEvent(game.getModel().getDraftPool()));
+                virtualView.sendEvent(new GrozingPliersRequestEvent(virtualView.getPlayerID(),game.getModel().getDraftPool().getNowNumber() ));
+            }
+
 
         }
 
@@ -95,10 +101,15 @@ public class ToolCardController implements Observer {
 
             try {
                 toolCardEffect.eglomiseBrushEffect(virtualView.getPlayerID(), ((EglomiseBrushEvent) arg).getIndexStart(), ((EglomiseBrushEvent) arg).getIndexEnd());
-            }catch(InvalidMoveException e){
-                e.printStackTrace();
+                game.nextStepTool(virtualView);
             }
-            game.nextStepTool(virtualView);
+            catch(InvalidMoveException e){
+
+                 virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+
+
+            }
+
         }
 
         if (arg instanceof CopperFoilEvent) {

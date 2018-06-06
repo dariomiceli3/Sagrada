@@ -27,12 +27,13 @@ public class ToolCardEffect {
         // case decrease
         if (increase == 0) {
 
-            if (dice.getValue() == 1) throw new InvalidMoveException("not valid move");
+            if (dice.getValue() == 1) throw new InvalidMoveException("not valid decrease if value is 1");
             game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() - 1);
         }
         // case increase
-        else {
-            if (dice.getValue() == 6) throw new InvalidMoveException("not valid move");
+        if (increase == 1) {
+
+            if (dice.getValue() == 6) throw new InvalidMoveException("not valid increase if value is 6");
             game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() + 1);
         }
 

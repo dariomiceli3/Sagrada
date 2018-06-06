@@ -435,7 +435,7 @@ public class CliView extends View implements Runnable {
         int index = INITIALIZE;
         do {
             try {
-                System.out.println("Select a die from the pool - Enter a number between 1 and" + poolSize);
+                System.out.println("Select a die from the pool - Enter a number between 1 and " + poolSize);
                 index = reader.nextInt();
             }
             catch (InputMismatchException e) {
