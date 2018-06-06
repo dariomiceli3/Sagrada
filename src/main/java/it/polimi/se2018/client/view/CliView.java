@@ -14,10 +14,7 @@ import it.polimi.se2018.server.model.Events.Event;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class CliView extends View implements Runnable {
 
@@ -93,11 +90,18 @@ public class CliView extends View implements Runnable {
         }
 
         Scanner reader = new Scanner(System.in);
-        int num;
+        int num = 10;
         do {
-
-            System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
-            num = reader.nextInt();
+//TODO GESTIRE COSI TUTTI GLI INPUT MISMATCH CHE CHIEDE NUMERO MA SI PUO SCRIVERE STRINGA
+            try {
+                System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
+                num = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("error dio can");
+                //reader.reset();
+            }
+            reader.nextLine();
         }
         while (! ((num == 1) || (num == 2) || (num == 3) || (num == 4)  )) ;
 
@@ -235,7 +239,7 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showMoveCommand(int poolSize)   {
+    public void showMoveCommand(int poolSize)  {
 
         Scanner reader = new Scanner(System.in);
         String response;
@@ -273,6 +277,7 @@ public class CliView extends View implements Runnable {
                 System.out.println("error in setting dice");
                 e.printStackTrace();
             }
+
         }
 
         if (response.equalsIgnoreCase("no")) {

@@ -1,6 +1,6 @@
 package it.polimi.se2018.exceptions;
 
-public class InvalidMoveException extends Exception {
+public class InvalidMoveException extends RuntimeException {
 
 
     public InvalidMoveException(String error) {
