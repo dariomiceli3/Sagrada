@@ -11,6 +11,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.Event;
+import jdk.internal.util.xml.impl.Input;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -22,6 +23,7 @@ public class CliView extends View implements Runnable {
     // metodi che in base alla scelta dell'utente mandano usando socket handler
 
     private boolean singlePlayer;
+    private static final int INITIALIZE = 99;
 
     public CliView(boolean singlePlayer) {
         this.singlePlayer = singlePlayer;
@@ -90,16 +92,14 @@ public class CliView extends View implements Runnable {
         }
 
         Scanner reader = new Scanner(System.in);
-        int num = 10;
+        int num = INITIALIZE;
         do {
-//TODO GESTIRE COSI TUTTI GLI INPUT MISMATCH CHE CHIEDE NUMERO MA SI PUO SCRIVERE STRINGA
             try {
-                System.out.println("Choose your pattern Card - Enter a number between 1 and 4");
+                System.out.println("Choose your Pattern Card - Enter a number between 1 and 4");
                 num = reader.nextInt();
             }
             catch (InputMismatchException e) {
-                System.out.println("error dio can");
-                //reader.reset();
+                System.out.println("You are not entering a number, please enter a number");
             }
             reader.nextLine();
         }
@@ -206,10 +206,17 @@ public class CliView extends View implements Runnable {
     public void showChooseCommand() {
 
         Scanner reader = new Scanner(System.in);
-        int request;
+        int request = INITIALIZE;
         do {
-            System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
-            request = reader.nextInt();
+            try {
+                System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
+                request = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are not choosing what to do, please enter a unmber");
+
+            }
+            reader.nextLine();
         }
         while (!( (request == 0) || (request == 1) ) ) ;
 
@@ -252,20 +259,32 @@ public class CliView extends View implements Runnable {
         if (response.equalsIgnoreCase("yes")) {
 
 
-            int indexPool;
+            int indexPool = INITIALIZE;
             do {
-                System.out.println("Enter the index of the dice from the pool - from 1 to " + poolSize);
-                indexPool = reader.nextInt();
+                try {
+                    System.out.println("Enter the index of the dice from the pool - from 1 to " + poolSize);
+                    indexPool = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not an index of the pool");
+                }
+                reader.nextLine();
             }
             while ( (indexPool < 1) || (indexPool > poolSize) );
             indexPool--;
 
 
 
-            int indexPattern;
+            int indexPattern = INITIALIZE;
             do {
-                System.out.println("Enter the index of the Pattern Card - from 1 to 20");
-                indexPattern = reader.nextInt();
+                try {
+                    System.out.println("Enter the index of the Pattern Card - from 1 to 20");
+                    indexPattern = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not an index of the card");
+                }
+                reader.nextLine();
             }
             while ( (indexPattern < 1) || (indexPattern > 20) );
             indexPattern--;
@@ -307,10 +326,16 @@ public class CliView extends View implements Runnable {
 
         if (response.equalsIgnoreCase("yes")) {
 
-            int indexTool;
+            int indexTool = INITIALIZE;
             do {
-                System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
-                indexTool = reader.nextInt();
+                try {
+                    System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
+                    indexTool = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not the number of a toolcard");
+                }
+                reader.nextLine();
             }
             while (! ( (indexTool == 1) || (indexTool == 2) || (indexTool == 3)  )) ;
             indexTool--;
@@ -410,18 +435,30 @@ public class CliView extends View implements Runnable {
     public void showGrozingRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        int index;
+        int index = INITIALIZE;
         do {
-            System.out.println("Select a die from the pool - Enter a number between 1 and" + poolSize);
-            index = reader.nextInt();
+            try {
+                System.out.println("Select a die from the pool - Enter a number between 1 and" + poolSize);
+                index = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the draft pool");
+            }
+            reader.nextLine();
         }
         while ( (index < 1) || (index > poolSize) );
         index--;
 
-        int increase;
+        int increase = INITIALIZE;
         do {
-            System.out.println("Do you want to increase (1) or decrease (0)");
-            increase = reader.nextInt();
+            try {
+                System.out.println("Do you want to increase (1) or decrease (0)");
+                increase = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not choosing the effect of the card");
+            }
+            reader.nextLine();
         }
         while (! ( (increase == 0) || (increase == 1)));
 
@@ -439,18 +476,30 @@ public class CliView extends View implements Runnable {
     public void showEglomiseRequest() {
 
         Scanner reader = new Scanner(System.in);
-        int indexStart;
+        int indexStart = INITIALIZE;
         do {
-            System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
-            indexStart = reader.nextInt();
+            try {
+                System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
+                indexStart = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexStart < 1) || (indexStart > 20) );
         indexStart--;
 
-        int indexEnd;
+        int indexEnd = INITIALIZE;
         do {
-            System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
-            indexEnd = reader.nextInt();
+            try {
+                System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
+                indexEnd = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
@@ -468,18 +517,30 @@ public class CliView extends View implements Runnable {
     public void showCopperFoilRequest() {
 
         Scanner reader = new Scanner(System.in);
-        int indexStart;
+        int indexStart = INITIALIZE;
         do {
-            System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
-            indexStart = reader.nextInt();
+            try {
+                System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
+                indexStart = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not the index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexStart < 1) || (indexStart > 20) );
         indexStart--;
 
-        int indexEnd;
+        int indexEnd = INITIALIZE;
         do {
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            indexEnd = reader.nextInt();
+            try {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEnd = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not the index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
@@ -497,35 +558,58 @@ public class CliView extends View implements Runnable {
     public void showLathekinRequest() {
 
         Scanner reader = new Scanner(System.in);
-        int indexStartOne;
+        int indexStartOne = INITIALIZE;
         do {
-
-            System.out.println("Select the first die to move - Enter a number from 1 to 20");
-            indexStartOne = reader.nextInt();
+            try {
+                System.out.println("Select the first die to move - Enter a number from 1 to 20");
+                indexStartOne = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not an index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexStartOne < 1) || (indexStartOne > 20) );
         indexStartOne--;
 
-        int indexEndOne;
+        int indexEndOne = INITIALIZE;
         do {
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            indexEndOne = reader.nextInt();
+            try {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEndOne = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexEndOne < 1) || (indexEndOne > 20) );
         indexEndOne--;
 
-        int indexStartTwo;
+        int indexStartTwo = INITIALIZE;
         do {
-            System.out.println("Select the second die to move - Enter a number from 1 to 20");
-            indexStartTwo = reader.nextInt();
+            try {
+                System.out.println("Select the second die to move - Enter a number from 1 to 20");
+                indexStartTwo = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the pattern card");
+            }
+            reader.nextLine();
         }
         while ( (indexStartTwo < 1) || (indexStartTwo > 20) );
         indexStartTwo--;
 
-        int indexEndTwo;
+        int indexEndTwo = INITIALIZE;
         do {
-            System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-            indexEndTwo = reader.nextInt();
+            try {
+                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                indexEndTwo = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not n index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
         indexEndTwo--;
@@ -543,26 +627,44 @@ public class CliView extends View implements Runnable {
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
 
         Scanner reader = new Scanner(System.in);
-        int indexPool;
+        int indexPool = INITIALIZE;
         do {
-            System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to " + poolSize);
-            indexPool = reader.nextInt();
+            try {
+                System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not an index of the pool");
+            }
+            reader.nextLine();
         }
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        int indexRound;
+        int indexRound = INITIALIZE;
         do {
-            System.out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
-            indexRound = reader.nextInt();
+            try {
+                System.out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
+                indexRound = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not the number of a round");
+            }
+            reader.nextLine();
         }
         while ( (indexRound < 1) || (indexRound > round.size()) );
         indexRound--;
 
-        int indexPosition;
+        int indexPosition = INITIALIZE;
         do {
-            System.out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(indexRound).toString());
-            indexPosition = reader.nextInt();
+            try {
+                System.out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(indexRound).toString());
+                indexPosition = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not an index of the round" + indexRound + "selected");
+            }
+            reader.nextLine();
         }
         while ( (indexPosition < 1) || (indexPosition > round.get(indexRound)) );
         indexPosition--;
@@ -580,10 +682,16 @@ public class CliView extends View implements Runnable {
     public void showFluxBrushRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        int indexPool;
+        int indexPool = INITIALIZE;
         do {
-            System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and " + poolSize);
-            indexPool = reader.nextInt();
+            try {
+                System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not an index of the pool");
+            }
+            reader.nextLine();
         }
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
@@ -620,10 +728,16 @@ public class CliView extends View implements Runnable {
     public void showRunningPliersRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        int indexPool;
+        int indexPool = INITIALIZE;
         do {
-            System.out.println("Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + poolSize);
-            indexPool = reader.nextInt();
+            try {
+                System.out.println("Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println("You are entering a string, not an index of the draft pool");
+            }
+            reader.nextLine();
         }
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
@@ -643,18 +757,30 @@ public class CliView extends View implements Runnable {
 
         Scanner reader = new Scanner(System.in);
 
-        int indexPool;
+        int indexPool = INITIALIZE;
         do {
-            System.out.println("Select a die from the pool - Enter a number from 1 to " + poolSize);
-            indexPool = reader.nextInt();
+            try {
+                System.out.println("Select a die from the pool - Enter a number from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not a number of the pool");
+            }
+            reader.nextLine();
         }
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        int indexPattern;
+        int indexPattern = INITIALIZE;
         do {
-            System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
-            indexPattern = reader.nextInt();
+            try {
+                System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
+                indexPattern = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the card");
+            }
+            reader.nextLine();
         }
         while ( (indexPattern < 1) || (indexPattern > 20) );
         indexPattern--;
@@ -673,10 +799,16 @@ public class CliView extends View implements Runnable {
     public void showGrindingStoneRequest(int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        int indexPool;
+        int indexPool = INITIALIZE;
         do {
-            System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to " + poolSize);
-            indexPool = reader.nextInt();
+            try {
+                System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not an index of the pool");
+            }
+            reader.nextLine();
         }
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
@@ -703,28 +835,46 @@ public class CliView extends View implements Runnable {
     public void showTapWheelRequest() {
 
         Scanner reader = new Scanner(System.in);
-        int number;
+        int number = INITIALIZE;
         do {
-            System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
-            number = reader.nextInt();
+            try {
+                System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
+                number = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not the number");
+            }
+            reader.nextLine();
         }
         while (! ( (number == 1) || (number == 2)));
 
 
         if (number == 1) {
 
-            int indexStarOne;
+            int indexStarOne = INITIALIZE;
             do {
-                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-                indexStarOne = reader.nextInt();
+                try {
+                    System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                    indexStarOne = reader.nextInt();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("You are entering a string, not an index of the card");
+                }
+                reader.nextLine();
             }
             while ( (indexStarOne < 1) || (indexStarOne > 20) );
             indexStarOne--;
 
-            int indexEndOne;
+            int indexEndOne = INITIALIZE;
             do {
-                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-                indexEndOne = reader.nextInt();
+                try {
+                    System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                    indexEndOne = reader.nextInt();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("You are entering a string, not the index of the pattern");
+                }
+                reader.nextLine();
             }
             while ( (indexEndOne < 1) || (indexEndOne > 20) );
             indexEndOne--;
@@ -741,34 +891,58 @@ public class CliView extends View implements Runnable {
 
         if (number == 2) {
 
-            int indexStartOne;
+            int indexStartOne = INITIALIZE;
             do {
-                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-                indexStartOne = reader.nextInt();
+                try {
+                    System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                    indexStartOne = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not the index of the card");
+                }
+                reader.nextLine();
             }
             while ( (indexStartOne < 1) || (indexStartOne > 20) );
             indexStartOne--;
 
-            int indexEndOne;
+            int indexEndOne = INITIALIZE;
             do {
-                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-                indexEndOne = reader.nextInt();
+                try {
+                    System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                    indexEndOne = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not the index of the your card");
+                }
+                reader.nextLine();
             }
             while ( (indexEndOne < 1) || (indexEndOne > 20) );
             indexEndOne--;
 
-            int indexStartTwo;
+            int indexStartTwo = INITIALIZE;
             do {
-                System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
-                indexStartTwo = reader.nextInt();
+                try {
+                    System.out.println("Enter the index of the dice you want to move - Enter a number from 1 to 20");
+                    indexStartTwo = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string , not the index of the card");
+                }
+                reader.nextLine();
             }
             while ( (indexStartTwo < 1) || (indexStartTwo > 20) );
             indexStartTwo--;
 
-            int indexEndTwo;
+            int indexEndTwo = INITIALIZE;
             do {
-                System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
-                indexEndTwo = reader.nextInt();
+                try {
+                    System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+                    indexEndTwo = reader.nextInt();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("You are entering a string ,  not an index of the card");
+                }
+                reader.nextLine();
             }
             while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
             indexEndTwo--;

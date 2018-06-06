@@ -58,7 +58,6 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void run() {
 
-        System.out.println("Listen the event from the server");
         boolean loop = true;
 
         while (loop) {
@@ -88,6 +87,7 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     }
 
+    // TODO sistemare e togliere queste println
     // metodo per leggere evento chiamato dal socket INPUT e in base all'evento fare la cosa giusta
     public void readEvent(Event event) {
 
@@ -103,7 +103,7 @@ public class SocketHandler implements ClientInterface, Runnable {
                System.out.println("Name set: " + view.getPlayerName());
             }
             else {
-                System.out.println("Other name: " + ((PlayerNameUpdateEvent) event).getName());
+                System.out.println("Another player connected: " + ((PlayerNameUpdateEvent) event).getName());
             }
         }
 
