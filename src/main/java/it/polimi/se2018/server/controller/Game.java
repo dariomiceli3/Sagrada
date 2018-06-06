@@ -4,9 +4,11 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
+import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
+import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 
 import java.util.*;
@@ -121,13 +123,8 @@ public class Game implements Observer {
         }
         if (arg instanceof PlayerMoveEvent) {
 
-            try {
+            setMoveModel(virtualView, ((PlayerMoveEvent) arg).getIndexPool(), ((PlayerMoveEvent) arg).getIndexPattern());
 
-                setMoveModel(virtualView, ((PlayerMoveEvent) arg).getIndexPool(), ((PlayerMoveEvent) arg).getIndexPattern());
-            }
-            catch (InvalidMoveException e) {
-                startMove(virtualView);
-            }
         }
         if (arg instanceof PlayerStartToolEvent){
 
@@ -204,10 +201,20 @@ public class Game implements Observer {
 
     }
 
-    protected void setMoveModel(VirtualView view, int indexPool, int indexPattern) throws InvalidMoveException {
+    protected void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
 
-        model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
-        nextStepMove(view);
+        Dice dice = model.getDraftPool().getDraftPool().get(indexPool);
+
+        try {
+            model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
+            nextStepMove(view);
+        }
+        catch (InvalidMoveException e) {
+            view.sendEvent(new InvalidMoveEvent(e.getMessage(), view.getPlayerID()));
+            model.getDraftPool().getDraftPool().add(dice);
+            model.updatePoolAndNotify();
+            startMove(view);
+        }
     }
 
     protected void setEndRoundModel(){
@@ -297,14 +304,14 @@ public class Game implements Observer {
     protected void startMove(VirtualView view){
 
         view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
-        //startTimer();
+
 
     }
 
     private void startTool(VirtualView view) {
 
         view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
-        //startTimer();
+
 
     }
 

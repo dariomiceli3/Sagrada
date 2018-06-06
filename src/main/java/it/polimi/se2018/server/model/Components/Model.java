@@ -144,27 +144,17 @@ public class Model extends Observable {
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
     }
 
-    public void setMoveAndNotify(int ID, int indexPool, int indexPattern)  {
+    public void setMoveAndNotify(int ID, int indexPool, int indexPattern) throws InvalidMoveException {
 
-        try {
-            dice = draftPool.removeDice(indexPool);
-            getPlayerFromID(ID).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(ID).getPattern());
-            setChanged();
-            notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
-            setChanged();
-            notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
-            setChanged();
-            notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
-        }
-        catch (InvalidMoveException e) {
-            draftPool.getDraftPool().add(dice);
-            setChanged();
-            notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
-            setChanged();
-            notifyObservers(new InvalidMoveEvent(e.getMessage(), ID));
-            setChanged();
-            notifyObservers(new StartMoveEvent(ID, this.getDraftPool().getNowNumber()));
-        }
+        dice = draftPool.removeDice(indexPool);
+        getPlayerFromID(ID).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(ID).getPattern());
+        setChanged();
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
+        setChanged();
+        notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
+        setChanged();
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+
     }
 
     public void setEndRoundAndNotify(){
@@ -182,6 +172,11 @@ public class Model extends Observable {
         setPlayerList(playerList);
         setChanged();
         notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList()));
+    }
+
+    public void updatePoolAndNotify() {
+        setChanged();
+        notifyObservers(new UpdatePoolEvent(this.getDraftPool()));
     }
 
     public void updateBoardAndNotify(){

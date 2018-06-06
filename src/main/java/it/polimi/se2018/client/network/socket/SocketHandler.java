@@ -354,6 +354,10 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof UpdatePoolEvent) {
+            view.showDraftPool(((UpdatePoolEvent) event).getDraftPool());
+        }
+
         else {
             System.out.println("Not understood the message");
         }
