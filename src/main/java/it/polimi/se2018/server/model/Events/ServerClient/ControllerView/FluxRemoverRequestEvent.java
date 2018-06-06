@@ -8,10 +8,12 @@ public class FluxRemoverRequestEvent implements Event {
     private static final long serialVersionUID = 8427977L;
     private int id;
     private DiceColor diceColor;
+    private int poolSize;
 
-    public FluxRemoverRequestEvent(int id, DiceColor diceColor) {
+    public FluxRemoverRequestEvent(int id, DiceColor diceColor, int poolSize) {
         this.id = id;
         this.diceColor = diceColor;
+        this.poolSize = poolSize;
     }
 
     public int getId() {
@@ -20,5 +22,9 @@ public class FluxRemoverRequestEvent implements Event {
 
     public DiceColor getDiceColor() {
         return diceColor;
+    }
+
+    public int getPoolSize() {
+        return poolSize;
     }
 }

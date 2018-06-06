@@ -43,7 +43,7 @@ public interface ClientInterface extends Remote {
 
     public void useGrindingStoneToolCard(int indexPool) throws RemoteException;
 
-    public void useFluxRemoverToolCard(int indexPool) throws RemoteException;
+    public void useFluxRemoverToolCard(int indexPool, int diceValue) throws RemoteException;
 
     public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
 

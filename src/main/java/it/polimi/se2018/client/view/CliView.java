@@ -6,10 +6,7 @@ import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Components.DraftPool;
-import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Components.RoundTracker;
+import it.polimi.se2018.server.model.Components.*;
 import it.polimi.se2018.server.model.Events.Event;
 import jdk.internal.util.xml.impl.Input;
 
@@ -824,10 +821,47 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showFluxRemoverRequest() {
+    public void showFluxRemoverRequest(DiceColor color, int poolSize) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println();
+
+        int indexPool = INITIALIZE;
+        do {
+            try {
+                System.out.println("Select the die you want to return from the pool - Enter a number from 1 to " + poolSize);
+                indexPool = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not the index");
+            }
+            reader.nextLine();
+        }
+        while ( (indexPool < 1) || (indexPool > poolSize) );
+        indexPool--;
+
+        System.out.println("The color of the die drafted from the bag is " + color.toString());
+
+        int diceValue = INITIALIZE;
+        do {
+            try {
+                System.out.println("Which value do you want for the dice? - Enter a number from 1 to 6");
+                diceValue = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering a string, not the value of the dice");
+            }
+            reader.nextLine();
+        }
+        while ( (diceValue < 1) || (diceValue > 6) );
+
+        try {
+            super.getConnection().useFluxRemoverToolCard(indexPool, diceValue);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting the value");
+            e.printStackTrace();
+        }
+
 
     }
 

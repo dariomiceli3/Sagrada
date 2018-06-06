@@ -331,7 +331,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof FluxRemoverRequestEvent) {
 
             if ((view.getPlayerID()) == ((FluxRemoverRequestEvent) event).getId()) {
-                view.showFluxRemoverRequest();
+                view.showFluxRemoverRequest( ((FluxRemoverRequestEvent) event).getDiceColor(), ((FluxRemoverRequestEvent) event).getPoolSize());
             }
         }
 
@@ -472,8 +472,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void useFluxRemoverToolCard(int indexPool) {
-        sendEvent(new FluxRemoverEvent(indexPool));
+    public void useFluxRemoverToolCard(int indexPool, int diceValue) {
+        sendEvent(new FluxRemoverEvent(indexPool, diceValue));
     }
 
     @Override

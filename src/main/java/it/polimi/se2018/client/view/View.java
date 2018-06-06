@@ -5,10 +5,7 @@ import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Components.DraftPool;
-import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Components.RoundTracker;
+import it.polimi.se2018.server.model.Components.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
@@ -130,7 +127,7 @@ public abstract class View implements Runnable {
 
     public abstract void showGrindingStoneRequest(int poolSize);
 
-    public abstract void showFluxRemoverRequest();
+    public abstract void showFluxRemoverRequest(DiceColor color, int poolSize);
 
     public abstract void showTapWheelRequest();
 
