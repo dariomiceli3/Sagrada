@@ -152,23 +152,19 @@ public class ToolCardEffect {
     }
 
     //toolcard 11
-    /*protected void fluxRemoverEffect(int iD, int indexPool, int value){
-
-        Dice dice = game.getModel().getDraftPool().getDraftPool().set(0, );
+    protected void fluxRemoverEffect(int iD, int indexPool, int value, Dice dice){
 
 
+        dice.setValue(value);
+        Dice dice1 = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
+        game.getModel().getDiceBag().setDice(dice1);
+        game.getModel().getDraftPool().setDice(dice);
+        game.getModel().updateBoardAndNotify();
+        game.getModel().updateTokenAndNotify(iD);
 
 
-    }
 
-    protected void fluxRemoverNumberRequest(int id, int indexPool){
-
-        Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
-        game.getModel().getDiceBag().setDice(dice);
-        Dice dice1 = game.getModel().getDiceBag().getDice();
-
-
-    }*/
+        }
 
     //TODO assumo che i dadi siano del colore giusto (Toolcard 12)
     //toolcard 12

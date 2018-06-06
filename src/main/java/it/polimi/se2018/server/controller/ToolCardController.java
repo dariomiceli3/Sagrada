@@ -2,6 +2,7 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 
@@ -12,6 +13,7 @@ public class ToolCardController implements Observer {
 
     private  Game game;
     private ToolCardEffect toolCardEffect;
+    private Dice dice;
 
     protected ToolCardController (Game game) {
         this.game = game;
@@ -62,7 +64,8 @@ public class ToolCardController implements Observer {
 
         }else if (n == 11) {
 
-            view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID()));
+            dice = game.getModel().getDiceBag().getDice();
+            view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID(), dice.getColor()));
 
         } else {
 
@@ -169,10 +172,10 @@ public class ToolCardController implements Observer {
             game.nextStepTool(virtualView);
         }
 
-        /*if (arg instanceof FluxRemoverEvent) {
+        if (arg instanceof FluxRemoverEvent) {
 
-            toolCardEffect.fluxRemoverEffect();
-        }*/
+            toolCardEffect.fluxRemoverEffect(virtualView.getPlayerID(), ((FluxRemoverEvent)arg).getIndexPool(), ((FluxRemoverEvent)arg).getDiceValue(), dice);
+        }
 
         if (arg instanceof TapWheelEvent) {
 

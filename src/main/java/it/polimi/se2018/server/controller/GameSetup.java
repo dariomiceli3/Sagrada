@@ -144,13 +144,13 @@ public class GameSetup {
     private List<ToolCard> loadToolCard() {
         List<ToolCard> list = new ArrayList<>();
 
-       // list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
-        //list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
-        //list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
-        //list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
-        //list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
-        //list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
-        //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
+        list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
+        list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
+        list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
+        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
+        list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
+        list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
+        list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
         //list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
         list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
