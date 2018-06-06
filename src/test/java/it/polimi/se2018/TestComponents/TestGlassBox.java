@@ -153,9 +153,15 @@ public class TestGlassBox {
         GlassBox glassBox1 = new GlassBox();
         GlassBox glassBox2 = new GlassBox();
         GlassBox glassBox3 = new GlassBox();
+        GlassBox glassBox4 = new GlassBox();
+        GlassBox glassBox5 = new GlassBox();
+        GlassBox glassBox6 = new GlassBox();
 
         glassBox.setConstraintColor("red");
         glassBox1.setConstraintColor("purple");
+        glassBox4.setConstraintColor("yellow");
+        glassBox5.setConstraintColor("blue");
+        glassBox6.setConstraintColor("green");
         glassBox2.setConstraintValue(5);
         glassBox3.setConstraintValue(6);
 
@@ -164,13 +170,140 @@ public class TestGlassBox {
         //System.out.println(glassBox2.toString());
         //System.out.println(glassBox3.toString());
 
+        Dice diceRed1 = new Dice(1, DiceColor.RED);
+        Dice diceRed2 = new Dice(2, DiceColor.RED);
+        Dice diceRed3 = new Dice(3, DiceColor.RED);
+        Dice diceRed4 = new Dice(4, DiceColor.RED);
+        Dice diceRed5 = new Dice(5, DiceColor.RED);
+        Dice diceRed6 = new Dice(6, DiceColor.RED);
+        Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
+        Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
+        Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
+        Dice diceYellow4 = new Dice(4, DiceColor.YELLOW);
+        Dice diceYellow5 = new Dice(5, DiceColor.YELLOW);
+        Dice diceYellow6 = new Dice(6, DiceColor.YELLOW);
+        Dice dicePurple1 = new Dice(1, DiceColor.PURPLE);
+        Dice dicePurple2 = new Dice(2, DiceColor.PURPLE);
+        Dice dicePurple3 = new Dice(3, DiceColor.PURPLE);
+        Dice dicePurple4 = new Dice(4, DiceColor.PURPLE);
+        Dice dicePurple5 = new Dice(5, DiceColor.PURPLE);
+        Dice dicePurple6 = new Dice(6, DiceColor.PURPLE);
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceBlue2 = new Dice(2, DiceColor.BLUE);
+        Dice diceBlue3 = new Dice(3, DiceColor.BLUE);
+        Dice diceBlue4 = new Dice(4, DiceColor.BLUE);
+        Dice diceBlue5 = new Dice(5, DiceColor.BLUE);
+        Dice diceBlue6 = new Dice(6, DiceColor.BLUE);
+        Dice diceGreen1 = new Dice(1, DiceColor.GREEN);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+        Dice diceGreen3 = new Dice(3, DiceColor.GREEN);
+        Dice diceGreen4 = new Dice(4, DiceColor.GREEN);
+        Dice diceGreen5 = new Dice(5, DiceColor.GREEN);
+        Dice diceGreen6 = new Dice(6, DiceColor.GREEN);
+
         Dice dice = new Dice(6, DiceColor.GREEN);
         glassBox.setDice(dice);
+        glassBox.unsetDice();
+
         Dice dice2 = new Dice(5, DiceColor.YELLOW);
         glassBox2.setDice(dice2);
 
         System.out.println(glassBox.toString());
         System.out.println(glassBox2.toString());
 
+        glassBox.setDice(diceRed1);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+        glassBox.setDice(diceRed2);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+        glassBox.setDice(diceRed3);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+        glassBox.setDice(diceRed4);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+        glassBox.setDice(diceRed5);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+        glassBox.setDice(diceRed6);
+        System.out.println(glassBox.toString());
+        glassBox.unsetDice();
+
+        glassBox4.setDice(diceYellow1);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+        glassBox4.setDice(diceYellow2);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+        glassBox4.setDice(diceYellow3);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+        glassBox4.setDice(diceYellow4);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+        glassBox4.setDice(diceYellow5);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+        glassBox4.setDice(diceYellow6);
+        System.out.println(glassBox4.toString());
+        glassBox4.unsetDice();
+
+        glassBox1.setDice(dicePurple1);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+        glassBox1.setDice(dicePurple2);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+        glassBox1.setDice(dicePurple3);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+        glassBox1.setDice(dicePurple4);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+        glassBox1.setDice(dicePurple5);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+        glassBox1.setDice(dicePurple6);
+        System.out.println(glassBox1.toString());
+        glassBox1.unsetDice();
+
+        glassBox5.setDice(diceBlue1);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+        glassBox5.setDice(diceBlue2);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+        glassBox5.setDice(diceBlue3);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+        glassBox5.setDice(diceBlue4);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+        glassBox5.setDice(diceBlue5);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+        glassBox5.setDice(diceBlue6);
+        System.out.println(glassBox5.toString());
+        glassBox5.unsetDice();
+
+        glassBox6.setDice(diceGreen1);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
+        glassBox6.setDice(diceGreen2);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
+        glassBox6.setDice(diceGreen3);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
+        glassBox6.setDice(diceGreen4);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
+        glassBox6.setDice(diceGreen5);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
+        glassBox6.setDice(diceGreen6);
+        System.out.println(glassBox6.toString());
+        glassBox6.unsetDice();
     }
 }

@@ -37,8 +37,8 @@ public class TestRoundTracker {
         assertEquals(2,roundTracker.getRoundTracker().size());
     }
 
-    @Test (expected = InvalidMoveException.class)
-    public void testAddDice() throws InvalidMoveException {
+    @Test
+    public void testAddDice() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4,diceBag);
         draftPool.createListDice();
@@ -48,8 +48,8 @@ public class TestRoundTracker {
         RoundTracker roundTracker = new RoundTracker();
         roundTracker.setTracker(list);
         roundTracker.addDice(dice, 0);
-        roundTracker.addDice(dice1, 2);
-        assertEquals(10, roundTracker.getRoundDice(1).size());
+        //roundTracker.addDice(dice1, 2);
+        assertEquals(10, roundTracker.getRoundDice(0).size());
 
     }
 
@@ -66,6 +66,18 @@ public class TestRoundTracker {
     }
 
     @Test
+    public void testGetRoundSizes() {
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(4,diceBag);
+        draftPool.createListDice();
+        List<Dice> list = draftPool.cleanListDice();
+        RoundTracker roundTracker =new RoundTracker();
+        roundTracker.setTracker(list);
+        roundTracker.getRoundsSizes();
+        assertEquals(1, roundTracker.getRoundsSizes().size());
+    }
+
+    @Test
     public void testToString() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4, diceBag);
@@ -73,15 +85,25 @@ public class TestRoundTracker {
         List<Dice> list = draftPool.cleanListDice();
 
         RoundTracker roundTracker = new RoundTracker();
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
+        System.out.println(roundTracker.toString());
         roundTracker.setTracker(list);
 
         System.out.println(roundTracker.toString());

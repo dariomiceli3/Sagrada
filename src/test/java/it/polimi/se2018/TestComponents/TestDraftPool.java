@@ -75,7 +75,7 @@ public class TestDraftPool {
     }
 
     @Test
-    public void testsetNumber() {
+    public void testSetNumber() {
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(4, diceBag);
         draftPool.setNumber(3);
@@ -83,6 +83,11 @@ public class TestDraftPool {
 
         assertEquals(7, draftPool.getNowNumber());
     }
+
+    /*@Test
+    public void testSetDraftPool() {
+
+    }*/
 
     @Test
     public void testToString() {

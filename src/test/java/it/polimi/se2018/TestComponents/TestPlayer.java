@@ -82,6 +82,13 @@ public class TestPlayer {
     }
 
     @Test
+    public void testRunningP() {
+        Player player = new Player();
+        player.setRunningP(true);
+        assertTrue(player.isRunningP());
+    }
+
+    @Test
     public void testToString(){
 
         String string = "Dario";
@@ -94,5 +101,14 @@ public class TestPlayer {
         player1.setTokensNumber(6);
         //player1.setFinalPoints(61);
         System.out.println(player1.toString());
+    }
+
+    @Test
+    public void testToStringPoints() {
+        Player player = new Player();
+        player.setPlayerName("ciao");
+        player.setFinalPoints(32);
+
+        System.out.println(player.toStringPoints());
     }
 }

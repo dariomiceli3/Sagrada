@@ -149,6 +149,7 @@ public class GlassBox implements Serializable {
                 // value = 0 e color = null case
                 else {
                     setDice(dice);
+                    int i;
                     return true;
 
                 }

@@ -8,7 +8,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
 import it.polimi.se2018.server.model.Events.Event;
-import jdk.internal.util.xml.impl.Input;
+
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
