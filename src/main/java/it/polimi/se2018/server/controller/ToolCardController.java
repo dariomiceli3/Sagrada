@@ -65,7 +65,7 @@ public class ToolCardController implements Observer {
         }else if (n == 11) {
 
             dice = game.getModel().getDiceBag().getDice();
-            view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID(), dice.getColor()));
+            view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID(), dice.getColor(), game.getModel().getDraftPool().getNowNumber()));
 
         } else {
 
@@ -175,6 +175,7 @@ public class ToolCardController implements Observer {
         if (arg instanceof FluxRemoverEvent) {
 
             toolCardEffect.fluxRemoverEffect(virtualView.getPlayerID(), ((FluxRemoverEvent)arg).getIndexPool(), ((FluxRemoverEvent)arg).getDiceValue(), dice);
+            game.nextStepTool(virtualView);
         }
 
         if (arg instanceof TapWheelEvent) {

@@ -345,12 +345,12 @@ public class Game implements Observer {
 
 
             toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
+            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
+            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - toolCardList.get(indexTool).getCost());
             if (toolCardList.get(indexTool).getCost() == START) {
 
                 toolCardList.get(indexTool).setCost(SET);
             }
-            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
-            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - toolCardList.get(indexTool).getCost());
 
             //TODO verificare che i token siano madati giusti insieme alla pattern dopo l'uso della toolcard o nel round successivo
 
