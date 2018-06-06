@@ -42,7 +42,18 @@ public class PatternCard implements Serializable {
      }
 
 
-     // put dice on the box
+     public void putAnyDice(Dice dice, int index) {
+
+         GlassBox box = pattern.get(index);
+         if (box.isBoxEmpty()) {
+             box.setDice(dice);
+             pattern.set(index, box);
+         }
+     }
+
+
+
+     // put dice on the box, but doing a check of the contrainst color or value
      public void putDice(Dice dice, int index) throws InvalidMoveException {
 
           GlassBox box = pattern.get(index);

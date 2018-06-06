@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerPatternUpdateEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.UpdatePoolEvent;
 
 import java.util.Observable;
@@ -99,37 +100,54 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof EglomiseBrushEvent) {
 
+            Dice dice = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((EglomiseBrushEvent) arg).getIndexStart());
+
             try {
                 toolCardEffect.eglomiseBrushEffect(virtualView.getPlayerID(), ((EglomiseBrushEvent) arg).getIndexStart(), ((EglomiseBrushEvent) arg).getIndexEnd());
                 game.nextStepTool(virtualView);
             }
             catch(InvalidMoveException e){
-
                  virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
-
-
+                 game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice, ((EglomiseBrushEvent) arg).getIndexStart());
+                 virtualView.sendEvent(new EglomiseBrushRequestEvent(virtualView.getPlayerID()));
             }
 
         }
 
         if (arg instanceof CopperFoilEvent) {
 
+            Dice dice = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((CopperFoilEvent) arg).getIndexStart());
+
             try {
                 toolCardEffect.copperFoilBurnisherEffect(virtualView.getPlayerID(), ((CopperFoilEvent)arg).getIndexStart(), ((CopperFoilEvent) arg).getIndexEnd());
-            }catch(InvalidMoveException e){
-                e.printStackTrace();
+                game.nextStepTool(virtualView);
             }
-            game.nextStepTool(virtualView);
+            catch(InvalidMoveException e){
+                virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice, ((CopperFoilEvent) arg).getIndexStart());
+                virtualView.sendEvent(new CopperFoilRequestEvent(virtualView.getPlayerID()));
+
+            }
+
         }
 
         if (arg instanceof LathekinEvent) {
 
-           try {
+            Dice dice1 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((LathekinEvent) arg).getIndexStartOne());
+            Dice dice2 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((LathekinEvent) arg).getIndexStartTwo());
+            try {
                toolCardEffect.lathekinEffect(virtualView.getPlayerID(), ((LathekinEvent)arg).getIndexStartOne(), ((LathekinEvent) arg).getIndexEndOne(), ((LathekinEvent)arg).getIndexStartTwo(), ((LathekinEvent) arg).getIndexEndTwo());
-           }catch(InvalidMoveException e){
-               e.printStackTrace();
-           }
-           game.nextStepTool(virtualView);
+                game.nextStepTool(virtualView);
+            }
+            catch(InvalidMoveException e) {
+                virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(),virtualView.getPlayerID()));
+                game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1,((LathekinEvent) arg).getIndexStartOne());
+                virtualView.sendEvent(new PlayerPatternUpdateEvent(virtualView.getPlayerID(), game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern()));
+                game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice2,((LathekinEvent) arg).getIndexStartTwo());
+                virtualView.sendEvent(new LathekinRequestEvent(virtualView.getPlayerID()));
+
+            }
+
         }
 
         if (arg instanceof LensCutterEvent) {
