@@ -123,7 +123,7 @@ public class ToolCardEffect {
    //toolcard 8
     protected void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
-        if(game.getStep() == 0){
+        if(game.getStep() == 0 && game.getTurn() < game.getViewGame().size()){
             Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
             game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, game.getModel().getPlayerFromID(iD).getPattern());
             game.getModel().getPlayerFromID(iD).setRunningP(true);
@@ -143,7 +143,7 @@ public class ToolCardEffect {
     protected void corkBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         if(game.getStep() == 1) {
-            Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
+            Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
             game.getModel().getPlayerFromID(iD).getPattern().putDice(dice, indexPattern);
             game.getModel().updatePatternAndNotify(iD);
             game.getModel().updateBoardAndNotify();
