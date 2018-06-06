@@ -65,12 +65,9 @@ public class RoundTracker implements Serializable {
      * Add a die from the top of the list of dice not used in the specified round
      * @param dice the die to add
      * @param round the round where the die has been extracted
-     * @throws InvalidMoveException if the insert in not valid
      */
-    public void addDice(Dice dice, int round) throws InvalidMoveException {
-        if (round < listDice.size()) {
-            listDice.get(round).add(dice);
-        } else throw new InvalidMoveException("Round ancora non giocato");
+    public void addDice(Dice dice, int round) {
+        listDice.get(round).add(dice);
     }
 
     public List<List<Dice>> getRoundTracker(){

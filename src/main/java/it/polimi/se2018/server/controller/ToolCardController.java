@@ -4,6 +4,7 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
+import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 
 import java.util.Observable;
@@ -122,11 +123,7 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof LensCutterEvent) {
 
-            try {
-                toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent)arg).getIndexPool(), ((LensCutterEvent)arg).getIndexRound(), ((LensCutterEvent)arg).getIndexPosition());
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
+            toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent)arg).getIndexPool(), ((LensCutterEvent)arg).getIndexRound(), ((LensCutterEvent)arg).getIndexPosition());
             game.nextStepTool(virtualView);
         }
 

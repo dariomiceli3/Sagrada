@@ -51,7 +51,7 @@ public class PatternCard implements Serializable {
                pattern.set(index, box);
           }
           else
-               throw new InvalidMoveException("Invalid Dice Position");
+               throw new InvalidMoveException("Invalid Constraint Value or Color");
      }
 
     public void putDiceEglomise(Dice dice, int index) throws InvalidMoveException {
@@ -62,7 +62,7 @@ public class PatternCard implements Serializable {
             pattern.set(index, box);
         }
         else
-            throw new InvalidMoveException("Invalid Dice Position");
+            throw new InvalidMoveException("Invalid Constraint Value");
     }
     public void putDiceCopper(Dice dice, int index) throws InvalidMoveException {
 
@@ -72,7 +72,7 @@ public class PatternCard implements Serializable {
             pattern.set(index, box);
         }
         else
-            throw new InvalidMoveException("Invalid Dice Position");
+            throw new InvalidMoveException("Invalid Constraint Color");
     }
 
      // remove dice from the box
@@ -103,7 +103,7 @@ public class PatternCard implements Serializable {
                  if ((checkNearEmpty(index + 1)) &&
                          (checkNearEmpty(index + 5))) {
                      if (checkNearEmpty(index + 6)) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid Near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -115,7 +115,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -127,7 +127,7 @@ public class PatternCard implements Serializable {
                          (checkNearEmpty(index + 5)) ) {
                      if ((checkNearEmpty(index + 4)) &&
                              (checkNearEmpty(index + 6)) ) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -140,7 +140,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
                      }
                  }
 
@@ -151,7 +151,7 @@ public class PatternCard implements Serializable {
                  if ((checkNearEmpty(index - 1)) &&
                          (checkNearEmpty(index + 5)) ) {
                      if (checkNearEmpty(index + 4)) {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -163,7 +163,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -175,7 +175,7 @@ public class PatternCard implements Serializable {
                          (checkNearEmpty(index + 5)) ) {
                      if ((checkNearEmpty(index - 4)) &&
                              (checkNearEmpty(index + 6)) ) {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -189,7 +189,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -204,7 +204,7 @@ public class PatternCard implements Serializable {
                              (checkNearEmpty(index - 4)) &&
                              (checkNearEmpty(index + 4 )) &&
                              (checkNearEmpty(index + 6)) ) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -218,7 +218,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -230,7 +230,7 @@ public class PatternCard implements Serializable {
                          (checkNearEmpty(index + 5)) ) {
                      if ((checkNearEmpty(index - 6)) &&
                              (checkNearEmpty(index + 4))) {
-                         throw  new InvalidMoveException("Invalid position");
+                         throw  new InvalidMoveException("Invalid near position");
 
                      }
                      else {
@@ -244,7 +244,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -254,7 +254,7 @@ public class PatternCard implements Serializable {
                  if ((checkNearEmpty(index - 5)) &&
                          (checkNearEmpty(index + 1)) ) {
                      if (checkNearEmpty(index - 4 )) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -266,7 +266,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -278,7 +278,7 @@ public class PatternCard implements Serializable {
                          (checkNearEmpty(index + 1)) ) {
                      if ((checkNearEmpty(index - 6 )) &&
                              (checkNearEmpty(index - 4)) ) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -291,7 +291,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -301,7 +301,7 @@ public class PatternCard implements Serializable {
                  if ((checkNearEmpty(index - 5)) &&
                          (checkNearEmpty(index - 1)) ) {
                      if (checkNearEmpty(index - 6 )) {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                      else {
                          patternCard.putDice(dice, index);
@@ -313,7 +313,7 @@ public class PatternCard implements Serializable {
                          patternCard.putDice(dice, index);
                      }
                      else {
-                         throw new InvalidMoveException("Invalid position");
+                         throw new InvalidMoveException("Invalid near position");
                      }
                  }
              }
@@ -338,7 +338,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index + 1)) &&
                         (checkNearEmpty(index + 5))) {
                     if (checkNearEmpty(index + 6)) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -350,7 +350,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -362,7 +362,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index + 4)) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -375,7 +375,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
 
@@ -386,7 +386,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 1)) &&
                         (checkNearEmpty(index + 5)) ) {
                     if (checkNearEmpty(index + 4)) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -398,7 +398,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -410,7 +410,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index - 4)) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -424,7 +424,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -439,7 +439,7 @@ public class PatternCard implements Serializable {
                             (checkNearEmpty(index - 4)) &&
                             (checkNearEmpty(index + 4 )) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -453,7 +453,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -465,7 +465,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index - 6)) &&
                             (checkNearEmpty(index + 4))) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
 
                     }
                     else {
@@ -479,7 +479,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -489,7 +489,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 5)) &&
                         (checkNearEmpty(index + 1)) ) {
                     if (checkNearEmpty(index - 4 )) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -501,7 +501,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -513,7 +513,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 1)) ) {
                     if ((checkNearEmpty(index - 6 )) &&
                             (checkNearEmpty(index - 4)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -526,7 +526,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -536,7 +536,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 5)) &&
                         (checkNearEmpty(index - 1)) ) {
                     if (checkNearEmpty(index - 6 )) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceEglomise(dice, index);
@@ -548,7 +548,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceEglomise(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -573,7 +573,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index + 1)) &&
                         (checkNearEmpty(index + 5))) {
                     if (checkNearEmpty(index + 6)) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -585,7 +585,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -597,7 +597,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index + 4)) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -610,7 +610,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
 
@@ -621,7 +621,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 1)) &&
                         (checkNearEmpty(index + 5)) ) {
                     if (checkNearEmpty(index + 4)) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -633,7 +633,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -645,7 +645,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index - 4)) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -659,7 +659,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -674,7 +674,7 @@ public class PatternCard implements Serializable {
                             (checkNearEmpty(index - 4)) &&
                             (checkNearEmpty(index + 4 )) &&
                             (checkNearEmpty(index + 6)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -688,7 +688,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -700,7 +700,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 5)) ) {
                     if ((checkNearEmpty(index - 6)) &&
                             (checkNearEmpty(index + 4))) {
-                        throw  new InvalidMoveException("Invalid position");
+                        throw  new InvalidMoveException("Invalid near position");
 
                     }
                     else {
@@ -714,7 +714,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -724,7 +724,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 5)) &&
                         (checkNearEmpty(index + 1)) ) {
                     if (checkNearEmpty(index - 4 )) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -736,7 +736,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -748,7 +748,7 @@ public class PatternCard implements Serializable {
                         (checkNearEmpty(index + 1)) ) {
                     if ((checkNearEmpty(index - 6 )) &&
                             (checkNearEmpty(index - 4)) ) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -761,7 +761,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }
@@ -771,7 +771,7 @@ public class PatternCard implements Serializable {
                 if ((checkNearEmpty(index - 5)) &&
                         (checkNearEmpty(index - 1)) ) {
                     if (checkNearEmpty(index - 6 )) {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                     else {
                         patternCard.putDiceCopper(dice, index);
@@ -783,7 +783,7 @@ public class PatternCard implements Serializable {
                         patternCard.putDiceCopper(dice, index);
                     }
                     else {
-                        throw new InvalidMoveException("Invalid position");
+                        throw new InvalidMoveException("Invalid near position");
                     }
                 }
             }

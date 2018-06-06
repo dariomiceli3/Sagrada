@@ -1021,7 +1021,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showInvalidMove(String msg) {
 
-        System.out.println("ERROR" + msg);
+        System.out.println("ERROR: " + msg);
     }
 }
 

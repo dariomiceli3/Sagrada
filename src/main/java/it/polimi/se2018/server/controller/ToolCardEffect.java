@@ -71,16 +71,12 @@ public class ToolCardEffect {
     }
 
     //toolcard 5
-    protected void lensCutterEffect(int iD, int indexPool, int indexRound, int indexPosition) throws InvalidMoveException {
+    protected void lensCutterEffect(int iD, int indexPool, int indexRound, int indexPosition) {
 
         Dice dice1 = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
         Dice dice2 = game.getModel().getRoundTracker().getDice(indexRound, indexPosition);
         game.getModel().getDraftPool().setDice(dice2);
-        try {
-            game.getModel().getRoundTracker().addDice(dice1, indexRound);
-        } catch (InvalidMoveException e) {
-            e.printStackTrace();
-        }
+        game.getModel().getRoundTracker().addDice(dice1, indexRound);
         game.getModel().updateBoardAndNotify();
         game.getModel().updateTokenAndNotify(iD);
 

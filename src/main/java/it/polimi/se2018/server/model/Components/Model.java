@@ -200,7 +200,4 @@ public class Model extends Observable {
         notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
     }
 
-
-
-    //TODO add some methods to performe move, and then send a notification to the view and uodate UML (dicebag instance)
 }
