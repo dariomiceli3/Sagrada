@@ -28,6 +28,7 @@ public class Model extends Observable {
     private List<Player> playerList;
     private int numberPlayer;
     private int timeToPlay;
+    private Dice dice;
 
     public Model() {
         this.roundTracker = new RoundTracker();
@@ -146,7 +147,8 @@ public class Model extends Observable {
     public void setMoveAndNotify(int ID, int indexPool, int indexPattern)  {
 
         try {
-            getPlayerFromID(ID).getPattern().putDiceOnPattern(draftPool.removeDice(indexPool), indexPattern, getPlayerFromID(ID).getPattern());
+            dice = draftPool.removeDice(indexPool);
+            getPlayerFromID(ID).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(ID).getPattern());
             setChanged();
             notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
             setChanged();
@@ -155,6 +157,9 @@ public class Model extends Observable {
             notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
         }
         catch (InvalidMoveException e) {
+            draftPool.getDraftPool().add(dice);
+            setChanged();
+            notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
             setChanged();
             notifyObservers(new InvalidMoveEvent(e.getMessage(), ID));
             setChanged();
