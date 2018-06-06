@@ -124,7 +124,7 @@ public class ToolCardEffect {
     protected void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         if(game.getStep() == 0){
-            Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
+            Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
             game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, game.getModel().getPlayerFromID(iD).getPattern());
             game.getModel().getPlayerFromID(iD).setRunningP(true);
             game.getModel().updatePatternAndNotify(iD);

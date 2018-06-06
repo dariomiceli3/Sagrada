@@ -270,6 +270,7 @@ public class Game implements Observer {
                     this.currID = model.getPlayerList().get(position).getPlayerID();
                     if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()){
                         System.out.println("hai usato la running pliers e il turno dle giocatore " + currID + "salta");
+                        model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
                     }else {
                         view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
