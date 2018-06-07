@@ -170,6 +170,9 @@ public class Game implements Observer {
 
             stepController(virtualView, ((PlayerChooseEvent)arg).getStep());
         }
+        if (arg instanceof PlayerNoTokenEvent){
+            startTool(virtualView);
+        }
 
 
 
