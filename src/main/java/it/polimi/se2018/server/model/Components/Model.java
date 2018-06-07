@@ -8,6 +8,7 @@ import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCa
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
+import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePrivateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -198,7 +199,7 @@ public class Model extends Observable {
     public void setPrivateSinglePlayerAndNotify(List<PrivateObjectiveCard> listPrivate){
         playerList.get(0).setPrivateSinglePlayer(listPrivate);
         setChanged();
-        //notifyObservers(new SinglePrivateEvent(playerList.get(0).getPrivateCard()));
+        notifyObservers(new SinglePrivateEvent(playerList.get(0).getPrivateSinglePlayerCard()));
     }
 
 }

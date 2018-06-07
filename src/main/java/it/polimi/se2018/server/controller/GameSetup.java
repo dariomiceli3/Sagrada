@@ -69,8 +69,9 @@ public class GameSetup {
             listPrivate.add(listPrivateCard.remove(0));
             listPrivate.add(listPrivateCard.remove(0));
             game.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
+        }else {
+            game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
         }
-        game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
 
 
     }
@@ -152,10 +153,10 @@ public class GameSetup {
     private List<ToolCard> loadToolCard() {
         List<ToolCard> list = new ArrayList<>();
 
-        //list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
-        //list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
-        //list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
-        //list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
+        list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
+        list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
+        list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
+        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
         //list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         //list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
         //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
@@ -164,7 +165,7 @@ public class GameSetup {
         }
         //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
-        list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
+        //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
         list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
 
 
@@ -177,9 +178,18 @@ public class GameSetup {
 
         List<ToolCard> toolCardList = this.loadToolCard();
         List<ToolCard> toolCardList1 = new ArrayList<>();
-        toolCardList1.add(toolCardList.remove(0));
-        toolCardList1.add(toolCardList.remove(0));
-        toolCardList1.add(toolCardList.remove(0));
+        if(!game.isSinglePlayer()) {
+
+            toolCardList1.add(toolCardList.remove(0));
+            toolCardList1.add(toolCardList.remove(0));
+            toolCardList1.add(toolCardList.remove(0));
+        }else {
+            System.out.println(game.getSinglePlayerDifficulty());
+            for(int i = 0; i < game.getSinglePlayerDifficulty(); i++) {
+
+                toolCardList1.add(toolCardList.remove(0));
+            }
+        }
         return toolCardList1;
     }
 }

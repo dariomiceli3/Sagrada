@@ -1071,7 +1071,7 @@ public class CliView extends View implements Runnable {
             catch (InputMismatchException e) {
                 System.out.println("You are entering something wrong, please read the request");
             }
-            reader.close();
+            reader.nextLine();
         }
         while ( (difficulty < 1) || (difficulty > 5) );
 

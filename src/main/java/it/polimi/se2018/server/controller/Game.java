@@ -10,6 +10,8 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberRequestEvent;
 
 import java.util.*;
 
@@ -29,6 +31,7 @@ public class Game implements Observer {
     private int round = START;
     private int position;
     private int currID;
+    private int singlePlayerDifficulty;
     private int step;
     private boolean singlePlayer;
     private final int timePlayer;
@@ -44,8 +47,8 @@ public class Game implements Observer {
         this.roundManager = new RoundManager();
         this.timePlayer = model.getTimeToPlay();
         this.toolController = new ToolCardController(this);
-        this.toolCardList = setup.setToolCard();
         this.singlePlayer = singlePlayer;
+
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -62,7 +65,10 @@ public class Game implements Observer {
             model.addObserver(view);
         }
 
+
         startGame();
+
+
 
 
 
@@ -102,6 +108,14 @@ public class Game implements Observer {
         return singlePlayer;
     }
 
+    protected int getSinglePlayerDifficulty(){
+        return singlePlayerDifficulty;
+    }
+
+    private void setSinglePlayerDifficulty(int difficulty){
+        this.singlePlayerDifficulty = difficulty;
+    }
+
 
 
 
@@ -116,6 +130,11 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerNameEvent) {
             setPlayerNameModel(virtualView, ((PlayerNameEvent) arg).getName());
+        }
+
+        if (arg instanceof ToolNumberEvent){
+            this.setSinglePlayerDifficulty(((ToolNumberEvent)arg).getDifficulty());
+            startCard();
         }
 
         if (arg instanceof PlayerPatternEvent){
@@ -175,8 +194,12 @@ public class Game implements Observer {
 
         model.setPlayerAndNotify((view.getPlayerID()), name);
 
-        if(model.getNumberPlayer() == (viewGame.size())){
-            startCard();
+        if (singlePlayer){
+            setToolSinglePlayer();
+        }else {
+            if (model.getNumberPlayer() == (viewGame.size())) {
+                startCard();
+            }
         }
     }
 
@@ -184,10 +207,14 @@ public class Game implements Observer {
 
         model.setPatternAndNotify(view.getPlayerID(), pattern);
 
-        setTokensModel(view);
+        if(!singlePlayer) {
+            setTokensModel(view);
 
-        if(model.getNumberPlayer() == (getViewGame().size())){
-            startTurn();
+            if (model.getNumberPlayer() == (getViewGame().size())) {
+                startTurn();
+            }
+        }else {
+            singlePlayerTurn();
         }
 
     }
@@ -247,9 +274,16 @@ public class Game implements Observer {
 
     }
 
+    private void setToolSinglePlayer(){
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new ToolNumberRequestEvent());
+        }
+    }
+
     private void startCard(){
 
         model.setNumberPlayer(0);
+        this.toolCardList = setup.setToolCard();
         setup.setPublicCardModel();
         for (VirtualView view : viewGame) {
             view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));//todo gestire la consegna delle toolcard in singleplayer e rimuovere il fatto che i token non esistano
