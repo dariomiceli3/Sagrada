@@ -10,6 +10,7 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.model.Events.SinglePlayer.LoserEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberRequestEvent;
 
@@ -286,13 +287,14 @@ public class Game implements Observer {
         this.toolCardList = setup.setToolCard();
         setup.setPublicCardModel();
         for (VirtualView view : viewGame) {
-            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));//todo gestire la consegna delle toolcard in singleplayer e rimuovere il fatto che i token non esistano
+            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));
             setup.setPrivateCardModel(view);
             setup.startPatternCard(view);
 
         }
     }
 
+    //todo gestire l'utilizzo delle toolcard in singleplayer
     private void singlePlayerTurn(){
         if(turn == DEFAULT){
             viewGame.get(0).sendEvent(new StartRoundEvent(round));
@@ -405,8 +407,12 @@ public class Game implements Observer {
             }
         }else {
 
-            //viewGame.sendEvent(new WinnerSinglePlayerEvent(roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateCard(), model.getRoundTracker())));
-
+            int a = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
+            if (a == 1){
+                viewGame.get(0).sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+            }else{
+                viewGame.get(0).sendEvent(new LoserEvent());
+            }
         }
 
     }

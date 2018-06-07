@@ -377,6 +377,10 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showPrivateSingle(((SinglePrivateEvent) event).getPrivateList());
         }
 
+        else if (event instanceof LoserEvent){
+            view.showLosers();
+        }
+
         else {
             System.out.println("Not understood the message");
         }
