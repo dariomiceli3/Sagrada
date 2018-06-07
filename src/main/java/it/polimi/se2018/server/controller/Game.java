@@ -229,7 +229,7 @@ public class Game implements Observer {
     protected void setDraftPoolModel(VirtualView view){
 
 
-        model.setDraftPoolAndNotify();
+        model.setDraftPoolAndNotify(singlePlayer);
         startChoose(view);
 
     }

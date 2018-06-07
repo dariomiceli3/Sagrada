@@ -115,7 +115,7 @@ public class DraftPool implements Serializable {
     public void createListDice(){
         if(dicePlay.isEmpty()){
         this.dicePlay = new ArrayList<>();
-        for(int i= DEFAULT; i <= (number*2); i++) {
+        for(int i= DEFAULT; i <= (number); i++) {
             this.dicePlay.add(this.diceBag.getDice());
         }
         }

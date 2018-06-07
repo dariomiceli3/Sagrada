@@ -21,6 +21,7 @@ import java.util.Observable;
 
 public class Model extends Observable {
 
+    private static final int DRAFTSINGLE = 4;
     private RoundTracker roundTracker;
     private DraftPool draftPool;
     private DiceBag diceBag;
@@ -137,9 +138,12 @@ public class Model extends Observable {
         notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
     }
 
-    public void setDraftPoolAndNotify(){
+    public void setDraftPoolAndNotify(boolean singlePlayer){
 
-        this.draftPool.setNumber(playerList.size());
+        if(singlePlayer){
+            this.draftPool.setNumber(DRAFTSINGLE);
+        }
+        this.draftPool.setNumber(playerList.size()*2);
         this.draftPool.createListDice();
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
