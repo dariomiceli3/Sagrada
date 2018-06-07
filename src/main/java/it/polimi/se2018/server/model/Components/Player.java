@@ -17,7 +17,8 @@ public class Player implements Serializable {
     private boolean runningP;
     private PlayerColour colour;
     private PatternCard pattern;
-    private List<PrivateObjectiveCard> privateCard;
+    private PrivateObjectiveCard privateCard;
+    private List<PrivateObjectiveCard> privateListCard;
     private int tokensNumber;
     private int finalPoints;
     private int privatePoints;
@@ -112,19 +113,19 @@ public class Player implements Serializable {
      * @param privateCard pattern card
      */
     public void setPrivate(PrivateObjectiveCard privateCard) {
-        this.privateCard.add(privateCard);
-    }
-
-    public PrivateObjectiveCard getPrivate() {
-        return privateCard.get(0);
-    }
-
-    public void setPrivateSinglePlayer(List<PrivateObjectiveCard> privateCard){
         this.privateCard = privateCard;
     }
 
-    public List<PrivateObjectiveCard> getPrivateCard(){
+    public PrivateObjectiveCard getPrivate() {
         return privateCard;
+    }
+
+    public void setPrivateSinglePlayer(List<PrivateObjectiveCard> privateCard){
+        this.privateListCard = privateCard;
+    }
+
+    public List<PrivateObjectiveCard> getPrivateSinglePlayerCard(){
+        return privateListCard;
     }
 
     public void setTokensNumber(int tokensNumber) {

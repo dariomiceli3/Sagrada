@@ -35,7 +35,7 @@ public class Game implements Observer {
     private Timer timer;
     private ToolCardController toolController;
 
-    public Game(List<VirtualView> viewList, boolean singlePlayer) {
+    public Game(List<VirtualView> viewList/*, boolean singlePlayer*/) {
 
         this.model = new Model();
         this.viewGame = new ArrayList<>(viewList);
@@ -45,7 +45,7 @@ public class Game implements Observer {
         this.timePlayer = model.getTimeToPlay();
         this.toolController = new ToolCardController(this);
         this.toolCardList = setup.setToolCard();
-        this.singlePlayer = singlePlayer;
+        //this.singlePlayer = singlePlayer;
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -254,6 +254,7 @@ public class Game implements Observer {
         for (VirtualView view : viewGame) {
             view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));//todo gestire la consegna delle toolcard in singleplayer e rimuovere il fatto che i token non esistano
             setup.setPrivateCardModel(view);
+            setup.startPatternCard(view);
 
         }
     }
@@ -370,7 +371,7 @@ public class Game implements Observer {
             }
         }else {
 
-            viewGame.sendEvent(new WinnerSinglePlayerEvent(roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateCard(), model.getRoundTracker())));
+            //viewGame.sendEvent(new WinnerSinglePlayerEvent(roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateCard(), model.getRoundTracker())));
 
         }
 
