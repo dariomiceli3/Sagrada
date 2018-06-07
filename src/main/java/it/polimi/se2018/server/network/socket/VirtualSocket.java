@@ -55,6 +55,9 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 if (received instanceof SinglePlayerEvent) {
                     this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
                     System.out.println(this.getServer().isSinglePlayer());
+
+                    // todo refactor with multithreading
+                    this.getServer().waitingOtherPlayers();
                 }
 
                 if (received instanceof PlayerPatternEvent) {

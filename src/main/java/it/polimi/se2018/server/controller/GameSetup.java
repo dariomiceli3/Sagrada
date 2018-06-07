@@ -81,6 +81,7 @@ public class GameSetup {
         listPublic1.add(listPublicCard.remove(0));
         listPublic1.add(listPublicCard.remove(0));
         if(!game.isSinglePlayer()) {
+            System.out.println("sono in multiplayer sulla consegna delle public");
             listPublic1.add(listPublicCard.remove(0));
         }
 

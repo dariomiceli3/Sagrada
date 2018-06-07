@@ -62,7 +62,7 @@ public class SocketGatherer implements Runnable {
                 Thread vsThread = new Thread(virtualSocket);
                 vsThread.start();
 
-                server.waitingOtherPlayers();
+                //server.waitingOtherPlayers();
                 //  TODO waiting other connections method!!
 
                 //Thread vsThread = new Thread(virtualSocket);

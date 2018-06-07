@@ -83,7 +83,9 @@ public class Server {
 
     public synchronized void waitingOtherPlayers() {
 
-        if (clients.size() == 1) {
+        System.out.println("in waiting " + singlePlayer);
+
+        if (singlePlayer) {
 
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
