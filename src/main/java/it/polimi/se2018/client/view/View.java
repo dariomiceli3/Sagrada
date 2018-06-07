@@ -135,7 +135,12 @@ public abstract class View implements Runnable {
 
     public abstract void showInvalidMove(String msg);
 
+    //------------------------  single player mode
+
     public abstract void showSinglePlayerRequest();
 
+    public abstract void showDifficultyRequest();
+
+    public abstract void showPrivateSingle(List<PrivateObjectiveCard> publicList);
 
 }

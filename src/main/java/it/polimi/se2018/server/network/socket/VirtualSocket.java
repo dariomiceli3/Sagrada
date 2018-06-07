@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -151,6 +152,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 }
 
                 if (received instanceof TapWheelEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
+                if (received instanceof ToolNumberEvent) {
                     setChanged();
                     notifyObservers(received);
                 }

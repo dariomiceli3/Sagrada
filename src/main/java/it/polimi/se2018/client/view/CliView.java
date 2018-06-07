@@ -1023,6 +1023,10 @@ public class CliView extends View implements Runnable {
         System.out.println("ERROR: " + msg);
     }
 
+
+
+    //---------------------------------------single player
+
     @Override
     public void showSinglePlayerRequest() {
 
@@ -1036,10 +1040,12 @@ public class CliView extends View implements Runnable {
 
         if (mode.equalsIgnoreCase("single")) {
             singlePlayer = true;
+            System.out.println("Now the game will start");
         }
 
         if (mode.equalsIgnoreCase("multi")) {
             singlePlayer = false;
+            System.out.println("Please wait, the game will start soon");
         }
 
         try {
@@ -1049,6 +1055,43 @@ public class CliView extends View implements Runnable {
             System.out.println("error in setting index");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void showDifficultyRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        int difficulty = INITIALIZE;
+
+        do {
+            try {
+                System.out.println("You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
+                difficulty = reader.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("You are entering something wrong, please read the request");
+            }
+            reader.close();
+        }
+        while ( (difficulty < 1) || (difficulty > 5) );
+
+        try {
+            super.getConnection().setDifficultyToServer(difficulty);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting difficulty");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
+
+        for (PrivateObjectiveCard privateCard : publicList) {
+            System.out.println(privateCard.toString());
+        }
+
     }
 }
 

@@ -10,8 +10,7 @@ import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -368,6 +367,16 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showDraftPool(((UpdatePoolEvent) event).getDraftPool());
         }
 
+        //-----------------single player events-------------
+
+        else if (event instanceof ToolNumberRequestEvent) {
+            view.showDifficultyRequest();
+        }
+
+        else if (event instanceof SinglePrivateEvent) {
+            view.showPrivateSingle(((SinglePrivateEvent) event).getPrivateList());
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -507,5 +516,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setSinglePlayerMode(int id, boolean singlePlayer) {
         sendEvent(new SinglePlayerEvent(id, singlePlayer));
+    }
+
+    @Override
+    public void setDifficultyToServer(int difficulty) {
+        sendEvent(new ToolNumberEvent(difficulty));
     }
 }
