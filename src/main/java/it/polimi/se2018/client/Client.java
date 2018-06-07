@@ -26,24 +26,7 @@ public class Client {
 
         Scanner reader = new Scanner(System.in);
 
-        //---------------------------------------modalità di gioco---------------------------------------------------
 
-        String mode;
-        do {
-            System.out.println("Enter the gameplay mode: Single or Multi?");
-            mode = reader.nextLine();
-        } while (!((mode.equalsIgnoreCase("single") || mode.equalsIgnoreCase("multi")))) ;
-
-        if (mode.equalsIgnoreCase("Single")) {
-            singlePlay = true;
-        }
-        else if (mode.equalsIgnoreCase("Multi")) {
-            singlePlay = false;
-        }
-        else {
-            System.out.println("something went wrong in setting modality");
-            reader.close();
-        }
 
 
         //-------------------------------view creation--------------------------------------------------------------
@@ -56,14 +39,14 @@ public class Client {
         } while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli")))) ;
 
         if (textView.equalsIgnoreCase("Gui")) {
-            view = new CliView(singlePlay);
+            view = new CliView();
         }
         else if (textView.equalsIgnoreCase("Cli")) {
-            view = new CliView(singlePlay);
+            view = new CliView();
         }
         else {
             System.out.println("something went wrong in setting view");
-            view = new CliView(singlePlay);
+            view = new CliView();
             reader.close();
         }
 

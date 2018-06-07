@@ -35,7 +35,7 @@ public class Game implements Observer {
     private Timer timer;
     private ToolCardController toolController;
 
-    public Game(List<VirtualView> viewList/*, boolean singlePlayer*/) {
+    public Game(List<VirtualView> viewList, boolean singlePlayer) {
 
         this.model = new Model();
         this.viewGame = new ArrayList<>(viewList);
@@ -45,7 +45,7 @@ public class Game implements Observer {
         this.timePlayer = model.getTimeToPlay();
         this.toolController = new ToolCardController(this);
         this.toolCardList = setup.setToolCard();
-        //this.singlePlayer = singlePlayer;
+        this.singlePlayer = singlePlayer;
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());

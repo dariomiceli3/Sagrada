@@ -59,11 +59,14 @@ public class SocketGatherer implements Runnable {
                 // add arraylist unico
                 server.getClients().add(virtualSocket);
 
+                Thread vsThread = new Thread(virtualSocket);
+                vsThread.start();
+
                 server.waitingOtherPlayers();
                 //  TODO waiting other connections method!!
 
-                Thread vsThread = new Thread(virtualSocket);
-                vsThread.start();
+                //Thread vsThread = new Thread(virtualSocket);
+                //vsThread.start();
 
                 }
             catch (IOException e) {

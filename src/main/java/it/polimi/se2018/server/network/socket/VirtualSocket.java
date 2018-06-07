@@ -5,6 +5,8 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,20 +24,13 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
     public VirtualSocket(Socket clientConnection, Server server, int ID) {
 
-        //try {
             super(ID);
             this.server = server;
             this.clientConnection = clientConnection;
             this.running = true;
             sendEvent(new PlayerIDEvent(this.playerID));
-            System.out.println("Send id to the player");
-            /*this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
-            this.socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
-        }
-        catch (IOException e) {
-            System.out.println("Error in virtual socket");
-            e.printStackTrace();
-        }*/
+            //System.out.println("Send id to the player");
+            sendEvent(new SinglePlayerRequestEvent(this.playerID));
 
     }
 
@@ -55,6 +50,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     super.setName(((PlayerNameEvent) received).getName());
                     setChanged();
                     notifyObservers(received);
+                }
+
+                if (received instanceof SinglePlayerEvent) {
+                    this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
+                    System.out.println(this.getServer().isSinglePlayer());
                 }
 
                 if (received instanceof PlayerPatternEvent) {
@@ -229,5 +229,9 @@ public class VirtualSocket extends VirtualView implements Runnable {
             e.printStackTrace();
         }
         running = false;
+    }
+
+    public Server getServer() {
+        return server;
     }
 }

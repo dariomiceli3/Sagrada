@@ -10,6 +10,8 @@ import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
+import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -95,6 +97,14 @@ public class SocketHandler implements ClientInterface, Runnable {
         if (event instanceof PlayerIDEvent) {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());
             System.out.println("Player id set " + view.getPlayerID());
+
+        }
+
+        else if (event instanceof SinglePlayerRequestEvent) {
+
+            if ((view.getPlayerID()) == ((SinglePlayerRequestEvent) event).getId()) {
+                view.showSinglePlayerRequest();
+            }
 
         }
         else if (event instanceof PlayerNameUpdateEvent) {
@@ -492,5 +502,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
 
+    }
+
+    @Override
+    public void setSinglePlayerMode(int id, boolean singlePlayer) {
+        sendEvent(new SinglePlayerEvent(id, singlePlayer));
     }
 }

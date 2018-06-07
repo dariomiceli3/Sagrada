@@ -135,6 +135,7 @@ public abstract class View implements Runnable {
 
     public abstract void showInvalidMove(String msg);
 
+    public abstract void showSinglePlayerRequest();
 
 
 }

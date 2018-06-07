@@ -22,6 +22,8 @@ public class Server {
     private List<VirtualView> socketClients = new ArrayList<>();
     private List<VirtualView> clients = new ArrayList<>();
 
+    private boolean singlePlayer;
+
     // add timer e timerturn
 
     public Server() {
@@ -35,6 +37,13 @@ public class Server {
 
     }
 
+    public void setSinglePlayer(boolean singlePlayer) {
+        this.singlePlayer = singlePlayer;
+    }
+
+    public boolean isSinglePlayer() {
+        return singlePlayer;
+    }
 
     public synchronized List<VirtualView> getSocketClients() {
         return socketClients;
@@ -74,32 +83,41 @@ public class Server {
 
     public synchronized void waitingOtherPlayers() {
 
-        if (clients.size() == 2) {
-            System.out.println("Due client connessi");
-            System.out.println("Starting timer before the game");
+        if (isSinglePlayer()) {
 
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask()
-            {
-                @Override
-                public void run() {
+            List<VirtualView> viewGame = new ArrayList<>();
+            viewGame.addAll(clients);
+            new Game(viewGame, singlePlayer);
+            System.out.println("Started single player");
+        }
 
-                    if (clients.size() >= 2 && clients.size() <= MAXPLAYERS) {
-                        List<VirtualView> viewGame = new ArrayList<>();
-                        viewGame.addAll(clients);
-                        new Game(viewGame);
-                        System.out.println("Started game");
+        else {
+            if (clients.size() == 2) {
+                System.out.println("Due client connessi");
+                System.out.println("Starting timer before the game");
+
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        if (clients.size() >= 2 && clients.size() <= MAXPLAYERS) {
+                            List<VirtualView> viewGame = new ArrayList<>();
+                            viewGame.addAll(clients);
+                            new Game(viewGame, singlePlayer);
+                            System.out.println("Started game");
+                        }
+
                     }
+                }, (long) SECONDS * 1000);
 
-                }
-            }, (long) SECONDS * 1000);
-
+            }
         }
 
         if (clients.size() == MAXPLAYERS) {
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
-            new Game(viewGame);
+            new Game(viewGame, singlePlayer);
         }
 
     }

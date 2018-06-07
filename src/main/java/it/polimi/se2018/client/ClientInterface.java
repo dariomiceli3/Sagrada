@@ -47,6 +47,8 @@ public interface ClientInterface extends Remote {
 
     public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
 
+    public void setSinglePlayerMode(int id, boolean singlePlayer) throws RemoteException;
+
 
 
 }

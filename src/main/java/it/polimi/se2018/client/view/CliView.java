@@ -22,8 +22,7 @@ public class CliView extends View implements Runnable {
     private boolean singlePlayer;
     private static final int INITIALIZE = 99;
 
-    public CliView(boolean singlePlayer) {
-        this.singlePlayer = singlePlayer;
+    public CliView( ) {
     }
 
 
@@ -1022,6 +1021,34 @@ public class CliView extends View implements Runnable {
     public void showInvalidMove(String msg) {
 
         System.out.println("ERROR: " + msg);
+    }
+
+    @Override
+    public void showSinglePlayerRequest() {
+
+        Scanner reader = new Scanner(System.in);
+        String mode;
+        do {
+            System.out.println("How do you want to play: Single or Multi?");
+            mode = reader.nextLine();
+        }
+        while (!((mode.equalsIgnoreCase("single") || mode.equalsIgnoreCase("multi")))) ;
+
+        if (mode.equalsIgnoreCase("single")) {
+            singlePlayer = true;
+        }
+
+        if (mode.equalsIgnoreCase("multi")) {
+            singlePlayer = false;
+        }
+
+        try {
+            super.getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting index");
+            e.printStackTrace();
+        }
     }
 }
 
