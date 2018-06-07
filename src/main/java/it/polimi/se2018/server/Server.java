@@ -22,7 +22,7 @@ public class Server {
     private List<VirtualView> socketClients = new ArrayList<>();
     private List<VirtualView> clients = new ArrayList<>();
 
-    private boolean singlePlayer;
+    private static boolean singlePlayer;
 
     // add timer e timerturn
 
@@ -83,10 +83,11 @@ public class Server {
 
     public synchronized void waitingOtherPlayers() {
 
-        if (isSinglePlayer()) {
+        if (clients.size() == 1) {
 
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
+            System.out.println(getClients().size());
             new Game(viewGame, singlePlayer);
             System.out.println("Started single player");
         }
