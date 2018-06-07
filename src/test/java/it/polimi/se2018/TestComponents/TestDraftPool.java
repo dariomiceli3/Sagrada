@@ -84,9 +84,15 @@ public class TestDraftPool {
         assertEquals(7, draftPool.getNowNumber());
     }
 
-    /*@Test
+   /* @Test
     public void testSetDraftPool() {
+        DraftPool draftPool = new DraftPool();
+        ArrayList<Dice> diceArrayList = new ArrayList<>();
+        Dice dice = new Dice(3, DiceColor.RED);
+        diceArrayList.add(dice);
+        draftPool.setDraftPool(diceArrayList);
 
+        assertEquals(1, draftPool.getNowNumber() );
     }*/
 
     @Test
