@@ -152,7 +152,7 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof LensCutterEvent) {
 
-            toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent)arg).getIndexPool(), ((LensCutterEvent)arg).getIndexRound(), ((LensCutterEvent)arg).getIndexPosition());
+            toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent) arg).getIndexPool(), ((LensCutterEvent) arg).getIndexRound(), ((LensCutterEvent) arg).getIndexPosition());
             game.nextStepTool(virtualView);
         }
 
@@ -166,10 +166,13 @@ public class ToolCardController implements Observer {
 
             try {
                 toolCardEffect.glazingHammerEffect(virtualView.getPlayerID());
+                game.nextStepTool(virtualView);
             } catch (InvalidMoveException e) {
-                e.printStackTrace();
+                virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                game.getTool(7, game.getToolCardList()).setCost(1);
+                game.startTool(virtualView);
             }
-            game.nextStepTool(virtualView);
+
         }
 
         if (arg instanceof RunningPliersEvent) {
@@ -178,7 +181,7 @@ public class ToolCardController implements Observer {
                 toolCardEffect.runningPliers(virtualView.getPlayerID(), ((RunningPliersEvent)arg).getIndexPool(), ((RunningPliersEvent)arg).getIndexPattern());
                 game.nextTurn();
             } catch (InvalidMoveException e) {
-                e.printStackTrace();
+
             }
         }
 

@@ -372,7 +372,7 @@ public class Game implements Observer {
 
     }
 
-    private void startTool(VirtualView view) {
+    protected void startTool(VirtualView view) {
 
         view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
 
@@ -488,6 +488,16 @@ public class Game implements Observer {
         else {
             nextTurn();
         }
+    }
+
+    protected ToolCard getTool(int n, List<ToolCard> toolList) {
+
+        for (ToolCard toolCard : toolList ) {
+            if (toolCard.getNumber() == n) {
+                return toolCard;
+            }
+        }
+        return null;
     }
 
 

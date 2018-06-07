@@ -361,7 +361,7 @@ public class CliView extends View implements Runnable {
         if (response.equalsIgnoreCase("no")) {
 
             try {
-                super.getConnection().setNextTurnToServer();
+                super.getConnection().setNoTokenToServer();
             }
             catch (RemoteException e) {
                 System.out.println("Error in turning around");

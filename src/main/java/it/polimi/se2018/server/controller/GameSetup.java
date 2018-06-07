@@ -8,6 +8,7 @@ import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
 
+import javax.tools.Tool;
 import java.util.Random;
 
 import java.io.FileNotFoundException;
@@ -153,20 +154,20 @@ public class GameSetup {
     private List<ToolCard> loadToolCard() {
         List<ToolCard> list = new ArrayList<>();
 
-        list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
+        //list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
         list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
-        list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
-        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
+        //list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
+        //list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
         //list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         //list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
-        //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
+        list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
         if(!game.isSinglePlayer()) {
             list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
         }
         //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
         //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
-        list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
+        //list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
 
 
         Collections.shuffle(list);

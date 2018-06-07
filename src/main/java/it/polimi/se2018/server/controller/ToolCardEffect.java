@@ -113,7 +113,7 @@ public class ToolCardEffect {
         }
 
         else {
-            throw new InvalidMoveException("not allowed now");
+            throw new InvalidMoveException("Not Permitted to use it in the first round man!");
         }
     }
 
@@ -130,7 +130,7 @@ public class ToolCardEffect {
 
         }else {
             System.out.println("Non puoi usarla ora");//Todo cancellare il println
-            throw new InvalidMoveException("First got a move");
+            throw new InvalidMoveException("First got a ");
         }
 
     }

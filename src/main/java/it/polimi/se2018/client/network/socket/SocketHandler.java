@@ -452,6 +452,11 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
+    public void setNoTokenToServer() {
+        sendEvent(new PlayerNoTokenEvent());
+    }
+
+    @Override
     public void useToolCardToServer(int indexTool) {
         sendEvent(new ToolCardStartEvent(indexTool));
     }
