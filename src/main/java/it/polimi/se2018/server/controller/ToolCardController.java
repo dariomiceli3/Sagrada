@@ -177,10 +177,22 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof RunningPliersEvent) {
 
+            Dice dice = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((RunningPliersEvent) arg).getIndexPool());
+
             try {
                 toolCardEffect.runningPliers(virtualView.getPlayerID(), ((RunningPliersEvent)arg).getIndexPool(), ((RunningPliersEvent)arg).getIndexPattern());
                 game.nextTurn();
             } catch (InvalidMoveException e) {
+
+                if (e.getMessage().equalsIgnoreCase("Invalid turn moment")) {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.startTool(virtualView);
+                }
+
+                else {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice, ((RunningPliersEvent)arg).getIndexPattern());
+                }
 
             }
         }

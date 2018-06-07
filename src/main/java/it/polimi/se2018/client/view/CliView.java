@@ -356,12 +356,23 @@ public class CliView extends View implements Runnable {
                 }
             }
 
+            if (reply.equalsIgnoreCase("no")) {
+
+                try {
+                    super.getConnection().setNoTokenToServer();
+                }
+                catch (RemoteException e) {
+                    System.out.println("error in setting");
+                    e.printStackTrace();
+                }
+            }
+
         }
 
         if (response.equalsIgnoreCase("no")) {
 
             try {
-                super.getConnection().setNoTokenToServer();
+                super.getConnection().setNextTurnToServer();
             }
             catch (RemoteException e) {
                 System.out.println("Error in turning around");

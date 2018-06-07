@@ -129,8 +129,7 @@ public class ToolCardEffect {
             game.getModel().updateTokenAndNotify(iD);
 
         }else {
-            System.out.println("Non puoi usarla ora");//Todo cancellare il println
-            throw new InvalidMoveException("First got a ");
+            throw new InvalidMoveException("Invalid turn moment");
         }
 
     }
