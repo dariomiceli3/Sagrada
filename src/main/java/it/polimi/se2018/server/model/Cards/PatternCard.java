@@ -89,11 +89,11 @@ public class PatternCard implements Serializable {
      // remove dice from the box
      public Dice removeDice(int index) {
 
-          GlassBox box = pattern.get(index);
+          //GlassBox box = pattern.get(index);
 
-          Dice diceRemoved;
-          diceRemoved = box.unsetDice();
-          return diceRemoved;
+          //Dice diceRemoved;
+          //diceRemoved = pattern.get(index).unsetDice();
+          return pattern.get(index).unsetDice();
      }
 
 

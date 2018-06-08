@@ -111,6 +111,11 @@ public class ToolCardController implements Observer {
                  game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice, ((EglomiseBrushEvent) arg).getIndexStart());
                  virtualView.sendEvent(new EglomiseBrushRequestEvent(virtualView.getPlayerID()));
             }
+            catch (NullPointerException e) {
+                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                game.startTool(virtualView);
+            }
 
         }
 
@@ -128,6 +133,11 @@ public class ToolCardController implements Observer {
                 virtualView.sendEvent(new CopperFoilRequestEvent(virtualView.getPlayerID()));
 
             }
+            catch (NullPointerException e) {
+                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                game.startTool(virtualView);
+            }
 
         }
 
@@ -140,12 +150,26 @@ public class ToolCardController implements Observer {
                 game.nextStepTool(virtualView);
             }
             catch(InvalidMoveException e) {
-                virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(),virtualView.getPlayerID()));
-                game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1,((LathekinEvent) arg).getIndexStartOne());
-                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
-                game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice2,((LathekinEvent) arg).getIndexStartTwo());
-                virtualView.sendEvent(new LathekinRequestEvent(virtualView.getPlayerID()));
 
+                if (e.getMessage().equalsIgnoreCase("Error first dice")) {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(),virtualView.getPlayerID()));
+                    game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                    virtualView.sendEvent(new LathekinRequestEvent(virtualView.getPlayerID()));
+                }
+
+                if (e.getMessage().equalsIgnoreCase("Error second dice")) {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(),virtualView.getPlayerID()));
+                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().removeDice( ((LathekinEvent)arg).getIndexEndOne());
+                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1, ((LathekinEvent)arg).getIndexStartOne());
+                    game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                    virtualView.sendEvent(new LathekinRequestEvent(virtualView.getPlayerID()));
+                }
+
+            }
+            catch (NullPointerException e) {
+                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                game.startTool(virtualView);
             }
 
         }
@@ -235,7 +259,7 @@ public class ToolCardController implements Observer {
             toolCardEffect.fluxRemoverEffect(virtualView.getPlayerID(), ((FluxRemoverEvent)arg).getIndexPool(), ((FluxRemoverEvent)arg).getDiceValue(), dice);
             game.nextStepTool(virtualView);
         }
-// todo gestire la null pointer exception
+
         if (arg instanceof TapWheelEvent) {
 
             Dice dice1 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((TapWheelEvent)arg).getIndexStartOne());
@@ -246,6 +270,14 @@ public class ToolCardController implements Observer {
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
             }
+
+            catch (NullPointerException e) {
+
+                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                game.startTool(virtualView);
+            }
+
             catch (InvalidMoveException e) {
 
                 if (e.getMessage().equalsIgnoreCase("There's no dice on the Round Tracker of the same color") || e.getMessage().equalsIgnoreCase("You choose two dice with different colors")) {
@@ -277,12 +309,7 @@ public class ToolCardController implements Observer {
 
 
             }
-            catch (NullPointerException e) {
 
-                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
-                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
-                game.startTool(virtualView);
-            }
 
 
         }

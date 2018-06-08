@@ -64,9 +64,22 @@ public class ToolCardEffect {
     protected void lathekinEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
 
         Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
-        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+        try {
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+        }
+        catch (InvalidMoveException e) {
+            game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
+            throw new InvalidMoveException("Error first dice");
+        }
+
         Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
-        game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+        try {
+            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+        }
+        catch (InvalidMoveException e) {
+            game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice2, indexStart2);
+            throw new InvalidMoveException("Error second dice");
+        }
         game.getModel().updatePatternAndNotify(iD);
         game.getModel().updateTokenAndNotify(iD);
     }
