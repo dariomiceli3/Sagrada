@@ -11,9 +11,7 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.LoserEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberRequestEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.*;
 
 import java.util.*;
 
@@ -33,6 +31,8 @@ public class Game implements Observer {
     private int round = START;
     private int position;
     private int currID;
+    private Dice diceToolSinglePlayer;
+    private ToolCard toolRemoveSinglePlayer;
     private int singlePlayerDifficulty;
     private int step;
     private boolean singlePlayer;
@@ -118,6 +118,14 @@ public class Game implements Observer {
         this.singlePlayerDifficulty = difficulty;
     }
 
+    protected Dice getDiceToolSinglePlayer(){
+        return diceToolSinglePlayer;
+    }
+
+    protected ToolCard getToolRemoveSinglePlayer(){
+        return toolRemoveSinglePlayer;
+    }
+
 
 
 
@@ -169,7 +177,7 @@ public class Game implements Observer {
         }
         if (arg instanceof ToolCardSinglePlayerStartEvent){
 
-            checkDice(virtualView, ((ToolCardSinglePlayerStartEvent)arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent)arg).getDiceColor());
+            checkDice(virtualView, ((ToolCardSinglePlayerStartEvent)arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent)arg).getIndexPool());
         }
         if (arg instanceof PlayerChooseEvent){
 
@@ -382,7 +390,7 @@ public class Game implements Observer {
         if(!singlePlayer){
             view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
         }else {
-            view.sendEvent( new StartToolSinglePlayerEvent(toolCardList));
+            view.sendEvent( new StartToolSinglePlayerEvent(toolCardList, model.getDraftPool().getNowNumber()));
         }
 
 
@@ -513,14 +521,15 @@ public class Game implements Observer {
 
         if(model.getDraftPool().getDraftPool().get(indexPool).getColor().equals(toolCardList.get(indexTool).getColor())){
 
-            Dice dice = model.getDraftPool().removeDice(indexPool);
+            diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
             model.updatePoolAndNotify();
-            toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
-            ToolCard toolCard = toolCardList.remove(indexTool);
+            toolRemoveSinglePlayer = toolCardList.remove(indexTool);
+            toolController.toolCardEffectRequest(toolRemoveSinglePlayer.getNumber(), view);
+
 
 
         }else {
-            //eccezione o evento che notifica che il dado non va bene
+            view.sendEvent(new NotMatchColorEvent());
             startTool(view);
         }
     }

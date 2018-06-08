@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceBag;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.ToolCardUpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,11 @@ public class ToolCardEffect {
         }
 
         game.getModel().updateBoardAndNotify();
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
 
     }
 
@@ -48,7 +53,11 @@ public class ToolCardEffect {
         Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
         game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternEglomise(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
         game.getModel().updatePatternAndNotify(iD);
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
     }
 
     //toolcard 3
@@ -57,7 +66,11 @@ public class ToolCardEffect {
         Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
         game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternCopper(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
         game.getModel().updatePatternAndNotify(iD);
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
     }
 
     //toolcard 4
@@ -81,7 +94,11 @@ public class ToolCardEffect {
             throw new InvalidMoveException("Error second dice");
         }
         game.getModel().updatePatternAndNotify(iD);
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
     }
 
     //toolcard 5
@@ -92,7 +109,11 @@ public class ToolCardEffect {
         game.getModel().getDraftPool().setDice(dice2);
         game.getModel().getRoundTracker().addDice(dice1, indexRound);
         game.getModel().updateBoardAndNotify();
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
 
 
     }
@@ -105,7 +126,11 @@ public class ToolCardEffect {
         int newValue = random.nextInt(6) + 1;
         game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(newValue);
         game.getModel().updateBoardAndNotify();
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
     }
 
     //toolcard 7
@@ -122,7 +147,11 @@ public class ToolCardEffect {
                 game.getModel().getDraftPool().setDice(dice);
             }
             game.getModel().updateBoardAndNotify();
-            game.getModel().updateTokenAndNotify(iD);
+            if(!game.isSinglePlayer()){
+                game.getModel().updateTokenAndNotify(iD);
+            }else {
+                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            }
         }
 
         else {
@@ -156,7 +185,11 @@ public class ToolCardEffect {
             game.getModel().getPlayerFromID(iD).getPattern().putDice(dice, indexPattern);
             game.getModel().updatePatternAndNotify(iD);
             game.getModel().updateBoardAndNotify();
-            game.getModel().updateTokenAndNotify(iD);
+            if(!game.isSinglePlayer()){
+                game.getModel().updateTokenAndNotify(iD);
+            }else {
+                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            }
         } else {
             throw new InvalidMoveException("Invalid turn moment");
         }
@@ -168,7 +201,11 @@ public class ToolCardEffect {
         int value = game.getModel().getDraftPool().getDraftPool().get(indexPool).getValue();
         game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(7 - value);
         game.getModel().updateBoardAndNotify();
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
 
     }
 
@@ -181,7 +218,11 @@ public class ToolCardEffect {
         game.getModel().getDiceBag().setDice(dice1);
         game.getModel().getDraftPool().setDice(dice);
         game.getModel().updateBoardAndNotify();
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
 
 
 
@@ -236,7 +277,11 @@ public class ToolCardEffect {
             throw new InvalidMoveException("There's no dice on the Round Tracker of the same color");
         }
         game.getModel().updatePatternAndNotify(iD);
-        game.getModel().updateTokenAndNotify(iD);
+        if(!game.isSinglePlayer()){
+            game.getModel().updateTokenAndNotify(iD);
+        }else {
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+        }
     }
 
 
