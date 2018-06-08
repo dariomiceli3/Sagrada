@@ -117,6 +117,14 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof PlayerNameErrorEvent) {
+
+            if ((view.getPlayerID()) == (((PlayerNameErrorEvent)event).getId())) {
+                System.out.println("This name is used by another player");
+                view.showNameChoose();
+            }
+        }
+
         else if (event instanceof GameStartedEvent) {
             view.setStarted(((GameStartedEvent) event).isStarted());
             System.out.println("Game started: " + view.isStarted());

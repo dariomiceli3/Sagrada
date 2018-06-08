@@ -5,6 +5,7 @@ import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
+import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
@@ -57,7 +58,6 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
                 if (received instanceof SinglePlayerEvent) {
                     this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
-                    System.out.println(this.getServer().isSinglePlayer());
 
                     // todo refactor with multithreading this should be exectued only after the thread is started (maybe a lock)
                     this.getServer().waitingOtherPlayers();
