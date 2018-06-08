@@ -210,6 +210,7 @@ public class ToolCardEffect {
                 game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
             }
             catch (InvalidMoveException e) {
+                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
                 throw new InvalidMoveException("Error in the first dice");
             }
             Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
@@ -217,6 +218,9 @@ public class ToolCardEffect {
                 game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
             }
             catch (InvalidMoveException e) {
+                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice2, indexStart2);
+                game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexEnd1);
+                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
                 throw new InvalidMoveException("Error in the second dice");
             }
             }

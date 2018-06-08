@@ -269,6 +269,7 @@ public class ToolCardController implements Observer {
             try {
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
+                game.nextStepTool(virtualView);
             }
 
             catch (NullPointerException e) {
@@ -286,24 +287,12 @@ public class ToolCardController implements Observer {
                 }
 
 
-                else if (((TapWheelEvent)arg).getNumberDice() == 1  || (e.getMessage().equalsIgnoreCase("Error in the first dice"))) {
+                if ((e.getMessage().equalsIgnoreCase("Error in the first dice")) || e.getMessage().equalsIgnoreCase("Error in the second dice")) {
 
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
-                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1,((TapWheelEvent) arg).getIndexStartOne());
                     game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                     virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));
 
-                }
-
-                else {
-                   if (e.getMessage().equalsIgnoreCase("Error in the second dice")) {
-                       virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
-                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().removeDice(((TapWheelEvent)arg).getIndexEndOne());
-                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1, ((TapWheelEvent)arg).getIndexStartOne());
-                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice2, ((TapWheelEvent) arg).getIndexStartTwo());
-                       game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
-                       virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));
-                   }
                 }
 
 
