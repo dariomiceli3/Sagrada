@@ -10,7 +10,7 @@ public class ToolCardSinglePlayerStartEvent implements Event {
 
      public ToolCardSinglePlayerStartEvent(int indexTool, int indexPool) {
          this.indexTool = indexTool;
-         this.indexPool = indexTool;
+         this.indexPool = indexPool;
      }
 
     public int getIndexPool() {

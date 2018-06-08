@@ -519,7 +519,7 @@ public class Game implements Observer {
 
     protected void checkDice(VirtualView view, int indexTool, int indexPool){
 
-        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().equals(toolCardList.get(indexTool).getColor())){
+        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(toolCardList.get(indexTool).getColor().toString())){
 
             diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
             model.updatePoolAndNotify();
