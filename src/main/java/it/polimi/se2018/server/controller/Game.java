@@ -5,6 +5,7 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
+import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
@@ -165,6 +166,10 @@ public class Game implements Observer {
 
             checkCost(virtualView, ((ToolCardStartEvent) arg).getIndexTool());
 
+        }
+        if (arg instanceof ToolCardSinglePlayerStartEvent){
+
+            checkDice(virtualView, ((ToolCardSinglePlayerStartEvent)arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent)arg).getDiceColor());
         }
         if (arg instanceof PlayerChooseEvent){
 
@@ -374,7 +379,11 @@ public class Game implements Observer {
 
     protected void startTool(VirtualView view) {
 
-        view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
+        if(!singlePlayer){
+            view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
+        }else {
+            view.sendEvent( new StartToolSinglePlayerEvent(toolCardList));
+        }
 
 
     }
@@ -498,6 +507,22 @@ public class Game implements Observer {
             }
         }
         return null;
+    }
+
+    protected void checkDice(VirtualView view, int indexTool, int indexPool){
+
+        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().equals(toolCardList.get(indexTool).getColor())){
+
+            Dice dice = model.getDraftPool().removeDice(indexPool);
+            model.updatePoolAndNotify();
+            toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
+            ToolCard toolCard = toolCardList.remove(indexTool);
+
+
+        }else {
+            //eccezione o evento che notifica che il dado non va bene
+            startTool(view);
+        }
     }
 
 
