@@ -1118,21 +1118,21 @@ public class CliView extends View implements Runnable {
 
         if (response.equalsIgnoreCase("yes")) {
 
+            Scanner scanner = new Scanner(System.in);
             int indexTool = INITIALIZE;
             do {
                 try {
-                    System.out.println("Which tool card do you want to use? - Enter a number from 1 to" + toolList.size());
-                    indexTool = reader.nextInt();
+                    System.out.println("Which tool card do you want to use? - Enter a number from 1 to " + toolList.size());
+                    indexTool = scanner.nextInt();
                 }
                 catch (InputMismatchException e) {
                     System.out.println("You are entering a string, not the number of a Tool Card");
                 }
-                reader.nextLine();
+                scanner.nextLine();
             }
             while ( (indexTool < 1) || ( indexTool > toolList.size()) );
             indexTool--;
 
-            Scanner scanner = new Scanner(System.in);
             int indexPool = INITIALIZE;
             do {
                 try {
@@ -1142,7 +1142,7 @@ public class CliView extends View implements Runnable {
                 catch (InputMismatchException e) {
                     System.out.println("You are entering a string, not the index of the pool");
                 }
-                reader.nextLine();
+                scanner.nextLine();
             }
             while ( (indexPool < 1) || ( indexPool > poolSize) );
             indexPool--;

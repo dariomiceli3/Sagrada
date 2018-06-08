@@ -59,7 +59,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
                     System.out.println(this.getServer().isSinglePlayer());
 
-                    // todo refactor with multithreading
+                    // todo refactor with multithreading this should be exectued only after the thread is started (maybe a lock)
                     this.getServer().waitingOtherPlayers();
                 }
 
@@ -172,7 +172,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
                 if (received instanceof ToolCardSinglePlayerStartEvent) {
                     setChanged();
-                    notifyObservers();
+                    notifyObservers(received);
                 }
 
 
