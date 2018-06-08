@@ -55,6 +55,8 @@ public interface ClientInterface extends Remote {
 
     public void setDifficultyToServer(int difficulty) throws RemoteException;
 
+    public void useToolSingleToServer(int indexTool, int indexPool) throws RemoteException;
+
 
 
 }

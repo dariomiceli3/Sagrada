@@ -143,4 +143,8 @@ public abstract class View implements Runnable {
 
     public abstract void showPrivateSingle(List<PrivateObjectiveCard> publicList);
 
+    public abstract void showToolSingleCommand(List<ToolCard> toolList, int poolSize);
+
+    public abstract void showMatchError();
+
 }

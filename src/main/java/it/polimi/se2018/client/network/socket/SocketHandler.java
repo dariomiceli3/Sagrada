@@ -381,6 +381,14 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showLosers();
         }
 
+        else if (event instanceof StartToolSinglePlayerEvent) {
+            view.showToolSingleCommand( ((StartToolSinglePlayerEvent) event).getToolCardList(), ((StartToolSinglePlayerEvent)event).getPoolSize());
+        }
+
+        else if (event instanceof NotMatchColorEvent) {
+            view.showMatchError();
+        }
+
         else {
             System.out.println("Not understood the message");
         }
@@ -522,6 +530,8 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     }
 
+    //---------------------------------------------single player
+
     @Override
     public void setSinglePlayerMode(int id, boolean singlePlayer) {
         sendEvent(new SinglePlayerEvent(id, singlePlayer));
@@ -530,5 +540,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void setDifficultyToServer(int difficulty) {
         sendEvent(new ToolNumberEvent(difficulty));
+    }
+
+    @Override
+    public void useToolSingleToServer(int indexTool, int indexPool) {
+        sendEvent(new ToolCardSinglePlayerStartEvent(indexTool,indexPool));
     }
 }

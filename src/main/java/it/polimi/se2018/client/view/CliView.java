@@ -1036,7 +1036,7 @@ public class CliView extends View implements Runnable {
 
 
 
-    //---------------------------------------single player
+    //---------------------------------------single player-------------------------------------------------------------
 
     @Override
     public void showSinglePlayerRequest() {
@@ -1104,7 +1104,78 @@ public class CliView extends View implements Runnable {
         }
 
     }
+
+    @Override
+    public void showToolSingleCommand(List<ToolCard> toolList, int poolSize) {
+
+        Scanner reader = new Scanner(System.in);
+        String response;
+        do {
+            System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+            response = reader.nextLine();
+        }
+        while (!( (response.equalsIgnoreCase("yes")) || (response.equalsIgnoreCase("no")) ) );
+
+        if (response.equalsIgnoreCase("yes")) {
+
+            int indexTool = INITIALIZE;
+            do {
+                try {
+                    System.out.println("Which tool card do you want to use? - Enter a number from 1 to" + toolList.size());
+                    indexTool = reader.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not the number of a Tool Card");
+                }
+                reader.nextLine();
+            }
+            while ( (indexTool < 1) || ( indexTool > toolList.size()) );
+            indexTool--;
+
+            Scanner scanner = new Scanner(System.in);
+            int indexPool = INITIALIZE;
+            do {
+                try {
+                    System.out.println("Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + poolSize);
+                    indexPool = scanner.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("You are entering a string, not the index of the pool");
+                }
+                reader.nextLine();
+            }
+            while ( (indexPool < 1) || ( indexPool > poolSize) );
+            indexPool--;
+
+
+            try {
+                super.getConnection().useToolSingleToServer(indexTool, indexPool);
+            }
+            catch (RemoteException e) {
+                System.out.println("Error in setting tool card");
+            }
+        }
+
+
+        if (response.equalsIgnoreCase("no")) {
+
+            try {
+                super.getConnection().setNextTurnToServer();
+            }
+            catch (RemoteException e) {
+                System.out.println("error in setting turning");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void showMatchError() {
+
+        System.out.println("You are choosed a not right dice, it doesn't match the color of the tool card");
+    }
 }
+
 
 
 

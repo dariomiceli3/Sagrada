@@ -2,11 +2,13 @@ package it.polimi.se2018.server.network.socket;
 
 import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
+import it.polimi.se2018.server.model.Events.SinglePlayer.ToolCardSinglePlayerStartEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
 
 import java.io.IOException;
@@ -156,6 +158,8 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                //-------------single player
+
                 if (received instanceof ToolNumberEvent) {
                     setChanged();
                     notifyObservers(received);
@@ -164,6 +168,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 if (received instanceof PlayerNoTokenEvent) {
                     setChanged();
                     notifyObservers(received);
+                }
+
+                if (received instanceof ToolCardSinglePlayerStartEvent) {
+                    setChanged();
+                    notifyObservers();
                 }
 
 
@@ -217,11 +226,6 @@ public class VirtualSocket extends VirtualView implements Runnable {
             if (arg instanceof Event) {
                 sendEvent((Event) arg);
             }
-
-
-            /*if (arg instanceof Event) {
-                sendEvent((Event) arg);
-            }*/
 
             // aggiungere il resto e nel caso oggetto ricevuto non sia messaggio
         }
