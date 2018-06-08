@@ -91,7 +91,7 @@ public class ToolCardController implements Observer {
             catch (InvalidMoveException e ){
 
                 virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
-                virtualView.sendEvent(new UpdatePoolEvent(game.getModel().getDraftPool()));
+                game.getModel().updatePoolAndNotify();
                 virtualView.sendEvent(new GrozingPliersRequestEvent(virtualView.getPlayerID(),game.getModel().getDraftPool().getNowNumber() ));
             }
 
@@ -142,7 +142,7 @@ public class ToolCardController implements Observer {
             catch(InvalidMoveException e) {
                 virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(),virtualView.getPlayerID()));
                 game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1,((LathekinEvent) arg).getIndexStartOne());
-                virtualView.sendEvent(new PlayerPatternUpdateEvent(virtualView.getPlayerID(), game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                 game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice2,((LathekinEvent) arg).getIndexStartTwo());
                 virtualView.sendEvent(new LathekinRequestEvent(virtualView.getPlayerID()));
 
@@ -177,7 +177,7 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof RunningPliersEvent) {
 
-            Dice dice = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((RunningPliersEvent) arg).getIndexPool());
+            Dice dice = game.getModel().getDraftPool().getDraftPool().get( ((RunningPliersEvent) arg).getIndexPool());
 
             try {
                 toolCardEffect.runningPliers(virtualView.getPlayerID(), ((RunningPliersEvent)arg).getIndexPool(), ((RunningPliersEvent)arg).getIndexPattern());
@@ -191,7 +191,9 @@ public class ToolCardController implements Observer {
 
                 else {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
-                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice, ((RunningPliersEvent)arg).getIndexPattern());
+                    game.getModel().getDraftPool().getDraftPool().add(dice);
+                    game.getModel().updatePoolAndNotify();
+                    virtualView.sendEvent(new RunningPliersRequestEvent(virtualView.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
                 }
 
             }
@@ -199,12 +201,26 @@ public class ToolCardController implements Observer {
 
         if (arg instanceof CorkBackedEvent) {
 
+            Dice dice = game.getModel().getDraftPool().getDraftPool().get( ((CorkBackedEvent) arg).getIndexPool() );
+
             try {
                 toolCardEffect.corkBackedStraightedgeEffect(virtualView.getPlayerID(), ((CorkBackedEvent)arg).getIndexPool(), ((CorkBackedEvent)arg).getIndexPattern() );
+                game.nextTurn();
             } catch (InvalidMoveException e) {
-                e.printStackTrace();
+
+                if (e.getMessage().equalsIgnoreCase("Invalid turn moment")) {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.startTool(virtualView);
+                }
+                else
+                {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.getModel().getDraftPool().getDraftPool().add(dice);
+                    virtualView.sendEvent(new CorkBackedRequestEvent(virtualView.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
+
+
+                }
             }
-            game.nextTurn();
 
         }
 
@@ -219,15 +235,56 @@ public class ToolCardController implements Observer {
             toolCardEffect.fluxRemoverEffect(virtualView.getPlayerID(), ((FluxRemoverEvent)arg).getIndexPool(), ((FluxRemoverEvent)arg).getDiceValue(), dice);
             game.nextStepTool(virtualView);
         }
-
+// todo gestire la null pointer exception
         if (arg instanceof TapWheelEvent) {
+
+            Dice dice1 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((TapWheelEvent)arg).getIndexStartOne());
+
+            Dice dice2 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((TapWheelEvent)arg).getIndexStartTwo());
 
             try {
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
             }
+            catch (InvalidMoveException e) {
+
+                if (e.getMessage().equalsIgnoreCase("There's no dice on the Round Tracker of the same color") || e.getMessage().equalsIgnoreCase("You choose two dice with different colors")) {
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.startTool(virtualView);
+                }
+
+
+                else if (((TapWheelEvent)arg).getNumberDice() == 1  || (e.getMessage().equalsIgnoreCase("Error in the first dice"))) {
+
+                    virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                    game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1,((TapWheelEvent) arg).getIndexStartOne());
+                    game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                    virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));
+
+                }
+
+                else {
+                   if (e.getMessage().equalsIgnoreCase("Error in the second dice")) {
+                       virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
+                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().removeDice(((TapWheelEvent)arg).getIndexEndOne());
+                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice1, ((TapWheelEvent)arg).getIndexStartOne());
+                       game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().putAnyDice(dice2, ((TapWheelEvent) arg).getIndexStartTwo());
+                       game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                       virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));
+                   }
+                }
+
+
+
+            }
+            catch (NullPointerException e) {
+
+                virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
+                game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
+                game.startTool(virtualView);
+            }
+
+
         }
 
     }

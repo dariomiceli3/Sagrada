@@ -145,8 +145,7 @@ public class ToolCardEffect {
             game.getModel().updateBoardAndNotify();
             game.getModel().updateTokenAndNotify(iD);
         } else {
-            System.out.println("Non puoi usarla ora");//Todo cancellare il println
-            throw new InvalidMoveException("you just got a move");
+            throw new InvalidMoveException("Invalid turn moment");
         }
     }
 
@@ -189,23 +188,35 @@ public class ToolCardEffect {
 
 
         }
-        if(numberOfDice > 1 && c > 0){
+        if (numberOfDice > 1 && c > 0){
 
             if (game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart1).getColor().equals(game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart2).getColor()))
             {
             Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
-            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+            try {
+                game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+            }
+            catch (InvalidMoveException e) {
+                throw new InvalidMoveException("Error in the first dice");
+            }
             Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
-            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+            try {
+                game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+            }
+            catch (InvalidMoveException e) {
+                throw new InvalidMoveException("Error in the second dice");
+            }
             }
             else {
-                throw new InvalidMoveException("you choose dice with different color");
+                throw new InvalidMoveException("You choose two dice with different colors");
             }
-        }else if (c > 0){
+        }
+        else if (c > 0){
             Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
             game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
-        }else {
-            throw new InvalidMoveException("color of dice not in RoundTracker");
+        }
+        else {
+            throw new InvalidMoveException("There's no dice on the Round Tracker of the same color");
         }
         game.getModel().updatePatternAndNotify(iD);
         game.getModel().updateTokenAndNotify(iD);
