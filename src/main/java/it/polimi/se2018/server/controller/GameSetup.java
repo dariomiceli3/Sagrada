@@ -136,16 +136,6 @@ public class GameSetup {
         }
     }*/
 
-    protected int calculatePlayerTurn(int turn, int numberOfPlayers) {
-        if (turn < numberOfPlayers) {
-            return turn;
-        } else if (turn == numberOfPlayers) {
-            return numberOfPlayers - 1;
-        } else {
-            return (2 * numberOfPlayers) - (turn + 1);
-        }
-    }
-
     protected void changeBagger() {
 
         game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));

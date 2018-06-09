@@ -12,6 +12,7 @@ public class ToolCard implements Serializable{
     private DiceColor color;
     private int number;
     private int cost;
+    private int usage;
     private static final int DEFAULT = 1;
 
 
@@ -20,6 +21,7 @@ public class ToolCard implements Serializable{
         this.color = color;
         this.number = number;
         this.cost = DEFAULT;
+        this.usage = 0;
     }
 
     protected DiceColor getColor() {
@@ -40,6 +42,14 @@ public class ToolCard implements Serializable{
 
     public int getCost() {
         return cost;
+    }
+
+    public int getUsage() {
+        return usage;
+    }
+
+    public void setUsage(int usage) {
+        this.usage = usage;
     }
 
     @Override
