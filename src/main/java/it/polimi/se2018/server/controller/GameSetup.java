@@ -8,7 +8,7 @@ import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
 
-import javax.tools.Tool;
+
 import java.util.Random;
 
 import java.io.FileNotFoundException;

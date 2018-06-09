@@ -85,6 +85,8 @@ public abstract class View implements Runnable {
 
     public abstract void showDraftPool(DraftPool draftPool);
 
+    public abstract void startCommand();
+
     public abstract void showChooseCommand();
 
     public abstract void showMoveCommand(int poolSize);

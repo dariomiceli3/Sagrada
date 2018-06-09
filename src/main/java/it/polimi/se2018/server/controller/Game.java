@@ -127,6 +127,9 @@ public class Game implements Observer {
     }
 
 
+    protected int getCurrID() {
+        return currID;
+    }
 
 
 
@@ -331,12 +334,13 @@ public class Game implements Observer {
     }
 
     private void startTurn(){
-        //startTimer();
+
+        startTimer();
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
                 view.sendEvent(new StartRoundEvent(round));
-                this.position = setup.calculatePlayerTurn(turn, viewGame.size());
+                this.position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                 if(round > START){
@@ -350,7 +354,7 @@ public class Game implements Observer {
         else if (turn > DEFAULT && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
-                this.position = setup.calculatePlayerTurn(turn, viewGame.size());
+                this.position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()){
                     System.out.println("hai usato la running pliers e il turno dle giocatore " + currID + "salta");
@@ -371,6 +375,17 @@ public class Game implements Observer {
         }
 
 
+
+    }
+
+    protected int calculatePlayerTurn(int turn, int numberOfPlayers) {
+        if (turn < numberOfPlayers) {
+            return turn;
+        } else if (turn == numberOfPlayers) {
+            return numberOfPlayers - 1;
+        } else {
+            return (2 * numberOfPlayers) - (turn + 1);
+        }
     }
 
     private void startChoose(VirtualView view){
@@ -535,7 +550,7 @@ public class Game implements Observer {
     }
 
 
-    /*protected void startTimer() {
+    protected void startTimer() {
 
         if (timer != null) {
             timer.cancel();
@@ -546,11 +561,13 @@ public class Game implements Observer {
         {
             @Override
             public void run() {
+                viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID(), viewGame.get(getCurrID()).getName()));
                 nextTurn();
+
             }
 
         }, (long) 10 * 1000);
-    }*/
+    }
 
 
 

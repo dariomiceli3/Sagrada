@@ -10,9 +10,12 @@ import it.polimi.se2018.server.model.Components.*;
 import it.polimi.se2018.server.model.Events.Event;
 
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.List;
 
 public class CliView extends View implements Runnable {
 
@@ -29,11 +32,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void run() {
 
+        Scanner reader = new Scanner(System.in);
         boolean loop = true;
 
         if (!isStarted) {
             System.out.println("Please wait, the game will start soon");
         }
+
 
     }
 
@@ -196,6 +201,23 @@ public class CliView extends View implements Runnable {
     @Override
     public void showDraftPool(DraftPool draftPool) {
         System.out.println(draftPool.toString());
+    }
+
+    @Override
+    public void startCommand() {
+
+        try {
+            Robot robot = new Robot();
+
+            // Simulate a key press
+            robot.keyPress(KeyEvent.VK_0);
+            robot.keyRelease(KeyEvent.VK_0);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
