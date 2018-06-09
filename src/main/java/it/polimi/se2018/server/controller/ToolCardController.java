@@ -115,6 +115,10 @@ public class ToolCardController implements Observer {
                 virtualView.sendEvent(new InvalidMoveEvent("There's no dice to move in the start index", virtualView.getPlayerID()));
                 game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                 invalidMove(virtualView);
+                if(game.getTool(2).getUsage() == 1){
+                    game.getTool(2).setCost(1);
+                    game.getTool(2).setUsage(0);
+                }
                 game.startTool(virtualView);
             }
 
@@ -138,6 +142,10 @@ public class ToolCardController implements Observer {
                 virtualView.sendEvent(new InvalidMoveEvent("There's no dices to move in the start index", virtualView.getPlayerID()));
                 game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                 invalidMove(virtualView);
+                if(game.getTool(3).getUsage() == 1){
+                    game.getTool(3).setCost(1);
+                    game.getTool(3).setUsage(0);
+                }
                 game.startTool(virtualView);
             }
 
@@ -172,6 +180,10 @@ public class ToolCardController implements Observer {
                 virtualView.sendEvent(new InvalidMoveEvent("There is no dice to move in the start index", virtualView.getPlayerID()));
                 game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                 invalidMove(virtualView);
+                if(game.getTool(4).getUsage() == 1){
+                    game.getTool(4).setCost(1);
+                    game.getTool(4).setUsage(0);
+                }
                 game.startTool(virtualView);
             }
 
@@ -197,6 +209,10 @@ public class ToolCardController implements Observer {
             } catch (InvalidMoveException e) {
                 virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                 invalidMove(virtualView);
+                if(game.getTool(7).getUsage() == 1){
+                    game.getTool(7).setCost(1);
+                    game.getTool(7).setUsage(0);
+                }
                 game.startTool(virtualView);
             }
 
@@ -214,6 +230,10 @@ public class ToolCardController implements Observer {
                 if (e.getMessage().equalsIgnoreCase("Invalid turn moment")) {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     invalidMove(virtualView);
+                    if(game.getTool(8).getUsage() == 1){
+                        game.getTool(8).setCost(1);
+                        game.getTool(8).setUsage(0);
+                    }
                     game.startTool(virtualView);
                 }
 
@@ -239,6 +259,10 @@ public class ToolCardController implements Observer {
                 if (e.getMessage().equalsIgnoreCase("Invalid turn moment")) {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     invalidMove(virtualView);
+                    if(game.getTool(9).getUsage() == 1){
+                        game.getTool(9).setCost(1);
+                        game.getTool(9).setUsage(0);
+                    }
                     game.startTool(virtualView);
                 }
                 else
@@ -282,6 +306,10 @@ public class ToolCardController implements Observer {
                 virtualView.sendEvent(new InvalidMoveEvent("There' s no dice to move in the start index", virtualView.getPlayerID()));
                 game.getModel().updatePatternAndNotify(virtualView.getPlayerID());
                 invalidMove(virtualView);
+                if(game.getTool(12).getUsage() == 1){
+                    game.getTool(12).setCost(1);
+                    game.getTool(12).setUsage(0);
+                }
                 game.startTool(virtualView);
             }
 
@@ -290,9 +318,12 @@ public class ToolCardController implements Observer {
                 if (e.getMessage().equalsIgnoreCase("There's no dice on the Round Tracker of the same color") || e.getMessage().equalsIgnoreCase("You choose two dice with different colors")) {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     invalidMove(virtualView);
+                    if(game.getTool(12).getUsage() == 1){
+                        game.getTool(12).setCost(1);
+                        game.getTool(12).setUsage(0);
+                    }
                     game.startTool(virtualView);
                 }
-
 
                 if ((e.getMessage().equalsIgnoreCase("Error in the first dice")) || e.getMessage().equalsIgnoreCase("Error in the second dice")) {
 
@@ -318,8 +349,6 @@ public class ToolCardController implements Observer {
             game.getModel().getDraftPool().getDraftPool().add(game.getDiceToolSinglePlayer());
             game.getModel().updatePoolAndNotify();
             game.getToolCardList().add(game.getToolRemoveSinglePlayer());
-        }else {
-            //todo fare in modo che la toolcard sia
         }
     }
 }

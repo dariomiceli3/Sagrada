@@ -22,6 +22,7 @@ public class Player implements Serializable {
     private int tokensNumber;
     private int finalPoints;
     private int privatePoints;
+    boolean off;
 
     /**
      * Default class constructor
@@ -69,6 +70,14 @@ public class Player implements Serializable {
      */
     public void setPattern(PatternCard pattern) {
         this.pattern = pattern;
+    }
+
+    public boolean isOff() {
+        return off;
+    }
+
+    public void setOff(boolean of) {
+        this.off = off;
     }
 
     public String getPlayerName() {

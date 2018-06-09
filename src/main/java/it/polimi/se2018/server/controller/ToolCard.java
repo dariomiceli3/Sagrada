@@ -48,6 +48,10 @@ public class ToolCard implements Serializable{
         return usage;
     }
 
+    public void incrementUsage(){
+        this.usage = usage + 1;
+    }
+
     public void setUsage(int usage) {
         this.usage = usage;
     }
