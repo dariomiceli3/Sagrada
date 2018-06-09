@@ -267,7 +267,7 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
 
             else {
-                view.showOtherTimer(((TimerEndedEvent) event).getName());
+                //view.showOtherTimer(((TimerEndedEvent) event).getName());
             }
         }
 

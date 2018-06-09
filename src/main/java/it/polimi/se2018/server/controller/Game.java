@@ -346,7 +346,7 @@ public class Game implements Observer {
 
     private void startTurn(){
 
-        startTimer();
+        //startTimer();
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
@@ -566,7 +566,7 @@ public class Game implements Observer {
     }
 
 
-    protected void startTimer() {
+   /* protected void startTimer() {
 
         if (timer != null) {
             timer.cancel();
@@ -583,7 +583,7 @@ public class Game implements Observer {
             }
 
         }, (long) 10 * 1000);
-    }
+    }*/
 
 
 
