@@ -159,6 +159,7 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerDraftPoolEvent){
 
+            startTimer();
             setDraftPoolModel(virtualView);
         }
         if (arg instanceof PlayerMoveEvent) {
@@ -185,6 +186,8 @@ public class Game implements Observer {
             checkDice(virtualView, ((ToolCardSinglePlayerStartEvent)arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent)arg).getIndexPool());
         }
         if (arg instanceof PlayerChooseEvent){
+
+            startTimer();
 
             stepController(virtualView, ((PlayerChooseEvent)arg).getStep());
         }

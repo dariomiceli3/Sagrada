@@ -262,7 +262,6 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof TimerEndedEvent) {
 
             if ((view.getPlayerID()) == ((TimerEndedEvent) event).getId()) {
-                view.startCommand();
                 view.showTimer();
             }
 

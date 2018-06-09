@@ -12,6 +12,12 @@ import it.polimi.se2018.server.model.Events.Event;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.*;
@@ -26,6 +32,8 @@ public class CliView extends View implements Runnable {
     private static final int INITIALIZE = 99;
 
     public CliView( ) {
+
+
     }
 
 
@@ -63,8 +71,12 @@ public class CliView extends View implements Runnable {
     public void showNameChoose() {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Enter your name");
-        String name = reader.nextLine();
+        String name;
+        do {
+            System.out.println("Enter your name: ");
+            name = reader.nextLine();
+        }
+        while (name.isEmpty());
         setPlayerName(name);
 
     }
@@ -201,23 +213,6 @@ public class CliView extends View implements Runnable {
     @Override
     public void showDraftPool(DraftPool draftPool) {
         System.out.println(draftPool.toString());
-    }
-
-    @Override
-    public void startCommand() {
-
-        try {
-            Robot robot = new Robot();
-
-            // Simulate a key press
-            robot.keyPress(KeyEvent.VK_0);
-            robot.keyRelease(KeyEvent.VK_0);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
