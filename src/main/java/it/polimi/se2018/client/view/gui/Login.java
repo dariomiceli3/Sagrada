@@ -29,6 +29,8 @@ public class Login {
     private static Button button;
 
 
+
+
     public static void start(Stage primaryStage) throws IOException {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
@@ -68,6 +70,10 @@ public class Login {
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(550);
         imageView.setFitWidth(430);
+        window.setMaxWidth(430);
+        window.setMaxHeight(550);
+        window.setMinWidth(430);
+        window.setMinHeight(550);
 
 
 
@@ -137,24 +143,36 @@ public class Login {
 
         borderPane.setCenter(vBox1);
 
-        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 
-                if (group.getSelectedToggle() != null) {
-
-                    System.out.println(group.getSelectedToggle().getUserData().toString());
-                    // Do something here with the userData of newly selected radioButton
-
-                }
-
-            }
-        });
 
         button1.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
 
         button.setOnAction(e ->{
+            group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+                public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+
+                    if (group.getSelectedToggle() != null) {
+
+                        System.out.println(group.getSelectedToggle().getUserData().toString());
+                        // Do something here with the userData of newly selected radioButton
+
+                    }
+
+                }
+            });
+            group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+                public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                    System.out.println("Ciao");
+                    //if (group1.getSelectedToggle() != null) {
+
+                        System.out.println(group1.getSelectedToggle().getUserData().toString());
+                        // Do something here with the userData of newly selected radioButton
+
+                    //}
+
+                }
+            });
             window.setScene(scene1);
-            ;
         });
 
         layout.setCenter(vBox);
