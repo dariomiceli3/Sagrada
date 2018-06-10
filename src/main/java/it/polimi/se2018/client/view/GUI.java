@@ -3,6 +3,8 @@ package it.polimi.se2018.client.view;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -47,23 +49,27 @@ public class GUI extends Application {
         final ToggleGroup group = new ToggleGroup();
 
         ToggleButton tb1 = new ToggleButton("Socket");
-
+        tb1.setUserData("socket");
         tb1.setSelected(true);
         tb1.isSelected();
         group.getToggles().add(tb1);
 
         ToggleButton tb2 = new ToggleButton("RMI");
-
+        tb2.setUserData("rmi");
         group.getToggles().add(tb2);
+
 
         final ToggleGroup group1 = new ToggleGroup();
         ToggleButton tb3 = new ToggleButton("Single");
+        tb3.setUserData("single");
         ToggleButton tb4 = new ToggleButton("Multi");
+        tb4.setUserData("multi");
         tb4.setSelected(true);
         tb4.isSelected();
         group1.getToggles().add(tb3);
         group1.getToggles().add(tb4);
         button = new Button("Play");
+
 
         BorderPane layout = new BorderPane();
 
@@ -144,11 +150,29 @@ public class GUI extends Application {
 
         borderPane.setCenter(vBox1);
 
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+
+                if (group.getSelectedToggle() != null) {
+
+                    System.out.println(group.getSelectedToggle().getUserData().toString());
+                    // Do something here with the userData of newly selected radioButton
+
+                }
+
+            }
+        });
+
         button1.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
 
-        button.setOnAction(e -> window.setScene(scene1));
+        button.setOnAction(e ->{
+            window.setScene(scene1);
+            ;
+        });
 
         layout.setCenter(vBox);
+
+
 
 
         window.setScene(scene);
