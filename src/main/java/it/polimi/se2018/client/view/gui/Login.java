@@ -146,39 +146,20 @@ public class Login {
 
 
         button1.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
-
+        button.disableProperty().bind(Bindings.isNull(group.selectedToggleProperty()).or(Bindings.isNull(group1.selectedToggleProperty())));
         button.setOnAction(e ->{
-            group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-                public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-
-                    if (group.getSelectedToggle() != null) {
-
-                        System.out.println(group.getSelectedToggle().getUserData().toString());
-                        // Do something here with the userData of newly selected radioButton
-
-                    }
-
-                }
-            });
-            group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-                public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-                    System.out.println("Ciao");
-                    //if (group1.getSelectedToggle() != null) {
-
-                        System.out.println(group1.getSelectedToggle().getUserData().toString());
-                        // Do something here with the userData of newly selected radioButton
-
-                    //}
-
-                }
-            });
+            System.out.println(group.getSelectedToggle().getUserData().toString());
+            System.out.println(group1.getSelectedToggle().getUserData().toString());
             window.setScene(scene1);
         });
 
         layout.setCenter(vBox);
 
 
-
+        button1.setOnAction(e -> {
+            System.out.println(textField.getText());
+            AlertBox.display("Error", "Name already chosen");
+        });
 
         window.setScene(scene);
 
