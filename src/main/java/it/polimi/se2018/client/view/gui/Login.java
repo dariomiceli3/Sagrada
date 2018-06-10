@@ -1,48 +1,35 @@
-package it.polimi.se2018.client.view;
+package it.polimi.se2018.client.view.gui;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import java.io.FileInputStream;
-
-
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
+
+public class Login {
+
+    private static Stage window;
+    private static Button button;
 
 
-public class GUI extends Application {
-     private Stage window;
-    private Button button;
-
-
-    public static void main(String []args) {
-        launch();
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws IOException {
+    public static void start(Stage primaryStage) throws IOException {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
 
@@ -179,4 +166,5 @@ public class GUI extends Application {
 
         window.show();
     }
+
 }

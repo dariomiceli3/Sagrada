@@ -154,7 +154,7 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
 
-            setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexChoosePattern());
+            //setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexChoosePattern());
         }
 
         if (arg instanceof PlayerDraftPoolEvent){

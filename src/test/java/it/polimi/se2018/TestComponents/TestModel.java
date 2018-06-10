@@ -112,7 +112,7 @@ public class TestModel {
 
 
         model.setPlayerAndNotify(1, "ciao");
-        model.setPatternAndNotify(1, patternCard);
+        //model.setPatternAndNotify(1, patternCard);
         model.setPrivateAndNotify(1, privateObjectiveCard);
         model.setTokenAndNotify(1);
         model.setDraftPoolAndNotify(false);
