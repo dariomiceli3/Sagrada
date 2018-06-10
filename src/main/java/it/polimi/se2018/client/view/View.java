@@ -57,7 +57,21 @@ public abstract class View implements Runnable {
         return connection;
     }
 
+
+
+    //---------------------- abstract method , which implementation depends on the view (cli or gui)
+
+    public abstract void showID();
+
+    public abstract void showGameStarted();
+
     public abstract void showNameChoose();
+
+    public abstract void showName();
+
+    public abstract void showNameOther(String name);
+
+    public abstract void showNameError();
 
     public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard);
 

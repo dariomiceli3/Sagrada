@@ -89,13 +89,12 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     }
 
-    // TODO sistemare e togliere queste println
     // metodo per leggere evento chiamato dal socket INPUT e in base all'evento fare la cosa giusta
     public void readEvent(Event event) {
 
         if (event instanceof PlayerIDEvent) {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());
-            System.out.println("Player id set " + view.getPlayerID());
+            view.showID();
 
         }
 
@@ -110,24 +109,24 @@ public class SocketHandler implements ClientInterface, Runnable {
 
             if ((view.getPlayerID()) == (((PlayerNameUpdateEvent) event).getID())) {
                view.setNameView(((PlayerNameUpdateEvent) event).getName());
-               System.out.println("Name set: " + view.getPlayerName());
+               view.showName();
             }
             else {
-                System.out.println("Another player connected: " + ((PlayerNameUpdateEvent) event).getName());
+                view.showNameOther(((PlayerNameUpdateEvent) event).getName());
             }
         }
 
         else if (event instanceof PlayerNameErrorEvent) {
 
             if ((view.getPlayerID()) == (((PlayerNameErrorEvent)event).getId())) {
-                System.out.println("This name is used by another player");
+                view.showNameError();
                 view.showNameChoose();
             }
         }
 
         else if (event instanceof GameStartedEvent) {
             view.setStarted(((GameStartedEvent) event).isStarted());
-            System.out.println("Game started: " + view.isStarted());
+            view.showGameStarted();
             view.showNameChoose();
         }
 
@@ -538,7 +537,7 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     }
 
-    //---------------------------------------------single player
+    //---------------------------------------------single player methods-----------------------------------------
 
     @Override
     public void setSinglePlayerMode(int id, boolean singlePlayer) {

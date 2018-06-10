@@ -1,27 +1,14 @@
 package it.polimi.se2018.client.view;
 
-import it.polimi.se2018.client.ClientInterface;
-import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
-import it.polimi.se2018.server.model.Events.Event;
-
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.List;
+
+
 
 public class CliView extends View implements Runnable {
 
@@ -32,8 +19,6 @@ public class CliView extends View implements Runnable {
     private static final int INITIALIZE = 99;
 
     public CliView( ) {
-
-
     }
 
 
@@ -56,16 +41,21 @@ public class CliView extends View implements Runnable {
     //---------------------------ovveride metodi mostrano su view---------------------------------
 
     @Override
-    public void setPlayerName(String username) {
-
-        try {
-            super.getConnection().setPlayerNameToServer(username, super.getPlayerID());
-        }
-        catch (RemoteException e) {
-            System.out.println("Error in setting name");
-            e.printStackTrace();
-        }
+    public void showID() {
+        System.out.println("Player id set " + super.getPlayerID());
     }
+
+
+    @Override
+    public void setPlayerName(String username) {
+            super.getConnection().setPlayerNameToServer(username, super.getPlayerID());
+    }
+
+    @Override
+    public void showGameStarted() {
+        System.out.println("Game started: " + super.isStarted());
+    }
+
 
     @Override
     public void showNameChoose() {
@@ -80,6 +70,23 @@ public class CliView extends View implements Runnable {
         setPlayerName(name);
 
     }
+
+    @Override
+    public void showName() {
+        System.out.println("Name set as: " + super.getPlayerName());
+    }
+
+    @Override
+    public void showNameOther(String name) {
+        System.out.println("Another player connected with name: " + name);
+    }
+
+
+    @Override
+    public void showNameError() {
+        System.out.println("This name is used by another player!");
+    }
+
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
@@ -128,13 +135,8 @@ public class CliView extends View implements Runnable {
 
         PatternCard patternCard = patternCards.get(num - 1);
 
-        try {
             super.getConnection().setPatternCardToServer(patternCard, super.getPlayerID());
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting pattern card");
-            e.printStackTrace();
-        }
+
 
     }
 
@@ -200,13 +202,10 @@ public class CliView extends View implements Runnable {
 
         if (command.equalsIgnoreCase("roll")) {
 
-            try {
+
                 super.getConnection().setDraftPoolToServer();
-            }
-            catch (RemoteException e)  {
-                System.out.println("error in inserting roll");
-                e.printStackTrace();
-            }
+
+
         }
     }
 
@@ -235,24 +234,18 @@ public class CliView extends View implements Runnable {
 
         if (request == 0) {
 
-            try {
+
                 super.getConnection().setChooseToServer(request);
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting request");
-                e.printStackTrace();
-            }
+
+
         }
 
         if (request == 1) {
 
-            try {
+
                 super.getConnection().setChooseToServer(request);
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting request");
-                e.printStackTrace();
-            }
+
+
         }
 
 
@@ -302,25 +295,18 @@ public class CliView extends View implements Runnable {
             while ( (indexPattern < 1) || (indexPattern > 20) );
             indexPattern--;
 
-            try {
+
                 super.getConnection().setMoveToServer(indexPool, indexPattern);
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting dice");
-                e.printStackTrace();
-            }
+
+
 
         }
 
         if (response.equalsIgnoreCase("no")) {
 
-            try {
+
                 super.getConnection().setStartToolToServer();
-            }
-            catch (RemoteException e) {
-                System.out.println(" error in sending tool");
-                e.printStackTrace();
-            }
+
 
         }
 
@@ -364,37 +350,25 @@ public class CliView extends View implements Runnable {
 
             if (reply.equalsIgnoreCase("yes")) {
 
-                try {
                     super.getConnection().useToolCardToServer(indexTool);
-                }
-                catch (RemoteException e) {
-                    System.out.println("Error in choosing tool");
-                    e.printStackTrace();
-                }
+
             }
 
             if (reply.equalsIgnoreCase("no")) {
 
-                try {
+
                     super.getConnection().setNoTokenToServer();
-                }
-                catch (RemoteException e) {
-                    System.out.println("error in setting");
-                    e.printStackTrace();
-                }
+
             }
 
         }
 
         if (response.equalsIgnoreCase("no")) {
 
-            try {
+
                 super.getConnection().setNextTurnToServer();
-            }
-            catch (RemoteException e) {
-                System.out.println("Error in turning around");
-                e.printStackTrace();
-            }
+
+
 
         }
     }
@@ -486,13 +460,10 @@ public class CliView extends View implements Runnable {
         }
         while (! ( (increase == 0) || (increase == 1)));
 
-        try {
+
             super.getConnection().useGrozingToolCard(index, increase);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index");
-            e.printStackTrace();
-        }
+
+
 
     }
 
@@ -528,13 +499,10 @@ public class CliView extends View implements Runnable {
         while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
 
-        try {
+
             super.getConnection().useEglomiseToolCard(indexStart, indexEnd);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -569,13 +537,10 @@ public class CliView extends View implements Runnable {
         while ( (indexEnd < 1) || (indexEnd > 20) );
         indexEnd--;
 
-        try {
+
             super.getConnection().useCopperFoilToolCard(indexStart, indexEnd);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -638,13 +603,9 @@ public class CliView extends View implements Runnable {
         while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
         indexEndTwo--;
 
-        try {
             super.getConnection().useLathekinToolCard(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
-        }
-        catch (RemoteException e) {
-            System.out.println("Error in setting index");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -693,13 +654,10 @@ public class CliView extends View implements Runnable {
         while ( (indexPosition < 1) || (indexPosition > round.get(indexRound)) );
         indexPosition--;
 
-        try {
+
             super.getConnection().useLensCutterToolCard(indexPool, indexRound, indexPosition);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index lens cutter");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -720,13 +678,9 @@ public class CliView extends View implements Runnable {
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        try {
             super.getConnection().useFluxBrushToolCard(indexPool);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting dice");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -738,13 +692,9 @@ public class CliView extends View implements Runnable {
 
         if (reply.equalsIgnoreCase("start")) {
 
-            try  {
                 super.getConnection().useGlazingHammerToolCard();
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting start");
-                e.printStackTrace();
-            }
+
+
         }
     }
 
@@ -781,13 +731,9 @@ public class CliView extends View implements Runnable {
         while ( (indexPattern < 1 ) || (indexPattern > 20) );
         indexPattern--;
 
-        try {
-            super.getConnection().useRunningPliersToolCard(indexPool, indexPattern);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index pool");
-            e.printStackTrace();
-        }
+        super.getConnection().useRunningPliersToolCard(indexPool, indexPattern);
+
+
 
     }
 
@@ -824,13 +770,9 @@ public class CliView extends View implements Runnable {
         while ( (indexPattern < 1) || (indexPattern > 20) );
         indexPattern--;
 
-        try {
             super.getConnection().useCorkBackedToolCard(indexPool, indexPattern);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in tool 9");
-            e.printStackTrace();
-        }
+
+
 
     }
 
@@ -852,13 +794,10 @@ public class CliView extends View implements Runnable {
         while ( (indexPool < 1) || (indexPool > poolSize) );
         indexPool--;
 
-        try {
+
             super.getConnection().useGrindingStoneToolCard(indexPool);
-        }
-        catch (RemoteException e) {
-            System.out.println("Error in tool 10");
-            e.printStackTrace();
-        }
+
+
 
     }
 
@@ -896,13 +835,10 @@ public class CliView extends View implements Runnable {
         }
         while ( (diceValue < 1) || (diceValue > 6) );
 
-        try {
+
             super.getConnection().useFluxRemoverToolCard(indexPool, diceValue);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting the value");
-            e.printStackTrace();
-        }
+
+
 
 
     }
@@ -955,13 +891,8 @@ public class CliView extends View implements Runnable {
             while ( (indexEndOne < 1) || (indexEndOne > 20) );
             indexEndOne--;
 
-            try {
+
                 super.getConnection().useTapWheelToolCard(number, indexStarOne, indexEndOne, 0, 0);
-            }
-            catch (RemoteException e) {
-                System.out.println("Error in setting first dice");
-                e.printStackTrace();
-            }
 
         }
 
@@ -1023,13 +954,9 @@ public class CliView extends View implements Runnable {
             while ( (indexEndTwo < 1) || (indexEndTwo > 20) );
             indexEndTwo--;
 
-            try {
+
                 super.getConnection().useTapWheelToolCard(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting second dice");
-                e.printStackTrace();
-            }
+
 
         }
 
@@ -1076,13 +1003,10 @@ public class CliView extends View implements Runnable {
             System.out.println("Please wait, the game will start soon");
         }
 
-        try {
+
             super.getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting index");
-            e.printStackTrace();
-        }
+
+
     }
 
     @Override
@@ -1103,13 +1027,9 @@ public class CliView extends View implements Runnable {
         }
         while ( (difficulty < 1) || (difficulty > 5) );
 
-        try {
             super.getConnection().setDifficultyToServer(difficulty);
-        }
-        catch (RemoteException e) {
-            System.out.println("error in setting difficulty");
-            e.printStackTrace();
-        }
+
+
 
     }
 
@@ -1165,24 +1085,18 @@ public class CliView extends View implements Runnable {
             indexPool--;
 
 
-            try {
+
                 super.getConnection().useToolSingleToServer(indexTool, indexPool);
-            }
-            catch (RemoteException e) {
-                System.out.println("Error in setting tool card");
-            }
+
+
         }
 
 
         if (response.equalsIgnoreCase("no")) {
 
-            try {
                 super.getConnection().setNextTurnToServer();
-            }
-            catch (RemoteException e) {
-                System.out.println("error in setting turning");
-                e.printStackTrace();
-            }
+
+
         }
     }
 
