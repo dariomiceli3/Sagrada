@@ -154,7 +154,7 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
 
-            setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getCard());
+            setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexChoosePattern());
         }
 
         if (arg instanceof PlayerDraftPoolEvent){
@@ -237,9 +237,9 @@ public class Game implements Observer {
         }
     }
 
-    protected void setPatternCardModel(VirtualView view, PatternCard pattern){
+    protected void setPatternCardModel(VirtualView view, int indexPatternChoose){
 
-        model.setPatternAndNotify(view.getPlayerID(), pattern);
+        model.setPatternAndNotify(view.getPlayerID(), indexPatternChoose);
 
         if(!singlePlayer) {
             setTokensModel(view);

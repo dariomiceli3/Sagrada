@@ -19,6 +19,7 @@ public class Player implements Serializable {
     private PatternCard pattern;
     private PrivateObjectiveCard privateCard;
     private List<PrivateObjectiveCard> privateListCard;
+    private List<PatternCard> patterChooseList;
     private int tokensNumber;
     private int finalPoints;
     private int privatePoints;
@@ -74,6 +75,14 @@ public class Player implements Serializable {
 
     public boolean isOff() {
         return off;
+    }
+
+    public List<PatternCard> getPatterChooseList() {
+        return patterChooseList;
+    }
+
+    public void setPatterChooseList(List<PatternCard> patterChooseList) {
+        this.patterChooseList = patterChooseList;
     }
 
     public void setOff(boolean of) {

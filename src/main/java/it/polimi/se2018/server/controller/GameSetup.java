@@ -114,6 +114,8 @@ public class GameSetup {
             patternList.add(listPattern.get(a + VALUE));
         }
 
+        game.getModel().getPlayerFromID(view.getPlayerID()).setPatterChooseList(patternList);
+
 
         view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
     }
