@@ -9,7 +9,7 @@ public interface ClientInterface {
 
     public void setPlayerNameToServer(String username, int iD);
 
-    public void setPatternCardToServer(PatternCard patternCard, int ID);
+    public void setPatternCardToServer(int indexPatternChoose, int ID);
 
     public void setDraftPoolToServer();
 

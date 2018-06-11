@@ -7,19 +7,18 @@ public class PlayerPatternEvent implements Event {
 
     private static final long serialVersionUID = 743857834L;
     private int ID;
-    private PatternCard card;
+    private int indexPatternChoose;
 
-    public PlayerPatternEvent(int ID, PatternCard card) {
+    public PlayerPatternEvent(int ID, int indexPatternChoose) {
         this.ID = ID;
-        this.card = card;
+        this.indexPatternChoose = indexPatternChoose;
     }
 
     public int getID() {
         return ID;
     }
 
-    public PatternCard getCard() {
-        return card;
+    public int getIndexPatternChoose() {
+        return indexPatternChoose;
     }
-
 }

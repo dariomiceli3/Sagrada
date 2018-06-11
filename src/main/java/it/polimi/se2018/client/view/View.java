@@ -38,8 +38,6 @@ public abstract class View implements Runnable {
         this.playerName = nameView;
     }
 
-
-
     public boolean isStarted() {
         return isStarted;
     }
@@ -54,11 +52,6 @@ public abstract class View implements Runnable {
 
     public  ClientInterface getConnection() {
         return connection;
-    }
-
-    //start method for gui
-    public void startGUI(){
-
     }
 
 
@@ -83,8 +76,6 @@ public abstract class View implements Runnable {
 
     public abstract void showPatternList(List<PatternCard> patternCards);
 
-    public abstract void showPatternChoose(int choose, List<PatternCard> patternCards);
-
     public abstract void showPattern(PatternCard patternCard);
 
     public abstract void showOtherPattern(PatternCard patternCard, String playerName);
@@ -107,6 +98,15 @@ public abstract class View implements Runnable {
 
     public abstract void showMoveCommand(int poolSize);
 
+    public abstract void showIndexPoolCommand(int poolsize);
+
+    public abstract void showIndexPatternCommand();
+
+    public abstract void showToolCommand(List<ToolCard> toolCards);
+
+    public abstract void showToolChooseCommand();
+
+    public abstract void showToolCostCommand(List<Integer> toolCost, int indexTool);
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
@@ -124,17 +124,61 @@ public abstract class View implements Runnable {
 
     public abstract void showTokenError();
 
+    //---------------------tool card----------------------------------------------------------------------
+
     public abstract void showGrozingRequest(int poolSize);
 
+    public abstract void showGrozingCommand();
+
+    public abstract void showEglomiseStart();
+
+    public abstract void showEglomiseEnd();
+
+    public abstract void showCopperFoilStart();
+
+    public abstract void showCopperFoilEnd();
+
+    public abstract void showLathekinStart();
+
+    public abstract void showLathekinStartTwo();
+
+    public abstract void showLathekinEnd();
+
+    public abstract void showLathekinEndTwo();
+
     public abstract void showLensCutterRequest(int poolSize, List<Integer> round);
+
+    public abstract void showLensCutterRound(List<Integer> round);
+
+    public abstract void showLensCutterDice(List<Integer> round, int roundIndex);
 
     public abstract void showFluxBrushRequest(int poolSize);
 
     public abstract void showGlazingHammerRequest();
 
+    public abstract void showRunningPliersPool(int poolSize);
+
+    public abstract void showRunningPliersEnd();
+
+    public abstract void showCorkBackedPool(int poolSize);
+
+    public abstract void showCorkBackedEnd();
 
     public abstract void showGrindingStoneRequest(int poolSize);
 
+    public abstract void showFluxRemoverPool(DiceColor color, int poolSize);
+
+    public abstract void showFluxRemoverValue();
+
+    public abstract void showTapWheelNumber();
+
+    public abstract void showTapWheelStartOne();
+
+    public abstract void showTapWheelEndOne();
+
+    public abstract void showTapWheelStartTwo();
+
+    public abstract void showTapWheelEndTwo();
 
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 
@@ -149,6 +193,10 @@ public abstract class View implements Runnable {
     public abstract void showPrivateSingle(List<PrivateObjectiveCard> publicList);
 
     public abstract void showToolSingleCommand(List<ToolCard> toolList, int poolSize);
+
+    public abstract void showToolSingleChoose();
+
+    public abstract void showToolSingleDice();
 
     public abstract void showMatchError();
 

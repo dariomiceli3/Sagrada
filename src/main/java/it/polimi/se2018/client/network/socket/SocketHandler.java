@@ -2,9 +2,6 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Components.DraftPool;
-import it.polimi.se2018.server.model.Components.RoundTracker;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
@@ -16,7 +13,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.rmi.RemoteException;
 
 // this class must do:
 // create the new socket connection and get the input/output stream
@@ -265,7 +261,7 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
 
             else {
-                //view.showOtherTimer(((TimerEndedEvent) event).getName());
+                view.showOtherTimer(((TimerEndedEvent) event).getName());
             }
         }
 
@@ -285,21 +281,21 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof EglomiseBrushRequestEvent) {
 
             if ((view.getPlayerID()) == ((EglomiseBrushRequestEvent) event).getId()) {
-                view.showEglomiseRequest();
+                view.showEglomiseStart();
             }
         }
 
         else if (event instanceof CopperFoilRequestEvent) {
 
             if ((view.getPlayerID()) == ((CopperFoilRequestEvent) event).getId()) {
-                view.showCopperFoilRequest();
+                view.showCopperFoilStart();
             }
         }
 
         else if (event instanceof LathekinRequestEvent) {
 
             if ((view.getPlayerID()) == ((LathekinRequestEvent) event).getId()) {
-                view.showLathekinRequest();
+                view.showLathekinStart();
             }
         }
 
@@ -327,14 +323,14 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof RunningPliersRequestEvent) {
 
             if ((view.getPlayerID()) == ((RunningPliersRequestEvent) event).getId()) {
-                view.showRunningPliersRequest( ((RunningPliersRequestEvent) event).getPoolSize());
+                view.showRunningPliersPool( ((RunningPliersRequestEvent) event).getPoolSize());
             }
         }
 
         else if (event instanceof CorkBackedRequestEvent) {
 
             if ((view.getPlayerID()) == ((CorkBackedRequestEvent) event).getId()) {
-                view.showCorkBackedRequest( ((CorkBackedRequestEvent) event).getPoolSize());
+                view.showCorkBackedPool( ((CorkBackedRequestEvent) event).getPoolSize());
             }
         }
 
@@ -348,14 +344,14 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof FluxRemoverRequestEvent) {
 
             if ((view.getPlayerID()) == ((FluxRemoverRequestEvent) event).getId()) {
-                view.showFluxRemoverRequest( ((FluxRemoverRequestEvent) event).getDiceColor(), ((FluxRemoverRequestEvent) event).getPoolSize());
+                view.showFluxRemoverPool( ((FluxRemoverRequestEvent) event).getDiceColor(), ((FluxRemoverRequestEvent) event).getPoolSize());
             }
         }
 
         else if (event instanceof TapWheelRequestEvent) {
 
             if ((view.getPlayerID()) == ((TapWheelRequestEvent) event).getId()) {
-                view.showTapWheelRequest();
+                view.showTapWheelNumber();
             }
         }
 
@@ -437,8 +433,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void setPatternCardToServer(PatternCard patternCard, int id) {
-        sendEvent(new PlayerPatternEvent(id, patternCard));
+    public void setPatternCardToServer(int indexPatternChoose, int id) {
+        sendEvent(new PlayerPatternEvent(id, indexPatternChoose));
     }
 
     @Override

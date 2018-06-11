@@ -36,6 +36,7 @@ public class Game implements Observer {
     private int singlePlayerDifficulty;
     private int step;
     private int disconnectPlayerNumber;
+    private List<String> activeNames;
     private boolean singlePlayer;
     private final int timePlayer;
     private Timer timer;
@@ -52,6 +53,7 @@ public class Game implements Observer {
         this.toolController = new ToolCardController(this);
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
+        this.activeNames = new ArrayList<>();
 
 
         for (VirtualView view: viewGame) {
@@ -154,7 +156,7 @@ public class Game implements Observer {
 
         if (arg instanceof PlayerPatternEvent){
 
-            //setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexChoosePattern());
+            setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexPatternChoose());
         }
 
         if (arg instanceof PlayerDraftPoolEvent){
@@ -226,7 +228,15 @@ public class Game implements Observer {
     //--------metodi che modificano model e mandano la notify alla view----------
     protected void setPlayerNameModel(VirtualView view, String name) {
 
-        model.setPlayerAndNotify((view.getPlayerID()), name);
+        if (activeNames.contains(name)) {
+            view.sendEvent(new PlayerNameErrorEvent(view.getPlayerID()));
+        }
+        else {
+            activeNames.add(name);
+            model.setPlayerAndNotify((view.getPlayerID()), name);
+        }
+
+
 
         if (singlePlayer){
             setToolSinglePlayer();
@@ -457,7 +467,7 @@ public class Game implements Observer {
             setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
             for (VirtualView view : viewGame){
                 if(!model.getPlayerFromID(view.getPlayerID()).isOff()){
-                view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+                    view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
                 }
             }
         }else {
@@ -572,7 +582,7 @@ public class Game implements Observer {
     }
 
 
-   /* protected void startTimer() {
+    protected void startTimer() {
 
         if (timer != null) {
             timer.cancel();
@@ -583,13 +593,13 @@ public class Game implements Observer {
         {
             @Override
             public void run() {
-                viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID()));
+                viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID(), model.getPlayerFromID(currID).getPlayerName()));
                 nextTurn();
 
             }
 
         }, (long) 10 * 1000);
-    }*/
+    }
 
 
 

@@ -31,7 +31,7 @@ public class Model extends Observable {
     private int numberPlayer;
     private int timeToPlay;
     private Dice dice;
-    private List<String> activeNames;
+
 
     public Model() {
         this.roundTracker = new RoundTracker();
@@ -40,7 +40,6 @@ public class Model extends Observable {
         this.playerList = new ArrayList<>();
         this.numberPlayer = 0;
         this.timeToPlay = 20;
-        this.activeNames = new ArrayList<>();
 
     }
 
@@ -105,16 +104,8 @@ public class Model extends Observable {
 
         numberPlayer++;
         getPlayerFromID(ID).setPlayerName(name);
-
-        if (activeNames.contains(name)) {
-            setChanged();
-            notifyObservers(new PlayerNameErrorEvent(getPlayerFromID(ID).getPlayerID()));
-        }
-        else {
-            activeNames.add(name);
-            setChanged();
-            notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(ID).getPlayerName(), ID));
-        }
+        setChanged();
+        notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(ID).getPlayerName(), ID));
 
     }
 
