@@ -19,6 +19,7 @@ public class GuiView extends View implements Runnable {
 
 
     private GUI gui;
+    private Login login;
     private ClientInterface connection;
 
     public GuiView() {
@@ -26,7 +27,11 @@ public class GuiView extends View implements Runnable {
         Application.launch(GUI.class);
     }
 
+    public String getString(Login login) {
+       //login.getGroup1().getSelectedToggle().getUserData().toString();
+        login.getGroup1().getSelectedToggle().getUserData().toString();
 
+    }
     //method to send event
 
     public void sendMode(boolean singlePlayer) {
@@ -39,14 +44,13 @@ public class GuiView extends View implements Runnable {
 
     @Override
     public void run() {
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 gui.setConnection(connection);
+                System.out.println("ci arrivo");
             }
         });
-
     }
 
     //--------------method to change scene-------------------

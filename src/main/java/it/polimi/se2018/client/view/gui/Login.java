@@ -30,6 +30,7 @@ public class Login {
 
     private static Stage window;
     private static Button button;
+    private static ToggleGroup group1;
 
     private String namePlayer;
 
@@ -53,7 +54,7 @@ public class Login {
         group.getToggles().add(tb2);*/
 
 
-        final ToggleGroup group1 = new ToggleGroup();
+        group1 = new ToggleGroup();
         ToggleButton tb3 = new ToggleButton("Single");
         tb3.setUserData("single");
         ToggleButton tb4 = new ToggleButton("Multi");
@@ -180,4 +181,12 @@ public class Login {
         window.show();
     }
 
+    public static Button getButton() {
+        return button;
+    }
+
+    public static ToggleGroup getGroup1() {
+        return group1;
+    }
 }
+

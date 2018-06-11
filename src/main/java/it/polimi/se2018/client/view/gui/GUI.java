@@ -15,21 +15,20 @@ import static javafx.application.Application.launch;
 
 public class GUI extends Application{
 
-    private GuiView view;
+    private GuiView guiView;
     private ClientInterface connection;
 
-    public void setView(GuiView view) {
-        this.view = view;
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Login.start(primaryStage, this);
     }
 
     public void setConnection(ClientInterface connection) {
         this.connection = connection;
     }
 
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Login.start(primaryStage, this);
+    public void setView(GuiView view) {
+        this.view = view;
     }
 
 
