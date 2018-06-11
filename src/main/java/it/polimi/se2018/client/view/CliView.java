@@ -976,7 +976,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showOtherTimer(String playerName) {
-        System.out.println(playerName + "timer is ended");
+        System.out.println(playerName + " turn time is ended");
     }
 
     @Override
