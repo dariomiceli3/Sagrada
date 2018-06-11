@@ -54,7 +54,7 @@ public abstract class View implements Runnable {
         return connection;
     }
 
-    public void startGUI {
+    public void startGUI() {
 
     }
 

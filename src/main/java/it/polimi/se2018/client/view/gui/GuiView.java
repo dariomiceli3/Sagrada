@@ -38,7 +38,13 @@ public class GuiView extends View {
         super.getConnection().setPlayerNameToServer(name, super.getPlayerID());
     }
 
+    @Override
+    public void run() {
+
+    }
+
     //--------------method to change scene-------------------
+
     @Override
     public void showID() {
 
@@ -385,9 +391,11 @@ public class GuiView extends View {
     }
 
     @Override
-    public void run() {
+    public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
 
     }
+
+
 
 
 }

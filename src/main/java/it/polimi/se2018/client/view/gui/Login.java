@@ -157,36 +157,36 @@ public class Login {
         button.setOnAction(e ->{
 
             mode = group1.getSelectedToggle().getUserData().toString();
-            Platform.runLater(new Runnable() {
-                    @Override
-                     public void run(){
-
-                    if(name.equalsIgnoreCase("multi")){
-                        view.sendMulti(false);
-                    }
-                    if(group1.getSelectedToggle().getUserData().toString().equalsIgnoreCase("single")){
-                        view.sendMulti(true);
-                    }
-
-                    }
-            });
-
-
-
             window.setScene(scene1);
         });
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run(){
+
+                if(mode.equalsIgnoreCase("multi")){
+                    view.sendMulti(false);
+                }
+                if(mode.equalsIgnoreCase("single")){
+                    view.sendMulti(true);
+                }
+
+            }
+        });
+
+
 
         layout.setCenter(vBox);
 
 
         button1.setOnAction(e -> {
-            System.out.println(textField.getText());
+            mode = textField.getText();
 
             Platform.runLater(new Runnable() {
                 @Override
                 public void run(){
 
-                    view.setName(textField.getText());
+                    view.setName(name);
 
                 }
             });
