@@ -30,15 +30,13 @@ public class Login {
 
     private static Stage window;
     private static Button button;
-    private static String name;
-    private static String mode;
 
     private String namePlayer;
 
 
 
 
-    public static void start(Stage primaryStage, GuiView view) throws IOException {
+    public static void start(Stage primaryStage, GUI gui) throws IOException {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
 
@@ -156,51 +154,30 @@ public class Login {
         button.disableProperty().bind(Bindings.isNull(/*group.selectedToggleProperty()).or(Bindings.isNull(*/group1.selectedToggleProperty()));
         button.setOnAction(e ->{
 
-            mode = group1.getSelectedToggle().getUserData().toString();
+           String mode = group1.getSelectedToggle().getUserData().toString();
+
+            gui.getMode(mode);
+
+
             window.setScene(scene1);
         });
-
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run(){
-
-                if(mode.equalsIgnoreCase("multi")){
-                    view.sendMulti(false);
-                }
-                if(mode.equalsIgnoreCase("single")){
-                    view.sendMulti(true);
-                }
-
-            }
-        });
-
 
 
         layout.setCenter(vBox);
 
 
         button1.setOnAction(e -> {
-            mode = textField.getText();
+           String name = textField.getText();
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run(){
-
-                    view.setName(name);
-
-                }
-            });
-
-
-
+            gui.getName(name);
 
             AlertBox.display("Error", "Name already chosen");
         });
+
 
         window.setScene(scene);
 
         window.show();
     }
-
 
 }

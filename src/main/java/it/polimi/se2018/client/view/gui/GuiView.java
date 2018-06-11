@@ -15,6 +15,8 @@ import java.util.List;
 public class GuiView extends View {
 
 
+    private GUI gui;
+
     public GuiView() {
 
     }
@@ -22,15 +24,16 @@ public class GuiView extends View {
     @Override
     public void startGUI() {
         String[] a = new String[]{""};
-        GUI gui = new GUI();
+        gui = new GUI();
         gui.setView(this);
         gui.main(a);
+
 
     }
 
     //method to send event
 
-    public void sendMulti(boolean singlePlayer) {
+    public void sendMode(boolean singlePlayer) {
         super.getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
     }
 
