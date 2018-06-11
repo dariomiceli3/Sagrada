@@ -20,7 +20,6 @@ public abstract class View implements Runnable {
     protected String playerName;
     protected boolean isStarted;
     protected int playerID;
-    protected ClientInterface connection;
 
     public int getPlayerID() {
         return playerID;
@@ -46,18 +45,9 @@ public abstract class View implements Runnable {
         this.isStarted = isStarted;
     }
 
-    public  void setConnection(ClientInterface client) {
-        this.connection = client;
-    }
+    public abstract void setConnection(ClientInterface client);
 
-    public  ClientInterface getConnection() {
-        return connection;
-    }
-
-    public void startGUI() {
-
-    }
-
+    public abstract ClientInterface getConnection();
 
 
     //---------------------- abstract method , which implementation depends on the view (cli or gui)

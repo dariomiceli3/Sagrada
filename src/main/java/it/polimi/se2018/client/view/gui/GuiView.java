@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.gui;
 
+import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
@@ -9,44 +10,57 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 import java.util.List;
 
-public class GuiView extends View {
+public class GuiView extends View implements Runnable {
 
 
     private GUI gui;
+    private ClientInterface connection;
 
     public GuiView() {
-
-    }
-
-    @Override
-    public void startGUI() {
-        String[] a = new String[]{""};
         gui = new GUI();
-        gui.setView(this);
-        gui.main(a);
-
-
+        Application.launch(GUI.class);
     }
+
 
     //method to send event
 
     public void sendMode(boolean singlePlayer) {
-        super.getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
+        getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
     }
 
     public void setName(String name) {
-        super.getConnection().setPlayerNameToServer(name, super.getPlayerID());
+        getConnection().setPlayerNameToServer(name, super.getPlayerID());
     }
 
     @Override
     public void run() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gui.setConnection(connection);
+            }
+        });
+
     }
 
     //--------------method to change scene-------------------
+
+
+    @Override
+    public void setConnection(ClientInterface connection) {
+        this.connection = connection;
+    }
+
+    @Override
+    public ClientInterface getConnection() {
+        return connection;
+    }
 
     @Override
     public void showID() {

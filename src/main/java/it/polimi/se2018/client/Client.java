@@ -72,14 +72,9 @@ public class Client {
 
             // accertarsi che abbia ricevuto ID e poi startare
             // start of the thread of the selected view
-            if (textView.equalsIgnoreCase("cli")) {
-                Thread viewThread = new Thread(view);
-                viewThread.start();
-            }
+            Thread viewThread = new Thread(view);
+            viewThread.start();
 
-            if (textView.equalsIgnoreCase("gui")) {
-                view.startGUI();
-            }
 
         } else if (connectionType.equalsIgnoreCase("Rmi")) {
             serverRmi = new RmiHandler();

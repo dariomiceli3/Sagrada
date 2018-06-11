@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view.gui;
 
 
+import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -15,15 +16,16 @@ import static javafx.application.Application.launch;
 public class GUI extends Application{
 
     private GuiView view;
-
+    private ClientInterface connection;
 
     public void setView(GuiView view) {
         this.view = view;
     }
 
-    public static void main(String []args) {
-        launch();
+    public void setConnection(ClientInterface connection) {
+        this.connection = connection;
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -1,5 +1,7 @@
 package it.polimi.se2018.client.view;
 
+import it.polimi.se2018.client.Client;
+import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -31,6 +33,7 @@ public class CliView extends View implements Runnable {
     private static DiceColor colorDice;
     private static int diceNumber;
     private static int toolSingleNumber;
+    private ClientInterface connection;
 
     public CliView() {
     }
@@ -168,17 +171,17 @@ public class CliView extends View implements Runnable {
             } else if (cliState == ViewState.MODE) {
                 if (input.equalsIgnoreCase("multi")) {
                     System.out.println("Please wait, the game will start soon");
-                    super.getConnection().setSinglePlayerMode(super.getPlayerID(), false);
+                    getConnection().setSinglePlayerMode(super.getPlayerID(), false);
                 } else if (input.equalsIgnoreCase("single")) {
                     System.out.println("Now the game will start");
-                    super.getConnection().setSinglePlayerMode(super.getPlayerID(), true);
+                    getConnection().setSinglePlayerMode(super.getPlayerID(), true);
                 } else {
                     System.out.println("You are not choosing a mode to play");
                     showSinglePlayerRequest();
                 }
             } else if (cliState == ViewState.NAME || cliState == ViewState.ERRORNAME) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")) {
-                    super.getConnection().setPlayerNameToServer(input, super.getPlayerID());
+                    getConnection().setPlayerNameToServer(input, super.getPlayerID());
                 } else {
                     System.out.println("blank name");
                 }
@@ -189,7 +192,7 @@ public class CliView extends View implements Runnable {
 
                     if (choose >= 1 && choose <= 4) {
                         choose--;
-                        super.getConnection().setPatternCardToServer(choose, super.getPlayerID());
+                        getConnection().setPatternCardToServer(choose, super.getPlayerID());
                     } else {
                         System.out.println("Please, decide which pattern to use");
                     }
@@ -200,7 +203,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == ViewState.ROLL) {
 
                 if (input.equalsIgnoreCase("roll")) {
-                    super.getConnection().setDraftPoolToServer();
+                    getConnection().setDraftPoolToServer();
                 } else {
                     System.out.println("Please, enter the command ROLL");
                     showRollCommand();
@@ -210,7 +213,7 @@ public class CliView extends View implements Runnable {
                 try {
                     int command = Integer.parseInt(input);
                     if (command == 0 || command == 1) {
-                        super.getConnection().setChooseToServer(command);
+                        getConnection().setChooseToServer(command);
                     } else {
                         System.out.println("Please enter the correct number");
                         showChooseCommand();
@@ -225,7 +228,7 @@ public class CliView extends View implements Runnable {
                 if (input.equalsIgnoreCase("yes")) {
                     showIndexPoolCommand(poolSize);
                 } else if (input.equalsIgnoreCase("no")) {
-                    super.getConnection().setStartToolToServer();
+                    getConnection().setStartToolToServer();
                 } else {
                     System.out.println("You are not entering the expected command");
                     showMoveCommand(poolSize);
@@ -251,7 +254,7 @@ public class CliView extends View implements Runnable {
                     if (idPattern >= 1 && idPattern <= 20) {
                         idPattern--;
                         setIndexPattern(idPattern);
-                        super.getConnection().setMoveToServer(indexPool, indexPattern);
+                        getConnection().setMoveToServer(indexPool, indexPattern);
                     } else {
                         System.out.println("Please enter the correct number");
                         showIndexPatternCommand();
@@ -266,7 +269,7 @@ public class CliView extends View implements Runnable {
                     showToolChooseCommand();
 
                 } else if (input.equalsIgnoreCase("no")) {
-                    super.getConnection().setNextTurnToServer();
+                    getConnection().setNextTurnToServer();
 
                 } else {
                     System.out.println("You are not entering the right command");
@@ -289,9 +292,9 @@ public class CliView extends View implements Runnable {
             } else if (cliState == ViewState.TOOLCOST) {
 
                 if (input.equalsIgnoreCase("yes")) {
-                    super.getConnection().useToolCardToServer(indexTool);
+                    getConnection().useToolCardToServer(indexTool);
                 } else if (input.equalsIgnoreCase("no")) {
-                    super.getConnection().setNoTokenToServer();
+                    getConnection().setNoTokenToServer();
                 } else {
                     System.out.println("You are entering the wrong command");
                     showToolCostCommand(toolCost, indexTool);
@@ -321,7 +324,7 @@ public class CliView extends View implements Runnable {
                 try {
                     int increase = Integer.parseInt(input);
                     if (increase == 0 || increase == 1) {
-                        super.getConnection().useGrozingToolCard(indexPool, increase);
+                        getConnection().useGrozingToolCard(indexPool, increase);
                     } else {
                         System.out.println("You are not choosing what to do");
                         showGrozingCommand();
@@ -354,7 +357,7 @@ public class CliView extends View implements Runnable {
                     if (idTwo >= 1 && idTwo <= 20) {
                         idTwo--;
                         setIndexEndOne(idTwo);
-                        super.getConnection().useEglomiseToolCard(indexStartOne, indexEndOne);
+                        getConnection().useEglomiseToolCard(indexStartOne, indexEndOne);
                     } else {
                         System.out.println("Please, enter the right index");
                         showEglomiseEnd();
@@ -384,7 +387,7 @@ public class CliView extends View implements Runnable {
                     if (idTwo >= 1 && idTwo <= 20) {
                         idTwo--;
                         setIndexEndOne(idTwo);
-                        super.getConnection().useCopperFoilToolCard(indexStartOne, indexEndOne);
+                        getConnection().useCopperFoilToolCard(indexStartOne, indexEndOne);
                     } else {
                         System.out.println("Please, enter the right index");
                         showCopperFoilEnd();
@@ -448,7 +451,7 @@ public class CliView extends View implements Runnable {
                     if (idEndTwo >= 1 && idEndTwo <= 20) {
                         idEndTwo--;
                         setIndexEndTwo(idEndTwo);
-                        super.getConnection().useLathekinToolCard(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+                        getConnection().useLathekinToolCard(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
                     } else {
                         System.out.println("Please enter a right index");
                         showLathekinEndTwo();
@@ -494,7 +497,7 @@ public class CliView extends View implements Runnable {
                     int idPos = Integer.parseInt(input);
                     if (idPos >= 1 && idPos <= roundList.get(indexRound)) {
                         idPos--;
-                        super.getConnection().useLensCutterToolCard(indexPool, indexRound, idPos);
+                        getConnection().useLensCutterToolCard(indexPool, indexRound, idPos);
                     } else {
                         System.out.println("Please enter a number in the range");
                         showLensCutterDice(roundList, indexRound);
@@ -509,7 +512,7 @@ public class CliView extends View implements Runnable {
                     if (idPool >= 1 && idPool <= getPoolSize()) {
                         idPool--;
                         setIndexPool(idPool);
-                        super.getConnection().useFluxBrushToolCard(indexPool);
+                        getConnection().useFluxBrushToolCard(indexPool);
                     } else {
                         System.out.println("Please enter a number in the range");
                         showFluxBrushRequest(poolSize);
@@ -520,7 +523,7 @@ public class CliView extends View implements Runnable {
                 }
             } else if (cliState == ViewState.GLAZINGHAMMER) {
                 if (input.equalsIgnoreCase("start")) {
-                    super.getConnection().useGlazingHammerToolCard();
+                    getConnection().useGlazingHammerToolCard();
                 } else {
                     System.out.println("Command not recognized for this card");
                 }
@@ -546,7 +549,7 @@ public class CliView extends View implements Runnable {
                     if (idPattern >= 1 && idPattern <= 20) {
                         idPattern--;
                         setIndexEndOne(idPattern);
-                        super.getConnection().useRunningPliersToolCard(indexPool, indexEndOne);
+                        getConnection().useRunningPliersToolCard(indexPool, indexEndOne);
                     } else {
                         System.out.println("Please enter a number between 1 and 20");
                         showRunningPliersEnd();
@@ -577,7 +580,7 @@ public class CliView extends View implements Runnable {
                     if (idPattern >= 1 && idPattern <= 20) {
                         idPattern--;
                         setIndexEndOne(idPattern);
-                        super.getConnection().useCorkBackedToolCard(indexPool, indexEndOne);
+                        getConnection().useCorkBackedToolCard(indexPool, indexEndOne);
                     } else {
                         System.out.println("Please, enter a number in the range");
                         showCorkBackedEnd();
@@ -592,7 +595,7 @@ public class CliView extends View implements Runnable {
                     if (idPool >= 1 && idPool <= getPoolSize()) {
                         idPool--;
                         setIndexPool(idPool);
-                        super.getConnection().useGrindingStoneToolCard(indexPool);
+                        getConnection().useGrindingStoneToolCard(indexPool);
                     } else {
                         System.out.println("Please, enter a number in the range correct");
                         showGrindingStoneRequest(poolSize);
@@ -621,7 +624,7 @@ public class CliView extends View implements Runnable {
                 try {
                     int value = Integer.parseInt(input);
                     if (value >= 1 && value <= 6) {
-                        super.getConnection().useFluxRemoverToolCard(indexPool, value);
+                        getConnection().useFluxRemoverToolCard(indexPool, value);
                     } else {
                         System.out.println("Please, a dice should have as value" + value);
                         showFluxRemoverValue();
@@ -668,7 +671,7 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idEndOne);
 
                         if (getDiceNumber() == 1) {
-                            super.getConnection().useTapWheelToolCard(getDiceNumber(), indexStartOne, indexEndOne, 0, 0);
+                            getConnection().useTapWheelToolCard(getDiceNumber(), indexStartOne, indexEndOne, 0, 0);
                         } else {
                             showTapWheelStartTwo();
                         }
@@ -702,7 +705,7 @@ public class CliView extends View implements Runnable {
                     if (idEndTwo >= 1 && idEndTwo <= 20) {
                         idEndTwo--;
                         setIndexEndTwo(idEndTwo);
-                        super.getConnection().useTapWheelToolCard(getDiceNumber(), indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+                        getConnection().useTapWheelToolCard(getDiceNumber(), indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
                     } else {
                         System.out.println("Please, enter the index correct for the range");
                         showTapWheelEndTwo();
@@ -719,7 +722,7 @@ public class CliView extends View implements Runnable {
                 try {
                     int difficulty = Integer.parseInt(input);
                     if (difficulty >= 1 && difficulty <= 5) {
-                        super.getConnection().setDifficultyToServer(difficulty);
+                        getConnection().setDifficultyToServer(difficulty);
                     } else {
                         System.out.println("Please, enter the difficulty");
                         showDifficultyRequest();
@@ -732,7 +735,7 @@ public class CliView extends View implements Runnable {
                 if (input.equalsIgnoreCase("yes")) {
                     showToolSingleChoose();
                 } else if (input.equalsIgnoreCase("no")) {
-                    super.getConnection().setNextTurnToServer();
+                    getConnection().setNextTurnToServer();
                 } else {
                     System.out.println("You are not entering the right command");
                     System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
@@ -758,7 +761,7 @@ public class CliView extends View implements Runnable {
                     if (idDice >= 1 && idDice <= getPoolSize()) {
                         idDice--;
                         setIndexPool(idDice);
-                        super.getConnection().useToolSingleToServer(indexTool, indexPool);
+                        getConnection().useToolSingleToServer(indexTool, indexPool);
                     } else {
                         System.out.println("Please, enter the right command");
                         showToolSingleDice();
@@ -776,6 +779,17 @@ public class CliView extends View implements Runnable {
 
 
     //---------------------------ovveride metodi mostrano su view---------------------------------
+
+
+    @Override
+    public ClientInterface getConnection() {
+        return connection;
+    }
+
+    @Override
+    public void setConnection(ClientInterface connection) {
+        this.connection = connection;
+    }
 
     @Override
     public void showID() {
