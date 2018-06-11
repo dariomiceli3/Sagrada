@@ -17,6 +17,11 @@ public class GuiView extends View {
     private boolean singlePlayer;
 
     public GuiView(){
+
+    }
+
+    @Override
+    public void startGUI(){
         String[] a = new String[]{""};
         GUI gui = new GUI();
         gui.main(a);

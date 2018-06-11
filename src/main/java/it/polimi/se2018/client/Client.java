@@ -31,6 +31,13 @@ public class Client {
 
         //-------------------------------view creation--------------------------------------------------------------
 
+        String connectionType;
+        do {
+            System.out.println("Choose the connection type:Socket or RMI?");
+            connectionType = reader.nextLine();
+        }
+        while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi"))));
+
         String textView;
         View view;
         do {
@@ -51,12 +58,6 @@ public class Client {
 
         //-------------------------------connectivity creation----------------------------------------------------------
 
-        String connectionType;
-        do {
-            System.out.println("Choose the connection type:Socket or RMI?");
-            connectionType = reader.nextLine();
-        }
-        while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi"))));
 
         if (connectionType.equalsIgnoreCase("Socket")) {
 
@@ -71,8 +72,14 @@ public class Client {
 
             // accertarsi che abbia ricevuto ID e poi startare
             // start of the thread of the selected view
-            Thread viewThread = new Thread(view);
-            viewThread.start();
+            if (textView.equalsIgnoreCase("cli")) {
+                Thread viewThread = new Thread(view);
+                viewThread.start();
+            }
+
+            if (textView.equalsIgnoreCase("gui")) {
+                view.startGUI();
+            }
 
         } else if (connectionType.equalsIgnoreCase("Rmi")) {
             serverRmi = new RmiHandler();

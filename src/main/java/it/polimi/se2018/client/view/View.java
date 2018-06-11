@@ -57,6 +57,11 @@ public abstract class View implements Runnable {
         return connection;
     }
 
+    //start method for gui
+    public void startGUI(){
+
+    }
+
 
 
     //---------------------- abstract method , which implementation depends on the view (cli or gui)
