@@ -13,8 +13,6 @@ import static javafx.application.Application.launch;
 
 public class GUI extends Application{
 
-
-
     public static void main(String []args) {
         launch();
     }

@@ -1,6 +1,9 @@
 package it.polimi.se2018.client.view.gui;
 
+import it.polimi.se2018.client.Client;
+import it.polimi.se2018.client.network.socket.SocketHandler;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,6 +30,7 @@ public class Login {
 
     private static Stage window;
     private static Button button;
+    private String namePlayer;
 
 
 
@@ -35,7 +39,7 @@ public class Login {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
 
-        final ToggleGroup group = new ToggleGroup();
+       /* final ToggleGroup group = new ToggleGroup();
 
         ToggleButton tb1 = new ToggleButton("Socket");
         tb1.setUserData("socket");
@@ -45,7 +49,7 @@ public class Login {
 
         ToggleButton tb2 = new ToggleButton("RMI");
         tb2.setUserData("rmi");
-        group.getToggles().add(tb2);
+        group.getToggles().add(tb2);*/
 
 
         final ToggleGroup group1 = new ToggleGroup();
@@ -90,7 +94,7 @@ public class Login {
         hbox1.setAlignment(Pos.TOP_CENTER);
         hBox2.setAlignment(Pos.TOP_CENTER);
         hBox2.setSpacing(100);
-        hbox.getChildren().addAll(tb1,tb2);
+        //hbox.getChildren().addAll(tb1,tb2);
         hbox1.getChildren().addAll(tb3,tb4);
         hBox2.getChildren().add(button);
         vBox.setPadding(new Insets(180, 50, 50, 50));
@@ -146,10 +150,19 @@ public class Login {
 
 
         button1.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
-        button.disableProperty().bind(Bindings.isNull(group.selectedToggleProperty()).or(Bindings.isNull(group1.selectedToggleProperty())));
+        button.disableProperty().bind(Bindings.isNull(/*group.selectedToggleProperty()).or(Bindings.isNull(*/group1.selectedToggleProperty()));
         button.setOnAction(e ->{
-            System.out.println(group.getSelectedToggle().getUserData().toString());
-            System.out.println(group1.getSelectedToggle().getUserData().toString());
+
+            Platform.runLater(new Runnable(){
+                    @Override
+                     public void run(){
+
+                    group1.getSelectedToggle().getUserData().toString();
+                    }
+            });
+
+
+
             window.setScene(scene1);
         });
 
@@ -165,5 +178,6 @@ public class Login {
 
         window.show();
     }
+
 
 }

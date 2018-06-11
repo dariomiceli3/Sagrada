@@ -19,16 +19,14 @@ public class Client {
 
     public static void main(String[] args) {
 
-        System.out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n"  +
-                " ####      #      ###     ###     #     ###      #        " +  "\n" +
-                "#         # #    #   #    #  #   # #    #  #    # #       " +  "\n" +
-                " ####    #####   #        ###   #####   #   #  #####      " +  "\n" +
-                "     #   #   #   #  ###   # #   #   #   #  #   #   #      " +  "\n" +
+        System.out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n" +
+                " ####      #      ###     ###     #     ###      #        " + "\n" +
+                "#         # #    #   #    #  #   # #    #  #    # #       " + "\n" +
+                " ####    #####   #        ###   #####   #   #  #####      " + "\n" +
+                "     #   #   #   #  ###   # #   #   #   #  #   #   #      " + "\n" +
                 " ####    #   #    ###     #  #  #   #   ###    #   #      " + "\n");
 
         Scanner reader = new Scanner(System.in);
-
-
 
 
         //-------------------------------view creation--------------------------------------------------------------
@@ -38,20 +36,17 @@ public class Client {
         do {
             System.out.println("How do you prefer to play: Gui or Cli?");
             textView = reader.nextLine();
-        } while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli")))) ;
+        } while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli"))));
 
         if (textView.equalsIgnoreCase("Gui")) {
-           view = new GuiView();
-        }
-        else if (textView.equalsIgnoreCase("Cli")) {
+            view = new GuiView();
+        } else if (textView.equalsIgnoreCase("Cli")) {
             view = new CliView();
-        }
-        else {
+        } else {
             System.out.println("something went wrong in setting view");
             view = new CliView();
             reader.close();
         }
-
 
 
         //-------------------------------connectivity creation----------------------------------------------------------
@@ -61,7 +56,7 @@ public class Client {
             System.out.println("Choose the connection type:Socket or RMI?");
             connectionType = reader.nextLine();
         }
-         while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi")))) ;
+        while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi"))));
 
         if (connectionType.equalsIgnoreCase("Socket")) {
 
@@ -79,16 +74,14 @@ public class Client {
             Thread viewThread = new Thread(view);
             viewThread.start();
 
-        }
-
-        else if (connectionType.equalsIgnoreCase("Rmi")) {
+        } else if (connectionType.equalsIgnoreCase("Rmi")) {
             serverRmi = new RmiHandler();
-        }
-        else {
+        } else {
             System.out.println("something went wrong in setting connection");
             reader.close();
         }
 
 
     }
+
 }

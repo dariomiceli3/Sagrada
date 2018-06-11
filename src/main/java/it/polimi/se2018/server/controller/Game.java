@@ -462,12 +462,15 @@ public class Game implements Observer {
             }
         }else {
 
-            int a = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
-            if (a == 1){
-                viewGame.get(0).sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
-            }else{
-                viewGame.get(0).sendEvent(new LoserEvent());
+            int roundTrackerPoints = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
+            int playerPoints = model.getPlayerList().get(0).getFinalPoints();
+            if(playerPoints > roundTrackerPoints){
+                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(true, playerPoints, roundTrackerPoints));
+            }else {
+                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(false, playerPoints, roundTrackerPoints));
             }
+
+
         }
 
     }

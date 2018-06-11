@@ -14,6 +14,8 @@ import java.util.List;
 
 public class GuiView extends View {
 
+    private boolean singlePlayer;
+
     public GuiView(){
         String[] a = new String[]{""};
         GUI gui = new GUI();

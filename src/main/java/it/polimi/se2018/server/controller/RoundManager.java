@@ -216,10 +216,7 @@ public class RoundManager  {
         int totalPoints = j + k - i;
         player.setFinalPoints(totalPoints);
 
-        if (totalPoints > roundTrackerPoints ) {
-            return 1;
-        }
-        else return 0;
+        return roundTrackerPoints;
 
     }
 
