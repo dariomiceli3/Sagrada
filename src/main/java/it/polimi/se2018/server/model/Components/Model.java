@@ -104,6 +104,7 @@ public class Model extends Observable {
 
         numberPlayer++;
         getPlayerFromID(ID).setPlayerName(name);
+        System.out.println(getPlayerFromID(ID).getPlayerName());
         setChanged();
         notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(ID).getPlayerName(), ID));
 

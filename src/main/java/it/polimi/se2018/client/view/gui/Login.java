@@ -30,6 +30,9 @@ public class Login {
 
     private static Stage window;
     private static Button button;
+    private static String name;
+    private static String mode;
+
     private String namePlayer;
 
 
@@ -153,11 +156,18 @@ public class Login {
         button.disableProperty().bind(Bindings.isNull(/*group.selectedToggleProperty()).or(Bindings.isNull(*/group1.selectedToggleProperty()));
         button.setOnAction(e ->{
 
-            Platform.runLater(new Runnable(){
+            mode = group1.getSelectedToggle().getUserData().toString();
+            Platform.runLater(new Runnable() {
                     @Override
                      public void run(){
 
-                    group1.getSelectedToggle().getUserData().toString();
+                    if(name.equalsIgnoreCase("multi")){
+                        view.sendMulti(false);
+                    }
+                    if(group1.getSelectedToggle().getUserData().toString().equalsIgnoreCase("single")){
+                        view.sendMulti(true);
+                    }
+
                     }
             });
 
@@ -171,6 +181,19 @@ public class Login {
 
         button1.setOnAction(e -> {
             System.out.println(textField.getText());
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run(){
+
+                    view.setName(textField.getText());
+
+                }
+            });
+
+
+
+
             AlertBox.display("Error", "Name already chosen");
         });
 

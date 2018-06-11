@@ -15,7 +15,11 @@ public class GUI extends Application{
 
     private GuiView view;
 
-    public GUI(GuiView view){
+    public GuiView getView() {
+        return view;
+    }
+
+    public void setView(GuiView view) {
         this.view = view;
     }
 

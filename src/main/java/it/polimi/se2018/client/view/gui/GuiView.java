@@ -14,37 +14,31 @@ import java.util.List;
 
 public class GuiView extends View {
 
-    private boolean singlePlayer;
 
-    public GuiView(){
+    public GuiView() {
 
     }
 
     @Override
-    public void startGUI(){
+    public void startGUI() {
         String[] a = new String[]{""};
-        GUI gui = new GUI(this);
+        GUI gui = new GUI();
+        gui.setView(this);
         gui.main(a);
 
     }
 
-    //method to send event to notify changes
+    //method to send event
 
-    public void
-
-
-
-
-
-
-    //--------------method to change scene-------------------
-
-
-    @Override
-    public void setPlayerName(String username) {
-
+    public void sendMulti(boolean singlePlayer) {
+        super.getConnection().setSinglePlayerMode(super.getPlayerID(), singlePlayer);
     }
 
+    public void setName(String name) {
+        super.getConnection().setPlayerNameToServer(name, super.getPlayerID());
+    }
+
+    //--------------method to change scene-------------------
     @Override
     public void showID() {
 
@@ -87,11 +81,6 @@ public class GuiView extends View {
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
-
-    }
-
-    @Override
-    public void showPatternChoose(int choose, List<PatternCard> patternCards) {
 
     }
 
@@ -151,7 +140,27 @@ public class GuiView extends View {
     }
 
     @Override
+    public void showIndexPoolCommand(int poolsize) {
+
+    }
+
+    @Override
+    public void showIndexPatternCommand() {
+
+    }
+
+    @Override
     public void showToolCommand(List<ToolCard> toolCards) {
+
+    }
+
+    @Override
+    public void showToolChooseCommand() {
+
+    }
+
+    @Override
+    public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
 
     }
 
@@ -201,22 +210,62 @@ public class GuiView extends View {
     }
 
     @Override
-    public void showEglomiseRequest() {
+    public void showGrozingCommand() {
 
     }
 
     @Override
-    public void showCopperFoilRequest() {
+    public void showEglomiseStart() {
 
     }
 
     @Override
-    public void showLathekinRequest() {
+    public void showEglomiseEnd() {
+
+    }
+
+    @Override
+    public void showCopperFoilStart() {
+
+    }
+
+    @Override
+    public void showCopperFoilEnd() {
+
+    }
+
+    @Override
+    public void showLathekinStart() {
+
+    }
+
+    @Override
+    public void showLathekinStartTwo() {
+
+    }
+
+    @Override
+    public void showLathekinEnd() {
+
+    }
+
+    @Override
+    public void showLathekinEndTwo() {
 
     }
 
     @Override
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
+
+    }
+
+    @Override
+    public void showLensCutterRound(List<Integer> round) {
+
+    }
+
+    @Override
+    public void showLensCutterDice(List<Integer> round, int roundIndex) {
 
     }
 
@@ -231,12 +280,22 @@ public class GuiView extends View {
     }
 
     @Override
-    public void showRunningPliersRequest(int poolSize) {
+    public void showRunningPliersPool(int poolSize) {
 
     }
 
     @Override
-    public void showCorkBackedRequest(int poolSize) {
+    public void showRunningPliersEnd() {
+
+    }
+
+    @Override
+    public void showCorkBackedPool(int poolSize) {
+
+    }
+
+    @Override
+    public void showCorkBackedEnd() {
 
     }
 
@@ -246,12 +305,37 @@ public class GuiView extends View {
     }
 
     @Override
-    public void showFluxRemoverRequest(DiceColor color, int poolSize) {
+    public void showFluxRemoverPool(DiceColor color, int poolSize) {
 
     }
 
     @Override
-    public void showTapWheelRequest() {
+    public void showFluxRemoverValue() {
+
+    }
+
+    @Override
+    public void showTapWheelNumber() {
+
+    }
+
+    @Override
+    public void showTapWheelStartOne() {
+
+    }
+
+    @Override
+    public void showTapWheelEndOne() {
+
+    }
+
+    @Override
+    public void showTapWheelStartTwo() {
+
+    }
+
+    @Override
+    public void showTapWheelEndTwo() {
 
     }
 
@@ -286,6 +370,16 @@ public class GuiView extends View {
     }
 
     @Override
+    public void showToolSingleChoose() {
+
+    }
+
+    @Override
+    public void showToolSingleDice() {
+
+    }
+
+    @Override
     public void showMatchError() {
 
     }
@@ -294,4 +388,6 @@ public class GuiView extends View {
     public void run() {
 
     }
+
+
 }
