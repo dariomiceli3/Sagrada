@@ -42,6 +42,7 @@ public class Game implements Observer {
     private Timer timer;
     private ToolCardController toolController;
 
+
     public Game(List<VirtualView> viewList, boolean singlePlayer) {
 
         this.model = new Model();
@@ -54,6 +55,7 @@ public class Game implements Observer {
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
+
 
 
         for (VirtualView view: viewGame) {

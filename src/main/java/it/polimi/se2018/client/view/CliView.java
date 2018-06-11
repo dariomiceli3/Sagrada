@@ -5,8 +5,6 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
-
-import java.awt.font.NumericShaper;
 import java.util.*;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class CliView extends View implements Runnable {
     // ovveride dei metodi dell'interfaccia view con gli show per metodi comportamentali
     // metodi che in base alla scelta dell'utente mandano usando socket handler
 
-    private static final int INITIALIZE = 99;
+
     private static ViewState cliState;
     private static int poolSize;
     private static int indexPool;
@@ -163,6 +161,10 @@ public class CliView extends View implements Runnable {
 
             if (input.isEmpty()) {
                 System.out.println("You are not writing nothing");
+            } else if (cliState == ViewState.NOTAUTHORIZED) {
+                if (input.matches(".*[a-zA-Z0-9]+.*")){
+                    System.out.println("Please, it's not your turn! Waiting for your moment");
+                }
             } else if (cliState == ViewState.MODE) {
                 if (input.equalsIgnoreCase("multi")) {
                     System.out.println("Please wait, the game will start soon");
@@ -802,6 +804,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showName() {
+        cliState = ViewState.NOTAUTHORIZED;
         System.out.println("Name set as: " + super.getPlayerName());
     }
 
@@ -878,6 +881,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showOtherCurrentTurn(String username) {
+        cliState = ViewState.NOTAUTHORIZED;
         System.out.println("It's " + username + "'s turn");
 
     }

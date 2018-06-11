@@ -15,16 +15,14 @@ public class Server {
     private static final int SOCKETPORT = 8888;
     private static final int RMIPORT = 1099;
     private static final int MAXPLAYERS = 4;
-    private static final int SECONDS = 10;
+    private static final int SECONDS = 40;
 
     private SocketGatherer socketGatherer;
     private RmiGatherer rmiGatherer;
     private List<VirtualView> socketClients = new ArrayList<>();
     private List<VirtualView> clients = new ArrayList<>();
-
+    private boolean gameStarted;
     private static boolean singlePlayer;
-
-    // add timer e timerturn
 
     public Server() {
 
@@ -35,6 +33,14 @@ public class Server {
 
         //todo rmi gatherer add for starting its server
 
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 
     public void setSinglePlayer(boolean singlePlayer) {
@@ -91,6 +97,7 @@ public class Server {
             viewGame.addAll(clients);
             System.out.println(getClients().size());
             new Game(viewGame, singlePlayer);
+            setGameStarted(true);
             System.out.println("Started single player");
         }
 
@@ -108,6 +115,7 @@ public class Server {
                             List<VirtualView> viewGame = new ArrayList<>();
                             viewGame.addAll(clients);
                             new Game(viewGame, singlePlayer);
+                            setGameStarted(true);
                             System.out.println("Started game");
                         }
 
@@ -121,6 +129,7 @@ public class Server {
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
             new Game(viewGame, singlePlayer);
+            setGameStarted(true);
         }
 
     }

@@ -43,7 +43,8 @@ public enum ViewState {
     DIFFICULTYSP,
     TOOLSP,
     TOOLSPCHOOSE,
-    TOOLSPDICE
+    TOOLSPDICE,
+    NOTAUTHORIZED
 
 
 
