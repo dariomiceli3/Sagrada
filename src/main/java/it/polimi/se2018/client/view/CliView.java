@@ -1259,6 +1259,20 @@ public class CliView extends View implements Runnable {
     public void showMatchError() {
         System.out.println("You are choosed a not right dice, it doesn't match the color of the tool card");
     }
+
+    @Override
+    public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
+        if (winner) {
+            System.out.println("You win");
+            System.out.println("You scored: " + playerPoints);
+            System.out.println("The threshold of the round tracker is: " + gameThreshold);
+        }
+        else {
+            System.out.println("You lose maaan!");
+            System.out.println("You scored: " + playerPoints);
+            System.out.println("The threshold of the round tracker is: " + gameThreshold);
+        }
+    }
 }
 
 

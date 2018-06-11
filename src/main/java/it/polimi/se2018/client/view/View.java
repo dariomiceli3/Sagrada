@@ -54,6 +54,10 @@ public abstract class View implements Runnable {
         return connection;
     }
 
+    public void startGUI {
+
+    }
+
 
 
     //---------------------- abstract method , which implementation depends on the view (cli or gui)
@@ -199,5 +203,7 @@ public abstract class View implements Runnable {
     public abstract void showToolSingleDice();
 
     public abstract void showMatchError();
+
+    public abstract void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold);
 
 }

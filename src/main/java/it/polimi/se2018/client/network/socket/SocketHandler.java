@@ -259,7 +259,6 @@ public class SocketHandler implements ClientInterface, Runnable {
             if ((view.getPlayerID()) == ((TimerEndedEvent) event).getId()) {
                 view.showTimer();
             }
-
             else {
                 view.showOtherTimer(((TimerEndedEvent) event).getName());
             }
@@ -380,8 +379,8 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showPrivateSingle(((SinglePrivateEvent) event).getPrivateList());
         }
 
-        else if (event instanceof LoserEvent){
-            view.showLosers();
+        else if (event instanceof EndSinglePlayerEvent){
+            view.showEndSinglePlayer(((EndSinglePlayerEvent) event).isWinner(), ((EndSinglePlayerEvent) event).getPlayerPoints(), ((EndSinglePlayerEvent)event).getGameThreshold());
         }
 
         else if (event instanceof StartToolSinglePlayerEvent) {

@@ -359,7 +359,7 @@ public class Game implements Observer {
 
     private void startTurn(){
 
-        //startTimer();
+        startTimer();
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
@@ -593,7 +593,10 @@ public class Game implements Observer {
         {
             @Override
             public void run() {
-                viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID(), model.getPlayerFromID(currID).getPlayerName()));
+                for (VirtualView view: viewGame)
+                {
+                    viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID(), model.getPlayerFromID(currID).getPlayerName()));
+                }
                 nextTurn();
 
             }
