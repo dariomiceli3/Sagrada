@@ -39,7 +39,6 @@ public abstract class View implements Runnable {
     }
 
 
-    public abstract void setPlayerName(String username);
 
     public boolean isStarted() {
         return isStarted;
@@ -108,7 +107,6 @@ public abstract class View implements Runnable {
 
     public abstract void showMoveCommand(int poolSize);
 
-    public abstract void showToolCommand(List<ToolCard> toolCards);
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
@@ -128,27 +126,15 @@ public abstract class View implements Runnable {
 
     public abstract void showGrozingRequest(int poolSize);
 
-    public abstract void showEglomiseRequest();
-
-    public abstract void showCopperFoilRequest();
-
-    public abstract void showLathekinRequest();
-
     public abstract void showLensCutterRequest(int poolSize, List<Integer> round);
 
     public abstract void showFluxBrushRequest(int poolSize);
 
     public abstract void showGlazingHammerRequest();
 
-    public abstract void showRunningPliersRequest(int poolSize);
-
-    public abstract void showCorkBackedRequest(int poolSize);
 
     public abstract void showGrindingStoneRequest(int poolSize);
 
-    public abstract void showFluxRemoverRequest(DiceColor color, int poolSize);
-
-    public abstract void showTapWheelRequest();
 
     public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
 

@@ -35,7 +35,7 @@ public class Login {
 
 
 
-    public static void start(Stage primaryStage) throws IOException {
+    public static void start(Stage primaryStage, GuiView view) throws IOException {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
 

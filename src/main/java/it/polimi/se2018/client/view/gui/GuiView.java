@@ -23,10 +23,22 @@ public class GuiView extends View {
     @Override
     public void startGUI(){
         String[] a = new String[]{""};
-        GUI gui = new GUI();
+        GUI gui = new GUI(this);
         gui.main(a);
 
     }
+
+    //method to send event to notify changes
+
+    public void
+
+
+
+
+
+
+    //--------------method to change scene-------------------
+
 
     @Override
     public void setPlayerName(String username) {

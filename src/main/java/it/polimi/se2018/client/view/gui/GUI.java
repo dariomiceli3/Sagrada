@@ -13,12 +13,18 @@ import static javafx.application.Application.launch;
 
 public class GUI extends Application{
 
+    private GuiView view;
+
+    public GUI(GuiView view){
+        this.view = view;
+    }
+
     public static void main(String []args) {
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Login.start(primaryStage);
+        Login.start(primaryStage, view);
     }
 }
