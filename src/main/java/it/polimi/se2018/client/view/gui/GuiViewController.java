@@ -12,12 +12,29 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
+import java.awt.*;
 import java.util.List;
 
 public class GuiViewController extends View {
 
+    public class PleaseProvideControllerClassName {
 
+        @FXML // fx:id="text"
+        private TextField text; // Value injected by FXMLLoader
+
+        @FXML // fx:id="button"
+        private Button button; // Value injected by FXMLLoader
+
+        @FXML
+        void getText(ActionEvent event) {
+
+        }
+
+    }
 
 
     //--------------method to change scene-------------------
