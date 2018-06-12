@@ -1,4 +1,4 @@
-package it.polimi.se2018.client.view.gui;
+/*package it.polimi.se2018.client.view.gui;
 
 import javafx.stage.*;
 import javafx.scene.*;
@@ -35,3 +35,4 @@ public class AlertBox {
 
     }
 
+*/

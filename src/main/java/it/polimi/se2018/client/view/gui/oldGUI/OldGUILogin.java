@@ -1,4 +1,4 @@
-package it.polimi.se2018.client.view.gui;
+/*package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.client.Client;
 import it.polimi.se2018.client.network.socket.SocketHandler;
@@ -41,7 +41,7 @@ public class Login {
         window = primaryStage;
         window.setTitle("Welcome to Sagrada");
 
-       /* final ToggleGroup group = new ToggleGroup();
+       final ToggleGroup group = new ToggleGroup();
 
         ToggleButton tb1 = new ToggleButton("Socket");
         tb1.setUserData("socket");
@@ -51,7 +51,7 @@ public class Login {
 
         ToggleButton tb2 = new ToggleButton("RMI");
         tb2.setUserData("rmi");
-        group.getToggles().add(tb2);*/
+        group.getToggles().add(tb2);
 
 
         group1 = new ToggleGroup();
@@ -152,12 +152,12 @@ public class Login {
 
 
         button1.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
-        button.disableProperty().bind(Bindings.isNull(/*group.selectedToggleProperty()).or(Bindings.isNull(*/group1.selectedToggleProperty()));
+        button.disableProperty().bind(Bindings.isNull(/*group.selectedToggleProperty()).or(Bindings.isNull(group1.selectedToggleProperty()));
         button.setOnAction(e ->{
 
            String mode = group1.getSelectedToggle().getUserData().toString();
 
-            gui.getMode(mode);
+            gui.getView().getMode(mode);
 
 
             window.setScene(scene1);
@@ -189,4 +189,4 @@ public class Login {
         return group1;
     }
 }
-
+*/
