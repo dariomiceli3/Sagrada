@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class GuiViewController extends View {
     //-------------------------gui start---------
     public GuiViewController(){
         gui = new GUI();
-        Application.launch(GUI.class);
+        //Application.launch(GUI.class);
     }
 
     //----------------fxml controller----------------
@@ -36,6 +37,10 @@ public class GuiViewController extends View {
 
     @FXML
     private Button button;
+
+    @FXML
+    private AnchorPane controller;
+
 
     @FXML
     void getMode(javafx.event.ActionEvent event) {
