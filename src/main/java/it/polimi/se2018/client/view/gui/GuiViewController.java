@@ -11,6 +11,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -25,29 +26,29 @@ public class GuiViewController extends View {
 
     private GUI gui;
 
+    private ClientInterface connection;
+
     //-------------------------gui start---------
     public GuiViewController(){
         gui = new GUI();
-        //Application.launch(GUI.class);
     }
 
     //----------------fxml controller----------------
     @FXML
     private TextField modeTxt;
 
-    @FXML
-    private Button button;
-
-    @FXML
-    private AnchorPane controller;
-
 
     @FXML
     void getMode(javafx.event.ActionEvent event) {
 
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
         if(modeTxt.getText().equalsIgnoreCase("single")){
             getConnection().setSinglePlayerMode(getPlayerID(), true);
         }
+            }
+        });
     }
 
 
@@ -58,11 +59,12 @@ public class GuiViewController extends View {
 
     @Override
     public void setConnection(ClientInterface connection) {
+        this.connection = connection;
     }
 
     @Override
     public ClientInterface getConnection() {
-        return getConnection();
+        return connection;
     }
 
     @Override

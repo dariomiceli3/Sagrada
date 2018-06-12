@@ -4,6 +4,9 @@ import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.CliView;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.client.view.gui.GUI;
+import it.polimi.se2018.client.view.gui.GuiViewController;
+import javafx.application.Application;
 //import it.polimi.se2018.client.view.gui.GuiView;
 
 import java.util.Scanner;
@@ -32,6 +35,15 @@ public class Client {
 
         //-------------------------------view creation--------------------------------------------------------------
 
+        String connectionType;
+        do {
+            System.out.println("Choose the connection type:Socket or RMI?");
+            connectionType = reader.nextLine();
+        }
+        while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi"))));
+
+
+
         String textView;
         View view;
         do {
@@ -41,7 +53,7 @@ public class Client {
         while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli"))));
 
         if (textView.equalsIgnoreCase("Gui")) {
-            view = new CliView();
+            view = new GuiViewController();
         }
         else if (textView.equalsIgnoreCase("Cli")) {
             view = new CliView();
@@ -54,13 +66,6 @@ public class Client {
 
 
         //-------------------------------connectivity creation----------------------------------------------------------
-
-        String connectionType;
-        do {
-            System.out.println("Choose the connection type:Socket or RMI?");
-            connectionType = reader.nextLine();
-        }
-        while (!((connectionType.equalsIgnoreCase("socket") || connectionType.equalsIgnoreCase("rmi"))));
 
 
         if (connectionType.equalsIgnoreCase("Socket")) {
@@ -76,8 +81,12 @@ public class Client {
 
             // accertarsi che abbia ricevuto ID e poi startare
             // start of the thread of the selected view
-            Thread viewSocketThread = new Thread(view);
-            viewSocketThread.start();
+            if(textView.equalsIgnoreCase("Cli")){
+                Thread viewSocketThread = new Thread(view);
+                viewSocketThread.start();
+            }else {
+                Application.launch(GUI.class);
+            }
 
 
         }

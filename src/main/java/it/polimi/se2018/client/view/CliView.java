@@ -39,7 +39,6 @@ public class CliView extends View implements Runnable {
     private ClientInterface connection;
 
     public CliView() {
-        Application.launch(GUI.class);
     }
 
     public static int getPoolSize() {

@@ -11,11 +11,11 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader laer = new FXMLLoader(getClass().getResource("/Login.fxml"));
-        Parent root = laer.load();
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        Parent root = load.load();
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        laer.getController();
+        load.getController();
 
     }
 
