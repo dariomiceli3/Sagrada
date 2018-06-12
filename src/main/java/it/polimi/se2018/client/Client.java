@@ -4,9 +4,8 @@ import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.CliView;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.client.view.gui.GuiViewController;
-/*import it.polimi.se2018.client.view.gui.GUI;
-import it.polimi.se2018.client.view.gui.GuiView;*/
+import it.polimi.se2018.client.view.gui.GUI;
+import it.polimi.se2018.client.view.gui.GuiView;
 
 import java.util.Scanner;
 
@@ -47,7 +46,7 @@ public class Client {
         } while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli"))));
 
         if (textView.equalsIgnoreCase("Gui")) {
-            view = new GuiViewController();
+            view = new GuiView();
         } else if (textView.equalsIgnoreCase("Cli")) {
             view = new CliView();
         } else {
