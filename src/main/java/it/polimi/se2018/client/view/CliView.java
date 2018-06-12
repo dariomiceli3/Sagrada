@@ -2,11 +2,14 @@ package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.Client;
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.view.gui.GUI;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
+import javafx.application.Application;
+
 import java.util.*;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class CliView extends View implements Runnable {
     private ClientInterface connection;
 
     public CliView() {
+        Application.launch(GUI.class);
     }
 
     public static int getPoolSize() {

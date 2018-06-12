@@ -11,30 +11,41 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class GuiViewController extends View {
 
-    public class PleaseProvideControllerClassName {
+    private GUI gui;
 
-        @FXML // fx:id="text"
-        private TextField text; // Value injected by FXMLLoader
-
-        @FXML // fx:id="button"
-        private Button button; // Value injected by FXMLLoader
-
-        @FXML
-        void getText(ActionEvent event) {
-
-        }
-
+    //-------------------------gui start---------
+    public GuiViewController(){
+        gui = new GUI();
+        Application.launch(GUI.class);
     }
+
+    //----------------fxml controller----------------
+    @FXML
+    private TextField modeTxt;
+
+    @FXML
+    private Button button;
+
+    @FXML
+    void getMode(javafx.event.ActionEvent event) {
+
+        if(modeTxt.getText().equalsIgnoreCase("single")){
+            getConnection().setSinglePlayerMode(getPlayerID(), true);
+        }
+    }
+
+
 
 
     //--------------method to change scene-------------------
