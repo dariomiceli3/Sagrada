@@ -33,17 +33,19 @@ public class VirtualSocket extends VirtualView implements Runnable {
             this.clientConnection = clientConnection;
             this.running = true;
             sendEvent(new PlayerIDEvent(this.playerID));
-            //System.out.println("Send id to the player");
+            System.out.println("Send socket id to the player");
             sendEvent(new SinglePlayerRequestEvent(this.playerID));
 
     }
 
+    // observable -> notify
     // waiting for msg from the clients
-    // gestisce eventi che notificano controller ed eventi che prendano da model usando sendUpdate superclasse
+    // gestisce eventi che notificano controller ed eventi che prendano da model
     @Override
     public void run() {
 
         try {
+            System.out.println("thread socket andato");
             while (this.isRunning()) {
 
 
@@ -213,10 +215,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
         catch (IOException e) {
             System.out.println("Error in writing from virtual socket");
             e.printStackTrace();
+            this.running = false;
         }
 
     }
 
+    // observable -> update
     // invocato dopo notify del model, e chiama sendEvent che la manda al client (run->readEvent->clientView)
     @Override
     public void update(Observable o, Object arg) {

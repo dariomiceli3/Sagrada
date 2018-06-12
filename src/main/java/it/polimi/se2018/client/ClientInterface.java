@@ -7,55 +7,55 @@ import java.rmi.RemoteException;
 
 public interface ClientInterface {
 
+    public void setSinglePlayerMode(int id, boolean singlePlayer);
+
     public void setPlayerNameToServer(String username, int iD);
 
     public void setPatternCardToServer(int indexPatternChoose, int ID);
 
-    public void setDraftPoolToServer();
+    public void setDraftPoolToServer(int ID);
 
-    public void setChooseToServer(int step);
+    public void setChooseToServer(int ID, int step);
 
-    public void setMoveToServer(int indexPool, int indexPattern);
+    public void setMoveToServer(int ID, int indexPool, int indexPattern);
 
-    public void setStartToolToServer();
+    public void setStartToolToServer(int ID);
 
-    public void setNextTurnToServer();
+    public void setNextTurnToServer(int ID);
 
-    public void setNoTokenToServer();
+    public void setNoTokenToServer(int ID);
 
-    public void useToolCardToServer(int id);
+    public void useToolCardToServer(int id, int indexTool);
 
-    public void useGrozingToolCard(int indexPool, int increase);
+    public void useGrozingToolCard(int ID, int indexPool, int increase);
 
-    public void useEglomiseToolCard(int indexStart, int indexEnd);
+    public void useEglomiseToolCard(int ID, int indexStart, int indexEnd);
 
-    public void useCopperFoilToolCard(int indexStart, int indexEnd);
+    public void useCopperFoilToolCard(int ID, int indexStart, int indexEnd);
 
-    public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo);
+    public void useLathekinToolCard(int ID, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo);
 
-    public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition);
+    public void useLensCutterToolCard(int ID, int indexPool, int indexRound, int indexPosition);
 
-    public void useFluxBrushToolCard(int indexPool);
+    public void useFluxBrushToolCard(int ID, int indexPool);
 
-    public void useGlazingHammerToolCard();
+    public void useGlazingHammerToolCard(int ID);
 
-    public void useRunningPliersToolCard(int indexPool, int indexPattern);
+    public void useRunningPliersToolCard(int ID, int indexPool, int indexPattern);
 
-    public void useCorkBackedToolCard(int indexPool, int indexPattern);
+    public void useCorkBackedToolCard(int ID, int indexPool, int indexPattern);
 
-    public void useGrindingStoneToolCard(int indexPool);
+    public void useGrindingStoneToolCard(int ID, int indexPool);
 
-    public void useFluxRemoverToolCard(int indexPool, int diceValue);
+    public void useFluxRemoverToolCard(int ID, int indexPool, int diceValue);
 
-    public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo);
+    public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo);
 
     //-------------------------single player mode
 
-    public void setSinglePlayerMode(int id, boolean singlePlayer);
+    public void setDifficultyToServer(int ID, int difficulty);
 
-    public void setDifficultyToServer(int difficulty);
-
-    public void useToolSingleToServer(int indexTool, int indexPool);
+    public void useToolSingleToServer(int ID, int indexTool, int indexPool);
 
 
 

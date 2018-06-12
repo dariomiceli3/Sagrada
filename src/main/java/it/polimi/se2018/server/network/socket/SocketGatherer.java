@@ -12,7 +12,6 @@ public class SocketGatherer implements Runnable {
     private ServerSocket serverSocket;
     private final Server server;
     private final int port;
-    private int counter = 0;
 
     public SocketGatherer(Server server, int port) {
         this.server = server;
@@ -45,13 +44,9 @@ public class SocketGatherer implements Runnable {
                 clientConnection = serverSocket.accept();
                 System.out.println("New socket connected");
 
-                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, counter);
-                counter++;
+                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, Server.idPlayer);
 
-                /*if (counter == 4) {
-                    System.out.println("Max connection reached");
-                    virtualSocket.stopConnection();
-                }*/
+                Server.setIdPlayer(Server.getIdPlayer() + 1);
 
                 // add arraylist di socket
                 server.addSocketClient(virtualSocket);
@@ -65,8 +60,6 @@ public class SocketGatherer implements Runnable {
                 //server.waitingOtherPlayers();
                 //  TODO waiting other connections method!!
 
-                //Thread vsThread = new Thread(virtualSocket);
-                //vsThread.start();
 
                 }
             catch (IOException e) {

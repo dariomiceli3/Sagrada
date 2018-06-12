@@ -430,6 +430,11 @@ public class SocketHandler implements ClientInterface, Runnable {
 
 
     @Override
+    public void setSinglePlayerMode(int id, boolean singlePlayer) {
+        sendEvent(new SinglePlayerEvent(id, singlePlayer));
+    }
+
+    @Override
     public void setPlayerNameToServer(String name, int id) {
         sendEvent(new PlayerNameEvent(name, id));
     }
@@ -440,115 +445,111 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void setDraftPoolToServer() {
+    public void setDraftPoolToServer(int ID) {
         sendEvent(new PlayerDraftPoolEvent());
     }
 
     @Override
-    public void setChooseToServer(int step) {
+    public void setChooseToServer(int ID, int step) {
         sendEvent(new PlayerChooseEvent(step));
     }
 
     @Override
-    public void setMoveToServer(int indexPool, int indexPattern) {
+    public void setMoveToServer(int ID, int indexPool, int indexPattern) {
         sendEvent(new PlayerMoveEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void setStartToolToServer() {
+    public void setStartToolToServer(int ID) {
         sendEvent(new PlayerStartToolEvent());
     }
 
     @Override
-    public void setNextTurnToServer() {
+    public void setNextTurnToServer(int ID) {
         sendEvent(new PlayerNextTurnEvent());
     }
 
     @Override
-    public void setNoTokenToServer() {
+    public void setNoTokenToServer(int ID) {
         sendEvent(new PlayerNoTokenEvent());
     }
 
     @Override
-    public void useToolCardToServer(int indexTool) {
+    public void useToolCardToServer(int ID, int indexTool) {
         sendEvent(new ToolCardStartEvent(indexTool));
     }
 
     @Override
-    public void useGrozingToolCard(int indexPool, int increase) {
+    public void useGrozingToolCard(int ID, int indexPool, int increase) {
         sendEvent(new GrozingPliersEvent(indexPool,increase));
     }
 
     @Override
-    public void useEglomiseToolCard(int indexStart, int indexEnd) {
+    public void useEglomiseToolCard(int ID, int indexStart, int indexEnd) {
         sendEvent(new EglomiseBrushEvent(indexStart, indexEnd));
     }
 
     @Override
-    public void useCopperFoilToolCard(int indexStart, int indexEnd) {
+    public void useCopperFoilToolCard(int ID, int indexStart, int indexEnd) {
         sendEvent(new CopperFoilEvent(indexStart, indexEnd));
     }
 
     @Override
-    public void useLathekinToolCard(int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useLathekinToolCard(int ID, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new LathekinEvent(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
     }
 
     @Override
-    public void useLensCutterToolCard(int indexPool, int indexRound, int indexPosition) {
+    public void useLensCutterToolCard(int ID, int indexPool, int indexRound, int indexPosition) {
         sendEvent(new LensCutterEvent(indexPool, indexRound, indexPosition));
     }
 
     @Override
-    public void useFluxBrushToolCard(int indexPool) {
+    public void useFluxBrushToolCard(int ID, int indexPool) {
         sendEvent(new FluxBrushEvent(indexPool));
     }
 
     @Override
-    public void useGlazingHammerToolCard() {
+    public void useGlazingHammerToolCard(int ID) {
         sendEvent(new GlazingHammerEvent());
     }
 
     @Override
-    public void useRunningPliersToolCard(int indexPool, int indexPattern) {
+    public void useRunningPliersToolCard(int ID, int indexPool, int indexPattern) {
         sendEvent(new RunningPliersEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void useCorkBackedToolCard(int indexPool, int indexPattern) {
+    public void useCorkBackedToolCard(int ID, int indexPool, int indexPattern) {
         sendEvent(new CorkBackedEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void useGrindingStoneToolCard(int indexPool) {
+    public void useGrindingStoneToolCard(int ID, int indexPool) {
         sendEvent(new GrindingStoneEvent(indexPool));
     }
 
     @Override
-    public void useFluxRemoverToolCard(int indexPool, int diceValue) {
+    public void useFluxRemoverToolCard(int ID, int indexPool, int diceValue) {
         sendEvent(new FluxRemoverEvent(indexPool, diceValue));
     }
 
     @Override
-    public void useTapWheelToolCard(int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
 
     }
 
     //---------------------------------------------single player methods-----------------------------------------
 
-    @Override
-    public void setSinglePlayerMode(int id, boolean singlePlayer) {
-        sendEvent(new SinglePlayerEvent(id, singlePlayer));
-    }
 
     @Override
-    public void setDifficultyToServer(int difficulty) {
+    public void setDifficultyToServer(int ID, int difficulty) {
         sendEvent(new ToolNumberEvent(difficulty));
     }
 
     @Override
-    public void useToolSingleToServer(int indexTool, int indexPool) {
+    public void useToolSingleToServer(int ID, int indexTool, int indexPool) {
         sendEvent(new ToolCardSinglePlayerStartEvent(indexTool,indexPool));
     }
 }
