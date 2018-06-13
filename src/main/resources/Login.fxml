@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?scenebuilder-stylesheet application.css?>
 
-<AnchorPane fx:id="controller" prefHeight="400.0" prefWidth="600.0" stylesheets="application.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
+<AnchorPane fx:id="controller" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
    <children>
       <GridPane layoutX="166.0" layoutY="58.0" prefHeight="142.0" prefWidth="308.0">
         <columnConstraints>
@@ -20,12 +20,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <RadioButton fx:id="ViewCli" mnemonicParsing="false" text="CLI" />
-            <RadioButton fx:id="ViewGui" mnemonicParsing="false" text="GUI" GridPane.columnIndex="1" />
-            <RadioButton fx:id="Socket" mnemonicParsing="false" text="Socket" GridPane.rowIndex="1" />
-            <RadioButton fx:id="Rmi" mnemonicParsing="false" text="RMI" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <RadioButton fx:id="cliView" mnemonicParsing="false" text="CLI" />
+            <RadioButton fx:id="guiView" mnemonicParsing="false" text="GUI" GridPane.columnIndex="1" />
+            <RadioButton fx:id="socket" mnemonicParsing="false" text="Socket" GridPane.rowIndex="1" />
+            <RadioButton fx:id="rmi" mnemonicParsing="false" text="RMI" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="268.0" layoutY="281.0" mnemonicParsing="false" onAction="#startClient" text="Login" />
+      <Button layoutX="268.0" layoutY="281.0" mnemonicParsing="false" onAction="#handlerClient" text="Login" />
    </children>
 </AnchorPane>

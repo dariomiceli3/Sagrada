@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.login;
 
+import it.polimi.se2018.client.view.cli.ClientCli;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -7,19 +8,50 @@ import javafx.scene.control.RadioButton;
 public class LoginController {
 
     @FXML
-    private RadioButton ViewCli;
+    private RadioButton cliView;
 
     @FXML
-    private RadioButton ViewGui;
+    private RadioButton guiView;
 
     @FXML
-    private RadioButton Socket;
+    private RadioButton socket;
 
     @FXML
-    private RadioButton Rmi;
+    private RadioButton rmi;
 
     @FXML
-    void startClient(ActionEvent event) {
+    void handlerClient(ActionEvent event) {
+
+        if (cliView.isSelected()) {
+
+            if (socket.isSelected()){
+
+                new ClientCli("socket");
+            }
+
+            if (rmi.isSelected()) {
+
+                new ClientCli("rmi");
+
+            }
+
+        }
+
+        if (guiView.isSelected()) {
+
+            if (socket.isSelected()) {
+
+            }
+
+            if (rmi.isSelected()) {
+
+            }
+
+        }
+
+
+
+
 
 
         }
