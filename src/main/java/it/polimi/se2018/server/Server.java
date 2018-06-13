@@ -20,6 +20,7 @@ public class Server {
     private static final int MAXPLAYERS = 4;
     private static final int SECONDS = 15;
 
+    private boolean mutex;
     private SocketGatherer socketGatherer;
     private RmiGatherer rmiGatherer;
     private List<VirtualView> socketClients = new ArrayList<>();
@@ -112,12 +113,15 @@ public class Server {
 
 
 
-
-
     public synchronized void waitingOtherPlayers() {
 
         System.out.println("in waiting the boolean of single player: " + singlePlayer);
 
+        if(mutex) {
+
+            return;
+        }
+        mutex = true;
         if (singlePlayer) {
 
             List<VirtualView> viewGame = new ArrayList<>();
@@ -138,6 +142,7 @@ public class Server {
                     @Override
                     public void run() {
 
+                        mutex = true;
                         if (clients.size() >= 2 && clients.size() <= MAXPLAYERS) {
                             List<VirtualView> viewGame = new ArrayList<>();
                             viewGame.addAll(clients);
