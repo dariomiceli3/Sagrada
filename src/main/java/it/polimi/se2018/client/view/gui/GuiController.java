@@ -31,14 +31,44 @@ public class GuiController extends View {
     private static RmiHandler serverRmi;
     private static String host = "localhost";
     private View view;
+    private String name;
 
     //-------------------------gui start---------
-    public GuiController(){
+    public GuiController(String connection){
+
+        Application.launch(Gui.class);
+
 
     }
 
     //----------------fxml controller----------------
+    @FXML
+    private RadioButton singlePlayer;
 
+    @FXML
+    private RadioButton multiPlayer;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    void handleMode(ActionEvent event) {
+
+        if(singlePlayer.isSelected()){
+            getConnection().setSinglePlayerMode(getPlayerID(), true);
+        }
+        if(multiPlayer.isSelected()){
+            getConnection().setSinglePlayerMode(getPlayerID(), false);
+        }
+        this.name = txtName.getText();
+
+    }
+
+    private void setName(){
+
+        getConnection().setPlayerNameToServer(name, getPlayerID());
+
+    }
 
 
 
@@ -82,6 +112,7 @@ public class GuiController extends View {
     @Override
     public void showNameChoose() {
 
+        setName();
     }
 
     @Override
