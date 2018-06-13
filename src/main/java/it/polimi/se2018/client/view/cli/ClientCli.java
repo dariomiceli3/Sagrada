@@ -1,16 +1,14 @@
-package it.polimi.se2018.client;
+package it.polimi.se2018.client.view.cli;
 
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
-import it.polimi.se2018.client.view.CliView;
+import it.polimi.se2018.client.view.cli.CliView;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.client.view.gui.GuiViewController;
-import javafx.application.Application;
 //import it.polimi.se2018.client.view.gui.GuiView;
 
 import java.util.Scanner;
 
-public class Client {
+public class ClientCli {
 
     private static final int SOCKETPORT = 8888;
     private static String host = "localhost";
@@ -35,7 +33,7 @@ public class Client {
         //-------------------------------view creation--------------------------------------------------------------
 
         String textView;
-        View view;
+        View view = null;
         do {
             System.out.println("How do you prefer to play: Gui or Cli?");
             textView = reader.nextLine();
@@ -43,7 +41,6 @@ public class Client {
         while (!((textView.equalsIgnoreCase("gui") || textView.equalsIgnoreCase("cli"))));
 
         if (textView.equalsIgnoreCase("Gui")) {
-            view = new GuiViewController();
         }
         else if (textView.equalsIgnoreCase("Cli")) {
             view = new CliView();
@@ -69,11 +66,6 @@ public class Client {
 
         if (connectionType.equalsIgnoreCase("Socket")) {
 
-            if (textView.equalsIgnoreCase("gui")) {
-
-                Thread viewSocketThread = new Thread(view);
-                viewSocketThread.start();
-            }
 
             if (textView.equalsIgnoreCase("cli")) {
             serverSocket = new SocketHandler(host, SOCKETPORT, view);

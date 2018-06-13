@@ -1,7 +1,6 @@
 /*package it.polimi.se2018.client.view.gui;
 
-import it.polimi.se2018.client.Client;
-import it.polimi.se2018.client.network.socket.SocketHandler;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;

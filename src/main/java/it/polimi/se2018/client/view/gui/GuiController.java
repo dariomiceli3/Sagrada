@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.controller.ToolCard;
@@ -13,46 +14,36 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
 
-public class GuiViewController extends View {
+public class GuiController extends View {
 
 
     private ClientInterface connection;
     private static final int SOCKETPORT = 8888;
+    private static SocketHandler serverSocket;
+    private static RmiHandler serverRmi;
     private static String host = "localhost";
-    private int ID;
+    private View view;
 
     //-------------------------gui start---------
-    public GuiViewController(){
+    public GuiController(){
 
     }
 
     //----------------fxml controller----------------
-    @FXML
-    private TextField modeTxt;
 
 
-    @FXML
-    public  void getMode(javafx.event.ActionEvent event) {
-
-        SocketHandler serverSocket = new SocketHandler(host, SOCKETPORT, this);
-
-        //  necessario
-        this.setConnection(serverSocket);
-
-        Thread socketThread = new Thread(serverSocket);
-        socketThread.start();
 
 
-        if(modeTxt.getText().equalsIgnoreCase("single")) {
-            getConnection().setSinglePlayerMode(getPlayerID(), true);
-        }
 
-    }
+
 
 
     @Override

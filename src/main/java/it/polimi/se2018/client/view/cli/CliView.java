@@ -1,14 +1,13 @@
-package it.polimi.se2018.client.view;
+package it.polimi.se2018.client.view.cli;
 
-import it.polimi.se2018.client.Client;
 import it.polimi.se2018.client.ClientInterface;
-import it.polimi.se2018.client.view.gui.GUI;
+import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
-import javafx.application.Application;
 
 import java.util.*;
 import java.util.List;
