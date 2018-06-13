@@ -71,7 +71,7 @@ public class Login {
         Scene scene = new Scene(layout, 430,550);
         File file = new File("./");
         String filePath = file.getAbsolutePath().replace(".", "src/main/res/Images/");
-        FileInputStream inputStream = new FileInputStream(filePath+"pic3101613.jpg");
+        FileInputStream inputStream = new FileInputStream(filePath+"background.jpg");
         Image image = new Image(inputStream);
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(550);
@@ -123,7 +123,7 @@ public class Login {
         Scene scene1 = new Scene(borderPane, 430,550);
         File file1 = new File("./");
         String filePath1 = file1.getAbsolutePath().replace(".", "src/main/res/Images/");
-        FileInputStream inputStream1 = new FileInputStream(filePath1+"pic3101613.jpg");
+        FileInputStream inputStream1 = new FileInputStream(filePath1+"background.jpg");
         Image image1 = new Image(inputStream1);
         ImageView imageView1 = new ImageView(image1);
         imageView1.setFitHeight(550);
