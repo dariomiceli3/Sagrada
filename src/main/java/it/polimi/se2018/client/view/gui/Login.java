@@ -11,17 +11,29 @@ import javafx.stage.Stage;
 
 public class Login extends Application {
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader load = new FXMLLoader(getClass().getResource("/Login.fxml"));
-        Parent root = load.load();
+
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Sagrada Login");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        Parent root = loader.load();
+
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        load.getController();
+
+        loader.getController();
 
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

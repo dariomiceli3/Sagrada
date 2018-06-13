@@ -4,7 +4,6 @@ import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.CliView;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.client.view.gui.GUI;
 import it.polimi.se2018.client.view.gui.GuiViewController;
 import javafx.application.Application;
 //import it.polimi.se2018.client.view.gui.GuiView;
