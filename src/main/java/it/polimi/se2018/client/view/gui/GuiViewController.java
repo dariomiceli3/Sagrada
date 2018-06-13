@@ -11,26 +11,19 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class GuiViewController extends View {
 
-    private GUI gui;
 
     private ClientInterface connection;
 
     //-------------------------gui start---------
     public GuiViewController(){
-        gui = new GUI();
+
     }
 
     //----------------fxml controller----------------
@@ -39,17 +32,22 @@ public class GuiViewController extends View {
 
 
     @FXML
-    void getMode(javafx.event.ActionEvent event) {
+    public  void getMode(javafx.event.ActionEvent event) {
 
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-        if(modeTxt.getText().equalsIgnoreCase("single")){
-            getConnection().setSinglePlayerMode(getPlayerID(), true);
-        }
-            }
-        });
+
+                if(modeTxt.getText().equalsIgnoreCase("single")) {
+                    getConnection().setSinglePlayerMode(getPlayerID(), true);
+                }
+
     }
+
+
+    @Override
+    public void run() {
+
+        Application.launch(GUI.class);
+    }
+
 
 
 
@@ -414,12 +412,6 @@ public class GuiViewController extends View {
 
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
-
-    }
-
-
-    @Override
-    public void run() {
 
     }
 }

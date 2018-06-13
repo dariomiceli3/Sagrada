@@ -57,6 +57,8 @@ public class Client {
 
 
         //-------------------------------connectivity creation----------------------------------------------------------
+
+
         String connectionType;
         do {
             System.out.println("Choose the connection type:Socket or RMI?");
@@ -79,12 +81,9 @@ public class Client {
 
             // accertarsi che abbia ricevuto ID e poi startare
             // start of the thread of the selected view
-            if(textView.equalsIgnoreCase("Cli")){
+
                 Thread viewSocketThread = new Thread(view);
                 viewSocketThread.start();
-            }else {
-                Application.launch(GUI.class);
-            }
 
 
         }
@@ -94,8 +93,8 @@ public class Client {
             view.setConnection(serverRmi);
 
 
-            Thread viewRmiThread = new Thread(view);
-            viewRmiThread.start();
+                Thread viewRmiThread = new Thread(view);
+                viewRmiThread.start();
 
         }
         else {
