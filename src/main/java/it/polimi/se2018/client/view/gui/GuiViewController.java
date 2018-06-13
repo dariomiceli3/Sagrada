@@ -1,6 +1,7 @@
 package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
@@ -11,6 +12,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -20,6 +22,9 @@ public class GuiViewController extends View {
 
 
     private ClientInterface connection;
+    private static final int SOCKETPORT = 8888;
+    private static String host = "localhost";
+    private int ID;
 
     //-------------------------gui start---------
     public GuiViewController(){
@@ -34,10 +39,18 @@ public class GuiViewController extends View {
     @FXML
     public  void getMode(javafx.event.ActionEvent event) {
 
+        SocketHandler serverSocket = new SocketHandler(host, SOCKETPORT, this);
 
-                if(modeTxt.getText().equalsIgnoreCase("single")) {
-                    getConnection().setSinglePlayerMode(getPlayerID(), true);
-                }
+        //  necessario
+        this.setConnection(serverSocket);
+
+        Thread socketThread = new Thread(serverSocket);
+        socketThread.start();
+
+
+        if(modeTxt.getText().equalsIgnoreCase("single")) {
+            getConnection().setSinglePlayerMode(getPlayerID(), true);
+        }
 
     }
 
@@ -45,7 +58,7 @@ public class GuiViewController extends View {
     @Override
     public void run() {
 
-        Application.launch(GUI.class);
+
     }
 
 

@@ -70,22 +70,29 @@ public class Client {
 
         if (connectionType.equalsIgnoreCase("Socket")) {
 
+            if (textView.equalsIgnoreCase("gui")) {
+
+                Thread viewSocketThread = new Thread(view);
+                viewSocketThread.start();
+            }
+
+            if (textView.equalsIgnoreCase("cli")) {
             serverSocket = new SocketHandler(host, SOCKETPORT, view);
 
             //  necessario
             view.setConnection(serverSocket);
 
             //decidere se così o dentro sockethandler
-            Thread socketThread = new Thread(serverSocket);
-            socketThread.start();
 
-            // accertarsi che abbia ricevuto ID e poi startare
-            // start of the thread of the selected view
+                Thread socketThread = new Thread(serverSocket);
+                socketThread.start();
 
+                // accertarsi che abbia ricevuto ID e poi startare
+                // start of the thread of the selected view
                 Thread viewSocketThread = new Thread(view);
                 viewSocketThread.start();
 
-
+            }
         }
         else if (connectionType.equalsIgnoreCase("Rmi")) {
             serverRmi = new RmiHandler(view);
