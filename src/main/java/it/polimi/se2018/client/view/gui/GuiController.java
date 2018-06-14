@@ -39,13 +39,16 @@ public class GuiController extends View {
     private String name;
     private Stage stage;
     private Scene scene;
+    private boolean singlePlayer;
 
     //-------------------------gui start-----------------
 
 
-    public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer ) throws IOException{
+    public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer) throws IOException{
 
         this.stage = primaryStage;
+
+        this.singlePlayer = singlePlayer;
 
         if (connectionType.equalsIgnoreCase("socket")) {
 
@@ -56,8 +59,8 @@ public class GuiController extends View {
             Thread socketThread = new Thread(serverSocket);
             socketThread.start();
 
-            Thread viewSocketThread = new Thread(this);
-            viewSocketThread.start();
+            //Thread viewSocketThread = new Thread(this);
+            //viewSocketThread.start();
 
         }
 
@@ -73,17 +76,13 @@ public class GuiController extends View {
 
         }
 
-        if (singlePlayer) {
-            getConnection().setSinglePlayerMode(getPlayerID(), true);
-        }
-        else {
-            getConnection().setSinglePlayerMode(getPlayerID(), false);
-
-        }
-
 
 
     }
+
+
+
+
 
     //----------------fxml controller----------------
 
@@ -127,6 +126,24 @@ public class GuiController extends View {
 
     }
 
+    private void setMode() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (singlePlayer) {
+                    getConnection().setSinglePlayerMode(getPlayerID(), true);
+                }
+                else {
+                    getConnection().setSinglePlayerMode(getPlayerID(), false);
+
+                }
+
+            }
+        });
+
+    }
+
 
 
 
@@ -145,6 +162,13 @@ public class GuiController extends View {
     }
 
     @Override
+    public void showSinglePlayerRequest() {
+
+        setMode();
+
+    }
+
+    @Override
     public void showID() {
 
     }
@@ -152,10 +176,12 @@ public class GuiController extends View {
     @Override
     public void showGameStarted() {
 
+        //tidi sblocco del play
     }
 
     @Override
     public void showNameChoose() {
+
     }
 
     @Override
@@ -184,7 +210,7 @@ public class GuiController extends View {
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Card.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
         Parent root = loader.load();
 
         //todo 0
@@ -466,10 +492,7 @@ public class GuiController extends View {
 
     }
 
-    @Override
-    public void showSinglePlayerRequest() {
 
-    }
 
     @Override
     public void showDifficultyRequest() {

@@ -116,12 +116,22 @@ public class Server {
     public synchronized void waitingOtherPlayers() {
 
         System.out.println("in waiting the boolean of single player: " + singlePlayer);
+        System.out.println(clients.size());
+
+        if (clients.size() < 2) {
+
+            return;
+
+        }
 
         if(mutex) {
 
             return;
         }
         mutex = true;
+
+        System.out.println("superato mutex");
+
         if (singlePlayer) {
 
             List<VirtualView> viewGame = new ArrayList<>();

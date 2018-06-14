@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.polimi.se2018.client.view.gui.GuiController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.GuiController">
+   <children>
+      <ImageView fitHeight="129.0" fitWidth="89.0" layoutX="30.0" layoutY="50.0">
+         <image>
+            <Image url="@images/private/BlueShade.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="89.0" layoutX="479.0" layoutY="91.0">
+         <image>
+            <Image url="@images/img003.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="62.0" layoutX="406.0" layoutY="100.0">
+         <image>
+            <Image url="@images/RoundTracker.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="50.0" layoutX="250.0" layoutY="148.0">
+         <image>
+            <Image url="@images/pattern/Aurora%20Sagradis.jpg" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

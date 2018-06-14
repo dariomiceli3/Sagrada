@@ -78,8 +78,16 @@ public class LoginController {
         this.connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
         this.viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
 
+        if(singleButton.isSelected()){
+            singlePlayer = true;
+        }
+        if(multiButton.isSelected()){
+            singlePlayer = false;
+        }
+
+
         if (viewType.equalsIgnoreCase("cli")) {
-            new ClientCli(connectionType);
+            new ClientCli(connectionType); //todo impostare con la chiamata della connessione anche single o multi
         }
 
         if (viewType.equalsIgnoreCase("gui")) {
