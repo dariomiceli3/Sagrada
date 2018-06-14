@@ -86,7 +86,7 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     // metodo per leggere evento chiamato dal socket INPUT e in base all'evento fare la cosa giusta
-    public void readEvent(Event event) {
+    public void readEvent(Event event) throws IOException {
 
         if (event instanceof PlayerIDEvent) {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());

@@ -9,6 +9,7 @@ import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -33,7 +34,7 @@ public interface RmiClientInterface extends Remote {
 
     public void remoteStartPatternEvent(int ID, List<PatternCard> patternList) throws RemoteException;
 
-    public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws RemoteException;
+    public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws RemoteException, IOException;
 
     public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException;
 
