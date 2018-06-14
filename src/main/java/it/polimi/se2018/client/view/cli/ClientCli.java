@@ -62,6 +62,5 @@ public class ClientCli {
 
     public static void main(String args[]) {
         new ClientCli("socket");
-        new ClientCli("rmi");
     }
 }

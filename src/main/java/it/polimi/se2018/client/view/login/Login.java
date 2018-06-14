@@ -7,31 +7,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Login extends Application {
 
-    private Stage primaryStage;
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Sagrada Login");
+    public void start(Stage primaryStage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
         Parent root = loader.load();
 
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Sagrada Login");
+        primaryStage.setScene(scene);
         primaryStage.show();
 
         loader.getController();
+
 
     }
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
 }

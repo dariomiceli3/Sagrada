@@ -30,13 +30,44 @@ public class GuiController extends View {
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
     private static String host = "localhost";
-    private View view;
     private String name;
+    private String connectionType;
 
-    //-------------------------gui start---------
-    public GuiController(String connection){
+    //-------------------------gui start-----------------
 
-        Application.launch(Gui.class);
+
+    public void GuiController(String connectionType){
+
+        //Application.launch(Gui.class);
+
+        this.connectionType = connectionType;
+
+        if (connectionType.equalsIgnoreCase("socket")) {
+
+            serverSocket = new SocketHandler(host, SOCKETPORT, this);
+
+            this.setConnection(serverSocket);
+
+            Thread socketThread = new Thread(serverSocket);
+            socketThread.start();
+
+            Thread viewSocketThread = new Thread(this);
+            viewSocketThread.start();
+
+        }
+
+        if (connectionType.equalsIgnoreCase("rmi")) {
+
+            serverRmi = new RmiHandler(this);
+
+            this.setConnection(serverRmi);
+
+            Thread viewRmiThread = new Thread(this);
+            viewRmiThread.start();
+
+
+        }
+
 
 
     }
@@ -54,30 +85,38 @@ public class GuiController extends View {
     @FXML
     void handleMode(ActionEvent event) {
 
+        GuiController("rmi");
+
+        this.name = txtName.getText();
+
         if(singlePlayer.isSelected()){
             getConnection().setSinglePlayerMode(getPlayerID(), true);
         }
         if(multiPlayer.isSelected()){
             getConnection().setSinglePlayerMode(getPlayerID(), false);
         }
-        this.name = txtName.getText();
+
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+
 
     private void setName(){
-
-        getConnection().setPlayerNameToServer(name, getPlayerID());
+        System.out.println("name" + name);
+        getConnection().setPlayerNameToServer(getName(), getPlayerID());
 
     }
-
-
-
 
 
 
 
     @Override
     public void run() {
+
 
 
     }
@@ -117,6 +156,8 @@ public class GuiController extends View {
 
     @Override
     public void showName() {
+
+        System.out.println("Player name: " + super.getPlayerName());
 
     }
 

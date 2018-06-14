@@ -4,55 +4,61 @@ import it.polimi.se2018.client.view.cli.ClientCli;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class LoginController {
 
-    @FXML
-    private RadioButton cliView;
 
     @FXML
-    private RadioButton guiView;
+    private ToggleButton cliView;
+    @FXML
+    private ToggleGroup viewToggleGroup;
+    @FXML
+    private ToggleButton guiView;
+    @FXML
+    private ToggleGroup connectionToggleGroup;
+    @FXML
+    private ToggleButton socket;
+    @FXML
+    private ToggleButton rmi;
+
+    private String connectionType;
+    private String viewType;
+    private Stage stage;
 
     @FXML
-    private RadioButton socket;
+    private void connectionButtonSelected(ActionEvent event) {
+
+        this.connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
+        System.out.println(connectionType);
+
+    }
 
     @FXML
-    private RadioButton rmi;
+    private void viewButtonSelected(ActionEvent event) {
+
+        this.viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
+
+    }
+
+
 
     @FXML
-    void handlerClient(ActionEvent event) {
+    private void loginButtonSelected(ActionEvent event) {
 
-        if (cliView.isSelected()) {
+        if (viewType.equalsIgnoreCase("cli")) {
+            new ClientCli(connectionType);
+        }
 
-            if (socket.isSelected()){
-
-                new ClientCli("socket");
-            }
-
-            if (rmi.isSelected()) {
-
-                new ClientCli("rmi");
-
-            }
+        if (viewType.equalsIgnoreCase("gui")) {
 
         }
 
-        if (guiView.isSelected()) {
-
-            if (socket.isSelected()) {
-
-            }
-
-            if (rmi.isSelected()) {
-
-            }
-
-        }
 
 
+    }
 
 
-
-
-        }
 }
