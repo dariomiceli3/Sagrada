@@ -42,6 +42,6 @@
             <ToggleButton fx:id="rmi" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Rmi" toggleGroup="$connectionToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="176.0" layoutY="397.0" mnemonicParsing="false" onAction="#loginButtonSelected" text="Login" />
+      <Button fx:id="loginButton" layoutX="176.0" layoutY="397.0" mnemonicParsing="false" onAction="#loginButtonSelected" text="Login" />
    </children>
 </AnchorPane>
