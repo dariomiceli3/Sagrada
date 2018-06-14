@@ -2,13 +2,15 @@ package it.polimi.se2018.client.view.login;
 
 import it.polimi.se2018.client.view.cli.ClientCli;
 import it.polimi.se2018.client.view.gui.GuiController;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,9 +35,6 @@ public class LoginController {
     @FXML
     private ToggleGroup connectionToggleGroup;
 
-    @FXML
-    private Button loginButton;
-
     private String connectionType;
     private String viewType;
     private Stage stage;
@@ -51,7 +50,6 @@ public class LoginController {
         cli.setUserData("cli");
         rmi.setUserData("rmi");
         socket.setUserData("socket");
-        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty())));
     }
 
 
@@ -67,7 +65,20 @@ public class LoginController {
 
         if (viewType.equalsIgnoreCase("gui")) {
 
-            new GuiController(connectionType, stage);
+
+                stage.setTitle("Sagrada Game");
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
+                Parent root = loader.load();
+
+                GuiController controller = (GuiController) loader.getController();
+                controller.setConnectionTypeAndStage(connectionType, stage);
+
+                Scene scene1 = new Scene(root);
+                stage.setScene(scene1);
+                stage.show();
+
+
         }
 
     }
