@@ -13,9 +13,9 @@
 
 <AnchorPane fx:id="controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
    <children>
-      <ImageView fitHeight="589.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="589.0" fitWidth="395.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../res/Images/background.jpg" />
+            <Image url="@../../../Images/background.jpg" />
          </image>
       </ImageView>
       <GridPane alignment="CENTER" cache="true" layoutX="139.0" layoutY="285.0" prefHeight="67.0" prefWidth="131.0">
@@ -28,18 +28,18 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="socket" mnemonicParsing="false" onAction="#connectionButtonSelected" prefHeight="25.0" prefWidth="52.0" text="Socket" GridPane.rowIndex="1">
+            <ToggleButton fx:id="socket" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Socket" GridPane.rowIndex="1">
                <toggleGroup>
                   <ToggleGroup fx:id="connectionToggleGroup" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="cliView" mnemonicParsing="false" onAction="#viewButtonSelected" prefHeight="25.0" prefWidth="52.0" text="CLI">
+            <ToggleButton fx:id="cli" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="CLI">
                <toggleGroup>
                   <ToggleGroup fx:id="viewToggleGroup" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="guiView" mnemonicParsing="false" onAction="#viewButtonSelected" prefHeight="25.0" prefWidth="52.0" text="GUI" toggleGroup="$viewToggleGroup" GridPane.columnIndex="1" />
-            <ToggleButton fx:id="rmi" mnemonicParsing="false" onAction="#connectionButtonSelected" prefHeight="25.0" prefWidth="52.0" text="Rmi" toggleGroup="$connectionToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ToggleButton fx:id="gui" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="GUI" toggleGroup="$viewToggleGroup" GridPane.columnIndex="1" />
+            <ToggleButton fx:id="rmi" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Rmi" toggleGroup="$connectionToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="176.0" layoutY="397.0" mnemonicParsing="false" onAction="#loginButtonSelected" text="Login" />
