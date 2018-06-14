@@ -34,6 +34,7 @@ public class GuiController extends View {
     private static final int SOCKETPORT = 8888;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
+    private boolean one;
     private static String host = "localhost";
     private String name;
     private Stage stage;
@@ -42,7 +43,7 @@ public class GuiController extends View {
     //-------------------------gui start-----------------
 
 
-    public void setConnectionTypeAndStage(String connectionType, Stage primaryStage) throws IOException{
+    public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer ) throws IOException{
 
         this.stage = primaryStage;
 
@@ -72,19 +73,23 @@ public class GuiController extends View {
 
         }
 
+        if (singlePlayer) {
+            getConnection().setSinglePlayerMode(getPlayerID(), true);
+        }
+        else {
+            getConnection().setSinglePlayerMode(getPlayerID(), false);
+
+        }
+
 
 
     }
 
     //----------------fxml controller----------------
-    @FXML
-    private ToggleButton multiPlayer;
 
     @FXML
     private ToggleGroup modeToggleGroup;
 
-    @FXML
-    private ToggleButton singlePlayer;
 
     @FXML
     private TextField txtName;
@@ -96,14 +101,9 @@ public class GuiController extends View {
     @FXML
     void handleMode(ActionEvent event) {
 
-        this.name = txtName.getText();
 
-        if(singlePlayer.isSelected()){
-            getConnection().setSinglePlayerMode(getPlayerID(), true);
-        }
-        if(multiPlayer.isSelected()){
-            getConnection().setSinglePlayerMode(getPlayerID(), false);
-        }
+        this.name = txtName.getText();
+        getConnection().setPlayerNameToServer(getName(), getPlayerID());
 
 
     }
@@ -117,14 +117,6 @@ public class GuiController extends View {
 
     public String getName() {
         return name;
-    }
-
-
-
-    private void setName(){
-        System.out.println("name" + name);
-        getConnection().setPlayerNameToServer(getName(), getPlayerID());
-
     }
 
 
@@ -166,8 +158,6 @@ public class GuiController extends View {
 
     @Override
     public void showNameChoose() {
-
-        setName();
     }
 
     @Override
@@ -185,6 +175,7 @@ public class GuiController extends View {
     @Override
     public void showNameError() {
 
+        AlertBox.display("Error", "Name already chosen");
     }
 
     @Override
