@@ -208,6 +208,7 @@ public class GuiController extends View {
     public void showPatternList(List<PatternCard> patternCards) {
 
         //TODO 3
+        //le pattern devono essere selezionabili
     }
 
     @Override
