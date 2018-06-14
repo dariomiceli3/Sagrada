@@ -42,12 +42,10 @@ public class GuiController extends View {
     //-------------------------gui start-----------------
 
 
-    public GuiController(String connectionType, Stage primaryStage) throws IOException{
+    public void setConnectionTypeAndStage(String connectionType, Stage primaryStage) throws IOException{
 
-        //Application.launch(Gui.class);
         this.primaryStage = primaryStage;
 
-        this.showMode();
 
         this.connectionType = connectionType;
 
@@ -79,19 +77,6 @@ public class GuiController extends View {
 
 
 
-    }
-
-
-    private void showMode() throws IOException {
-
-        primaryStage.setTitle("Sagrada Game");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
-        AnchorPane root = (AnchorPane) loader.load();
-
-        Scene scene1 = new Scene(root);
-        primaryStage.setScene(scene1);
-        primaryStage.show();
     }
 
     //----------------fxml controller----------------
