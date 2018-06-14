@@ -15,14 +15,14 @@ public class Login extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
-        Parent root = loader.load();
+        Parent root = (Parent) loader.load();
+        LoginController controller = (LoginController) loader.getController();
+        controller.setStage(primaryStage);
 
         Scene scene = new Scene(root);
         primaryStage.setTitle("Sagrada Login");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        loader.getController();
 
 
     }

@@ -16,10 +16,15 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GuiController extends View {
@@ -31,14 +36,18 @@ public class GuiController extends View {
     private static RmiHandler serverRmi;
     private static String host = "localhost";
     private String name;
+    private Stage primaryStage;
     private String connectionType;
 
     //-------------------------gui start-----------------
 
 
-    public void GuiController(String connectionType){
+    public GuiController(String connectionType, Stage primaryStage) throws IOException{
 
         //Application.launch(Gui.class);
+        this.primaryStage = primaryStage;
+
+        this.showMode();
 
         this.connectionType = connectionType;
 
@@ -72,6 +81,19 @@ public class GuiController extends View {
 
     }
 
+
+    private void showMode() throws IOException {
+
+        primaryStage.setTitle("Sagrada Game");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
+        AnchorPane root = (AnchorPane) loader.load();
+
+        Scene scene1 = new Scene(root);
+        primaryStage.setScene(scene1);
+        primaryStage.show();
+    }
+
     //----------------fxml controller----------------
     @FXML
     private RadioButton singlePlayer;
@@ -84,8 +106,6 @@ public class GuiController extends View {
 
     @FXML
     void handleMode(ActionEvent event) {
-
-        GuiController("rmi");
 
         this.name = txtName.getText();
 

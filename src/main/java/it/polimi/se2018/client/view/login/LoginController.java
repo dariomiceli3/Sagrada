@@ -9,6 +9,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginController {
 
     @FXML
@@ -33,6 +35,10 @@ public class LoginController {
     private String viewType;
     private Stage stage;
 
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
 
     public void initialize() {
 
@@ -44,7 +50,7 @@ public class LoginController {
 
 
     @FXML
-    void loginButtonSelected(ActionEvent event) {
+    void loginButtonSelected(ActionEvent event) throws IOException {
 
         this.connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
         this.viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
@@ -54,7 +60,8 @@ public class LoginController {
         }
 
         if (viewType.equalsIgnoreCase("gui")) {
-            new GuiController()
+
+            new GuiController(connectionType, stage);
         }
 
     }
