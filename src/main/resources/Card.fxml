@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.GuiController">
    <children>
-      <Pane prefHeight="1600.0" prefWidth="2560.0">
+      <Pane prefHeight="900.0" prefWidth="1440.0">
          <children>
-            <HBox prefHeight="150.0" prefWidth="399.0" spacing="50.0">
+            <HBox layoutX="9.0" layoutY="132.0" prefHeight="150.0" prefWidth="399.0" spacing="50.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,48 +30,45 @@
                   </ImageView>
                </children>
             </HBox>
-            <VBox layoutX="487.0" prefHeight="460.0" prefWidth="122.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Private.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Private.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Private.jpeg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <ImageView fitHeight="150.0" fitWidth="99.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+            <VBox layoutX="487.0" prefHeight="460.0" prefWidth="122.0" />
+            <ImageView fitHeight="150.0" fitWidth="99.0" layoutX="802.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Private.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="184.0" layoutX="1379.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="184.0" layoutX="1013.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Virtus%20.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1758.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1226.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Virtus%20.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1350.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1002.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Virtus%20.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1745.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1233.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Virtus%20.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="142.0" layoutX="14.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Private.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Private.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="314.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Private.jpeg" />
                </image>
             </ImageView>
          </children>
