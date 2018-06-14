@@ -38,12 +38,22 @@ public class LoginController {
     private ToggleGroup connectionToggleGroup;
 
     @FXML
+    private ToggleButton multiButton;
+
+    @FXML
+    private ToggleGroup modeToggleGroup;
+
+    @FXML
+    private ToggleButton singleButton;
+
+    @FXML
     private Button loginButton;
 
 
     private String connectionType;
     private String viewType;
     private Stage stage;
+    private boolean singlePlayer;
 
     public void setStage(Stage stage){
         this.stage = stage;
@@ -56,7 +66,9 @@ public class LoginController {
         cli.setUserData("cli");
         rmi.setUserData("rmi");
         socket.setUserData("socket");
-        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty())));
+        multiButton.setUserData("multi");
+        singleButton.setUserData("single");
+        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty()))));
     }
 
 
@@ -79,7 +91,7 @@ public class LoginController {
                 Parent root = loader.load();
 
                 GuiController controller = (GuiController) loader.getController();
-                controller.setConnectionTypeAndStage(connectionType, stage);
+                controller.setConnectionTypeAndStage(connectionType, stage, singlePlayer);
 
                 Scene scene1 = new Scene(root);
                 stage.setScene(scene1);

@@ -87,8 +87,6 @@ public class GuiController extends View {
 
     //----------------fxml controller----------------
 
-    @FXML
-    private ToggleGroup modeToggleGroup;
 
 
     @FXML
@@ -111,7 +109,7 @@ public class GuiController extends View {
     public void initialize() {
         //singlePlayer.setUserData("single");
         //multiPlayer.setUserData("multi");
-        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty())));
+        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()));
 
     }
 

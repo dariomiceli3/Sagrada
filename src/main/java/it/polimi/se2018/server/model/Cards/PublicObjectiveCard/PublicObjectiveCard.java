@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class PublicObjectiveCard implements Serializable {
     private PublicEffects effect;
+    private String name;
 
     public PublicObjectiveCard(PublicEffects effect) {
         this.effect = effect;
@@ -19,8 +20,14 @@ public class PublicObjectiveCard implements Serializable {
             return effect.runPublic(pattern);
         }
 
-        @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public String toString(){
         return "Public Card : " + effect.toString();
         }
 }
+
+

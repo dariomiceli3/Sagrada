@@ -49,6 +49,9 @@ public class LightShade implements PublicEffects, Serializable {
                 + "VP : " + VPOINTS;
     }
 
+    public static String getNAME() {
+        return NAME;
+    }
 }
 
 

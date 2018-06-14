@@ -46,4 +46,8 @@ public class DifferentShadeRow implements PublicEffects, Serializable {
                 + "Rows with no repeated colors" + "\n"
                 + "VP : " + VPOINTS;
     }
+
+    public static String getNAME() {
+        return NAME;
+    }
 }

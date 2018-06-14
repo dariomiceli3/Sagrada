@@ -40,4 +40,8 @@ public class DifferentShadeColumn implements PublicEffects, Serializable {
                 + "Columns with no repeated values" + "\n"
                 + "VP : " + VPOINTS;
     }
+
+    public static String getNAME() {
+        return NAME;
+    }
 }

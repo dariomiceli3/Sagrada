@@ -54,6 +54,10 @@ private static final String NAME = "Color Diagonals";
               + "Count of diagonally adjacent same color dice" + "\n"
               + "VP : #";
    }
+
+   public static String getNAME() {
+      return NAME;
+   }
 }
 
 

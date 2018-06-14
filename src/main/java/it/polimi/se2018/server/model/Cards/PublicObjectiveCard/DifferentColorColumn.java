@@ -41,6 +41,10 @@ public class DifferentColorColumn implements PublicEffects, Serializable {
         return points;
     }
 
+    public static String getNAME() {
+        return NAME;
+    }
+
     @Override
     public String toString(){
         return NAME + "\n"
