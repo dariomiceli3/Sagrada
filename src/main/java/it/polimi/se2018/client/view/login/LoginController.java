@@ -2,11 +2,13 @@ package it.polimi.se2018.client.view.login;
 
 import it.polimi.se2018.client.view.cli.ClientCli;
 import it.polimi.se2018.client.view.gui.GuiController;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -35,6 +37,10 @@ public class LoginController {
     @FXML
     private ToggleGroup connectionToggleGroup;
 
+    @FXML
+    private Button loginButton;
+
+
     private String connectionType;
     private String viewType;
     private Stage stage;
@@ -50,6 +56,7 @@ public class LoginController {
         cli.setUserData("cli");
         rmi.setUserData("rmi");
         socket.setUserData("socket");
+        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty())));
     }
 
 

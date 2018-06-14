@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?scenebuilder-stylesheet application.css?>
 
-<AnchorPane fx:id="controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
+<AnchorPane fx:id="controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
    <children>
       <ImageView fitHeight="530.0" fitWidth="474.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -28,7 +28,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="socket" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Socket" GridPane.rowIndex="1">
+            <ToggleButton fx:id="socket" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" selected="true" text="Socket" GridPane.rowIndex="1">
                <toggleGroup>
                   <ToggleGroup fx:id="connectionToggleGroup" />
                </toggleGroup>
@@ -38,7 +38,7 @@
                   <ToggleGroup fx:id="viewToggleGroup" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="gui" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="GUI" toggleGroup="$viewToggleGroup" GridPane.columnIndex="1" />
+            <ToggleButton fx:id="gui" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" selected="true" text="GUI" toggleGroup="$viewToggleGroup" GridPane.columnIndex="1" />
             <ToggleButton fx:id="rmi" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Rmi" toggleGroup="$connectionToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>

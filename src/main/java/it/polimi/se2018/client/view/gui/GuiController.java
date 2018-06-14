@@ -14,13 +14,13 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -81,13 +81,20 @@ public class GuiController extends View {
 
     //----------------fxml controller----------------
     @FXML
-    private RadioButton singlePlayer;
+    private ToggleButton multiPlayer;
 
     @FXML
-    private RadioButton multiPlayer;
+    private ToggleGroup modeToggleGroup;
+
+    @FXML
+    private ToggleButton singlePlayer;
 
     @FXML
     private TextField txtName;
+
+
+    @FXML
+    private Button playButton;
 
     @FXML
     void handleMode(ActionEvent event) {
@@ -101,6 +108,13 @@ public class GuiController extends View {
             getConnection().setSinglePlayerMode(getPlayerID(), false);
         }
 
+
+    }
+
+    public void initialize() {
+        //singlePlayer.setUserData("single");
+        //multiPlayer.setUserData("multi");
+        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty())));
 
     }
 

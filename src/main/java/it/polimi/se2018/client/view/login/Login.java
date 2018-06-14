@@ -22,6 +22,7 @@ public class Login extends Application {
         Scene scene = new Scene(root);
         primaryStage.setTitle("Sagrada Login");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
 
