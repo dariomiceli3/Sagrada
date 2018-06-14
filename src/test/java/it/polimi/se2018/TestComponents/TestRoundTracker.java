@@ -32,8 +32,8 @@ public class TestRoundTracker {
         roundTracker.setTracker(list);
         roundTracker.setTracker(list);
 
-        assertEquals(9, roundTracker.getRoundDice(0).size());
-        assertEquals(9, roundTracker.getRoundDice(1).size());
+        assertEquals(5, roundTracker.getRoundDice(0).size());
+        assertEquals(5, roundTracker.getRoundDice(1).size());
         assertEquals(2,roundTracker.getRoundTracker().size());
     }
 
@@ -49,7 +49,7 @@ public class TestRoundTracker {
         roundTracker.setTracker(list);
         roundTracker.addDice(dice, 0);
         //roundTracker.addDice(dice1, 2);
-        assertEquals(10, roundTracker.getRoundDice(0).size());
+        assertEquals(6, roundTracker.getRoundDice(0).size());
 
     }
 
@@ -61,8 +61,8 @@ public class TestRoundTracker {
         List<Dice> list = draftPool.cleanListDice();
         RoundTracker roundTracker =new RoundTracker();
         roundTracker.setTracker(list);
-        assertEquals(9, roundTracker.getRoundDice(0).size());
-        Dice dice = roundTracker.getDice(0, 8);
+        assertEquals(5, roundTracker.getRoundDice(0).size());
+        Dice dice = roundTracker.getDice(0, 4);
     }
 
     @Test

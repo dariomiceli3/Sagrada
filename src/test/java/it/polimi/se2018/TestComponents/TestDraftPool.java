@@ -33,7 +33,7 @@ public class TestDraftPool {
         List<Dice> listDice = draftPool.cleanListDice();
 
         assertEquals(0, draftPool.getDraftPool().size());
-        assertEquals(7,listDice.size());
+        assertEquals(4,listDice.size());
     }
 
     @Test
@@ -43,8 +43,8 @@ public class TestDraftPool {
         DraftPool draftPool = new DraftPool(3, diceBag );
         draftPool.createListDice();
 
-        assertEquals(7, draftPool.getDraftPool().size());
-        assertEquals(83, diceBag.getListBag().size());
+        assertEquals(4, draftPool.getDraftPool().size());
+        assertEquals(86, diceBag.getListBag().size());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class TestDraftPool {
         Dice dice = new Dice(4, DiceColor.YELLOW);
 
         draftPool.setDice(dice);
-        assertEquals(10, draftPool.getNowNumber());
+        assertEquals(6, draftPool.getNowNumber());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TestDraftPool {
         DraftPool draftPool = new DraftPool(4, diceBag);
         draftPool.createListDice();
         draftPool.removeDice(0);
-        assertEquals(8, draftPool.getNowNumber());
+        assertEquals(4, draftPool.getNowNumber());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TestDraftPool {
         draftPool.setNumber(3);
         draftPool.createListDice();
 
-        assertEquals(7, draftPool.getNowNumber());
+        assertEquals(4, draftPool.getNowNumber());
     }
 
    /* @Test

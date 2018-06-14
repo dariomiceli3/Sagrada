@@ -1,6 +1,6 @@
 package it.polimi.se2018.server.network.rmi;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
 import it.polimi.se2018.server.Server;

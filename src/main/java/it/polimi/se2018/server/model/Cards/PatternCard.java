@@ -905,6 +905,14 @@ public class PatternCard implements Serializable {
 
      }
 
+     public PatternCard  loadPatternForTesting() throws FileNotFoundException {
+         File file = new File("./");
+         String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
+         PatternCard test = loadCard(filePath + 25 + ".json");
+         return test;
+
+     }
+
      @Override
     public String toString(){
 
