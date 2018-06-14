@@ -15,17 +15,17 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/Private.jpeg" />
+                        <Image url="@images/private/BlueShade.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="150.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/Private.jpeg" />
+                        <Image url="@images/private/PurpleShade.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="150.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/Private.jpeg" />
+                        <Image url="@images/private/RedShade.jpg" />
                      </image>
                   </ImageView>
                </children>
@@ -33,42 +33,42 @@
             <VBox layoutX="487.0" prefHeight="460.0" prefWidth="122.0" />
             <ImageView fitHeight="150.0" fitWidth="99.0" layoutX="802.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Private.jpeg" />
+                  <Image url="@images/Iphone.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="184.0" layoutX="1013.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Virtus%20.jpeg" />
+                  <Image url="@images/tool/CorkBakced.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1226.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Virtus%20.jpeg" />
+                  <Image url="@images/Scammer.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1002.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Virtus%20.jpeg" />
+                  <Image url="@images/Virtus .jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1233.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Virtus%20.jpeg" />
+                  <Image url="@images/RoundTracker.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="142.0" layoutX="14.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Private.jpeg" />
+                  <Image url="@images/img003.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Private.jpeg" />
+                  <Image url="@images/tool/CorkBakced.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="314.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Private.jpeg" />
+                  <Image url="@images/public/LightShades.jpg" />
                </image>
             </ImageView>
          </children>
