@@ -10,6 +10,7 @@ import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public abstract class View implements Runnable {
 
     public abstract void showPrivateCard(PrivateObjectiveCard privateObjectiveCard);
 
-    public abstract void showPublicCard(List<PublicObjectiveCard> publicList);
+    public abstract void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException;
 
     public abstract void showPatternList(List<PatternCard> patternCards);
 

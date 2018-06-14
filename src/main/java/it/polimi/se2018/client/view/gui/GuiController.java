@@ -36,18 +36,15 @@ public class GuiController extends View {
     private static RmiHandler serverRmi;
     private static String host = "localhost";
     private String name;
-    private Stage primaryStage;
-    private String connectionType;
+    private Stage stage;
+    private Scene scene;
 
     //-------------------------gui start-----------------
 
 
     public void setConnectionTypeAndStage(String connectionType, Stage primaryStage) throws IOException{
 
-        this.primaryStage = primaryStage;
-
-
-        this.connectionType = connectionType;
+        this.stage = primaryStage;
 
         if (connectionType.equalsIgnoreCase("socket")) {
 
@@ -192,17 +189,25 @@ public class GuiController extends View {
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-
+        //todo 2
     }
 
     @Override
-    public void showPublicCard(List<PublicObjectiveCard> publicList) {
+    public void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException{
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Card.fxml"));
+        Parent root = loader.load();
+
+        //todo 0
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
 
+        //TODO 3
     }
 
     @Override
@@ -318,6 +323,7 @@ public class GuiController extends View {
     @Override
     public void showToolCards(List<ToolCard> toolCardList) {
 
+        //todo 1
     }
 
     @Override
