@@ -41,6 +41,7 @@ public class VirtualRmi extends VirtualView {
 
         if (event instanceof SinglePlayerEvent) {
             this.server.setSinglePlayer( ((SinglePlayerEvent)event).isSinglePlayer());
+            Server.setMulti(Server.getMulti() + 1);
             this.server.waitingOtherPlayers();
         }
         else {

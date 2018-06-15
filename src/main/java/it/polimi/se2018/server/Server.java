@@ -28,6 +28,7 @@ public class Server {
     private boolean gameStarted;
     private static boolean singlePlayer;
     public static int idPlayer;
+    public static int multi;
 
     public Server() {
 
@@ -58,6 +59,10 @@ public class Server {
         return singlePlayer;
     }
 
+    public static int getMulti() {
+        return multi;
+    }
+
     public void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
     }
@@ -68,6 +73,10 @@ public class Server {
 
     public static void setIdPlayer(int idPlayer) {
         Server.idPlayer = idPlayer;
+    }
+
+    public static void setMulti(int multi) {
+        Server.multi = multi;
     }
 
     //-------------------------------methods for clients list -------------------------------------
@@ -116,7 +125,7 @@ public class Server {
     public synchronized void waitingOtherPlayers() {
 
         System.out.println("in waiting the boolean of single player: " + singlePlayer);
-        System.out.println(clients.size());
+        //System.out.println(clients.size());
 
         if (singlePlayer) {
 
@@ -128,14 +137,19 @@ public class Server {
             System.out.println("Started single player");
         }
 
-        if (clients.size() < 2) {
 
-            return;
-
+        if (getMulti() == MAXPLAYERS) {
+            List<VirtualView> viewGame = new ArrayList<>();
+            viewGame.addAll(clients);
+            new Game(viewGame, singlePlayer);
+            setGameStarted(true);
         }
 
-        if(mutex) {
+        if (getMulti() < 2) {
+            return;
+        }
 
+        if (mutex) {
             return;
         }
         mutex = true;
@@ -143,36 +157,35 @@ public class Server {
         System.out.println("superato mutex");
 
 
-        if (clients.size() == 2) {
+        if (getMulti() >= 2) {
+
             System.out.println("Due client connessi");
             System.out.println("Starting timer before the game");
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
+                @Override
+                public void run() {
 
-                        mutex = true;
-                        if (clients.size() >= 2 && clients.size() <= MAXPLAYERS) {
-                            List<VirtualView> viewGame = new ArrayList<>();
-                            viewGame.addAll(clients);
-                            new Game(viewGame, singlePlayer);
-                            setGameStarted(true);
-                            System.out.println("Started game");
-                        }
-
+                    //mutex = true;
+                    if (getMulti() >= 2 && getMulti() < MAXPLAYERS) {
+                        List<VirtualView> viewGame = new ArrayList<>();
+                        viewGame.addAll(clients);
+                        new Game(viewGame, singlePlayer);
+                        setGameStarted(true);
+                        System.out.println("Started game");
                     }
-                }, (long) SECONDS * 1000);
 
-            }
+                }
+            }, (long) SECONDS * 1000);
 
-
-        if (clients.size() == MAXPLAYERS) {
-            List<VirtualView> viewGame = new ArrayList<>();
-            viewGame.addAll(clients);
-            new Game(viewGame, singlePlayer);
-            setGameStarted(true);
         }
+
+
+
+
+
+
 
     }
 
