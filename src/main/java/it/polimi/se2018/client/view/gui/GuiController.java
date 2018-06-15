@@ -14,7 +14,12 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.BooleanExpression;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +45,7 @@ public class GuiController extends View {
     private Stage stage;
     private Scene scene;
     private boolean singlePlayer;
+    private BooleanProperty gameStarted;
 
     //-------------------------gui start-----------------
 
@@ -108,7 +114,9 @@ public class GuiController extends View {
     public void initialize() {
         //singlePlayer.setUserData("single");
         //multiPlayer.setUserData("multi");
-        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()));
+        gameStarted = new SimpleBooleanProperty(false);
+        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).and(gameStarted));
+
 
     }
 
@@ -177,6 +185,7 @@ public class GuiController extends View {
     public void showGameStarted() {
 
         //tidi sblocco del play
+        gameStarted.set(true);
     }
 
     @Override
