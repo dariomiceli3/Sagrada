@@ -20,6 +20,7 @@ public class AlertBox extends Application {
             window.initModality(Modality.APPLICATION_MODAL);
             window.setTitle(title);
             window.setMinWidth(250);
+            window.setMinHeight(150);
 
             Label label = new Label();
             label.setText(message);
@@ -33,6 +34,7 @@ public class AlertBox extends Application {
             //Display window and wait for it to be closed before returning
             Scene scene = new Scene(layout);
             window.setScene(scene);
+            window.setResizable(false);
             window.showAndWait();
         }
 
@@ -40,7 +42,7 @@ public class AlertBox extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-            display("Error", "Name already chosen");
+            display("Error", "Name already chosen.\nPlease try with another one");
 
 
     }

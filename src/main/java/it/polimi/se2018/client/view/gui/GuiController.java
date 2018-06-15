@@ -26,6 +26,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -111,11 +113,55 @@ public class GuiController extends View {
 
     }
 
+    @FXML
+    private ImageView privateCard;
+
+    @FXML
+    private ImageView toolCard1;
+
+    @FXML
+    private ImageView toolCard2;
+
+    @FXML
+    private ImageView toolCard3;
+
+    @FXML
+    private ImageView public1;
+
+    @FXML
+    private ImageView public2;
+
+    @FXML
+    private ImageView public3;
+
+    @FXML
+    private ImageView pattern1;
+
+    @FXML
+    private ImageView pattern2;
+
+    @FXML
+    private ImageView pattern3;
+
+    @FXML
+    private ImageView pattern4;
+
+    @FXML
+    private ImageView toolCard1Zoom;
+
+    /*@FXML
+    void handleZoom(MouseEvent event) throws InterruptedException {
+        toolCard1Zoom.setVisible(true);
+        wait(5000);
+        toolCard1Zoom.setVisible(false);
+    }*/
+
+
     public void initialize() {
         //singlePlayer.setUserData("single");
         //multiPlayer.setUserData("multi");
         gameStarted = new SimpleBooleanProperty(false);
-        playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).and(gameStarted));
+        //playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).and(gameStarted));
 
 
     }
