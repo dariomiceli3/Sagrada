@@ -208,7 +208,15 @@ public class GuiController extends View {
     @Override
     public void showNameError() {
 
-        AlertBox.display("Error", "Name already chosen");
+
+        System.out.println("nome non settato");
+      Platform.runLater(new Runnable() {
+          @Override
+          public void run() {
+              AlertBox.display("Error", "Name already chosen");
+          }
+      });
+
     }
 
     @Override

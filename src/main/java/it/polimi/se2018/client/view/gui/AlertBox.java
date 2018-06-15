@@ -1,5 +1,8 @@
 package it.polimi.se2018.client.view.gui;
 
+import it.polimi.se2018.client.view.login.LoginController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
@@ -8,7 +11,7 @@ import javafx.geometry.*;
 
 
 
-public class AlertBox {
+public class AlertBox extends Application {
 
         public static void display(String title, String message) {
             Stage window = new Stage();
@@ -33,5 +36,20 @@ public class AlertBox {
             window.showAndWait();
         }
 
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+            display("Error", "Name already chosen");
+
+
     }
+
+    public static void main(String[] args) {
+        launch(args);
+
+    }
+
+
+}
 
