@@ -69,29 +69,80 @@ public class BoartTest extends Application {
     @FXML
     private ImageView privateCardZoom;
 
-
-    public BoartTest() throws IOException {
+    @FXML
+    void handlePrivateUnzoom(MouseEvent event) {
+        privateCardZoom.setVisible(false);
     }
 
     @FXML
-    void handleZoom(MouseEvent event) throws InterruptedException {
-        if(toolCard1.isPickOnBounds()) {
-            toolCard1Zoom.setVisible(true);
-        }
-        else if(toolCard2.isPickOnBounds()) {
-            toolCard2Zoom.setVisible(true);
-        }
+    void handlePrivateZoom(MouseEvent event) {
+        privateCardZoom.setVisible(true);
     }
 
     @FXML
-    void handleUnzoom(MouseEvent event) {
-        if(toolCard1Zoom.isPickOnBounds()) {
-            toolCard1Zoom.setVisible(false);
-        }
-        else if(toolCard2Zoom.isPickOnBounds()) {
-            toolCard2Zoom.setVisible(false);
-        }
+    void handlePublicUnzoom1(MouseEvent event) {
+        publicCard1Zoom.setVisible(false);
     }
+
+    @FXML
+    void handlePublicUnzoom2(MouseEvent event) {
+        publicCard2Zoom.setVisible(false);
+    }
+
+    @FXML
+    void handlePublicUnzoom3(MouseEvent event) {
+        publicCard3Zoom.setVisible(false);
+    }
+
+    @FXML
+    void handlePublicZoom1(MouseEvent event) {
+        publicCard1Zoom.setVisible(true);
+    }
+
+    @FXML
+    void handlePublicZoom2(MouseEvent event) {
+        publicCard2Zoom.setVisible(true);
+    }
+
+    @FXML
+    void handlePublicZoom3(MouseEvent event) {
+        publicCard3Zoom.setVisible(true);
+    }
+
+    @FXML
+    void handleToolUnzoom1(MouseEvent event) {
+        toolCard1Zoom.setVisible(false);
+    }
+
+    @FXML
+    void handleToolUnzoom2(MouseEvent event) {
+        toolCard2Zoom.setVisible(false);
+    }
+
+    @FXML
+    void handleToolUnzoom3(MouseEvent event) {
+        toolCard3Zoom.setVisible(false);
+    }
+
+    @FXML
+    void handleToolZoom1(MouseEvent event) {
+        toolCard1Zoom.setVisible(true);
+    }
+
+    @FXML
+    void handleToolZoom2(MouseEvent event) {
+        toolCard2Zoom.setVisible(true);
+    }
+
+    @FXML
+    void handleToolZoom3(MouseEvent event) {
+        toolCard3Zoom.setVisible(true);
+    }
+
+
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -119,6 +170,40 @@ public class BoartTest extends Application {
 
         });
         toolCard2Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+
+        });
+        toolCard3Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
+        privateCardZoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+
+        });
+        publicCard3Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+
+        });
+        publicCard2Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+
+        });
+        publicCard1Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 System.out.println(newValue);
