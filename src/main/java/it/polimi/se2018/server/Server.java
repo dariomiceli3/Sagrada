@@ -118,6 +118,16 @@ public class Server {
         System.out.println("in waiting the boolean of single player: " + singlePlayer);
         System.out.println(clients.size());
 
+        if (singlePlayer) {
+
+            List<VirtualView> viewGame = new ArrayList<>();
+            viewGame.addAll(clients);
+            System.out.println(getClients().size());
+            new Game(viewGame, singlePlayer);
+            setGameStarted(true);
+            System.out.println("Started single player");
+        }
+
         if (clients.size() < 2) {
 
             return;
@@ -132,23 +142,13 @@ public class Server {
 
         System.out.println("superato mutex");
 
-        if (singlePlayer) {
 
-            List<VirtualView> viewGame = new ArrayList<>();
-            viewGame.addAll(clients);
-            System.out.println(getClients().size());
-            new Game(viewGame, singlePlayer);
-            setGameStarted(true);
-            System.out.println("Started single player");
-        }
+        if (clients.size() == 2) {
+            System.out.println("Due client connessi");
+            System.out.println("Starting timer before the game");
 
-        else {
-            if (clients.size() == 2) {
-                System.out.println("Due client connessi");
-                System.out.println("Starting timer before the game");
-
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
 
@@ -165,7 +165,7 @@ public class Server {
                 }, (long) SECONDS * 1000);
 
             }
-        }
+
 
         if (clients.size() == MAXPLAYERS) {
             List<VirtualView> viewGame = new ArrayList<>();

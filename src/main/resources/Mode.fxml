@@ -30,7 +30,7 @@
       <HBox layoutX="104.0" layoutY="244.0" prefHeight="129.0" prefWidth="356.0">
          <children>
             <TextField fx:id="txtName" promptText="Name..." />
-            <Button fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleMode" text="Play" />
+            <Button fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePlayButton" text="Play" />
          </children>
       </HBox>
    </children>

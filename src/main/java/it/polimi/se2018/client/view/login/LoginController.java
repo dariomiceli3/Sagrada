@@ -87,7 +87,7 @@ public class LoginController {
 
 
         if (viewType.equalsIgnoreCase("cli")) {
-            new ClientCli(connectionType); //todo impostare con la chiamata della connessione anche single o multi
+            new ClientCli(connectionType);
         }
 
         if (viewType.equalsIgnoreCase("gui")) {

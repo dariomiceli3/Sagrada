@@ -20,14 +20,15 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -41,13 +42,12 @@ public class GuiController extends View {
     private static final int SOCKETPORT = 8888;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
-    private boolean one;
     private static String host = "localhost";
     private String name;
     private Stage stage;
     private Scene scene;
     private boolean singlePlayer;
-    private BooleanProperty gameStarted;
+    private boolean gameStarted;
 
     //-------------------------gui start-----------------
 
@@ -55,7 +55,6 @@ public class GuiController extends View {
     public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer) throws IOException{
 
         this.stage = primaryStage;
-
         this.singlePlayer = singlePlayer;
 
         if (connectionType.equalsIgnoreCase("socket")) {
@@ -80,12 +79,7 @@ public class GuiController extends View {
 
             Thread viewRmiThread = new Thread(this);
             viewRmiThread.start();
-
-
         }
-
-
-
     }
 
 
@@ -98,72 +92,55 @@ public class GuiController extends View {
 
     @FXML
     private TextField txtName;
-
-
     @FXML
     private Button playButton;
 
-    @FXML
-    void handleMode(ActionEvent event) {
+    public void initialize() {
 
+        gameStarted = false;
 
-        this.name = txtName.getText();
-        getConnection().setPlayerNameToServer(getName(), getPlayerID());
+        playButton.disableProperty().bind(txtName.textProperty().isEmpty());
 
+        playButton.disableProperty().addListener(
+                new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                        System.out.println(newValue.toString());
+
+                    }
+                }
+
+        );
 
     }
 
     @FXML
-    private ImageView privateCard;
+    void handlePlayButton(ActionEvent event) {
 
-    @FXML
-    private ImageView toolCard1;
+        if (gameStarted) {
+            this.name = txtName.getText();
+            getConnection().setPlayerNameToServer(getName(), getPlayerID());
+        }
 
-    @FXML
-    private ImageView toolCard2;
+        else {
+            AlertBox.display("Name Choose", "You have to wait till the game is started!");
+        }
 
-    @FXML
-    private ImageView toolCard3;
-
-    @FXML
-    private ImageView public1;
-
-    @FXML
-    private ImageView public2;
-
-    @FXML
-    private ImageView public3;
-
-    @FXML
-    private ImageView pattern1;
-
-    @FXML
-    private ImageView pattern2;
-
-    @FXML
-    private ImageView pattern3;
-
-    @FXML
-    private ImageView pattern4;
-
-    @FXML
-    private ImageView toolCard1Zoom;
-
-    /*@FXML
-    void handleZoom(MouseEvent event) throws InterruptedException {
-        toolCard1Zoom.setVisible(true);
-        wait(5000);
-        toolCard1Zoom.setVisible(false);
-    }*/
+    }
 
 
-    public void initialize() {
-        //singlePlayer.setUserData("single");
-        //multiPlayer.setUserData("multi");
-        gameStarted = new SimpleBooleanProperty(false);
-        //playButton.disableProperty().bind(Bindings.isEmpty(txtName.textProperty()).and(gameStarted));
+    //--------------getter and setter-------------------
 
 
+    @Override
+    public void setConnection(ClientInterface connection) {
+        this.connection = connection;
+    }
+
+    @Override
+    public ClientInterface getConnection() {
+        return connection;
     }
 
     public String getName() {
@@ -171,12 +148,29 @@ public class GuiController extends View {
     }
 
 
-
+    //--------------------show events to change scene-------------------------
 
     @Override
     public void run() {
 
+    }
 
+    @Override
+    public void showID() {
+
+    }
+
+    @Override
+    public void showSinglePlayerRequest() {
+
+        setMode();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
+            }
+        });
 
     }
 
@@ -192,50 +186,26 @@ public class GuiController extends View {
                     getConnection().setSinglePlayerMode(getPlayerID(), false);
 
                 }
-
             }
         });
-
-    }
-
-
-
-
-
-    //--------------method to change scene-------------------
-
-
-    @Override
-    public void setConnection(ClientInterface connection) {
-        this.connection = connection;
-    }
-
-    @Override
-    public ClientInterface getConnection() {
-        return connection;
-    }
-
-    @Override
-    public void showSinglePlayerRequest() {
-
-        setMode();
-
-    }
-
-    @Override
-    public void showID() {
-
     }
 
     @Override
     public void showGameStarted() {
 
-        //tidi sblocco del play
-        gameStarted.set(true);
+        gameStarted = true;
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Name Choose", "Game is started, enter your name");
+            }
+        });
     }
 
     @Override
     public void showNameChoose() {
+
 
     }
 
@@ -247,21 +217,26 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showNameOther(String name) {
+    public void showNameOther(String playerName) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Name Choose", "Another player connected with name " + playerName);
+            }
+        });
 
     }
 
     @Override
     public void showNameError() {
 
-
-        System.out.println("nome non settato");
-      Platform.runLater(new Runnable() {
-          @Override
-          public void run() {
-              AlertBox.display("Error", "Name already chosen");
-          }
-      });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Error", "Name already chosen");
+            }
+        });
 
     }
 
