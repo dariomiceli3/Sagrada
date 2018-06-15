@@ -252,6 +252,7 @@ public class GuiController extends View {
         Parent root = loader.load();
 
         //todo 0
+        publicList.get(0).getName();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

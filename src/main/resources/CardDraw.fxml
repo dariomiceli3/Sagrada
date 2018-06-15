@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -8,7 +9,7 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.BoartTest">
    <children>
-      <ImageView fx:id="privateCard" fitHeight="900.0" fitWidth="1442.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="privateCard" fitHeight="900.0" fitWidth="1442.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/mainBackground.jpg" />
          </image>
@@ -48,22 +49,17 @@
             <Image url="@images/tool/CorkBacked.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="pattern1" fitHeight="198.0" fitWidth="170.0" layoutX="824.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/pattern/Aurora%20Sagradis.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="pattern2" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="pattern2" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="129.0" onMouseClicked="#handlePattern2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Firelight.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="pattern3" fitHeight="198.0" fitWidth="170.0" layoutX="824.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="pattern3" fitHeight="198.0" fitWidth="170.0" layoutX="824.0" layoutY="383.0" onMouseClicked="#handlePattern3" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Chromatic%20Splendor.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="pattern4" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="pattern4" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="383.0" onMouseClicked="#handlePattern4" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Industria.jpg" />
          </image>
@@ -87,5 +83,15 @@
       <ImageView fx:id="publicCard2Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="250.0" layoutY="275.0" onMouseClicked="#handlePublicUnzoom2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="publicCard3Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="430.0" layoutY="268.0" onMouseClicked="#handlePublicUnzoom3" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="privateCardZoom" fitHeight="364.0" fitWidth="280.0" layoutX="236.0" layoutY="500.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button fx:id="playStarGameButton" layoutX="979.0" layoutY="674.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefHeight="88.0" prefWidth="149.0" text="Play Motherfucker!!!!" />
+      <Button layoutX="826.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="193.0" prefWidth="184.0" rotate="90.0" text="Button">
+         <graphic>
+            <ImageView fx:id="pattern1" fitHeight="193.0" fitWidth="184.0" onMouseClicked="#handlePattern1" preserveRatio="true">
+               <image>
+                  <Image url="@images/pattern/Aurora%20Sagradis.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

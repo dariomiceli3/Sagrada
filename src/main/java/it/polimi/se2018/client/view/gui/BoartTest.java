@@ -1,18 +1,25 @@
 package it.polimi.se2018.client.view.gui;
 
-import it.polimi.se2018.client.view.login.LoginController;
+import it.polimi.se2018.client.view.gui.GuiController;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.Property
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+import java.util.List;
 
 public class BoartTest extends Application {
     @FXML
@@ -68,6 +75,18 @@ public class BoartTest extends Application {
 
     @FXML
     private ImageView privateCardZoom;
+
+    @FXML
+    private Button playStarGameButton;
+
+    @FXML
+    private PatternCard patternCard;
+
+    private List<PatternCard> patternCardList;
+
+    private Boolean cacca = false;
+
+
 
     @FXML
     void handlePrivateUnzoom(MouseEvent event) {
@@ -139,6 +158,35 @@ public class BoartTest extends Application {
         toolCard3Zoom.setVisible(true);
     }
 
+    @FXML
+    void handlePattern1(MouseEvent event) {
+        cacca = true;
+        System.out.println("cacca: " + cacca);
+    }
+
+    @FXML
+    void handlePattern2(MouseEvent event) {
+        cacca = true;
+        System.out.println("cacca: " + cacca);
+    }
+
+    @FXML
+    void handlePattern3(MouseEvent event) {
+        cacca = true;
+        System.out.println("cacca: " + cacca);
+    }
+
+    @FXML
+    void handlePattern4(MouseEvent event) {
+        cacca = true;
+        System.out.println("cacca: " + cacca);
+    }
+
+    @FXML
+    void handleStartGame(MouseEvent event) {
+
+    }
+
 
 
 
@@ -157,6 +205,8 @@ public class BoartTest extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        PseudoClass imageViewBorder = PseudoClass.getPseudoClass("bord");
 
 
     }
@@ -210,6 +260,9 @@ public class BoartTest extends Application {
             }
 
         });
+
+
+        playStarGameButton.disableProperty().bind(cacca);
     }
 
 
