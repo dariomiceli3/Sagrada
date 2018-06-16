@@ -136,7 +136,7 @@ public class RoundTrackerBox {
     void selectedDice(MouseEvent event) {
 
         if(buttonGroup.getSelectedToggle().equals(button1)){
-            button1.setBlendMode(BlendMode.HARD_LIGHT);
+            button1.setBlendMode(BlendMode.COLOR_BURN);
             button2.setBlendMode(BlendMode.SRC_OVER);
             button3.setBlendMode(BlendMode.SRC_OVER);
             button4.setBlendMode(BlendMode.SRC_OVER);
@@ -149,7 +149,7 @@ public class RoundTrackerBox {
         }
         if(buttonGroup.getSelectedToggle().equals(button2)){
             button1.setBlendMode(BlendMode.SRC_OVER);
-            button2.setBlendMode(BlendMode.HARD_LIGHT);
+            button2.setBlendMode(BlendMode.COLOR_BURN);
             button3.setBlendMode(BlendMode.SRC_OVER);
             button4.setBlendMode(BlendMode.SRC_OVER);
             button5.setBlendMode(BlendMode.SRC_OVER);
@@ -162,7 +162,7 @@ public class RoundTrackerBox {
         if(buttonGroup.getSelectedToggle().equals(button3)){
             button1.setBlendMode(BlendMode.SRC_OVER);
             button2.setBlendMode(BlendMode.SRC_OVER);
-            button3.setBlendMode(BlendMode.HARD_LIGHT);
+            button3.setBlendMode(BlendMode.COLOR_BURN);
             button4.setBlendMode(BlendMode.SRC_OVER);
             button5.setBlendMode(BlendMode.SRC_OVER);
             button6.setBlendMode(BlendMode.SRC_OVER);
@@ -175,7 +175,7 @@ public class RoundTrackerBox {
             button1.setBlendMode(BlendMode.SRC_OVER);
             button2.setBlendMode(BlendMode.SRC_OVER);
             button3.setBlendMode(BlendMode.SRC_OVER);
-            button4.setBlendMode(BlendMode.HARD_LIGHT);
+            button4.setBlendMode(BlendMode.COLOR_BURN);
             button5.setBlendMode(BlendMode.SRC_OVER);
             button6.setBlendMode(BlendMode.SRC_OVER);
             button7.setBlendMode(BlendMode.SRC_OVER);
@@ -188,7 +188,7 @@ public class RoundTrackerBox {
             button2.setBlendMode(BlendMode.SRC_OVER);
             button3.setBlendMode(BlendMode.SRC_OVER);
             button4.setBlendMode(BlendMode.SRC_OVER);
-            button5.setBlendMode(BlendMode.HARD_LIGHT);
+            button5.setBlendMode(BlendMode.COLOR_BURN);
             button6.setBlendMode(BlendMode.SRC_OVER);
             button7.setBlendMode(BlendMode.SRC_OVER);
             button8.setBlendMode(BlendMode.SRC_OVER);
@@ -201,7 +201,7 @@ public class RoundTrackerBox {
             button3.setBlendMode(BlendMode.SRC_OVER);
             button4.setBlendMode(BlendMode.SRC_OVER);
             button5.setBlendMode(BlendMode.SRC_OVER);
-            button6.setBlendMode(BlendMode.HARD_LIGHT);
+            button6.setBlendMode(BlendMode.COLOR_BURN);
             button7.setBlendMode(BlendMode.SRC_OVER);
             button8.setBlendMode(BlendMode.SRC_OVER);
             button9.setBlendMode(BlendMode.SRC_OVER);
@@ -214,7 +214,7 @@ public class RoundTrackerBox {
             button4.setBlendMode(BlendMode.SRC_OVER);
             button5.setBlendMode(BlendMode.SRC_OVER);
             button6.setBlendMode(BlendMode.SRC_OVER);
-            button7.setBlendMode(BlendMode.HARD_LIGHT);
+            button7.setBlendMode(BlendMode.COLOR_BURN);
             button8.setBlendMode(BlendMode.SRC_OVER);
             button9.setBlendMode(BlendMode.SRC_OVER);
             selectedDice = 6;
@@ -227,7 +227,7 @@ public class RoundTrackerBox {
             button5.setBlendMode(BlendMode.SRC_OVER);
             button6.setBlendMode(BlendMode.SRC_OVER);
             button7.setBlendMode(BlendMode.SRC_OVER);
-            button8.setBlendMode(BlendMode.HARD_LIGHT);
+            button8.setBlendMode(BlendMode.COLOR_BURN);
             button9.setBlendMode(BlendMode.SRC_OVER);
             selectedDice = 7;
         }
@@ -240,7 +240,7 @@ public class RoundTrackerBox {
             button6.setBlendMode(BlendMode.SRC_OVER);
             button7.setBlendMode(BlendMode.SRC_OVER);
             button8.setBlendMode(BlendMode.SRC_OVER);
-            button9.setBlendMode(BlendMode.HARD_LIGHT);
+            button9.setBlendMode(BlendMode.COLOR_BURN);
             selectedDice = 8;
         }
 
