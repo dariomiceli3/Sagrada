@@ -16,52 +16,52 @@
             <Image url="@images/mainBackground.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="toolCard1" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="66.0" onMouseClicked="#handleToolZoom1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="66.0" onMouseClicked="#handleToolZoom1" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/private/BlueShade.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="toolCard2" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/private/GreenShade.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="toolCard3" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="66.0" onMouseClicked="#handleToolZoom3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardThree" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="66.0" onMouseClicked="#handleToolZoom3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/private/PurpleShade.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="public1" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="275.0" onMouseClicked="#handlePublicZoom1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="publicOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="275.0" onMouseClicked="#handlePublicZoom1" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/public/ColorDiagonals.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="public2" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="275.0" onMouseClicked="#handlePublicZoom2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="publicTwo" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="275.0" onMouseClicked="#handlePublicZoom2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/public/ColorVariety.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="public3" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="275.0" onMouseClicked="#handlePublicZoom3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="publicThree" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="275.0" onMouseClicked="#handlePublicZoom3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/public/ColumnColorVariety.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="512.0" onMouseClicked="#handlePrivateZoom" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="privateCard" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="512.0" onMouseClicked="#handlePrivateZoom" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/tool/CorkBacked.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="129.0" onMouseClicked="#handlePattern2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="patternCardTwo" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Firelight.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="198.0" fitWidth="170.0" layoutX="797.0" layoutY="383.0" onMouseClicked="#handlePattern3" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="patternCardThree" fitHeight="198.0" fitWidth="170.0" layoutX="797.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Chromatic%20Splendor.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="383.0" onMouseClicked="#handlePattern4" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="patternCardFour" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Industria.jpg" />
          </image>
@@ -93,13 +93,13 @@
       <ImageView fx:id="publicCard2Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="250.0" layoutY="275.0" onMouseClicked="#handlePublicUnzoom2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="publicCard3Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="430.0" layoutY="268.0" onMouseClicked="#handlePublicUnzoom3" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="privateCardZoom" fitHeight="364.0" fitWidth="280.0" layoutX="236.0" layoutY="500.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Button fx:id="playStarGameButton" layoutX="1004.0" layoutY="658.0" mnemonicParsing="false" onAction="#playButtonSelected" onMouseClicked="#handleStartGame" prefHeight="48.0" prefWidth="117.0" text="Play" />
+      <Button fx:id="playGameButton" layoutX="1004.0" layoutY="658.0" mnemonicParsing="false" onAction="#playButtonSelected" onMouseClicked="#handleStartGame" prefHeight="48.0" prefWidth="117.0" text="Play" />
       <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="280.0" layoutY="20.0" prefHeight="32.0" prefWidth="126.0" text="Tool Card">
          <font>
             <Font name="Lucida Handwriting Italic" size="16.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="198.0" fitWidth="170.0" layoutX="797.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="patternCardOne" fitHeight="198.0" fitWidth="170.0" layoutX="797.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/pattern/Batllo.jpg" />
          </image>
