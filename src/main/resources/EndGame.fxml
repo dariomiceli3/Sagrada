@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="450.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.EndGameScene">
    <children>
@@ -19,7 +19,17 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField blendMode="OVERLAY" editable="false" layoutX="140.0" layoutY="111.0" text="The Winner is: ">
+      <TextField blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="113.0" prefHeight="37.0" prefWidth="322.0" text="The Winner is:              with      points">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextArea blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="206.0" prefHeight="218.0" prefWidth="345.0" text="other Players......">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextArea>
+      <TextField blendMode="OVERLAY" editable="false" layoutX="191.0" layoutY="159.0" prefHeight="37.0" prefWidth="63.0" text="Rank:">
          <font>
             <Font size="16.0" />
          </font>
