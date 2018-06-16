@@ -21,7 +21,7 @@ public class OtherPatternCard {
     private static PatternCard patternCard;
     private FileInputStream fileStream;
 
-    public static void setPatternCard(PatternCard patternCard){
+    public static void setPatternCard(PatternCard patternCard) {
         OtherPatternCard.patternCard = patternCard;
     }
 
@@ -89,12 +89,12 @@ public class OtherPatternCard {
     private ImageView glassBox20;
 
 
-   public static void displayOtherPattern(String name) throws IOException {
+    public static void displayOtherPattern(String name) throws IOException {
         Stage window = new Stage();
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Pattern Card of : " + name);
+        window.setTitle("Pattern Card of : "/* + name*/);
         FXMLLoader loader = new FXMLLoader(OtherPatternCard.class.getResource("/PatternOtherPlayer.fxml"));
         Parent root1 = (Parent) loader.load();
         Scene scene = new Scene(root1);
@@ -109,19 +109,19 @@ public class OtherPatternCard {
     }
 
 
-    public void initialize(){
+    public void initialize() {
 
         loadPattern();
 
-        for(int i = 0; i < patternCard.getPattern().size(); i++) {
-            if(!patternCard.getPattern().get(i).isBoxEmpty()){
+        for (int i = 0; i < patternCard.getPattern().size(); i++) {
+            if (!patternCard.getPattern().get(i).isBoxEmpty()) {
                 patternCard.getDice(i);
                 loadDice(i);
             }
         }
     }
 
-    private void loadPattern(){
+    private void loadPattern() {
         File file = new File("./");
         String fileName = patternCard.getName();
         String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
@@ -136,93 +136,93 @@ public class OtherPatternCard {
         }
     }
 
-    private void loadDice(int indexPattern){
+    private void loadDice(int indexPattern) {
 
         File file = new File("./");
         String fileName = patternCard.getDice(indexPattern).toStringGui();
-        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/images/dice");
 
         try {
-            fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
+            fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
             Image image = new Image(fileStream);
-            if(indexPattern == 0){
+            if (indexPattern == 0) {
 
                 glassBox1.setImage(image);
             }
-            if(indexPattern == 1){
+            if (indexPattern == 1) {
 
                 glassBox2.setImage(image);
             }
-            if(indexPattern == 2){
+            if (indexPattern == 2) {
 
                 glassBox3.setImage(image);
             }
-            if(indexPattern == 3){
+            if (indexPattern == 3) {
 
                 glassBox4.setImage(image);
             }
-            if(indexPattern == 4){
+            if (indexPattern == 4) {
 
                 glassBox5.setImage(image);
             }
-            if(indexPattern == 5){
+            if (indexPattern == 5) {
 
                 glassBox6.setImage(image);
             }
-            if(indexPattern == 6){
+            if (indexPattern == 6) {
 
                 glassBox7.setImage(image);
             }
-            if(indexPattern == 7){
+            if (indexPattern == 7) {
 
                 glassBox8.setImage(image);
             }
-            if(indexPattern == 8){
+            if (indexPattern == 8) {
 
                 glassBox9.setImage(image);
             }
-            if(indexPattern == 9){
+            if (indexPattern == 9) {
 
                 glassBox10.setImage(image);
             }
-            if(indexPattern == 10){
+            if (indexPattern == 10) {
 
                 glassBox11.setImage(image);
             }
-            if(indexPattern == 11){
+            if (indexPattern == 11) {
 
                 glassBox12.setImage(image);
             }
-            if(indexPattern == 12){
+            if (indexPattern == 12) {
 
                 glassBox13.setImage(image);
             }
-            if(indexPattern == 13){
+            if (indexPattern == 13) {
 
                 glassBox14.setImage(image);
             }
-            if(indexPattern == 14){
+            if (indexPattern == 14) {
 
                 glassBox15.setImage(image);
             }
-            if(indexPattern == 15){
+            if (indexPattern == 15) {
 
                 glassBox16.setImage(image);
             }
-            if(indexPattern == 16){
+            if (indexPattern == 16) {
 
                 glassBox17.setImage(image);
             }
-            if(indexPattern == 17){
+            if (indexPattern == 17) {
 
                 glassBox18.setImage(image);
 
             }
-            if(indexPattern == 18){
+            if (indexPattern == 18) {
 
                 glassBox19.setImage(image);
             }
-            if(indexPattern == 19){
+            if (indexPattern == 19) {
 
                 glassBox20.setImage(image);
             }
@@ -231,9 +231,6 @@ public class OtherPatternCard {
         }
 
     }
-
-
-
 
 
 
