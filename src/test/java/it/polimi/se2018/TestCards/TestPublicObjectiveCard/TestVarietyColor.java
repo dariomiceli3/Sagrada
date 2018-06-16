@@ -50,7 +50,7 @@ public class TestVarietyColor {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor());
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor(), "Color Variety");
             assertEquals(8, publicCard.executeEffect(pattern));
 
 
@@ -61,7 +61,7 @@ public class TestVarietyColor {
     }
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor());
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor(), "Color Variety");
         System.out.println(publicCard.toString());
     }
 }

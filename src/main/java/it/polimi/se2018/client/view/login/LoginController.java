@@ -68,7 +68,10 @@ public class LoginController {
         socket.setUserData("socket");
         multiButton.setUserData("multi");
         singleButton.setUserData("single");
+
         loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty()))));
+        singleButton.disableProperty().bind(cli.selectedProperty());
+        multiButton.disableProperty().bind(cli.selectedProperty());
     }
 
 
@@ -78,10 +81,10 @@ public class LoginController {
         this.connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
         this.viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
 
-        if(singleButton.isSelected()){
+        if (singleButton.isSelected()){
             singlePlayer = true;
         }
-        if(multiButton.isSelected()){
+        if (multiButton.isSelected()){
             singlePlayer = false;
         }
 

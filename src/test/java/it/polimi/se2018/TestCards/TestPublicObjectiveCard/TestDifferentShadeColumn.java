@@ -49,7 +49,7 @@ public class TestDifferentShadeColumn {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeColumn());
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeColumn(), "Column Shade Variety");
             assertEquals(8, publicCard.executeEffect(pattern));
 
 
@@ -61,7 +61,7 @@ public class TestDifferentShadeColumn {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeColumn());
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeColumn(), "Column Shade Variety");
         System.out.println(publicCard.toString());
     }
 }

@@ -71,8 +71,8 @@ public class TestModel {
         model.getPlayerFromID(1);
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
-        PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor());
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DifferentColorColumn());
+        PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals");
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
 

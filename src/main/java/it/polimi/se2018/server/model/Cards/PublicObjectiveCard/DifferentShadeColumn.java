@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class DifferentShadeColumn implements PublicEffects, Serializable {
     public static final int VPOINTS = 4;
-    public static final String NAME = "Column Shade Variety ";
+    public static final String NAME = "Column Shade Variety";
 
     @Override
     public int runPublic(PatternCard pattern) {

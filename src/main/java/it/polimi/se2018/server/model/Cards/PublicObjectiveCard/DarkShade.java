@@ -13,7 +13,7 @@ import java.util.Iterator;
  */
 public class DarkShade implements PublicEffects, Serializable {
     private static final int VPOINTS = 2;
-    private static final String NAME = "Deep Shades ";
+    private static final String NAME = "Deep Shades";
 
     @Override
     public int runPublic(PatternCard pattern){

@@ -12,8 +12,9 @@ public class PublicObjectiveCard implements Serializable {
     private PublicEffects effect;
     private String name;
 
-    public PublicObjectiveCard(PublicEffects effect) {
+    public PublicObjectiveCard(PublicEffects effect, String name) {
         this.effect = effect;
+        this.name = name;
     }
 
     public int executeEffect(PatternCard pattern){
@@ -22,6 +23,10 @@ public class PublicObjectiveCard implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

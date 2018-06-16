@@ -49,7 +49,7 @@ public class TestDiagonalColor {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DiagonalColor());
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals");
             assertEquals(11, publicCard.executeEffect(pattern));
 
 
@@ -61,7 +61,7 @@ public class TestDiagonalColor {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DiagonalColor());
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals");
         System.out.println(publicCard.toString());
     }
 }

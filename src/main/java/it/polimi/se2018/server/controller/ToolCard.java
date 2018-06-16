@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ToolCard implements Serializable{
+public class ToolCard implements Serializable {
     private String name;
     private DiceColor color;
     private int number;
@@ -28,7 +28,7 @@ public class ToolCard implements Serializable{
         return color;
     }
 
-    protected String getName() {
+    public String getName() {
         return name;
     }
 

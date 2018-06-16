@@ -49,7 +49,7 @@ public class TestDarkShade {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade());
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade(), "Deep Shades");
             assertEquals(4, publicCard.executeEffect(pattern));
 
 
@@ -61,7 +61,7 @@ public class TestDarkShade {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade());
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade(),"Deep Shades");
         System.out.println(publicCard.toString());
     }
 }

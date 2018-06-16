@@ -49,16 +49,16 @@ public class GameSetup {
 
     private List<PublicObjectiveCard> loadPublic() {
         List<PublicObjectiveCard> list = new ArrayList<>();
-        list.add(new PublicObjectiveCard(new DarkShade()));
-        list.add(new PublicObjectiveCard(new DiagonalColor()));
-        list.add(new PublicObjectiveCard(new DifferentColorColumn()));
-        list.add(new PublicObjectiveCard(new DifferentColorRow()));
-        list.add(new PublicObjectiveCard(new DifferentShade()));
-        list.add(new PublicObjectiveCard(new DifferentShadeRow()));
-        list.add(new PublicObjectiveCard(new DifferentShadeColumn()));
-        list.add(new PublicObjectiveCard(new LightShade()));
-        list.add(new PublicObjectiveCard(new MediumShade()));
-        list.add(new PublicObjectiveCard(new VarietyColor()));
+        list.add(new PublicObjectiveCard(new DarkShade(), "Deep Shades"));
+        list.add(new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals"));
+        list.add(new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety"));
+        list.add(new PublicObjectiveCard(new DifferentColorRow(), "Row Color Variety"));
+        list.add(new PublicObjectiveCard(new DifferentShade(), "Shade Variety"));
+        list.add(new PublicObjectiveCard(new DifferentShadeRow(), "Row Shade Variety"));
+        list.add(new PublicObjectiveCard(new DifferentShadeColumn(), "Column Shade Variety"));
+        list.add(new PublicObjectiveCard(new LightShade(), "Light Shades"));
+        list.add(new PublicObjectiveCard(new MediumShade(), "Medium Shades"));
+        list.add(new PublicObjectiveCard(new VarietyColor(), "Color Variety"));
         Collections.shuffle(list);
         return list;
     }

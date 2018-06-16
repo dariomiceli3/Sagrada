@@ -38,6 +38,12 @@ import java.util.List;
 public class GuiController extends View {
 
 
+    @FXML
+    private TextField txtName;
+    @FXML
+    private Button playButton;
+
+
     private ClientInterface connection;
     private static final int SOCKETPORT = 8888;
     private static SocketHandler serverSocket;
@@ -52,6 +58,8 @@ public class GuiController extends View {
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
     private PrivateObjectiveCard privateCard;
+
+
 
 
     //-------------------------gui start-----------------
@@ -89,16 +97,8 @@ public class GuiController extends View {
 
 
 
-
-
     //----------------fxml controller----------------
 
-
-
-    @FXML
-    private TextField txtName;
-    @FXML
-    private Button playButton;
 
     public void initialize() {
 
@@ -176,6 +176,18 @@ public class GuiController extends View {
 
     public PrivateObjectiveCard getPrivateCard() {
         return privateCard;
+    }
+
+    public List<ToolCard> getToolList() {
+        return toolList;
+    }
+
+    public List<PublicObjectiveCard> getPublicCardList() {
+        return publicCardList;
+    }
+
+    public List<PatternCard> getPatternList() {
+        return patternList;
     }
 
     //--------------------show events to change scene-------------------------
@@ -283,8 +295,6 @@ public class GuiController extends View {
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) throws IOException {
-
-
 
 
         Platform.runLater(new Runnable() {
@@ -624,7 +634,7 @@ public class GuiController extends View {
         Parent root1 = (Parent) loader.load();
 
         Scene scene = new Scene(root1);
-        stage.setTitle("Sagrada Login");
+        stage.setTitle("Sagrada Pattern Choose");
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
