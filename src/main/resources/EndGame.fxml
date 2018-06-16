@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="450.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.EndGameScene">
+   <children>
+      <ImageView fitHeight="450.0" fitWidth="460.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/mainBackground.jpg" />
+         </image>
+      </ImageView>
+      <TextField blendMode="OVERLAY" editable="false" layoutX="171.0" layoutY="30.0" prefHeight="40.0" prefWidth="118.0" text="Game ended!!!">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField blendMode="OVERLAY" editable="false" layoutX="140.0" layoutY="111.0" text="The Winner is: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
