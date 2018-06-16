@@ -267,16 +267,19 @@ public class GuiController extends View {
 
         this.patternList = patternCards;
 
-        FXMLLoader loader = new FXMLLoader(ChoosePattern.class.getResource("/CardDraw.fxml"));
-        Parent root1 = (Parent) loader.load();
-        ChoosePattern controller = (ChoosePattern) loader.getController();
-        controller.setMainController(this);
 
-        Scene scene = new Scene(root1);
-        stage.setTitle("Sagrada Login");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+       try {
+           patternScene();
+       }catch (IOException e){
+           e.printStackTrace();
+       }
+
+
+            }
+        });
 
     }
 
@@ -582,4 +585,20 @@ public class GuiController extends View {
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
 
     }
+
+
+    //-------------switch scene method----------
+    private void patternScene() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
+        Parent root1 = (Parent) loader.load();
+        ChoosePattern controller = (ChoosePattern) loader.getController();
+        controller.setMainController(this);
+
+        Scene scene = new Scene(root1);
+        stage.setTitle("Sagrada Login");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 }
+
