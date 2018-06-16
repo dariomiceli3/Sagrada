@@ -8,10 +8,7 @@ import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Components.DiceColor;
-import it.polimi.se2018.server.model.Components.DraftPool;
-import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Components.RoundTracker;
+import it.polimi.se2018.server.model.Components.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Binding;
@@ -643,6 +640,9 @@ public class GuiController extends View {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
+
     }
+
+
 }
 
