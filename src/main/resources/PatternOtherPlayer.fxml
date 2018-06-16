@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.polimi.se2018.client.view.gui.OtherPatternCard"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.OtherPatternCard">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/mainBackground.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pattern" fitHeight="366.0" fitWidth="280.0" layoutX="153.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="glassBox1" fitHeight="54.0" fitWidth="57.0" layoutX="141.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox2" fitHeight="54.0" fitWidth="57.0" layoutX="204.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox3" fitHeight="54.0" fitWidth="57.0" layoutX="265.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox4" fitHeight="54.0" fitWidth="57.0" layoutX="328.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox5" fitHeight="54.0" fitWidth="57.0" layoutX="394.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox6" fitHeight="54.0" fitWidth="57.0" layoutX="141.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox7" fitHeight="54.0" fitWidth="57.0" layoutX="204.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox8" fitHeight="54.0" fitWidth="57.0" layoutX="265.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox9" fitHeight="54.0" fitWidth="57.0" layoutX="328.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox10" fitHeight="54.0" fitWidth="57.0" layoutX="394.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox11" fitHeight="54.0" fitWidth="57.0" layoutX="141.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox12" fitHeight="54.0" fitWidth="57.0" layoutX="204.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox13" fitHeight="54.0" fitWidth="57.0" layoutX="265.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox14" fitHeight="54.0" fitWidth="57.0" layoutX="328.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox15" fitHeight="54.0" fitWidth="57.0" layoutX="394.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox16" fitHeight="54.0" fitWidth="57.0" layoutX="141.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox17" fitHeight="54.0" fitWidth="57.0" layoutX="204.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox18" fitHeight="54.0" fitWidth="57.0" layoutX="265.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox19" fitHeight="54.0" fitWidth="57.0" layoutX="328.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="glassBox20" fitHeight="54.0" fitWidth="57.0" layoutX="394.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
 </AnchorPane>
