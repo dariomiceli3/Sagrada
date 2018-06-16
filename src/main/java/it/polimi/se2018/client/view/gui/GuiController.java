@@ -48,6 +48,11 @@ public class GuiController extends View {
     private Scene scene;
     private boolean singlePlayer;
     private boolean gameStarted;
+    private List<ToolCard>  toolCardList;
+    private List<PatternCard>  patternList;
+    private List<PublicObjectiveCard>  publicCardList;
+    private PrivateObjectiveCard privateCard;
+
 
     //-------------------------gui start-----------------
 
@@ -129,6 +134,28 @@ public class GuiController extends View {
 
     }
 
+    private void setMode() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (singlePlayer) {
+                    getConnection().setSinglePlayerMode(getPlayerID(), true);
+                }
+                else {
+                    getConnection().setSinglePlayerMode(getPlayerID(), false);
+
+                }
+            }
+        });
+    }
+
+
+    public void setPattern(int indexPattern){
+
+        getConnection().setPatternCardToServer(indexPattern, getPlayerID());
+    }
+
 
     //--------------getter and setter-------------------
 
@@ -172,22 +199,6 @@ public class GuiController extends View {
             }
         });
 
-    }
-
-    private void setMode() {
-
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (singlePlayer) {
-                    getConnection().setSinglePlayerMode(getPlayerID(), true);
-                }
-                else {
-                    getConnection().setSinglePlayerMode(getPlayerID(), false);
-
-                }
-            }
-        });
     }
 
     @Override
@@ -242,27 +253,31 @@ public class GuiController extends View {
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-        //todo 2
+        this.privateCard = privateObjectiveCard;
     }
 
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
-        Parent root = loader.load();
-
-        //todo 0
-        publicList.get(0).getName();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        this.publicCardList = publicList;
     }
 
     @Override
-    public void showPatternList(List<PatternCard> patternCards) {
+    public void showPatternList(List<PatternCard> patternCards) throws IOException {
 
-        //TODO 3
-        //le pattern devono essere selezionabili
+        this.patternList = patternCards;
+
+        FXMLLoader loader = new FXMLLoader(ChoosePattern.class.getResource("/CardDraw.fxml"));
+        Parent root1 = (Parent) loader.load();
+        ChoosePattern controller = (ChoosePattern) loader.getController();
+        controller.setMainController(this);
+
+        Scene scene = new Scene(root1);
+        stage.setTitle("Sagrada Login");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
     }
 
     @Override
@@ -378,7 +393,7 @@ public class GuiController extends View {
     @Override
     public void showToolCards(List<ToolCard> toolCardList) {
 
-        //todo 1
+        this.toolCardList = toolCardList;
     }
 
     @Override

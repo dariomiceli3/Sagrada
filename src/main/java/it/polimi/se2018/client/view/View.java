@@ -69,7 +69,7 @@ public abstract class View implements Runnable {
 
     public abstract void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException;
 
-    public abstract void showPatternList(List<PatternCard> patternCards);
+    public abstract void showPatternList(List<PatternCard> patternCards) throws IOException;
 
     public abstract void showPattern(PatternCard patternCard);
 

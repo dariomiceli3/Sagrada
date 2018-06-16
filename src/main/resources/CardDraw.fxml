@@ -93,7 +93,7 @@
       <ImageView fx:id="publicCard2Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="250.0" layoutY="275.0" onMouseClicked="#handlePublicUnzoom2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="publicCard3Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="430.0" layoutY="268.0" onMouseClicked="#handlePublicUnzoom3" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="privateCardZoom" fitHeight="364.0" fitWidth="280.0" layoutX="236.0" layoutY="500.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Button fx:id="playGameButton" layoutX="1004.0" layoutY="658.0" mnemonicParsing="false" onAction="#playButtonSelected" onMouseClicked="#handleStartGame" prefHeight="48.0" prefWidth="117.0" text="Play" />
+      <Button fx:id="playGameButton" layoutX="1004.0" layoutY="658.0" mnemonicParsing="false" onAction="#playButtonSelected"  prefHeight="48.0" prefWidth="117.0" text="Play" />
       <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="280.0" layoutY="20.0" prefHeight="32.0" prefWidth="126.0" text="Tool Card">
          <font>
             <Font name="Lucida Handwriting Italic" size="16.0" />

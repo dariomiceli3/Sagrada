@@ -39,19 +39,5 @@ public class AlertBox extends Application {
         }
 
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-            display("Error", "Name already chosen.\nPlease try with another one");
-
-
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-
-    }
-
-
 }
 
