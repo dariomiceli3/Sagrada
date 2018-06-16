@@ -11,24 +11,24 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.ChoosePattern">
    <children>
-      <ImageView fx:id="privateCard" fitHeight="900.0" fitWidth="1442.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background" fitHeight="900.0" fitWidth="1442.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/mainBackground.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="66.0" onMouseClicked="#handleToolZoom1" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/private/BlueShade.png" />
+            <Image url="@images/private/blue.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCarTwo" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/private/GreenShade.png" />
+            <Image url="@images/private/green.png" />
          </image>
       </ImageView>
       <ImageView fx:id="toolCardThree" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="66.0" onMouseClicked="#handleToolZoom3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/private/PurpleShade.png" />
+            <Image url="@images/private/purple.png" />
          </image>
       </ImageView>
       <ImageView fx:id="publicOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="275.0" onMouseClicked="#handlePublicZoom1" pickOnBounds="true" preserveRatio="true">
@@ -47,9 +47,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="privateCard" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="512.0" onMouseClicked="#handlePrivateZoom" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/tool/CorkBacked.png" />
-         </image>
+
       </ImageView>
       <ImageView fx:id="patternCardTwo" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
@@ -80,12 +78,12 @@
          </font></TextField>
       <ImageView fx:id="toolCard1Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="22.0" layoutY="47.0" onMouseClicked="#handleToolUnzoom1" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@images/private/BlueShade.png" />
+            <Image url="@images/private/blue.png" />
          </image>
       </ImageView>
       <ImageView fx:id="toolCard2Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="232.0" layoutY="47.0" onMouseClicked="#handleToolUnzoom2" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@images/private/GreenShade.png" />
+            <Image url="@images/private/green.png" />
          </image>
       </ImageView>
       <ImageView fx:id="toolCard3Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="436.0" layoutY="47.0" onMouseClicked="#handleToolUnzoom3" pickOnBounds="true" preserveRatio="true" visible="false" />

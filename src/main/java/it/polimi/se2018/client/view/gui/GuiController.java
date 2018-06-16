@@ -48,7 +48,7 @@ public class GuiController extends View {
     private Scene scene;
     private boolean singlePlayer;
     private boolean gameStarted;
-    private List<ToolCard>  toolCardList;
+    private List<ToolCard>  toolList;
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
     private PrivateObjectiveCard privateCard;
@@ -174,6 +174,9 @@ public class GuiController extends View {
         return name;
     }
 
+    public PrivateObjectiveCard getPrivateCard() {
+        return privateCard;
+    }
 
     //--------------------show events to change scene-------------------------
 
@@ -253,29 +256,46 @@ public class GuiController extends View {
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-        this.privateCard = privateObjectiveCard;
+
+        System.out.println(privateObjectiveCard.getColour().toString());
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                privateCard = privateObjectiveCard;
+            }
+        });
+
     }
 
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) throws IOException{
 
-        this.publicCardList = publicList;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                publicCardList = publicList;
+            }
+        });
+
+
     }
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) throws IOException {
 
-        this.patternList = patternCards;
+
 
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-       try {
-           patternScene();
-       }catch (IOException e){
-           e.printStackTrace();
-       }
+                patternList = patternCards;
+            try {
+                patternScene();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
 
             }
@@ -285,6 +305,7 @@ public class GuiController extends View {
 
     @Override
     public void showPattern(PatternCard patternCard) {
+        System.out.println("received" + patternCard.getName());
 
     }
 
@@ -295,6 +316,8 @@ public class GuiController extends View {
 
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
+
+
 
     }
 
@@ -396,7 +419,14 @@ public class GuiController extends View {
     @Override
     public void showToolCards(List<ToolCard> toolCardList) {
 
-        this.toolCardList = toolCardList;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                toolList = toolCardList;
+            }
+        });
+
+
     }
 
     @Override
@@ -589,15 +619,14 @@ public class GuiController extends View {
 
     //-------------switch scene method----------
     private void patternScene() throws IOException{
+        ChoosePattern.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
         Parent root1 = (Parent) loader.load();
-        ChoosePattern controller = (ChoosePattern) loader.getController();
-        controller.setMainController(this);
 
         Scene scene = new Scene(root1);
         stage.setTitle("Sagrada Login");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 }

@@ -14,14 +14,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -99,11 +102,11 @@ public class ChoosePattern {
 
     private  int indexPattern;
 
-    private GuiController mainController;
+    private static GuiController mainController;
 
 
-    public void setMainController(GuiController mainController){
-        this.mainController = mainController;
+    public static void setMainController(GuiController mainController){
+        ChoosePattern.mainController = mainController;
     }
 
 
@@ -199,10 +202,20 @@ public class ChoosePattern {
     }
 
 
-        public void initialize () {
+        public void initialize () throws IOException {
+
+            File file = new File("./");
+            System.out.println(mainController.getPrivateCard().getColour().toString());
+            String fileColor = mainController.getPrivateCard().getColour().toString();
+            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/private");
+
+            FileInputStream inputStream = new FileInputStream(filePath + "/" + fileColor + ".png");
+            Image image = new Image(inputStream);
+
+            privateCard.setImage(image);
 
 
-
+            playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()));
 
             toolCard1Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
