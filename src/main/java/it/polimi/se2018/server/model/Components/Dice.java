@@ -190,6 +190,120 @@ public class Dice implements Serializable {
 
 
 
+    public String toStringGui() {
+
+        if (this.getColor().toString() == "red") {
+
+            if (this.getValue() == 1) {
+                return "R1";
+            }
+            else if (this.getValue() == 2) {
+                return "R2";
+            }
+            else if (this.getValue() == 3) {
+                return "R3";
+            }
+            else if (this.getValue() == 4) {
+                return "R4";
+            }
+            else if (this.getValue() == 5) {
+                return "R5";
+            }
+            else {
+                return "R6";
+            }
+        }
+
+        else if (this.getColor().toString() == "yellow") {
+
+            if (this.getValue() == 1) {
+                return "Y1";
+            }
+            else if (this.getValue() == 2) {
+                return "Y2";
+            }
+            else if (this.getValue() == 3) {
+                return "Y3";
+            }
+            else if (this.getValue() == 4) {
+                return "Y4";
+            }
+            else if (this.getValue() == 5) {
+                return "Y5";
+            }
+            else {
+                return "Y6";
+            }
+        }
+
+        else if (this.getColor().toString() == "blue") {
+
+            if (this.getValue() == 1) {
+                return "B1";
+            }
+            else if (this.getValue() == 2) {
+                return "B2";
+            }
+            else if (this.getValue() == 3) {
+                return "B3";
+            }
+            else if (this.getValue() == 4) {
+                return "B4";
+            }
+            else if (this.getValue() == 5) {
+                return "B5";
+            }
+            else {
+                return "B6";
+            }
+        }
+
+        else if (this.getColor().toString() == "green") {
+
+            if (this.getValue() == 1) {
+                return "G1";
+            }
+            else if (this.getValue() == 2) {
+                return "G2";
+            }
+            else if (this.getValue() == 3) {
+                return "G3";
+            }
+            else if (this.getValue() == 4) {
+                return "G4";
+            }
+            else if (this.getValue() == 5) {
+                return "G5";
+            }
+            else {
+                return "G6";
+            }
+        }
+
+        else
+
+        if (this.getValue() == 1) {
+            return "P1";
+        }
+        else if (this.getValue() == 2) {
+            return "P2";
+        }
+        else if (this.getValue() == 3) {
+            return "P3";
+        }
+        else if (this.getValue() == 4) {
+            return "P4";
+        }
+        else if (this.getValue() == 5) {
+            return "P5";
+        }
+        else {
+            return "P6";
+        }
+    }
+
+
+
 
     }
 

@@ -58,6 +58,7 @@ public class GuiController extends View {
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
     private PrivateObjectiveCard privateCard;
+    private RoundTracker roundTarcker;
 
 
 
@@ -188,6 +189,10 @@ public class GuiController extends View {
 
     public List<PatternCard> getPatternList() {
         return patternList;
+    }
+
+    public RoundTracker getRoundTarcker(){
+        return roundTarcker;
     }
 
     //--------------------show events to change scene-------------------------
