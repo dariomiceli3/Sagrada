@@ -73,7 +73,7 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remoteStartPatternEvent(int ID, List<PatternCard> patternList) throws RemoteException {
+    public void remoteStartPatternEvent(int ID, List<PatternCard> patternList) throws RemoteException, IOException {
         if (view.getPlayerID() == ID) {
             view.showPatternList(patternList);
         }
