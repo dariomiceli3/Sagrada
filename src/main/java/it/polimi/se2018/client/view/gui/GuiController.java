@@ -317,7 +317,7 @@ public class GuiController extends View {
 
     @Override
     public void showPattern(PatternCard patternCard) {
-        System.out.println("received" + patternCard.getName());
+        //todo evento che fa cambiare la scena nella scena principale
 
     }
 
