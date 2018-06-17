@@ -192,6 +192,10 @@ public class GuiController extends View {
         return roundTarcker;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     //--------------------show events to change scene-------------------------
 
     @Override

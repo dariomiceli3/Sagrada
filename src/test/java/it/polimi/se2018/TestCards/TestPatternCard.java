@@ -261,16 +261,16 @@ public class TestPatternCard {
         }
     }
 
-   /* @Test
+    @Test
     public void testPutDiceOnPattern2() throws FileNotFoundException, InvalidMoveException {
         PatternCard patternCard4 = new PatternCard();
-        patternCard4.loadPatternForTesting();
+        patternCard4 = patternCard4.loadPatternForTesting();
         Dice diceBlue2 = new Dice(2, DiceColor.BLUE);
 
         patternCard4.putDiceOnPattern(diceBlue2, 19, patternCard4);
         patternCard4.putDiceOnPattern(diceBlue2, 13, patternCard4);
         patternCard4.putDiceOnPattern(diceBlue2, 9, patternCard4);
-    }*/
+    }
 
 
     @Test (expected = InvalidMoveException.class)

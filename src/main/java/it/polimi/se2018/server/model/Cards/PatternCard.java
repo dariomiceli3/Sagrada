@@ -897,7 +897,7 @@ public class PatternCard implements Serializable {
               return patternList;
               }
 
-     private PatternCard loadCard(String fileName) throws FileNotFoundException
+     public PatternCard loadCard(String fileName) throws FileNotFoundException
      {
           Gson gson = new Gson();
           JsonReader reader = new JsonReader(new FileReader(fileName));
@@ -908,8 +908,7 @@ public class PatternCard implements Serializable {
      public PatternCard  loadPatternForTesting() throws FileNotFoundException {
          File file = new File("./");
          String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
-         PatternCard test = loadCard(filePath + 25 + ".json");
-         return test;
+         return loadCard(filePath + "25" + ".json");
 
      }
 

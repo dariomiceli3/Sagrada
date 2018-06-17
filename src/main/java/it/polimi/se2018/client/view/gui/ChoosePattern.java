@@ -5,6 +5,7 @@ import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Components.GlassBox;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,12 +16,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.beans.binding.Bindings;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -70,6 +75,8 @@ public class ChoosePattern {
     private ImageView privateCardZoom;
     @FXML
     private Button playGameButton;
+    @FXML
+    private Button loadButton;
     @FXML
     private RadioButton radioPatternOne;
     @FXML
@@ -181,6 +188,28 @@ public class ChoosePattern {
            }
 
            mainController.setPattern(indexPattern);
+    }
+
+    @FXML
+    void loadButtonSelected(ActionEvent event) throws FileNotFoundException  {
+
+        // todo check quando entrambi provano ad aprire il filechooser
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select File");
+        fileChooser.setInitialDirectory(new File("."));
+
+        File file;
+
+        do {
+            file = fileChooser.showOpenDialog(mainController.getStage());
+        }
+        while (!(file.getName().matches(".*[a-zA-Z0-9]+.*" + ".json")));
+
+        System.out.println(file.getName());
+
+        renderingScheme(file);
+
     }
 
 
@@ -364,6 +393,22 @@ public class ChoosePattern {
             }
 
         }
+    }
+
+    private void renderingScheme(File file) throws FileNotFoundException {
+
+        PatternCard selfScheme = new PatternCard();
+        selfScheme = selfScheme.loadCard(file.getAbsolutePath());
+
+        System.out.println(selfScheme.toString());
+
+        List<GlassBox> boxRender = selfScheme.getPattern();
+
+        Canvas canvas = new Canvas();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+
+
     }
 
 
