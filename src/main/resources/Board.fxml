@@ -243,5 +243,6 @@
       <ImageView fx:id="toolCardZoom1" fitHeight="293.0" fitWidth="222.0" layoutX="728.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool1" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom2" fitHeight="293.0" fitWidth="222.0" layoutX="945.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom3" fitHeight="293.0" fitWidth="222.0" layoutX="1151.0" layoutY="181.0" onMouseClicked="#handleUnzoomTool3" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button fx:id="rollButton" layoutX="613.0" layoutY="784.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" text="ROLL" />
    </children>
 </AnchorPane>
