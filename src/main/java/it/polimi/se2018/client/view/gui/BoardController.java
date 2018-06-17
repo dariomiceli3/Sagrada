@@ -470,6 +470,8 @@ public class BoardController {
 
     public void initialize() throws IOException {
 
+        GuiController.setBoard(this);
+
         loadPanel();
 
         loadPattern();
@@ -532,7 +534,6 @@ public class BoardController {
             }
         });
     }
-
 
 
     private void loadPanel() throws IOException {
@@ -773,5 +774,9 @@ public class BoardController {
         String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
         fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
         return new Image(fileStream);
+    }
+
+    public void updateRound() {
+        textGame.setText("Round " + mainController.getCurrRound() + "is started");
     }
 }

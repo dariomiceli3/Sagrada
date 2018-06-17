@@ -49,22 +49,24 @@ public class GuiController extends View {
     private static String host = "localhost";
     private String name;
     private Stage stage;
-    private Scene scene;
     private boolean singlePlayer;
     private boolean gameStarted;
     private List<ToolCard>  toolList;
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
     private PrivateObjectiveCard privateCard;
-    private RoundTracker roundTarcker; //todo refator
+    private RoundTracker roundTracker;
     private PatternCard patternCurrent;
     private PatternCard patternID0;
     private PatternCard patternID1;
     private PatternCard patternID2;
     private PatternCard patternID3;
+    private int currRound;
+    private static BoardController board;
 
-
-
+    public static void setBoard(BoardController board) {
+        GuiController.board = board;
+    }
 
     //-------------------------gui start-----------------
 
@@ -163,7 +165,6 @@ public class GuiController extends View {
 
     //--------------getter and setter-------------------
 
-
     @Override
     public void setConnection(ClientInterface connection) {
         this.connection = connection;
@@ -194,8 +195,8 @@ public class GuiController extends View {
         return patternList;
     }
 
-    public RoundTracker getRoundTarcker(){
-        return roundTarcker;
+    public RoundTracker getRoundTracker(){
+        return roundTracker;
     }
 
     public PatternCard getPatternCurrent() {
@@ -220,6 +221,10 @@ public class GuiController extends View {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public int getCurrRound() {
+        return currRound;
     }
 
     //--------------------show events to change scene-------------------------
@@ -401,7 +406,7 @@ public class GuiController extends View {
 
     @Override
     public void showStartScene() throws IOException {
-        // todo  cambiare scena da choose pattern a board main game
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -417,6 +422,17 @@ public class GuiController extends View {
 
     @Override
     public void showCurrentRound(int round) {
+
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                currRound = round;
+
+                board.updateRound();
+            }
+        });
+
 
     }
 

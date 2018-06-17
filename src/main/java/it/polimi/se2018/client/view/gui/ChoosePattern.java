@@ -174,6 +174,8 @@ public class ChoosePattern {
     @FXML
     void playButtonSelected(ActionEvent event) {
 
+            AlertBox.display("Sagrada Choose", "Please, wait some seconds and the game will start");
+
            if (patternToggleGroup.getSelectedToggle().equals(radioPatternFour)) {
                 indexPattern = 3;
            }

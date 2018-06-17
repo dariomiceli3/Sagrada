@@ -393,10 +393,10 @@ public class RoundTrackerBox {
 
     private void loadDice() throws IOException {
 
-        for (int i = 0; i < mainController.getRoundTarcker().getRoundDice(round).size(); i++) {
+        for (int i = 0; i < mainController.getRoundTracker().getRoundDice(round).size(); i++) {
 
             File file = new File("./");
-            String fileName = mainController.getRoundTarcker().getRoundDice(round).get(i).toStringGui();
+            String fileName = mainController.getRoundTracker().getRoundDice(round).get(i).toStringGui();
             String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/dice");
 
             try {
