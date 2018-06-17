@@ -90,7 +90,7 @@ public class ChoosePattern {
 
 
 
-    FileInputStream fileStream;
+    private FileInputStream fileStream;
     private int indexPattern;
     private static GuiController mainController;
 

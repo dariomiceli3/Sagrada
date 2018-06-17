@@ -36,7 +36,7 @@ public interface RmiClientInterface extends Remote {
 
     public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws RemoteException, IOException;
 
-    public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException;
+    public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException, IOException;
 
     public void remotePlayerTokensUpdateEvent(int ID, int numberTokens) throws RemoteException;
 

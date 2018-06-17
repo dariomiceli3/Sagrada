@@ -55,7 +55,8 @@ public class GuiController extends View {
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
     private PrivateObjectiveCard privateCard;
-    private RoundTracker roundTarcker;
+    private RoundTracker roundTarcker; //todo refator
+    private PatternCard patternCurrent;
 
 
 
@@ -192,6 +193,10 @@ public class GuiController extends View {
         return roundTarcker;
     }
 
+    public PatternCard getPatternCurrent() {
+        return patternCurrent;
+    }
+
     public Stage getStage() {
         return stage;
     }
@@ -251,12 +256,12 @@ public class GuiController extends View {
     @Override
     public void showNameOther(String playerName) {
 
-        Platform.runLater(new Runnable() {
+        /*Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 AlertBox.display("Name Choose", "Another player connected with name " + playerName);
             }
-        });
+        });*/
 
     }
 
@@ -320,8 +325,27 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showPattern(PatternCard patternCard) {
+    public void showPattern(PatternCard patternCard) throws IOException {
         //todo evento che fa cambiare la scena nella scena principale
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                patternCurrent = patternCard;
+
+
+                try {
+                    boardScene();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void showOtherStartPattern(PatternCard patternCard, int ID) {
 
     }
 
@@ -645,6 +669,19 @@ public class GuiController extends View {
         stage.setResizable(true);
         stage.show();
 
+    }
+
+    private void boardScene() throws IOException {
+
+        BoardController.setMainController(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
+        Parent root2 = (Parent) loader.load();
+
+        Scene board = new Scene(root2);
+        stage.setTitle("Sagrada Main Board");
+        stage.setScene(board);
+        stage.setResizable(true);
+        stage.show();
     }
 
 

@@ -71,9 +71,11 @@ public abstract class View implements Runnable {
 
     public abstract void showPatternList(List<PatternCard> patternCards) throws IOException;
 
-    public abstract void showPattern(PatternCard patternCard);
+    public abstract void showPattern(PatternCard patternCard) throws IOException;
 
     public abstract void showOtherPattern(PatternCard patternCard, String playerName);
+
+    public abstract void showOtherStartPattern(PatternCard patternCard, int ID);
 
     public abstract void showPatternUpdate(PatternCard patternCard);
 

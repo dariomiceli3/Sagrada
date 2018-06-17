@@ -151,6 +151,9 @@ public class SocketHandler implements ClientInterface, Runnable {
             if((view.getPlayerID()) == ((PlayerPatternUpdateEvent) event).getID()) {
                 view.showPattern(((PlayerPatternUpdateEvent) event).getCard());
             }
+            else {
+                view.showOtherStartPattern( ((PlayerPatternUpdateEvent)event).getCard(), ((PlayerPatternUpdateEvent)event).getID());
+            }
         }
 
         else if (event instanceof PlayerTokensUpdateEvent) {

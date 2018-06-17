@@ -874,6 +874,12 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
+    public void showOtherStartPattern(PatternCard patternCard, int ID) {
+        System.out.println("The pattern of your enemy is: ");
+        System.out.println(patternCard.toString());
+    }
+
+    @Override
     public void showPatternUpdate(PatternCard patternCard) {
         System.out.println("Now you're Pattern Card is");
         System.out.println(patternCard.toString());
