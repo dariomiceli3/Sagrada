@@ -1,6 +1,7 @@
 package it.polimi.se2018.server.controller;
 
 
+import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
@@ -257,6 +258,11 @@ public class Game implements Observer {
             setTokensModel(view);
 
             if (model.getNumberPlayer() == (getViewGame().size() - disconnectPlayerNumber)) {
+
+                for (VirtualView view1 : viewGame) {
+                    view1.sendEvent(new StartGameSceneEvent());
+                }
+
                 startTurn();
             }
         }else {

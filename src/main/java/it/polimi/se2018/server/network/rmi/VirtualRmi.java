@@ -97,6 +97,10 @@ public class VirtualRmi extends VirtualView {
                     clientRmi.remotePlayerPatternUpdateEvent( ((PlayerPatternUpdateEvent)event).getID(), ((PlayerPatternUpdateEvent)event).getCard() );
                 }
 
+                else if (event instanceof StartGameSceneEvent) {
+                    clientRmi.remoteStartGameSceneEvent();
+                }
+
                 else if (event instanceof PlayerTokensUpdateEvent) {
                     clientRmi.remotePlayerTokensUpdateEvent( ((PlayerTokensUpdateEvent)event).getID(), ((PlayerTokensUpdateEvent)event).getTokensNumber());
                 }
@@ -231,7 +235,7 @@ public class VirtualRmi extends VirtualView {
                 }
 
                 else if (event instanceof SinglePrivateEvent) {
-                    clientRmi.remoteSinglePlayerEvent( ((SinglePlayerEvent)event).getId());
+                    clientRmi.remoteSinglePrivateEvent( ((SinglePrivateEvent)event).getPrivateList());
                 }
 
                 else if (event instanceof EndSinglePlayerEvent){

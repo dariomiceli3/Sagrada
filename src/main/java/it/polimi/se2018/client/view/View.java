@@ -81,6 +81,8 @@ public abstract class View implements Runnable {
 
     public abstract void showTokens(int tokensNumber);
 
+    public abstract void showStartScene() throws IOException;
+
     public abstract void showCurrentRound(int round);
 
     public abstract void showCurrentTurn();

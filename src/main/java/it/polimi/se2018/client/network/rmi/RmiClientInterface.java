@@ -38,6 +38,8 @@ public interface RmiClientInterface extends Remote {
 
     public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException, IOException;
 
+    public void remoteStartGameSceneEvent() throws RemoteException, IOException;
+
     public void remotePlayerTokensUpdateEvent(int ID, int numberTokens) throws RemoteException;
 
     public void remoteStartRoundEvent(int round) throws RemoteException;

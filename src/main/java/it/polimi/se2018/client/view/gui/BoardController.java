@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.gui;
 
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -455,25 +456,24 @@ public class BoardController {
 
     }
 
-
-
     @FXML
     void exitButtonSelected(ActionEvent event) {
 
     }
 
-        private static GuiController mainController;
-        private FileInputStream fileStream;
+    private static GuiController mainController;
+    private FileInputStream fileStream;
 
     public static void setMainController(GuiController mainController){
         BoardController.mainController = mainController;
     }
 
-        public void initialize() throws IOException {
+    public void initialize() throws IOException {
 
         loadPanel();
 
         loadPattern();
+        loadTokensNumber();
 
         loadPrivate();
 
@@ -481,99 +481,93 @@ public class BoardController {
 
         loadToolCard();
 
-            privateCardZoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
-            });
+        loadOtherPattern();
 
-            publicCardZoom1.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
+        privateCardZoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            });
+        publicCardZoom1.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            publicCardZoom2.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
+        publicCardZoom2.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            });
+        publicCardZoom3.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            publicCardZoom3.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
+        toolCardZoom1.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            });
+        toolCardZoom2.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
 
-            toolCardZoom1.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
-
-            });
-
-            toolCardZoom2.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
-
-            });
-
-            toolCardZoom3.visibleProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println(newValue);
-                }
-
-            });
-        }
+        toolCardZoom3.visibleProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+            }
+        });
+    }
 
 
 
+    private void loadPanel() throws IOException {
 
+        File file = new File("./");
+        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/panel");
 
-        private void loadPanel() throws IOException {
-
-            File file = new File("./");
-            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/panel");
-
-            try {
-                System.out.println("consegna panel");
-                if ((mainController.getPlayerID() == 0)) {
-                    fileStream = new FileInputStream(filePath + "/BluePanel" + ".png");
-                    Image imagePlayerOne = new Image(fileStream);
-                    panelWindow.setImage(imagePlayerOne);
-                }
-                if ((mainController.getPlayerID() == 1)) {
-                    fileStream = new FileInputStream(filePath + "/GreenPanel" + ".png");
-                    Image imagePlayerTwo = new Image(fileStream);
-                    panelWindow.setImage(imagePlayerTwo);
-                }
-                if ((mainController.getPlayerID() == 2)) {
-                    fileStream = new FileInputStream(filePath + "/PurplePanel" + ".png");
-                    Image imagePlayerThree = new Image(fileStream);
-                    panelWindow.setImage(imagePlayerThree);
-                }
-
-                if ((mainController.getPlayerID() == 3)) {
-                    fileStream = new FileInputStream(filePath + "/RedPanel" + ".png");
-                    Image imagePlayerFour = new Image(fileStream);
-                    panelWindow.setImage(imagePlayerFour);
-                }
-            } finally {
-                fileStream.close();
+        try {
+            System.out.println("consegna panel");
+            if ((mainController.getPlayerID() == 0)) {
+                fileStream = new FileInputStream(filePath + "/BluePanel" + ".png");
+                Image imagePlayerOne = new Image(fileStream);
+                panelWindow.setImage(imagePlayerOne);
+            }
+            if ((mainController.getPlayerID() == 1)) {
+                fileStream = new FileInputStream(filePath + "/GreenPanel" + ".png");
+                Image imagePlayerTwo = new Image(fileStream);
+                panelWindow.setImage(imagePlayerTwo);
+            }
+            if ((mainController.getPlayerID() == 2)) {
+                fileStream = new FileInputStream(filePath + "/PurplePanel" + ".png");
+                Image imagePlayerThree = new Image(fileStream);
+                panelWindow.setImage(imagePlayerThree);
             }
 
+            if ((mainController.getPlayerID() == 3)) {
+                fileStream = new FileInputStream(filePath + "/RedPanel" + ".png");
+                Image imagePlayerFour = new Image(fileStream);
+                panelWindow.setImage(imagePlayerFour);
+            }
+        } finally {
+            fileStream.close();
         }
+
+    }
 
     private void loadPrivate() throws IOException {
 
@@ -594,23 +588,23 @@ public class BoardController {
     }
 
 
-        private void loadPattern() throws IOException {
+    private void loadPattern() throws IOException {
 
-            File file = new File("./");
-            String filePattern = mainController.getPatternCurrent().getName();
-            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+        File file = new File("./");
+        String filePattern = mainController.getPatternCurrent().getName();
+        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
 
-            try {
-                System.out.println("consegna singola pattern");
-                fileStream = new FileInputStream(filePath + "/" + filePattern + ".jpg");
-                Image image = new Image(fileStream);
-                patternCard.setImage(image);
-            }
-            finally {
-                fileStream.close();
-            }
-
+        try {
+            System.out.println("consegna singola pattern");
+            fileStream = new FileInputStream(filePath + "/" + filePattern + ".jpg");
+            Image image = new Image(fileStream);
+            patternCard.setImage(image);
         }
+        finally {
+            fileStream.close();
+        }
+
+    }
 
 
     private void loadPublicCard() throws IOException  {
@@ -675,5 +669,109 @@ public class BoardController {
             }
 
         }
+    }
+
+    private void loadTokensNumber() {
+        tokensNumber.setText("" + mainController.getPatternCurrent().getDifficulty());
+    }
+
+    private void loadOtherPattern() throws IOException {
+
+        if (mainController.getPlayerID() == 0) {
+
+            if (mainController.getPatternID1() != null) {
+                String fileName = mainController.getPatternID1().getName();
+                Image image = loadImage(fileName);
+                patternPlayer2.setImage(image);
+            }
+
+            if (mainController.getPatternID2() != null) {
+                String fileName = mainController.getPatternID2().getName();
+                Image image = loadImage(fileName);
+                patternPlayer3.setImage(image);
+            }
+
+            if (mainController.getPatternID3() != null) {
+                String fileName = mainController.getPatternID3().getName();
+                Image image = loadImage(fileName);
+                patternPlayer4.setImage(image);
+            }
+
+        }
+
+        if (mainController.getPlayerID() == 1) {
+
+            if (mainController.getPatternID0() != null) {
+                String fileName = mainController.getPatternID0().getName();
+                Image image = loadImage(fileName);
+                patternPlayer2.setImage(image);
+            }
+
+            if (mainController.getPatternID2() != null) {
+                String fileName = mainController.getPatternID2().getName();
+                Image image = loadImage(fileName);
+                patternPlayer3.setImage(image);
+            }
+
+            if (mainController.getPatternID3() != null) {
+                String fileName = mainController.getPatternID3().getName();
+                Image image = loadImage(fileName);
+                patternPlayer4.setImage(image);
+            }
+
+        }
+
+        if (mainController.getPlayerID() == 2){
+
+            if (mainController.getPatternID0() != null) {
+                String fileName = mainController.getPatternID0().getName();
+                Image image = loadImage(fileName);
+                patternPlayer2.setImage(image);
+            }
+
+            if (mainController.getPatternID1() != null) {
+                String fileName = mainController.getPatternID1().getName();
+                Image image = loadImage(fileName);
+                patternPlayer3.setImage(image);
+            }
+
+            if (mainController.getPatternID3() != null) {
+                String fileName = mainController.getPatternID3().getName();
+                Image image = loadImage(fileName);
+                patternPlayer4.setImage(image);
+            }
+
+        }
+
+        if (mainController.getPlayerID() == 3){
+
+            if (mainController.getPatternID0() != null) {
+                String fileName = mainController.getPatternID0().getName();
+                Image image = loadImage(fileName);
+                patternPlayer2.setImage(image);
+            }
+
+            if (mainController.getPatternID1() != null) {
+                String fileName = mainController.getPatternID1().getName();
+                Image image = loadImage(fileName);
+                patternPlayer3.setImage(image);
+            }
+
+            if (mainController.getPatternID2() != null) {
+                String fileName = mainController.getPatternID2().getName();
+                Image image = loadImage(fileName);
+                patternPlayer4.setImage(image);
+            }
+
+        }
+
+    }
+
+    private Image loadImage(String fileName) throws IOException {
+
+        File file = new File("./");
+        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+        fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
+        return new Image(fileStream);
     }
 }

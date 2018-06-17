@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.gui;
 
+
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
@@ -57,6 +58,10 @@ public class GuiController extends View {
     private PrivateObjectiveCard privateCard;
     private RoundTracker roundTarcker; //todo refator
     private PatternCard patternCurrent;
+    private PatternCard patternID0;
+    private PatternCard patternID1;
+    private PatternCard patternID2;
+    private PatternCard patternID3;
 
 
 
@@ -197,6 +202,22 @@ public class GuiController extends View {
         return patternCurrent;
     }
 
+    public PatternCard getPatternID0() {
+        return patternID0;
+    }
+
+    public PatternCard getPatternID1() {
+        return patternID1;
+    }
+
+    public PatternCard getPatternID2() {
+        return patternID2;
+    }
+
+    public PatternCard getPatternID3() {
+        return patternID3;
+    }
+
     public Stage getStage() {
         return stage;
     }
@@ -326,19 +347,11 @@ public class GuiController extends View {
 
     @Override
     public void showPattern(PatternCard patternCard) throws IOException {
-        //todo evento che fa cambiare la scena nella scena principale
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 patternCurrent = patternCard;
-
-
-                try {
-                    boardScene();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -346,6 +359,26 @@ public class GuiController extends View {
 
     @Override
     public void showOtherStartPattern(PatternCard patternCard, int ID) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (ID == 0) {
+                    patternID0 = patternCard;
+                }
+                if (ID == 1) {
+                    patternID1 = patternCard;
+                }
+                if (ID == 2) {
+                    patternID2 = patternCard;
+                }
+                if (ID == 3) {
+                    patternID3 = patternCard;
+                }
+            }
+        });
+
+
 
     }
 
@@ -363,6 +396,22 @@ public class GuiController extends View {
 
     @Override
     public void showTokens(int tokensNumber) {
+
+    }
+
+    @Override
+    public void showStartScene() throws IOException {
+        // todo  cambiare scena da choose pattern a board main game
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    boardScene();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

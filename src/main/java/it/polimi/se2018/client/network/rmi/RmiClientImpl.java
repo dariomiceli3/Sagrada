@@ -91,7 +91,15 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
         if (view.getPlayerID() == ID) {
             view.showPattern(patternCard);
         }
+        else {
+            view.showOtherStartPattern(patternCard,ID);
+        }
 
+    }
+
+    @Override
+    public void remoteStartGameSceneEvent() throws IOException {
+        view.showStartScene();
     }
 
     @Override

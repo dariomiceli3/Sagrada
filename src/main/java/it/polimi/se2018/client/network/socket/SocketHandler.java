@@ -163,6 +163,11 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
         }
 
+        else if (event instanceof StartGameSceneEvent) {
+
+            view.showStartScene();
+        }
+
         else if (event instanceof StartRoundEvent) {
 
             view.showCurrentRound(((StartRoundEvent) event).getRound());

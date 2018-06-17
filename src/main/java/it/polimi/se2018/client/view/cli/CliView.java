@@ -877,6 +877,7 @@ public class CliView extends View implements Runnable {
     public void showOtherStartPattern(PatternCard patternCard, int ID) {
         System.out.println("The pattern of your enemy is: ");
         System.out.println(patternCard.toString());
+        System.out.println("Choose your Pattern Card - Enter a number between 1 and 4");
     }
 
     @Override
@@ -889,6 +890,11 @@ public class CliView extends View implements Runnable {
     @Override
     public void showTokens(int tokensNumber) {
         System.out.println("This your number of favor tokens available: " + tokensNumber);
+    }
+
+    @Override
+    public void showStartScene() {
+        System.out.println("Time to take the gloves off and build your own window!" + "\n");
     }
 
     @Override
