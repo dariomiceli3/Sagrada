@@ -235,13 +235,13 @@
          <graphic>
             <ImageView fx:id="imageDice9" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ImageView fx:id="privateCardZoom" fitHeight="293.0" fitWidth="222.0" layoutX="493.0" layoutY="599.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="privateCardZoom" fitHeight="293.0" fitWidth="222.0" layoutX="409.0" layoutY="606.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Button fx:id="next" layoutX="1136.0" layoutY="784.0" mnemonicParsing="false" onAction="#nextButtonSelected" prefHeight="33.0" prefWidth="75.0" text="NEXT" />
       <ImageView fx:id="publicCardZoom1" fitHeight="293.0" fitWidth="222.0" layoutX="717.0" layoutY="372.0" onMouseClicked="#handleUnzoomPublic1" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="publicCardZoom2" fitHeight="293.0" fitWidth="222.0" layoutX="939.0" layoutY="372.0" onMouseClicked="#handleUnzoomPublic2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="publicCardZoom3" fitHeight="293.0" fitWidth="222.0" layoutX="1151.0" layoutY="369.0" onMouseClicked="#handleUnzoomPublic3" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom1" fitHeight="293.0" fitWidth="222.0" layoutX="728.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool1" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom2" fitHeight="293.0" fitWidth="222.0" layoutX="945.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool2" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="toolCardZoom3" fitHeight="293.0" fitWidth="222.0" layoutX="1202.0" layoutY="181.0" onMouseClicked="#handleUnzoomTool3" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="toolCardZoom3" fitHeight="293.0" fitWidth="222.0" layoutX="1151.0" layoutY="181.0" onMouseClicked="#handleUnzoomTool3" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
 </AnchorPane>
