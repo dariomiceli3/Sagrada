@@ -19,25 +19,13 @@
          </image>
       </ImageView>
       <ImageView fx:id="panelWindow" fitHeight="875.0" fitWidth="419.0" layoutX="22.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="patternPlayer2" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="270.0" onMouseClicked="#handleUpdatePattern2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/pattern/Batllo.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="patternPlayer3" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="380.0" onMouseClicked="#handleUpdatePattern3" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/pattern/Batllo.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="patternPlayer4" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="490.0" onMouseClicked="#handleUpdatePattern4" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/pattern/Batllo.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="patternPlayer2" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="270.0" onMouseClicked="#handleUpdatePattern2" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="patternPlayer3" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="380.0" onMouseClicked="#handleUpdatePattern3" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="patternPlayer4" fitHeight="75.0" fitWidth="100.0" layoutX="458.0" layoutY="490.0" onMouseClicked="#handleUpdatePattern4" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
       <ImageView fx:id="privateCard" fitHeight="177.0" fitWidth="280.0" layoutX="430.0" layoutY="678.0" onMouseClicked="#handlePrivateZoom" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="patternCard" fitHeight="320.0" fitWidth="257.0" layoutX="88.0" layoutY="578.0" pickOnBounds="true" rotate="90.0" />
       <Circle fill="WHITE" layoutX="489.0" layoutY="635.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="tokensNumber" layoutX="481.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+      <Text fx:id="tokensNumber" layoutX="481.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="30.0" />
          </font>
