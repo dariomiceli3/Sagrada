@@ -61,7 +61,6 @@ public class GuiController extends View {
     private PatternCard patternID1;
     private PatternCard patternID2;
     private PatternCard patternID3;
-    private int currRound;
     private static BoardController board;
 
     public static void setBoard(BoardController board) {
@@ -103,7 +102,7 @@ public class GuiController extends View {
 
 
 
-    //----------------fxml controller----------------
+    //----------------mode.fxml controller----------------
 
 
     public void initialize() {
@@ -223,11 +222,9 @@ public class GuiController extends View {
         return stage;
     }
 
-    public int getCurrRound() {
-        return currRound;
-    }
 
-    //--------------------show events to change scene-------------------------
+
+    //--------------------show methods for update scene-------------------------
 
     @Override
     public void run() {
@@ -427,9 +424,8 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                currRound = round;
 
-                board.updateRound();
+                board.updateRound(round);
             }
         });
 
@@ -723,6 +719,8 @@ public class GuiController extends View {
 
 
     //-------------switch scene method----------
+
+
     private void patternScene() throws IOException{
         ChoosePattern.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));

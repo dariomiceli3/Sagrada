@@ -776,7 +776,7 @@ public class BoardController {
         return new Image(fileStream);
     }
 
-    public void updateRound() {
-        textGame.setText("Round " + mainController.getCurrRound() + "is started");
+    public void updateRound(int round) {
+        textGame.setText("Round " + round + "is started");
     }
 }
