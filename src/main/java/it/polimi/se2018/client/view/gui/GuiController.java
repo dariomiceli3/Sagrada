@@ -48,6 +48,7 @@ public class GuiController extends View {
     private static RmiHandler serverRmi;
     private static String host = "localhost";
     private String name;
+    private SimpleBooleanProperty nameSetted = new SimpleBooleanProperty(false);
     private Stage stage;
     private boolean singlePlayer;
     private boolean gameStarted;
@@ -109,7 +110,7 @@ public class GuiController extends View {
 
         gameStarted = false;
 
-        playButton.disableProperty().bind(txtName.textProperty().isEmpty());
+        playButton.disableProperty().bind(txtName.textProperty().isEmpty().or(nameSetted));
 
         playButton.disableProperty().addListener(
                 new ChangeListener<Boolean>() {
@@ -131,6 +132,8 @@ public class GuiController extends View {
         if (gameStarted) {
             this.name = txtName.getText();
             getConnection().setPlayerNameToServer(getName(), getPlayerID());
+            nameSetted.setValue(true);
+            AlertBox.display("Name Choose", "Name entered, some seconds and will go");
         }
 
         else {

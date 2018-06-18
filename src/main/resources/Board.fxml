@@ -44,47 +44,47 @@
       <Button fx:id="skip" layoutX="1238.0" layoutY="784.0" mnemonicParsing="false" onAction="#skipButtonSelected" prefHeight="33.0" prefWidth="75.0" text="SKIP" />
       <Button fx:id="exit" layoutX="1330.0" layoutY="784.0" mnemonicParsing="false" onAction="#exitButtonSelected" prefHeight="33.0" prefWidth="75.0" text="EXIT" />
       <ImageView fx:id="publicCard2" fitHeight="164.0" fitWidth="127.0" layoutX="989.0" layoutY="433.0" onMouseClicked="#handleZoomPublic2" pickOnBounds="true" preserveRatio="true" />
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="443.0" layoutY="354.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 3">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="443.0" layoutY="354.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 3">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="447.0" layoutY="867.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="109.0" text="private card">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="447.0" layoutY="867.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="109.0" text="private card">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="443.0" layoutY="464.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 4">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="443.0" layoutY="464.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 4">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="447.0" layoutY="574.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="tokens av.">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="447.0" layoutY="574.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="tokens av.">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="443.0" layoutY="245.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 2">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="443.0" layoutY="245.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="93.0" text="player 2">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="613.0" layoutY="327.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Tool Cards">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="613.0" layoutY="327.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Tool Cards">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="613.0" layoutY="495.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Public Cards">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="613.0" layoutY="495.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Public Cards">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="613.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Round Tracker">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="613.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Round Tracker">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="613.0" layoutY="643.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Draft Pool">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="613.0" layoutY="643.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="127.0" text="Draft Pool">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />
          </font>

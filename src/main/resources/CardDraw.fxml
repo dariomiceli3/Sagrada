@@ -46,15 +46,15 @@
       <ImageView fx:id="patternCardFour" fitHeight="198.0" fitWidth="170.0" layoutX="1109.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
 
       </ImageView>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="837.0" layoutY="63.0" pickOnBounds="false" prefHeight="39.0" prefWidth="432.0" text="Choose one of the four pattern card">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="837.0" layoutY="63.0" mouseTransparent="true" pickOnBounds="false" prefHeight="39.0" prefWidth="432.0" text="Choose one of the four pattern card">
          <font>
             <Font name="Lucida Handwriting Italic" size="16.0" />
          </font></TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="270.0" layoutY="230.0" pickOnBounds="false" prefHeight="39.0" prefWidth="149.0" text="Public Card">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="270.0" layoutY="230.0" mouseTransparent="true" pickOnBounds="false" prefHeight="39.0" prefWidth="149.0" text="Public Card">
          <font>
             <Font name="Lucida Handwriting Italic" size="17.0" />
          </font></TextField>
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="262.0" layoutY="461.0" pickOnBounds="false" prefHeight="41.0" prefWidth="167.0" text="Private Card">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="262.0" layoutY="461.0" mouseTransparent="true" pickOnBounds="false" prefHeight="41.0" prefWidth="167.0" text="Private Card">
          <font>
             <Font name="Lucida Handwriting Italic" size="17.0" />
          </font></TextField>
@@ -70,7 +70,7 @@
       <ImageView fx:id="publicCard3Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="430.0" layoutY="268.0" onMouseClicked="#handlePublicUnzoom3" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="privateCardZoom" fitHeight="364.0" fitWidth="280.0" layoutX="236.0" layoutY="500.0" onMouseClicked="#handlePrivateUnzoom" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Button fx:id="playGameButton" layoutX="1004.0" layoutY="658.0" mnemonicParsing="false" onAction="#playButtonSelected" prefHeight="48.0" prefWidth="117.0" text="Play" />
-      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" layoutX="280.0" layoutY="20.0" prefHeight="32.0" prefWidth="126.0" text="Tool Card">
+      <TextField alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="280.0" layoutY="20.0" mouseTransparent="true" prefHeight="32.0" prefWidth="126.0" text="Tool Card">
          <font>
             <Font name="Lucida Handwriting Italic" size="16.0" />
          </font>

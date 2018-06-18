@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
 import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.PseudoClass;
@@ -93,6 +94,7 @@ public class ChoosePattern {
     private FileInputStream fileStream;
     private int indexPattern;
     private static GuiController mainController;
+    private SimpleBooleanProperty patternSetted = new SimpleBooleanProperty(false);
 
 
     public static void setMainController(GuiController mainController){
@@ -174,6 +176,8 @@ public class ChoosePattern {
     @FXML
     void playButtonSelected(ActionEvent event) {
 
+            patternSetted.setValue(true);
+
             AlertBox.display("Sagrada Choose", "Please, wait some seconds and the game will start");
 
            if (patternToggleGroup.getSelectedToggle().equals(radioPatternFour)) {
@@ -190,6 +194,7 @@ public class ChoosePattern {
            }
 
            mainController.setPattern(indexPattern);
+
     }
 
     @FXML
@@ -227,6 +232,14 @@ public class ChoosePattern {
         loadFilePatternCard();
 
         playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()));
+        playGameButton.disableProperty().bind(patternSetted);
+
+        playGameButton.disableProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+            }
+        });
 
         toolCard1Zoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
             @Override
