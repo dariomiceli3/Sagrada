@@ -9,30 +9,40 @@
 
 <AnchorPane prefHeight="450.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.EndGameScene">
    <children>
-      <ImageView fitHeight="450.0" fitWidth="460.0" pickOnBounds="true">
+      <ImageView fitHeight="450.0" fitWidth="460.0" mouseTransparent="true" pickOnBounds="true">
          <image>
             <Image url="@images/mainBackground.jpg" />
          </image>
       </ImageView>
-      <TextField blendMode="OVERLAY" editable="false" layoutX="171.0" layoutY="30.0" prefHeight="40.0" prefWidth="118.0" text="Game ended!!!">
+      <TextField blendMode="OVERLAY" editable="false" layoutX="171.0" layoutY="30.0" mouseTransparent="true" prefHeight="40.0" prefWidth="118.0" text="Game ended!!!">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="winnerText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="113.0" prefHeight="37.0" prefWidth="345.0" text="The Winner is:              with      points">
+      <TextField fx:id="winnerText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="113.0" mouseTransparent="true" prefHeight="37.0" prefWidth="345.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextArea fx:id="LooserText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="206.0" prefHeight="218.0" prefWidth="345.0" text="other Players......">
+      <TextArea fx:id="rankText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="206.0" mouseTransparent="true" prefHeight="218.0" prefWidth="345.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextArea>
-      <TextField blendMode="OVERLAY" editable="false" layoutX="191.0" layoutY="159.0" prefHeight="37.0" prefWidth="63.0" text="Rank:">
+      <TextField blendMode="OVERLAY" editable="false" layoutX="191.0" layoutY="159.0" mouseTransparent="true" prefHeight="37.0" prefWidth="63.0" text="Rank:">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
+      <ImageView fitHeight="208.0" fitWidth="200.0" mouseTransparent="true">
+         <image>
+            <Image url="@images/fuoco.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="208.0" fitWidth="200.0" layoutX="254.0" mouseTransparent="true">
+         <image>
+            <Image url="@images/fuoco.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
