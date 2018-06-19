@@ -31,7 +31,7 @@ public class EndGameScene {
     }
 
 
-    public void dispaly() throws IOException {
+    public static void dispaly() throws IOException {
         Stage window = new Stage();
 
         //Block events to other windows
