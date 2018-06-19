@@ -231,8 +231,7 @@ public class ChoosePattern {
 
         loadFilePatternCard();
 
-        playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()));
-        playGameButton.disableProperty().bind(patternSetted);
+        playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted));
 
         playGameButton.disableProperty().addListener(new ChangeListener<Boolean>() {
             @Override

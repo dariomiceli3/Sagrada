@@ -395,12 +395,28 @@ public class GuiController extends View {
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
 
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.updatePattern(patternCard);
+            }
+        });
 
     }
 
     @Override
     public void showTokens(int tokensNumber) {
+
+
+        // todo refactor this method for the tokens available at the start
+        // todo see when effectively it'sended by the model
+
+        /*Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.updateToken(tokensNumber);
+            }
+        });*/
 
     }
 
@@ -438,65 +454,122 @@ public class GuiController extends View {
     @Override
     public void showCurrentTurn() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.updateTurn();
+            }
+        });
+
     }
 
     @Override
     public void showOtherCurrentTurn(String username) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.updateOtherTurn(username);
+            }
+        });
 
     }
 
     @Override
     public void showRollCommand() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textRollMsg();
+            }
+        });
+
     }
 
     @Override
     public void showDraftPool(DraftPool draftPool) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    board.updateDraftPool(draftPool);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
     @Override
     public void showChooseCommand() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textChooseMsg();
+            }
+        });
     }
 
     @Override
     public void showMoveCommand(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textMoveMsg();
+            }
+        });
+
     }
 
     @Override
     public void showIndexPoolCommand(int poolsize) {
-
+        //non usare
     }
 
     @Override
     public void showIndexPatternCommand() {
-
+        //non usare
     }
 
     @Override
     public void showToolCommand(List<ToolCard> toolCards) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.toolMoveMsg();
+            }
+        });
     }
 
     @Override
     public void showToolChooseCommand() {
+        // non usare
 
     }
 
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
+        // non usare
 
     }
 
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
 
+        // stampare msg end of the round
+
     }
 
     @Override
     public void showFinalRank(List<Player> playerList) {
+        // cambiare scena con classifica finale
 
     }
 
@@ -513,10 +586,14 @@ public class GuiController extends View {
     @Override
     public void showTimer() {
 
+        // mostrare fine del turno causa timer
+
     }
 
     @Override
     public void showOtherTimer(String playerName) {
+
+        // mostrare altri la fine del turno causa timer
 
     }
 

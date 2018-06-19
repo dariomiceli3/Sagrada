@@ -44,7 +44,13 @@ public enum ViewState {
     TOOLSP,
     TOOLSPCHOOSE,
     TOOLSPDICE,
-    NOTAUTHORIZED
+    NOTAUTHORIZED,
+
+    //------for gui
+    DICEMOVE,
+    TOOLMOVE,
+    USEDICE,
+    USETOOL
 
 
 

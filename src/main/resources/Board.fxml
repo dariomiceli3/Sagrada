@@ -40,7 +40,7 @@
       <ImageView fx:id="toolCard3" fitHeight="164.0" fitWidth="127.0" layoutX="1241.0" layoutY="245.0" onMouseClicked="#handleTool3" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="publicCard1" fitHeight="164.0" fitWidth="127.0" layoutX="753.0" layoutY="433.0" onMouseClicked="#handleZoomPublic1" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="publicCard3" fitHeight="164.0" fitWidth="127.0" layoutX="1241.0" layoutY="433.0" onMouseClicked="#handleZoomPublic3" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="textGame" editable="false" layoutX="714.0" layoutY="784.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="404.0" />
+      <TextField fx:id="textGame" editable="false" focusTraversable="false" layoutX="714.0" layoutY="784.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="33.0" prefWidth="404.0" />
       <Button fx:id="skip" layoutX="1238.0" layoutY="784.0" mnemonicParsing="false" onAction="#skipButtonSelected" prefHeight="33.0" prefWidth="75.0" text="SKIP" />
       <Button fx:id="exit" layoutX="1330.0" layoutY="784.0" mnemonicParsing="false" onAction="#exitButtonSelected" prefHeight="33.0" prefWidth="75.0" text="EXIT" />
       <ImageView fx:id="publicCard2" fitHeight="164.0" fitWidth="127.0" layoutX="989.0" layoutY="433.0" onMouseClicked="#handleZoomPublic2" pickOnBounds="true" preserveRatio="true" />
@@ -172,54 +172,54 @@
          <graphic>
             <ImageView fx:id="imageCell20" fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="round1" blendMode="OVERLAY" layoutX="782.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0">
+      <ToggleButton fx:id="round1" blendMode="OVERLAY" layoutX="782.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" visible="false">
          <toggleGroup>
             <ToggleGroup fx:id="roundToggleGroup" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="round2" blendMode="OVERLAY" layoutX="842.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round3" blendMode="OVERLAY" layoutX="896.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round4" blendMode="OVERLAY" layoutX="956.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round5" blendMode="OVERLAY" layoutX="1010.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round6" blendMode="OVERLAY" layoutX="1066.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round7" blendMode="OVERLAY" layoutX="1124.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round8" blendMode="OVERLAY" layoutX="1181.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="round9" blendMode="OVERLAY" layoutX="1242.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" />
-      <ToggleButton fx:id="dice1" contentDisplay="CENTER" layoutX="718.0" layoutY="687.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0">
+      <ToggleButton fx:id="round2" blendMode="OVERLAY" layoutX="842.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round3" blendMode="OVERLAY" layoutX="896.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round4" blendMode="OVERLAY" layoutX="956.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round5" blendMode="OVERLAY" layoutX="1010.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round6" blendMode="OVERLAY" layoutX="1066.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round7" blendMode="OVERLAY" layoutX="1124.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round8" blendMode="OVERLAY" layoutX="1181.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="round9" blendMode="OVERLAY" layoutX="1242.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
+      <ToggleButton fx:id="dice1" contentDisplay="CENTER" layoutX="718.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" visible="false">
          <graphic>
             <ImageView fx:id="imageDice1" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
          <toggleGroup>
             <ToggleGroup fx:id="poolToggleGroup" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="dice2" contentDisplay="CENTER" layoutX="800.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice2" contentDisplay="CENTER" layoutX="800.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice2" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice3" contentDisplay="CENTER" layoutX="882.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice3" contentDisplay="CENTER" layoutX="882.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice3" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice4" contentDisplay="CENTER" layoutX="956.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice4" contentDisplay="CENTER" layoutX="956.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice4" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice5" contentDisplay="CENTER" layoutX="1037.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice5" contentDisplay="CENTER" layoutX="1037.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice5" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice6" contentDisplay="CENTER" layoutX="1118.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice6" contentDisplay="CENTER" layoutX="1118.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice6" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice7" contentDisplay="CENTER" layoutX="1199.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice7" contentDisplay="CENTER" layoutX="1199.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice7" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice8" contentDisplay="CENTER" layoutX="1275.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice8" contentDisplay="CENTER" layoutX="1275.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice8" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice9" contentDisplay="CENTER" layoutX="1351.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" opacity="0.0" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup">
+      <ToggleButton fx:id="dice9" contentDisplay="CENTER" layoutX="1351.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice9" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
@@ -231,6 +231,24 @@
       <ImageView fx:id="toolCardZoom1" fitHeight="293.0" fitWidth="222.0" layoutX="728.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool1" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom2" fitHeight="293.0" fitWidth="222.0" layoutX="945.0" layoutY="182.0" onMouseClicked="#handleUnzoomTool2" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom3" fitHeight="293.0" fitWidth="222.0" layoutX="1151.0" layoutY="181.0" onMouseClicked="#handleUnzoomTool3" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Button fx:id="rollButton" layoutX="613.0" layoutY="784.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" text="ROLL" />
+      <Button fx:id="roll" layoutX="613.0" layoutY="784.0" mnemonicParsing="false" onAction="#rollButtonSelected" prefHeight="35.0" prefWidth="75.0" text="ROLL" />
+      <Circle fill="WHITE" layoutX="916.0" layoutY="403.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1141.0" layoutY="403.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1389.0" layoutY="403.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="costTool1" layoutX="911.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="costTool2" layoutX="1136.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="costTool3" layoutX="1384.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

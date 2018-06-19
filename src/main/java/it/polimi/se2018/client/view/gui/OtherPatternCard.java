@@ -116,7 +116,12 @@ public class OtherPatternCard {
         for (int i = 0; i < patternCard.getPattern().size(); i++) {
             if (!patternCard.getPattern().get(i).isBoxEmpty()) {
                 patternCard.getDice(i);
-                loadDice(i);
+                try {
+                    loadDice(i);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -136,7 +141,7 @@ public class OtherPatternCard {
         }
     }
 
-    private void loadDice(int indexPattern) {
+    private void loadDice(int indexPattern) throws IOException {
 
         File file = new File("./");
         String fileName = patternCard.getDice(indexPattern).toStringGui();
@@ -228,6 +233,9 @@ public class OtherPatternCard {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+        finally {
+            fileStream.close();
         }
 
     }
