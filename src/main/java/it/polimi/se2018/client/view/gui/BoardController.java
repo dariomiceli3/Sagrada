@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -26,8 +27,8 @@ import java.util.List;
 
 public class BoardController {
 
-
-
+    @FXML
+    private AnchorPane pane;
     @FXML
     private ImageView panelWindow;
 
@@ -1125,35 +1126,111 @@ public class BoardController {
 
     }
 
-    private void unvisibleDraftPool() {
+    private void cleanDraftPool() {
 
-        int index = getDraftPool().getDraftPool().size();
+        int size = getDraftPool().getDraftPool().size();
 
-        if (index == 0) {
+        if (size == 1) {
             dice1.setVisible(false);
         }
-        if (index == 1) {
+        if (size == 2) {
+            dice1.setVisible(false);
             dice2.setVisible(false);
         }
-        if (index == 2) {
+        if (size == 3) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
             dice3.setVisible(false);
         }
-        if (index == 3) {
+        if (size == 4) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
             dice4.setVisible(false);
         }
-        if (index == 4) {
+        if (size == 5) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
+            dice4.setVisible(false);
             dice5.setVisible(false);
         }
-        if (index == 5) {
+
+        if (size == 6) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
+            dice4.setVisible(false);
+            dice5.setVisible(false);
             dice6.setVisible(false);
         }
-        if (index == 6) {
+
+        if (size == 7) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
+            dice4.setVisible(false);
+            dice5.setVisible(false);
+            dice6.setVisible(false);
             dice7.setVisible(false);
         }
-        if (index == 7) {
+
+        if (size == 8) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
+            dice4.setVisible(false);
+            dice5.setVisible(false);
+            dice6.setVisible(false);
+            dice7.setVisible(false);
+            dice8.setVisible(false);
+
+        }
+
+        if (size == 9) {
+            dice1.setVisible(false);
+            dice2.setVisible(false);
+            dice3.setVisible(false);
+            dice4.setVisible(false);
+            dice5.setVisible(false);
+            dice6.setVisible(false);
+            dice7.setVisible(false);
+            dice8.setVisible(false);
+            dice9.setVisible(false);
+
+        }
+
+    }
+
+    private void unvisibleDraftPool() {
+
+        int size = getDraftPool().getDraftPool().size();
+
+        if (size == 1) {
+            dice1.setVisible(false);
+        }
+        if (size == 2) {
+            dice2.setVisible(false);
+        }
+        if (size == 3) {
+            dice3.setVisible(false);
+        }
+        if (size == 4) {
+            dice4.setVisible(false);
+        }
+        if (size == 5) {
+            dice5.setVisible(false);
+        }
+        if (size == 6) {
+            dice6.setVisible(false);
+        }
+        if (size == 7) {
+            dice7.setVisible(false);
+        }
+        if (size == 8) {
             dice8.setVisible(false);
         }
-        if (index == 8) {
+        if (size == 9) {
             dice9.setVisible(false);
         }
     }
@@ -1167,6 +1244,7 @@ public class BoardController {
 
     public void updateTurn() {
         textGame.setText("It's your turn");
+        pane.setDisable(false);
         next.setDisable(false);
         skip.setDisable(false);
         roll.setDisable(true);
@@ -1174,15 +1252,17 @@ public class BoardController {
 
     public void updateOtherTurn(String name) {
         textGame.setText("It's " + name + " turn");
+        pane.setDisable(true);
         next.setDisable(true);
         skip.setDisable(true);
         roll.setDisable(true);
+        exit.setDisable(false);
     }
 
     public void textRollMsg() {
         textGame.setText("Click the roll button to roll the draft pool");
-        next.setDisable(false);
-        skip.setDisable(false);
+        next.setDisable(true);
+        skip.setDisable(true);
         roll.setDisable(false);
     }
 
@@ -1244,9 +1324,13 @@ public class BoardController {
            }
        }
 
-        currPoolSize = draftPool.getDraftPool().size();
+        currPoolSize = getDraftPool().getDraftPool().size();
 
-        if (currPoolSize < prevPoolSize) {
+        if (currPoolSize == 0) {
+            cleanDraftPool();
+        }
+
+        else if (currPoolSize < prevPoolSize) {
             unvisibleDraftPool();
             prevPoolSize = currPoolSize;
         }
@@ -1281,6 +1365,7 @@ public class BoardController {
     }
 
     public void textChooseMsg() {
+        skip.setDisable(false);
         roll.setDisable(true);
         next.setDisable(true);
         setGuiState(ViewState.MOVE);

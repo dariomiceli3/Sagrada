@@ -446,7 +446,6 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 board.updateRound(round);
             }
         });
