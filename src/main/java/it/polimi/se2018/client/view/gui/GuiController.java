@@ -27,9 +27,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -521,7 +524,7 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                board.textMoveMsg();
+                board.sendMove();
             }
         });
 
@@ -806,7 +809,10 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
         Parent root1 = (Parent) loader.load();
 
-        Scene scene = new Scene(root1);
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int width = gd.getDisplayMode().getWidth();
+        int height = gd.getDisplayMode().getHeight();
+        Scene scene = new Scene(root1, width, height);
         stage.setTitle("Sagrada Pattern Choose");
         stage.setScene(scene);
         stage.setResizable(true);
@@ -819,8 +825,10 @@ public class GuiController extends View {
         BoardController.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = (Parent) loader.load();
-
-        Scene board = new Scene(root2);
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int width = gd.getDisplayMode().getWidth();
+        int height = gd.getDisplayMode().getHeight();
+        Scene board = new Scene(root2, width, height);
         stage.setTitle("Sagrada Main Board");
         stage.setScene(board);
         stage.setResizable(true);
