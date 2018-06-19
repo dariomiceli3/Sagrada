@@ -161,7 +161,7 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
             view.showPatternUpdate(patternCard);
         }
         else {
-            view.showOtherPattern(patternCard, name);
+            view.showOtherPattern(patternCard, name, ID);
         }
 
     }

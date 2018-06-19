@@ -25,13 +25,13 @@ public class EndGameScene {
 
     private static List<Player> playerList;
 
-    private static void setPlayerList(List<Player> playerList){
+    protected static void setPlayerList(List<Player> playerList){
 
         EndGameScene.playerList = playerList;
     }
 
 
-    public static void dispaly() throws IOException {
+    public static void display() throws IOException {
         Stage window = new Stage();
 
         //Block events to other windows

@@ -216,7 +216,7 @@ public class SocketHandler implements ClientInterface, Runnable {
                 view.showPatternUpdate(((PatternUpdateEvent) event).getPatternCard());
             }
             else {
-                view.showOtherPattern(((PatternUpdateEvent) event).getPatternCard(), ((PatternUpdateEvent) event).getName());
+                view.showOtherPattern(((PatternUpdateEvent) event).getPatternCard(), ((PatternUpdateEvent) event).getName(), ((PatternUpdateEvent)event).getID());
             }
 
         }

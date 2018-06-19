@@ -867,7 +867,7 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showOtherPattern(PatternCard patternCard, String name) {
+    public void showOtherPattern(PatternCard patternCard, String name,  int ID) {
         System.out.println("Now Pattern of" + name + "is: ");
         System.out.println(patternCard.toString());
 

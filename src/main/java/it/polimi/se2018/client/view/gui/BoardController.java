@@ -4,6 +4,8 @@ import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DraftPool;
+import it.polimi.se2018.server.model.Components.Player;
+import it.polimi.se2018.server.model.Components.RoundTracker;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -50,8 +52,6 @@ public class BoardController {
     @FXML
     private Text tokensNumber;
 
-    @FXML
-    private ImageView roundTracker;
 
     @FXML
     private ImageView toolCard1;
@@ -455,8 +455,53 @@ public class BoardController {
     }
 
     @FXML
-    void handleRoundButton(ActionEvent event) {
+    void handleRoundButton(ActionEvent event) throws IOException {
 
+        try {
+            if (roundToggleGroup.getSelectedToggle().equals(round1)) {
+                RoundTrackerBox.setBoxRound(0);
+
+            }
+
+            if (roundToggleGroup.getSelectedToggle().equals(round2)) {
+                RoundTrackerBox.setBoxRound(1);
+
+            }
+            if (roundToggleGroup.getSelectedToggle().equals(round3)) {
+                RoundTrackerBox.setBoxRound(2);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round4)) {
+                RoundTrackerBox.setBoxRound(3);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round5)) {
+                RoundTrackerBox.setBoxRound(4);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round6)) {
+                RoundTrackerBox.setBoxRound(5);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round7)) {
+                RoundTrackerBox.setBoxRound(6);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round8)) {
+                RoundTrackerBox.setBoxRound(7);
+
+            }
+            if (poolToggleGroup.getSelectedToggle().equals(round9)) {
+                RoundTrackerBox.setBoxRound(8);
+            }
+        }
+        catch (NullPointerException e) {
+            System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
+
+        }
+        finally {
+            RoundTrackerBox.display();
+        }
     }
 
     @FXML
@@ -587,17 +632,71 @@ public class BoardController {
     }
 
     @FXML
-    void handleUpdatePattern2(MouseEvent event) {
+    void handleUpdatePattern2(MouseEvent event) throws IOException {
+
+        if (mainController.getPlayerID() == 0){
+            OtherPatternCard.setPatternCard(mainController.getPatternID1());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+        }
+        if (mainController.getPlayerID() == 1) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID0());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+        }
+
+        if (mainController.getPlayerID() == 2) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID0());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+        }
+        if (mainController.getPlayerID() == 3) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID0());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+        }
 
     }
 
     @FXML
-    void handleUpdatePattern3(MouseEvent event) {
+    void handleUpdatePattern3(MouseEvent event) throws IOException {
 
+        if (mainController.getPlayerID() == 0){
+            OtherPatternCard.setPatternCard(mainController.getPatternID2());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+        }
+        if (mainController.getPlayerID() == 1) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID2());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+        }
+
+        if (mainController.getPlayerID() == 2) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID1());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+        }
+        if (mainController.getPlayerID() == 3) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID1());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+        }
     }
 
     @FXML
-    void handleUpdatePattern4(MouseEvent event) {
+    void handleUpdatePattern4(MouseEvent event) throws IOException{
+
+        if (mainController.getPlayerID() == 0){
+            OtherPatternCard.setPatternCard(mainController.getPatternID3());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+        }
+        if (mainController.getPlayerID() == 1) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID3());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+        }
+
+        if (mainController.getPlayerID() == 2) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID3());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+        }
+        if (mainController.getPlayerID() == 3) {
+            OtherPatternCard.setPatternCard(mainController.getPatternID2());
+            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+        }
+
 
     }
 
@@ -646,6 +745,7 @@ public class BoardController {
     private DraftPool draftPool;
     private int prevPoolSize = DEFAULT;
     private int currPoolSize;
+    private RoundTracker roundTracker;
 
 
     public static void setMainController(GuiController mainController){
@@ -676,9 +776,17 @@ public class BoardController {
         this.draftPool = draftPool;
     }
 
+    protected RoundTracker getRoundTracker() {
+        return roundTracker;
+    }
+
+    protected void setRoundTracker(RoundTracker roundTracker){
+        this.roundTracker = roundTracker;
+    }
     public void initialize() throws IOException {
 
         GuiController.setBoard(this);
+        RoundTrackerBox.setMainController(this);
 
         setToolCost();
 
@@ -1234,6 +1342,46 @@ public class BoardController {
     }
 
     public void updateRound(int round) {
+        if (round == 1) {
+            AlertBox.display("Round", "Round 1 is started");
+        }
+        if (round == 2) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round1.setVisible(true);
+        }
+        if (round == 3) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round2.setVisible(true);
+        }
+        if (round == 4) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round3.setVisible(true);
+        }
+        if (round == 5) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round4.setVisible(true);
+        }
+        if (round == 6) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round5.setVisible(true);
+        }
+        if (round == 7) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round6.setVisible(true);
+        }
+        if (round == 8) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round7.setVisible(true);
+        }
+        if (round == 9) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round8.setVisible(true);
+        }
+        if (round == 10) {
+            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            round9.setVisible(true);
+        }
+
         textGame.setText("Round " + round + "is started");
         next.setDisable(true);
         skip.setDisable(true);
@@ -1362,6 +1510,14 @@ public class BoardController {
         }
     }
 
+
+
+    public void updateRoundTracker(RoundTracker roundTracker) {
+
+        setRoundTracker(roundTracker);
+
+    }
+
     public void textChooseMsg() {
         skip.setDisable(false);
         roll.setDisable(true);
@@ -1378,6 +1534,14 @@ public class BoardController {
         next.setDisable(true);
         setGuiState(ViewState.TOOLMOVE);
         textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
+    }
+
+    public void showRank(List<Player> playerList) throws IOException{
+
+        pane.setDisable(true);
+        EndGameScene.setPlayerList(playerList);
+        EndGameScene.display();
+
     }
 
 

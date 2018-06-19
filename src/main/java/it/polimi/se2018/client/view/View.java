@@ -73,7 +73,7 @@ public abstract class View implements Runnable {
 
     public abstract void showPattern(PatternCard patternCard) throws IOException;
 
-    public abstract void showOtherPattern(PatternCard patternCard, String playerName);
+    public abstract void showOtherPattern(PatternCard patternCard, String playerName, int ID);
 
     public abstract void showOtherStartPattern(PatternCard patternCard, int ID);
 

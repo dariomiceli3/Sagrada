@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GuiController extends View {
 
@@ -65,6 +66,10 @@ public class GuiController extends View {
     private PatternCard patternID1;
     private PatternCard patternID2;
     private PatternCard patternID3;
+    private String nameID0;
+    private String nameID1;
+    private String nameID2;
+    private String nameID3;
     private static BoardController board;
 
     public static void setBoard(BoardController board) {
@@ -222,6 +227,38 @@ public class GuiController extends View {
 
     public PatternCard getPatternID3() {
         return patternID3;
+    }
+
+    public String getNameID0() {
+        return nameID0;
+    }
+
+    public String getNameID1() {
+        return nameID1;
+    }
+
+    public String getNameID2() {
+        return nameID2;
+    }
+
+    public String getNameID3() {
+        return nameID3;
+    }
+
+    public void setNameID0(String nameID0) {
+        this.nameID0 = nameID0;
+    }
+
+    public void setNameID1(String nameID1) {
+        this.nameID1 = nameID1;
+    }
+
+    public void setNameID2(String nameID2) {
+        this.nameID2 = nameID2;
+    }
+
+    public void setNameID3(String nameID3) {
+        this.nameID3 = nameID3;
     }
 
     public Stage getStage() {
@@ -391,7 +428,30 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showOtherPattern(PatternCard patternCard, String playerName) {
+    public void showOtherPattern(PatternCard patternCard, String playerName, int ID) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                if (ID == 0) {
+                    patternID0 = patternCard;
+                    setNameID0(playerName);
+                }
+                if (ID == 1) {
+                    patternID1 = patternCard;
+                    setNameID1(playerName);
+                }
+                if (ID  == 2) {
+                    patternID2 = patternCard;
+                    setNameID2(playerName);
+                }
+                if (ID == 3) {
+                    patternID3 = patternCard;
+                    setNameID3(playerName);
+                }
+            }
+        });
 
     }
 
@@ -565,24 +625,42 @@ public class GuiController extends View {
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.updateRoundTracker(roundTracker);
+            }
+        });
+
         // stampare msg end of the round
 
     }
 
     @Override
     public void showFinalRank(List<Player> playerList) {
-        // cambiare scena con classifica finale
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    board.showRank(playerList);
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
     @Override
     public void showWinner() {
-
+        //non usare
     }
 
     @Override
     public void showLosers() {
-
+        // non usare
     }
 
     @Override

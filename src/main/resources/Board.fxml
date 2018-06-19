@@ -31,7 +31,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <ImageView fx:id="roundTracker" fitHeight="606.0" fitWidth="197.0" layoutX="961.0" layoutY="-181.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="606.0" fitWidth="197.0" layoutX="961.0" layoutY="-181.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@images/RoundTracker.jpg" />
          </image>
