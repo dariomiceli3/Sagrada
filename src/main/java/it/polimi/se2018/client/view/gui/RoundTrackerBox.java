@@ -29,7 +29,7 @@ import java.io.IOException;
 
 public class RoundTrackerBox {
 
-    private static GuiController mainController;
+    private static BoardController board;
 
     private static int round;
 
@@ -37,8 +37,8 @@ public class RoundTrackerBox {
 
     FileInputStream fileStream;
 
-    public static void setMainController(GuiController mainController){
-        RoundTrackerBox.mainController = mainController;
+    public static void setMainController(BoardController board){
+        RoundTrackerBox.board = board;
     }
 
     public static void setBoxRound(int round){
@@ -393,10 +393,10 @@ public class RoundTrackerBox {
 
     private void loadDice() throws IOException {
 
-        for (int i = 0; i < mainController.getRoundTracker().getRoundDice(round).size(); i++) {
+        for (int i = 0; i < board.getRoundTracker().getRoundDice(round).size(); i++) {
 
             File file = new File("./");
-            String fileName = mainController.getRoundTracker().getRoundDice(round).get(i).toStringGui();
+            String fileName = board.getRoundTracker().getRoundDice(round).get(i).toStringGui();
             String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/dice");
 
             try {
