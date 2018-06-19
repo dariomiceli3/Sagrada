@@ -1202,9 +1202,7 @@ public class BoardController {
 
     }
 
-    private void unvisibleDraftPool() {
-
-        int size = getDraftPool().getDraftPool().size();
+    private void unvisibleDraftPool(int size) {
 
         if (size == 1) {
             dice1.setVisible(false);
@@ -1331,7 +1329,7 @@ public class BoardController {
         }
 
         else if (currPoolSize < prevPoolSize) {
-            unvisibleDraftPool();
+            unvisibleDraftPool(prevPoolSize);
             prevPoolSize = currPoolSize;
         }
 
