@@ -706,6 +706,13 @@ public class GuiController extends View {
     @Override
     public void showGrozingRequest(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textGrozingMsg();
+            }
+        });
+
     }
 
     @Override

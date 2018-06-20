@@ -100,10 +100,10 @@ public class ToolCardRequest {
             board.setIncrease(tool1);
         }
         if(toolNumber == 11){
-            board.---(tool11);
+            //board.---(tool11);
         }
         if(toolNumber == 12){
-            board.---(tool12);
+            //board.---(tool12);
         }
     }
 

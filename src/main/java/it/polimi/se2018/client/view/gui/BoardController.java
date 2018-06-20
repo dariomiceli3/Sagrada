@@ -330,6 +330,10 @@ public class BoardController {
     @FXML
     void handleCellEvent(ActionEvent event) {
 
+        toolCard1.setDisable(true);
+        toolCard2.setDisable(true);
+        toolCard3.setDisable(true);
+
         if (guiState == ViewState.DICEMOVE) {
             next.setDisable(false);
         }
@@ -402,7 +406,13 @@ public class BoardController {
     @FXML
     void handleDicePool(ActionEvent event) {
 
-        setGuiState(ViewState.DICEMOVE);
+        if (guiState == ViewState.GROZINGCOMMAND) {
+            next.setDisable(false);
+        }
+
+        else {
+            setGuiState(ViewState.DICEMOVE);
+        }
 
         try {
             if (poolToggleGroup.selectedToggleProperty().isNull().get()) {
@@ -806,6 +816,20 @@ public class BoardController {
             mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
         }
 
+        if (guiState == ViewState.GROZINGPOOL) {
+            next.setDisable(true);
+            ToolCardRequest.setToolNumber(1);
+            try {
+                ToolCardRequest.display();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (guiState == ViewState.GROZINGCOMMAND) {
+            mainController.getConnection().useGrozingToolCard(mainController.getPlayerID(), indexPool, increase);
+        }
+
 
     }
 
@@ -839,7 +863,7 @@ public class BoardController {
     private int prevPoolSize = DEFAULT;
     private int currPoolSize;
     private RoundTracker roundTracker;
-
+    private int increase;
 
     public static void setMainController(GuiController mainController){
         BoardController.mainController = mainController;
@@ -876,10 +900,19 @@ public class BoardController {
     protected void setRoundTracker(RoundTracker roundTracker){
         this.roundTracker = roundTracker;
     }
+
+    protected void setIncrease(int increase) {
+        setGuiState(ViewState.GROZINGCOMMAND);
+        next.setDisable(false);
+        this.increase = increase;
+    }
+
+
     public void initialize() throws IOException {
 
         GuiController.setBoard(this);
         RoundTrackerBox.setMainController(this);
+        ToolCardRequest.setBoard(this);
 
         setToolCost();
 
@@ -1434,6 +1467,29 @@ public class BoardController {
         }
     }
 
+    private void disablePattern() {
+        cell1.setVisible(false);
+        cell2.setVisible(false);
+        cell3.setVisible(false);
+        cell4.setVisible(false);
+        cell5.setVisible(false);
+        cell6.setVisible(false);
+        cell7.setVisible(false);
+        cell8.setVisible(false);
+        cell9.setVisible(false);
+        cell10.setVisible(false);
+        cell11.setVisible(false);
+        cell12.setVisible(false);
+        cell13.setVisible(false);
+        cell14.setVisible(false);
+        cell15.setVisible(false);
+        cell16.setVisible(false);
+        cell17.setVisible(false);
+        cell18.setVisible(false);
+        cell19.setVisible(false);
+        cell20.setVisible(false);
+    }
+
     public void updateRound(int round) {
 
         textGame.setText("Round " + round + "is started");
@@ -1626,6 +1682,9 @@ public class BoardController {
     }
 
     public void textChooseMsg() {
+        toolCard1.setDisable(false);
+        toolCard2.setDisable(false);
+        toolCard3.setDisable(false);
         skip.setDisable(false);
         roll.setDisable(true);
         next.setDisable(true);
@@ -1637,11 +1696,17 @@ public class BoardController {
         skip.setDisable(false);
         roll.setDisable(true);
         next.setDisable(true);
+        toolCard1.setDisable(true);
+        toolCard2.setDisable(true);
+        toolCard3.setDisable(true);
         textGame.setText("Click the Dice & the Card position, then NEXT");
     }
 
 
     public void toolMoveMsg() {
+        toolCard1.setDisable(false);
+        toolCard2.setDisable(false);
+        toolCard3.setDisable(false);
         next.setDisable(true);
         setGuiState(ViewState.TOOLMOVE);
         textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
@@ -1656,11 +1721,21 @@ public class BoardController {
     }
 
     public void showRank(List<Player> playerList) throws IOException{
-
         pane.setDisable(true);
         EndGameScene.setPlayerList(playerList);
         EndGameScene.display();
+    }
 
+    public void textGrozingMsg() {
+
+        disablePattern();
+        roll.setDisable(true);
+        next.setDisable(false);
+        toolCard1.setDisable(true);
+        toolCard2.setDisable(true);
+        toolCard3.setDisable(true);
+        setGuiState(ViewState.GROZINGPOOL);
+        textGame.setText("Click the dice you want to increase/decrease, then NEXT");
     }
 
 }
