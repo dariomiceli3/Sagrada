@@ -580,13 +580,6 @@ public class GuiController extends View {
     @Override
     public void showMoveCommand(int poolSize) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                board.sendMove();
-            }
-        });
-
     }
 
     @Override
@@ -856,6 +849,7 @@ public class GuiController extends View {
             @Override
             public void run() {
                 AlertBox.display("Error", msg);
+                board.textRemoveMsg();
             }
         });
     }

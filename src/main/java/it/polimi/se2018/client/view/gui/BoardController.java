@@ -406,6 +406,7 @@ public class BoardController {
 
         try {
             if (poolToggleGroup.selectedToggleProperty().isNull().get()) {
+                System.out.println("reset dice");
                 dice1.setBlendMode(BlendMode.SRC_OVER);
                 dice2.setBlendMode(BlendMode.SRC_OVER);
                 dice3.setBlendMode(BlendMode.SRC_OVER);
@@ -1510,6 +1511,16 @@ public class BoardController {
 
     public void updateDraftPool(DraftPool draftPool) throws IOException {
 
+        dice1.setBlendMode(BlendMode.SRC_OVER);
+        dice2.setBlendMode(BlendMode.SRC_OVER);
+        dice3.setBlendMode(BlendMode.SRC_OVER);
+        dice4.setBlendMode(BlendMode.SRC_OVER);
+        dice5.setBlendMode(BlendMode.SRC_OVER);
+        dice6.setBlendMode(BlendMode.SRC_OVER);
+        dice7.setBlendMode(BlendMode.SRC_OVER);
+        dice8.setBlendMode(BlendMode.SRC_OVER);
+        dice9.setBlendMode(BlendMode.SRC_OVER);
+
         setDraftPool(draftPool);
 
        for (int i = 0; i < draftPool.getDraftPool().size(); i++) {
@@ -1622,9 +1633,13 @@ public class BoardController {
         textGame.setText("Click a Dice & the Card position or a Tool, then NEXT");
     }
 
-    public void sendMove() {
-        mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
+    public void textRemoveMsg() {
+        skip.setDisable(false);
+        roll.setDisable(true);
+        next.setDisable(true);
+        textGame.setText("Click the Dice & the Card position, then NEXT");
     }
+
 
     public void toolMoveMsg() {
         next.setDisable(true);
@@ -1647,6 +1662,5 @@ public class BoardController {
         EndGameScene.display();
 
     }
-
 
 }
