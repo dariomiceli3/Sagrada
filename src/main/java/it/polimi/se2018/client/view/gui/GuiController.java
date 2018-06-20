@@ -666,15 +666,23 @@ public class GuiController extends View {
     @Override
     public void showTimer() {
 
-        // mostrare fine del turno causa timer
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.endTimer();
+            }
+        });
 
     }
 
     @Override
     public void showOtherTimer(String playerName) {
-
-        // mostrare altri la fine del turno causa timer
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.endOtherTimer(playerName);
+            }
+        });
     }
 
     @Override

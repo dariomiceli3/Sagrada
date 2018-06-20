@@ -435,7 +435,7 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
-            System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
+            //System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
 
         }
 
@@ -496,7 +496,7 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
-            System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
+            //System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
 
         }
         finally {
@@ -1352,39 +1352,39 @@ public class BoardController {
             AlertBox.display("Round", "Round 1 is started");
         }
         if (round == 2) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round1.setVisible(true);
         }
         if (round == 3) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round2.setVisible(true);
         }
         if (round == 4) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round3.setVisible(true);
         }
         if (round == 5) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round4.setVisible(true);
         }
         if (round == 6) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round5.setVisible(true);
         }
         if (round == 7) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round6.setVisible(true);
         }
         if (round == 8) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round7.setVisible(true);
         }
         if (round == 9) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round8.setVisible(true);
         }
         if (round == 10) {
-            AlertBox.display("Round", "Round" + round + "is started. Check the Round Tracker");
+            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
             round9.setVisible(true);
         }
 
@@ -1538,6 +1538,14 @@ public class BoardController {
         next.setDisable(true);
         setGuiState(ViewState.TOOLMOVE);
         textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
+    }
+
+    public void endTimer() {
+        AlertBox.display("Timer", "You're time is over man!");
+    }
+
+    public void endOtherTimer(String playerName) {
+        AlertBox.display("Timer", "The time of " + playerName + " ended");
     }
 
     public void showRank(List<Player> playerList) throws IOException{
