@@ -41,6 +41,8 @@ public class ToolCardRequest {
         ToolCardRequest.board = board;
     }
 
+    private static Stage window;
+
     private int tool1;
 
     private int tool11;
@@ -105,6 +107,7 @@ public class ToolCardRequest {
         if(toolNumber == 12){
             //board.---(tool12);
         }
+        window.close();
     }
 
     @FXML
@@ -202,7 +205,7 @@ public class ToolCardRequest {
 
     public static void display()  throws IOException {
 
-        Stage window = new Stage();
+        window = new Stage();
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
