@@ -548,6 +548,11 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     }
 
+    @Override
+    public void setEndGameTimer(int ID) {
+        sendEvent(new EndGameTimerEvent());
+    }
+
     //---------------------------------------------single player methods-----------------------------------------
 
 

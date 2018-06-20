@@ -632,7 +632,6 @@ public class GuiController extends View {
             }
         });
 
-        // stampare msg end of the round
 
     }
 
@@ -643,6 +642,7 @@ public class GuiController extends View {
             @Override
             public void run() {
                 try {
+                    getConnection().setEndGameTimer(getPlayerID());
                     board.showRank(playerList);
                 }
                 catch (IOException e){
@@ -700,6 +700,13 @@ public class GuiController extends View {
 
     @Override
     public void showTokenError() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Error", "You have NOT enough tokens!");
+            }
+        });
 
     }
 
@@ -845,10 +852,18 @@ public class GuiController extends View {
 
     @Override
     public void showInvalidMove(String msg) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Error", msg);
+            }
+        });
     }
 
 
+
+
+    //------------single  player----------------------------------------------------
 
     @Override
     public void showDifficultyRequest() {

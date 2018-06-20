@@ -312,6 +312,20 @@ public class RmiHandler implements ClientInterface {
     }
 
     @Override
+    public void setEndGameTimer(int ID) {
+        try {
+            stub.setEndGameTimer(ID);
+        }
+        catch (RemoteException e) {
+            System.out.println("Error in setting end game timer");
+            e.printStackTrace();
+        }
+    }
+
+
+    //-------------------------single player----------------------
+
+    @Override
     public void setDifficultyToServer(int ID, int difficulty) {
         try{
             stub.setDifficultyToServer(ID, difficulty);

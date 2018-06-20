@@ -58,6 +58,8 @@ public interface RmiServerInterface extends Remote {
 
     public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) throws RemoteException;
 
+    public void setEndGameTimer(int ID) throws RemoteException;
+
     //-------------------------single player mode
 
     public void setDifficultyToServer(int ID, int difficulty) throws RemoteException;

@@ -989,6 +989,7 @@ public class CliView extends View implements Runnable {
         for (Player player : playerList) {
             System.out.println(player.toStringPoints());
         }
+        getConnection().setEndGameTimer(super.getPlayerID());
     }
 
     @Override

@@ -14,22 +14,22 @@
             <Image url="@images/mainBackground.jpg" />
          </image>
       </ImageView>
-      <TextField blendMode="OVERLAY" editable="false" layoutX="171.0" layoutY="30.0" mouseTransparent="true" prefHeight="40.0" prefWidth="118.0" text="Game ended!!!">
+      <TextField blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="171.0" layoutY="30.0" mouseTransparent="true" prefHeight="40.0" prefWidth="118.0" text="Game ended!!!">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="winnerText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="113.0" mouseTransparent="true" prefHeight="37.0" prefWidth="345.0">
+      <TextField fx:id="winnerText" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="50.0" layoutY="113.0" mouseTransparent="true" prefHeight="37.0" prefWidth="345.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextArea fx:id="rankText" blendMode="OVERLAY" editable="false" layoutX="50.0" layoutY="206.0" mouseTransparent="true" prefHeight="218.0" prefWidth="345.0">
+      <TextArea fx:id="rankText" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="50.0" layoutY="206.0" mouseTransparent="true" prefHeight="218.0" prefWidth="345.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextArea>
-      <TextField blendMode="OVERLAY" editable="false" layoutX="191.0" layoutY="159.0" mouseTransparent="true" prefHeight="37.0" prefWidth="63.0" text="Rank:">
+      <TextField blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="191.0" layoutY="159.0" mouseTransparent="true" prefHeight="37.0" prefWidth="63.0" text="Rank:">
          <font>
             <Font size="16.0" />
          </font>

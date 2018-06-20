@@ -51,6 +51,8 @@ public interface ClientInterface {
 
     public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo);
 
+    public void setEndGameTimer(int ID);
+
     //-------------------------single player mode
 
     public void setDifficultyToServer(int ID, int difficulty);

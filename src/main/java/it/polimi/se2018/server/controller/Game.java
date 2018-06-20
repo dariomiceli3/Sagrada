@@ -197,6 +197,10 @@ public class Game implements Observer {
         if (arg instanceof PlayerNoTokenEvent){
             startTool(virtualView);
         }
+
+        if (arg instanceof EndGameTimerEvent) {
+            endTimer();
+        }
        /* if(arg instanceof DisconnectPlayerEvent){
             model.getPlayerFromID(getCurrID()).setOff(true);
             disconnectPlayerNumber++;
@@ -365,7 +369,7 @@ public class Game implements Observer {
 
     private void startTurn(){
 
-        //startTimer();
+        startTimer();
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
@@ -588,6 +592,10 @@ public class Game implements Observer {
     }
 
 
+    protected void endTimer() {
+        timer.cancel();
+    }
+
     protected void startTimer() {
 
         if (timer != null) {
@@ -612,7 +620,7 @@ public class Game implements Observer {
                 nextTurn();
             }
 
-        }, (long) 10 * 1000);
+        }, (long) 3 * 1000);
     }
 
 

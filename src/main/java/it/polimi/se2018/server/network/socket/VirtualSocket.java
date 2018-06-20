@@ -161,6 +161,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                if (received instanceof EndGameTimerEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
                 //-------------single player
 
                 if (received instanceof ToolNumberEvent) {

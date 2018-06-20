@@ -177,6 +177,11 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
         sendEventVirtual(ID, new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
     }
 
+    @Override
+    public void setEndGameTimer(int ID) {
+        sendEventVirtual(ID, new EndGameTimerEvent());
+    }
+
     //---------------------------single player methods-------------------------------------------
 
     @Override
