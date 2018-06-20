@@ -405,33 +405,125 @@ public class BoardController {
         setGuiState(ViewState.DICEMOVE);
 
         try {
+            if (poolToggleGroup.selectedToggleProperty().isNull().get()) {
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
+            }
             if (poolToggleGroup.getSelectedToggle().equals(dice1)) {
                 setIndexPool(0);
+                dice1.setBlendMode(BlendMode.COLOR_BURN);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
 
             if (poolToggleGroup.getSelectedToggle().equals(dice2)) {
                 setIndexPool(1);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.COLOR_BURN);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice3)) {
                 setIndexPool(2);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.COLOR_BURN);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice4)) {
                 setIndexPool(3);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.COLOR_BURN);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice5)) {
                 setIndexPool(4);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.COLOR_BURN);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice6)) {
                 setIndexPool(5);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.COLOR_BURN);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice7)) {
                 setIndexPool(6);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.COLOR_BURN);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice8)) {
                 setIndexPool(7);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.COLOR_BURN);
+                dice9.setBlendMode(BlendMode.SRC_OVER);
             }
             if (poolToggleGroup.getSelectedToggle().equals(dice9)) {
                 setIndexPool(8);
+                dice1.setBlendMode(BlendMode.SRC_OVER);
+                dice2.setBlendMode(BlendMode.SRC_OVER);
+                dice3.setBlendMode(BlendMode.SRC_OVER);
+                dice4.setBlendMode(BlendMode.SRC_OVER);
+                dice5.setBlendMode(BlendMode.SRC_OVER);
+                dice6.setBlendMode(BlendMode.SRC_OVER);
+                dice7.setBlendMode(BlendMode.SRC_OVER);
+                dice8.setBlendMode(BlendMode.SRC_OVER);
+                dice9.setBlendMode(BlendMode.COLOR_BURN);
             }
         }
         catch (NullPointerException e) {

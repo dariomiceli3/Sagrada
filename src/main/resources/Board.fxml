@@ -184,42 +184,42 @@
       <ToggleButton fx:id="round7" blendMode="OVERLAY" layoutX="1124.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
       <ToggleButton fx:id="round8" blendMode="OVERLAY" layoutX="1181.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
       <ToggleButton fx:id="round9" blendMode="OVERLAY" layoutX="1242.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRoundButton" prefHeight="35.0" prefWidth="40.0" toggleGroup="$roundToggleGroup" visible="false" />
-      <ToggleButton fx:id="dice1" contentDisplay="CENTER" layoutX="718.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" visible="false">
+      <ToggleButton fx:id="dice1" contentDisplay="CENTER" layoutX="718.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" visible="false">
          <graphic>
             <ImageView fx:id="imageDice1" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
          <toggleGroup>
             <ToggleGroup fx:id="poolToggleGroup" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="dice2" contentDisplay="CENTER" layoutX="800.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice2" contentDisplay="CENTER" layoutX="800.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice2" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice3" contentDisplay="CENTER" layoutX="882.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice3" contentDisplay="CENTER" layoutX="882.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice3" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice4" contentDisplay="CENTER" layoutX="956.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice4" contentDisplay="CENTER" layoutX="956.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice4" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice5" contentDisplay="CENTER" layoutX="1037.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice5" contentDisplay="CENTER" layoutX="1037.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice5" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice6" contentDisplay="CENTER" layoutX="1118.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice6" contentDisplay="CENTER" layoutX="1118.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice6" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice7" contentDisplay="CENTER" layoutX="1199.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice7" contentDisplay="CENTER" layoutX="1199.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice7" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice8" contentDisplay="CENTER" layoutX="1275.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice8" contentDisplay="CENTER" layoutX="1275.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice8" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
-      <ToggleButton fx:id="dice9" contentDisplay="CENTER" layoutX="1351.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="45.0" prefWidth="45.0" toggleGroup="$poolToggleGroup" visible="false">
+      <ToggleButton fx:id="dice9" contentDisplay="CENTER" layoutX="1351.0" layoutY="682.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDicePool" prefHeight="30.0" prefWidth="30.0" toggleGroup="$poolToggleGroup" visible="false">
          <graphic>
             <ImageView fx:id="imageDice9" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></ToggleButton>
