@@ -1342,6 +1342,12 @@ public class BoardController {
     }
 
     public void updateRound(int round) {
+
+        textGame.setText("Round " + round + "is started");
+        next.setDisable(true);
+        skip.setDisable(true);
+        roll.setDisable(true);
+
         if (round == 1) {
             AlertBox.display("Round", "Round 1 is started");
         }
@@ -1382,11 +1388,9 @@ public class BoardController {
             round9.setVisible(true);
         }
 
-        textGame.setText("Round " + round + "is started");
-        next.setDisable(true);
-        skip.setDisable(true);
-        roll.setDisable(true);
     }
+
+
 
     public void updateTurn() {
         textGame.setText("It's your turn");
