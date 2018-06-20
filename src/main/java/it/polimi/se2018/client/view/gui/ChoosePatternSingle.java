@@ -1,4 +1,4 @@
-package it.polimi.se2018.client.view.gui;
+/*package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
@@ -498,3 +498,4 @@ public class ChoosePatternSingle {
     }
 
 }
+*/
