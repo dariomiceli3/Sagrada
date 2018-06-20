@@ -21,7 +21,17 @@ public class EndGameScene {
     private TextField winnerText;
 
     @FXML
-    private TextArea rankText;
+    private TextArea rankText1;
+
+    @FXML
+    private TextArea rankText2;
+
+    @FXML
+    private TextArea rankText3;
+
+    @FXML
+    private TextArea rankText4;
+
 
     private static List<Player> playerList;
 
@@ -55,7 +65,21 @@ public class EndGameScene {
         winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
 
         for (Player player : playerList) {
-            rankText.setText(player.toStringPoints() + "\n");
+            int i = 0;
+            if(i == 0) {
+                rankText1.setText(player.toStringPoints() + "\n");
+            }
+            if(i == 1) {
+                rankText2.setText(player.toStringPoints() + "\n");
+            }
+            if(i == 2) {
+                rankText3.setText(player.toStringPoints() + "\n");
+            }
+            if(i == 3) {
+                rankText4.setText(player.toStringPoints() + "\n");
+            }
+            i++;
+
         }
     }
 }

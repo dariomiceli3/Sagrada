@@ -289,7 +289,7 @@ public class RoundTrackerBox {
 
         selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
 
-        button1.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
+       /* button1.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
             @Override
             public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
 
@@ -421,7 +421,7 @@ public class RoundTrackerBox {
 
             }
 
-        });
+        });*/
 
 
 
