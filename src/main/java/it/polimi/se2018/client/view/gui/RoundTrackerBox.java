@@ -142,6 +142,7 @@ public class RoundTrackerBox {
                 button2.setBlendMode(BlendMode.SRC_OVER);
                 button3.setBlendMode(BlendMode.SRC_OVER);
                 button4.setBlendMode(BlendMode.SRC_OVER);
+                System.out.println();
                 button5.setBlendMode(BlendMode.SRC_OVER);
                 button6.setBlendMode(BlendMode.SRC_OVER);
                 button7.setBlendMode(BlendMode.SRC_OVER);
