@@ -94,7 +94,7 @@ public class OtherPatternCard {
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Pattern Card of : "/* + name*/);
+        window.setTitle("Pattern Card of : " + name);
         FXMLLoader loader = new FXMLLoader(OtherPatternCard.class.getResource("/PatternOtherPlayer.fxml"));
         Parent root1 = (Parent) loader.load();
         Scene scene = new Scene(root1);

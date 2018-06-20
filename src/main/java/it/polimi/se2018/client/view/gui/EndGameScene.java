@@ -50,7 +50,7 @@ public class EndGameScene {
         });
     }
 
-    public void inizialize(){
+    public void initialize(){
 
         winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
 
