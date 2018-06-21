@@ -16,13 +16,13 @@
             <Image url="@images/mainBackground.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="66.0" onMouseClicked="#handleToolZoom1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardOne" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="66.0" onMouseClicked="#handleToolZoom1" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <ImageView fx:id="toolCardTwo" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardTwo" fitHeight="150.0" fitWidth="200.0" layoutX="278.0" layoutY="66.0" onMouseClicked="#handleToolZoom2" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <ImageView fx:id="toolCardThree" fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="66.0" onMouseClicked="#handleToolZoom3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="toolCardThree" fitHeight="150.0" fitWidth="200.0" layoutX="516.0" layoutY="66.0" onMouseClicked="#handleToolZoom3" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
       <ImageView fx:id="publicOne" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="275.0" onMouseClicked="#handlePublicZoom1" pickOnBounds="true" preserveRatio="true">
@@ -87,5 +87,11 @@
       <RadioButton fx:id="radioPatternTwo" layoutX="1043.0" layoutY="217.0" mnemonicParsing="false" toggleGroup="$patternToggleGroup" />
       <RadioButton fx:id="radioPatternFour" layoutX="1043.0" layoutY="465.0" mnemonicParsing="false" toggleGroup="$patternToggleGroup" />
       <Button fx:id="loadButton" layoutX="772.0" layoutY="658.0" mnemonicParsing="false" onAction="#loadButtonSelected" prefHeight="48.0" prefWidth="117.0" text="Load" />
+      <ImageView fx:id="privateCardTwo" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" layoutY="512.0" onMouseClicked="#handlePrivateZoomTwo" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="toolCardFour" fitHeight="150.0" fitWidth="200.0" layoutX="162.0" layoutY="66.0" onMouseClicked="#handleToolZoom4" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="toolCardFive" fitHeight="150.0" fitWidth="200.0" layoutX="393.0" layoutY="66.0" onMouseClicked="#handleToolZoom5" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="privateCardZoom2" fitHeight="364.0" fitWidth="280.0" layoutX="32.0" layoutY="500.0" onMouseClicked="#handlePrivateUnzoom2" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="toolCard5Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="321.0" layoutY="53.0" onMouseClicked="#handleToolUnzoom5" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="toolCard4Zoom" fitHeight="364.0" fitWidth="280.0" layoutX="85.0" layoutY="53.0" onMouseClicked="#handleToolUnzoom4" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
 </AnchorPane>

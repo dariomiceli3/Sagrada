@@ -22,8 +22,8 @@ public class Login extends Application {
         Scene scene = new Scene(root);
         primaryStage.setTitle("Sagrada Login");
         primaryStage.setScene(scene);
-        primaryStage.setHeight(550);
-        primaryStage.setWidth(395);
+        //primaryStage.setHeight(550);
+       // primaryStage.setWidth(395);
         primaryStage.setResizable(false);
         primaryStage.show();
 
