@@ -47,7 +47,7 @@ public class TestPatternCard {
             assertEquals("Lux Astram",patternCardArrayList.get(8).getName());
             assertEquals(5,patternCardArrayList.get(8).getDifficulty());
             assertEquals(20, patternCardArrayList.get(8).getPattern().size());
-            assertEquals("Chromatic Splender",patternCardArrayList.get(9).getName());
+            assertEquals("Chromatic Splendor",patternCardArrayList.get(9).getName());
             assertEquals(4,patternCardArrayList.get(9).getDifficulty());
             assertEquals(20, patternCardArrayList.get(9).getPattern().size());
             assertEquals("Firelight",patternCardArrayList.get(10).getName());
@@ -59,10 +59,10 @@ public class TestPatternCard {
             assertEquals("Firmitas",patternCardArrayList.get(12).getName());
             assertEquals(5,patternCardArrayList.get(12).getDifficulty());
             assertEquals(20, patternCardArrayList.get(12).getPattern().size());
-            assertEquals("Symphony of Light",patternCardArrayList.get(13).getName());
+            assertEquals("Symphony Of Light",patternCardArrayList.get(13).getName());
             assertEquals(6,patternCardArrayList.get(13).getDifficulty());
             assertEquals(20, patternCardArrayList.get(13).getPattern().size());
-            assertEquals("Aurora Sagradis",patternCardArrayList.get(14).getName());
+            assertEquals("Aurorae Sagradis",patternCardArrayList.get(14).getName());
             assertEquals(4,patternCardArrayList.get(14).getDifficulty());
             assertEquals(20, patternCardArrayList.get(14).getPattern().size());
             assertEquals("Industria",patternCardArrayList.get(15).getName());
@@ -74,10 +74,10 @@ public class TestPatternCard {
             assertEquals("Batllo",patternCardArrayList.get(17).getName());
             assertEquals(5,patternCardArrayList.get(17).getDifficulty());
             assertEquals(20, patternCardArrayList.get(17).getPattern().size());
-            assertEquals("Water of Life",patternCardArrayList.get(18).getName());
+            assertEquals("Water Of Life",patternCardArrayList.get(18).getName());
             assertEquals(6,patternCardArrayList.get(18).getDifficulty());
             assertEquals(20, patternCardArrayList.get(18).getPattern().size());
-            assertEquals("Ripples of Light",patternCardArrayList.get(19).getName());
+            assertEquals("Ripples Of Light",patternCardArrayList.get(19).getName());
             assertEquals(5,patternCardArrayList.get(19).getDifficulty());
             assertEquals(20, patternCardArrayList.get(19).getPattern().size());
             assertEquals("Lux Mundi",patternCardArrayList.get(20).getName());
@@ -89,7 +89,7 @@ public class TestPatternCard {
             assertEquals("Suns Glory",patternCardArrayList.get(22).getName());
             assertEquals(6,patternCardArrayList.get(22).getDifficulty());
             assertEquals(20, patternCardArrayList.get(22).getPattern().size());
-            assertEquals("Fulgor del Cielo",patternCardArrayList.get(23).getName());
+            assertEquals("Fulgor Del Cielo",patternCardArrayList.get(23).getName());
             assertEquals(5,patternCardArrayList.get(23).getDifficulty());
             assertEquals(20, patternCardArrayList.get(23).getPattern().size());
         }

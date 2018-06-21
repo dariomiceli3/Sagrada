@@ -957,7 +957,8 @@ public class GuiController extends View {
         Scene board = new Scene(root2, width, height);
         stage.setTitle("Sagrada Main Board");
         stage.setScene(board);
-        stage.setResizable(true);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
         stage.show();
     }
 

@@ -813,11 +813,7 @@ public class PatternCard implements Serializable {
              if ((box.getDice().getColor() == dice.getColor())) {
                  return false;
              } else {
-                 if ((box.getDice().getValue()) == (dice.getValue())) {
-                     return false;
-                 } else {
-                     return true;
-                 }
+                 return (box.getDice().getValue()) != (dice.getValue());
              }
          }
      }
@@ -828,12 +824,7 @@ public class PatternCard implements Serializable {
 
           GlassBox box = pattern.get(index);
 
-          if (box.isBoxEmpty()) {
-               return true;
-          }
-          else {
-               return false;
-          }
+         return box.isBoxEmpty();
 
      }
 
@@ -841,19 +832,14 @@ public class PatternCard implements Serializable {
      // check if the first dice is placed on an edge or corner
      private boolean checkFirstDice(int index) {
 
-          Integer[] corner = {0,1,2,3,4,5,9,10,14,15,16,17,18,19};
+         Integer[] corner = {0,1,2,3,4,5,9,10,14,15,16,17,18,19};
 
-          if (Arrays.asList(corner).contains(index)) {
-               return true;
-          }
-          else {
-               return false;
-          }
+         return Arrays.asList(corner).contains(index);
      }
 
 
      // check if the pattern scheme is empty (no dice placed) or not
-     public boolean isPatternEmpty(PatternCard patternCard) {
+     private boolean isPatternEmpty(PatternCard patternCard) {
 
           ArrayList <GlassBox> patternCopy = patternCard.getPattern();
 
@@ -867,18 +853,6 @@ public class PatternCard implements Serializable {
           return true;
 
      }
-
-     /* fill the pattern card with all null values
-     public void fillPattern() {
-
-          final int NUMBER_OF_BOX = 20;
-          GlassBox nullBox = new GlassBox();
-
-          for (int i = 0; i < NUMBER_OF_BOX; i++) {
-               pattern.add(nullBox);
-          }
-
-     }*/
 
 
      public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException {
@@ -913,16 +887,20 @@ public class PatternCard implements Serializable {
      }
 
      @Override
-    public String toString(){
+    public String toString() {
 
-         return "Pattern Card Name: " + this.name + "\n" +
-                 "Difficulty: " + this.difficulty + "\n" +
+         String card = "Pattern Card Name: " + this.name + "\n" + "Difficulty: " + this.difficulty + "\n";
 
-                 pattern.get(0).toString() + " " + pattern.get(1).toString() + " " + pattern.get(2).toString() + " " + pattern.get(3).toString() + " " + pattern.get(4).toString() + "\n" +
-                 pattern.get(5).toString() + " " + pattern.get(6).toString() + " " + pattern.get(7).toString() + " " + pattern.get(8).toString() + " " + pattern.get(9).toString() + "\n" +
-                 pattern.get(10).toString() + " " + pattern.get(11).toString() + " " + pattern.get(12).toString() + " " + pattern.get(13).toString() + " " + pattern.get(14).toString() + "\n" +
-                 pattern.get(15).toString() + " " + pattern.get(16).toString() + " " + pattern.get(17).toString() + " " + pattern.get(18).toString() + " " + pattern.get(19).toString();
+         for (int i = 0; i < pattern.size(); i++) {
 
-
+             card = card + pattern.get(i).toString();
+             if (i == 4 || i == 9 || i == 14){
+                 card = card + "\n";
+             }
+             else {
+                 card = card + " ";
+             }
+         }
+         return card;
      }
 }

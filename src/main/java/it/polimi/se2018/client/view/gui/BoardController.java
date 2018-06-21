@@ -836,6 +836,9 @@ public class BoardController {
 
         if (guiState == ViewState.TOOLMOVE) {
             mainController.getConnection().setChooseToServer(mainController.getPlayerID(), 1);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
         }
 
         if (guiState == ViewState.TOOLMOVESECOND) {
@@ -1532,6 +1535,28 @@ public class BoardController {
         cell20.setVisible(false);
     }
 
+    private void enablePattern() {
+        cell1.setVisible(true);
+        cell2.setVisible(true);
+        cell3.setVisible(true);
+        cell4.setVisible(true);
+        cell5.setVisible(true);
+        cell6.setVisible(true);
+        cell7.setVisible(true);
+        cell8.setVisible(true);
+        cell9.setVisible(true);
+        cell10.setVisible(true);
+        cell12.setVisible(true);
+        cell13.setVisible(true);
+        cell14.setVisible(true);
+        cell15.setVisible(true);
+        cell16.setVisible(true);
+        cell17.setVisible(true);
+        cell18.setVisible(true);
+        cell19.setVisible(true);
+        cell20.setVisible(true);
+    }
+
     public void updateRound(int round) {
 
         textGame.setText("Round " + round + "is started");
@@ -1753,6 +1778,7 @@ public class BoardController {
             textGame.setText("Click the Dice & the correct position, then NEXT");
         }
         else {
+           enablePattern();
            setGuiState(ViewState.DICEMOVESECOND);
            skip.setDisable(false);
            roll.setDisable(true);
