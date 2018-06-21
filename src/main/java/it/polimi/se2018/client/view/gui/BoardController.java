@@ -415,14 +415,43 @@ public class BoardController {
         if (guiState == ViewState.EGLOMISESTART) {
             setIndexPatternStartOne(indexPattern);
             setGuiState(ViewState.EGLOMISEEND);
-            System.out.println("index start"+ indexPatternStartOne);
         }
 
         if (guiState == ViewState.EGLOMISEEND) {
             setIndexPatternEndOne(indexPattern);
-            System.out.println("index end"+ indexPatternEndOne);
             next.setDisable(false);
 
+        }
+
+        if (guiState == ViewState.COPPERSTART) {
+            setIndexPatternStartOne(indexPattern);
+            setGuiState(ViewState.COPPEREND);
+        }
+
+        if (guiState == ViewState.COPPEREND) {
+            setIndexPatternEndOne(indexPattern);
+            next.setDisable(false);
+        }
+
+        if (guiState == ViewState.LATHEKINSTARTONE) {
+            setIndexPatternStartOne(indexPattern);
+            setGuiState(ViewState.LATHEKINENDONE);
+        }
+
+        if (guiState == ViewState.LATHEKINENDONE) {
+            setIndexPatternEndOne(indexPattern);
+            textGame.setText("Click the 2nd dice you want to move, and where you want to move it, then NEXT");
+            setGuiState(ViewState.LATHEKINSTARTONE);
+        }
+
+        if (guiState == ViewState.LATHEKINSTARTONE) {
+            setIndexPatternStartTwo(indexPattern);
+            setGuiState(ViewState.LATHEKINENDTWO);
+        }
+
+        if (guiState == ViewState.LATHEKINENDTWO) {
+            setIndexPatternEndTwo(indexPattern);
+            next.setDisable(false);
         }
 
 
@@ -569,6 +598,14 @@ public class BoardController {
         catch (NullPointerException e) {
             //System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
 
+        }
+
+        if (guiState == ViewState.FLUXBRUSH) {
+            next.setDisable(false);
+        }
+
+        if (guiState == ViewState.LENSCUTTERPOOL) {
+            disablePool();
         }
 
 
@@ -893,16 +930,22 @@ public class BoardController {
             mainController.getConnection().useEglomiseToolCard(mainController.getPlayerID(), indexPatternStartOne, indexPatternEndOne);
         }
 
+        if (guiState == ViewState.COPPEREND) {
+            mainController.getConnection().useCopperFoilToolCard(mainController.getPlayerID(), indexPatternStartOne, indexPatternEndOne);
+        }
 
-    }
+        if (guiState == ViewState.LATHEKINENDTWO) {
+            mainController.getConnection().useLathekinToolCard(mainController.getPlayerID(), indexPatternStartOne, indexPatternEndOne, indexPatternStartTwo, indexPatternEndTwo );
+        }
 
-    public void useTool() {
-        mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
-        updateCost(indexTool);
-    }
+        if (guiState == ViewState.FLUXBRUSH) {
+            mainController.getConnection().useFluxBrushToolCard(mainController.getPlayerID(), indexTool);
+        }
+        if (guiState == ViewState.LENSCUTTERPOOL) {
+            mainController.getConnection().useLensCutterToolCard(mainController.getPlayerID(), indexPool, round, indexPosition);
+        }
 
-    public void useDice() {
-        mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
+
     }
 
     @FXML
@@ -940,6 +983,8 @@ public class BoardController {
     private int currPoolSize;
     private RoundTracker roundTracker;
     private int increase;
+    private int indexPosition;
+    private int round;
 
 
     public static void setMainController(GuiController mainController){
@@ -1001,6 +1046,17 @@ public class BoardController {
         this.increase = increase;
     }
 
+    protected void setIndexPosition(int index) {
+        if (guiState == ViewState.LENSCUTTERPOOL) {
+            this.indexPosition = index;
+            next.setDisable(false);
+        }
+    }
+
+    protected void setRound(int round) {
+        this.round = round;
+    }
+
 
     public void initialize() throws IOException {
 
@@ -1017,16 +1073,6 @@ public class BoardController {
         loadPublicCard();
         loadToolCard();
         loadOtherPattern();
-
-
-        /*poolToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
-                if (poolToggleGroup.getSelectedToggle() != null) {
-                    System.out.println(poolToggleGroup.getSelectedToggle().getUserData().toString());
-                }
-            }
-        });*/
 
 
         privateCardZoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
@@ -2078,7 +2124,7 @@ public class BoardController {
         EndGameScene.display();
     }
 
-    public void textGrozingMsg() {
+    protected void textGrozingMsg() {
         enablePool();
         setToken(mainController.getTokens());
         disablePattern();
@@ -2089,7 +2135,7 @@ public class BoardController {
         textGame.setText("Click the dice you want to increase/decrease, then NEXT");
     }
 
-    public void textEglomiseMsg() {
+    protected void textEglomiseMsg() {
         disablePool();
         enablePattern();
         setToken(mainController.getTokens());
@@ -2098,6 +2144,47 @@ public class BoardController {
         disableTool();
         setGuiState(ViewState.EGLOMISESTART);
         textGame.setText("Click the dice you want to move, and where you want to move it, then NEXT");
+    }
+
+    protected void textCopperFoilMsg() {
+        disablePool();
+        enablePattern();
+        roll.setDisable(true);
+        next.setDisable(true);
+        disableTool();
+        setGuiState(ViewState.COPPERSTART);
+        textGame.setText("Click the dice you want to move, and where you want to move it, then NEXT");
+    }
+
+    protected void textLathekinMsg() {
+        disablePool();
+        enablePattern();
+        disableTool();
+        roll.setDisable(true);
+        next.setDisable(true);
+        setGuiState(ViewState.LATHEKINSTARTONE);
+        textGame.setText("Click the 1st dice you want to move, and where you want to move it");
+    }
+
+    protected void textLensCutterMsg() {
+        enablePool();
+        disablePattern();
+        disableTool();
+        roll.setDisable(true);
+        next.setDisable(true);
+        setGuiState(ViewState.LENSCUTTERPOOL);
+        textGame.setText("Click the dice in the Draft Pool, and in the Round Tracker, then NEXT");
+
+    }
+
+    protected void textFluxBrushMsg() {
+        disablePattern();
+        disableTool();
+        enablePool();
+        roll.setDisable(true);
+        next.setDisable(true);
+        setGuiState(ViewState.FLUXBRUSH);
+        textGame.setText("Click the dice you want to re-roll, then NEXT");
     }
 
 }

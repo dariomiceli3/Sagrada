@@ -250,7 +250,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextArea fx:id="textGame" editable="false" focusTraversable="false" layoutX="712.0" layoutY="780.0" mouseTransparent="true" prefHeight="43.0" prefWidth="398.0" />
+      <TextArea fx:id="textGame" editable="false" focusTraversable="false" layoutX="712.0" layoutY="780.0" prefHeight="43.0" prefWidth="398.0" />
       <TextField fx:id="textPrivateSingle" alignment="CENTER" blendMode="OVERLAY" editable="false" focusTraversable="false" layoutX="1251.0" layoutY="606.0" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="23.0" prefWidth="109.0" text="private card" visible="false">
          <font>
             <Font name="Lucida Handwriting Italic" size="12.0" />

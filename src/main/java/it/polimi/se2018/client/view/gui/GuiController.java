@@ -747,35 +747,56 @@ public class GuiController extends View {
     @Override
     public void showCopperFoilStart() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textCopperFoilMsg();
+            }
+        });
+
     }
 
     @Override
     public void showCopperFoilEnd() {
-
+        // non usare
     }
 
     @Override
     public void showLathekinStart() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textLathekinMsg();
+            }
+        });
+
     }
 
     @Override
     public void showLathekinStartTwo() {
-
+        // non usare
     }
 
     @Override
     public void showLathekinEnd() {
-
+        // non usare
     }
 
     @Override
     public void showLathekinEndTwo() {
-
+        // non usare
     }
 
     @Override
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textLensCutterMsg();
+            }
+        });
 
     }
 
@@ -792,6 +813,12 @@ public class GuiController extends View {
     @Override
     public void showFluxBrushRequest(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textFluxBrushMsg();
+            }
+        });
     }
 
     @Override
