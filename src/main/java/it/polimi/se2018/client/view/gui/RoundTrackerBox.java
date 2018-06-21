@@ -129,7 +129,7 @@ public class RoundTrackerBox {
     @FXML
     void selectMethod(MouseEvent event) {
 
-        System.out.println(selectedDice);
+
 
     }
 
@@ -142,7 +142,6 @@ public class RoundTrackerBox {
                 button2.setBlendMode(BlendMode.SRC_OVER);
                 button3.setBlendMode(BlendMode.SRC_OVER);
                 button4.setBlendMode(BlendMode.SRC_OVER);
-                System.out.println();
                 button5.setBlendMode(BlendMode.SRC_OVER);
                 button6.setBlendMode(BlendMode.SRC_OVER);
                 button7.setBlendMode(BlendMode.SRC_OVER);
@@ -151,7 +150,7 @@ public class RoundTrackerBox {
             } else {
                 if (buttonGroup.getSelectedToggle().equals(button1)) {
 
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.COLOR_BURN);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -161,11 +160,10 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 0;
-                    }
+                        board.setIndexPosition(0);
                 }
                 if (buttonGroup.getSelectedToggle().equals(button2)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.COLOR_BURN);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -175,11 +173,11 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 1;
-                    }
+                        board.setIndexPosition(1);
+
                 }
                 if (buttonGroup.getSelectedToggle().equals(button3)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.COLOR_BURN);
@@ -189,11 +187,11 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 2;
-                    }
+                        board.setIndexPosition(2);
+
                 }
                 if (buttonGroup.getSelectedToggle().equals(button4)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -203,11 +201,11 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 3;
-                    }
+                        board.setIndexPosition(3);
+
                 }
                 if (buttonGroup.getSelectedToggle().equals(button5)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -217,11 +215,11 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 4;
-                    }
+                        board.setIndexPosition(4);
+
                 }
                 if (buttonGroup.getSelectedToggle().equals(button6)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -231,11 +229,10 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 5;
-                    }
+                        board.setIndexPosition(5);
                 }
                 if (buttonGroup.getSelectedToggle().equals(button7)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -245,11 +242,11 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.COLOR_BURN);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 6;
-                    }
+                        board.setIndexPosition(6);
+
                 }
                 if (buttonGroup.getSelectedToggle().equals(button8)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
                         button3.setBlendMode(BlendMode.SRC_OVER);
@@ -259,11 +256,9 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.COLOR_BURN);
                         button9.setBlendMode(BlendMode.SRC_OVER);
-                        selectedDice = 7;
-                    }
+                        board.setIndexPosition(7);
                 }
                 if (buttonGroup.getSelectedToggle().equals(button9)) {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
 
                         button1.setBlendMode(BlendMode.SRC_OVER);
                         button2.setBlendMode(BlendMode.SRC_OVER);
@@ -274,8 +269,7 @@ public class RoundTrackerBox {
                         button7.setBlendMode(BlendMode.SRC_OVER);
                         button8.setBlendMode(BlendMode.SRC_OVER);
                         button9.setBlendMode(BlendMode.COLOR_BURN);
-                        selectedDice = 8;
-                    }
+                        board.setIndexPosition(8);
                 }
             }
         }catch(NullPointerException e){
@@ -287,6 +281,8 @@ public class RoundTrackerBox {
 
 
         loadDice();
+
+        selectButton.setVisible(false);
 
         selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
 
