@@ -477,10 +477,10 @@ public class BoardController {
         if (guiState == ViewState.LATHEKINENDONE) {
             setIndexPatternEndOne(indexPattern);
             textGame.setText("Click the 2nd dice you want to move, and where you want to move it, then NEXT");
-            setGuiState(ViewState.LATHEKINSTARTONE);
+            setGuiState(ViewState.LATHEKINSTARTTWO);
         }
 
-        if (guiState == ViewState.LATHEKINSTARTONE) {
+        if (guiState == ViewState.LATHEKINSTARTTWO) {
             setIndexPatternStartTwo(indexPattern);
             setGuiState(ViewState.LATHEKINENDTWO);
         }
@@ -503,6 +503,14 @@ public class BoardController {
 
         else if (guiState == ViewState.MOVE) {
             setGuiState(ViewState.DICEMOVE);
+        }
+
+        else if (guiState == ViewState.FLUXBRUSH) {
+            next.setDisable(false);
+        }
+
+        else if (guiState == ViewState.LENSCUTTERPOOL) {
+            disablePool();
         }
         else {
             setGuiState(ViewState.DICEMOVESECOND);
@@ -636,13 +644,6 @@ public class BoardController {
 
         }
 
-        if (guiState == ViewState.FLUXBRUSH) {
-            next.setDisable(false);
-        }
-
-        if (guiState == ViewState.LENSCUTTERPOOL) {
-            disablePool();
-        }
 
 
     }
@@ -975,7 +976,7 @@ public class BoardController {
         }
 
         if (guiState == ViewState.FLUXBRUSH) {
-            mainController.getConnection().useFluxBrushToolCard(mainController.getPlayerID(), indexTool);
+            mainController.getConnection().useFluxBrushToolCard(mainController.getPlayerID(), indexPool);
         }
         if (guiState == ViewState.LENSCUTTERPOOL) {
             mainController.getConnection().useLensCutterToolCard(mainController.getPlayerID(), indexPool, round, indexPosition);
