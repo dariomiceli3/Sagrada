@@ -483,6 +483,7 @@ public class BoardController {
         if (guiState == ViewState.LATHEKINSTARTTWO) {
             setIndexPatternStartTwo(indexPattern);
             setGuiState(ViewState.LATHEKINENDTWO);
+            next.setDisable(false);
         }
 
         if (guiState == ViewState.LATHEKINENDTWO) {
@@ -2020,6 +2021,13 @@ public class BoardController {
 
         if (guiState == ViewState.EGLOMISEEND) {
             removeDiceOnPattern(indexPatternStartOne);
+        }
+        if (guiState == ViewState.COPPEREND) {
+            removeDiceOnPattern(indexPatternStartOne);
+        }
+        if (guiState == ViewState.LATHEKINENDTWO) {
+            removeDiceOnPattern(indexPatternStartOne);
+            removeDiceOnPattern(indexPatternStartTwo);
         }
 
 

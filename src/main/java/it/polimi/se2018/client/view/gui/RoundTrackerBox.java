@@ -284,7 +284,7 @@ public class RoundTrackerBox {
 
         loadDice();
 
-        selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
+        //selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
 
        /* button1.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
             @Override
