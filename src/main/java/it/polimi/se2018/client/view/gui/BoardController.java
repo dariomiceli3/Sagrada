@@ -30,6 +30,42 @@ import java.util.List;
 
 public class BoardController {
 
+    //----start single player-----------------------
+
+    @FXML
+    private TextField textPrivateSingle;
+    @FXML
+    private ImageView toolCard4;
+    @FXML
+    private ImageView toolCard5;
+    @FXML
+    private ImageView toolCardZoom4;
+    @FXML
+    private ImageView toolCardZoom5;
+
+    @FXML
+    void handleTool4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleTool5(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleUnzoomTool4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleUnzoomTool5(MouseEvent event) {
+
+    }
+
+    //----------end single player--------------
+
+
     @FXML
     private AnchorPane pane;
     @FXML

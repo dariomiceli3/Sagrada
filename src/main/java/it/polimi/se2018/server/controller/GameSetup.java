@@ -153,9 +153,9 @@ public class GameSetup {
         list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
         //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
-        if(!game.isSinglePlayer()) {
+        /*if(!game.isSinglePlayer()) {
             list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
-        }
+        }*/
         //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
         //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));

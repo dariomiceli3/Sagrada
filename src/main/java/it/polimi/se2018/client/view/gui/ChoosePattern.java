@@ -90,6 +90,55 @@ public class ChoosePattern {
     private ToggleGroup patternToggleGroup;
 
 
+    //-----------start single player fxml------------------
+
+    @FXML
+    private ImageView privateCardTwo;
+    @FXML
+    private ImageView toolCardFour;
+    @FXML
+    private ImageView toolCardFive;
+    @FXML
+    private ImageView privateCardZoom2;
+    @FXML
+    private ImageView toolCard5Zoom;
+    @FXML
+    private ImageView toolCard4Zoom;
+
+
+    @FXML
+    void handlePrivateUnzoom2(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handlePrivateZoomTwo(MouseEvent event) {
+
+    }
+
+
+    @FXML
+    void handleToolUnzoom4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleToolUnzoom5(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleToolZoom4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleToolZoom5(MouseEvent event) {
+
+    }
+
+    //-----------------end single player
+
 
     private FileInputStream fileStream;
     private int indexPattern;
