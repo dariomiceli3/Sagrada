@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.gui;
 
+import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -338,6 +339,10 @@ public class BoardController {
             next.setDisable(false);
         }
 
+        if (guiState == ViewState.DICEMOVESECOND) {
+            next.setDisable(false);
+        }
+
         if (patternToggleGroup.getSelectedToggle().equals(cell1)) {
             setIndexPattern(0);
         }
@@ -406,12 +411,15 @@ public class BoardController {
     @FXML
     void handleDicePool(ActionEvent event) {
 
-        if (guiState == ViewState.GROZINGCOMMAND) {
+        if (guiState == ViewState.GROZINGPOOL) {
             next.setDisable(false);
         }
 
-        else {
+        else if (guiState == ViewState.MOVE) {
             setGuiState(ViewState.DICEMOVE);
+        }
+        else {
+            setGuiState(ViewState.DICEMOVESECOND);
         }
 
         try {
@@ -616,11 +624,17 @@ public class BoardController {
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
 
+            // 1a mossa
             if (guiState == ViewState.MOVE) {
                 next.setDisable(false);
                 setGuiState(ViewState.TOOLMOVE);
                 setIndexTool(0);
+            }
 
+            //2a mossa
+            if (guiState == ViewState.TOOLMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(0);
             }
 
         }
@@ -645,6 +659,10 @@ public class BoardController {
                 setGuiState(ViewState.TOOLMOVE);
                 setIndexTool(1);
 
+            }
+            if (guiState == ViewState.TOOLMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(1);
             }
 
 
@@ -671,6 +689,10 @@ public class BoardController {
                 setGuiState(ViewState.TOOLMOVE);
                 setIndexTool(2);
 
+            }
+            if (guiState == ViewState.TOOLMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(2);
             }
 
 
@@ -809,11 +831,22 @@ public class BoardController {
     void nextButtonSelected(ActionEvent event) {
 
         if (guiState == ViewState.DICEMOVE) {
-            mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
+            mainController.getConnection().setChooseToServer(mainController.getPlayerID(), 0);
         }
 
         if (guiState == ViewState.TOOLMOVE) {
+            mainController.getConnection().setChooseToServer(mainController.getPlayerID(), 1);
+        }
+
+        if (guiState == ViewState.TOOLMOVESECOND) {
             mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+        }
+
+        if (guiState == ViewState.DICEMOVESECOND) {
+            mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
         }
 
         if (guiState == ViewState.GROZINGPOOL) {
@@ -831,6 +864,14 @@ public class BoardController {
         }
 
 
+    }
+
+    public void useTool() {
+        mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+    }
+
+    public void useDice() {
+        mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
     }
 
     @FXML
@@ -864,6 +905,7 @@ public class BoardController {
     private int currPoolSize;
     private RoundTracker roundTracker;
     private int increase;
+
 
     public static void setMainController(GuiController mainController){
         BoardController.mainController = mainController;
@@ -1692,24 +1734,61 @@ public class BoardController {
         textGame.setText("Click a Dice & the Card position or a Tool, then NEXT");
     }
 
-    public void textRemoveMsg() {
-        skip.setDisable(false);
-        roll.setDisable(true);
-        next.setDisable(true);
-        toolCard1.setDisable(true);
-        toolCard2.setDisable(true);
-        toolCard3.setDisable(true);
-        textGame.setText("Click the Dice & the Card position, then NEXT");
+    public void errorStateDice() {
+        setGuiState(ViewState.ERRORDICE);
     }
 
+    public void textMoveMsg() {
+
+        if (guiState == ViewState.DICEMOVE) {
+           mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
+        }
+        else if (guiState == ViewState.ERRORDICE) {
+            skip.setDisable(false);
+            roll.setDisable(true);
+            next.setDisable(true);
+            toolCard1.setDisable(true);
+            toolCard2.setDisable(true);
+            toolCard3.setDisable(true);
+            textGame.setText("Click the Dice & the correct position, then NEXT");
+        }
+        else {
+           setGuiState(ViewState.DICEMOVESECOND);
+           skip.setDisable(false);
+           roll.setDisable(true);
+           next.setDisable(true);
+           toolCard1.setDisable(true);
+           toolCard2.setDisable(true);
+           toolCard3.setDisable(true);
+           textGame.setText("Click the Dice & the Card position, then NEXT");
+        }
+    }
+
+    public void errorStateTool() {
+        setGuiState(ViewState.ERRORTOOL);
+    }
 
     public void toolMoveMsg() {
-        toolCard1.setDisable(false);
-        toolCard2.setDisable(false);
-        toolCard3.setDisable(false);
-        next.setDisable(true);
-        setGuiState(ViewState.TOOLMOVE);
-        textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
+        if (guiState == ViewState.TOOLMOVE) {
+            mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+        }
+        else if (guiState == ViewState.ERRORTOOL) {
+
+            setGuiState(ViewState.TOOLMOVESECOND);
+            toolCard1.setDisable(false);
+            toolCard2.setDisable(false);
+            toolCard3.setDisable(false);
+            next.setDisable(true);
+            textGame.setText("Click on another tool card (if) you want to use it, then NEXT or SKIP");
+        }
+        else {
+            setGuiState(ViewState.TOOLMOVESECOND);
+            toolCard1.setDisable(false);
+            toolCard2.setDisable(false);
+            toolCard3.setDisable(false);
+            next.setDisable(true);
+            textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
+        }
     }
 
     public void endTimer() {
@@ -1730,7 +1809,7 @@ public class BoardController {
 
         disablePattern();
         roll.setDisable(true);
-        next.setDisable(false);
+        next.setDisable(true);
         toolCard1.setDisable(true);
         toolCard2.setDisable(true);
         toolCard3.setDisable(true);

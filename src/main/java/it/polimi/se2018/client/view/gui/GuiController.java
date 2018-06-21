@@ -580,6 +580,13 @@ public class GuiController extends View {
     @Override
     public void showMoveCommand(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textMoveMsg();
+            }
+        });
+
     }
 
     @Override
@@ -694,10 +701,13 @@ public class GuiController extends View {
     @Override
     public void showTokenError() {
 
+        board.errorStateTool();
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 AlertBox.display("Error", "You have NOT enough tokens!");
+
             }
         });
 
@@ -848,15 +858,30 @@ public class GuiController extends View {
     @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    board.updateDraftPool(draftPool);
+                    board.updateRoundTracker(roundTracker);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override
     public void showInvalidMove(String msg) {
+
+        board.errorStateDice();
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 AlertBox.display("Error", msg);
-                board.textRemoveMsg();
+
             }
         });
     }

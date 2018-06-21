@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?scenebuilder-stylesheet application.css?>
 
-<AnchorPane fx:id="controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
+<AnchorPane fx:id="controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.login.LoginController">
    <children>
-      <ImageView fitHeight="530.0" fitWidth="474.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="530.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/background.jpeg" />
          </image>

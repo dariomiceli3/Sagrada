@@ -49,7 +49,10 @@ public enum ViewState {
     //------for gui
     DICEMOVE,
     TOOLMOVE,
-
+    TOOLMOVESECOND,
+    DICEMOVESECOND,
+    ERRORDICE,
+    ERRORTOOL
 
 
 
