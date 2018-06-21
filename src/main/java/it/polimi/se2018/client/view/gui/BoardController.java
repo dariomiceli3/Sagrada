@@ -335,73 +335,94 @@ public class BoardController {
         toolCard2.setDisable(true);
         toolCard3.setDisable(true);
 
-        if (guiState == ViewState.DICEMOVE) {
-            next.setDisable(false);
-        }
-
         if (guiState == ViewState.DICEMOVESECOND) {
             next.setDisable(false);
+
         }
 
-        if (patternToggleGroup.getSelectedToggle().equals(cell1)) {
-            setIndexPattern(0);
+        if (guiState == ViewState.DICEMOVE) {
+            next.setDisable(false);
+
         }
-        if (patternToggleGroup.getSelectedToggle().equals(cell2)) {
-            setIndexPattern(1);
+
+        try {
+            if (patternToggleGroup.getSelectedToggle().equals(cell1)) {
+                setIndexPattern(0);
+
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell2)) {
+                setIndexPattern(1);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell3)) {
+                setIndexPattern(2);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell4)) {
+                setIndexPattern(3);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell5)) {
+                setIndexPattern(4);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell6)) {
+                setIndexPattern(5);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell7)) {
+                setIndexPattern(6);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell8)) {
+                setIndexPattern(7);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell9)) {
+                setIndexPattern(8);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell10)) {
+                setIndexPattern(9);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell11)) {
+                setIndexPattern(10);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell12)) {
+                setIndexPattern(11);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell13)) {
+                setIndexPattern(12);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell14)) {
+                setIndexPattern(13);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell15)) {
+                setIndexPattern(14);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell16)) {
+                setIndexPattern(15);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell17)) {
+                setIndexPattern(16);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell18)) {
+                setIndexPattern(17);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell19)) {
+                setIndexPattern(18);
+            }
+            if (patternToggleGroup.getSelectedToggle().equals(cell20)) {
+                setIndexPattern(19);
+            }
         }
-        if (patternToggleGroup.getSelectedToggle().equals(cell3)) {
-            setIndexPattern(2);
+        catch (NullPointerException e) {
+
         }
-        if (patternToggleGroup.getSelectedToggle().equals(cell4)) {
-            setIndexPattern(3);
+
+        if (guiState == ViewState.EGLOMISESTART) {
+            setIndexPatternStartOne(indexPattern);
+            setGuiState(ViewState.EGLOMISEEND);
+            System.out.println("index start"+ indexPatternStartOne);
         }
-        if (patternToggleGroup.getSelectedToggle().equals(cell5)) {
-            setIndexPattern(4);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell6)) {
-            setIndexPattern(5);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell7)) {
-            setIndexPattern(6);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell8)) {
-            setIndexPattern(7);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell9)) {
-            setIndexPattern(8);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell10)) {
-            setIndexPattern(9);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell11)) {
-            setIndexPattern(10);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell12)) {
-            setIndexPattern(11);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell13)) {
-            setIndexPattern(12);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell14)) {
-            setIndexPattern(13);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell15)) {
-            setIndexPattern(14);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell16)) {
-            setIndexPattern(15);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell17)) {
-            setIndexPattern(16);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell18)) {
-            setIndexPattern(17);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell19)) {
-            setIndexPattern(18);
-        }
-        if (patternToggleGroup.getSelectedToggle().equals(cell20)) {
-            setIndexPattern(19);
+
+        if (guiState == ViewState.EGLOMISEEND) {
+            setIndexPatternEndOne(indexPattern);
+            System.out.println("index end"+ indexPatternEndOne);
+            next.setDisable(false);
+
         }
 
 
@@ -837,15 +858,16 @@ public class BoardController {
         if (guiState == ViewState.TOOLMOVE) {
             mainController.getConnection().setChooseToServer(mainController.getPlayerID(), 1);
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
-            toolCard1.setBlendMode(BlendMode.SRC_OVER);
-            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard2.setBlendMode(BlendMode.SRC_OVER);
+            toolCard3.setBlendMode(BlendMode.SRC_OVER);
         }
 
         if (guiState == ViewState.TOOLMOVESECOND) {
             mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+            updateCost(indexTool);
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
-            toolCard1.setBlendMode(BlendMode.SRC_OVER);
-            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard2.setBlendMode(BlendMode.SRC_OVER);
+            toolCard3.setBlendMode(BlendMode.SRC_OVER);
         }
 
         if (guiState == ViewState.DICEMOVESECOND) {
@@ -856,6 +878,7 @@ public class BoardController {
             next.setDisable(true);
             ToolCardRequest.setToolNumber(1);
             try {
+                pane.setDisable(true);
                 ToolCardRequest.display();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -866,11 +889,16 @@ public class BoardController {
             mainController.getConnection().useGrozingToolCard(mainController.getPlayerID(), indexPool, increase);
         }
 
+        if (guiState == ViewState.EGLOMISEEND) {
+            mainController.getConnection().useEglomiseToolCard(mainController.getPlayerID(), indexPatternStartOne, indexPatternEndOne);
+        }
+
 
     }
 
     public void useTool() {
         mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+        updateCost(indexTool);
     }
 
     public void useDice() {
@@ -901,6 +929,10 @@ public class BoardController {
     private FileInputStream fileStream;
     private static int indexPool;
     private static int indexPattern;
+    private static int indexPatternStartOne;
+    private static int indexPatternEndOne;
+    private static int indexPatternStartTwo;
+    private static int indexPatternEndTwo;
     private static int indexTool;
     private static ViewState guiState;
     private DraftPool draftPool;
@@ -926,6 +958,21 @@ public class BoardController {
         BoardController.indexPattern = indexPattern;
     }
 
+    private static void setIndexPatternStartOne(int indexPatternStartOne) {
+        BoardController.indexPatternStartOne = indexPatternStartOne;
+    }
+    private static void setIndexPatternEndOne(int indexPatternEndOne) {
+        BoardController.indexPatternEndOne = indexPatternEndOne;
+    }
+
+    private static void setIndexPatternStartTwo(int indexPatternStartTwo) {
+        BoardController.indexPatternStartTwo = indexPatternStartTwo;
+    }
+    private static void setIndexPatternEndTwo(int indexPatternEndTwo) {
+        BoardController.indexPatternEndTwo = indexPatternEndTwo;
+    }
+
+
     private static void setGuiState(ViewState state) {
         BoardController.guiState = state;
     }
@@ -948,7 +995,9 @@ public class BoardController {
 
     protected void setIncrease(int increase) {
         setGuiState(ViewState.GROZINGCOMMAND);
+        pane.setDisable(false);
         next.setDisable(false);
+        disablePool();
         this.increase = increase;
     }
 
@@ -1405,6 +1454,121 @@ public class BoardController {
 
     }
 
+    private void removeDiceOnPattern(int index) {
+
+        if (index == 0) {
+            imageCell1.setImage(null);
+            cell1.setOpacity(0);
+        }
+
+        if (index == 1) {
+            imageCell2.setImage(null);
+            cell2.setOpacity(0);
+        }
+
+        if (index == 2) {
+            imageCell3.setImage(null);
+            cell3.setOpacity(0);
+        }
+
+        if (index == 3) {
+            imageCell4.setImage(null);
+            cell4.setOpacity(0);
+
+        }
+
+        if (index == 4) {
+            imageCell5.setImage(null);
+            cell5.setOpacity(0);
+
+        }
+
+        if (index == 5) {
+            imageCell6.setImage(null);
+            cell6.setOpacity(0);
+
+        }
+
+        if (index == 6) {
+            imageCell7.setImage(null);
+            cell7.setOpacity(0);
+
+        }
+
+        if (index == 7) {
+            imageCell8.setImage(null);
+            cell8.setOpacity(0);
+
+        }
+
+        if (index == 8) {
+            imageCell9.setImage(null);
+            cell9.setOpacity(0);
+
+        }
+
+        if (index == 9) {
+            imageCell10.setImage(null);
+            cell10.setOpacity(0);
+
+        }
+
+        if (index == 10) {
+            imageCell11.setImage(null);
+            cell11.setOpacity(0);
+
+        }
+
+        if (index == 11) {
+            imageCell12.setImage(null);
+            cell12.setOpacity(0);
+        }
+
+        if (index == 12) {
+            imageCell13.setImage(null);
+            cell13.setOpacity(0);
+
+        }
+
+        if (index == 13) {
+            imageCell14.setImage(null);
+            cell14.setOpacity(0);
+
+        }
+
+        if (index == 14) {
+            imageCell15.setImage(null);
+            cell15.setOpacity(0);
+
+        }
+        if (index == 15) {
+            imageCell16.setImage(null);
+            cell16.setOpacity(0);
+
+        }
+        if (index == 16) {
+            imageCell17.setImage(null);
+            cell17.setOpacity(0);
+
+        }
+        if (index == 17) {
+            imageCell18.setImage(null);
+            cell18.setOpacity(0);
+
+        }
+        if (index == 18) {
+            imageCell19.setImage(null);
+            cell19.setOpacity(0);
+
+        }
+        if (index == 19) {
+            imageCell20.setImage(null);
+            cell20.setOpacity(0);
+        }
+
+
+    }
+
     private void cleanDraftPool() {
 
         int size = getDraftPool().getDraftPool().size();
@@ -1513,48 +1677,90 @@ public class BoardController {
     }
 
     private void disablePattern() {
-        cell1.setVisible(false);
-        cell2.setVisible(false);
-        cell3.setVisible(false);
-        cell4.setVisible(false);
-        cell5.setVisible(false);
-        cell6.setVisible(false);
-        cell7.setVisible(false);
-        cell8.setVisible(false);
-        cell9.setVisible(false);
-        cell10.setVisible(false);
-        cell11.setVisible(false);
-        cell12.setVisible(false);
-        cell13.setVisible(false);
-        cell14.setVisible(false);
-        cell15.setVisible(false);
-        cell16.setVisible(false);
-        cell17.setVisible(false);
-        cell18.setVisible(false);
-        cell19.setVisible(false);
-        cell20.setVisible(false);
+
+        cell1.setDisable(true);
+        cell2.setDisable(true);
+        cell3.setDisable(true);
+        cell4.setDisable(true);
+        cell5.setDisable(true);
+        cell6.setDisable(true);
+        cell7.setDisable(true);
+        cell8.setDisable(true);
+        cell9.setDisable(true);
+        cell10.setDisable(true);
+        cell11.setDisable(true);
+        cell12.setDisable(true);
+        cell13.setDisable(true);
+        cell14.setDisable(true);
+        cell15.setDisable(true);
+        cell16.setDisable(true);
+        cell17.setDisable(true);
+        cell18.setDisable(true);
+        cell19.setDisable(true);
+        cell20.setDisable(true);
+
+
     }
 
     private void enablePattern() {
-        cell1.setVisible(true);
-        cell2.setVisible(true);
-        cell3.setVisible(true);
-        cell4.setVisible(true);
-        cell5.setVisible(true);
-        cell6.setVisible(true);
-        cell7.setVisible(true);
-        cell8.setVisible(true);
-        cell9.setVisible(true);
-        cell10.setVisible(true);
-        cell12.setVisible(true);
-        cell13.setVisible(true);
-        cell14.setVisible(true);
-        cell15.setVisible(true);
-        cell16.setVisible(true);
-        cell17.setVisible(true);
-        cell18.setVisible(true);
-        cell19.setVisible(true);
-        cell20.setVisible(true);
+
+        cell1.setDisable(false);
+        cell2.setDisable(false);
+        cell3.setDisable(false);
+        cell4.setDisable(false);
+        cell5.setDisable(false);
+        cell6.setDisable(false);
+        cell7.setDisable(false);
+        cell8.setDisable(false);
+        cell9.setDisable(false);
+        cell10.setDisable(false);
+        cell11.setDisable(false);
+        cell12.setDisable(false);
+        cell13.setDisable(false);
+        cell14.setDisable(false);
+        cell15.setDisable(false);
+        cell16.setDisable(false);
+        cell17.setDisable(false);
+        cell18.setDisable(false);
+        cell19.setDisable(false);
+        cell20.setDisable(false);
+
+    }
+
+    private void enablePool() {
+        dice1.setDisable(false);
+        dice2.setDisable(false);
+        dice3.setDisable(false);
+        dice4.setDisable(false);
+        dice5.setDisable(false);
+        dice6.setDisable(false);
+        dice7.setDisable(false);
+        dice8.setDisable(false);
+        dice9.setDisable(false);
+    }
+
+    private void disablePool(){
+        dice1.setDisable(true);
+        dice2.setDisable(true);
+        dice3.setDisable(true);
+        dice4.setDisable(true);
+        dice5.setDisable(true);
+        dice6.setDisable(true);
+        dice7.setDisable(true);
+        dice8.setDisable(true);
+        dice9.setDisable(true);
+    }
+
+    private void enableTool() {
+        toolCard1.setDisable(false);
+        toolCard2.setDisable(false);
+        toolCard3.setDisable(false);
+    }
+
+    private void disableTool() {
+        toolCard1.setDisable(true);
+        toolCard2.setDisable(true);
+        toolCard3.setDisable(true);
     }
 
     public void updateRound(int round) {
@@ -1633,6 +1839,8 @@ public class BoardController {
     }
 
     public void updateDraftPool(DraftPool draftPool) throws IOException {
+
+        setToken(mainController.getTokens());
 
         dice1.setBlendMode(BlendMode.SRC_OVER);
         dice2.setBlendMode(BlendMode.SRC_OVER);
@@ -1718,11 +1926,19 @@ public class BoardController {
 
     }
 
-    public void updateToken(int tokenNumber) {
-        tokensNumber.setText("" + tokenNumber);
+
+    public void setToken(int token) {
+        tokensNumber.setText("" + token);
     }
 
     public void updatePattern(PatternCard patternCard) {
+
+        setToken(mainController.getTokens());
+
+        if (guiState == ViewState.EGLOMISEEND) {
+            removeDiceOnPattern(indexPatternStartOne);
+        }
+
 
         for (int index = 0; index < patternCard.getPattern().size(); index++) {
 
@@ -1740,6 +1956,37 @@ public class BoardController {
         }
     }
 
+    private void updateCost(int toolIndex) {
+
+        if (toolIndex == 1) {
+
+            if (costTool1.getText().equalsIgnoreCase("1")) {
+                costTool1.setText("" + "2");
+            }
+            else {
+                costTool1.setText("" + "2");
+            }
+        }
+        if (toolIndex == 2) {
+
+            if (costTool2.getText().equalsIgnoreCase("1")) {
+                costTool2.setText("" + "2");
+            }
+            else {
+                costTool2.setText("" + "2");
+            }
+
+        }
+        if (toolIndex == 3) {
+            if (costTool3.getText().equalsIgnoreCase("1")) {
+                costTool3.setText("" + "2");
+            }
+            else {
+                costTool3.setText("" + "2");
+            }
+        }
+    }
+
 
 
     public void updateRoundTracker(RoundTracker roundTracker) {
@@ -1749,9 +1996,10 @@ public class BoardController {
     }
 
     public void textChooseMsg() {
-        toolCard1.setDisable(false);
-        toolCard2.setDisable(false);
-        toolCard3.setDisable(false);
+
+        enablePool();
+        enablePattern();
+        enableTool();
         skip.setDisable(false);
         roll.setDisable(true);
         next.setDisable(true);
@@ -1765,6 +2013,9 @@ public class BoardController {
 
     public void textMoveMsg() {
 
+        enablePool();
+        enablePattern();
+
         if (guiState == ViewState.DICEMOVE) {
            mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
         }
@@ -1772,20 +2023,16 @@ public class BoardController {
             skip.setDisable(false);
             roll.setDisable(true);
             next.setDisable(true);
-            toolCard1.setDisable(true);
-            toolCard2.setDisable(true);
-            toolCard3.setDisable(true);
+            disableTool();
             textGame.setText("Click the Dice & the correct position, then NEXT");
         }
         else {
-           enablePattern();
+
            setGuiState(ViewState.DICEMOVESECOND);
            skip.setDisable(false);
            roll.setDisable(true);
            next.setDisable(true);
-           toolCard1.setDisable(true);
-           toolCard2.setDisable(true);
-           toolCard3.setDisable(true);
+           disableTool();
            textGame.setText("Click the Dice & the Card position, then NEXT");
         }
     }
@@ -1795,23 +2042,23 @@ public class BoardController {
     }
 
     public void toolMoveMsg() {
+
+        disablePattern();
+        disablePool();
+
         if (guiState == ViewState.TOOLMOVE) {
             mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
         }
         else if (guiState == ViewState.ERRORTOOL) {
 
             setGuiState(ViewState.TOOLMOVESECOND);
-            toolCard1.setDisable(false);
-            toolCard2.setDisable(false);
-            toolCard3.setDisable(false);
+            enableTool();
             next.setDisable(true);
             textGame.setText("Click on another tool card (if) you want to use it, then NEXT or SKIP");
         }
         else {
             setGuiState(ViewState.TOOLMOVESECOND);
-            toolCard1.setDisable(false);
-            toolCard2.setDisable(false);
-            toolCard3.setDisable(false);
+            enableTool();
             next.setDisable(true);
             textGame.setText("Click on the tool card (if) you want to use it, then NEXT or SKIP");
         }
@@ -1832,15 +2079,25 @@ public class BoardController {
     }
 
     public void textGrozingMsg() {
-
+        enablePool();
+        setToken(mainController.getTokens());
         disablePattern();
         roll.setDisable(true);
         next.setDisable(true);
-        toolCard1.setDisable(true);
-        toolCard2.setDisable(true);
-        toolCard3.setDisable(true);
+        disableTool();
         setGuiState(ViewState.GROZINGPOOL);
         textGame.setText("Click the dice you want to increase/decrease, then NEXT");
+    }
+
+    public void textEglomiseMsg() {
+        disablePool();
+        enablePattern();
+        setToken(mainController.getTokens());
+        roll.setDisable(true);
+        next.setDisable(true);
+        disableTool();
+        setGuiState(ViewState.EGLOMISESTART);
+        textGame.setText("Click the dice you want to move, and where you want to move it, then NEXT");
     }
 
 }

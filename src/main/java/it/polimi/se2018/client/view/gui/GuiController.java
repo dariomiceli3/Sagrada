@@ -70,6 +70,7 @@ public class GuiController extends View {
     private String nameID1;
     private String nameID2;
     private String nameID3;
+    private int tokens;
     private static BoardController board;
 
     public static void setBoard(BoardController board) {
@@ -227,6 +228,14 @@ public class GuiController extends View {
 
     public PatternCard getPatternID3() {
         return patternID3;
+    }
+
+    public int getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(int tokens) {
+        this.tokens = tokens;
     }
 
     public String getNameID0() {
@@ -469,18 +478,7 @@ public class GuiController extends View {
 
     @Override
     public void showTokens(int tokensNumber) {
-
-
-        // todo refactor this method for the tokens available at the start
-        // todo see when effectively it'sended by the model
-
-        /*Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                board.updateToken(tokensNumber);
-            }
-        });*/
-
+        setTokens(tokensNumber);
     }
 
     @Override
@@ -727,17 +725,23 @@ public class GuiController extends View {
 
     @Override
     public void showGrozingCommand() {
-
+        // non usare
     }
 
     @Override
     public void showEglomiseStart() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textEglomiseMsg();
+            }
+        });
     }
 
     @Override
     public void showEglomiseEnd() {
-
+        // non usare
     }
 
     @Override
@@ -941,7 +945,7 @@ public class GuiController extends View {
         Scene scene = new Scene(root1, width, height);
         stage.setTitle("Sagrada Pattern Choose");
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
 
     }
@@ -957,7 +961,6 @@ public class GuiController extends View {
         Scene board = new Scene(root2, width, height);
         stage.setTitle("Sagrada Main Board");
         stage.setScene(board);
-        stage.setFullScreen(true);
         stage.setResizable(false);
         stage.show();
     }

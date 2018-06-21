@@ -46,7 +46,7 @@ public enum ViewState {
     TOOLSPDICE,
     NOTAUTHORIZED,
 
-    //------for gui
+    //--gui events--
     DICEMOVE,
     TOOLMOVE,
     TOOLMOVESECOND,
