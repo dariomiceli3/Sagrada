@@ -36,6 +36,8 @@ public class RoundTrackerBox {
 
     private int selectedDice;
 
+    private static Stage window;
+
     FileInputStream fileStream;
 
     public static void setMainController(BoardController board){
@@ -48,7 +50,7 @@ public class RoundTrackerBox {
 
     public static void display()  throws IOException {
 
-        Stage window = new Stage();
+        window = new Stage();
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
@@ -129,7 +131,7 @@ public class RoundTrackerBox {
     @FXML
     void selectMethod(MouseEvent event) {
 
-
+        window.close();
 
     }
 
@@ -281,8 +283,6 @@ public class RoundTrackerBox {
 
 
         loadDice();
-
-        selectButton.setVisible(false);
 
         selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
 
