@@ -49,6 +49,8 @@ public class TestDice {
         Dice dice4 = new Dice(4, DiceColor.YELLOW);
         Dice dice5 = new Dice(5, DiceColor.GREEN);
         Dice dice6 = new Dice(6, DiceColor.RED);
+        Dice dice7 = new Dice(5, DiceColor.YELLOW);
+        Dice dice8 = new Dice(6, DiceColor.GREEN);
 
         System.out.println(dice.toString());
         System.out.println(dice2.toString());
@@ -56,8 +58,75 @@ public class TestDice {
         System.out.println(dice4.toString());
         System.out.println(dice5.toString());
         System.out.println(dice6.toString());
+        System.out.println(dice7.toString());
+        System.out.println(dice8.toString());
 
 
         //AnsiConsole.systemUninstall();
+    }
+
+    @Test
+    public void testToStringGui() {
+        Dice diceRed1 = new Dice(1, DiceColor.RED);
+        Dice diceRed2 = new Dice(2, DiceColor.RED);
+        Dice diceRed3 = new Dice(3, DiceColor.RED);
+        Dice diceRed4 = new Dice(4, DiceColor.RED);
+        Dice diceRed5 = new Dice(5, DiceColor.RED);
+        Dice diceRed6 = new Dice(6, DiceColor.RED);
+        Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
+        Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
+        Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
+        Dice diceYellow4 = new Dice(4, DiceColor.YELLOW);
+        Dice diceYellow5 = new Dice(5, DiceColor.YELLOW);
+        Dice diceYellow6 = new Dice(6, DiceColor.YELLOW);
+        Dice dicePurple1 = new Dice(1, DiceColor.PURPLE);
+        Dice dicePurple2 = new Dice(2, DiceColor.PURPLE);
+        Dice dicePurple3 = new Dice(3, DiceColor.PURPLE);
+        Dice dicePurple4 = new Dice(4, DiceColor.PURPLE);
+        Dice dicePurple5 = new Dice(5, DiceColor.PURPLE);
+        Dice dicePurple6 = new Dice(6, DiceColor.PURPLE);
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceBlue2 = new Dice(2, DiceColor.BLUE);
+        Dice diceBlue3 = new Dice(3, DiceColor.BLUE);
+        Dice diceBlue4 = new Dice(4, DiceColor.BLUE);
+        Dice diceBlue5 = new Dice(5, DiceColor.BLUE);
+        Dice diceBlue6 = new Dice(6, DiceColor.BLUE);
+        Dice diceGreen1 = new Dice(1, DiceColor.GREEN);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+        Dice diceGreen3 = new Dice(3, DiceColor.GREEN);
+        Dice diceGreen4 = new Dice(4, DiceColor.GREEN);
+        Dice diceGreen5 = new Dice(5, DiceColor.GREEN);
+        Dice diceGreen6 = new Dice(6, DiceColor.GREEN);
+
+        System.out.println(diceRed1.toStringGui());
+        System.out.println(diceRed2.toStringGui());
+        System.out.println(diceRed3.toStringGui());
+        System.out.println(diceRed4.toStringGui());
+        System.out.println(diceRed5.toStringGui());
+        System.out.println(diceRed6.toStringGui());
+        System.out.println(diceYellow1.toStringGui());
+        System.out.println(diceYellow2.toStringGui());
+        System.out.println(diceYellow3.toStringGui());
+        System.out.println(diceYellow4.toStringGui());
+        System.out.println(diceYellow5.toStringGui());
+        System.out.println(diceYellow6.toStringGui());
+        System.out.println(dicePurple1.toStringGui());
+        System.out.println(dicePurple2.toStringGui());
+        System.out.println(dicePurple3.toStringGui());
+        System.out.println(dicePurple4.toStringGui());
+        System.out.println(dicePurple5.toStringGui());
+        System.out.println(dicePurple6.toStringGui());
+        System.out.println(diceBlue1.toStringGui());
+        System.out.println(diceBlue2.toStringGui());
+        System.out.println(diceBlue3.toStringGui());
+        System.out.println(diceBlue4.toStringGui());
+        System.out.println(diceBlue5.toStringGui());
+        System.out.println(diceBlue6.toStringGui());
+        System.out.println(diceGreen1.toStringGui());
+        System.out.println(diceGreen2.toStringGui());
+        System.out.println(diceGreen3.toStringGui());
+        System.out.println(diceGreen4.toStringGui());
+        System.out.println(diceGreen5.toStringGui());
+        System.out.println(diceGreen6.toStringGui());
     }
 }

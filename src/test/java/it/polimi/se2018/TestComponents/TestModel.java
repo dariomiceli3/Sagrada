@@ -41,6 +41,7 @@ public class TestModel {
         model.getPlayerFromID(0);
         model.setPlayerList(playerArrayList);
         model.getPlayerFromID(1);
+        model.setNumberPlayer(5);
         model.updateBoardAndNotify();
         model.updateTokenAndNotify(1);
         model.updatePatternAndNotify(0);
@@ -89,6 +90,11 @@ public class TestModel {
         Player player1  = new Player();
 
         PrivateObjectiveCard privateObjectiveCard = new PrivateObjectiveCard(DiceColor.RED);
+        PrivateObjectiveCard privateObjectiveCard1 = new PrivateObjectiveCard(DiceColor.RED);
+        ArrayList<PrivateObjectiveCard> privateObjectiveCardArrayList = new ArrayList<>();
+        privateObjectiveCardArrayList.add(privateObjectiveCard);
+        privateObjectiveCardArrayList.add(privateObjectiveCard1);
+
         PatternCard patternCard = new PatternCard();
         patternCard = patternCard.loadPatternList().get(0);
 
@@ -102,10 +108,10 @@ public class TestModel {
         diceArrayList.add(dice1);
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool(diceBag);
-        draftPool.setDraftPool(diceArrayList);
+        //draftPool.setDraftPool(diceArrayList);
 
         player.setPlayerID(0);
-        player.setPlayerID(1);
+        player1.setPlayerID(1);
         playerArrayList.add(player);
         playerArrayList.add(player1);
         model.setPlayerList(playerArrayList);
@@ -114,16 +120,28 @@ public class TestModel {
         model.setPlayerAndNotify(1, "ciao");
         //model.setPatternAndNotify(1, patternCard);
         model.setPrivateAndNotify(1, privateObjectiveCard);
-        //model.setTokenAndNotify(1);
+        model.setTokenAndNotify(1);
         model.setDraftPoolAndNotify(false);
+        model.setDraftPoolAndNotify(true);
         model.setEndRoundAndNotify();
+        //model.setPatternAndNotify(1, 0);
         model.setFinalPointsAndNotify(playerArrayList);
-        //model.setMoveAndNotify(1,0,0);
-
-
-
-
-
+        model.setPrivateSinglePlayerAndNotify(privateObjectiveCardArrayList);
+        model.setMoveAndNotify(1,0,0);
 
     }
+
+    /*@Test
+    public void testSetMoveAndNotify() throws InvalidMoveException {
+        Player player = new Player();
+        player.setPlayerID(0);
+        DiceBag diceBag = new DiceBag();
+        DraftPool draftPool = new DraftPool(diceBag);
+
+        Model model = new Model();
+        //model.setPatternAndNotify(0,0);
+        model.setDraftPool(draftPool);
+        model.setMoveAndNotify(0,1,0);
+
+    }*/
 }

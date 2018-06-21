@@ -66,4 +66,10 @@ public class TestDifferentShade {
         PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShade(), "Shade Variety");
         System.out.println(publicCard.toString());
     }
+
+    @Test
+    public void testGetName() {
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShade(), "Shade Variety");
+        assertEquals("Shade Variety",  publicCard.getName());
+    }
 }
