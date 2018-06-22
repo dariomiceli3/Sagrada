@@ -802,12 +802,12 @@ public class GuiController extends View {
 
     @Override
     public void showLensCutterRound(List<Integer> round) {
-
+        //non usare
     }
 
     @Override
     public void showLensCutterDice(List<Integer> round, int roundIndex) {
-
+        //non usare
     }
 
     @Override
@@ -824,6 +824,12 @@ public class GuiController extends View {
     @Override
     public void showGlazingHammerRequest() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textGlazingHammerMsg();
+            }
+        });
     }
 
     @Override

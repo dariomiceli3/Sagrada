@@ -367,17 +367,18 @@ public class BoardController {
     @FXML
     void handleCellEvent(ActionEvent event) {
 
-        toolCard1.setDisable(true);
-        toolCard2.setDisable(true);
-        toolCard3.setDisable(true);
+        disableTool();
+        disablePool();
 
         if (guiState == ViewState.DICEMOVESECOND) {
             next.setDisable(false);
+
 
         }
 
         if (guiState == ViewState.DICEMOVE) {
             next.setDisable(false);
+
 
         }
 
@@ -448,12 +449,19 @@ public class BoardController {
 
         }
 
+        if (guiState == ViewState.EGLOMISEEND) {
+            setIndexPatternEndOne(indexPattern);
+            next.setDisable(false);
+
+
+        }
+
         if (guiState == ViewState.EGLOMISESTART) {
             setIndexPatternStartOne(indexPattern);
             setGuiState(ViewState.EGLOMISEEND);
         }
 
-        if (guiState == ViewState.EGLOMISEEND) {
+        if (guiState == ViewState.COPPEREND) {
             setIndexPatternEndOne(indexPattern);
             next.setDisable(false);
 
@@ -462,16 +470,17 @@ public class BoardController {
         if (guiState == ViewState.COPPERSTART) {
             setIndexPatternStartOne(indexPattern);
             setGuiState(ViewState.COPPEREND);
+
         }
 
-        if (guiState == ViewState.COPPEREND) {
-            setIndexPatternEndOne(indexPattern);
+        if (guiState == ViewState.LATHEKINENDTWO) {
+            setIndexPatternEndTwo(indexPattern);
             next.setDisable(false);
         }
 
-        if (guiState == ViewState.LATHEKINSTARTONE) {
-            setIndexPatternStartOne(indexPattern);
-            setGuiState(ViewState.LATHEKINENDONE);
+        if (guiState == ViewState.LATHEKINSTARTTWO) {
+            setIndexPatternStartTwo(indexPattern);
+            setGuiState(ViewState.LATHEKINENDTWO);
         }
 
         if (guiState == ViewState.LATHEKINENDONE) {
@@ -480,16 +489,15 @@ public class BoardController {
             setGuiState(ViewState.LATHEKINSTARTTWO);
         }
 
-        if (guiState == ViewState.LATHEKINSTARTTWO) {
-            setIndexPatternStartTwo(indexPattern);
-            setGuiState(ViewState.LATHEKINENDTWO);
-            next.setDisable(false);
+        if (guiState == ViewState.LATHEKINSTARTONE) {
+            setIndexPatternStartOne(indexPattern);
+            setGuiState(ViewState.LATHEKINENDONE);
         }
 
-        if (guiState == ViewState.LATHEKINENDTWO) {
-            setIndexPatternEndTwo(indexPattern);
-            next.setDisable(false);
-        }
+
+
+
+
 
 
 
@@ -716,6 +724,8 @@ public class BoardController {
 
         if (event.getButton().equals(MouseButton.PRIMARY)) {
 
+            disablePool();
+
             toolCard1.setBlendMode(BlendMode.OVERLAY);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
@@ -733,10 +743,28 @@ public class BoardController {
                 setIndexTool(0);
             }
 
+            if (guiState == ViewState.TOOLMOVE) {
+                next.setDisable(false);
+                setIndexTool(0);
+            }
+
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(0);
+            }
+
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(0);
+            }
+
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom1.setVisible(true);
+            next.setDisable(true);
+            enablePool();
+
         }
 
         }
@@ -746,6 +774,8 @@ public class BoardController {
 
         if (event.getButton().equals(MouseButton.PRIMARY)) {
 
+            disablePool();
+
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.OVERLAY);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
@@ -754,9 +784,20 @@ public class BoardController {
                 next.setDisable(false);
                 setGuiState(ViewState.TOOLMOVE);
                 setIndexTool(1);
-
             }
             if (guiState == ViewState.TOOLMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(1);
+            }
+            if (guiState == ViewState.TOOLMOVE) {
+                next.setDisable(false);
+                setIndexTool(1);
+            }
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(1);
+            }
+            if (guiState == ViewState.DICEMOVESECOND) {
                 next.setDisable(false);
                 setIndexTool(1);
             }
@@ -764,8 +805,10 @@ public class BoardController {
 
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
+            enablePool();
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom2.setVisible(true);
+            next.setDisable(true);
         }
 
 
@@ -775,6 +818,8 @@ public class BoardController {
     void handleTool3(MouseEvent event) {
 
         if (event.getButton().equals(MouseButton.PRIMARY)) {
+
+            disablePool();
 
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
@@ -790,12 +835,27 @@ public class BoardController {
                 next.setDisable(false);
                 setIndexTool(2);
             }
+            if (guiState == ViewState.TOOLMOVE) {
+                next.setDisable(false);
+                setIndexTool(2);
+            }
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(2);
+            }
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(2);
+            }
+
 
 
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom3.setVisible(true);
+            enablePool();
+            next.setDisable(true);
         }
 
     }
@@ -938,8 +998,8 @@ public class BoardController {
         }
 
         if (guiState == ViewState.TOOLMOVESECOND) {
-            mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
             updateCost(indexTool);
+            mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
@@ -1001,8 +1061,12 @@ public class BoardController {
     @FXML
     void rollButtonSelected(ActionEvent event) {
 
-        mainController.getConnection().setDraftPoolToServer(mainController.getPlayerID());
-
+        if (guiState == ViewState.GLAZINGHAMMER) {
+            mainController.getConnection().useGlazingHammerToolCard(mainController.getPlayerID());
+        }
+        else {
+            mainController.getConnection().setDraftPoolToServer(mainController.getPlayerID());
+        }
     }
 
     private static final int DEFAULT = 0;
@@ -1917,6 +1981,7 @@ public class BoardController {
 
     public void textRollMsg() {
         textGame.setText("Click the roll button to roll the draft pool");
+        disablePool();
         next.setDisable(true);
         skip.setDisable(true);
         roll.setDisable(false);
@@ -2049,31 +2114,34 @@ public class BoardController {
 
     private void updateCost(int toolIndex) {
 
+        if (toolIndex == 0) {
+
+            if (costTool1.getText().equalsIgnoreCase("" + 1)) {
+                costTool1.setText(null);
+                costTool1.setText("" + 2);
+            }
+            else {
+                costTool1.setText("" + 2);
+            }
+        }
         if (toolIndex == 1) {
 
-            if (costTool1.getText().equalsIgnoreCase("1")) {
-                costTool1.setText("" + "2");
+            if (costTool2.getText().equalsIgnoreCase("" + 1)) {
+                costTool2.setText(null);
+                costTool2.setText("" + 2);
             }
             else {
-                costTool1.setText("" + "2");
+                costTool2.setText("" + 2);
             }
+
         }
         if (toolIndex == 2) {
-
-            if (costTool2.getText().equalsIgnoreCase("1")) {
-                costTool2.setText("" + "2");
+            if (costTool3.getText().equalsIgnoreCase("" + 1)) {
+                costTool3.setText(null);
+                costTool3.setText("" + 2);
             }
             else {
-                costTool2.setText("" + "2");
-            }
-
-        }
-        if (toolIndex == 3) {
-            if (costTool3.getText().equalsIgnoreCase("1")) {
-                costTool3.setText("" + "2");
-            }
-            else {
-                costTool3.setText("" + "2");
+                costTool3.setText("" + 2);
             }
         }
     }
@@ -2099,7 +2167,12 @@ public class BoardController {
     }
 
     public void errorStateDice() {
-        setGuiState(ViewState.ERRORDICE);
+        if (guiState == ViewState.GLAZINGHAMMER) {
+            setGuiState(ViewState.ERRORTOOL);
+        }
+        else {
+            setGuiState(ViewState.ERRORDICE);
+        }
     }
 
     public void textMoveMsg() {
@@ -2118,7 +2191,6 @@ public class BoardController {
             textGame.setText("Click the Dice & the correct position, then NEXT");
         }
         else {
-
            setGuiState(ViewState.DICEMOVESECOND);
            skip.setDisable(false);
            roll.setDisable(true);
@@ -2138,6 +2210,7 @@ public class BoardController {
         disablePool();
 
         if (guiState == ViewState.TOOLMOVE) {
+            updateCost(indexTool);
             mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
         }
         else if (guiState == ViewState.ERRORTOOL) {
@@ -2230,6 +2303,16 @@ public class BoardController {
         next.setDisable(true);
         setGuiState(ViewState.FLUXBRUSH);
         textGame.setText("Click the dice you want to re-roll, then NEXT");
+    }
+
+    protected void textGlazingHammerMsg() {
+        disablePattern();
+        disableTool();
+        disablePool();
+        next.setDisable(true);
+        setGuiState(ViewState.GLAZINGHAMMER);
+        textGame.setText("Click ROLL to re-roll all dice in the pool, then NEXT");
+        roll.setDisable(false);
     }
 
 }

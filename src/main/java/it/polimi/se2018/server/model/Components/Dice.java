@@ -192,7 +192,7 @@ public class Dice implements Serializable {
 
     public String toStringGui() {
 
-        if (this.getColor().toString() == "red") {
+        if (this.getColor().toString().equalsIgnoreCase("red")) {
 
             if (this.getValue() == 1) {
                 return "R1";
@@ -214,7 +214,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "yellow") {
+        else if (this.getColor().toString().equalsIgnoreCase("yellow")) {
 
             if (this.getValue() == 1) {
                 return "Y1";
@@ -236,7 +236,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "blue") {
+        else if (this.getColor().toString().equalsIgnoreCase("blue")) {
 
             if (this.getValue() == 1) {
                 return "B1";
@@ -258,7 +258,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "green") {
+        else if (this.getColor().toString().equalsIgnoreCase("green")) {
 
             if (this.getValue() == 1) {
                 return "G1";
