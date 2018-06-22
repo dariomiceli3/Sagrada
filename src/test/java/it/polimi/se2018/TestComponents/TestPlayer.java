@@ -32,6 +32,8 @@ public class TestPlayer {
         int finalPoints = 110;
         int privatePoints = 34;
         PatternCard pattern = new PatternCard();
+        ArrayList<PatternCard> patternCards = new ArrayList<>();
+        patternCards.add(pattern);
         try {
 
             ArrayList<PatternCard> patternList = pattern.loadPatternList();
@@ -47,6 +49,8 @@ public class TestPlayer {
         player.setPlayerID(2);
         player.setPlayerName("Dario");
         player.setPlayerColor(PlayerColour.RED);
+        player.setOff(true);
+        player.setPatterChooseList(patternCards);
 
 
         assertEquals(pattern, player.getPattern());
@@ -58,6 +62,8 @@ public class TestPlayer {
         assertEquals("Dario", player.getPlayerName());
         assertEquals("RED", player.getColour().toString());
         assertEquals("Player Tokens6",player.toStringTokens());
+        assertEquals(patternCards, player.getPatterChooseList());
+        assertEquals(false, player.isOff());
     }
 
     @Test

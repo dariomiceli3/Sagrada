@@ -48,9 +48,7 @@ public class MediumShade implements PublicEffects, Serializable {
                 + "VP : " + VPOINTS;
     }
 
-    public static String getNAME() {
-        return NAME;
-    }
+
 
 }
 

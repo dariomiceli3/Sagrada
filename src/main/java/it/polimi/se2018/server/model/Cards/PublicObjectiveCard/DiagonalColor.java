@@ -55,9 +55,7 @@ private static final String NAME = "Color Diagonals";
               + "VP : #";
    }
 
-   public static String getNAME() {
-      return NAME;
-   }
+
 }
 
 

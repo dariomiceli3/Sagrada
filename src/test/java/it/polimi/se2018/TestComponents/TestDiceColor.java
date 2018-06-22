@@ -14,6 +14,7 @@ public class TestDiceColor {
         assertEquals("blue", DiceColor.BLUE.toString());
         assertEquals("green", DiceColor.GREEN.toString());
         assertEquals("purple", DiceColor.PURPLE.toString());
+        assertEquals("", DiceColor.test.toString());
 
     }
 }

@@ -127,21 +127,38 @@ public class TestModel {
         //model.setPatternAndNotify(1, 0);
         model.setFinalPointsAndNotify(playerArrayList);
         model.setPrivateSinglePlayerAndNotify(privateObjectiveCardArrayList);
-        model.setMoveAndNotify(1,0,0);
+        //model.setMoveAndNotify(1,0,0);
 
     }
 
-    /*@Test
-    public void testSetMoveAndNotify() throws InvalidMoveException {
+    @Test
+    public void testSetPatternAndMoveNotify() throws FileNotFoundException, InvalidMoveException {
+        ArrayList<Player> playerArrayList = new ArrayList<>();
         Player player = new Player();
+        Player player1  = new Player();
+        playerArrayList.add(player);
+        playerArrayList.add(player1);
         player.setPlayerID(0);
-        DiceBag diceBag = new DiceBag();
-        DraftPool draftPool = new DraftPool(diceBag);
+        PatternCard patternCard = new PatternCard();
+        ArrayList<PatternCard> patternCards = patternCard.loadPatternList();
+
+        player.setPatterChooseList(patternCards);
 
         Model model = new Model();
-        //model.setPatternAndNotify(0,0);
-        model.setDraftPool(draftPool);
-        model.setMoveAndNotify(0,1,0);
+        model.setPlayerList(playerArrayList);
+        model.setPatternAndNotify(0, 1);
 
-    }*/
+        //assertEquals("Kaleidoscopic Dream", player.getPatterChooseList().get(0).getName() );
+
+
+        ArrayList<Dice> diceArrayList = new ArrayList<>();
+        Dice dice = new Dice(4, DiceColor.YELLOW);
+        diceArrayList.add(dice);
+        DraftPool draftPool = new DraftPool();
+        //draftPool.setDraftPool(diceArrayList);
+        model.getDraftPool().setDraftPool(diceArrayList);
+
+        model.setMoveAndNotify(0,0,0);
+
+    }
 }
