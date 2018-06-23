@@ -105,35 +105,34 @@ public class ChoosePattern {
     @FXML
     private ImageView toolCard4Zoom;
 
-
     @FXML
     void handlePrivateUnzoom2(MouseEvent event) {
+        privateCardZoom2.setVisible(false);
 
     }
-
     @FXML
     void handlePrivateZoomTwo(MouseEvent event) {
+        privateCardZoom2.setVisible(true);
 
     }
-
 
     @FXML
     void handleToolUnzoom4(MouseEvent event) {
+        toolCard4Zoom.setVisible(false);
 
     }
-
     @FXML
     void handleToolUnzoom5(MouseEvent event) {
-
+        toolCard5Zoom.setVisible(false);
     }
-
     @FXML
     void handleToolZoom4(MouseEvent event) {
+        toolCard4Zoom.setVisible(true);
 
     }
-
     @FXML
     void handleToolZoom5(MouseEvent event) {
+        toolCard5Zoom.setVisible(true);
 
     }
 
@@ -271,14 +270,19 @@ public class ChoosePattern {
 
     public void initialize () throws IOException {
 
+        if (mainController.isSinglePlayer()) {
+            loadFilePrivateSingle();
+            loadFileToolCard();
+            loadFilePublicCard();
+            loadFilePatternCard();
+        }
 
-        loadFilePrivate();
-
-        loadFileToolCard();
-
-        loadFilePublicCard();
-
-        loadFilePatternCard();
+        else {
+            loadFilePrivate();
+            loadFileToolCard();
+            loadFilePublicCard();
+            loadFilePatternCard();
+        }
 
         playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted));
 
@@ -362,6 +366,36 @@ public class ChoosePattern {
         }
     }
 
+    private void loadFilePrivateSingle() throws IOException {
+
+        for (int i = 0; i < mainController.getPrivateCardSingle().size(); i++) {
+
+            File file = new File("./");
+            String fileColor = mainController.getPrivateCardSingle().get(i).getColour().toString();
+            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/private");
+
+            try {
+                fileStream = new FileInputStream(filePath + "/" + fileColor + ".png");
+                Image image = new Image(fileStream);
+                if (i == 0) {
+                    privateCard.setImage(image);
+                    privateCardZoom.setImage(image);
+                }
+                if (i == 1) {
+                    privateCardTwo.setImage(image);
+                    privateCardTwo.setVisible(true);
+                    privateCardZoom2.setImage(image);
+                }
+            }
+            finally {
+                fileStream.close();
+            }
+
+        }
+
+
+    }
+
     private void loadFileToolCard() throws IOException  {
 
         for (int i = 0; i < mainController.getToolList().size(); i++) {
@@ -370,25 +404,58 @@ public class ChoosePattern {
             String fileName = mainController.getToolList().get(i).getName();
             String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/tool");
 
-            try {
-                System.out.println("consegna tool");
-                fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
-                Image image = new Image(fileStream);
-                if (i == 0) {
-                    toolCardOne.setImage(image);
-                    toolCard1Zoom.setImage(image);
-                }
-                if (i == 1) {
-                    toolCardTwo.setImage(image);
-                    toolCard2Zoom.setImage(image);
-                }
-                if (i == 2) {
-                    toolCardThree.setImage(image);
-                    toolCard3Zoom.setImage(image);
+            if (mainController.isSinglePlayer()) {
+                try {
+                    fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
+                    Image image = new Image(fileStream);
+                    if (i == 0) {
+                        toolCardOne.setImage(image);
+                        toolCard1Zoom.setImage(image);
+                    }
+                    if (i == 1) {
+                        toolCardTwo.setImage(image);
+                        toolCard2Zoom.setImage(image);
+                    }
+                    if (i == 2) {
+                        toolCardThree.setImage(image);
+                        toolCard3Zoom.setImage(image);
+                    }
+                    if (i == 3) {
+                        toolCardFour.setImage(image);
+                        toolCardFour.setVisible(true);
+                        toolCard4Zoom.setImage(image);
+                    }
+                    if (i == 4) {
+                        toolCardFive.setImage(image);
+                        toolCardFive.setVisible(true);
+                        toolCard5Zoom.setImage(image);
+                    }
+                } finally {
+                    fileStream.close();
                 }
             }
-            finally {
-                fileStream.close();
+
+            else {
+
+                try {
+                    System.out.println("consegna tool");
+                    fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
+                    Image image = new Image(fileStream);
+                    if (i == 0) {
+                        toolCardOne.setImage(image);
+                        toolCard1Zoom.setImage(image);
+                    }
+                    if (i == 1) {
+                        toolCardTwo.setImage(image);
+                        toolCard2Zoom.setImage(image);
+                    }
+                    if (i == 2) {
+                        toolCardThree.setImage(image);
+                        toolCard3Zoom.setImage(image);
+                    }
+                } finally {
+                    fileStream.close();
+                }
             }
 
         }
@@ -402,25 +469,45 @@ public class ChoosePattern {
             String fileName = mainController.getPublicCardList().get(i).getName();
             String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/public");
 
-            try {
-                System.out.println("consegna public");
-                fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
-                Image image = new Image(fileStream);
-                if (i == 0) {
-                    publicOne.setImage(image);
-                    publicCard1Zoom.setImage(image);
-                }
-                if (i == 1) {
-                    publicTwo.setImage(image);
-                    publicCard2Zoom.setImage(image);
-                }
-                if (i == 2) {
-                    publicThree.setImage(image);
-                    publicCard3Zoom.setImage(image);
+            if (mainController.isSinglePlayer()) {
+                try {
+
+                    fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
+                    Image image = new Image(fileStream);
+                    if (i == 0) {
+                        publicOne.setImage(image);
+                        publicCard1Zoom.setImage(image);
+                    }
+                    if (i == 1) {
+                        publicTwo.setImage(image);
+                        publicCard2Zoom.setImage(image);
+                    }
+
+                } finally {
+                    fileStream.close();
                 }
             }
-            finally {
-                fileStream.close();
+
+            else{
+                try {
+                    System.out.println("consegna public");
+                    fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
+                    Image image = new Image(fileStream);
+                    if (i == 0) {
+                        publicOne.setImage(image);
+                        publicCard1Zoom.setImage(image);
+                    }
+                    if (i == 1) {
+                        publicTwo.setImage(image);
+                        publicCard2Zoom.setImage(image);
+                    }
+                    if (i == 2) {
+                        publicThree.setImage(image);
+                        publicCard3Zoom.setImage(image);
+                    }
+                } finally {
+                    fileStream.close();
+                }
             }
 
         }

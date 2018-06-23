@@ -2,11 +2,9 @@ package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.client.view.ViewState;
+import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Components.DraftPool;
-import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Components.RoundTracker;
+import it.polimi.se2018.server.model.Components.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -494,6 +492,33 @@ public class BoardController {
             setGuiState(ViewState.LATHEKINENDONE);
         }
 
+        if (guiState == ViewState.RUNNINGPOOL) {
+            next.setDisable(false);
+        }
+
+        if (guiState == ViewState.CORKPOOL) {
+            next.setDisable(false);
+        }
+
+        if (guiState == ViewState.TAPENDTWO) {
+            setIndexPatternEndTwo(indexPattern);
+            next.setDisable(false);
+            disablePattern();
+        }
+        if (guiState == ViewState.TAPSTARTTWO) {
+            setIndexPatternStartTwo(indexPattern);
+            setGuiState(ViewState.TAPENDTWO);
+        }
+        if (guiState == ViewState.TAPENDONE) {
+            setIndexPatternEndOne(indexPattern);
+            next.setDisable(false);
+            disablePattern();
+        }
+        if (guiState == ViewState.TAPSTARTONE) {
+            setIndexPatternStartOne(indexPattern);
+            setGuiState(ViewState.TAPENDONE);
+        }
+
 
 
 
@@ -508,18 +533,20 @@ public class BoardController {
 
         if (guiState == ViewState.GROZINGPOOL) {
             next.setDisable(false);
-        }
-
-        else if (guiState == ViewState.MOVE) {
+        } else if (guiState == ViewState.MOVE) {
             setGuiState(ViewState.DICEMOVE);
-        }
-
-        else if (guiState == ViewState.FLUXBRUSH) {
+        } else if (guiState == ViewState.FLUXBRUSH) {
             next.setDisable(false);
-        }
-
-        else if (guiState == ViewState.LENSCUTTERPOOL) {
+        } else if (guiState == ViewState.LENSCUTTERPOOL) {
             disablePool();
+        } else if (guiState == ViewState.RUNNINGPOOL) {
+            enablePattern();
+        } else if (guiState == ViewState.CORKPOOL) {
+            enablePattern();
+        } else if (guiState == ViewState.GRINDING) {
+            next.setDisable(false);
+        } else if (guiState == ViewState.FLUXPOOL) {
+            next.setDisable(false);
         }
         else {
             setGuiState(ViewState.DICEMOVESECOND);
@@ -1042,6 +1069,46 @@ public class BoardController {
         if (guiState == ViewState.LENSCUTTERPOOL) {
             mainController.getConnection().useLensCutterToolCard(mainController.getPlayerID(), indexPool, round, indexPosition);
         }
+        if (guiState == ViewState.RUNNINGPOOL) {
+            mainController.getConnection().useRunningPliersToolCard(mainController.getPlayerID(), indexPool, indexPattern);
+        }
+        if (guiState == ViewState.CORKPOOL) {
+            mainController.getConnection().useCorkBackedToolCard(mainController.getPlayerID(),indexPool, indexPattern);
+        }
+        if (guiState == ViewState.GRINDING) {
+            mainController.getConnection().useGrindingStoneToolCard(mainController.getPlayerID(), indexPool);
+        }
+        if (guiState == ViewState.FLUXPOOL) {
+            next.setDisable(true);
+            ToolCardRequest.setToolNumber(11);
+            try {
+                pane.setDisable(true);
+                ToolCardRequest.display();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (guiState == ViewState.FLUXVALUE) {
+            mainController.getConnection().useFluxRemoverToolCard(mainController.getPlayerID(), indexPool, diceValue);
+        }
+        if (guiState == ViewState.TAPNUMBER) {
+            next.setDisable(true);
+            textTapWheelFirstDice();
+        }
+        if (guiState == ViewState.TAPENDONE) {
+            if (numberDice == 1) {
+                mainController.getConnection().useTapWheelToolCard(mainController.getPlayerID(), numberDice, indexPatternStartOne, indexPatternEndOne, 0, 0);
+            }
+            if (numberDice == 2) {
+                textTapWheelSecondDice();
+            }
+        }
+        if (guiState == ViewState.TAPENDTWO) {
+            mainController.getConnection().useTapWheelToolCard(mainController.getPlayerID(), numberDice, indexPatternStartOne, indexPatternEndOne, indexPatternStartTwo, indexPatternEndTwo);
+        }
+
+
 
 
     }
@@ -1087,6 +1154,8 @@ public class BoardController {
     private int increase;
     private int indexPosition;
     private int round;
+    private int diceValue;
+    private int numberDice;
 
 
     public static void setMainController(GuiController mainController){
@@ -1152,6 +1221,23 @@ public class BoardController {
         if (guiState == ViewState.LENSCUTTERPOOL) {
             this.indexPosition = index;
             next.setDisable(false);
+        }
+    }
+
+    protected void setDiceValue(int diceValue) {
+        setGuiState(ViewState.FLUXVALUE);
+        pane.setDisable(false);
+        next.setDisable(false);
+        disablePool();
+        this.diceValue = diceValue;
+    }
+
+    protected void setNumberDice(int numberDice) {
+
+        if (guiState == ViewState.TAPNUMBER) {
+            pane.setDisable(false);
+            next.setDisable(false);
+            this.numberDice = numberDice;
         }
     }
 
@@ -2313,6 +2399,86 @@ public class BoardController {
         setGuiState(ViewState.GLAZINGHAMMER);
         textGame.setText("Click ROLL to re-roll all dice in the pool, then NEXT");
         roll.setDisable(false);
+    }
+
+    protected void textRunningPliersMsg() {
+        disablePattern();
+        disableTool();
+        enablePool();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.RUNNINGPOOL);
+        textGame.setText("Click a dice and the position, then NEXT");
+    }
+
+    protected void textCorkBackedMsg() {
+        disablePattern();
+        disableTool();
+        enablePool();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.CORKPOOL);
+        textGame.setText("Click the dice in the pool and a position not adjacent, then NEXT");
+    }
+
+    protected void textGrindingStoneMsg() {
+        disablePattern();
+        disableTool();
+        enablePool();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.GRINDING);
+        textGame.setText("Click the dice you want to flip, then NEXT");
+    }
+
+    protected void textFluxRemoverMsg(DiceColor color) {
+        disablePattern();
+        disableTool();
+        enablePool();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.FLUXPOOL);
+        ToolCardRequest.setColor(color);
+        textGame.setText("Select the dice you want to return to the Dice Bag, then NEXT");
+    }
+
+    protected void textTapWheelMsg() {
+        disablePattern();
+        disableTool();
+        disablePool();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.TAPNUMBER);
+        textGame.setText("Click the number on the Box, then NEXT");
+        ToolCardRequest.setToolNumber(12);
+        try {
+            pane.setDisable(true);
+            ToolCardRequest.display();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void textTapWheelFirstDice() {
+        disableTool();
+        disablePool();
+        enablePattern();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.TAPSTARTONE);
+        textGame.setText("Click the 1st dice and where you want to move it, then NEXT");
+    }
+
+    private void textTapWheelSecondDice() {
+        disableTool();
+        disablePool();
+        enablePattern();
+        next.setDisable(true);
+        roll.setDisable(true);
+        setGuiState(ViewState.TAPSTARTTWO);
+        textGame.setText("Click the 2nd dice and where yuo want to move it, then NEXT");
+
     }
 
 }

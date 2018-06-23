@@ -21,6 +21,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,11 @@ public class GuiController extends View {
     @FXML
     private Button playButton;
 
+    //-----fxml single player----
+    @FXML
+    private ComboBox<Integer> comboBox;
+
+
 
     private ClientInterface connection;
     private static final int SOCKETPORT = 8888;
@@ -59,6 +66,7 @@ public class GuiController extends View {
     private List<ToolCard>  toolList;
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
+    private List<PrivateObjectiveCard> privateCardSingle;
     private PrivateObjectiveCard privateCard;
     private RoundTracker roundTracker;
     private PatternCard patternCurrent;
@@ -72,9 +80,15 @@ public class GuiController extends View {
     private String nameID3;
     private int tokens;
     private static BoardController board;
+    private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
+    private Integer selectedDifficulty;
 
     public static void setBoard(BoardController board) {
         GuiController.board = board;
+    }
+
+    public boolean isSinglePlayer() {
+        return singlePlayer;
     }
 
     //-------------------------gui start-----------------
@@ -139,16 +153,25 @@ public class GuiController extends View {
     void handlePlayButton(ActionEvent event) {
 
         if (gameStarted) {
+
+            if (singlePlayer) {
+                getConnection().setDifficultyToServer(getPlayerID(), selectedDifficulty);
+            }
             this.name = txtName.getText();
             getConnection().setPlayerNameToServer(getName(), getPlayerID());
             nameSetted.setValue(true);
             AlertBox.display("Name Choose", "Name entered, some seconds and will go");
         }
-
         else {
             AlertBox.display("Name Choose", "You have to wait till the game is started!");
         }
 
+    }
+
+    @FXML
+    void handleDifficultyBox(ActionEvent event) {
+        this.selectedDifficulty = comboBox.getSelectionModel().getSelectedItem();
+        txtName.setDisable(false);
     }
 
     private void setMode() {
@@ -204,6 +227,10 @@ public class GuiController extends View {
 
     public List<PatternCard> getPatternList() {
         return patternList;
+    }
+
+    public List<PrivateObjectiveCard> getPrivateCardSingle() {
+        return privateCardSingle;
     }
 
     public RoundTracker getRoundTracker(){
@@ -296,7 +323,9 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
+                if (!singlePlayer) {
+                    AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
+                }
             }
         });
 
@@ -310,6 +339,16 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                if (singlePlayer) {
+                    comboBoxData.add(1);
+                    comboBoxData.add(2);
+                    comboBoxData.add(3);
+                    comboBoxData.add(4);
+                    comboBoxData.add(5);
+                    comboBox.setItems(comboBoxData);
+                    comboBox.setVisible(true);
+                    txtName.setDisable(true);
+                }
                 AlertBox.display("Name Choose", "Game is started, enter your name");
             }
         });
@@ -835,61 +874,99 @@ public class GuiController extends View {
     @Override
     public void showRunningPliersPool(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textRunningPliersMsg();
+            }
+        });
+
     }
 
     @Override
     public void showRunningPliersEnd() {
-
+        // non usare
     }
 
     @Override
     public void showCorkBackedPool(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textCorkBackedMsg();
+            }
+        });
     }
 
     @Override
     public void showCorkBackedEnd() {
+
+        // non usare
 
     }
 
     @Override
     public void showGrindingStoneRequest(int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textGrindingStoneMsg();
+            }
+        });
+
     }
 
     @Override
     public void showFluxRemoverPool(DiceColor color, int poolSize) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textFluxRemoverMsg(color);
+            }
+        });
 
     }
 
     @Override
     public void showFluxRemoverValue() {
 
+        //non usare
+
     }
 
     @Override
     public void showTapWheelNumber() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textTapWheelMsg();
+            }
+        });
     }
 
     @Override
     public void showTapWheelStartOne() {
 
+        // non usare
     }
 
     @Override
     public void showTapWheelEndOne() {
-
+        // non usare
     }
 
     @Override
     public void showTapWheelStartTwo() {
-
+        // non usare
     }
 
     @Override
     public void showTapWheelEndTwo() {
-
+        // non usare
     }
 
     @Override
@@ -924,18 +1001,24 @@ public class GuiController extends View {
     }
 
 
-
-
     //------------single  player----------------------------------------------------
 
     @Override
     public void showDifficultyRequest() {
+
+        // non usare
 
     }
 
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                privateCardSingle = publicList;
+            }
+        });
     }
 
     @Override
@@ -972,10 +1055,10 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
         Parent root1 = (Parent) loader.load();
 
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        /*GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
-        Scene scene = new Scene(root1, width, height);
+        int height = gd.getDisplayMode().getHeight();*/
+        Scene scene = new Scene(root1/*, width, height*/);
         stage.setTitle("Sagrada Pattern Choose");
         stage.setScene(scene);
         stage.setResizable(false);

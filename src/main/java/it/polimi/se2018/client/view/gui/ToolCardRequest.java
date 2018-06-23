@@ -102,10 +102,10 @@ public class ToolCardRequest {
             board.setIncrease(tool1);
         }
         if(toolNumber == 11){
-            //board.---(tool11);
+            board.setDiceValue(tool11);
         }
         if(toolNumber == 12){
-            //board.---(tool12);
+            board.setNumberDice(tool12);
         }
         window.close();
     }
@@ -113,40 +113,51 @@ public class ToolCardRequest {
     @FXML
     void handleTool1(ActionEvent event) {
 
-        if(tool1Group.getSelectedToggle().equals(tool1ButtonMin)){
-            tool1 = 0;
-        }
-        if(tool1Group.getSelectedToggle().equals(tool1ButtonPlus)){
+        try {
+            if (tool1Group.getSelectedToggle().equals(tool1ButtonMin)) {
+                tool1 = 0;
+            }
+            if (tool1Group.getSelectedToggle().equals(tool1ButtonPlus)) {
 
-            tool1 = 1;
+                tool1 = 1;
+            }
+        }
+        catch (NullPointerException e){
+
         }
     }
 
     @FXML
     void handleTool11(ActionEvent event) {
-        if(tool11Group.getSelectedToggle().equals(tool11Button1)){
 
-            tool11 = 1;
+        try {
+            if (tool11Group.getSelectedToggle().equals(tool11Button1)) {
+
+                tool11 = 1;
+            }
+            if (tool1Group.getSelectedToggle().equals(tool11Button2)) {
+
+                tool11 = 2;
+            }
+            if (tool11Group.getSelectedToggle().equals(tool11Button3)) {
+
+                tool11 = 3;
+            }
+            if (tool1Group.getSelectedToggle().equals(tool11Button4)) {
+
+                tool11 = 4;
+            }
+            if (tool11Group.getSelectedToggle().equals(tool11Button5)) {
+
+                tool11 = 5;
+            }
+            if (tool1Group.getSelectedToggle().equals(tool11Button6)) {
+
+                tool11 = 6;
+            }
         }
-        if(tool1Group.getSelectedToggle().equals(tool11Button2)){
+        catch (NullPointerException e) {
 
-            tool11 = 2;
-        }
-        if(tool11Group.getSelectedToggle().equals(tool11Button3)){
-
-            tool11 = 3;
-        }
-        if(tool1Group.getSelectedToggle().equals(tool11Button4)){
-
-            tool11 = 4;
-        }
-        if(tool11Group.getSelectedToggle().equals(tool11Button5)){
-
-            tool11 = 5;
-        }
-        if(tool1Group.getSelectedToggle().equals(tool11Button6)){
-
-            tool11 = 6;
         }
 
     }
@@ -154,13 +165,18 @@ public class ToolCardRequest {
     @FXML
     void handleTool12(ActionEvent event) {
 
-        if(tool12Group.getSelectedToggle().equals(tool12Button1)){
+        try {
+            if (tool12Group.getSelectedToggle().equals(tool12Button1)) {
 
-            tool12 = 1;
+                tool12 = 1;
+            }
+            if (tool12Group.getSelectedToggle().equals(tool12Button2)) {
+
+                tool12 = 2;
+            }
         }
-        if(tool12Group.getSelectedToggle().equals(tool12Button2)){
+        catch (NullPointerException e) {
 
-            tool12 = 2;
         }
 
     }

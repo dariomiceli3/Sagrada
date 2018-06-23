@@ -34,7 +34,7 @@
             <Button fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePlayButton" text="Play" />
          </children>
       </HBox>
-      <ComboBox fx:id="comboBox" layoutX="123.0" layoutY="320.0" prefWidth="150.0" promptText="Difficulty" visible="false" />
+      <ComboBox fx:id="comboBox" layoutX="123.0" layoutY="320.0" onAction="#handleDifficultyBox" prefWidth="150.0" promptText="Difficulty" visible="false" />
    </children>
    <effect>
       <DropShadow />

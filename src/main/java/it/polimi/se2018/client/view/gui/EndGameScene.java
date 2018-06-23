@@ -64,8 +64,8 @@ public class EndGameScene {
 
         winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
 
+        int i = 0;
         for (Player player : playerList) {
-            int i = 0;
             if(i == 0) {
                 rankText1.setText(player.toStringPoints() + "\n");
             }
@@ -79,7 +79,6 @@ public class EndGameScene {
                 rankText4.setText(player.toStringPoints() + "\n");
             }
             i++;
-
         }
     }
 }
