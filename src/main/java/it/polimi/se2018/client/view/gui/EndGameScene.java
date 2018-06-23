@@ -32,6 +32,33 @@ public class EndGameScene {
     @FXML
     private TextArea rankText4;
 
+    //------Single Player instance variables and observer method-----------
+
+    private static boolean singlePlayer;
+
+    private static boolean winnerSingl;
+
+    private static int playerPoints;
+
+    private static int gameThreshold;
+
+    public static int getPlayerPoints() {
+        return playerPoints;
+    }
+
+    public static int getGameThreshold() {
+        return gameThreshold;
+    }
+
+    public static boolean isSinglePlayer() {
+        return singlePlayer;
+    }
+
+    public static boolean isWinnerSingl() {
+        return winnerSingl;
+    }
+
+    //----------------------------------------------------
 
     private static List<Player> playerList;
 
@@ -62,23 +89,49 @@ public class EndGameScene {
 
     public void initialize(){
 
-        winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
+        if(singlePlayer){
 
-        int i = 0;
-        for (Player player : playerList) {
-            if(i == 0) {
-                rankText1.setText(player.toStringPoints() + "\n");
+            if(winnerSingl){
+
+                winnerText.setText("You Win!" + "   Score : " + playerPoints);
+
+                rankText2.setVisible(true);
+                rankText2.setText("Threshold : " + gameThreshold);
+
+
+            }else {
+
+                winnerText.setText("You Lose!" + "  Score : " + playerPoints);
+
+                rankText2.setVisible(true);
+                rankText2.setText("Threshold : " + gameThreshold);
+
             }
-            if(i == 1) {
-                rankText2.setText(player.toStringPoints() + "\n");
+
+        }else {
+
+            winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
+
+            int i = 0;
+            for (Player player : playerList) {
+                if (i == 0) {
+                    rankText1.setVisible(true);
+                    rankText1.setText(player.toStringPoints());
+                }
+                if (i == 1) {
+                    rankText1.setVisible(true);
+                    rankText2.setText(player.toStringPoints());
+                }
+                if (i == 2) {
+                    rankText1.setVisible(true);
+                    rankText3.setText(player.toStringPoints());
+                }
+                if (i == 3) {
+                    rankText1.setVisible(true);
+                    rankText4.setText(player.toStringPoints() + "\n");
+                }
+                i++;
             }
-            if(i == 2) {
-                rankText3.setText(player.toStringPoints() + "\n");
-            }
-            if(i == 3) {
-                rankText4.setText(player.toStringPoints() + "\n");
-            }
-            i++;
         }
     }
 }
