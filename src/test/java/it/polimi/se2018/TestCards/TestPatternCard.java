@@ -1779,15 +1779,439 @@ public class TestPatternCard {
 
         System.out.println(patternCard.toString());
 
+    }
+
+    @Test
+    public void testvalid() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPattern(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,2,patternCard6);
+
+    }
+
+    @Test
+    public void testValid2() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,12,patternCard6);
+        patternCard6.putDiceOnPattern(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,2,patternCard6);
+    }
+
+    @Test
+    public void testvalidEglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,2,patternCard6);
+
+    }
+
+    @Test
+    public void testValid2Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,12,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,2,patternCard6);
+    }
+
+    @Test
+    public void testvalidCopper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPatternCopper(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,2,patternCard6);
+
+    }
+
+    @Test
+    public void testValid2Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,12,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,2,patternCard6);
+    }
+
+    @Test
+    public void testvalid3() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPattern(diceBlue1,9,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,8,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,2,patternCard6);
+    }
+
+    @Test
+    public void testvalid3Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPatternCopper(diceBlue1,9,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,8,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,2,patternCard6);
+    }
+
+    @Test
+    public void testvalid3Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,9,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,8,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,2,patternCard6);
+    }
 
 
+    @Test
+    public void testValid3() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
 
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,15,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,11,patternCard6);
+        //patternCard6.putDiceOnPattern(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,5,patternCard6);
+    }
+
+    @Test
+    public void testValidEglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,15,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,11,patternCard6);
+        //patternCard6.putDiceOnPattern(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,5,patternCard6);
+    }
+
+    @Test
+    public void testValid3Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,15,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,11,patternCard6);
+        //patternCard6.putDiceOnPattern(diceBlue1,7,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,5,patternCard6);
+    }
+
+    @Test
+    public void testValid6() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,2,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid60() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,0,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid6Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,2,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid60Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,0,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid6Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,2,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid60Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,0,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid9() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,9,patternCard6);
     }
 
 
 
+    @Test
+    public void testValid9Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
 
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
 
-
-
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,9,patternCard6);
     }
+
+
+
+    @Test
+    public void testValid9Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,3,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,9,patternCard6);
+    }
+
+    @Test
+    public void testValid16() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,16,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,15,patternCard6);
+    }
+
+    @Test
+    public void testValid16Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,16,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,15,patternCard6);
+    }
+
+    @Test
+    public void testValid16Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,16,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,15,patternCard6);
+    }
+
+    @Test
+    public void testValid15() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,16,patternCard6);
+    }
+
+    @Test
+    public void testValid1516() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPattern(diceBlue1,14,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,13,patternCard6);
+        patternCard6.putDiceOnPattern(diceBlue1,12,patternCard6);
+        patternCard6.putDiceOnPattern(diceGreen2,16,patternCard6);
+    }
+
+    @Test
+    public void testValid15Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,16,patternCard6);
+    }
+
+    @Test
+    public void testValid1516Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,14,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,13,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,12,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,16,patternCard6);
+    }
+    @Test
+    public void testValid15Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,17,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,16,patternCard6);
+    }
+
+    @Test
+    public void testValid1516Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceBlue1,14,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,13,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceBlue1,12,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,16,patternCard6);
+    }
+
+    @Test
+    public void testValid612Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,17,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,12,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid612Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceGreen2,17,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceBlue1,12,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,6,patternCard6);
+    }
+
+    @Test
+    public void testValid912Eglomise() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,18,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceBlue1,13,patternCard6);
+        patternCard6.putDiceOnPatternEglomise(diceGreen2,9,patternCard6);
+    }
+
+    @Test
+    public void testValid912Copper() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+
+        PatternCard patternCard6 = patternCard.loadPatternForTesting();
+
+        patternCard6.putDiceOnPatternCopper(diceGreen2,18,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceBlue1,13,patternCard6);
+        patternCard6.putDiceOnPatternCopper(diceGreen2,9,patternCard6);
+    }
+}
