@@ -79,27 +79,30 @@ public class BoardController {
             //2a mossa
             if (guiState == ViewState.TOOLMOVESECOND) {
                 if (mainController.isSinglePlayer()) {
-                    setGuiState(ViewState.TOOLSPDICE);
-                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                    setIndexTool(3);
+                    disablePool();
+                    disableTool();
+                    next.setDisable(false);
+                } else {
+                    next.setDisable(false);
+                    setIndexTool(3);
                 }
-                next.setDisable(false);
-                setIndexTool(3);
             }
 
             if (guiState == ViewState.TOOLMOVE) {
                 next.setDisable(false);
                 setIndexTool(3);
             }
-
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(3);
+            }
             if (guiState == ViewState.DICEMOVE) {
                 next.setDisable(false);
                 setIndexTool(3);
             }
 
-            if (guiState == ViewState.DICEMOVESECOND) {
-                next.setDisable(false);
-                setIndexTool(3);
-            }
+
 
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
@@ -133,27 +136,29 @@ public class BoardController {
             //2a mossa
             if (guiState == ViewState.TOOLMOVESECOND) {
                 if (mainController.isSinglePlayer()) {
-                    setGuiState(ViewState.TOOLSPDICE);
-                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                    setIndexTool(4);
+                    disablePool();
+                    disableTool();
+                    next.setDisable(false);
+                } else {
+                    next.setDisable(false);
+                    setIndexTool(4);
                 }
-                next.setDisable(false);
-                setIndexTool(4);
             }
 
             if (guiState == ViewState.TOOLMOVE) {
                 next.setDisable(false);
                 setIndexTool(4);
             }
-
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(4);
+            }
             if (guiState == ViewState.DICEMOVE) {
                 next.setDisable(false);
                 setIndexTool(4);
             }
 
-            if (guiState == ViewState.DICEMOVESECOND) {
-                next.setDisable(false);
-                setIndexTool(4);
-            }
 
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
@@ -485,14 +490,9 @@ public class BoardController {
 
         if (guiState == ViewState.DICEMOVESECOND) {
             next.setDisable(false);
-
-
         }
-
         if (guiState == ViewState.DICEMOVE) {
             next.setDisable(false);
-
-
         }
 
         try {
@@ -664,6 +664,7 @@ public class BoardController {
             next.setDisable(false);
         } else if (guiState == ViewState.TOOLSPDICE){
             next.setDisable(false);
+            disablePool();
         }
         else {
             setGuiState(ViewState.DICEMOVESECOND);
@@ -886,27 +887,29 @@ public class BoardController {
             //2a mossa
             if (guiState == ViewState.TOOLMOVESECOND) {
                 if (mainController.isSinglePlayer()) {
-                    setGuiState(ViewState.TOOLSPDICE);
-                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                    setIndexTool(0);
+                    disablePool();
+                    disableTool();
+                    next.setDisable(false);
+                } else {
+                    next.setDisable(false);
+                    setIndexTool(0);
                 }
-                next.setDisable(false);
-                setIndexTool(0);
             }
 
             if (guiState == ViewState.TOOLMOVE) {
                 next.setDisable(false);
                 setIndexTool(0);
             }
-
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(0);
+            }
             if (guiState == ViewState.DICEMOVE) {
                 next.setDisable(false);
                 setIndexTool(0);
             }
 
-            if (guiState == ViewState.DICEMOVESECOND) {
-                next.setDisable(false);
-                setIndexTool(0);
-            }
 
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
@@ -938,17 +941,16 @@ public class BoardController {
             }
             if (guiState == ViewState.TOOLMOVESECOND) {
                 if (mainController.isSinglePlayer()) {
-                    setGuiState(ViewState.TOOLSPDICE);
-                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                    setIndexTool(1);
+                    disablePool();
+                    disableTool();
+                    next.setDisable(false);
+                } else {
+                    next.setDisable(false);
+                    setIndexTool(1);
                 }
-                next.setDisable(false);
-                setIndexTool(1);
             }
             if (guiState == ViewState.TOOLMOVE) {
-                next.setDisable(false);
-                setIndexTool(1);
-            }
-            if (guiState == ViewState.DICEMOVE) {
                 next.setDisable(false);
                 setIndexTool(1);
             }
@@ -956,6 +958,11 @@ public class BoardController {
                 next.setDisable(false);
                 setIndexTool(1);
             }
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(1);
+            }
+
 
 
         }
@@ -990,17 +997,16 @@ public class BoardController {
             }
             if (guiState == ViewState.TOOLMOVESECOND) {
                 if (mainController.isSinglePlayer()) {
-                    setGuiState(ViewState.TOOLSPDICE);
-                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                    setIndexTool(2);
+                    disablePool();
+                    disableTool();
+                    next.setDisable(false);
+                } else {
+                    next.setDisable(false);
+                    setIndexTool(2);
                 }
-                next.setDisable(false);
-                setIndexTool(2);
             }
             if (guiState == ViewState.TOOLMOVE) {
-                next.setDisable(false);
-                setIndexTool(2);
-            }
-            if (guiState == ViewState.DICEMOVE) {
                 next.setDisable(false);
                 setIndexTool(2);
             }
@@ -1008,6 +1014,11 @@ public class BoardController {
                 next.setDisable(false);
                 setIndexTool(2);
             }
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(2);
+            }
+
 
 
 
@@ -1147,6 +1158,20 @@ public class BoardController {
     @FXML
     void nextButtonSelected(ActionEvent event) {
 
+        //---- single player
+
+        if (guiState == ViewState.TOOLSPDICE) {
+            mainController.getConnection().useToolSingleToServer(mainController.getPlayerID(), indexTool, indexPool);
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard2.setBlendMode(BlendMode.SRC_OVER);
+            toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
+
+        }
+
+        //----- multiplayer
+
         if (guiState == ViewState.DICEMOVE) {
             mainController.getConnection().setChooseToServer(mainController.getPlayerID(), 0);
         }
@@ -1161,11 +1186,26 @@ public class BoardController {
         }
 
         if (guiState == ViewState.TOOLMOVESECOND) {
-            updateCost(indexTool);
-            mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
-            toolCard1.setBlendMode(BlendMode.SRC_OVER);
-            toolCard2.setBlendMode(BlendMode.SRC_OVER);
-            toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            if (mainController.isSinglePlayer()) {
+                textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                disablePattern();
+                setGuiState(ViewState.TOOLSPDICE);
+                enablePool();
+                next.setDisable(true);
+                toolCard1.setBlendMode(BlendMode.SRC_OVER);
+                toolCard2.setBlendMode(BlendMode.SRC_OVER);
+                toolCard3.setBlendMode(BlendMode.SRC_OVER);
+                toolCard4.setBlendMode(BlendMode.SRC_OVER);
+                toolCard5.setBlendMode(BlendMode.SRC_OVER);
+
+            }
+            else {
+                updateCost(indexTool);
+                mainController.getConnection().useToolCardToServer(mainController.getPlayerID(), indexTool);
+                toolCard1.setBlendMode(BlendMode.SRC_OVER);
+                toolCard2.setBlendMode(BlendMode.SRC_OVER);
+                toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            }
         }
 
         if (guiState == ViewState.DICEMOVESECOND) {
@@ -1244,11 +1284,7 @@ public class BoardController {
             mainController.getConnection().useTapWheelToolCard(mainController.getPlayerID(), numberDice, indexPatternStartOne, indexPatternEndOne, indexPatternStartTwo, indexPatternEndTwo);
         }
 
-        //---- single player
 
-        if (guiState == ViewState.TOOLSPDICE) {
-            mainController.getConnection().useToolSingleToServer(mainController.getPlayerID(), indexTool, indexPool);
-        }
 
 
 
@@ -1547,7 +1583,7 @@ public class BoardController {
                     Image image = new Image(fileStream);
                     if (i == 0) {
                         privateCard.setImage(image);
-                        publicCardZoom1.setImage(image);
+                        privateCardZoom.setImage(image);
                     }
                     if (i == 1) {
                         publicCard3.setImage(image);
@@ -1633,6 +1669,8 @@ public class BoardController {
 
     private void loadToolCard() throws IOException {
 
+        updateToolCard();
+
         for (int i = 0; i < mainController.getToolList().size(); i++) {
 
             File file = new File("./");
@@ -1671,6 +1709,43 @@ public class BoardController {
             }
 
         }
+
+    }
+
+    private void updateToolCard() {
+
+        if (mainController.isSinglePlayer()) {
+            if (mainController.getToolList().size() == 1) {
+                toolCard2.setImage(null);
+                toolCard2.setVisible(false);
+                toolCard3.setImage(null);
+                toolCard3.setVisible(false);
+                toolCard4.setImage(null);
+                toolCard4.setVisible(false);
+                toolCard5.setImage(null);
+                toolCard5.setVisible(false);
+            }
+            if (mainController.getToolList().size() == 2) {
+                toolCard4.setImage(null);
+                toolCard4.setVisible(false);
+                toolCard5.setImage(null);
+                toolCard5.setVisible(false);
+                toolCard3.setImage(null);
+                toolCard3.setVisible(false);
+
+            }
+            if (mainController.getToolList().size() == 3) {
+                toolCard4.setImage(null);
+                toolCard4.setVisible(false);
+                toolCard5.setImage(null);
+                toolCard5.setVisible(false);
+            }
+            if (mainController.getToolList().size() == 4) {
+                toolCard5.setImage(null);
+                toolCard5.setVisible(false);
+            }
+        }
+
     }
 
     private void loadTokensNumber() {
@@ -2453,7 +2528,10 @@ public class BoardController {
 
     }
 
-    public void textChooseMsg() {
+    public void textChooseMsg() throws IOException {
+
+
+        loadToolCard();
 
         enablePool();
         enablePattern();
@@ -2468,13 +2546,17 @@ public class BoardController {
     public void errorStateDice() {
         if (guiState == ViewState.GLAZINGHAMMER) {
             setGuiState(ViewState.ERRORTOOL);
+            roll.setDisable(true);
         }
         else {
             setGuiState(ViewState.ERRORDICE);
         }
     }
 
-    public void textMoveMsg() {
+    public void textMoveMsg() throws IOException {
+
+
+        loadToolCard();
 
         enablePool();
         enablePattern();
@@ -2695,13 +2777,17 @@ public class BoardController {
 
     }
 
-    protected void textToolSinglePlayerMsg() {
+    protected void textToolSinglePlayerMsg() throws IOException{
+
+        loadToolCard();
 
         disablePattern();
         disablePool();
 
         if (guiState == ViewState.TOOLMOVE) {
             textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+            disablePattern();
+            disableTool();
             setGuiState(ViewState.TOOLSPDICE);
             enablePool();
             next.setDisable(true);
