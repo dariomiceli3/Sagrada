@@ -613,7 +613,11 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                board.textChooseMsg();
+                try {
+                    board.textChooseMsg();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -624,7 +628,11 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                board.textMoveMsg();
+                try {
+                    board.textMoveMsg();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -1032,7 +1040,11 @@ public class GuiController extends View {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                board.textToolSinglePlayerMsg();
+                try {
+                    board.textToolSinglePlayerMsg();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
