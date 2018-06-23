@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -40,25 +41,139 @@ public class BoardController {
     private ImageView toolCardZoom4;
     @FXML
     private ImageView toolCardZoom5;
+    @FXML
+    private Circle circleTool1;
+    @FXML
+    private Circle circleTool2;
+    @FXML
+    private Circle circleTool3;
+    @FXML
+    private Circle circleTokens;
+    @FXML
+    private TextField txtPlayer2;
+    @FXML
+    private TextField txtPlayer3;
+    @FXML
+    private TextField txtPlayer4;
+    @FXML
+    private TextField txtTokens;
 
     @FXML
     void handleTool4(MouseEvent event) {
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
+
+            disablePool();
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard2.setBlendMode(BlendMode.SRC_OVER);
+            toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.OVERLAY);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
+
+            // 1a mossa
+            if (guiState == ViewState.MOVE) {
+                next.setDisable(false);
+                setGuiState(ViewState.TOOLMOVE);
+                setIndexTool(3);
+            }
+
+            //2a mossa
+            if (guiState == ViewState.TOOLMOVESECOND) {
+                if (mainController.isSinglePlayer()) {
+                    setGuiState(ViewState.TOOLSPDICE);
+                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                }
+                next.setDisable(false);
+                setIndexTool(3);
+            }
+
+            if (guiState == ViewState.TOOLMOVE) {
+                next.setDisable(false);
+                setIndexTool(3);
+            }
+
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(3);
+            }
+
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(3);
+            }
+
+        }
+        if (event.getButton().equals(MouseButton.SECONDARY)) {
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            enablePool();
+            toolCardZoom4.setVisible(true);
+            next.setDisable(true);
+        }
 
     }
 
     @FXML
     void handleTool5(MouseEvent event) {
 
-    }
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
 
+            disablePool();
+            toolCard1.setBlendMode(BlendMode.SRC_OVER);
+            toolCard2.setBlendMode(BlendMode.SRC_OVER);
+            toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.OVERLAY);
+
+            // 1a mossa
+            if (guiState == ViewState.MOVE) {
+                next.setDisable(false);
+                setGuiState(ViewState.TOOLMOVE);
+                setIndexTool(4);
+            }
+
+            //2a mossa
+            if (guiState == ViewState.TOOLMOVESECOND) {
+                if (mainController.isSinglePlayer()) {
+                    setGuiState(ViewState.TOOLSPDICE);
+                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                }
+                next.setDisable(false);
+                setIndexTool(4);
+            }
+
+            if (guiState == ViewState.TOOLMOVE) {
+                next.setDisable(false);
+                setIndexTool(4);
+            }
+
+            if (guiState == ViewState.DICEMOVE) {
+                next.setDisable(false);
+                setIndexTool(4);
+            }
+
+            if (guiState == ViewState.DICEMOVESECOND) {
+                next.setDisable(false);
+                setIndexTool(4);
+            }
+
+        }
+        if (event.getButton().equals(MouseButton.SECONDARY)) {
+            System.out.println("toolcard5");
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
+            toolCardZoom5.setVisible(true);
+            enablePool();
+            next.setDisable(true);
+        }
+
+    }
     @FXML
     void handleUnzoomTool4(MouseEvent event) {
-
+        toolCardZoom4.setVisible(false);
     }
+
 
     @FXML
     void handleUnzoomTool5(MouseEvent event) {
-
+        toolCardZoom5.setVisible(false);
     }
 
     //----------end single player--------------
@@ -547,6 +662,8 @@ public class BoardController {
             next.setDisable(false);
         } else if (guiState == ViewState.FLUXPOOL) {
             next.setDisable(false);
+        } else if (guiState == ViewState.TOOLSPDICE){
+            next.setDisable(false);
         }
         else {
             setGuiState(ViewState.DICEMOVESECOND);
@@ -756,6 +873,8 @@ public class BoardController {
             toolCard1.setBlendMode(BlendMode.OVERLAY);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
 
             // 1a mossa
             if (guiState == ViewState.MOVE) {
@@ -766,6 +885,10 @@ public class BoardController {
 
             //2a mossa
             if (guiState == ViewState.TOOLMOVESECOND) {
+                if (mainController.isSinglePlayer()) {
+                    setGuiState(ViewState.TOOLSPDICE);
+                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                }
                 next.setDisable(false);
                 setIndexTool(0);
             }
@@ -793,8 +916,7 @@ public class BoardController {
             enablePool();
 
         }
-
-        }
+    }
 
     @FXML
     void handleTool2(MouseEvent event) {
@@ -806,6 +928,8 @@ public class BoardController {
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.OVERLAY);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
 
             if (guiState == ViewState.MOVE) {
                 next.setDisable(false);
@@ -813,6 +937,10 @@ public class BoardController {
                 setIndexTool(1);
             }
             if (guiState == ViewState.TOOLMOVESECOND) {
+                if (mainController.isSinglePlayer()) {
+                    setGuiState(ViewState.TOOLSPDICE);
+                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                }
                 next.setDisable(false);
                 setIndexTool(1);
             }
@@ -851,6 +979,8 @@ public class BoardController {
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.OVERLAY);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
 
             if (guiState == ViewState.MOVE) {
                 next.setDisable(false);
@@ -859,6 +989,10 @@ public class BoardController {
 
             }
             if (guiState == ViewState.TOOLMOVESECOND) {
+                if (mainController.isSinglePlayer()) {
+                    setGuiState(ViewState.TOOLSPDICE);
+                    textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+                }
                 next.setDisable(false);
                 setIndexTool(2);
             }
@@ -1022,6 +1156,8 @@ public class BoardController {
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
         }
 
         if (guiState == ViewState.TOOLMOVESECOND) {
@@ -1106,6 +1242,12 @@ public class BoardController {
         }
         if (guiState == ViewState.TAPENDTWO) {
             mainController.getConnection().useTapWheelToolCard(mainController.getPlayerID(), numberDice, indexPatternStartOne, indexPatternEndOne, indexPatternStartTwo, indexPatternEndTwo);
+        }
+
+        //---- single player
+
+        if (guiState == ViewState.TOOLSPDICE) {
+            mainController.getConnection().useToolSingleToServer(mainController.getPlayerID(), indexTool, indexPool);
         }
 
 
@@ -1252,15 +1394,39 @@ public class BoardController {
         RoundTrackerBox.setMainController(this);
         ToolCardRequest.setBoard(this);
 
-        setToolCost();
+        if (mainController.isSinglePlayer()) {
+            tokensNumber.setVisible(false);
+            textPrivateSingle.setVisible(true);
+            circleTool1.setVisible(false);
+            circleTool2.setVisible(false);
+            circleTool3.setVisible(false);
+            patternPlayer2.setVisible(false);
+            patternPlayer3.setVisible(false);
+            patternPlayer4.setVisible(false);
+            txtPlayer2.setVisible(false);
+            txtPlayer3.setVisible(false);
+            txtPlayer4.setVisible(false);
+            txtTokens.setVisible(false);
+            circleTokens.setVisible(false);
+            loadPanel();
+            loadPattern();
+            loadPrivate();
+            loadPublicCard();
+            loadToolCard();
 
-        loadPanel();
-        loadPattern();
-        loadTokensNumber();
-        loadPrivate();
-        loadPublicCard();
-        loadToolCard();
-        loadOtherPattern();
+        }
+        else {
+            setToolCost();
+            loadPanel();
+            loadPattern();
+            loadTokensNumber();
+            loadPrivate();
+            loadPublicCard();
+            loadToolCard();
+            loadOtherPattern();
+        }
+
+
 
 
         privateCardZoom.visibleProperty().addListener(new ChangeListener<Boolean>() {
@@ -1332,9 +1498,16 @@ public class BoardController {
         try {
             System.out.println("consegna panel");
             if ((mainController.getPlayerID() == 0)) {
-                fileStream = new FileInputStream(filePath + "/BluePanel" + ".png");
-                Image imagePlayerOne = new Image(fileStream);
-                panelWindow.setImage(imagePlayerOne);
+                if (mainController.isSinglePlayer()) {
+                    fileStream = new FileInputStream(filePath + "/RedPanel" + ".png");
+                    Image imagePlayerFour = new Image(fileStream);
+                    panelWindow.setImage(imagePlayerFour);
+                }
+                else {
+                    fileStream = new FileInputStream(filePath + "/BluePanel" + ".png");
+                    Image imagePlayerOne = new Image(fileStream);
+                    panelWindow.setImage(imagePlayerOne);
+                }
             }
             if ((mainController.getPlayerID() == 1)) {
                 fileStream = new FileInputStream(filePath + "/GreenPanel" + ".png");
@@ -1360,19 +1533,47 @@ public class BoardController {
 
     private void loadPrivate() throws IOException {
 
-        File file = new File("./");
-        String fileColor = mainController.getPrivateCard().getColour().toString();
-        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/private");
+        if (mainController.isSinglePlayer()) {
 
-        try {
-            System.out.println("private board");
-            fileStream = new FileInputStream(filePath + "/" + fileColor + ".png");
-            Image image = new Image(fileStream);
-            privateCard.setImage(image);
-            privateCardZoom.setImage(image);
+            for (int i = 0; i < mainController.getPrivateCardSingle().size(); i++) {
+
+                File file = new File("./");
+                String fileColor = mainController.getPrivateCardSingle().get(i).getColour().toString();
+                String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/private");
+
+                try {
+                    System.out.println("private single player");
+                    fileStream = new FileInputStream(filePath + "/" + fileColor + ".png");
+                    Image image = new Image(fileStream);
+                    if (i == 0) {
+                        privateCard.setImage(image);
+                        publicCardZoom1.setImage(image);
+                    }
+                    if (i == 1) {
+                        publicCard3.setImage(image);
+                        publicCardZoom3.setImage(image);
+                    }
+                }
+                finally {
+                    fileStream.close();
+                }
+            }
         }
-        finally {
-            fileStream.close();
+
+        else {
+            File file = new File("./");
+            String fileColor = mainController.getPrivateCard().getColour().toString();
+            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/private");
+
+            try {
+                System.out.println("private board");
+                fileStream = new FileInputStream(filePath + "/" + fileColor + ".png");
+                Image image = new Image(fileStream);
+                privateCard.setImage(image);
+                privateCardZoom.setImage(image);
+            } finally {
+                fileStream.close();
+            }
         }
     }
 
@@ -1416,9 +1617,11 @@ public class BoardController {
                     publicCard2.setImage(image);
                     publicCardZoom2.setImage(image);
                 }
-                if (i == 2) {
-                    publicCard3.setImage(image);
-                    publicCardZoom3.setImage(image);
+                if (!mainController.isSinglePlayer()) {
+                    if (i == 2) {
+                        publicCard3.setImage(image);
+                        publicCardZoom3.setImage(image);
+                    }
                 }
             }
             finally {
@@ -1451,6 +1654,16 @@ public class BoardController {
                 if (i == 2) {
                     toolCard3.setImage(image);
                     toolCardZoom3.setImage(image);
+                }
+                if (i == 3) {
+                    toolCard4.setImage(image);
+                    toolCardZoom4.setImage(image);
+                    toolCard4.setVisible(true);
+                }
+                if (i == 4) {
+                    toolCard5.setImage(image);
+                    toolCardZoom5.setImage(image);
+                    toolCard5.setVisible(true);
                 }
             }
             finally {
@@ -2275,6 +2488,7 @@ public class BoardController {
             next.setDisable(true);
             disableTool();
             textGame.setText("Click the Dice & the correct position, then NEXT");
+
         }
         else {
            setGuiState(ViewState.DICEMOVESECOND);
@@ -2480,5 +2694,37 @@ public class BoardController {
         textGame.setText("Click the 2nd dice and where yuo want to move it, then NEXT");
 
     }
+
+    protected void textToolSinglePlayerMsg() {
+
+        disablePattern();
+        disablePool();
+
+        if (guiState == ViewState.TOOLMOVE) {
+            textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
+            setGuiState(ViewState.TOOLSPDICE);
+            enablePool();
+            next.setDisable(true);
+        }
+        else if (guiState == ViewState.ERRORMATCH) {
+            setGuiState(ViewState.TOOLMOVESECOND);
+            enableTool();
+            next.setDisable(true);
+            textGame.setText("Click on a tool card (if) you want to use it, then NEXT or SKIP");
+        }
+        else {
+            setGuiState(ViewState.TOOLMOVESECOND);
+            enableTool();
+            next.setDisable(true);
+            textGame.setText("Click a tool card (if) you want to use it, then NEXT or SKIP");
+        }
+    }
+
+
+    protected void errorMatchDice() {
+        setGuiState(ViewState.ERRORMATCH);
+
+    }
+
 
 }

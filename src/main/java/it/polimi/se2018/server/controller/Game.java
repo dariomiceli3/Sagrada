@@ -268,6 +268,7 @@ public class Game implements Observer {
                 startTurn();
             }
         }else {
+            view.sendEvent(new StartGameSceneEvent());
             singlePlayerTurn();
         }
 

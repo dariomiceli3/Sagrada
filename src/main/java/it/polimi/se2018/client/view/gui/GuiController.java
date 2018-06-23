@@ -91,6 +91,10 @@ public class GuiController extends View {
         return singlePlayer;
     }
 
+    public Integer getSelectedDifficulty() {
+        return selectedDifficulty;
+    }
+
     //-------------------------gui start-----------------
 
 
@@ -680,6 +684,7 @@ public class GuiController extends View {
             public void run() {
                 try {
                     getConnection().setEndGameTimer(getPlayerID());
+                    EndGameScene.setSinglePlayer(false);
                     board.showRank(playerList);
                 }
                 catch (IOException e){
@@ -1024,25 +1029,57 @@ public class GuiController extends View {
     @Override
     public void showToolSingleCommand(List<ToolCard> toolList, int poolSize) {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                board.textToolSinglePlayerMsg();
+            }
+        });
+
     }
 
     @Override
     public void showToolSingleChoose() {
-
+        // non usare
     }
 
     @Override
     public void showToolSingleDice() {
-
+        // non usare
     }
 
     @Override
     public void showMatchError() {
 
+        board.errorMatchDice();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Error", "The dice selected doesn't match the color of the tool card");
+            }
+        });
+
     }
 
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                getConnection().setEndGameTimer(getPlayerID());
+                EndGameScene.setSinglePlayer(true);
+                EndGameScene.setWinnerSingl(winner);
+                EndGameScene.setPlayerPoints(playerPoints);
+                EndGameScene.setGameThreshold(gameThreshold);
+                try {
+                    EndGameScene.display();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

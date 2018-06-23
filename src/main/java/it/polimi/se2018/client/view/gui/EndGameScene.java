@@ -42,20 +42,20 @@ public class EndGameScene {
 
     private static int gameThreshold;
 
-    public static int getPlayerPoints() {
-        return playerPoints;
+    public static void setPlayerPoints(int playerPoints) {
+        EndGameScene.playerPoints = playerPoints;
     }
 
-    public static int getGameThreshold() {
-        return gameThreshold;
+    public static void setGameThreshold(int gameThreshold) {
+        EndGameScene.gameThreshold = gameThreshold;
     }
 
-    public static boolean isSinglePlayer() {
-        return singlePlayer;
+    public static void setSinglePlayer(boolean singlePlayer) {
+        EndGameScene.singlePlayer = singlePlayer;
     }
 
-    public static boolean isWinnerSingl() {
-        return winnerSingl;
+    public static void setWinnerSingl(boolean winnerSingl) {
+        EndGameScene.winnerSingl = winnerSingl;
     }
 
     //----------------------------------------------------

@@ -52,7 +52,8 @@ public enum ViewState {
     TOOLMOVESECOND,
     DICEMOVESECOND,
     ERRORDICE,
-    ERRORTOOL
+    ERRORTOOL,
+    ERRORMATCH
 
 
 
