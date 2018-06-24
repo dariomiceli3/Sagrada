@@ -2,23 +2,44 @@ package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
+import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import static java.lang.String.*;
 
 public class CustomCard {
 
+    private static WritableImage snapshot;
 
-    public void createCard(PatternCard patternCard){
+    public static WritableImage getSnapshot() {
+        return snapshot;
+    }
+    private static WritableImage wi;
+
+    public static WritableImage getWi() {
+        return wi;
+    }
+
+    public static void createCard(PatternCard patternCard){
 
         Stage canvasWindow = new Stage();
 
@@ -69,6 +90,27 @@ public class CustomCard {
 
         //Close Button
         Button button = new Button("Close");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                button.setOnAction((ActionEvent event) -> {
+                   try {
+                       SnapshotParameters params = new SnapshotParameters();
+                       wi = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+                       snapshot = canvas.snapshot(new SnapshotParameters(), null);
+
+                       File output = new File("src/main/resources/rendering" + ".png");
+                       ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+                       canvasWindow.close();
+                   }
+                   catch (IOException e){
+                       e.printStackTrace();
+                   }
+
+                });
+            }
+        });
+
         button.setLayoutX(137);
         button.setLayoutY(280);
         button.setPrefSize(70, 20);
@@ -94,7 +136,7 @@ public class CustomCard {
 
     }
 
-    private void cardParser(PatternCard patternCard, GraphicsContext gc) {
+    private static void cardParser(PatternCard patternCard, GraphicsContext gc) {
 
 
         List<GlassBox> boxList = patternCard.getPattern();
@@ -106,15 +148,15 @@ public class CustomCard {
                 parserColor(i, gc);
             }
             if(boxList.get(i).getConstraintValue() != 0){
-                String contraintValue = Integer.toString(boxList.get(i).getConstraintValue());
-                parserNum(contraintValue, i ,gc);
+                String constraintValue = Integer.toString(boxList.get(i).getConstraintValue());
+                parserNum(constraintValue, i ,gc);
             }
 
         }
 
     }
 
-    private void parserColor(int i, GraphicsContext gc){
+    private static void parserColor(int i, GraphicsContext gc){
 
         if(i == 0){
             gc.fillRoundRect(7.5, 7.5, 55, 50, 0, 0); //dado 1
@@ -179,7 +221,7 @@ public class CustomCard {
 
     }
 
-    private void parserNum(String contraintValue, int i, GraphicsContext gc){
+    private static void parserNum(String contraintValue, int i, GraphicsContext gc){
 
         gc.setFont(Font.font("Arial", 50));
         gc.setFill(Color.BLACK);
@@ -248,7 +290,7 @@ public class CustomCard {
 
     }
 
-    private void setFillColor(String string, GraphicsContext gc){
+    private static void setFillColor(String string, GraphicsContext gc){
 
         if(string.equalsIgnoreCase("yellow")){
             gc.setFill(Color.YELLOW);
@@ -272,9 +314,5 @@ public class CustomCard {
         }
 
     }
-
-
-
-
 
 }

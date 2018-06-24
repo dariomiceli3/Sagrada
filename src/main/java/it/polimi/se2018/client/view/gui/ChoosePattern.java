@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.beans.binding.Bindings;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -26,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -264,7 +266,6 @@ public class ChoosePattern {
         System.out.println(file.getName());
 
         renderingScheme(file);
-
     }
 
 
@@ -549,17 +550,9 @@ public class ChoosePattern {
 
         PatternCard selfScheme = new PatternCard();
         selfScheme = selfScheme.loadCard(file.getAbsolutePath());
-
-        System.out.println(selfScheme.toString());
-
-        List<GlassBox> boxRender = selfScheme.getPattern();
-
-        Canvas canvas = new Canvas();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-
-
+        CustomCard.createCard(selfScheme);
     }
+
 
 
 
