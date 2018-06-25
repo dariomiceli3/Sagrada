@@ -79,6 +79,7 @@ public class GuiController extends View {
     private String nameID2;
     private String nameID3;
     private int tokens;
+    private boolean customCard;
     private static BoardController board;
     private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
     private Integer selectedDifficulty;
@@ -93,6 +94,10 @@ public class GuiController extends View {
 
     public Integer getSelectedDifficulty() {
         return selectedDifficulty;
+    }
+
+    public boolean isCustomCard() {
+        return customCard;
     }
 
     //-------------------------gui start-----------------
@@ -199,6 +204,14 @@ public class GuiController extends View {
 
         getConnection().setPatternCardToServer(indexPattern, getPlayerID());
     }
+
+    public void setCustomPattern(PatternCard pattern, boolean customCard) {
+
+        getConnection().setPatternCustomToServer(getPlayerID(), pattern);
+        this.customCard = customCard;
+
+    }
+
 
 
     //--------------getter and setter-------------------

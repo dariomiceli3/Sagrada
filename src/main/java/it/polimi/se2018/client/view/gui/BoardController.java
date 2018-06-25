@@ -1617,17 +1617,35 @@ public class BoardController {
     private void loadPattern() throws IOException {
 
         File file = new File("./");
-        String filePattern = mainController.getPatternCurrent().getName();
-        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+        if (mainController.isCustomCard()) {
+            String fileCustom = "rendering";
+            String filePath = file.getAbsolutePath().replace(".","src/main/resources/images");
 
-        try {
-            System.out.println("consegna singola pattern");
-            fileStream = new FileInputStream(filePath + "/" + filePattern + ".jpg");
-            Image image = new Image(fileStream);
-            patternCard.setImage(image);
+            try {
+                fileStream = new FileInputStream(filePath + "/" + fileCustom + ".png");
+                Image image = new Image(fileStream);
+                patternCard.setImage(image);
+                patternCard.setRotate(360);
+                patternCard.setFitHeight(257);
+                patternCard.setFitWidth(320);
+                patternCard.setLayoutX(80);
+                patternCard.setLayoutY(210);
+            } finally {
+                fileStream.close();
+            }
         }
-        finally {
-            fileStream.close();
+        else {
+            String filePattern = mainController.getPatternCurrent().getName();
+            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+
+            try {
+                System.out.println("consegna singola pattern");
+                fileStream = new FileInputStream(filePath + "/" + filePattern + ".jpg");
+                Image image = new Image(fileStream);
+                patternCard.setImage(image);
+            } finally {
+                fileStream.close();
+            }
         }
 
     }

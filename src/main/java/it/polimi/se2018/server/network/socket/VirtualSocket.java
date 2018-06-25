@@ -183,6 +183,13 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
+                //--------custom card
+
+                if (received instanceof CustomPatternEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
+
 
 
                 // TODO add the other msg from the client:

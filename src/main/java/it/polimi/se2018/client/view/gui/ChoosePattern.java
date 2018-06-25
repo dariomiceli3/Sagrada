@@ -145,6 +145,9 @@ public class ChoosePattern {
     private int indexPattern;
     private static GuiController mainController;
     private SimpleBooleanProperty patternSetted = new SimpleBooleanProperty(false);
+    private SimpleBooleanProperty customPlay = new SimpleBooleanProperty(true);
+    private boolean customCard = false;
+    private PatternCard selfScheme;
 
 
     public static void setMainController(GuiController mainController){
@@ -230,27 +233,30 @@ public class ChoosePattern {
 
             AlertBox.display("Sagrada Choose", "Please, wait some seconds and the game will start");
 
-           if (patternToggleGroup.getSelectedToggle().equals(radioPatternFour)) {
-                indexPattern = 3;
-           }
-           else if (patternToggleGroup.getSelectedToggle().equals(radioPatternThree)) {
-               indexPattern = 2;
-           }
-           else if (patternToggleGroup.getSelectedToggle().equals(radioPatternTwo)) {
-               indexPattern = 1;
-           }
-           else {
-               indexPattern = 0;
-           }
+            try {
+                if (patternToggleGroup.getSelectedToggle().equals(radioPatternFour)) {
+                    indexPattern = 3;
+                } else if (patternToggleGroup.getSelectedToggle().equals(radioPatternThree)) {
+                    indexPattern = 2;
+                } else if (patternToggleGroup.getSelectedToggle().equals(radioPatternTwo)) {
+                    indexPattern = 1;
+                } else {
+                    indexPattern = 0;
+                }
+                mainController.setPattern(indexPattern);
+            }
+            catch (NullPointerException e) {
+                System.out.println("null pointer play button");
+            }
 
-           mainController.setPattern(indexPattern);
+           if (customCard) {
+               mainController.setCustomPattern(selfScheme, true);
+           }
 
     }
 
     @FXML
     void loadButtonSelected(ActionEvent event) throws FileNotFoundException  {
-
-        // todo check quando entrambi provano ad aprire il filechooser
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
@@ -271,6 +277,12 @@ public class ChoosePattern {
         
         if (file != null) {
             renderingScheme(file);
+            customCard = true;
+            customPlay.setValue(false);
+            radioPatternOne.setDisable(true);
+            radioPatternTwo.setDisable(true);
+            radioPatternThree.setDisable(true);
+            radioPatternFour.setDisable(true);
         }
     }
 
@@ -291,7 +303,7 @@ public class ChoosePattern {
             loadFilePatternCard();
         }
 
-        playGameButton.disableProperty().bind(Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted));
+        playGameButton.disableProperty().bind((Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted)).and(customPlay));
 
         playGameButton.disableProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -554,7 +566,7 @@ public class ChoosePattern {
 
     private void renderingScheme(File file) throws FileNotFoundException {
 
-        PatternCard selfScheme = new PatternCard();
+        selfScheme = new PatternCard();
         selfScheme = selfScheme.loadCard(file.getAbsolutePath());
         CustomCard.createCard(selfScheme);
     }

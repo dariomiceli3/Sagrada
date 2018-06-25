@@ -3,6 +3,7 @@ package it.polimi.se2018.client.network.rmi;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.network.rmi.RmiServerInterface;
 
 import java.net.MalformedURLException;
@@ -348,6 +349,12 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
+    //----------custuom card
 
+
+    @Override
+    public void setPatternCustomToServer(int ID, PatternCard patternCard) {
+
+    }
 }
 

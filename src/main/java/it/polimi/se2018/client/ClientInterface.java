@@ -59,6 +59,10 @@ public interface ClientInterface {
 
     public void useToolSingleToServer(int ID, int indexTool, int indexPool);
 
+    //-------------------------custom card
+
+    public void setPatternCustomToServer(int ID, PatternCard patternCard);
+
 
 
 }

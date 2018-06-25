@@ -132,6 +132,13 @@ public class Model extends Observable {
         notifyObservers(new PlayerPatternUpdateEvent(iD, getPlayerFromID(iD).getPattern()));
     }
 
+    public void setCustomPatternAndNotify(int ID, PatternCard patternCard) {
+        numberPlayer++;
+        getPlayerFromID(ID).setPattern(patternCard);
+        setChanged();
+        notifyObservers(new PlayerPatternUpdateEvent(ID, getPlayerFromID(ID).getPattern()));
+    }
+
     public void setTokenAndNotify(int ID) {
 
         Player player1 = getPlayerFromID(ID);

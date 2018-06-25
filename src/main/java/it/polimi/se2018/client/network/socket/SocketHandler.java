@@ -2,6 +2,7 @@ package it.polimi.se2018.client.network.socket;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
@@ -564,5 +565,13 @@ public class SocketHandler implements ClientInterface, Runnable {
     @Override
     public void useToolSingleToServer(int ID, int indexTool, int indexPool) {
         sendEvent(new ToolCardSinglePlayerStartEvent(indexTool,indexPool));
+    }
+
+    //------------------------custom card method
+
+
+    @Override
+    public void setPatternCustomToServer(int ID, PatternCard patternCard) {
+        sendEvent(new CustomPatternEvent(patternCard));
     }
 }

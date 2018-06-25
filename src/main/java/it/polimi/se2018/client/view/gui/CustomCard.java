@@ -99,7 +99,7 @@ public class CustomCard {
                        wi = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
                        snapshot = canvas.snapshot(new SnapshotParameters(), null);
 
-                       File output = new File("src/main/resources/rendering" + ".png");
+                       File output = new File("src/main/resources/images/rendering" + ".png");
                        ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                        canvasWindow.close();
                    }

@@ -201,6 +201,11 @@ public class Game implements Observer {
         if (arg instanceof EndGameTimerEvent) {
             endTimer();
         }
+
+        if (arg instanceof CustomPatternEvent) {
+            setCustomPatternModel(virtualView, ((CustomPatternEvent)arg).getPatternCard());
+
+        }
        /* if(arg instanceof DisconnectPlayerEvent){
             model.getPlayerFromID(getCurrID()).setOff(true);
             disconnectPlayerNumber++;
@@ -251,6 +256,30 @@ public class Game implements Observer {
             }
         }
     }
+
+    protected void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
+
+        model.setCustomPatternAndNotify(view.getPlayerID(), patternCard);
+
+        if(!singlePlayer) {
+            System.out.println("custom pattern setting controller");
+            setTokensModel(view);
+
+            if (model.getNumberPlayer() == (getViewGame().size() - disconnectPlayerNumber)) {
+
+                for (VirtualView view1 : viewGame) {
+                    view1.sendEvent(new StartGameSceneEvent());
+                }
+
+                startTurn();
+            }
+        }else {
+            view.sendEvent(new StartGameSceneEvent());
+            singlePlayerTurn();
+        }
+
+    }
+
 
     protected void setPatternCardModel(VirtualView view, int indexPatternChoose){
 
