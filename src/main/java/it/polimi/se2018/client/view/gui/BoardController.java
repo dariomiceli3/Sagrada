@@ -2355,6 +2355,7 @@ public class BoardController {
 
     public void textRollMsg() {
         textGame.setText("Click the roll button to roll the draft pool");
+        disableTool();
         disablePool();
         next.setDisable(true);
         skip.setDisable(true);

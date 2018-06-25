@@ -256,16 +256,22 @@ public class ChoosePattern {
         fileChooser.setTitle("Select File");
         fileChooser.setInitialDirectory(new File("."));
 
-        File file;
+        File file = null;
 
-        do {
-            file = fileChooser.showOpenDialog(mainController.getStage());
+        try {
+            do {
+                file = fileChooser.showOpenDialog(mainController.getStage());
+                System.out.println(file.getName());
+            }
+            while (!(file.getName().matches(".*[a-zA-Z0-9]+.*" + ".json")));
         }
-        while (!(file.getName().matches(".*[a-zA-Z0-9]+.*" + ".json")));
-
-        System.out.println(file.getName());
-
-        renderingScheme(file);
+        catch (NullPointerException e) {
+            System.out.println("closing file");
+        }
+        
+        if (file != null) {
+            renderingScheme(file);
+        }
     }
 
 
