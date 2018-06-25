@@ -112,25 +112,23 @@ public class EndGameScene {
 
             winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
 
-            int i = 0;
-            for (Player player : playerList) {
+            for (int i = 0;  i < playerList.size(); i++) {
                 if (i == 0) {
                     rankText1.setVisible(true);
-                    rankText1.setText(player.toStringPoints());
+                    rankText1.setText(playerList.get(i).toStringPoints());
                 }
                 if (i == 1) {
-                    rankText1.setVisible(true);
-                    rankText2.setText(player.toStringPoints());
+                    rankText2.setVisible(true);
+                    rankText2.setText(playerList.get(i).toStringPoints());
                 }
                 if (i == 2) {
-                    rankText1.setVisible(true);
-                    rankText3.setText(player.toStringPoints());
+                    rankText3.setVisible(true);
+                    rankText3.setText(playerList.get(i).toStringPoints());
                 }
                 if (i == 3) {
-                    rankText1.setVisible(true);
-                    rankText4.setText(player.toStringPoints() + "\n");
+                    rankText4.setVisible(true);
+                    rankText4.setText(playerList.get(i).toStringPoints());
                 }
-                i++;
             }
         }
     }

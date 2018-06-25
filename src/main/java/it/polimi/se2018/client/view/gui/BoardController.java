@@ -1625,11 +1625,12 @@ public class BoardController {
                 fileStream = new FileInputStream(filePath + "/" + fileCustom + ".png");
                 Image image = new Image(fileStream);
                 patternCard.setImage(image);
+                patternCard.setLayoutX(58);
+                patternCard.setLayoutY(605);
                 patternCard.setRotate(360);
                 patternCard.setFitHeight(257);
                 patternCard.setFitWidth(320);
-                patternCard.setLayoutX(80);
-                patternCard.setLayoutY(210);
+
             } finally {
                 fileStream.close();
             }
