@@ -9,9 +9,10 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
-
 
 
 public class CliView extends View implements Runnable {
@@ -36,6 +37,8 @@ public class CliView extends View implements Runnable {
     private static int diceNumber;
     private static int toolSingleNumber;
     private ClientInterface connection;
+    private PatternCard customPattern;
+    private String filePath;
 
     public CliView() {
     }
@@ -195,12 +198,28 @@ public class CliView extends View implements Runnable {
                     if (choose >= 1 && choose <= 4) {
                         choose--;
                         getConnection().setPatternCardToServer(choose, super.getPlayerID());
-                    } else {
+                    }
+                    else if (choose == 0) {
+                        showCustomCardPath();
+                    }
+                    else {
                         System.out.println("Please, decide which pattern to use");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a number between 1 and 4!");
                 }
+
+            } else if (cliState == ViewState.CUSTOMPATTERN) {
+               try {
+                   customPattern = new PatternCard();
+                   customPattern = customPattern.loadCard(filePath + input);
+                   getConnection().setPatternCustomToServer(super.getPlayerID(), customPattern);
+               }
+               catch (IOException e) {
+                   System.out.println("error in loading file");
+                   showCustomCardPath();
+               }
+
 
             } else if (cliState == ViewState.ROLL) {
 
@@ -856,7 +875,15 @@ public class CliView extends View implements Runnable {
         }
 
         cliState = ViewState.PATTERN;
-        System.out.println("Choose your Pattern Card - Enter a number between 1 and 4");
+        System.out.println("Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
+    }
+
+    public void showCustomCardPath() {
+        System.out.println("Enter the path of the file .json");
+        File file = new File("./");
+        filePath = file.getAbsolutePath().replace(".", "src/main/res/");
+        System.out.print(filePath);
+        cliState = ViewState.CUSTOMPATTERN;
     }
 
 

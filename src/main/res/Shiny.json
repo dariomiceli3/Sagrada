@@ -1,0 +1,66 @@
+{
+  "name": "Dario Flyer Shiny",
+  "difficulty": 10,
+  "pattern": [
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor" : "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor": "green"
+    }
+  ]
+}

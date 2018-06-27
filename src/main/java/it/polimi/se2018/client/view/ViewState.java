@@ -5,6 +5,7 @@ public enum ViewState {
     NAME,
     ERRORNAME,
     PATTERN,
+    CUSTOMPATTERN,
     ROLL,
     CHOOSE,
     MOVE,
