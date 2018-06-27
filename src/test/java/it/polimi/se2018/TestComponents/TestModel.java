@@ -159,6 +159,8 @@ public class TestModel {
         model.getDraftPool().setDraftPool(diceArrayList);
 
         model.setMoveAndNotify(0,0,0);
+        PatternCard patternCard1 = patternCards.get(0);
+        model.setCustomPatternAndNotify(0, patternCard1);
 
     }
 }

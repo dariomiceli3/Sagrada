@@ -59,6 +59,88 @@ public class TestDifferentColorColumn {
 
     }
 
+    /*@Test
+    public void test() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        PatternCard Pattern = patternCard.loadPatternForTesting();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+        Dice diceBlue3 = new Dice(3, DiceColor.RED);
+        Dice diceGreen4 = new Dice(4, DiceColor.PURPLE);
+
+
+        Pattern.putDiceOnPattern(diceBlue1, 0, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 5, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 10, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 15, Pattern);
+
+        Pattern.putDiceOnPattern(diceGreen4, 1, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 6, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 11, Pattern);
+        Pattern.putDiceOnPattern(diceBlue1, 16, Pattern);
+
+        Pattern.putDiceOnPattern(diceBlue1, 2, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 7, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 12, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 17, Pattern);
+
+        Pattern.putDiceOnPattern(diceGreen4, 3, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 8, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 13, Pattern);
+        Pattern.putDiceOnPattern(diceBlue1, 18, Pattern);
+
+        Pattern.putDiceOnPattern(diceBlue1, 4, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 9, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 14, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 19, Pattern);
+
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        publicCard.executeEffect(Pattern);
+
+
+    }*/
+
+    /*@Test
+    public void test2() throws FileNotFoundException, InvalidMoveException {
+        PatternCard patternCard = new PatternCard();
+        PatternCard Pattern = patternCard.loadPatternForTesting();
+        Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+        Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+        Dice diceBlue3 = new Dice(3, DiceColor.RED);
+        Dice diceGreen4 = new Dice(4, DiceColor.PURPLE);
+
+
+        Pattern.putDiceOnPattern(diceBlue1, 0, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 5, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 10, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 15, Pattern);
+
+        //Pattern.putDiceOnPattern(diceGreen4, 1, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 6, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 11, Pattern);
+        Pattern.putDiceOnPattern(diceBlue1, 16, Pattern);
+
+        //Pattern.putDiceOnPattern(diceBlue1, 2, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 7, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 12, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 17, Pattern);
+
+        //Pattern.putDiceOnPattern(diceGreen4, 3, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 8, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 13, Pattern);
+        Pattern.putDiceOnPattern(diceBlue1, 18, Pattern);
+
+        //Pattern.putDiceOnPattern(diceBlue1, 4, Pattern);
+        Pattern.putDiceOnPattern(diceGreen2, 9, Pattern);
+        Pattern.putDiceOnPattern(diceBlue3, 14, Pattern);
+        Pattern.putDiceOnPattern(diceGreen4, 19, Pattern);
+
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        publicCard.executeEffect(Pattern);
+
+
+    }*/
+
     @Test
     public void testToString(){
         PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
