@@ -20,9 +20,14 @@ public class OtherPatternCard {
 
     private static PatternCard patternCard;
     private FileInputStream fileStream;
+    private static GuiController guiController;
 
     public static void setPatternCard(PatternCard patternCard) {
         OtherPatternCard.patternCard = patternCard;
+    }
+
+    public static void setGuiController(GuiController guiController) {
+        OtherPatternCard.guiController = guiController;
     }
 
     @FXML
@@ -133,9 +138,15 @@ public class OtherPatternCard {
 
         try {
             System.out.println("consegna pattern");
-            fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
+            fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
             Image image = new Image(fileStream);
-            pattern.setImage(image);
+            if (guiController.isCustomCard()) {
+                pattern.setImage(image);
+                pattern.setRotate(360);
+            }
+            else {
+                pattern.setImage(image);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

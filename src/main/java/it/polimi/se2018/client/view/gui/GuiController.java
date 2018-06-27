@@ -100,6 +100,10 @@ public class GuiController extends View {
         return customCard;
     }
 
+    public void setCustomCard(boolean customCard) {
+        this.customCard = customCard;
+    }
+
     //-------------------------gui start-----------------
 
 
@@ -139,6 +143,8 @@ public class GuiController extends View {
 
 
     public void initialize() {
+
+        OtherPatternCard.setGuiController(this);
 
         gameStarted = false;
 
@@ -208,7 +214,7 @@ public class GuiController extends View {
     public void setCustomPattern(PatternCard pattern, boolean customCard) {
 
         getConnection().setPatternCustomToServer(getPlayerID(), pattern);
-        this.customCard = customCard;
+        setCustomCard(customCard);
 
     }
 

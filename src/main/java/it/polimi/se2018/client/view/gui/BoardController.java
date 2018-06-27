@@ -5,6 +5,7 @@ import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.*;
+import it.polimi.se2018.server.model.Events.ClientServer.CustomPatternEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -1430,6 +1431,7 @@ public class BoardController {
         RoundTrackerBox.setMainController(this);
         ToolCardRequest.setBoard(this);
 
+
         if (mainController.isSinglePlayer()) {
             tokensNumber.setVisible(false);
             textPrivateSingle.setVisible(true);
@@ -1616,38 +1618,30 @@ public class BoardController {
 
     private void loadPattern() throws IOException {
 
-        File file = new File("./");
-        if (mainController.isCustomCard()) {
-            String fileCustom = "rendering";
-            String filePath = file.getAbsolutePath().replace(".","src/main/resources/images");
 
-            try {
-                fileStream = new FileInputStream(filePath + "/" + fileCustom + ".png");
-                Image image = new Image(fileStream);
+        File file = new File("./");
+        String filePattern = mainController.getPatternCurrent().getName();
+        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+
+        try {
+            System.out.println("consegna singola pattern");
+            fileStream = new FileInputStream(filePath + "/" + filePattern + ".png");
+            Image image = new Image(fileStream);
+            if (mainController.isCustomCard()) {
                 patternCard.setImage(image);
                 patternCard.setLayoutX(58);
                 patternCard.setLayoutY(605);
                 patternCard.setRotate(360);
                 patternCard.setFitHeight(257);
                 patternCard.setFitWidth(320);
-
-            } finally {
-                fileStream.close();
             }
-        }
-        else {
-            String filePattern = mainController.getPatternCurrent().getName();
-            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
-
-            try {
-                System.out.println("consegna singola pattern");
-                fileStream = new FileInputStream(filePath + "/" + filePattern + ".jpg");
-                Image image = new Image(fileStream);
+            else {
                 patternCard.setImage(image);
-            } finally {
-                fileStream.close();
             }
+        } finally {
+            fileStream.close();
         }
+
 
     }
 
@@ -1778,7 +1772,13 @@ public class BoardController {
             if (mainController.getPatternID1() != null) {
                 String fileName = mainController.getPatternID1().getName();
                 Image image = loadImage(fileName);
-                patternPlayer2.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer2.setImage(image);
+                    patternPlayer2.setRotate(360);
+                }
+                else {
+                    patternPlayer2.setImage(image);
+                }
                 System.out.println("setted player2-0");
                 fileStream.close();
             }
@@ -1786,7 +1786,14 @@ public class BoardController {
             if (mainController.getPatternID2() != null) {
                 String fileName = mainController.getPatternID2().getName();
                 Image image = loadImage(fileName);
-                patternPlayer3.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer3.setImage(image);
+                    patternPlayer3.setRotate(360);
+
+                }
+                else {
+                    patternPlayer3.setImage(image);
+                }
                 System.out.println("setted player3-0");
                 fileStream.close();
             }
@@ -1794,7 +1801,13 @@ public class BoardController {
             if (mainController.getPatternID3() != null) {
                 String fileName = mainController.getPatternID3().getName();
                 Image image = loadImage(fileName);
-                patternPlayer4.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer4.setImage(image);
+                    patternPlayer4.setRotate(360);
+                }
+                else {
+                    patternPlayer4.setImage(image);
+                }
                 System.out.println("setted player4-0");
                 fileStream.close();
             }
@@ -1806,7 +1819,13 @@ public class BoardController {
             if (mainController.getPatternID0() != null) {
                 String fileName = mainController.getPatternID0().getName();
                 Image image = loadImage(fileName);
-                patternPlayer2.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer2.setImage(image);
+                    patternPlayer2.setRotate(360);
+                }
+                else {
+                    patternPlayer2.setImage(image);
+                }
                 System.out.println("setted player2-1");
                 fileStream.close();
             }
@@ -1814,7 +1833,13 @@ public class BoardController {
             if (mainController.getPatternID2() != null) {
                 String fileName = mainController.getPatternID2().getName();
                 Image image = loadImage(fileName);
-                patternPlayer3.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer3.setImage(image);
+                    patternPlayer3.setRotate(360);
+                }
+                else {
+                    patternPlayer3.setImage(image);
+                }
                 System.out.println("setted player 3-1");
                 fileStream.close();
             }
@@ -1822,7 +1847,13 @@ public class BoardController {
             if (mainController.getPatternID3() != null) {
                 String fileName = mainController.getPatternID3().getName();
                 Image image = loadImage(fileName);
-                patternPlayer4.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer4.setImage(image);
+                    patternPlayer4.setRotate(360);
+                }
+                else {
+                    patternPlayer4.setImage(image);
+                }
                 System.out.println("setted player 4-1");
                 fileStream.close();
             }
@@ -1834,7 +1865,13 @@ public class BoardController {
             if (mainController.getPatternID0() != null) {
                 String fileName = mainController.getPatternID0().getName();
                 Image image = loadImage(fileName);
-                patternPlayer2.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer2.setImage(image);
+                    patternPlayer2.setRotate(360);
+                }
+                else {
+                    patternPlayer2.setImage(image);
+                }
                 System.out.println("setted player 2-2");
                 fileStream.close();
             }
@@ -1842,7 +1879,13 @@ public class BoardController {
             if (mainController.getPatternID1() != null) {
                 String fileName = mainController.getPatternID1().getName();
                 Image image = loadImage(fileName);
-                patternPlayer3.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer3.setImage(image);
+                    patternPlayer3.setRotate(360);
+                }
+                else {
+                    patternPlayer3.setImage(image);
+                }
                 System.out.println("setted player 3-2");
                 fileStream.close();
             }
@@ -1850,7 +1893,13 @@ public class BoardController {
             if (mainController.getPatternID3() != null) {
                 String fileName = mainController.getPatternID3().getName();
                 Image image = loadImage(fileName);
-                patternPlayer4.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer4.setImage(image);
+                    patternPlayer4.setRotate(360);
+                }
+                else {
+                    patternPlayer4.setImage(image);
+                }
                 System.out.println("setted player 4-2");
                 fileStream.close();
             }
@@ -1862,7 +1911,13 @@ public class BoardController {
             if (mainController.getPatternID0() != null) {
                 String fileName = mainController.getPatternID0().getName();
                 Image image = loadImage(fileName);
-                patternPlayer2.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer2.setImage(image);
+                    patternPlayer2.setRotate(360);
+                }
+                else {
+                    patternPlayer2.setImage(image);
+                }
                 System.out.println("setted player 2-3");
                 fileStream.close();
             }
@@ -1870,7 +1925,13 @@ public class BoardController {
             if (mainController.getPatternID1() != null) {
                 String fileName = mainController.getPatternID1().getName();
                 Image image = loadImage(fileName);
-                patternPlayer3.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer3.setImage(image);
+                    patternPlayer3.setRotate(360);
+                }
+                else {
+                    patternPlayer3.setImage(image);
+                }
                 System.out.println("setted player 3-3");
                 fileStream.close();
             }
@@ -1878,7 +1939,13 @@ public class BoardController {
             if (mainController.getPatternID2() != null) {
                 String fileName = mainController.getPatternID2().getName();
                 Image image = loadImage(fileName);
-                patternPlayer4.setImage(image);
+                if (mainController.isCustomCard()) {
+                    patternPlayer4.setImage(image);
+                    patternPlayer4.setRotate(360);
+                }
+                else {
+                    patternPlayer4.setImage(image);
+                }
                 System.out.println("setted player 3-3 ");
                 fileStream.close();
             }
@@ -1891,7 +1958,7 @@ public class BoardController {
 
         File file = new File("./");
         String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
-        fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
+        fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
         return new Image(fileStream);
     }
 

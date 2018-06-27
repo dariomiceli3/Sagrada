@@ -2,6 +2,7 @@ package it.polimi.se2018.server.network.rmi;
 
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -65,5 +66,9 @@ public interface RmiServerInterface extends Remote {
     public void setDifficultyToServer(int ID, int difficulty) throws RemoteException;
 
     public void useToolSingleToServer(int ID, int indexTool, int indexPool) throws RemoteException;
+
+    //-------------------------custom card
+
+    public void setPatternCustomToServer(int ID, PatternCard patternCard) throws RemoteException;
 
 }

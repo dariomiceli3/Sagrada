@@ -354,6 +354,13 @@ public class RmiHandler implements ClientInterface {
 
     @Override
     public void setPatternCustomToServer(int ID, PatternCard patternCard) {
+        try {
+            stub.setPatternCustomToServer(ID, patternCard);
+        }
+        catch (RemoteException e) {
+            System.out.println("error in setting custom card");
+            e.printStackTrace();
+        }
 
     }
 }

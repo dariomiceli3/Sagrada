@@ -283,6 +283,7 @@ public class ChoosePattern {
             radioPatternTwo.setDisable(true);
             radioPatternThree.setDisable(true);
             radioPatternFour.setDisable(true);
+            loadButton.setDisable(true);
         }
     }
 
@@ -542,7 +543,7 @@ public class ChoosePattern {
 
             try {
                 System.out.println("consegna pattern");
-                fileStream = new FileInputStream(filePath + "/" + fileName + ".jpg");
+                fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
                     patternCardOne.setImage(image);

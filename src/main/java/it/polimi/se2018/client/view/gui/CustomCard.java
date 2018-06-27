@@ -35,9 +35,7 @@ public class CustomCard {
     }
     private static WritableImage wi;
 
-    public static WritableImage getWi() {
-        return wi;
-    }
+
 
     public static void createCard(PatternCard patternCard){
 
@@ -99,7 +97,7 @@ public class CustomCard {
                        wi = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
                        snapshot = canvas.snapshot(new SnapshotParameters(), null);
 
-                       File output = new File("src/main/resources/images/rendering" + ".png");
+                       File output = new File("src/main/resources/images/pattern/" + patternCard.getName() + ".png");
                        ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                        canvasWindow.close();
                    }

@@ -4,6 +4,7 @@ package it.polimi.se2018.server.network.rmi;
 import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
 import it.polimi.se2018.server.Server;
+import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
@@ -194,7 +195,13 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
         sendEventVirtual(ID, new ToolCardSinglePlayerStartEvent(indexTool, indexPool));
     }
 
+    //----------------------------card custom-----------------------------------------
 
+
+    @Override
+    public void setPatternCustomToServer(int ID, PatternCard patternCard) throws RemoteException {
+        sendEventVirtual(ID, new CustomPatternEvent(patternCard));
+    }
 }
 
 
