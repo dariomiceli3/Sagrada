@@ -139,7 +139,11 @@ public class OtherPatternCard {
             Image image = new Image(fileStream);
             if (patternCard.isCustom()) {
                 pattern.setImage(image);
+                pattern.setLayoutX(123);
+                pattern.setLayoutY(63);
                 pattern.setRotate(360);
+                pattern.setFitHeight(280);
+                pattern.setFitWidth(366);
             }
             else {
                 pattern.setImage(image);
