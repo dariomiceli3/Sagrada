@@ -178,7 +178,7 @@ public class CliView extends View implements Runnable {
                     System.out.println("Please wait, the game will start soon");
                     getConnection().setSinglePlayerMode(super.getPlayerID(), false);
                 } else if (input.equalsIgnoreCase("single")) {
-                    System.out.println("Now the game will start");
+                    System.out.println("\n" + "Now the game will start");
                     getConnection().setSinglePlayerMode(super.getPlayerID(), true);
                 } else {
                     System.out.println("You are not choosing a mode to play");
@@ -834,7 +834,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showNameChoose() {
         cliState = ViewState.NAME;
-        System.out.println("Enter your name: ");
+        System.out.println("\n" + "Enter your name ");
     }
 
     @Override
@@ -845,7 +845,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showNameOther(String name) {
-        System.out.println("Another player connected with name: " + name);
+        System.out.println("\n" + "Another player connected with name: " + name);
     }
 
 
@@ -858,24 +858,24 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-        System.out.println(privateObjectiveCard.toString());
+        System.out.println("\n" + privateObjectiveCard.toString());
     }
 
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) {
         for (PublicObjectiveCard publicCard : publicList) {
-            System.out.println(publicCard.toString());
+            System.out.println("\n" + publicCard.toString());
         }
     }
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
         for (PatternCard patternCard : patternCards) {
-            System.out.println(patternCard.toString());
+            System.out.println("\n" + patternCard.toString());
         }
 
         cliState = ViewState.PATTERN;
-        System.out.println("Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
+        System.out.println("\n" + "Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
     }
 
     public void showCustomCardPath() {
@@ -889,34 +889,34 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showPattern(PatternCard patternCard) {
-        System.out.println("This is the PatternCard you will use ");
+        System.out.println("\n" + "This is the PatternCard you will use ");
         System.out.println(patternCard.toString());
     }
 
     @Override
     public void showOtherPattern(PatternCard patternCard, String name,  int ID) {
-        System.out.println("Now Pattern of" + name + "is: ");
+        System.out.println("\n" + "Now Pattern of" + name + "is: ");
         System.out.println(patternCard.toString());
 
     }
 
     @Override
     public void showOtherStartPattern(PatternCard patternCard, int ID) {
-        System.out.println("The pattern of your enemy is: ");
+        System.out.println("The pattern of your enemy is: " + "\n");
         System.out.println(patternCard.toString());
         System.out.println("Choose your Pattern Card - Enter a number between 1 and 4");
     }
 
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
-        System.out.println("Now you're Pattern Card is");
+        System.out.println("Now you're Pattern Card is" + "\n");
         System.out.println(patternCard.toString());
 
     }
 
     @Override
     public void showTokens(int tokensNumber) {
-        System.out.println("This your number of favor tokens available: " + tokensNumber);
+        System.out.println("\n" + "This your number of favor tokens available: " + tokensNumber);
     }
 
     @Override
@@ -931,13 +931,13 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showCurrentTurn() {
-        System.out.println("It's your turn");
+        System.out.println("\n" + "It's your turn");
     }
 
     @Override
     public void showOtherCurrentTurn(String username) {
         cliState = ViewState.NOTAUTHORIZED;
-        System.out.println("It's " + username + "'s turn");
+        System.out.println("\n" + "It's " + username + "'s turn");
 
     }
 
@@ -949,13 +949,13 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showDraftPool(DraftPool draftPool) {
-        System.out.println(draftPool.toString());
+        System.out.println("\n" + draftPool.toString());
     }
 
     @Override
     public void showChooseCommand() {
         cliState = ViewState.CHOOSE;
-        System.out.println("What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
+        System.out.println("\n" + "What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
 
     }
 
@@ -963,7 +963,7 @@ public class CliView extends View implements Runnable {
     public void showMoveCommand(int poolSize)  {
         setPoolSize(poolSize);
         cliState = ViewState.MOVE;
-        System.out.println("Do you want to move a dice from the pool to the card? - Enter yes or no?");
+        System.out.println("\n" + "Do you want to move a dice from the pool to the card? - Enter yes or no?");
 
     }
 
@@ -971,13 +971,13 @@ public class CliView extends View implements Runnable {
     public void showIndexPoolCommand(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.POOLINDEX;
-        System.out.println("Enter the index of the dice from the pool - from 1 to " + getPoolSize());
+        System.out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + getPoolSize());
     }
 
     @Override
     public void showIndexPatternCommand() {
         cliState = ViewState.PATTERNINDEX;
-        System.out.println("Enter the index of the Pattern Card - Enter a number between 1 and 20");
+        System.out.println("\n" + "Enter the index of the Pattern Card - Enter a number between 1 and 20");
     }
 
     @Override
@@ -987,20 +987,20 @@ public class CliView extends View implements Runnable {
             toolCost.add(tool.getCost());
         }
         cliState = ViewState.TOOL;
-        System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+        System.out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
     public void showToolChooseCommand() {
         cliState = ViewState.TOOLINDEX;
-        System.out.println("Which tool card do you want to use? - Enter a number from 1 to 3");
+        System.out.println("\n" + "Which tool card do you want to use? - Enter a number from 1 to 3");
     }
 
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
         cliState = ViewState.TOOLCOST;
         int cost = toolCost.get(indexTool);
-        System.out.println("Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
+        System.out.println("\n" + "Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
     }
 
     @Override
@@ -1012,7 +1012,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showFinalRank(List<Player> playerList) {
-        System.out.println("Final Rank:");
+        System.out.println("Final Rank:" + "\n" );
         for (Player player : playerList) {
             System.out.println(player.toStringPoints());
         }
@@ -1031,18 +1031,18 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showTimer() {
-        System.out.println("You'r time is over");
+        System.out.println("\n" + "You'r time is over");
     }
 
     @Override
     public void showOtherTimer(String playerName) {
-        System.out.println(playerName + " turn time is ended");
+        System.out.println("\n" + playerName + " turn time is ended");
     }
 
     @Override
     public  void showToolCards(List<ToolCard> toolCardList) {
         for (ToolCard toolCard : toolCardList) {
-            System.out.println(toolCard.toString());
+            System.out.println("\n" + toolCard.toString());
         }
     }
 
@@ -1061,7 +1061,7 @@ public class CliView extends View implements Runnable {
     public void showGrozingRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.GROZINGPOOL;
-        System.out.println("Select a die from the pool - Enter a number between 1 and " + getPoolSize());
+        System.out.println("\n" + "Select a die from the pool - Enter a number between 1 and " + getPoolSize());
 
     }
 
@@ -1077,7 +1077,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showEglomiseStart() {
         cliState = ViewState.EGLOMISESTART;
-        System.out.println("Select a die from the pattern card to move - Enter a number between 1 and 20");
+        System.out.println("\n" + "Select a die from the pattern card to move - Enter a number between 1 and 20");
     }
 
     @Override
@@ -1092,7 +1092,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showCopperFoilStart() {
         cliState = ViewState.COPPERSTART;
-        System.out.println("Select ad die from the pattern card to move - Enter a number from 1 to 20");
+        System.out.println("\n" + "Select ad die from the pattern card to move - Enter a number from 1 to 20");
 
     }
 
@@ -1107,7 +1107,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showLathekinStart() {
         cliState = ViewState.LATHEKINSTARTONE;
-        System.out.println("Select the first die to move - Enter a number from 1 to 20");
+        System.out.println("\n" + "Select the first die to move - Enter a number from 1 to 20");
     }
 
 
@@ -1141,7 +1141,7 @@ public class CliView extends View implements Runnable {
         }
         setPoolSize(poolSize);
         cliState = ViewState.LENSCUTTERPOOL;
-        System.out.println("Selected the die from the draft pool you want to change - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
@@ -1163,7 +1163,7 @@ public class CliView extends View implements Runnable {
     public void showFluxBrushRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.FLUXBRUSH;
-        System.out.println("Selected the die to re-roll from the pool: - Enter a number between 1 and " + getPoolSize());
+        System.out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + getPoolSize());
     }
 
 
@@ -1171,7 +1171,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showGlazingHammerRequest() {
         cliState = ViewState.GLAZINGHAMMER;
-        System.out.println("Enter START to roll the dice of the draft pool" );
+        System.out.println("\n" + "Enter START to roll the dice of the draft pool" );
     }
 
     // tool running pliers
@@ -1179,7 +1179,7 @@ public class CliView extends View implements Runnable {
     public void showRunningPliersPool(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.RUNNINGPOOL;
-        System.out.println("Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + getPoolSize());
 
     }
 
@@ -1196,7 +1196,7 @@ public class CliView extends View implements Runnable {
     public void showCorkBackedPool(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.CORKPOOL;
-        System.out.println("Select a die from the pool - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
@@ -1212,7 +1212,7 @@ public class CliView extends View implements Runnable {
     public void showGrindingStoneRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = ViewState.GRINDING;
-        System.out.println("Select a die from the pool that should be flipped - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + getPoolSize());
     }
 
     // tool card flux remover
@@ -1221,7 +1221,7 @@ public class CliView extends View implements Runnable {
         setPoolSize(poolSize);
         setColorDice(color);
         cliState = ViewState.FLUXPOOL;
-        System.out.println("Select the die you want to return from the pool - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
@@ -1235,7 +1235,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showTapWheelNumber() {
         cliState = ViewState.TAPNUMBER;
-        System.out.println("Enter the number of dice that you want to move - Enter 1 or 2");
+        System.out.println("\n" + "Enter the number of dice that you want to move - Enter 1 or 2");
     }
 
     @Override
@@ -1265,15 +1265,15 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
-        System.out.println("Now Round Tracker is:");
+        System.out.println("\n" + "Now Round Tracker is:");
         System.out.println(roundTracker.toString());
-        System.out.println("Now Draft Pool is: ");
+        System.out.println("\n" + "Now Draft Pool is: ");
         System.out.println(draftPool.toString());
     }
 
     @Override
     public void showInvalidMove(String msg) {
-        System.out.println("ERROR: " + msg);
+        System.out.println("\n" + "ERROR: " + msg);
     }
 
 
@@ -1284,13 +1284,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showDifficultyRequest() {
         cliState = ViewState.DIFFICULTYSP;
-        System.out.println("You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
+        System.out.println("\n" + "You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
     }
 
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
         for (PrivateObjectiveCard privateCard : publicList) {
-            System.out.println(privateCard.toString());
+            System.out.println("\n" + privateCard.toString());
         }
 
     }
@@ -1300,7 +1300,7 @@ public class CliView extends View implements Runnable {
         setPoolSize(poolSize);
         setToolSingleNumber(toolList.size());
         cliState = ViewState.TOOLSP;
-        System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+        System.out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
@@ -1312,23 +1312,23 @@ public class CliView extends View implements Runnable {
     @Override
     public void showToolSingleDice() {
         cliState = ViewState.TOOLSPDICE;
-        System.out.println("Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + getPoolSize());
+        System.out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
     public void showMatchError() {
-        System.out.println("You are choosed a not right dice, it doesn't match the color of the tool card");
+        System.out.println("\n" + "You are choosed a not right dice, it doesn't match the color of the tool card");
     }
 
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
         if (winner) {
-            System.out.println("You win");
+            System.out.println("\n" + "You win");
             System.out.println("You scored: " + playerPoints);
             System.out.println("The threshold of the round tracker is: " + gameThreshold);
         }
         else {
-            System.out.println("You lose maaan!");
+            System.out.println("\n" + "You lose maaan!");
             System.out.println("You scored: " + playerPoints);
             System.out.println("The threshold of the round tracker is: " + gameThreshold);
         }
