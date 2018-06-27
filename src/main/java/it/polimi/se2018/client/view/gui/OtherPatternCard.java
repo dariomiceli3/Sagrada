@@ -20,15 +20,12 @@ public class OtherPatternCard {
 
     private static PatternCard patternCard;
     private FileInputStream fileStream;
-    private static GuiController guiController;
+
 
     public static void setPatternCard(PatternCard patternCard) {
         OtherPatternCard.patternCard = patternCard;
     }
 
-    public static void setGuiController(GuiController guiController) {
-        OtherPatternCard.guiController = guiController;
-    }
 
     @FXML
     private ImageView pattern;
@@ -140,7 +137,7 @@ public class OtherPatternCard {
             System.out.println("consegna pattern");
             fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
             Image image = new Image(fileStream);
-            if (guiController.isCustomCard()) {
+            if (patternCard.isCustom()) {
                 pattern.setImage(image);
                 pattern.setRotate(360);
             }

@@ -144,7 +144,6 @@ public class GuiController extends View {
 
     public void initialize() {
 
-        OtherPatternCard.setGuiController(this);
 
         gameStarted = false;
 

@@ -23,8 +23,17 @@ public class PatternCard implements Serializable {
      private int difficulty;
      private ArrayList<GlassBox> pattern;
      private Dice dice;
+     private boolean custom = false;
 
-     public int getDifficulty(){
+    public boolean isCustom() {
+        return custom;
+    }
+
+    public void setCustom(boolean custom) {
+        this.custom = custom;
+    }
+
+    public int getDifficulty(){
           return difficulty;
      }
 
