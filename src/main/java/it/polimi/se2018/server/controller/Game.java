@@ -352,7 +352,7 @@ public class Game implements Observer {
 
     protected void setPlayerDisconnection(int playerID){
 
-        model.setPlayerDisconnectModel(playerID);
+        model.getPlayerFromID(playerID).setDisconnect(true);
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
             endMatch();

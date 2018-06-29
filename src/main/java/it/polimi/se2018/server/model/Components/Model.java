@@ -100,11 +100,6 @@ public class Model extends Observable {
         return null;
     }
 
-    public void setPlayerDisconnectModel(int playerID) {
-
-        getPlayerFromID(playerID).setDisconnect(true);
-
-    }
 
     public void setPlayerAndNotify(int ID, String name) {
 
