@@ -46,6 +46,7 @@ public enum ViewState {
     TOOLSPCHOOSE,
     TOOLSPDICE,
     NOTAUTHORIZED,
+    NOTCONNECTED,
 
     //--gui events--
     DICEMOVE,

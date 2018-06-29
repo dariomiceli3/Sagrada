@@ -67,6 +67,8 @@ public interface ClientInterface {
 
     public void setExitToServer(int ID);
 
+    public void setReconnectToServer(int ID);
+
 
 
 }

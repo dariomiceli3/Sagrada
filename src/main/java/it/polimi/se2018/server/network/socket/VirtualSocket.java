@@ -200,6 +200,11 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     setChanged();
                     notifyObservers(received);
                 }
+
+                if (received instanceof ReconnectPlayerEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
             }
                 // add the disconnection if there's an exception
         } catch (IOException e) {

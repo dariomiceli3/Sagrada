@@ -578,7 +578,14 @@ public class SocketHandler implements ClientInterface, Runnable {
 
     //--------------------------disconnection-----------------------------------------------
 
+    @Override
     public void setExitToServer(int ID) {
-        sendEvent(new ExitEvent());
+        sendEvent(new ExitEvent(ID));
+
+    }
+
+    @Override
+    public void setReconnectToServer(int ID) {
+        sendEvent(new ReconnectPlayerEvent(ID));
     }
 }

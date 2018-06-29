@@ -260,5 +260,6 @@
       <ImageView fx:id="toolCard5" fitHeight="164.0" fitWidth="127.0" layoutX="1122.0" layoutY="245.0" onMouseClicked="#handleTool5" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom4" fitHeight="293.0" fitWidth="222.0" layoutX="820.0" layoutY="223.0" onMouseClicked="#handleUnzoomTool4" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="toolCardZoom5" fitHeight="293.0" fitWidth="222.0" layoutX="1070.0" layoutY="223.0" onMouseClicked="#handleUnzoomTool5" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button fx:id="reconnect" layoutX="1329.0" layoutY="745.0" mnemonicParsing="false" onAction="#reconnectButtonSelected" prefHeight="33.0" prefWidth="75.0" text="ENTER" />
    </children>
 </AnchorPane>

@@ -121,8 +121,8 @@ public class TestModel {
         //model.setPatternAndNotify(1, patternCard);
         model.setPrivateAndNotify(1, privateObjectiveCard);
         model.setTokenAndNotify(1);
-        model.setDraftPoolAndNotify(false);
-        model.setDraftPoolAndNotify(true);
+        //model.setDraftPoolAndNotify(false);
+        //model.setDraftPoolAndNotify(true);
         model.setEndRoundAndNotify();
         //model.setPatternAndNotify(1, 0);
         model.setFinalPointsAndNotify(playerArrayList);

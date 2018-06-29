@@ -208,7 +208,12 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
 
     @Override
     public void setExitToServer(int ID) {
-        sendEventVirtual(ID, new ExitEvent());
+        sendEventVirtual(ID, new ExitEvent(ID));
+    }
+
+    @Override
+    public void setReconnectToServer(int ID) {
+        sendEventVirtual(ID, new ReconnectPlayerEvent(ID));
     }
 }
 

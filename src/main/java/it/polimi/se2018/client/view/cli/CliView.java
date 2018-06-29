@@ -170,11 +170,22 @@ public class CliView extends View implements Runnable {
             if (input.isEmpty()) {
                 System.out.println("You are not writing nothing");
             } else if (input.equalsIgnoreCase("exit")) {
-                System.out.println("from now you are suspended - enter RECONNECT to re-enter in the game");
+                System.out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
                 getConnection().setExitToServer(super.getPlayerID());
+                cliState = ViewState.NOTCONNECTED;
             } else if (cliState == ViewState.NOTAUTHORIZED) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     System.out.println("Please, it's not your turn! Waiting for your moment");
+                }
+            } else if (cliState == ViewState.NOTCONNECTED) {
+                if (input.matches(".*[a-zA-Z0-9]+.*")){
+                    System.out.println("You are not in the game!");
+                }
+                else if (input.equalsIgnoreCase("reconnect")) {
+                    getConnection().setReconnectToServer(super.getPlayerID());
+                    System.out.println("from the next round you will re-enter the game");
+                } else {
+                    System.out.println("You are not choosing a mode to play");
                 }
             } else if (cliState == ViewState.MODE) {
                 if (input.equalsIgnoreCase("multi")) {

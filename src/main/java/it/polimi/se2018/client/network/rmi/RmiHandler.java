@@ -376,5 +376,15 @@ public class RmiHandler implements ClientInterface {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setReconnectToServer(int ID) {
+        try {
+            stub.setReconnectToServer(ID);
+        }catch (RemoteException e) {
+            System.out.println("Error in reconnect in the game");
+            e.printStackTrace();
+        }
+    }
 }
 

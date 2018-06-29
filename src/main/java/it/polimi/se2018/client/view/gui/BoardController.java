@@ -240,6 +240,9 @@ public class BoardController {
     private Button exit;
 
     @FXML
+    private Button reconnect;
+
+    @FXML
     private Button roll;
 
     @FXML
@@ -1293,6 +1296,23 @@ public class BoardController {
     }
 
     @FXML
+    void reconnectButtonSelected(ActionEvent event) {
+
+        mainController.getConnection().setReconnectToServer(mainController.getPlayerID());
+        enableTool();
+        enablePattern();
+        enablePool();
+        enableOtherPattern();
+        enablePublic();
+        enablePrivate();
+        enableRoundTracker();
+        skip.setDisable(false);
+        exit.setDisable(false);
+        reconnect.setVisible(false);
+        reconnect.setDisable(true);
+    }
+
+    @FXML
     void skipButtonSelected(ActionEvent event) {
 
         mainController.getConnection().setNextTurnToServer(mainController.getPlayerID());
@@ -1303,8 +1323,19 @@ public class BoardController {
     void exitButtonSelected(ActionEvent event) {
 
         mainController.getConnection().setExitToServer(mainController.getPlayerID());
-        pane.setDisable(true);
-
+        disableTool();
+        disablePattern();
+        disableOtherPattern();
+        disablePool();
+        disablePublic();
+        disablePrivate();
+        disableRoundTracker();
+        roll.setDisable(true);
+        next.setDisable(true);
+        skip.setDisable(true);
+        exit.setDisable(true);
+        reconnect.setVisible(true);
+        reconnect.setDisable(false);
     }
 
     @FXML
@@ -1436,6 +1467,7 @@ public class BoardController {
 
 
         if (mainController.isSinglePlayer()) {
+            reconnect.setVisible(false);
             tokensNumber.setVisible(false);
             textPrivateSingle.setVisible(true);
             circleTool1.setVisible(false);
@@ -1457,6 +1489,7 @@ public class BoardController {
 
         }
         else {
+            reconnect.setVisible(false);
             setToolCost();
             loadPanel();
             loadPattern();
@@ -2287,6 +2320,43 @@ public class BoardController {
         }
     }
 
+    private void disableRoundTracker() {
+        round1.setDisable(true);
+        round2.setDisable(true);
+        round3.setDisable(true);
+        round4.setDisable(true);
+        round5.setDisable(true);
+        round6.setDisable(true);
+        round7.setDisable(true);
+        round8.setDisable(true);
+        round9.setDisable(true);
+
+    }
+
+    private void enableRoundTracker() {
+        round1.setDisable(false);
+        round2.setDisable(false);
+        round3.setDisable(false);
+        round4.setDisable(false);
+        round5.setDisable(false);
+        round6.setDisable(false);
+        round7.setDisable(false);
+        round8.setDisable(false);
+        round9.setDisable(false);
+    }
+
+    private void disableOtherPattern() {
+        patternPlayer2.setDisable(true);
+        patternPlayer3.setDisable(true);
+        patternPlayer4.setDisable(true);
+    }
+
+    private void enableOtherPattern() {
+        patternPlayer2.setDisable(false);
+        patternPlayer3.setDisable(false);
+        patternPlayer4.setDisable(false);
+    }
+
     private void disablePattern() {
 
         cell1.setDisable(true);
@@ -2362,16 +2432,83 @@ public class BoardController {
         dice9.setDisable(true);
     }
 
+    private void disablePrivate() {
+        if (mainController.isSinglePlayer()) {
+            privateCard.setDisable(true);
+            publicCard3.setDisable(true);
+        }
+        else {
+            privateCard.setDisable(true);
+        }
+
+
+    }
+
+    private void enablePrivate() {
+        if (mainController.isSinglePlayer()) {
+            privateCard.setDisable(false);
+            publicCard3.setDisable(false);
+        }
+        else {
+            privateCard.setDisable(false);
+        }
+
+    }
+
+    private void disablePublic() {
+        if (mainController.isSinglePlayer()) {
+            publicCard1.setDisable(true);
+            publicCard2.setDisable(true);
+        }
+        else {
+            publicCard1.setDisable(true);
+            publicCard2.setDisable(true);
+            publicCard3.setDisable(true);
+        }
+
+    }
+
+    private void enablePublic() {
+        if (mainController.isSinglePlayer()) {
+            publicCard1.setDisable(false);
+            publicCard2.setDisable(false);
+        }
+        else {
+            publicCard1.setDisable(false);
+            publicCard2.setDisable(false);
+            publicCard3.setDisable(false);
+        }
+
+    }
+
     private void enableTool() {
-        toolCard1.setDisable(false);
-        toolCard2.setDisable(false);
-        toolCard3.setDisable(false);
+        if (mainController.isSinglePlayer()) {
+            toolCard1.setDisable(false);
+            toolCard2.setDisable(false);
+            toolCard3.setDisable(false);
+            toolCard4.setDisable(false);
+            toolCard5.setDisable(false);
+        }
+        else {
+            toolCard1.setDisable(false);
+            toolCard2.setDisable(false);
+            toolCard3.setDisable(false);
+        }
     }
 
     private void disableTool() {
-        toolCard1.setDisable(true);
-        toolCard2.setDisable(true);
-        toolCard3.setDisable(true);
+        if (mainController.isSinglePlayer()) {
+            toolCard1.setDisable(true);
+            toolCard2.setDisable(true);
+            toolCard3.setDisable(true);
+            toolCard4.setDisable(true);
+            toolCard5.setDisable(true);
+        }
+        else {
+            toolCard1.setDisable(true);
+            toolCard2.setDisable(true);
+            toolCard3.setDisable(true);
+        }
     }
 
     public void updateRound(int round) {

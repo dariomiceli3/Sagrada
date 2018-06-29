@@ -212,12 +212,13 @@ public class Game implements Observer {
 
         if (arg instanceof ExitEvent) {
 
-            setPlayerDisconnection(((ExitEvent) arg).getPlayerID);
+            setPlayerDisconnection(((ExitEvent) arg).getPlayerID());
+            //nextTurn();
         }
 
         if (arg instanceof ReconnectPlayerEvent){
 
-            reconnectedPlayer.add(((ReconnectPlayerEvent) arg).getPlayerID);
+            reconnectedPlayer.add(((ReconnectPlayerEvent) arg).getPlayerID());
 
         }
 
