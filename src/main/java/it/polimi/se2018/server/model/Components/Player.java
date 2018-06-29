@@ -85,7 +85,7 @@ public class Player implements Serializable {
         this.patterChooseList = patterChooseList;
     }
 
-    public void setDisconnect(boolean of) {
+    public void setDisconnect(boolean disconnect) {
         this.disconnect = disconnect;
     }
 

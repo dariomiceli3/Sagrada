@@ -39,6 +39,7 @@ public class CliView extends View implements Runnable {
     private ClientInterface connection;
     private PatternCard customPattern;
     private String filePath;
+    private static boolean connected = true;
 
     public CliView() {
     }
@@ -177,15 +178,20 @@ public class CliView extends View implements Runnable {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     System.out.println("Please, it's not your turn! Waiting for your moment");
                 }
+            } else if (cliState == ViewState.NOTAUTHORIZEDNAME) {
+                if (input.matches(".*[a-zA-Z0-9]+.*")) {
+                    System.out.println("Please, you enter your name yet! Waiting for the game");
+                }
             } else if (cliState == ViewState.NOTCONNECTED) {
+                connected = false;
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     System.out.println("You are not in the game!");
-                }
-                else if (input.equalsIgnoreCase("reconnect")) {
+                } else if (input.equalsIgnoreCase("reconnect")) {
                     getConnection().setReconnectToServer(super.getPlayerID());
-                    System.out.println("from the next round you will re-enter the game");
+                    connected = true;
+                    System.out.println("frow now you are in the game");
                 } else {
-                    System.out.println("You are not choosing a mode to play");
+                    System.out.println("You cannot enter commands now, you are not in the game");
                 }
             } else if (cliState == ViewState.MODE) {
                 if (input.equalsIgnoreCase("multi")) {
@@ -853,7 +859,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showName() {
-        cliState = ViewState.NOTAUTHORIZED;
+        cliState = ViewState.NOTAUTHORIZEDNAME;
         System.out.println("Name set as: " + super.getPlayerName());
     }
 
@@ -950,9 +956,12 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showOtherCurrentTurn(String username) {
-        cliState = ViewState.NOTAUTHORIZED;
+        if (!connected) {
+            cliState = ViewState.NOTCONNECTED;
+        } else {
+            cliState = ViewState.NOTAUTHORIZED;
+        }
         System.out.println("\n" + "It's " + username + "'s turn");
-
     }
 
     @Override
