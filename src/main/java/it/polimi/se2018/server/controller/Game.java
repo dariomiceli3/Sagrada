@@ -424,13 +424,16 @@ public class Game implements Observer {
                 if (model.getPlayerFromID(currID).isDisconnect()) {
 
                     nextTurn();
-                }
+
+                }else {
+
                     view.sendEvent(new StartRoundEvent(round));
                     view.sendEvent(new StartTurnEvent(currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                     if (round > START) {
                         view.sendEvent(new TurnPatternEvent(currID, model.getPlayerFromID(currID).getPattern()));
                     }
                     view.sendEvent(new RollDraftPoolEvent(currID));
+                }
 
 
             }
@@ -445,17 +448,19 @@ public class Game implements Observer {
                 if(model.getPlayerFromID(currID).isDisconnect()) {
 
                     nextTurn();
-                }
+                }else {
+
                     if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
                         model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
-                    }else {
+                    } else {
                         view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                         view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
                         if (currID == view.getPlayerID()) {
                             startChoose(view);
 
                         }
+                    }
                 }
 
             }
