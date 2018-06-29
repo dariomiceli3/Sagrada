@@ -201,4 +201,7 @@ public abstract class View implements Runnable {
 
     public abstract void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold);
 
+    //---------------disconnection
+
+    public abstract void showMaxPlayerLogin();
 }

@@ -39,14 +39,23 @@ public class Game implements Observer {
     private int disconnectPlayerNumber;
     private List<String> activeNames;
     private boolean singlePlayer;
-    private final int timePlayer;
+    private int timePlayer;
     private Timer timer;
     private ToolCardController toolController;
 
 
     public Game(List<VirtualView> viewList, boolean singlePlayer) {
+        Model modelGame = new Model();
+        createGame(viewList, singlePlayer, modelGame);
+    }
 
-        this.model = new Model();
+    public Game(List<VirtualView> viewList, boolean singlePlayer, Model model) {
+        createGame(viewList, singlePlayer, model);
+    }
+
+    private void createGame(List<VirtualView> viewList, boolean singlePlayer, Model model) {
+
+        this.model = model;
         this.viewGame = new ArrayList<>(viewList);
         this.playerList = new ArrayList<>();
         this.setup = new GameSetup(this);
@@ -57,29 +66,21 @@ public class Game implements Observer {
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
 
-
-
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
             System.out.println("Player id in new Game" + player.getPlayerID());
             playerList.add(player);
         }
 
-        model.setPlayerList(playerList);
+        this.model.setPlayerList(playerList);
 
         for (VirtualView view : viewGame) {
             view.addObserver(this);
             view.addObserver(toolController);
             view.setModel(model);
-            model.addObserver(view);
+            this.model.addObserver(view);
         }
-
-
         startGame();
-
-
-
-
 
     }
 
@@ -89,7 +90,6 @@ public class Game implements Observer {
     // update gestisce
 
     protected List<ToolCard> getToolCardList(){
-
         return toolCardList;
     }
 
@@ -204,6 +204,12 @@ public class Game implements Observer {
 
         if (arg instanceof CustomPatternEvent) {
             setCustomPatternModel(virtualView, ((CustomPatternEvent)arg).getPatternCard());
+
+        }
+
+        //-------------disconnection----------------
+
+        if (arg instanceof ExitEvent) {
 
         }
        /* if(arg instanceof DisconnectPlayerEvent){

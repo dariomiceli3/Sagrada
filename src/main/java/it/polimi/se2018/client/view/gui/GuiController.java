@@ -63,6 +63,7 @@ public class GuiController extends View {
     private Stage stage;
     private boolean singlePlayer;
     private boolean gameStarted;
+    private boolean maxPlayers;
     private List<ToolCard>  toolList;
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
@@ -146,6 +147,7 @@ public class GuiController extends View {
 
 
         gameStarted = false;
+        maxPlayers = false;
 
         playButton.disableProperty().bind(txtName.textProperty().isEmpty().or(nameSetted));
 
@@ -175,6 +177,9 @@ public class GuiController extends View {
             getConnection().setPlayerNameToServer(getName(), getPlayerID());
             nameSetted.setValue(true);
             AlertBox.display("Name Choose", "Name entered, some seconds and will go");
+        }
+        else if (maxPlayers) {
+            AlertBox.display("Error", "The number of player reached the maximum, retry later!");
         }
         else {
             AlertBox.display("Name Choose", "You have to wait till the game is started!");
@@ -1111,6 +1116,22 @@ public class GuiController extends View {
             }
         });
 
+    }
+
+    //---------------disconnection
+
+    @Override
+    public void showMaxPlayerLogin() {
+
+        maxPlayers = true;
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                AlertBox.display("Error", "The number of player reached the maximum, retry later!");
+            }
+        });
     }
 
 

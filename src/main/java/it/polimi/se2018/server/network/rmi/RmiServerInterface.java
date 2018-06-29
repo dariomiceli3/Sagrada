@@ -71,4 +71,8 @@ public interface RmiServerInterface extends Remote {
 
     public void setPatternCustomToServer(int ID, PatternCard patternCard) throws RemoteException;
 
+    //-------------------------disconnection
+
+    public void setExitToServer(int ID) throws RemoteException;
+
 }

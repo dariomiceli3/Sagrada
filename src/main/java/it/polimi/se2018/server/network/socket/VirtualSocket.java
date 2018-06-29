@@ -27,7 +27,6 @@ public class VirtualSocket extends VirtualView implements Runnable {
     private Server server;
 
     public VirtualSocket(Socket clientConnection, Server server, int ID) {
-
             super(ID);
             this.server = server;
             this.clientConnection = clientConnection;
@@ -61,9 +60,14 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 if (received instanceof SinglePlayerEvent) {
                     this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
 
-                    Server.setMulti(Server.getMulti() + 1);
-
-                    this.getServer().waitingOtherPlayers();
+                    if (getServer().checkNumberPlayer(this.getPlayerID())) {
+                        Server.setMulti(Server.getMulti() + 1);
+                        this.getServer().waitingOtherPlayers();
+                    }
+                    else {
+                        System.out.println("client socket extra ha provato a connettersi");
+                        this.running = false;
+                    }
                 }
 
                 if (received instanceof PlayerPatternEvent) {
@@ -183,34 +187,31 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     notifyObservers(received);
                 }
 
-                //--------custom card
+                //-----------custom card-----------------
 
                 if (received instanceof CustomPatternEvent) {
                     setChanged();
                     notifyObservers(received);
                 }
 
+                //------------disconnection-----------------
 
-
-                // TODO add the other msg from the client:
-                // if the msg is a modification of the model, notify, ecc.
-                // if the msg is an update, access the model to get the latest information
-                // add the disconnection if there's an exception
+                if (received instanceof ExitEvent) {
+                    setChanged();
+                    notifyObservers(received);
+                }
             }
-        }
-        catch (IOException e) {
+                // add the disconnection if there's an exception
+        } catch (IOException e) {
             System.out.println("Error in reading object");
             e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Error in finding classes");
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             stopConnection();
             // devo rimuovere dall'array il client(?)
         }
-
     }
 
 

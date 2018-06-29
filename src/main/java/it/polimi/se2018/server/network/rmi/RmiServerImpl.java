@@ -202,6 +202,14 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     public void setPatternCustomToServer(int ID, PatternCard patternCard) throws RemoteException {
         sendEventVirtual(ID, new CustomPatternEvent(patternCard));
     }
+
+    //------------------------------disconnection----------------------------------------
+
+
+    @Override
+    public void setExitToServer(int ID) {
+        sendEventVirtual(ID, new ExitEvent());
+    }
 }
 
 

@@ -63,6 +63,10 @@ public interface ClientInterface {
 
     public void setPatternCustomToServer(int ID, PatternCard patternCard);
 
+    //-----------------------disconnection
+
+    public void setExitToServer(int ID);
+
 
 
 }

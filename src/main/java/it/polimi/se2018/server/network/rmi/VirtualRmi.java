@@ -11,6 +11,7 @@ import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 import it.polimi.se2018.server.model.Events.SinglePlayer.*;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Observable;
 
 public class VirtualRmi extends VirtualView {
@@ -41,8 +42,23 @@ public class VirtualRmi extends VirtualView {
 
         if (event instanceof SinglePlayerEvent) {
             this.server.setSinglePlayer( ((SinglePlayerEvent)event).isSinglePlayer());
-            Server.setMulti(Server.getMulti() + 1);
-            this.server.waitingOtherPlayers();
+            //Server.setMulti(Server.getMulti() + 1);
+            //this.server.waitingOtherPlayers();
+
+            if (server.checkNumberPlayer(this.getPlayerID())) {
+                Server.setMulti(Server.getMulti() + 1);
+                this.server.waitingOtherPlayers();
+            }
+            else {
+                System.out.println("client rmi extra ha provato a connettersi");
+                this.running = false;
+                try {
+                    clientRmi.remoteMaxPlayerLogin();
+                }
+                catch (RemoteException e) {
+                    System.out.println("error rmi max player");
+                }
+            }
         }
         else {
             setChanged();
@@ -254,10 +270,9 @@ public class VirtualRmi extends VirtualView {
                 }
 
             }
-
         }
         catch (IOException e) {
-            System.out.println();
+            System.out.println("Error i/O rmi");
             this.running = false;
 
         }

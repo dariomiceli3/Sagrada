@@ -113,4 +113,8 @@ public interface RmiClientInterface extends Remote {
     public void remoteStartToolSinglePlayer(List<ToolCard> toolCards, int poolSize) throws RemoteException;
 
     public void remoteNotMatchColorEvent() throws RemoteException;
+
+    //-------------------------disconection
+
+    public void remoteMaxPlayerLogin() throws RemoteException;
 }

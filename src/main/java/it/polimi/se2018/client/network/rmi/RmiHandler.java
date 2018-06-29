@@ -9,6 +9,7 @@ import it.polimi.se2018.server.network.rmi.RmiServerInterface;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public class RmiHandler implements ClientInterface {
@@ -349,8 +350,7 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
-    //----------custuom card
-
+    //-----------------------custom card------------------------------------
 
     @Override
     public void setPatternCustomToServer(int ID, PatternCard patternCard) {
@@ -362,6 +362,19 @@ public class RmiHandler implements ClientInterface {
             e.printStackTrace();
         }
 
+    }
+
+    //----------------------disconnection------------------------------------
+
+    @Override
+    public void setExitToServer(int ID) {
+        try {
+            stub.setExitToServer(ID);
+        }
+        catch (RemoteException e) {
+            System.out.println("Error in exit the game");
+            e.printStackTrace();
+        }
     }
 }
 

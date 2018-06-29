@@ -832,27 +832,27 @@ public class BoardController {
                 RoundTrackerBox.setBoxRound(2);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round4)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round4)) {
                 RoundTrackerBox.setBoxRound(3);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round5)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round5)) {
                 RoundTrackerBox.setBoxRound(4);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round6)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round6)) {
                 RoundTrackerBox.setBoxRound(5);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round7)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round7)) {
                 RoundTrackerBox.setBoxRound(6);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round8)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round8)) {
                 RoundTrackerBox.setBoxRound(7);
 
             }
-            if (poolToggleGroup.getSelectedToggle().equals(round9)) {
+            if (roundToggleGroup.getSelectedToggle().equals(round9)) {
                 RoundTrackerBox.setBoxRound(8);
             }
         }
@@ -1301,6 +1301,9 @@ public class BoardController {
 
     @FXML
     void exitButtonSelected(ActionEvent event) {
+
+        mainController.getConnection().setExitToServer(mainController.getPlayerID());
+        pane.setDisable(true);
 
     }
 

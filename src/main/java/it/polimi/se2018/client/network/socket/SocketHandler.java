@@ -76,7 +76,8 @@ public class SocketHandler implements ClientInterface, Runnable {
             }
             catch (IOException e) {
                 System.out.println("Error in I/O socket");
-                e.printStackTrace();
+                loop = false;
+                view.showMaxPlayerLogin();
             }
             catch (ClassNotFoundException e) {
                 System.out.println("Error loading class socket");
@@ -554,7 +555,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         sendEvent(new EndGameTimerEvent());
     }
 
-    //---------------------------------------------single player methods-----------------------------------------
+    //-------------------------single player methods------------------
 
 
     @Override
@@ -567,11 +568,17 @@ public class SocketHandler implements ClientInterface, Runnable {
         sendEvent(new ToolCardSinglePlayerStartEvent(indexTool,indexPool));
     }
 
-    //------------------------custom card method
+    //------------------------custom card--------------------------------------------------
 
 
     @Override
     public void setPatternCustomToServer(int ID, PatternCard patternCard) {
         sendEvent(new CustomPatternEvent(patternCard));
+    }
+
+    //--------------------------disconnection-----------------------------------------------
+
+    public void setExitToServer(int ID) {
+        sendEvent(new ExitEvent());
     }
 }

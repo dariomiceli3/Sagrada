@@ -373,5 +373,10 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
         view.showMatchError();
 
     }
+
+    @Override
+    public void remoteMaxPlayerLogin() {
+        view.showMaxPlayerLogin();
+    }
 }
 

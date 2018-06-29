@@ -180,13 +180,17 @@ public class Server {
             }, (long) SECONDS * 1000);
 
         }
+    }
 
+    public boolean checkNumberPlayer(int ID) {
 
+        if (singlePlayer) {
+            return ID == 0;
+        }
+        else {
+            return ID >= 0 && ID <= 3;
 
-
-
-
-
+        }
     }
 
 

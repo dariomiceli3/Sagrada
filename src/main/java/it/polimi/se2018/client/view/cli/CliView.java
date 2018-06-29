@@ -169,6 +169,9 @@ public class CliView extends View implements Runnable {
 
             if (input.isEmpty()) {
                 System.out.println("You are not writing nothing");
+            } else if (input.equalsIgnoreCase("exit")) {
+                System.out.println("from now you are suspended - enter RECONNECT to re-enter in the game");
+                getConnection().setExitToServer(super.getPlayerID());
             } else if (cliState == ViewState.NOTAUTHORIZED) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     System.out.println("Please, it's not your turn! Waiting for your moment");
@@ -1332,6 +1335,14 @@ public class CliView extends View implements Runnable {
             System.out.println("You scored: " + playerPoints);
             System.out.println("The threshold of the round tracker is: " + gameThreshold);
         }
+    }
+
+    //------------------------disconnection
+
+
+    @Override
+    public void showMaxPlayerLogin() {
+        System.out.println("The number of player reached the maximum, retry later!");
     }
 }
 
