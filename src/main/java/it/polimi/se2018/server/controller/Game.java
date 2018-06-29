@@ -59,6 +59,7 @@ public class Game implements Observer {
         this.model = model;
         this.viewGame = new ArrayList<>(viewList);
         this.playerList = new ArrayList<>();
+        this.reconnectedPlayer = new ArrayList<>();
         this.setup = new GameSetup(this);
         this.roundManager = new RoundManager();
         this.timePlayer = model.getTimeToPlay();
@@ -499,12 +500,17 @@ public class Game implements Observer {
     //chiama endMatch; gestisce inoltre tutti gli eventi della fine del round
     private void endRound(){
 
-        setEndRoundModel();
-        for (Integer i : reconnectedPlayer){
-            model.getPlayerFromID(i).setDisconnect(false);
-            reconnectedPlayer.remove(i);
+        for (Integer playerID : reconnectedPlayer){
+            model.getPlayerFromID(playerID).setDisconnect(false);
+            reconnectedPlayer.remove(playerID);
             disconnectPlayerNumber--;
+            for (VirtualView view : viewGame){
+                if(view.getPlayerID() == playerID){
+                    view.sendEvent(new ReconnectPlayerUpdateEvent(playerID));
+                }
+            }
         }
+        setEndRoundModel();
         round++;
         if (round > END){
             endMatch();
