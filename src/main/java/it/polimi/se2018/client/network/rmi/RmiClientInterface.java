@@ -114,7 +114,11 @@ public interface RmiClientInterface extends Remote {
 
     public void remoteNotMatchColorEvent() throws RemoteException;
 
-    //-------------------------disconection
+    //-------------------------disconection----------------------------------------------------------------
 
     public void remoteMaxPlayerLogin() throws RemoteException;
+
+    public void remoteExitPlayer(String name) throws RemoteException;
+
+    public void remoteReconnectPlayer(String name) throws RemoteException;
 }

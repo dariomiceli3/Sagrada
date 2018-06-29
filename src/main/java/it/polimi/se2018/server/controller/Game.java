@@ -37,7 +37,7 @@ public class Game implements Observer {
     private int singlePlayerDifficulty;
     private int step;
     private int disconnectPlayerNumber;
-    private List<Integer> reconnectedPlayer;
+    //private List<Integer> reconnectedPlayer;
     private List<String> activeNames;
     private boolean singlePlayer;
     private int timePlayer;
@@ -208,18 +208,17 @@ public class Game implements Observer {
 
         }
 
-        //-------------disconnection----------------
+        //------------------------disconnection-------------------------------------------------------
 
         if (arg instanceof ExitEvent) {
-
             setPlayerDisconnection(((ExitEvent) arg).getPlayerID());
+            sendExitNotification( ((ExitEvent) arg).getPlayerID());
         }
 
         if (arg instanceof ReconnectPlayerEvent){
-
             model.getPlayerFromID(((ReconnectPlayerEvent) arg).getPlayerID()).setDisconnect(false);
             disconnectPlayerNumber--;
-
+            sendReconnectNotification( ((ReconnectPlayerEvent) arg).getPlayerID());
         }
 
 
@@ -644,6 +643,19 @@ public class Game implements Observer {
             view.sendEvent(new NotMatchColorEvent());
             startTool(view);
         }
+    }
+
+    protected void sendExitNotification(int ID) {
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new DisconnectionMsgEvent(ID, model.getPlayerFromID(ID).getPlayerName()));
+        }
+    }
+
+    protected void sendReconnectNotification(int ID) {
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new ReconnectionMsgEvent(ID, model.getPlayerFromID(ID).getPlayerName()));
+        }
+
     }
 
 

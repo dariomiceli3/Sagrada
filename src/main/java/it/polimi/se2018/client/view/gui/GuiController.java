@@ -1118,7 +1118,7 @@ public class GuiController extends View {
 
     }
 
-    //---------------disconnection
+    //---------------disconnection---------------------------------------------
 
     @Override
     public void showMaxPlayerLogin() {
@@ -1132,6 +1132,30 @@ public class GuiController extends View {
                 AlertBox.display("Error", "The number of player reached the maximum, retry later!");
             }
         });
+    }
+
+    @Override
+    public void showExitPlayer(String playerName) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Event",  "The player " + playerName + " disconnected from the game");
+            }
+        });
+
+    }
+
+    @Override
+    public void showReconnectPlayer(String playerName) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Event", "The player " + playerName + " reconnected to the game");
+            }
+        });
+
     }
 
 

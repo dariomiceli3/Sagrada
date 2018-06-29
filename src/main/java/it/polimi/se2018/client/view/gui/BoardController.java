@@ -1306,8 +1306,8 @@ public class BoardController {
         enablePublic();
         enablePrivate();
         enableRoundTracker();
-        skip.setDisable(false);
-        exit.setDisable(false);
+        skip.setDisable(true);
+        exit.setVisible(true);
         reconnect.setVisible(false);
         reconnect.setDisable(true);
     }
@@ -1322,6 +1322,9 @@ public class BoardController {
     @FXML
     void exitButtonSelected(ActionEvent event) {
 
+        if (guiState == ViewState.ROLL) {
+            mainController.getConnection().setDraftPoolToServer(mainController.getPlayerID());
+        }
         mainController.getConnection().setExitToServer(mainController.getPlayerID());
         disableTool();
         disablePattern();
@@ -1333,9 +1336,9 @@ public class BoardController {
         roll.setDisable(true);
         next.setDisable(true);
         skip.setDisable(true);
-        exit.setDisable(true);
         reconnect.setVisible(true);
         reconnect.setDisable(false);
+        exit.setVisible(false);
     }
 
     @FXML
@@ -2564,7 +2567,11 @@ public class BoardController {
 
     public void updateTurn() {
         textGame.setText("It's your turn");
-        pane.setDisable(false);
+        enablePattern();
+        enableTool();
+        enableRoundTracker();
+        enablePool();
+        reconnect.setDisable(false);
         next.setDisable(false);
         skip.setDisable(false);
         roll.setDisable(true);
@@ -2572,7 +2579,14 @@ public class BoardController {
 
     public void updateOtherTurn(String name) {
         textGame.setText("It's " + name + " turn");
-        pane.setDisable(true);
+        disablePattern();
+        //disableOtherPattern();
+        //disablePrivate();
+        //disablePublic();
+        disableTool();
+        disableRoundTracker();
+        disablePool();
+        reconnect.setDisable(false);
         next.setDisable(true);
         skip.setDisable(true);
         roll.setDisable(true);
@@ -2580,6 +2594,7 @@ public class BoardController {
     }
 
     public void textRollMsg() {
+        setGuiState(ViewState.ROLL);
         textGame.setText("Click the roll button to roll the draft pool");
         disableTool();
         disablePool();
