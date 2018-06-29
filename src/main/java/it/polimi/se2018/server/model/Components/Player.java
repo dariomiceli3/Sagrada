@@ -23,7 +23,7 @@ public class Player implements Serializable {
     private int tokensNumber;
     private int finalPoints;
     private int privatePoints;
-    boolean off;
+    boolean disconnect;
 
     /**
      * Default class constructor
@@ -73,8 +73,8 @@ public class Player implements Serializable {
         this.pattern = pattern;
     }
 
-    public boolean isOff() {
-        return off;
+    public boolean isDisconnect() {
+        return disconnect;
     }
 
     public List<PatternCard> getPatterChooseList() {
@@ -85,8 +85,8 @@ public class Player implements Serializable {
         this.patterChooseList = patterChooseList;
     }
 
-    public void setOff(boolean of) {
-        this.off = off;
+    public void setDisconnect(boolean of) {
+        this.disconnect = disconnect;
     }
 
     public String getPlayerName() {

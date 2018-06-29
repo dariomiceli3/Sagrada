@@ -100,6 +100,12 @@ public class Model extends Observable {
         return null;
     }
 
+    public void setPlayerDisconnectModel(int playerID) {
+
+        getPlayerFromID(playerID).setDisconnect(true);
+
+    }
+
     public void setPlayerAndNotify(int ID, String name) {
 
         numberPlayer++;
@@ -148,12 +154,12 @@ public class Model extends Observable {
         notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
     }
 
-    public void setDraftPoolAndNotify(boolean singlePlayer){
+    public void setDraftPoolAndNotify(boolean singlePlayer, int size){
 
         if(singlePlayer){
             this.draftPool.setNumber(DRAFTSINGLE);
         }else {
-           this.draftPool.setNumber(playerList.size()*2);
+           this.draftPool.setNumber(size*2);
         }
         this.draftPool.createListDice();
         setChanged();

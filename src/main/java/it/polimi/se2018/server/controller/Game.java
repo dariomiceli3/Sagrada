@@ -37,6 +37,7 @@ public class Game implements Observer {
     private int singlePlayerDifficulty;
     private int step;
     private int disconnectPlayerNumber;
+    private List<Integer> reconnectedPlayer;
     private List<String> activeNames;
     private boolean singlePlayer;
     private int timePlayer;
@@ -211,17 +212,14 @@ public class Game implements Observer {
 
         if (arg instanceof ExitEvent) {
 
+            setPlayerDisconnection(((ExitEvent) arg).getPlayerID);
         }
-       /* if(arg instanceof DisconnectPlayerEvent){
-            model.getPlayerFromID(getCurrID()).setOff(true);
-            disconnectPlayerNumber++;
-            if((viewGame.size() - disconnectPlayerNumber) < 2){
-                endMatch();
-            }
-        }
+
         if (arg instanceof ReconnectPlayerEvent){
 
-        }*/
+            reconnectedPlayer.add(((ReconnectPlayerEvent) arg).getPlayerID);
+
+        }
 
 
     }
@@ -319,7 +317,7 @@ public class Game implements Observer {
     protected void setDraftPoolModel(VirtualView view){
 
 
-        model.setDraftPoolAndNotify(singlePlayer);
+        model.setDraftPoolAndNotify(singlePlayer, model.getPlayerList().size() - disconnectPlayerNumber);
         startChoose(view);
 
     }
@@ -349,6 +347,15 @@ public class Game implements Observer {
 
         model.setFinalPointsAndNotify(playerList);
 
+    }
+
+    protected void setPlayerDisconnection(int playerID){
+
+        model.setPlayerDisconnectModel(playerID);
+        disconnectPlayerNumber++;
+        if((viewGame.size() - disconnectPlayerNumber) < 2){
+            endMatch();
+        }
     }
 
 
@@ -411,7 +418,7 @@ public class Game implements Observer {
             for (VirtualView view : viewGame) {
                 this.position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
-                if (!model.getPlayerFromID(currID).isOff()) {
+                if (!model.getPlayerFromID(currID).isDisconnect()) {
                     view.sendEvent(new StartRoundEvent(round));
                     view.sendEvent(new StartTurnEvent(currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
                     if (round > START) {
@@ -430,7 +437,7 @@ public class Game implements Observer {
 
                 this.position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
-                if(!model.getPlayerFromID(currID).isOff()) {
+                if(!model.getPlayerFromID(currID).isDisconnect()) {
                     if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
                         model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
@@ -492,6 +499,11 @@ public class Game implements Observer {
     private void endRound(){
 
         setEndRoundModel();
+        for (Integer i : reconnectedPlayer){
+            model.getPlayerFromID(i).setDisconnect(false);
+            reconnectedPlayer.remove(i);
+            disconnectPlayerNumber--;
+        }
         round++;
         if (round > END){
             endMatch();
@@ -512,7 +524,7 @@ public class Game implements Observer {
         if(!singlePlayer) {
             setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
             for (VirtualView view : viewGame){
-                if(!model.getPlayerFromID(view.getPlayerID()).isOff()){
+                if(!model.getPlayerFromID(view.getPlayerID()).isDisconnect()){
                     view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
                 }
             }
