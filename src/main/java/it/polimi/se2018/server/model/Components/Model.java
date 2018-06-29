@@ -154,12 +154,12 @@ public class Model extends Observable {
         notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
     }
 
-    public void setDraftPoolAndNotify(boolean singlePlayer, int size){
+    public void setDraftPoolAndNotify(boolean singlePlayer){
 
         if(singlePlayer){
             this.draftPool.setNumber(DRAFTSINGLE);
         }else {
-           this.draftPool.setNumber(size*2);
+           this.draftPool.setNumber(playerList.size()*2);
         }
         this.draftPool.createListDice();
         setChanged();
