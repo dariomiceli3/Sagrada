@@ -465,6 +465,9 @@ public class Game implements Observer {
 
             }
 
+        }else {
+
+            endRound();
         }
 
 
