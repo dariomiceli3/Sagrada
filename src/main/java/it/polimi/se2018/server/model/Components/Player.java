@@ -53,7 +53,7 @@ public class Player implements Serializable {
         return disconnect;
     }
 
-    List<PatternCard> getPatterChooseList() {
+    public List<PatternCard> getPatterChooseList() {
         return patterChooseList;
     }
 

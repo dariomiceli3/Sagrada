@@ -2,7 +2,6 @@ package it.polimi.se2018.TestComponents;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
@@ -62,26 +61,7 @@ public class TestPlayer {
         assertEquals(true, player.isDisconnect());
     }
 
-    @Test
-    public void testNewConstructor() {
-        String string = "Dario";
-        //PlayerColour playerColour = PlayerColour.BLUE;
-        int ID = 1;
 
-        Player player = new Player(string);
-        Player player1 = new Player(ID);
-        Player player2 = new Player(player1);
-
-
-        assertEquals("Dario", player.getPlayerName());
-        assertEquals(1, player1.getPlayerID());
-        assertEquals(1,player2.getPlayerID());
-        assertEquals(0,player2.getTokensNumber());
-        assertEquals(0,player2.getFinalPoints());
-        assertEquals(0,player2.getPrivatePoints());
-        assertNull(player2.getPrivate());
-
-    }
 
     @Test
     public void testRunningP() {

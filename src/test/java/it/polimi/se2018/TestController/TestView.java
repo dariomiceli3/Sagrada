@@ -164,6 +164,7 @@ public class TestView {
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 2));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         assertEquals("Michele",model.getPlayerFromID(1).getPlayerName());
+        Game game1 = new Game(viewList,false);
 
     }
 
@@ -410,10 +411,10 @@ public class TestView {
         viewList.get(1).sendEvent(new ExitEvent(1));
         //viewList.get(1).sendEvent(new ReconnectPlayerEvent(1));
 
-        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
-        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
 
     }
 
@@ -506,6 +507,15 @@ public class TestView {
         viewList.get(1).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+
+        viewList.get(0).getModel().getPlayerFromID(0).setFinalPoints(150);
+        viewList.get(0).getModel().getPlayerFromID(0).setPrivatePoints(29);
+        viewList.get(0).getModel().getPlayerFromID(0).setTokensNumber(3);
+
+        viewList.get(1).getModel().getPlayerFromID(1).setFinalPoints(150);
+        viewList.get(1).getModel().getPlayerFromID(1).setPrivatePoints(30);
+        viewList.get(1).getModel().getPlayerFromID(1).setTokensNumber(3);
+
         viewList.get(1).sendEvent(new PlayerNextTurnEvent());
     }
 
