@@ -1,12 +1,10 @@
 package it.polimi.se2018.server.controller;
 
 
-import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
@@ -23,21 +21,18 @@ public class Game implements Observer {
     private static final int END = 10;
     private static final int SET = 2;
     private Model model;
-    private List<Player> playerList;
     private List<ToolCard> toolCardList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
-    private static int turn = DEFAULT;
+    private int turn = DEFAULT;
     private int round = START;
-    private int position;
     private int currID;
     private Dice diceToolSinglePlayer;
     private ToolCard toolRemoveSinglePlayer;
     private int singlePlayerDifficulty;
     private int step;
     private int disconnectPlayerNumber;
-    //private List<Integer> reconnectedPlayer;
     private List<String> activeNames;
     private boolean singlePlayer;
     private int timePlayer;
@@ -58,7 +53,6 @@ public class Game implements Observer {
 
         this.model = model;
         this.viewGame = new ArrayList<>(viewList);
-        this.playerList = new ArrayList<>();
         this.setup = new GameSetup(this);
         this.roundManager = new RoundManager();
         this.timePlayer = model.getTimeToPlay();
@@ -66,6 +60,8 @@ public class Game implements Observer {
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
+
+        List<Player> playerList = new ArrayList<>();
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
@@ -90,7 +86,7 @@ public class Game implements Observer {
     // protected relativo al cambiamento
     // update gestisce
 
-    protected List<ToolCard> getToolCardList(){
+    List<ToolCard> getToolCardList(){
         return toolCardList;
     }
 
@@ -98,15 +94,15 @@ public class Game implements Observer {
         return model;
     }
 
-    protected List<VirtualView> getViewGame(){
+    List<VirtualView> getViewGame(){
         return viewGame;
     }
 
-    protected int getTurn(){
+    int getTurn(){
         return turn;
     }
 
-    protected int getStep(){
+    int getStep(){
         return step;
     }
 
@@ -118,7 +114,7 @@ public class Game implements Observer {
         return singlePlayer;
     }
 
-    protected int getSinglePlayerDifficulty(){
+    int getSinglePlayerDifficulty(){
         return singlePlayerDifficulty;
     }
 
@@ -126,16 +122,16 @@ public class Game implements Observer {
         this.singlePlayerDifficulty = difficulty;
     }
 
-    protected Dice getDiceToolSinglePlayer(){
+    Dice getDiceToolSinglePlayer(){
         return diceToolSinglePlayer;
     }
 
-    protected ToolCard getToolRemoveSinglePlayer(){
+    ToolCard getToolRemoveSinglePlayer(){
         return toolRemoveSinglePlayer;
     }
 
 
-    protected int getCurrID() {
+    private int getCurrID() {
         return currID;
     }
 
@@ -240,7 +236,7 @@ public class Game implements Observer {
 
 
     //--------metodi che modificano model e mandano la notify alla view----------
-    protected void setPlayerNameModel(VirtualView view, String name) {
+    private void setPlayerNameModel(VirtualView view, String name) {
 
         if (activeNames.contains(name)) {
             view.sendEvent(new PlayerNameErrorEvent(view.getPlayerID()));
@@ -261,7 +257,7 @@ public class Game implements Observer {
         }
     }
 
-    protected void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
+    private void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
 
         model.setCustomPatternAndNotify(view.getPlayerID(), patternCard);
 
@@ -285,7 +281,7 @@ public class Game implements Observer {
     }
 
 
-    protected void setPatternCardModel(VirtualView view, int indexPatternChoose){
+    private void setPatternCardModel(VirtualView view, int indexPatternChoose){
 
         model.setPatternAndNotify(view.getPlayerID(), indexPatternChoose);
 
@@ -307,14 +303,14 @@ public class Game implements Observer {
 
     }
 
-    protected void setTokensModel(VirtualView view) {
+    private void setTokensModel(VirtualView view) {
 
         model.setTokenAndNotify(view.getPlayerID());
 
 
     }
 
-    protected void setDraftPoolModel(VirtualView view){
+    private void setDraftPoolModel(VirtualView view){
 
 
         model.setDraftPoolAndNotify(singlePlayer);
@@ -322,7 +318,7 @@ public class Game implements Observer {
 
     }
 
-    protected void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
+    private void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
 
         Dice dice = model.getDraftPool().getDraftPool().get(indexPool);
 
@@ -338,18 +334,18 @@ public class Game implements Observer {
         }
     }
 
-    protected void setEndRoundModel(){
+    private void setEndRoundModel(){
 
         model.setEndRoundAndNotify();
     }
 
-    protected void setFinalPointsModel(List<Player> playerList){
+    private void setFinalPointsModel(List<Player> playerList){
 
         model.setFinalPointsAndNotify(playerList);
 
     }
 
-    protected void setPlayerDisconnection(int playerID){
+    private void setPlayerDisconnection(int playerID){
 
         model.getPlayerFromID(playerID).setDisconnect(true);
         disconnectPlayerNumber++;
@@ -392,7 +388,7 @@ public class Game implements Observer {
         }
     }
 
-    //todo gestire l'utilizzo delle toolcard in singleplayer
+
     private void singlePlayerTurn(){
         if(turn == DEFAULT){
             viewGame.get(0).sendEvent(new StartRoundEvent(round));
@@ -418,7 +414,7 @@ public class Game implements Observer {
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
-                this.position = calculatePlayerTurn(turn, viewGame.size());
+                int position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 if (model.getPlayerFromID(currID).isDisconnect()) {
 
@@ -442,7 +438,7 @@ public class Game implements Observer {
         else if (turn > DEFAULT && turn < (viewGame.size()*2)){
             for (VirtualView view : viewGame) {
 
-                this.position = calculatePlayerTurn(turn, viewGame.size());
+                int position = calculatePlayerTurn(turn, viewGame.size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 if(model.getPlayerFromID(currID).isDisconnect()) {
 
@@ -472,7 +468,7 @@ public class Game implements Observer {
 
     }
 
-    protected int calculatePlayerTurn(int turn, int numberOfPlayers) {
+    private int calculatePlayerTurn(int turn, int numberOfPlayers) {
         if (turn < numberOfPlayers) {
             return turn;
         } else if (turn == numberOfPlayers) {
@@ -487,14 +483,14 @@ public class Game implements Observer {
         view.sendEvent(new StartChooseEvent(view.getPlayerID()));
     }
 
-    protected void startMove(VirtualView view){
+    private void startMove(VirtualView view){
 
         view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
 
 
     }
 
-    protected void startTool(VirtualView view) {
+    void startTool(VirtualView view) {
 
         if(!singlePlayer){
             view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
@@ -549,7 +545,7 @@ public class Game implements Observer {
 
     }
 
-    protected void nextTurn() {
+    void nextTurn() {
         step = SET;
         turn++;
         if(!singlePlayer) {
@@ -559,7 +555,7 @@ public class Game implements Observer {
         }
     }
 
-    protected void checkCost(VirtualView view, int indexTool){
+    private void checkCost(VirtualView view, int indexTool){
         if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < toolCardList.get(indexTool).getCost()){
 
             view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
@@ -580,7 +576,7 @@ public class Game implements Observer {
         }
     }
 
-    protected void stepController(VirtualView view, int step){
+    private void stepController(VirtualView view, int step){
 
         if(step == DEFAULT){
             this.step = step;
@@ -593,7 +589,7 @@ public class Game implements Observer {
         }
     }
 
-    protected void nextStepTool(VirtualView view){
+    void nextStepTool(VirtualView view){
 
         if(step == START){
 
@@ -606,7 +602,7 @@ public class Game implements Observer {
 
     }
 
-    protected void nextStepMove(VirtualView view){
+    private void nextStepMove(VirtualView view){
 
         if(step == DEFAULT){
 
@@ -618,7 +614,7 @@ public class Game implements Observer {
         }
     }
 
-    protected ToolCard getTool(int n) {
+    ToolCard getTool(int n) {
 
         for (ToolCard toolCard : toolCardList ) {
             if (toolCard.getNumber() == n) {
@@ -628,7 +624,7 @@ public class Game implements Observer {
         return null;
     }
 
-    protected void checkDice(VirtualView view, int indexTool, int indexPool){
+    private void checkDice(VirtualView view, int indexTool, int indexPool){
 
         if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(toolCardList.get(indexTool).getColor().toString())){
 
@@ -645,21 +641,21 @@ public class Game implements Observer {
         }
     }
 
-    protected void sendExitNotification(int ID) {
+    private void sendExitNotification(int iD) {
         for (VirtualView view : viewGame) {
-            view.sendEvent(new DisconnectionMsgEvent(ID, model.getPlayerFromID(ID).getPlayerName()));
+            view.sendEvent(new DisconnectionMsgEvent(iD, model.getPlayerFromID(iD).getPlayerName()));
         }
     }
 
-    protected void sendReconnectNotification(int ID) {
+    private void sendReconnectNotification(int iD) {
         for (VirtualView view : viewGame) {
-            view.sendEvent(new ReconnectionMsgEvent(ID, model.getPlayerFromID(ID).getPlayerName()));
+            view.sendEvent(new ReconnectionMsgEvent(iD, model.getPlayerFromID(iD).getPlayerName()));
         }
 
     }
 
 
-    protected void endTimer() {
+    private void endTimer() {
         if (timer != null) {
             timer.cancel();
         }
