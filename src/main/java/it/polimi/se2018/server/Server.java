@@ -29,6 +29,7 @@ public class Server {
     private static boolean singlePlayer;
     public static int idPlayer;
     public static int multi;
+    private Game game;
 
     public Server() {
 
@@ -77,6 +78,10 @@ public class Server {
 
     public static void setMulti(int multi) {
         Server.multi = multi;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     //-------------------------------methods for clients list -------------------------------------
@@ -132,7 +137,7 @@ public class Server {
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
             System.out.println(getClients().size());
-            new Game(viewGame, singlePlayer);
+            game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
             System.out.println("Started single player");
         }
@@ -141,7 +146,7 @@ public class Server {
         if (getMulti() == MAXPLAYERS) {
             List<VirtualView> viewGame = new ArrayList<>();
             viewGame.addAll(clients);
-            new Game(viewGame, singlePlayer);
+            game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
         }
 
@@ -171,7 +176,7 @@ public class Server {
                     if (getMulti() >= 2 && getMulti() < MAXPLAYERS) {
                         List<VirtualView> viewGame = new ArrayList<>();
                         viewGame.addAll(clients);
-                        new Game(viewGame, singlePlayer);
+                        game = new Game(viewGame, singlePlayer);
                         setGameStarted(true);
                         System.out.println("Started game");
                     }

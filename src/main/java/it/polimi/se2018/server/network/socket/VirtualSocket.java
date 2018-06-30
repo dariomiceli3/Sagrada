@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Observable;
 
 public class VirtualSocket extends VirtualView implements Runnable {
@@ -47,9 +48,22 @@ public class VirtualSocket extends VirtualView implements Runnable {
             System.out.println("thread socket andato");
             while (this.isRunning()) {
 
-
-                socketIn = new ObjectInputStream(clientConnection.getInputStream());
-                Object received = socketIn.readObject();
+                Object received = null;
+                try {
+                     socketIn = new ObjectInputStream(clientConnection.getInputStream());
+                     received = socketIn.readObject();
+                }
+                catch (SocketException e) {
+                    System.out.println("error: " + super.getPlayerID() + " disconnected from the game ");
+                    if (getServer().getGame() == null) {
+                        getServer().getSocketClients().remove(this);
+                        getServer().getClients().remove(this);
+                    }else {
+                        setChanged();
+                        notifyObservers(new DisconnectionEvent(super.getPlayerID()));
+                    }
+                    this.running = false;
+                }
 
                 if (received instanceof PlayerNameEvent) {
                     super.setName(((PlayerNameEvent) received).getName());
@@ -226,9 +240,15 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
             if (this.isRunning()) {
 
-                socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
-                socketOut.writeObject(event);
-                socketOut.flush();
+                try {
+                    socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
+                    socketOut.writeObject(event);
+                    socketOut.flush();
+                }
+                catch (SocketException e) {
+                    System.out.println("error in send event virtual socket appena inserito");
+                    this.running = false;
+                }
             }
         }
         catch (IOException e) {

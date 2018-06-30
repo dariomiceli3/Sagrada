@@ -1046,11 +1046,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showWinner() {
         System.out.println("You win !!!!!!!!!");
+        cliState =  ViewState.NOTAUTHORIZED;
     }
 
     @Override
     public void showLosers() {
         System.out.println("You lose maaaan!");
+        cliState =  ViewState.NOTAUTHORIZED;
     }
 
     @Override

@@ -60,6 +60,7 @@ public class Game implements Observer {
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
+        this.currID = -1;
 
         List<Player> playerList = new ArrayList<>();
 
@@ -78,6 +79,7 @@ public class Game implements Observer {
             this.model.addObserver(view);
         }
         startGame();
+
 
     }
 
@@ -146,6 +148,7 @@ public class Game implements Observer {
         VirtualView virtualView = (VirtualView) o;
 
         if (arg instanceof PlayerNameEvent) {
+
             setPlayerNameModel(virtualView, ((PlayerNameEvent) arg).getName());
         }
 
@@ -155,12 +158,17 @@ public class Game implements Observer {
         }
 
         if (arg instanceof PlayerPatternEvent){
-
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexPatternChoose());
+
+            for (VirtualView view : viewGame){
+                Player player = model.getPlayerFromID(view.getPlayerID());
+                if (player.isDisconnect() && player.getPattern() == null) {
+                    setPatternCardModel(view, 0);
+                }
+            }
         }
 
         if (arg instanceof PlayerDraftPoolEvent){
-
             setDraftPoolModel(virtualView);
         }
         if (arg instanceof PlayerMoveEvent) {
@@ -217,7 +225,32 @@ public class Game implements Observer {
             sendReconnectNotification( ((ReconnectPlayerEvent) arg).getPlayerID());
         }
 
+        if (arg instanceof DisconnectionEvent) {
+            handlingDisconnection( ((DisconnectionEvent)arg).getID(), virtualView);
+        }
 
+
+    }
+
+    private void handlingDisconnection(int id, VirtualView virtualView) {
+
+        if (model.getPlayerFromID(id).getPlayerName() == null) {
+            setPlayerNameModel(virtualView, "default name");
+            setPlayerDisconnection(id);
+        }
+        else if (model.getPlayerFromID(id).getPattern() == null) {
+            setPatternCardModel(virtualView, 0);
+            setPlayerDisconnection(id);
+        }
+        else if ((currID == id) && (model.getDraftPool().getNowNumber() == 0))
+        {
+            System.out.println("sono nel ramo particular");
+            setDraftPoolModel(virtualView);
+            setPlayerDisconnection(id);
+        }
+        else {
+            setPlayerDisconnection(id);
+        }
     }
 
 
@@ -351,8 +384,10 @@ public class Game implements Observer {
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
             endMatch();
-        }else {
+        }else if (currID == playerID) {
             nextTurn();
+        }
+        else {
         }
     }
 
@@ -418,6 +453,7 @@ public class Game implements Observer {
                 this.currID = model.getPlayerList().get(position).getPlayerID();
                 if (model.getPlayerFromID(currID).isDisconnect()) {
 
+                    //setDraftPoolModel(view);
                     nextTurn();
 
                 }else {
@@ -428,6 +464,7 @@ public class Game implements Observer {
                         view.sendEvent(new TurnPatternEvent(currID, model.getPlayerFromID(currID).getPattern()));
                     }
                     view.sendEvent(new RollDraftPoolEvent(currID));
+
                 }
 
 

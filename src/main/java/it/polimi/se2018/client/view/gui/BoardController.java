@@ -1595,6 +1595,7 @@ public class BoardController {
                 fileStream = new FileInputStream(filePath + "/PurplePanel" + ".png");
                 Image imagePlayerThree = new Image(fileStream);
                 panelWindow.setImage(imagePlayerThree);
+                patternCard.setLayoutY(572);
             }
 
             if ((mainController.getPlayerID() == 3)) {
