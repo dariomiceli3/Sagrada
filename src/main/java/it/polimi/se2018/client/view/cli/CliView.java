@@ -171,6 +171,10 @@ public class CliView extends View implements Runnable {
             if (input.isEmpty()) {
                 System.out.println("You are not writing nothing");
             } else if (input.equalsIgnoreCase("exit")) {
+                if (cliState == ViewState.ROLL) {
+                    getConnection().setDraftPoolToServer(super.getPlayerID());
+                }
+                connected = false;
                 System.out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
                 getConnection().setExitToServer(super.getPlayerID());
                 cliState = ViewState.NOTCONNECTED;
@@ -183,10 +187,7 @@ public class CliView extends View implements Runnable {
                     System.out.println("Please, you enter your name yet! Waiting for the game");
                 }
             } else if (cliState == ViewState.NOTCONNECTED) {
-                connected = false;
-                if (input.matches(".*[a-zA-Z0-9]+.*")){
-                    System.out.println("You are not in the game!");
-                } else if (input.equalsIgnoreCase("reconnect")) {
+                if (input.equalsIgnoreCase("reconnect")) {
                     getConnection().setReconnectToServer(super.getPlayerID());
                     connected = true;
                     System.out.println("frow now you are in the game");
@@ -1363,6 +1364,16 @@ public class CliView extends View implements Runnable {
     @Override
     public void showMaxPlayerLogin() {
         System.out.println("The number of player reached the maximum, retry later!");
+    }
+
+    @Override
+    public void showExitPlayer(String playerName) {
+        System.out.println("\n" + "The player " + playerName + " disconnected from the game");
+    }
+
+    @Override
+    public void showReconnectPlayer(String playerName) {
+        System.out.println("\n" + "The player " + playerName + " reconnected to the game");
     }
 }
 

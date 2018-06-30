@@ -265,6 +265,12 @@ public class VirtualRmi extends VirtualView {
                 else if (event instanceof NotMatchColorEvent) {
                     clientRmi.remoteNotMatchColorEvent();
                 }
+                else if (event instanceof DisconnectionMsgEvent ) {
+                    clientRmi.remoteExitPlayer( ((DisconnectionMsgEvent)event).getName());
+                }
+                else if (event instanceof ReconnectionMsgEvent) {
+                    clientRmi.remoteReconnectPlayer( ((ReconnectionMsgEvent)event).getName());
+                }
                 else {
                     System.out.println("Not understood the message");
                 }

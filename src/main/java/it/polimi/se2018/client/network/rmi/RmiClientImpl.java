@@ -375,8 +375,18 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remoteMaxPlayerLogin() {
+    public void remoteMaxPlayerLogin() throws RemoteException {
         view.showMaxPlayerLogin();
+    }
+
+    @Override
+    public void remoteExitPlayer(String name) throws RemoteException {
+        view.showExitPlayer(name);
+    }
+
+    @Override
+    public void remoteReconnectPlayer(String name) throws RemoteException {
+        view.showReconnectPlayer(name);
     }
 }
 

@@ -183,7 +183,7 @@ public abstract class View implements Runnable {
 
     public abstract void showInvalidMove(String msg);
 
-    //------------------------  single player mode
+    //------------------------single player mode----------------------------------
 
     public abstract void showSinglePlayerRequest();
 
@@ -201,7 +201,11 @@ public abstract class View implements Runnable {
 
     public abstract void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold);
 
-    //---------------disconnection
+    //--------------------disconnection---------------------------------------------
 
     public abstract void showMaxPlayerLogin();
+
+    public abstract void showExitPlayer(String playerName);
+
+    public abstract void showReconnectPlayer(String playerName);
 }

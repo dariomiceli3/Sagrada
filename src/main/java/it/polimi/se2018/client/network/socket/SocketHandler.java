@@ -382,7 +382,7 @@ public class SocketHandler implements ClientInterface, Runnable {
             view.showDraftPool(((UpdatePoolEvent) event).getDraftPool());
         }
 
-        //-----------------single player events-------------
+        //---------------------------------single player events-----------------------------------------
 
         else if (event instanceof ToolNumberRequestEvent) {
             view.showDifficultyRequest();
@@ -402,6 +402,16 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         else if (event instanceof NotMatchColorEvent) {
             view.showMatchError();
+        }
+
+        //------------------------disconnection msg-----------------------------------------------------
+
+        else if (event instanceof DisconnectionMsgEvent) {
+            view.showExitPlayer( ((DisconnectionMsgEvent) event).getName());
+        }
+
+        else if (event instanceof ReconnectionMsgEvent) {
+            view.showReconnectPlayer( ((ReconnectionMsgEvent)event).getName());
         }
 
         else {
