@@ -106,7 +106,8 @@ public class RoundManager  {
 
                     if (playerArrayList.get(i).getPrivatePoints() < playerArrayList.get(i + 1).getPrivatePoints()) {
 
-                        Player player = new Player(playerArrayList.get(i));
+                        Player player = copy(playerArrayList.get(i));
+
 
                         playerArrayList.set(i, playerArrayList.get(i + 1));
                         playerArrayList.set(i + 1, player);
@@ -122,7 +123,7 @@ public class RoundManager  {
 
                     if (playerArrayList.get(i).getTokensNumber() < playerArrayList.get(i + 1).getTokensNumber()) {
 
-                        Player player = new Player(playerArrayList.get(i));
+                        Player player = copy(playerArrayList.get(i));
 
                         playerArrayList.set(i, playerArrayList.get(i + 1));
                         playerArrayList.set(i + 1, player);
@@ -220,7 +221,19 @@ public class RoundManager  {
 
     }
 
-
+    private Player copy(Player playerToCopy) {
+        Player player = new Player();
+        player.setPlayerName(playerToCopy.getPlayerName());
+        player.setPlayerID(playerToCopy.getPlayerID());
+        player.setPattern(playerToCopy.getPattern());
+        player.setPrivate(playerToCopy.getPrivate());
+        player.setTokensNumber(playerToCopy.getTokensNumber());
+        player.setFinalPoints(playerToCopy.getFinalPoints());
+        player.setPrivatePoints(playerToCopy.getPrivatePoints());
+        player.setDisconnect(playerToCopy.isDisconnect());
+        player.setRunningP(playerToCopy.isDisconnect());
+        return player;
+    }
 
 
 

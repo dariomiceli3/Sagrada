@@ -1,4 +1,4 @@
-/*package it.polimi.se2018.TestComponents;
+package it.polimi.se2018.TestComponents;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
@@ -9,7 +9,6 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Components.PlayerColour;
 import  org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -19,7 +18,7 @@ public class TestPlayer {
     @Test
     public void testConstructor() {
         String ID = "Buonasera";
-        Player player = new Player(ID, PlayerColour.BLUE);
+        Player player = new Player(ID);
         assertEquals("Buonasera", player.getPlayerName());
     }
 
@@ -47,8 +46,7 @@ public class TestPlayer {
         player.setPrivatePoints(privatePoints);
         player.setPlayerID(2);
         player.setPlayerName("Dario");
-        player.setPlayerColor(PlayerColour.RED);
-        //player.setOff(true);
+        player.setDisconnect(true);
         player.setPatterChooseList(patternCards);
 
 
@@ -59,10 +57,9 @@ public class TestPlayer {
         assertEquals(privatePoints, player.getPrivatePoints());
         assertEquals(2, player.getPlayerID());
         assertEquals("Dario", player.getPlayerName());
-        assertEquals("RED", player.getColour().toString());
         assertEquals("Player Tokens6",player.toStringTokens());
         assertEquals(patternCards, player.getPatterChooseList());
-        //assertEquals(false, player.isOff());
+        assertEquals(true, player.isDisconnect());
     }
 
     @Test
@@ -100,7 +97,7 @@ public class TestPlayer {
         //PlayerColour playerColour = PlayerColour.BLUE;
         int ID = 1;
 
-        Player player1 = new Player(string, PlayerColour.BLUE);
+        Player player1 = new Player(string);
         player1.setPlayerID(ID);
         player1.setPrivate(new PrivateObjectiveCard(DiceColor.RED));
         player1.setTokensNumber(6);
@@ -118,4 +115,3 @@ public class TestPlayer {
     }
 }
 
-*/
