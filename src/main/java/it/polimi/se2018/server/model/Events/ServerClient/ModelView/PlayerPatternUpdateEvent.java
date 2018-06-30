@@ -5,18 +5,18 @@ import it.polimi.se2018.server.model.Events.Event;
 
 public class PlayerPatternUpdateEvent implements Event {
 
-    private final static long serialVersionUID = 483589L;
+    private static final long serialVersionUID = 483589L;
 
-    private int ID;
+    private int iD;
     private PatternCard card;
 
-    public PlayerPatternUpdateEvent(int ID, PatternCard card) {
-        this.ID = ID;
+    public PlayerPatternUpdateEvent(int iD, PatternCard card) {
+        this.iD = iD;
         this.card = card;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public PatternCard getCard() {

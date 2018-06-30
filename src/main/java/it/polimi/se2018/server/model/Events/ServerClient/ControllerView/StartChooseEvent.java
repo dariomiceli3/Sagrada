@@ -5,13 +5,13 @@ import it.polimi.se2018.server.model.Events.Event;
 public class StartChooseEvent implements Event {
 
     private static final long serialVersionUID = 388893L;
-    private int ID;
+    private int iD;
 
-    public StartChooseEvent(int ID) {
-        this.ID = ID;
+    public StartChooseEvent(int iD) {
+        this.iD = iD;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 }

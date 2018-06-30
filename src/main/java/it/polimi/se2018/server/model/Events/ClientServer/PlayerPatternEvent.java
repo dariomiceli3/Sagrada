@@ -6,16 +6,16 @@ import it.polimi.se2018.server.model.Events.Event;
 public class PlayerPatternEvent implements Event {
 
     private static final long serialVersionUID = 743857834L;
-    private int ID;
+    private int iD;
     private int indexPatternChoose;
 
-    public PlayerPatternEvent(int ID, int indexPatternChoose) {
-        this.ID = ID;
+    public PlayerPatternEvent(int iD, int indexPatternChoose) {
+        this.iD = iD;
         this.indexPatternChoose = indexPatternChoose;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public int getIndexPatternChoose() {

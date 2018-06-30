@@ -52,7 +52,7 @@ public class TestModel {
     public void testGetter(){
         Model model = new Model();
 
-        model.getPlayer();
+       // model.getPlayer();
         model.getDraftPool();
         model.getRoundTracker();
         model.getPlayerList();

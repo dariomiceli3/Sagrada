@@ -7,11 +7,11 @@ public class PlayerPrivateUpdateEvent implements Event {
     private static final long serialVersionUID = 534534L;
 
     private final PrivateObjectiveCard privateCard;
-    private final int ID;
+    private final int iD;
 
-    public PlayerPrivateUpdateEvent(int ID, PrivateObjectiveCard privateCard) {
+    public PlayerPrivateUpdateEvent(int iD, PrivateObjectiveCard privateCard) {
         this.privateCard = privateCard;
-        this.ID = ID;
+        this.iD = iD;
     }
 
     public PrivateObjectiveCard getCard(){
@@ -19,6 +19,6 @@ public class PlayerPrivateUpdateEvent implements Event {
     }
 
     public int getID(){
-        return ID;
+        return iD;
     }
 }

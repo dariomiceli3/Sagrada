@@ -82,12 +82,7 @@ public class GlassBox implements Serializable {
 
     public boolean isBoxEmpty()
     {
-        if (this.dice == null)
-        {
-            return true;
-        }
-        else
-            return false;
+        return this.dice == null;
     }
 
     public boolean isBoxValid(Dice dice)
@@ -106,20 +101,8 @@ public class GlassBox implements Serializable {
             }
             // no color si value case
             else {
-                if (this.constraintValue != DEFAULT) {
-                    if (this.constraintValue == dice.getValue()) {
-                        setDice(dice);
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                // value = 0 e color = null case
-                else {
-                    setDice(dice);
-                    return true;
-                }
+
+                return valueCase(dice);
             }
         }
         // box full case
@@ -137,22 +120,8 @@ public class GlassBox implements Serializable {
             }
             // no color si value case
             else {
-                if (this.constraintValue != DEFAULT) {
-                    if (this.constraintValue == dice.getValue()) {
-                        setDice(dice);
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                // value = 0 e color = null case
-                else {
-                    setDice(dice);
-                    int i;
-                    return true;
 
-                }
+               return valueCase(dice);
             }
         }
         // box full case
@@ -175,28 +144,31 @@ public class GlassBox implements Serializable {
             }
             // no color si value case
             else {
-                if (this.constraintValue != DEFAULT) {
-                    if (this.constraintValue == dice.getValue()) {
-                        setDice(dice);
-                        return true;
-                    }
-                    else {
-                        setDice(dice);
-                        return true;
-                    }
-                }
-                // value = 0 e color = null case
-                else {
                     setDice(dice);
                     return true;
-                }
             }
         }
         // box full case
         else return false;
     }
 
+    private boolean valueCase(Dice dice) {
 
+        if (this.constraintValue != DEFAULT) {
+            if (this.constraintValue == dice.getValue()) {
+                setDice(dice);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        // value = 0 e color = null case
+        else {
+            setDice(dice);
+            return true;
+        }
+
+    }
 
     @Override
     public String toString() {

@@ -21,6 +21,7 @@ public class VarietyColor implements PublicEffects, Serializable {
      * @param pattern scheme card of a player
      * @return number of sets of one of each value
      */
+
     @Override
     public int runPublic(PatternCard pattern){
         int points;
@@ -35,10 +36,9 @@ public class VarietyColor implements PublicEffects, Serializable {
 
         GlassBox box;
 
-        Iterator<GlassBox> it = pattern.getPattern().iterator();
-        while (it.hasNext()) {
-            box = it.next();
-            if(!box.isBoxEmpty()) {
+        for (GlassBox glassBox : pattern.getPattern()) {
+            box = glassBox;
+            if (!box.isBoxEmpty()) {
                 if (box.getDice().getColor() == DiceColor.YELLOW) {
                     setOfY++;
                 }

@@ -15,10 +15,10 @@ public class RoundManager  {
     private List<Integer> calculatePrivate(List<Player> playerArrayList) {
         List<Integer> results = new ArrayList<>();
 
-        for (int i = 0; i < playerArrayList.size(); i++) {
+        for (Player aPlayerArrayList : playerArrayList) {
             int result;
-            result = playerArrayList.get(i).getPrivate().runPrivate(playerArrayList.get(i).getPattern());
-            playerArrayList.get(i).setPrivatePoints(result);
+            result = aPlayerArrayList.getPrivate().runPrivate(aPlayerArrayList.getPattern());
+            aPlayerArrayList.setPrivatePoints(result);
             results.add(result);
         }
         return results;
@@ -28,9 +28,9 @@ public class RoundManager  {
     private List<Integer> calculateTokens(List<Player> playerArrayList) {
         List<Integer> results = new ArrayList<>();
 
-        for (int i = 0; i < playerArrayList.size(); i++) {
+        for (Player aPlayerArrayList : playerArrayList) {
             int result;
-            result = playerArrayList.get(i).getTokensNumber();
+            result = aPlayerArrayList.getTokensNumber();
             results.add(result);
         }
         return results;
@@ -41,12 +41,12 @@ public class RoundManager  {
         PatternCard result;
         List<Integer> results = new ArrayList<>();
 
-        for (int i = 0; i < playerArrayList.size(); i++) {
-            result = playerArrayList.get(i).getPattern();
-            int boxEmptyCounter=0;
+        for (Player aPlayerArrayList : playerArrayList) {
+            result = aPlayerArrayList.getPattern();
+            int boxEmptyCounter = 0;
 
             for (int j = 0; j < result.getPattern().size(); j++) {
-                if(result.getPattern().get(j).isBoxEmpty()) {
+                if (result.getPattern().get(j).isBoxEmpty()) {
                     boxEmptyCounter++;
                 }
 
@@ -61,17 +61,17 @@ public class RoundManager  {
     private List<Integer> calculatePublic(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
         List<Integer> results = new ArrayList<>();
 
-        for (int i = 0; i < playerArrayList.size(); i++) {
+        for (Player aPlayerArrayList : playerArrayList) {
             PatternCard result;
-            int personalResult=0;
-            result = playerArrayList.get(i).getPattern();
-            for (int j = 0; j < publicObjectiveCardArrayList.size(); j++) {
-                personalResult = personalResult + publicObjectiveCardArrayList.get(j).executeEffect(result);
+            int personalResult = 0;
+            result = aPlayerArrayList.getPattern();
+            for (PublicObjectiveCard aPublicObjectiveCardArrayList : publicObjectiveCardArrayList) {
+                personalResult = personalResult + aPublicObjectiveCardArrayList.executeEffect(result);
 
             }
             results.add(personalResult);
 
-            }
+        }
         return results;
 
     }
@@ -136,7 +136,7 @@ public class RoundManager  {
      return playerArrayList;
  }
 
- protected List<Player> calculateWinner (List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+ List<Player> calculateWinner(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
         List<Player> unsortedPlayers;
         List<Player> sortedPlayers;
 
@@ -144,7 +144,7 @@ public class RoundManager  {
         unsortedPlayers = calculatePoints( playerArrayList, publicObjectiveCardArrayList );
 
 
-        Collections.sort(unsortedPlayers, new PointsComparator());
+        unsortedPlayers.sort(new PointsComparator());
         sortedPlayers = checkPoints(unsortedPlayers);
 
 
@@ -154,12 +154,12 @@ public class RoundManager  {
 
 
 
-    public int calculatePrivateSinglePlayer(Player player, List<PrivateObjectiveCard> privateObjectiveCards) {
+    private int calculatePrivateSinglePlayer(Player player, List<PrivateObjectiveCard> privateObjectiveCards) {
         int results=0;
 
-        for (int i = 0; i <privateObjectiveCards.size(); i++) {
+        for (PrivateObjectiveCard privateObjectiveCard : privateObjectiveCards) {
             int result;
-            result = privateObjectiveCards.get(i).runPrivate(player.getPattern());
+            result = privateObjectiveCard.runPrivate(player.getPattern());
             results = results + result;
 
         }
@@ -168,20 +168,20 @@ public class RoundManager  {
 
     }
 
-    public int calculatePublicSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+    private int calculatePublicSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
         int results=0;
 
-            for (int j = 0; j < publicObjectiveCardArrayList.size(); j++) {
-                int result;
-                result = publicObjectiveCardArrayList.get(j).executeEffect(player.getPattern());
-                results = results + result;
-            }
+        for (PublicObjectiveCard aPublicObjectiveCardArrayList : publicObjectiveCardArrayList) {
+            int result;
+            result = aPublicObjectiveCardArrayList.executeEffect(player.getPattern());
+            results = results + result;
+        }
 
         return results;
 
     }
 
-    public int calculateEmptyBoxSinglePLayer(Player player) {
+    private int calculateEmptyBoxSinglePLayer(Player player) {
         int boxEmptyCounter=0;
         for (int i=0; i < player.getPattern().getPattern().size(); i++) {
 
@@ -194,7 +194,7 @@ public class RoundManager  {
         return boxEmptyCounter;
     }
 
-    public  int calculatePointsRoundTrackerSinglePlayer(RoundTracker roundTracker) {
+    private int calculatePointsRoundTrackerSinglePlayer(RoundTracker roundTracker) {
         int sum;
         int finalSum=0;
 
@@ -207,7 +207,7 @@ public class RoundManager  {
         return finalSum;
     }
 
-    public int calculateWinnerSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList, List<PrivateObjectiveCard> privateObjectiveCardArrayList, RoundTracker roundTracker ){
+    int calculateWinnerSinglePlayer(Player player, List<PublicObjectiveCard> publicObjectiveCardArrayList, List<PrivateObjectiveCard> privateObjectiveCardArrayList, RoundTracker roundTracker){
         int i = calculateEmptyBoxSinglePLayer(player);
         int j = calculatePrivateSinglePlayer(player, privateObjectiveCardArrayList);
         int k = calculatePublicSinglePlayer(player, publicObjectiveCardArrayList);

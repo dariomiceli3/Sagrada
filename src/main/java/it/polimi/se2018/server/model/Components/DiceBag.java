@@ -14,13 +14,13 @@ import java.util.ArrayList;
  * @author Salvatrore Fadda
  */
 public class DiceBag implements Serializable {
+
     //private static DiceBag istanceDB;
     private static final int TOP = 0;
     private static final int MAX_VALUE = 6;
     private static final int NUMBER = 90;
     private static final int DIV = 5;
     private List<Dice> listDice;
-//TODO gestione eccezioni da dichiarare e controlli da fare
 
 
     /*public static DiceBag getIstanceDB(){

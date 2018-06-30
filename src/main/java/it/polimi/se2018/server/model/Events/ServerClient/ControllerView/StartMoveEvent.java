@@ -5,16 +5,16 @@ import it.polimi.se2018.server.model.Events.Event;
 public class StartMoveEvent implements Event {
 
     private static final long serialVersionUID = 34893L;
-    private int ID;
+    private int iD;
     private int poolSize;
 
-    public StartMoveEvent(int ID, int poolSize) {
-        this.ID = ID;
+    public StartMoveEvent(int iD, int poolSize) {
+        this.iD = iD;
         this.poolSize = poolSize;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public int getPoolSize() {

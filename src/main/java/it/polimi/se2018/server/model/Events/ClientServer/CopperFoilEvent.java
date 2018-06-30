@@ -4,7 +4,7 @@ import it.polimi.se2018.server.model.Events.Event;
 
 public class CopperFoilEvent implements Event {
 
-    private static final long sreialVersionUID = 43934L;
+    private static final long serialVersionUID = 43934L;
     private int indexStart;
     private int indexEnd;
 

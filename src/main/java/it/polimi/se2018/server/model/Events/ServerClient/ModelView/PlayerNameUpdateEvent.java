@@ -7,11 +7,11 @@ public class PlayerNameUpdateEvent implements Event {
     private static final long serialVersionUID = 58458L;
 
     private final String name;
-    private int ID;
+    private int iD;
 
-    public PlayerNameUpdateEvent(String name, int ID) {
+    public PlayerNameUpdateEvent(String name, int iD) {
         this.name = name;
-        this.ID = ID;
+        this.iD = iD;
     }
 
     public String getName(){
@@ -19,6 +19,6 @@ public class PlayerNameUpdateEvent implements Event {
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 }

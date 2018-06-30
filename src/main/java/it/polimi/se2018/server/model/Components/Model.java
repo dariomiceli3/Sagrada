@@ -5,8 +5,6 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
 import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePrivateEvent;
 
@@ -25,7 +23,6 @@ public class Model extends Observable {
     private RoundTracker roundTracker;
     private DraftPool draftPool;
     private DiceBag diceBag;
-    private Player player;
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
@@ -59,15 +56,11 @@ public class Model extends Observable {
         return draftPool;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public List<PublicObjectiveCard> getPublicList() {
         return publicList;
     }
 
-    public void setPublicList(List<PublicObjectiveCard> publicList){
+    private void setPublicList(List<PublicObjectiveCard> publicList){
         this.publicList = publicList;
     }
 
@@ -79,7 +72,6 @@ public class Model extends Observable {
         this.playerList = playerList;
     }
 
-    // todo gestione da file del timer
     public int getTimeToPlay() {
         return timeToPlay;
     }
@@ -89,11 +81,11 @@ public class Model extends Observable {
     }
 
 
-    public Player getPlayerFromID(int ID) {
+    public Player getPlayerFromID(int iD) {
 
         for (Player player1 : playerList)
         {
-            if (player1.getPlayerID() == ID) {
+            if (player1.getPlayerID() == iD) {
                 return player1;
             }
         }
@@ -101,21 +93,21 @@ public class Model extends Observable {
     }
 
 
-    public void setPlayerAndNotify(int ID, String name) {
+    public void setPlayerAndNotify(int iD, String name) {
 
         numberPlayer++;
-        getPlayerFromID(ID).setPlayerName(name);
-        System.out.println(getPlayerFromID(ID).getPlayerName());
+        getPlayerFromID(iD).setPlayerName(name);
+        System.out.println(getPlayerFromID(iD).getPlayerName());
         setChanged();
-        notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(ID).getPlayerName(), ID));
+        notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(iD).getPlayerName(), iD));
 
     }
 
-    public void setPrivateAndNotify(int ID, PrivateObjectiveCard privateCard){
+    public void setPrivateAndNotify(int iD, PrivateObjectiveCard privateCard){
 
-        getPlayerFromID(ID).setPrivate(privateCard);
+        getPlayerFromID(iD).setPrivate(privateCard);
         setChanged();
-        notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(ID).getPlayerID(), privateCard));
+        notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(iD).getPlayerID(), privateCard));
     }
 
 
@@ -133,20 +125,20 @@ public class Model extends Observable {
         notifyObservers(new PlayerPatternUpdateEvent(iD, getPlayerFromID(iD).getPattern()));
     }
 
-    public void setCustomPatternAndNotify(int ID, PatternCard patternCard) {
+    public void setCustomPatternAndNotify(int iD, PatternCard patternCard) {
         numberPlayer++;
-        getPlayerFromID(ID).setPattern(patternCard);
-        getPlayerFromID(ID).getPattern().setCustom(true);
+        getPlayerFromID(iD).setPattern(patternCard);
+        getPlayerFromID(iD).getPattern().setCustom(true);
         setChanged();
-        notifyObservers(new PlayerPatternUpdateEvent(ID, getPlayerFromID(ID).getPattern()));
+        notifyObservers(new PlayerPatternUpdateEvent(iD, getPlayerFromID(iD).getPattern()));
     }
 
-    public void setTokenAndNotify(int ID) {
+    public void setTokenAndNotify(int iD) {
 
-        Player player1 = getPlayerFromID(ID);
+        Player player1 = getPlayerFromID(iD);
         player1.setTokensNumber(player1.getPattern().getDifficulty());
         setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(ID, getPlayerFromID(ID).getTokensNumber()));
+        notifyObservers(new PlayerTokensUpdateEvent(iD, getPlayerFromID(iD).getTokensNumber()));
     }
 
     public void setDraftPoolAndNotify(boolean singlePlayer){
@@ -161,16 +153,16 @@ public class Model extends Observable {
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
     }
 
-    public void setMoveAndNotify(int ID, int indexPool, int indexPattern) throws InvalidMoveException {
+    public void setMoveAndNotify(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         dice = draftPool.removeDice(indexPool);
-        getPlayerFromID(ID).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(ID).getPattern());
+        getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(iD).getPattern());
         setChanged();
-        notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getPattern(), getPlayerFromID(iD).getPlayerName()));
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
         setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getTokensNumber()));
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
 
     }
 
@@ -202,9 +194,9 @@ public class Model extends Observable {
         notifyObservers(new UpdateBoardEvent(this.getRoundTracker(), this.getDraftPool()));
     }
 
-    public void updatePatternAndNotify(int ID){
+    public void updatePatternAndNotify(int iD){
         setChanged();
-        notifyObservers(new PatternUpdateEvent(getPlayerFromID(ID).getPlayerID(), getPlayerFromID(ID).getPattern(), getPlayerFromID(ID).getPlayerName()));
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getPattern(), getPlayerFromID(iD).getPlayerName()));
     }
 
     public void updateTokenAndNotify(int iD){

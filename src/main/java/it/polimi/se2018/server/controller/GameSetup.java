@@ -25,7 +25,7 @@ public class GameSetup {
     private List<PatternCard> listPattern;
     private boolean[] control;
 
-    protected GameSetup(Game game) {
+    GameSetup(Game game) {
         this.game = game;
         this.listPrivateCard = this.loadPrivate();
         this.listPublicCard = this.loadPublic();
@@ -63,7 +63,7 @@ public class GameSetup {
         return list;
     }
 
-    protected void setPrivateCardModel(VirtualView view) {
+    void setPrivateCardModel(VirtualView view) {
 
         if (game.isSinglePlayer()){
             List<PrivateObjectiveCard> listPrivate = new ArrayList<>();
@@ -77,7 +77,7 @@ public class GameSetup {
 
     }
 
-    protected void setPublicCardModel() {
+    void setPublicCardModel() {
 
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
         listPublic1.add(listPublicCard.remove(0));
@@ -102,7 +102,7 @@ public class GameSetup {
         return listPattern;
     }
 
-    protected void startPatternCard(VirtualView view) {
+    void startPatternCard(VirtualView view) {
 
         List<PatternCard> patternList = new ArrayList<>();
         Random random = new Random();
@@ -128,17 +128,8 @@ public class GameSetup {
         } else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
-    /*protected int calculatePlayerTurn(int turn, int numberOfPlayers){
-        if(turn > (numberOfPlayers-1) && turn < ((numberOfPlayers*2)-1)){
-            return (turn - ((2*(turn-numberOfPlayers-1))-1));
-        }else if(turn == ((numberOfPlayers*2)-1)){
-            return 0;
-        }else {
-            return turn;
-        }
-    }*/
 
-    protected void changeBagger() {
+    void changeBagger() {
 
         game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
     }
@@ -154,7 +145,7 @@ public class GameSetup {
         list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
         list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
         if(!game.isSinglePlayer()) {
-            list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));//todo
+            list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));
         }
         list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
         list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
@@ -167,7 +158,7 @@ public class GameSetup {
 
     }
 
-    protected List<ToolCard> setToolCard() {
+    List<ToolCard> setToolCard() {
 
         List<ToolCard> toolCardList = this.loadToolCard();
         List<ToolCard> toolCardList1 = new ArrayList<>();

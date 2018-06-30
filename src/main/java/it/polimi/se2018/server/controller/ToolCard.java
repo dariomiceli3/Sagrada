@@ -1,11 +1,8 @@
 package it.polimi.se2018.server.controller;
 
-import it.polimi.se2018.server.VirtualView;
 import it.polimi.se2018.server.model.Components.DiceColor;
 
 import java.io.Serializable;
-import java.util.Observable;
-import java.util.Observer;
 
 public class ToolCard implements Serializable {
     private String name;
@@ -36,7 +33,7 @@ public class ToolCard implements Serializable {
         return number;
     }
 
-    protected void setCost(int cost) {
+    void setCost(int cost) {
         this.cost = cost;
     }
 
@@ -44,15 +41,15 @@ public class ToolCard implements Serializable {
         return cost;
     }
 
-    public int getUsage() {
+    int getUsage() {
         return usage;
     }
 
-    public void incrementUsage(){
+    void incrementUsage(){
         this.usage = usage + 1;
     }
 
-    public void setUsage(int usage) {
+    void setUsage(int usage) {
         this.usage = usage;
     }
 

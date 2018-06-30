@@ -4,7 +4,7 @@ public class InvalidMoveEvent implements Event {
 
     private static final long serialVersionUID = 329239320L;
     private String errorMsg;
-    int id;
+    private int id;
 
     public InvalidMoveEvent(String errorMsg,int id) {
         this.errorMsg = errorMsg;

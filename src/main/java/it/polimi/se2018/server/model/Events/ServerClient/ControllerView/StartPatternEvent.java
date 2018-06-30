@@ -10,17 +10,17 @@ public class StartPatternEvent implements Event {
 
     private static final long serialVersionUID = 58798L;
 
-    private final int ID;
+    private final int iD;
     private List<PatternCard> patternList;
 
     public StartPatternEvent(int id, List<PatternCard> patternList) {
 
-        this.ID = id;
+        this.iD = id;
         this.patternList = patternList;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public List<PatternCard> getPatternListEvent() {

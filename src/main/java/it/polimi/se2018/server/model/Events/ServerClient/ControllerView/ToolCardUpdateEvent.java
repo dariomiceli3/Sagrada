@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ToolCardUpdateEvent implements Event {
 
-    private final static long serialVersionUID = 489337L;
+    private static final long serialVersionUID = 489337L;
     private List<ToolCard> toolCardList;
 
     public ToolCardUpdateEvent(List<ToolCard> toolCardList) {

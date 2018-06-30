@@ -9,7 +9,7 @@ public class GameStartedEvent implements Event {
     private final boolean isStarted;
 
     public GameStartedEvent(boolean isStarted) {
-        this.isStarted = true;
+        this.isStarted = isStarted;
     }
 
     public boolean isStarted() {

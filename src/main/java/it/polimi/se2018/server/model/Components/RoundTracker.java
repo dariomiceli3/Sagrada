@@ -1,7 +1,5 @@
 package it.polimi.se2018.server.model.Components;
 
-import it.polimi.se2018.exceptions.InvalidMoveException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

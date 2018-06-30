@@ -4,18 +4,18 @@ import it.polimi.se2018.server.model.Events.Event;
 
 public class PlayerTokensUpdateEvent implements Event {
 
-    private final static long serialVersionUID = 53857L;
-    private int ID;
+    private static final long serialVersionUID = 53857L;
+    private int iD;
     private int tokensNumber;
 
-    public PlayerTokensUpdateEvent(int ID, int tokensNumber) {
-        this.ID = ID;
+    public PlayerTokensUpdateEvent(int iD, int tokensNumber) {
+        this.iD = iD;
         this.tokensNumber = tokensNumber;
 
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public int getTokensNumber() {

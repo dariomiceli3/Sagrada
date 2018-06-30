@@ -1,11 +1,8 @@
 package it.polimi.se2018.server.model.Components;
 
-import java.io.Serializable;
+import org.fusesource.jansi.Ansi.Color;
 
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.Ansi.*;
-import org.fusesource.jansi.Ansi.Color.*;
-import org.fusesource.jansi.AnsiConsole;
+import java.io.Serializable;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -77,7 +74,7 @@ public class Dice implements Serializable {
     @Override
     public String toString() {
 
-        if (this.getColor().toString() == "red") {
+        if (this.getColor().toString().equals("red")) {
 
             if (this.getValue() == 1) {
                 return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2680").reset());
@@ -99,7 +96,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "yellow") {
+        else if (this.getColor().toString().equals("yellow")) {
 
             if (this.getValue() == 1) {
                 return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2680").reset());
@@ -121,7 +118,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "blue") {
+        else if (this.getColor().toString().equals("blue")) {
 
             if (this.getValue() == 1) {
                 return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2680").reset());
@@ -143,7 +140,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else if (this.getColor().toString() == "green") {
+        else if (this.getColor().toString().equals("green")) {
 
             if (this.getValue() == 1) {
                 return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2680").reset());

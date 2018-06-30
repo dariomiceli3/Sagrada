@@ -1,28 +1,23 @@
 package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.VirtualView;
-import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Components.DiceBag;
-import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.ToolCardUpdateEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//todo unire metodi di toolcard(somigliano 10-11-6-7   12-4-3)
-public class ToolCardEffect {
+
+class ToolCardEffect {
 
     private Game game;
 
-    protected ToolCardEffect(Game game){
+    ToolCardEffect(Game game){
         this.game = game;
     }
 
     //toolcard 1
-    protected void grozingPliersEffect(int iD, int indexPool, int increase) throws InvalidMoveException {
+    void grozingPliersEffect(int iD, int indexPool, int increase) throws InvalidMoveException {
 
         Dice dice = game.getModel().getDraftPool().getDraftPool().get(indexPool);
         // case decrease
@@ -48,7 +43,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 2
-    protected void eglomiseBrushEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
+    void eglomiseBrushEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
 
         Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
         game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternEglomise(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
@@ -61,7 +56,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 3
-    protected void copperFoilBurnisherEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
+    void copperFoilBurnisherEffect(int iD, int indexStart, int indexEnd) throws InvalidMoveException {
 
         Dice dice = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart);
         game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPatternCopper(dice, indexEnd, game.getModel().getPlayerFromID(iD).getPattern());
@@ -74,7 +69,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 4
-    protected void lathekinEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
+    void lathekinEffect(int iD, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
 
         Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
         try {
@@ -102,7 +97,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 5
-    protected void lensCutterEffect(int iD, int indexPool, int indexRound, int indexPosition) {
+    void lensCutterEffect(int iD, int indexPool, int indexRound, int indexPosition) {
 
         Dice dice1 = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
         Dice dice2 = game.getModel().getRoundTracker().getDice(indexRound, indexPosition);
@@ -119,7 +114,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 6
-    protected void fluxBrushEffect(int iD, int indexPool) {
+    void fluxBrushEffect(int iD, int indexPool) {
 
 
         Random random = new Random();
@@ -134,7 +129,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 7
-    protected void glazingHammerEffect(int iD) throws InvalidMoveException{
+    void glazingHammerEffect(int iD) throws InvalidMoveException{
 
         if (game.getTurn() > (game.getViewGame().size() - 1)) {
             List<Dice> newDicePlay;
@@ -160,7 +155,7 @@ public class ToolCardEffect {
     }
 
    //toolcard 8
-    protected void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
+   void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         if(game.getStep() == 0 && game.getTurn() < game.getViewGame().size()){
             Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
@@ -178,7 +173,7 @@ public class ToolCardEffect {
 
 
     //toolcard 9
-    protected void corkBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
+    void corkBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
         if(game.getStep() == 1) {
             Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
@@ -196,7 +191,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 10
-    protected void grindingStoneEffect(int iD, int indexPool) {
+    void grindingStoneEffect(int iD, int indexPool) {
 
         int value = game.getModel().getDraftPool().getDraftPool().get(indexPool).getValue();
         game.getModel().getDraftPool().getDraftPool().get(indexPool).setValue(7 - value);
@@ -210,7 +205,7 @@ public class ToolCardEffect {
     }
 
     //toolcard 11
-    protected void fluxRemoverEffect(int iD, int indexPool, int value, Dice dice){
+    void fluxRemoverEffect(int iD, int indexPool, int value, Dice dice){
 
 
         dice.setValue(value);
@@ -230,7 +225,7 @@ public class ToolCardEffect {
 
 
     //toolcard 12
-    protected void tapWheelEffect(int iD,int numberOfDice, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
+    void tapWheelEffect(int iD, int numberOfDice, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
 
         int c = 0;
         for(int i = 0; i < game.getModel().getRoundTracker().getRoundTracker().size(); i++) {

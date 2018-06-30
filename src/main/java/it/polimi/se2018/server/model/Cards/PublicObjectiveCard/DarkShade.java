@@ -22,16 +22,15 @@ public class DarkShade implements PublicEffects, Serializable {
         int setOf6 = 0;
         GlassBox box;
 
-        Iterator<GlassBox> it = pattern.getPattern().iterator();
-        while (it.hasNext()) {
-            box = it.next();
-            if(!box.isBoxEmpty()){
-            if (box.getDice().getValue() == 5 ) {
-                setOf5++;
-            }
-            if (box.getDice().getValue() == 6){
-                setOf6++;
-            }
+        for (GlassBox glassBox : pattern.getPattern()) {
+            box = glassBox;
+            if (!box.isBoxEmpty()) {
+                if (box.getDice().getValue() == 5) {
+                    setOf5++;
+                }
+                if (box.getDice().getValue() == 6) {
+                    setOf6++;
+                }
             }
         }
         points = min(setOf5, setOf6);

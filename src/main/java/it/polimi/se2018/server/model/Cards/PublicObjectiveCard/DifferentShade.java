@@ -36,28 +36,27 @@ public class DifferentShade implements PublicEffects, Serializable {
 
         GlassBox box;
 
-        Iterator<GlassBox> it = pattern.getPattern().iterator();
-        while (it.hasNext()) {
-            box = it.next();
-            if (!box.isBoxEmpty()){
-            if (box.getDice().getValue() == 1 ) {
-                setOf1++;
-            }
-            if (box.getDice().getValue() == 2){
-                setOf2++;
-            }
-            if (box.getDice().getValue() == 3 ) {
-                setOf3++;
-            }
-            if (box.getDice().getValue() == 4){
-                setOf4++;
-            }
-            if (box.getDice().getValue() == 5 ) {
-                setOf5++;
-            }
-            if (box.getDice().getValue() == 6){
-                setOf6++;
-            }
+        for (GlassBox glassBox : pattern.getPattern()) {
+            box = glassBox;
+            if (!box.isBoxEmpty()) {
+                if (box.getDice().getValue() == 1) {
+                    setOf1++;
+                }
+                if (box.getDice().getValue() == 2) {
+                    setOf2++;
+                }
+                if (box.getDice().getValue() == 3) {
+                    setOf3++;
+                }
+                if (box.getDice().getValue() == 4) {
+                    setOf4++;
+                }
+                if (box.getDice().getValue() == 5) {
+                    setOf5++;
+                }
+                if (box.getDice().getValue() == 6) {
+                    setOf6++;
+                }
             }
         }
 

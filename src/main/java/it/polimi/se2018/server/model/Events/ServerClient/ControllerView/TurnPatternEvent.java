@@ -7,11 +7,11 @@ public class TurnPatternEvent implements Event {
 
     private static final long serialVersionUID = 93295894312L;
 
-    private int ID;
+    private int iD;
     private PatternCard patternCard;
 
-    public TurnPatternEvent(int ID, PatternCard patternCard){
-        this.ID = ID;
+    public TurnPatternEvent(int iD, PatternCard patternCard){
+        this.iD = iD;
         this.patternCard = patternCard;
     }
 
@@ -20,6 +20,6 @@ public class TurnPatternEvent implements Event {
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 }

@@ -36,13 +36,12 @@ public class PrivateObjectiveCard implements Serializable {
     public int runPrivate(PatternCard pattern) {
         int count = DEF;
         GlassBox box;
-        Iterator<GlassBox> it = pattern.getPattern().iterator();
-        while (it.hasNext()) {
-            box = it.next();
-            if(!box.isBoxEmpty())
-            if (box.getDice().getColor() == colour) {
-                count = count + box.getDice().getValue();
-            }
+        for (GlassBox glassBox : pattern.getPattern()) {
+            box = glassBox;
+            if (!box.isBoxEmpty())
+                if (box.getDice().getColor() == colour) {
+                    count = count + box.getDice().getValue();
+                }
 
         }
         return count;

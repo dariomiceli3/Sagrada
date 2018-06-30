@@ -5,14 +5,14 @@ import it.polimi.se2018.server.model.Events.Event;
 public class WinnerEvent implements Event {
 
     private static final long serialVersionUID = 4839483L;
-    private int ID;
+    private int iD;
 
-    public WinnerEvent(int ID) {
-        this.ID = ID;
+    public WinnerEvent(int iD) {
+        this.iD = iD;
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
 }

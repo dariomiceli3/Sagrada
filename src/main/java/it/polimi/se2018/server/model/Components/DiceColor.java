@@ -4,7 +4,7 @@ package it.polimi.se2018.server.model.Components;
 
 
 public enum DiceColor{
-    RED, YELLOW, PURPLE, GREEN, BLUE, test;
+    RED, YELLOW, PURPLE, GREEN, BLUE, TEST;
 
     @Override
     public String toString() {
