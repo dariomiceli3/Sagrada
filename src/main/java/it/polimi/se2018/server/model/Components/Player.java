@@ -31,17 +31,6 @@ public class Player implements Serializable {
         this.playerName = null;
     }
 
-    public Player(Player player) {
-        this.playerName = player.playerName;
-        this.pattern = player.pattern;
-        this.privateCard = player.privateCard;
-        this.tokensNumber = player.tokensNumber;
-        this.finalPoints = player.finalPoints;
-        this.privatePoints = player.privatePoints;
-        this.playerID = player.playerID;
-    }
-
-
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -64,7 +53,7 @@ public class Player implements Serializable {
         return disconnect;
     }
 
-    public List<PatternCard> getPatterChooseList() {
+    List<PatternCard> getPatterChooseList() {
         return patterChooseList;
     }
 

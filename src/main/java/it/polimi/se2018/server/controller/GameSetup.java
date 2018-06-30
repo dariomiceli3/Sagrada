@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
 
 
@@ -131,7 +132,11 @@ public class GameSetup {
 
     void changeBagger() {
 
-        game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
+        do{
+
+            game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
+
+        }while (game.getModel().getPlayerList().get(0).isDisconnect());
     }
 
     private List<ToolCard> loadToolCard() {
