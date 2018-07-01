@@ -1158,8 +1158,21 @@ public class GuiController extends View {
 
     }
 
+    @Override
+    public void showNotPermittedReconnection() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                AlertBox.display("Error", "There's no available player to reconnect");
+            }
+        });
+    }
 
     //-------------switch scene method----------
+
+    private void reloadScene() throws IOException {
+
+    }
 
 
     private void patternScene() throws IOException{

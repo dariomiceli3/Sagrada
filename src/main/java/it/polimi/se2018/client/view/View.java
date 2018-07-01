@@ -208,4 +208,6 @@ public abstract class View implements Runnable {
     public abstract void showExitPlayer(String playerName);
 
     public abstract void showReconnectPlayer(String playerName);
+
+    public abstract void showNotPermittedReconnection();
 }

@@ -11,6 +11,7 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -387,6 +388,10 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     @Override
     public void remoteReconnectPlayer(String name) throws RemoteException {
         view.showReconnectPlayer(name);
+    }
+
+    public void remoteNotPermittedReconnection() throws RemoteException {
+        view.showNotPermittedReconnection();
     }
 }
 

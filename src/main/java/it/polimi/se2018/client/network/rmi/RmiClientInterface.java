@@ -121,4 +121,6 @@ public interface RmiClientInterface extends Remote {
     public void remoteExitPlayer(String name) throws RemoteException;
 
     public void remoteReconnectPlayer(String name) throws RemoteException;
+
+    public void remoteNotPermittedReconnection() throws RemoteException;
 }

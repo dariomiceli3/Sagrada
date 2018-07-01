@@ -10,6 +10,7 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Events.ClientServer.*;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.server.model.Events.SinglePlayer.*;
 
 import java.util.*;
@@ -164,6 +165,7 @@ public class Game implements Observer {
                 Player player = model.getPlayerFromID(view.getPlayerID());
                 if (player.isDisconnect() && player.getPattern() == null) {
                     setPatternCardModel(view, 0);
+
                 }
             }
         }
@@ -225,6 +227,7 @@ public class Game implements Observer {
 
         if (arg instanceof DisconnectionEvent) {
             handlingDisconnection( ((DisconnectionEvent)arg).getID(), virtualView);
+
         }
         if (arg instanceof ReconnectionEvent) {
             // arriva la riconnessione
@@ -242,6 +245,7 @@ public class Game implements Observer {
             setPlayerNameModel(virtualView, "default name");
             setPlayerDisconnection(id);
             sendExitNotification(id);
+
         }
         else if (model.getPlayerFromID(id).getPattern() == null) {
             setPatternCardModel(virtualView, 0);
@@ -252,32 +256,44 @@ public class Game implements Observer {
             setDraftPoolModel(virtualView);
             setPlayerDisconnection(id);
             sendExitNotification(id);
+
         }
         else {
             setPlayerDisconnection(id);
             sendExitNotification(id);
+
         }
+
     }
 
     private void handlingReconnection(VirtualView view) {
 
         System.out.println("tentata riconnessione");
+        VirtualView viewRemove = null;
         for(Player player : model.getPlayerList()) {
 
             if(player.isDisconnect()) {
+                for (VirtualView virtualView : viewGame) {
+                    if (virtualView.getPlayerID() == player.getPlayerID()) {
+                        viewRemove = virtualView;
+                    }
+                }
+                viewGame.remove(viewRemove);
                 view.setPlayerID(player.getPlayerID());
+                view.sendEvent(new PlayerIDEvent(player.getPlayerID()));
                 view.addObserver(this);
                 view.addObserver(toolController);
                 view.setModel(model);
                 this.model.addObserver(view);
+                viewGame.add(view);
                 break;
             }
         }
         if(view.getModel() != getModel()){
             view.sendEvent(new NotPlayerDisconnectedEvent());
         }else{
-           // view.sendEvent(new SuccessfullyReconnectionEvent(view.getPlayerID())); decidere se usare questa o la sendReconnectNotification(playerID);
             setPlayerReconnect(view.getPlayerID());
+            view.sendEvent(new SuccessfulReconnectionEvent());
         }
 
 

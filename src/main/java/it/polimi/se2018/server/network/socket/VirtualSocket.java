@@ -95,7 +95,9 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     }
                     if (getServer().checkNumberPlayer()) {
                         if (getServer().isGameStarted()) {
-                            // todo finire di gestire la riconnessione
+
+                            System.out.println("sono nel ramo della disconnessione");
+                            this.addObserver(getServer().getGame());
                             setChanged();
                             notifyObservers(new ReconnectionEvent());
                         }

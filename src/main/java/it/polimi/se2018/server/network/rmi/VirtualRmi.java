@@ -271,6 +271,9 @@ public class VirtualRmi extends VirtualView {
                 else if (event instanceof ReconnectionMsgEvent) {
                     clientRmi.remoteReconnectPlayer( ((ReconnectionMsgEvent)event).getName());
                 }
+                else if (event instanceof NotPlayerDisconnectedEvent) {
+                    clientRmi.remoteNotPermittedReconnection();
+                }
                 else {
                     System.out.println("Not understood the message");
                 }

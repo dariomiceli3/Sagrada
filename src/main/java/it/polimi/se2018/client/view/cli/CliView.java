@@ -1377,6 +1377,11 @@ public class CliView extends View implements Runnable {
     public void showReconnectPlayer(String playerName) {
         System.out.println("\n" + "The player " + playerName + " reconnected to the game");
     }
+
+    @Override
+    public void showNotPermittedReconnection() {
+        System.out.println("\n" + "There's no player available to reconnect");
+    }
 }
 
 

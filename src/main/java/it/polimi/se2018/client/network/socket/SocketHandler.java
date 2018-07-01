@@ -413,6 +413,13 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof ReconnectionMsgEvent) {
             view.showReconnectPlayer( ((ReconnectionMsgEvent)event).getName());
         }
+        else if (event instanceof NotPlayerDisconnectedEvent) {
+            view.showNotPermittedReconnection();
+        }
+        else if (event instanceof SuccessfulReconnectionEvent) {
+            // todo gestire anche per rmi
+            //view.showStartScene();
+        }
 
         else {
             System.out.println("Not understood the message");
