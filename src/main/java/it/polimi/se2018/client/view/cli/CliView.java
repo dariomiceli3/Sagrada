@@ -1382,6 +1382,11 @@ public class CliView extends View implements Runnable {
     public void showNotPermittedReconnection() {
         System.out.println("\n" + "There's no player available to reconnect");
     }
+
+    @Override
+    public void showReload() {
+        // todo sistemare
+    }
 }
 
 

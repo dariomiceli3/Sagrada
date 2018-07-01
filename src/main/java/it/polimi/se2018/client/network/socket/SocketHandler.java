@@ -418,7 +418,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         }
         else if (event instanceof SuccessfulReconnectionEvent) {
             // todo gestire anche per rmi
-            //view.showStartScene();
+            view.showReload();
         }
 
         else {

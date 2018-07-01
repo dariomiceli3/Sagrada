@@ -1168,9 +1168,33 @@ public class GuiController extends View {
         });
     }
 
+    @Override
+    public void showReload()  {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    reloadScene();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     //-------------switch scene method----------
 
     private void reloadScene() throws IOException {
+
+        BoardController.setMainController(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
+        Parent root3 = (Parent) loader.load();
+        Scene board = new Scene(root3);
+        stage.setTitle("Sagrada Main Board");
+        stage.setScene(board);
+        stage.setResizable(false);
+        stage.show();
+
 
     }
 
