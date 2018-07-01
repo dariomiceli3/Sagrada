@@ -220,9 +220,7 @@ public class Game implements Observer {
         }
 
         if (arg instanceof ReconnectPlayerEvent){
-            model.getPlayerFromID(((ReconnectPlayerEvent) arg).getPlayerID()).setDisconnect(false);
-            disconnectPlayerNumber--;
-            sendReconnectNotification( ((ReconnectPlayerEvent) arg).getPlayerID());
+            setPlayerReconnect(((ReconnectPlayerEvent) arg).getPlayerID());
         }
 
         if (arg instanceof DisconnectionEvent) {
@@ -261,8 +259,28 @@ public class Game implements Observer {
         }
     }
 
-    private void handlingReconnection(VirtualView virtualView) {
+    private void handlingReconnection(VirtualView view) {
+
         System.out.println("tentata riconnessione");
+        for(Player player : model.getPlayerList()) {
+
+            if(player.isDisconnect()) {
+                view.setPlayerID(player.getPlayerID());
+                view.addObserver(this);
+                view.addObserver(toolController);
+                view.setModel(model);
+                this.model.addObserver(view);
+                break;
+            }
+        }
+        if(view.getModel() != getModel()){
+            view.sendEvent(new NotPlayerDisconnectedEvent());
+        }else{
+           // view.sendEvent(new SuccessfullyReconnectionEvent(view.getPlayerID())); decidere se usare questa o la sendReconnectNotification(playerID);
+            setPlayerReconnect(view.getPlayerID());
+        }
+
+
     }
 
 
@@ -296,7 +314,7 @@ public class Game implements Observer {
         if (singlePlayer){
             setToolSinglePlayer();
         }else {
-            if (model.getNumberPlayer() == (viewGame.size())) {
+            if (model.getNumberPlayer() == (model.getPlayerList().size())) {
                 startCard();
             }
         }
@@ -403,6 +421,14 @@ public class Game implements Observer {
         }
     }
 
+    private void setPlayerReconnect(int playerID){
+
+        model.getPlayerFromID(playerID).setDisconnect(false);
+        disconnectPlayerNumber--;
+        sendReconnectNotification(playerID);
+
+    }
+
 
 
     //---------------------------------logica applicativa---------------------------
@@ -461,8 +487,9 @@ public class Game implements Observer {
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {
-                int position = calculatePlayerTurn(turn, viewGame.size());
+                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
+                System.out.println(currID);
                 if (model.getPlayerFromID(currID).isDisconnect()) {
 
                     //setDraftPoolModel(view);
@@ -476,6 +503,7 @@ public class Game implements Observer {
                         view.sendEvent(new TurnPatternEvent(currID, model.getPlayerFromID(currID).getPattern()));
                     }
                     view.sendEvent(new RollDraftPoolEvent(currID));
+                    System.out.println("roll");
 
                 }
 
@@ -484,11 +512,12 @@ public class Game implements Observer {
 
 
         }
-        else if (turn > DEFAULT && turn < (viewGame.size()*2)){
+        else if (turn > DEFAULT && turn < (model.getPlayerList().size()*2)){
             for (VirtualView view : viewGame) {
 
-                int position = calculatePlayerTurn(turn, viewGame.size());
+                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
                 this.currID = model.getPlayerList().get(position).getPlayerID();
+                System.out.println(currID);
                 if(model.getPlayerFromID(currID).isDisconnect()) {
 
                     nextTurn();
@@ -498,12 +527,17 @@ public class Game implements Observer {
                         model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
                     } else {
-                        view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                        view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
-                        if (currID == view.getPlayerID()) {
-                            startChoose(view);
+                       if (turn != 0) {
+                            System.out.println("turno strano " + turn);
+                            view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                            view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                            if (currID == view.getPlayerID()) {
+                                startChoose(view);
+                                System.out.println(turn);
+                                System.out.println("startChoose");
 
-                        }
+                            }
+                       }
                     }
                 }
 
@@ -564,6 +598,7 @@ public class Game implements Observer {
             turn = DEFAULT;
             if(!singlePlayer) {
                 setup.changeBagger();
+                System.out.println("endround" + turn);
                 startTurn();
             }else {
                 singlePlayerTurn();
@@ -597,7 +632,9 @@ public class Game implements Observer {
     void nextTurn() {
         step = SET;
         turn++;
+        System.out.println("turn++");
         if(!singlePlayer) {
+            System.out.println(turn);
             startTurn();
         }else {
             singlePlayerTurn();

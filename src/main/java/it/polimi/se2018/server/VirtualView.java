@@ -35,6 +35,9 @@ public abstract class VirtualView extends Observable implements Observer {
         this.model = model;
     }
 
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
 
     // manda eventi da virtual view al client
     public abstract void sendEvent(Event event);

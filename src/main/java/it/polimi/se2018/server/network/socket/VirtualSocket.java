@@ -53,7 +53,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                      socketIn = new ObjectInputStream(clientConnection.getInputStream());
                      received = socketIn.readObject();
                 }
-                catch (SocketException e) {
+                catch (IOException e) {
                     System.out.println("error: " + super.getPlayerID() + " disconnected from the game ");
                     if (getServer().getGame() == null) {
                         getServer().getSocketClients().remove(this);
@@ -251,9 +251,6 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 }
             }
                 // add the disconnection if there's an exception
-        } catch (IOException e) {
-            System.out.println("Error in reading object");
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             System.out.println("Error in finding classes");
             e.printStackTrace();
