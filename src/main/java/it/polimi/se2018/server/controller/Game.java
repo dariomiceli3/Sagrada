@@ -228,6 +228,12 @@ public class Game implements Observer {
         if (arg instanceof DisconnectionEvent) {
             handlingDisconnection( ((DisconnectionEvent)arg).getID(), virtualView);
         }
+        if (arg instanceof ReconnectionEvent) {
+            // arriva la riconnessione
+            // se c'è un player libero lo assegni
+            // altrimenti mi mandi evento in cui dici che non c'è nessuno libero
+            handlingReconnection(virtualView);
+        }
 
 
     }
@@ -237,20 +243,26 @@ public class Game implements Observer {
         if (model.getPlayerFromID(id).getPlayerName() == null) {
             setPlayerNameModel(virtualView, "default name");
             setPlayerDisconnection(id);
+            sendExitNotification(id);
         }
         else if (model.getPlayerFromID(id).getPattern() == null) {
             setPatternCardModel(virtualView, 0);
             setPlayerDisconnection(id);
+            sendExitNotification(id);
         }
-        else if ((currID == id) && (model.getDraftPool().getNowNumber() == 0))
-        {
-            System.out.println("sono nel ramo particular");
+        else if ((currID == id) && (model.getDraftPool().getNowNumber() == 0)) {
             setDraftPoolModel(virtualView);
             setPlayerDisconnection(id);
+            sendExitNotification(id);
         }
         else {
             setPlayerDisconnection(id);
+            sendExitNotification(id);
         }
+    }
+
+    private void handlingReconnection(VirtualView virtualView) {
+        System.out.println("tentata riconnessione");
     }
 
 

@@ -41,11 +41,11 @@ public class VirtualRmi extends VirtualView {
     public void sendEventController(Event event) {
 
         if (event instanceof SinglePlayerEvent) {
-            this.server.setSinglePlayer( ((SinglePlayerEvent)event).isSinglePlayer());
-            //Server.setMulti(Server.getMulti() + 1);
-            //this.server.waitingOtherPlayers();
+            if (!server.isGameStarted()) {
+                this.server.setSinglePlayer(((SinglePlayerEvent) event).isSinglePlayer());
+            }
 
-            if (server.checkNumberPlayer(this.getPlayerID())) {
+            if (server.checkNumberPlayer()) {
                 Server.setMulti(Server.getMulti() + 1);
                 this.server.waitingOtherPlayers();
             }

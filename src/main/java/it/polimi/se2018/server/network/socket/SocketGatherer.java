@@ -46,7 +46,10 @@ public class SocketGatherer implements Runnable {
 
                 VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, Server.idPlayer);
 
+                System.out.println("player id : " + Server.idPlayer);
+
                 Server.setIdPlayer(Server.getIdPlayer() + 1);
+
 
                 // add arraylist di socket
                 server.addSocketClient(virtualSocket);

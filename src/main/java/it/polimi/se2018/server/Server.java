@@ -30,6 +30,7 @@ public class Server {
     public static int idPlayer;
     public static int multi;
     private Game game;
+    private Timer timer;
 
     public Server() {
 
@@ -164,22 +165,31 @@ public class Server {
 
         if (getMulti() >= 2) {
 
+
             System.out.println("Due client connessi");
             System.out.println("Starting timer before the game");
 
-            Timer timer = new Timer();
+            timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
 
                     //mutex = true;
                     if (getMulti() >= 2 && getMulti() < MAXPLAYERS) {
+                        System.out.println("sono nel ramo timer finito");
                         List<VirtualView> viewGame = new ArrayList<>();
                         viewGame.addAll(clients);
                         game = new Game(viewGame, singlePlayer);
                         setGameStarted(true);
                         System.out.println("Started game");
                     }
+                    /*else {
+                        if (timer != null) {
+                            System.out.println("cancello timer");
+                            timer.cancel();
+                            mutex = false;
+                        }
+                    }*/
 
                 }
             }, (long) SECONDS * 1000);
@@ -187,14 +197,23 @@ public class Server {
         }
     }
 
-    public boolean checkNumberPlayer(int ID) {
+    public boolean checkNumberPlayer() {
 
         if (singlePlayer) {
-            return ID == 0;
+             return getMulti() < 1;
         }
         else {
-            return ID >= 0 && ID <= 3;
+            return getMulti() < 4;
 
+        }
+    }
+
+    public void endTimerLogin() {
+
+        if (timer != null) {
+            System.out.println("cancello timer");
+            timer.cancel();
+            mutex = false;
         }
     }
 

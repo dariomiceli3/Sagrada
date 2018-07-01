@@ -58,7 +58,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     if (getServer().getGame() == null) {
                         getServer().getSocketClients().remove(this);
                         getServer().getClients().remove(this);
-                    }else {
+                        Server.setMulti(Server.getMulti() - 1);
+                        if (Server.getMulti() == 1) {
+                            getServer().endTimerLogin();
+                        }
+                    }
+                    else {
                         setChanged();
                         notifyObservers(new DisconnectionEvent(super.getPlayerID()));
                     }
@@ -72,14 +77,39 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 }
 
                 if (received instanceof SinglePlayerEvent) {
-                    this.getServer().setSinglePlayer(((SinglePlayerEvent) received).isSinglePlayer());
 
-                    if (getServer().checkNumberPlayer(this.getPlayerID())) {
-                        Server.setMulti(Server.getMulti() + 1);
-                        this.getServer().waitingOtherPlayers();
+                    if (!getServer().isGameStarted()) {
+
+                        if (!(((SinglePlayerEvent)received).isSinglePlayer())) {
+                            this.getServer().setSinglePlayer(false);
+                        }
+                        else {
+                            System.out.println("client socket extra in avvio multi come single ha provato a connettersi");
+                            getServer().getSocketClients().remove(this);
+                            getServer().getClients().remove(this);
+                            this.running = false;
+                        }
+
+
+                        System.out.println("modalita settata " + getServer().isSinglePlayer());
                     }
+                    if (getServer().checkNumberPlayer()) {
+                        if (getServer().isGameStarted()) {
+                            // todo finire di gestire la riconnessione
+                            setChanged();
+                            notifyObservers(new ReconnectionEvent());
+                        }
+                        else {
+                            Server.setMulti(Server.getMulti() + 1);
+                            System.out.println(Server.getMulti());
+                            this.getServer().waitingOtherPlayers();
+                        }
+                    }
+
                     else {
                         System.out.println("client socket extra ha provato a connettersi");
+                        getServer().getSocketClients().remove(this);
+                        getServer().getClients().remove(this);
                         this.running = false;
                     }
                 }
