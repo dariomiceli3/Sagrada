@@ -708,7 +708,7 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showFinalRank(List<Player> playerList) {
+    public void showFinalRank(List<Player> playerList, boolean ended) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -716,7 +716,7 @@ public class GuiController extends View {
                 try {
                     getConnection().setEndGameTimer(getPlayerID());
                     EndGameScene.setSinglePlayer(false);
-                    board.showRank(playerList);
+                    board.showRank(playerList, ended);
                 }
                 catch (IOException e){
                     e.printStackTrace();
@@ -1169,7 +1169,7 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList) {
+    public void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -1179,14 +1179,15 @@ public class GuiController extends View {
                     // private boolean maxPlayers;
                     //private boolean customCard;
                     name = currPlayer.getPlayerName();
-                    singlePlayer = singlePlayerr;
-                    gameStarted = gameStartedd;
-                    toolList = toolListt;
-                    publicCardList = publicCardListt;
+                    singlePlayer = singlePlay;
+                    gameStarted = gameStart;
+                    toolList = tool;
+                    publicCardList = publicCard;
                     privateCard = currPlayer.getPrivate();
                     patternCurrent = currPlayer.getPattern();
+                    customCard = patternCurrent.isCustom();
                     tokens = currPlayer.getTokensNumber();
-                    for(Player player : playerList) {
+                    for(Player player : players) {
                         if (player.getPlayerID() == 0) {
                             patternID0 = player.getPattern();
                             nameID0 = player.getPlayerName();
@@ -1224,10 +1225,7 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
         Parent root1 = (Parent) loader.load();
 
-        /*GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();*/
-        Scene scene = new Scene(root1/*, width, height*/);
+        Scene scene = new Scene(root1);
         stage.setTitle("Sagrada Pattern Choose");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -1240,10 +1238,7 @@ public class GuiController extends View {
         BoardController.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = (Parent) loader.load();
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
-        Scene board = new Scene(root2, width, height);
+        Scene board = new Scene(root2);
         stage.setTitle("Sagrada Main Board");
         stage.setScene(board);
         stage.setResizable(false);

@@ -1035,7 +1035,7 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showFinalRank(List<Player> playerList) {
+    public void showFinalRank(List<Player> playerList, boolean ended) {
         System.out.println("Final Rank:" + "\n" );
         for (Player player : playerList) {
             System.out.println(player.toStringPoints());
@@ -1384,7 +1384,8 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList) {
+    public void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
+        System.out.println("\n" + "You are returned to the game!");
 
     }
 

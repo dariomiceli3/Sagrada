@@ -165,7 +165,7 @@ public class VirtualRmi extends VirtualView {
                 }
 
                 else if (event instanceof PlayerPointsUpdateEvent) {
-                    clientRmi.remotePlayerPointsUpdateEvent( ((PlayerPointsUpdateEvent) event).getPlayerList());
+                    clientRmi.remotePlayerPointsUpdateEvent( ((PlayerPointsUpdateEvent) event).getPlayerList(), ((PlayerPointsUpdateEvent)event).isFinish());
                 }
 
                 else if (event instanceof WinnerEvent) {
@@ -273,6 +273,9 @@ public class VirtualRmi extends VirtualView {
                 }
                 else if (event instanceof NotPlayerDisconnectedEvent) {
                     clientRmi.remoteNotPermittedReconnection();
+                }
+                else if (event instanceof SuccessfulReconnectionEvent) {
+                    clientRmi.remoteSuccessfulReconnection( ((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
                 }
                 else {
                     System.out.println("Not understood the message");

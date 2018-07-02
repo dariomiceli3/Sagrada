@@ -1470,6 +1470,7 @@ public class BoardController {
 
 
         if (mainController.isSinglePlayer()) {
+            exit.setDisable(true);
             reconnect.setVisible(false);
             tokensNumber.setVisible(false);
             textPrivateSingle.setVisible(true);
@@ -1495,6 +1496,7 @@ public class BoardController {
             reconnect.setVisible(false);
             roll.setDisable(true);
             next.setDisable(true);
+            skip.setDisable(true);
             setToolCost();
             loadPanel();
             loadPattern();
@@ -2863,8 +2865,9 @@ public class BoardController {
         AlertBox.display("Timer", "The time of " + playerName + " ended");
     }
 
-    public void showRank(List<Player> playerList) throws IOException{
+    public void showRank(List<Player> playerList, boolean ended) throws IOException{
         pane.setDisable(true);
+        EndGameScene.setFinish(ended);
         EndGameScene.setPlayerList(playerList);
         EndGameScene.display();
     }

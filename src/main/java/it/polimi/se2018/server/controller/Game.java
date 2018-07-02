@@ -434,7 +434,9 @@ public class Game implements Observer {
             if(model.getPlayerFromID(playerID).getPattern() == null){
                 endMatch(false);
             }
-            endMatch(true);
+            else {
+                endMatch(true);
+            }
         }else if (currID == playerID) {
             nextTurn();
         }
@@ -632,11 +634,17 @@ public class Game implements Observer {
     private void endMatch(boolean finish){
 
         if(!singlePlayer) {
-            setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), finish);
-            for (VirtualView view : viewGame){
+            if (finish) {
+                setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), true);
+                for (VirtualView view : viewGame) {
                     view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+                }
             }
-        }else {
+            else {
+                setFinalPointsModel(null, false);
+            }
+        }
+        else {
 
             int roundTrackerPoints = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
             int playerPoints = model.getPlayerList().get(0).getFinalPoints();

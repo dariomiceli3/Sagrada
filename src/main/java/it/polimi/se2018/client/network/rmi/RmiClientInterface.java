@@ -64,7 +64,7 @@ public interface RmiClientInterface extends Remote {
 
     public void remoteOutOfTokenEvent(int ID) throws RemoteException;
 
-    public void remotePlayerPointsUpdateEvent(List<Player> playerList) throws RemoteException;
+    public void remotePlayerPointsUpdateEvent(List<Player> playerList,boolean ended) throws RemoteException;
 
     public void remoteWinnerEvent(int ID) throws RemoteException;
 
@@ -123,4 +123,7 @@ public interface RmiClientInterface extends Remote {
     public void remoteReconnectPlayer(String name) throws RemoteException;
 
     public void remoteNotPermittedReconnection() throws RemoteException;
+
+    public void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) throws RemoteException;
+
 }

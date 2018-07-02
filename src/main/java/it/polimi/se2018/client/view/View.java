@@ -109,7 +109,7 @@ public abstract class View implements Runnable {
 
     public abstract void showRoundTracker(RoundTracker roundTracker);
 
-    public abstract void showFinalRank(List<Player> playerList);
+    public abstract void showFinalRank(List<Player> playerList, boolean ended);
 
     public abstract void showWinner();
 
@@ -211,5 +211,5 @@ public abstract class View implements Runnable {
 
     public abstract void showNotPermittedReconnection();
 
-    public abstract void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList);
+    public abstract void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players);
 }

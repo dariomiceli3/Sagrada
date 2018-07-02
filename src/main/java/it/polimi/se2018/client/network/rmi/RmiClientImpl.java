@@ -198,8 +198,8 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remotePlayerPointsUpdateEvent(List<Player> playerList) throws RemoteException {
-        view.showFinalRank(playerList);
+    public void remotePlayerPointsUpdateEvent(List<Player> playerList, boolean ended) throws RemoteException {
+        view.showFinalRank(playerList,ended);
 
     }
 
@@ -390,8 +390,14 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
         view.showReconnectPlayer(name);
     }
 
+    @Override
     public void remoteNotPermittedReconnection() throws RemoteException {
         view.showNotPermittedReconnection();
+    }
+
+    @Override
+    public void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) throws RemoteException {
+        view.showReload(currPlayer, singlePlay, gameStart, tool, publicCard, players);
     }
 }
 

@@ -83,13 +83,15 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         if (!(((SinglePlayerEvent)received).isSinglePlayer())) {
                             this.getServer().setSinglePlayer(false);
                         }
+                        else if ( ((SinglePlayerEvent) received).isSinglePlayer() && Server.getMulti() == 0) {
+                            this.getServer().setSinglePlayer(true);
+                        }
                         else {
                             System.out.println("client socket extra in avvio multi come single ha provato a connettersi");
                             getServer().getSocketClients().remove(this);
                             getServer().getClients().remove(this);
                             this.running = false;
                         }
-
 
                         System.out.println("modalita settata " + getServer().isSinglePlayer());
                     }
