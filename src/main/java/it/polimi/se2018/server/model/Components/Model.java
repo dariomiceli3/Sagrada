@@ -176,11 +176,11 @@ public class Model extends Observable {
 
     }
 
-    public void setFinalPointsAndNotify(List<Player> playerList){
+    public void setFinalPointsAndNotify(List<Player> playerList, boolean finish){
 
         setPlayerList(playerList);
         setChanged();
-        notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList()));
+        notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList(), finish));
     }
 
     public void updatePoolAndNotify() {

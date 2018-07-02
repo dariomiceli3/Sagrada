@@ -420,9 +420,9 @@ public class Game implements Observer {
         model.setEndRoundAndNotify();
     }
 
-    private void setFinalPointsModel(List<Player> playerList){
+    private void setFinalPointsModel(List<Player> playerList, boolean finish){
 
-        model.setFinalPointsAndNotify(playerList);
+        model.setFinalPointsAndNotify(playerList, finish);
 
     }
 
@@ -431,7 +431,10 @@ public class Game implements Observer {
         model.getPlayerFromID(playerID).setDisconnect(true);
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
-            endMatch();
+            if(model.getPlayerFromID(playerID).getPattern() == null){
+                endMatch(false);
+            }
+            endMatch(true);
         }else if (currID == playerID) {
             nextTurn();
         }
@@ -541,6 +544,7 @@ public class Game implements Observer {
                     nextTurn();
                 }else {
 
+                    //todo gestire il caso runningP del turn != 0
                     if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
                         model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
@@ -611,7 +615,7 @@ public class Game implements Observer {
         setEndRoundModel();
         round++;
         if (round > END){
-            endMatch();
+            endMatch(true);
         }else {
             turn = DEFAULT;
             if(!singlePlayer) {
@@ -625,10 +629,10 @@ public class Game implements Observer {
 
     }
 
-    private void endMatch(){
+    private void endMatch(boolean finish){
 
         if(!singlePlayer) {
-            setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()));
+            setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), finish);
             for (VirtualView view : viewGame){
                     view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
             }

@@ -60,13 +60,18 @@ public class EndGameScene {
 
     //----------------------------------------------------
 
+    private static boolean finish;
+
     private static List<Player> playerList;
 
-    protected static void setPlayerList(List<Player> playerList){
+    protected static void setPlayerList(List<Player> playerList) {
 
         EndGameScene.playerList = playerList;
     }
 
+    public static void setFinish(boolean finish) {
+        EndGameScene.finish = finish;
+    }
 
     public static void display() throws IOException {
         Stage window = new Stage();
@@ -87,49 +92,56 @@ public class EndGameScene {
         });
     }
 
-    public void initialize(){
+    public void initialize() {
 
-        if(singlePlayer){
+        if (finish) {
+            if (singlePlayer) {
 
-            if(winnerSingl){
+                if (winnerSingl) {
 
-                winnerText.setText("You Win!" + "   Score : " + playerPoints);
+                    winnerText.setText("You Win!" + "   Score : " + playerPoints);
 
-                rankText2.setVisible(true);
-                rankText2.setText("Threshold : " + gameThreshold);
-
-
-            }else {
-
-                winnerText.setText("You Lose!" + "  Score : " + playerPoints);
-
-                rankText2.setVisible(true);
-                rankText2.setText("Threshold : " + gameThreshold);
-
-            }
-
-        }else {
-
-            winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
-
-            for (int i = 0;  i < playerList.size(); i++) {
-                if (i == 0) {
-                    rankText1.setVisible(true);
-                    rankText1.setText(playerList.get(i).toStringPoints());
-                }
-                if (i == 1) {
                     rankText2.setVisible(true);
-                    rankText2.setText(playerList.get(i).toStringPoints());
+                    rankText2.setText("Threshold : " + gameThreshold);
+
+
+                } else {
+
+                    winnerText.setText("You Lose!" + "  Score : " + playerPoints);
+
+                    rankText2.setVisible(true);
+                    rankText2.setText("Threshold : " + gameThreshold);
+
                 }
-                if (i == 2) {
-                    rankText3.setVisible(true);
-                    rankText3.setText(playerList.get(i).toStringPoints());
-                }
-                if (i == 3) {
-                    rankText4.setVisible(true);
-                    rankText4.setText(playerList.get(i).toStringPoints());
+
+            } else {
+
+                winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
+
+                for (int i = 0; i < playerList.size(); i++) {
+                    if (i == 0) {
+                        rankText1.setVisible(true);
+                        rankText1.setText(playerList.get(i).toStringPoints());
+                    }
+                    if (i == 1) {
+                        rankText2.setVisible(true);
+                        rankText2.setText(playerList.get(i).toStringPoints());
+                    }
+                    if (i == 2) {
+                        rankText3.setVisible(true);
+                        rankText3.setText(playerList.get(i).toStringPoints());
+                    }
+                    if (i == 3) {
+                        rankText4.setVisible(true);
+                        rankText4.setText(playerList.get(i).toStringPoints());
+                    }
                 }
             }
+
+        } else {
+
+            winnerText.setText("Game never played");
         }
     }
+
 }
