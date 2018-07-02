@@ -79,7 +79,7 @@ public class EndGameScene {
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("GAME OVER");
-        FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/EndGame.fxml"));
+        FXMLLoader loader = new FXMLLoader(EndGameScene.class.getResource("/EndGame.fxml"));
         Parent root1 = (Parent) loader.load();
         Scene scene = new Scene(root1);
         window.setScene(scene);

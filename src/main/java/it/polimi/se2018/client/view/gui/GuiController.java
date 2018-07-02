@@ -36,6 +36,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -716,7 +717,16 @@ public class GuiController extends View {
                 try {
                     getConnection().setEndGameTimer(getPlayerID());
                     EndGameScene.setSinglePlayer(false);
-                    board.showRank(playerList, ended);
+                    if(ended) {
+
+                        board.showRank(playerList, true);
+
+                    }else {
+
+                            EndGameScene.setFinish(ended);
+                            EndGameScene.setPlayerList(playerList);
+                            EndGameScene.display();
+                    }
                 }
                 catch (IOException e){
                     e.printStackTrace();

@@ -29,6 +29,7 @@ public class Game implements Observer {
     private int turn = DEFAULT;
     private int round = START;
     private int currID;
+    private boolean notEnded;
     private Dice diceToolSinglePlayer;
     private ToolCard toolRemoveSinglePlayer;
     private int singlePlayerDifficulty;
@@ -62,6 +63,7 @@ public class Game implements Observer {
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
         this.currID = -1;
+        this.notEnded = true;
 
         List<Player> playerList = new ArrayList<>();
 
@@ -432,6 +434,7 @@ public class Game implements Observer {
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
             if(model.getPlayerFromID(playerID).getPattern() == null){
+                notEnded = false;
                 endMatch(false);
             }
             else {
@@ -545,8 +548,6 @@ public class Game implements Observer {
 
                     nextTurn();
                 }else {
-
-                    //todo gestire il caso runningP del turn != 0
                     if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
                         model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
                         nextTurn();
@@ -759,7 +760,9 @@ public class Game implements Observer {
 
     private void sendExitNotification(int iD) {
         for (VirtualView view : viewGame) {
-            view.sendEvent(new DisconnectionMsgEvent(iD, model.getPlayerFromID(iD).getPlayerName()));
+            if(notEnded) {
+                view.sendEvent(new DisconnectionMsgEvent(iD, model.getPlayerFromID(iD).getPlayerName()));
+            }
         }
     }
 
