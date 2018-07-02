@@ -3,7 +3,9 @@ package it.polimi.se2018.server.network.rmi;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
 import it.polimi.se2018.server.Server;
 import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.model.Events.ClientServer.DisconnectionEvent;
 import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
+import it.polimi.se2018.server.model.Events.ClientServer.ReconnectionEvent;
 import it.polimi.se2018.server.model.Events.Event;
 import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
 import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
@@ -13,12 +15,15 @@ import it.polimi.se2018.server.model.Events.SinglePlayer.*;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class VirtualRmi extends VirtualView {
 
     private Server server;
     private RmiClientInterface clientRmi;
     private boolean running;
+    private Timer timer;
 
     public VirtualRmi(RmiClientInterface clientRmi, Server server, int ID) {
         super(ID);
@@ -36,38 +41,53 @@ public class VirtualRmi extends VirtualView {
     }
 
 
-
     // metodo per inoltrare i messaggi al controller (chiamato dalla RmiServerImpl)
     public void sendEventController(Event event) {
 
         if (event instanceof SinglePlayerEvent) {
+
             if (!server.isGameStarted()) {
-                this.server.setSinglePlayer(((SinglePlayerEvent) event).isSinglePlayer());
+
+                if (!(((SinglePlayerEvent) event).isSinglePlayer())) {
+                    this.server.setSinglePlayer(false);
+                } else if (((SinglePlayerEvent) event).isSinglePlayer() && Server.getMulti() == 0) {
+                    this.server.setSinglePlayer(true);
+                } else {
+                    System.out.println("client socket rmi in avvio multi come single ha provato a connettersi");
+                    this.server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
+                    this.server.removeClient(this);
+                    this.running = false;
+                }
             }
 
+
             if (server.checkNumberPlayer()) {
-                Server.setMulti(Server.getMulti() + 1);
-                this.server.waitingOtherPlayers();
-            }
-            else {
+
+                if (server.isGameStarted()) {
+                    System.out.println("ramo disconnessione rmi");
+                    this.addObserver(server.getGame());
+                    setChanged();
+                    notifyObservers(new ReconnectionEvent());
+                } else {
+                    Server.setMulti(Server.getMulti() + 1);
+                    this.server.waitingOtherPlayers();
+                }
+            } else {
                 System.out.println("client rmi extra ha provato a connettersi");
+                server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
+                server.removeClient(this);
                 this.running = false;
                 try {
                     clientRmi.remoteMaxPlayerLogin();
-                }
-                catch (RemoteException e) {
+                } catch (RemoteException e) {
                     System.out.println("error rmi max player");
                 }
             }
-        }
-        else {
+        } else {
             setChanged();
             notifyObservers(event);
         }
     }
-
-
-
 
 
     // mandare al client -> fare una serie di instanceof con view.metodo della RmiClientImpl
@@ -79,216 +99,126 @@ public class VirtualRmi extends VirtualView {
 
                 if (event instanceof PlayerIDEvent) {
                     clientRmi.remoteIDEvent(((PlayerIDEvent) event).getPlayerID());
-                }
+                } else if (event instanceof SinglePlayerRequestEvent) {
+                    clientRmi.remoteSinglePlayerEvent(((SinglePlayerRequestEvent) event).getId());
 
-                else if (event instanceof SinglePlayerRequestEvent) {
-                    clientRmi.remoteSinglePlayerEvent( ((SinglePlayerRequestEvent) event).getId());
-
-                }
-                else if (event instanceof PlayerNameUpdateEvent) {
-                    clientRmi.remotePlayerNameUpdateEvent( ((PlayerNameUpdateEvent) event).getID(), ((PlayerNameUpdateEvent) event).getName());
-                }
-
-                else if (event instanceof PlayerNameErrorEvent) {
-                    clientRmi.remotePlayerNameErrorEvent( ((PlayerNameErrorEvent) event).getId());
-                }
-
-                else if (event instanceof GameStartedEvent) {
-                    clientRmi.remoteGameStartedEvent( ((GameStartedEvent) event).isStarted());
-                }
-
-                else if (event instanceof PlayerPrivateUpdateEvent) {
-                    clientRmi.remotePlayerPrivateUpdateEvent( ((PlayerPrivateUpdateEvent) event).getID(), ((PlayerPrivateUpdateEvent) event).getCard());
-                }
-
-                else if (event instanceof StartPatternEvent) {
+                } else if (event instanceof PlayerNameUpdateEvent) {
+                    clientRmi.remotePlayerNameUpdateEvent(((PlayerNameUpdateEvent) event).getID(), ((PlayerNameUpdateEvent) event).getName());
+                } else if (event instanceof PlayerNameErrorEvent) {
+                    clientRmi.remotePlayerNameErrorEvent(((PlayerNameErrorEvent) event).getId());
+                } else if (event instanceof GameStartedEvent) {
+                    clientRmi.remoteGameStartedEvent(((GameStartedEvent) event).isStarted());
+                } else if (event instanceof PlayerPrivateUpdateEvent) {
+                    clientRmi.remotePlayerPrivateUpdateEvent(((PlayerPrivateUpdateEvent) event).getID(), ((PlayerPrivateUpdateEvent) event).getCard());
+                } else if (event instanceof StartPatternEvent) {
                     clientRmi.remoteStartPatternEvent(((StartPatternEvent) event).getID(), ((StartPatternEvent) event).getPatternListEvent());
-                }
-
-                else if (event instanceof PublicDrawEvent) {
-                    clientRmi.remotePublicDrawEvent( ((PublicDrawEvent) event).getCard());
-                }
-
-                else if (event instanceof PlayerPatternUpdateEvent) {
-                    clientRmi.remotePlayerPatternUpdateEvent( ((PlayerPatternUpdateEvent)event).getID(), ((PlayerPatternUpdateEvent)event).getCard() );
-                }
-
-                else if (event instanceof StartGameSceneEvent) {
+                } else if (event instanceof PublicDrawEvent) {
+                    clientRmi.remotePublicDrawEvent(((PublicDrawEvent) event).getCard());
+                } else if (event instanceof PlayerPatternUpdateEvent) {
+                    clientRmi.remotePlayerPatternUpdateEvent(((PlayerPatternUpdateEvent) event).getID(), ((PlayerPatternUpdateEvent) event).getCard());
+                } else if (event instanceof StartGameSceneEvent) {
                     clientRmi.remoteStartGameSceneEvent();
-                }
-
-                else if (event instanceof PlayerTokensUpdateEvent) {
-                    clientRmi.remotePlayerTokensUpdateEvent( ((PlayerTokensUpdateEvent)event).getID(), ((PlayerTokensUpdateEvent)event).getTokensNumber());
-                }
-
-                else if (event instanceof StartRoundEvent) {
-                    clientRmi.remoteStartRoundEvent( ((StartRoundEvent)event).getRound());
-                }
-
-                else if (event instanceof StartTurnEvent) {
-                    clientRmi.remoteStartTurnEvent( ((StartTurnEvent)event).getID(), ((StartTurnEvent)event).getName());
-                }
-
-                else if (event instanceof RollDraftPoolEvent) {
-                    clientRmi.remoteRollDraftPoolEvent( ((RollDraftPoolEvent)event).getId());
-                }
-                else if (event instanceof PlayerDraftPoolUpdateEvent) {
-                    clientRmi.remotePlayerDraftPoolUpdateEvent( ((PlayerDraftPoolUpdateEvent)event).getDraftPool());
-                }
-
-                else if(event instanceof StartChooseEvent){
-                    clientRmi.remoteStartChooseEvent( ((StartChooseEvent)event).getID());
-                }
-
-                else if (event instanceof StartMoveEvent) {
-                    clientRmi.remoteStartMoveEvent( ((StartMoveEvent)event).getID(), ((StartMoveEvent) event).getPoolSize());
-                }
-
-                else if (event instanceof PatternUpdateEvent) {
-                    clientRmi.remotePatternUpdateEvent(((PatternUpdateEvent)event).getID(), ((PatternUpdateEvent)event).getPatternCard(), ((PatternUpdateEvent)event).getName());
-                }
-
-                else if (event instanceof RoundTrackerUpdateEvent) {
+                } else if (event instanceof PlayerTokensUpdateEvent) {
+                    clientRmi.remotePlayerTokensUpdateEvent(((PlayerTokensUpdateEvent) event).getID(), ((PlayerTokensUpdateEvent) event).getTokensNumber());
+                } else if (event instanceof StartRoundEvent) {
+                    clientRmi.remoteStartRoundEvent(((StartRoundEvent) event).getRound());
+                } else if (event instanceof StartTurnEvent) {
+                    clientRmi.remoteStartTurnEvent(((StartTurnEvent) event).getID(), ((StartTurnEvent) event).getName());
+                } else if (event instanceof RollDraftPoolEvent) {
+                    clientRmi.remoteRollDraftPoolEvent(((RollDraftPoolEvent) event).getId());
+                } else if (event instanceof PlayerDraftPoolUpdateEvent) {
+                    clientRmi.remotePlayerDraftPoolUpdateEvent(((PlayerDraftPoolUpdateEvent) event).getDraftPool());
+                } else if (event instanceof StartChooseEvent) {
+                    clientRmi.remoteStartChooseEvent(((StartChooseEvent) event).getID());
+                } else if (event instanceof StartMoveEvent) {
+                    clientRmi.remoteStartMoveEvent(((StartMoveEvent) event).getID(), ((StartMoveEvent) event).getPoolSize());
+                } else if (event instanceof PatternUpdateEvent) {
+                    clientRmi.remotePatternUpdateEvent(((PatternUpdateEvent) event).getID(), ((PatternUpdateEvent) event).getPatternCard(), ((PatternUpdateEvent) event).getName());
+                } else if (event instanceof RoundTrackerUpdateEvent) {
                     clientRmi.remoteRoundTrackerUpdateEvent(((RoundTrackerUpdateEvent) event).getRoundTracker());
-                }
+                } else if (event instanceof TurnPatternEvent) {
+                    clientRmi.remoteTurnPatternEvent(((TurnPatternEvent) event).getID(), ((TurnPatternEvent) event).getPatternCard());
+                } else if (event instanceof StartToolEvent) {
+                    clientRmi.remoteStartToolEvent(((StartToolEvent) event).getId(), ((StartToolEvent) event).getToolCardList());
+                } else if (event instanceof OutOfTokenEvent) {
+                    clientRmi.remoteOutOfTokenEvent(((OutOfTokenEvent) event).getId());
+                } else if (event instanceof PlayerPointsUpdateEvent) {
+                    clientRmi.remotePlayerPointsUpdateEvent(((PlayerPointsUpdateEvent) event).getPlayerList(), ((PlayerPointsUpdateEvent) event).isFinish());
+                } else if (event instanceof WinnerEvent) {
+                    clientRmi.remoteWinnerEvent(((WinnerEvent) event).getID());
+                } else if (event instanceof TimerEndedEvent) {
+                    clientRmi.remoteTimerEndedEvent(((TimerEndedEvent) event).getId());
+                } else if (event instanceof TimerOtherEvent) {
+                    clientRmi.remoteTimerOtherEvent(((TimerOtherEvent) event).getName());
+                } else if (event instanceof ToolCardUpdateEvent) {
+                    clientRmi.remoteToolCardUpdateEvent(((ToolCardUpdateEvent) event).getToolCardList());
+                } else if (event instanceof GrozingPliersRequestEvent) {
+                    clientRmi.remoteGrozingPliersRequestEvent(((GrozingPliersRequestEvent) event).getId(), ((GrozingPliersRequestEvent) event).getPoolSize());
+                } else if (event instanceof EglomiseBrushRequestEvent) {
+                    clientRmi.remoteEglomiseBrushRequestEvent(((EglomiseBrushRequestEvent) event).getId());
+                } else if (event instanceof CopperFoilRequestEvent) {
+                    clientRmi.remoteCopperFoilRequestEvent(((CopperFoilRequestEvent) event).getId());
+                } else if (event instanceof LathekinRequestEvent) {
+                    clientRmi.remoteLathekinRequestEvent(((LathekinRequestEvent) event).getId());
+                } else if (event instanceof LensCutterRequestEvent) {
+                    clientRmi.remoteLensCutterRequestEvent(((LensCutterRequestEvent) event).getId(), ((LensCutterRequestEvent) event).getPoolSize(), ((LensCutterRequestEvent) event).getRoundSizes());
+                } else if (event instanceof FluxBrushRequestEvent) {
+                    clientRmi.remoteFluxBrushRequesEvent(((FluxBrushRequestEvent) event).getId(), ((FluxRemoverRequestEvent) event).getPoolSize());
+                } else if (event instanceof GlazingHammerRequestEvent) {
+                    clientRmi.remoteGlazingHammerRequestEvent(((GlazingHammerRequestEvent) event).getId());
+                } else if (event instanceof RunningPliersRequestEvent) {
+                    clientRmi.remoteRunningPliersRequestEvent(((RunningPliersRequestEvent) event).getId(), ((RunningPliersRequestEvent) event).getPoolSize());
+                } else if (event instanceof CorkBackedRequestEvent) {
+                    clientRmi.remoteCorkBackedRequestEvent(((CorkBackedRequestEvent) event).getId(), ((CorkBackedRequestEvent) event).getPoolSize());
+                } else if (event instanceof GrindingStoneRequestEvent) {
+                    clientRmi.remoteGrindingStoneRequestEvent(((GrindingStoneRequestEvent) event).getId(), ((GrindingStoneRequestEvent) event).getPoolSize());
 
-                else if (event instanceof TurnPatternEvent) {
-                    clientRmi.remoteTurnPatternEvent(((TurnPatternEvent)event).getID(), ((TurnPatternEvent)event).getPatternCard());
-                }
-
-                else if (event instanceof StartToolEvent) {
-                    clientRmi.remoteStartToolEvent( ((StartToolEvent)event).getId(), ((StartToolEvent)event).getToolCardList());
-                }
-
-                else if (event instanceof OutOfTokenEvent) {
-                    clientRmi.remoteOutOfTokenEvent( ((OutOfTokenEvent)event).getId());
-                }
-
-                else if (event instanceof PlayerPointsUpdateEvent) {
-                    clientRmi.remotePlayerPointsUpdateEvent( ((PlayerPointsUpdateEvent) event).getPlayerList(), ((PlayerPointsUpdateEvent)event).isFinish());
-                }
-
-                else if (event instanceof WinnerEvent) {
-                    clientRmi.remoteWinnerEvent(((WinnerEvent)event).getID());
-                }
-
-                else if (event instanceof TimerEndedEvent) {
-                    clientRmi.remoteTimerEndedEvent(((TimerEndedEvent)event).getId());
-                }
-
-                else if (event instanceof TimerOtherEvent) {
-                    clientRmi.remoteTimerOtherEvent( ((TimerOtherEvent)event).getName());
-                }
-
-                else if (event instanceof ToolCardUpdateEvent) {
-                    clientRmi.remoteToolCardUpdateEvent( ((ToolCardUpdateEvent) event).getToolCardList());
-                }
-
-                else if (event instanceof GrozingPliersRequestEvent) {
-                    clientRmi.remoteGrozingPliersRequestEvent(((GrozingPliersRequestEvent)event).getId(), ((GrozingPliersRequestEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof EglomiseBrushRequestEvent) {
-                    clientRmi.remoteEglomiseBrushRequestEvent(((EglomiseBrushRequestEvent)event).getId());
-                }
-
-                else if (event instanceof CopperFoilRequestEvent) {
-                    clientRmi.remoteCopperFoilRequestEvent( ((CopperFoilRequestEvent)event).getId());
-                }
-
-                else if (event instanceof LathekinRequestEvent) {
-                    clientRmi.remoteLathekinRequestEvent( ((LathekinRequestEvent) event).getId());
-                }
-
-                else if (event instanceof LensCutterRequestEvent) {
-                    clientRmi.remoteLensCutterRequestEvent( ((LensCutterRequestEvent)event).getId(), ((LensCutterRequestEvent)event).getPoolSize(), ((LensCutterRequestEvent)event).getRoundSizes());
-                }
-
-                else if (event instanceof FluxBrushRequestEvent) {
-                    clientRmi.remoteFluxBrushRequesEvent( ((FluxBrushRequestEvent)event).getId(), ((FluxRemoverRequestEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof GlazingHammerRequestEvent) {
-                    clientRmi.remoteGlazingHammerRequestEvent( ((GlazingHammerRequestEvent)event).getId());
-                }
-
-                else if (event instanceof RunningPliersRequestEvent) {
-                    clientRmi.remoteRunningPliersRequestEvent( ((RunningPliersRequestEvent)event).getId(), ((RunningPliersRequestEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof CorkBackedRequestEvent) {
-                    clientRmi.remoteCorkBackedRequestEvent(((CorkBackedRequestEvent)event).getId(), ((CorkBackedRequestEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof GrindingStoneRequestEvent) {
-                    clientRmi.remoteGrindingStoneRequestEvent(((GrindingStoneRequestEvent)event).getId(), ((GrindingStoneRequestEvent)event).getPoolSize());
-
-                }
-                else if (event instanceof FluxRemoverRequestEvent) {
-                    clientRmi.remoteFluxRemoverRequestEvent(((FluxRemoverRequestEvent)event).getId(), ((FluxRemoverRequestEvent)event).getDiceColor(), ((FluxRemoverRequestEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof TapWheelRequestEvent) {
-                    clientRmi.remoteTapWheelRequestEvent( ((TapWheelRequestEvent)event).getId());
-                }
-
-                else if (event instanceof UpdateBoardEvent) {
-                    clientRmi.remoteUpdateBoardEvent( ((UpdateBoardEvent)event).getRoundTracker(), ((UpdateBoardEvent)event).getDraftPool());
-                }
-
-                else if (event instanceof InvalidMoveEvent) {
-                    clientRmi.remoteInvalidMoveEvent(((InvalidMoveEvent)event).getId(), ((InvalidMoveEvent)event).getErrorMsg());
-                }
-
-                else if (event instanceof UpdatePoolEvent) {
-                    clientRmi.remoteUpdatePoolEvent(((UpdatePoolEvent)event).getDraftPool());
+                } else if (event instanceof FluxRemoverRequestEvent) {
+                    clientRmi.remoteFluxRemoverRequestEvent(((FluxRemoverRequestEvent) event).getId(), ((FluxRemoverRequestEvent) event).getDiceColor(), ((FluxRemoverRequestEvent) event).getPoolSize());
+                } else if (event instanceof TapWheelRequestEvent) {
+                    clientRmi.remoteTapWheelRequestEvent(((TapWheelRequestEvent) event).getId());
+                } else if (event instanceof UpdateBoardEvent) {
+                    clientRmi.remoteUpdateBoardEvent(((UpdateBoardEvent) event).getRoundTracker(), ((UpdateBoardEvent) event).getDraftPool());
+                } else if (event instanceof InvalidMoveEvent) {
+                    clientRmi.remoteInvalidMoveEvent(((InvalidMoveEvent) event).getId(), ((InvalidMoveEvent) event).getErrorMsg());
+                } else if (event instanceof UpdatePoolEvent) {
+                    clientRmi.remoteUpdatePoolEvent(((UpdatePoolEvent) event).getDraftPool());
                 }
 
                 //-----------------single player events-------------
 
                 else if (event instanceof ToolNumberRequestEvent) {
                     clientRmi.remoteToolNumberRequestEvent();
-                }
-
-                else if (event instanceof SinglePrivateEvent) {
-                    clientRmi.remoteSinglePrivateEvent( ((SinglePrivateEvent)event).getPrivateList());
-                }
-
-                else if (event instanceof EndSinglePlayerEvent){
-                    clientRmi.remoteEndSinglePlayerEvent(((EndSinglePlayerEvent)event).isWinner(), ((EndSinglePlayerEvent) event).getPlayerPoints(), ((EndSinglePlayerEvent)event).getGameThreshold());
-                }
-
-                else if (event instanceof StartToolSinglePlayerEvent) {
-                    clientRmi.remoteStartToolSinglePlayer( ((StartToolSinglePlayerEvent)event).getToolCardList(), ((StartToolSinglePlayerEvent)event).getPoolSize());
-                }
-
-                else if (event instanceof NotMatchColorEvent) {
+                } else if (event instanceof SinglePrivateEvent) {
+                    clientRmi.remoteSinglePrivateEvent(((SinglePrivateEvent) event).getPrivateList());
+                } else if (event instanceof EndSinglePlayerEvent) {
+                    clientRmi.remoteEndSinglePlayerEvent(((EndSinglePlayerEvent) event).isWinner(), ((EndSinglePlayerEvent) event).getPlayerPoints(), ((EndSinglePlayerEvent) event).getGameThreshold());
+                } else if (event instanceof StartToolSinglePlayerEvent) {
+                    clientRmi.remoteStartToolSinglePlayer(((StartToolSinglePlayerEvent) event).getToolCardList(), ((StartToolSinglePlayerEvent) event).getPoolSize());
+                } else if (event instanceof NotMatchColorEvent) {
                     clientRmi.remoteNotMatchColorEvent();
                 }
-                else if (event instanceof DisconnectionMsgEvent ) {
-                    clientRmi.remoteExitPlayer( ((DisconnectionMsgEvent)event).getName());
-                }
-                else if (event instanceof ReconnectionMsgEvent) {
-                    clientRmi.remoteReconnectPlayer( ((ReconnectionMsgEvent)event).getName());
-                }
-                else if (event instanceof NotPlayerDisconnectedEvent) {
+
+                //-----------------disconnection------------------------------
+
+                else if (event instanceof DisconnectionMsgEvent) {
+                    clientRmi.remoteExitPlayer(((DisconnectionMsgEvent) event).getName());
+                } else if (event instanceof ReconnectionMsgEvent) {
+                    clientRmi.remoteReconnectPlayer(((ReconnectionMsgEvent) event).getName());
+                } else if (event instanceof NotPlayerDisconnectedEvent) {
                     clientRmi.remoteNotPermittedReconnection();
-                }
-                else if (event instanceof SuccessfulReconnectionEvent) {
-                    clientRmi.remoteSuccessfulReconnection( ((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
-                }
-                else {
+                } else if (event instanceof SuccessfulReconnectionEvent) {
+                    clientRmi.remoteSuccessfulReconnection(((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
+                } else {
                     System.out.println("Not understood the message");
                 }
 
             }
-        }
-        catch (IOException e) {
-            System.out.println("Error i/O rmi");
+        } catch (IOException e) {
+            System.out.println("Error I/O rmi");
             this.running = false;
 
         }
-
 
 
     }
@@ -303,6 +233,39 @@ public class VirtualRmi extends VirtualView {
                 sendEvent((Event) arg);
             }
 
+        }
+
+    }
+
+    public void timeout() {
+
+        if (timer != null) {
+            timer.cancel();
+        }
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("client rmi disconnected");
+                disconnectionRmi();
+            }
+        }, (long) 3 * 1000);
+    }
+
+    private void disconnectionRmi() {
+
+        if (server.getGame() == null) {
+            server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
+            server.removeClient(this);
+            Server.setMulti(Server.getMulti() - 1);
+            if (Server.getMulti() == 1) {
+                server.endTimerLogin();
+            }
+        }
+        else {
+            setChanged();
+            notifyObservers(new DisconnectionEvent(super.getPlayerID()));
         }
 
     }

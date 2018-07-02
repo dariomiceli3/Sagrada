@@ -9,6 +9,11 @@ import java.rmi.registry.LocateRegistry;
 
 public class RmiGatherer {
 
+    private RmiServerImpl serverRmi;
+
+    public RmiServerImpl getServerRmi() {
+        return serverRmi;
+    }
 
     // crea registry e si collega all'impl lato server
 
@@ -24,7 +29,8 @@ public class RmiGatherer {
         }
 
         try {
-            RmiServerImpl serverRmi = new RmiServerImpl(server);
+            // todo check if everything is ok with this
+            /*RmiServerImpl*/ serverRmi = new RmiServerImpl(server);
             Naming.rebind("//localhost/Sagrada", serverRmi);
             System.out.println("Server rmi started on port " + port);
 

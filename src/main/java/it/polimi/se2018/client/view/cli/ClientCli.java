@@ -1,5 +1,6 @@
 package it.polimi.se2018.client.view.cli;
 
+import it.polimi.se2018.client.network.rmi.Ping;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.cli.CliView;
@@ -16,6 +17,7 @@ public class ClientCli {
     private static RmiHandler serverRmi;
     private String connectionType;
     private View view;
+    private Ping ping;
 
 
     public ClientCli(String connectionType) {
@@ -50,8 +52,9 @@ public class ClientCli {
 
         if (connectionType.equalsIgnoreCase("rmi")) {
 
-            serverRmi = new RmiHandler(view);
-
+            ping = new Ping();
+            serverRmi = new RmiHandler(view, ping);
+            ping.setConnection(serverRmi);
             view.setConnection(serverRmi);
 
             Thread viewRmiThread = new Thread(view);

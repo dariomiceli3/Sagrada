@@ -85,6 +85,10 @@ public class Server {
         return game;
     }
 
+    public RmiGatherer getRmiGatherer() {
+        return rmiGatherer;
+    }
+
     //-------------------------------methods for clients list -------------------------------------
 
 

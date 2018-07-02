@@ -56,8 +56,8 @@ public class VirtualSocket extends VirtualView implements Runnable {
                 catch (IOException e) {
                     System.out.println("error: " + super.getPlayerID() + " disconnected from the game ");
                     if (getServer().getGame() == null) {
-                        getServer().getSocketClients().remove(this);
-                        getServer().getClients().remove(this);
+                        getServer().removeSocketClient(this);
+                        getServer().removeClient(this);
                         Server.setMulti(Server.getMulti() - 1);
                         if (Server.getMulti() == 1) {
                             getServer().endTimerLogin();
@@ -88,12 +88,12 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         }
                         else {
                             System.out.println("client socket extra in avvio multi come single ha provato a connettersi");
-                            getServer().getSocketClients().remove(this);
-                            getServer().getClients().remove(this);
+                            getServer().removeSocketClient(this);
+                            getServer().removeClient(this);
                             this.running = false;
                         }
 
-                        System.out.println("modalita settata " + getServer().isSinglePlayer());
+                        //System.out.println("modalita settata " + getServer().isSinglePlayer());
                     }
                     if (getServer().checkNumberPlayer()) {
                         if (getServer().isGameStarted()) {
@@ -109,11 +109,10 @@ public class VirtualSocket extends VirtualView implements Runnable {
                             this.getServer().waitingOtherPlayers();
                         }
                     }
-
                     else {
                         System.out.println("client socket extra ha provato a connettersi");
-                        getServer().getSocketClients().remove(this);
-                        getServer().getClients().remove(this);
+                        getServer().removeSocketClient(this);
+                        getServer().removeClient(this);
                         this.running = false;
                     }
                 }

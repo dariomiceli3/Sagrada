@@ -2,6 +2,7 @@ package it.polimi.se2018.client.view.gui;
 
 
 import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.rmi.Ping;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.View;
@@ -130,8 +131,9 @@ public class GuiController extends View {
 
         if (connectionType.equalsIgnoreCase("rmi")) {
 
-            serverRmi = new RmiHandler(this);
-
+            Ping ping = new Ping();
+            serverRmi = new RmiHandler(this, ping);
+            ping.setConnection(serverRmi);
             this.setConnection(serverRmi);
 
             Thread viewRmiThread = new Thread(this);

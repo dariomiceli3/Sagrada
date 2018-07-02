@@ -77,4 +77,6 @@ public interface RmiServerInterface extends Remote {
 
     public void setReconnectToServer(int ID) throws RemoteException;
 
+    public void clientPing(int ID) throws RemoteException;
+
 }

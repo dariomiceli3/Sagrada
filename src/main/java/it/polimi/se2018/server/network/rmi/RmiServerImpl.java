@@ -29,6 +29,10 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
 
     }
 
+    public List<VirtualRmi> getClientsRmi() {
+        return clientsRmi;
+    }
+
     public void sendEventVirtual(int id, Event event) {
         for (VirtualRmi virtualRmi : clientsRmi) {
             if (virtualRmi.getPlayerID() == id) {
@@ -214,6 +218,15 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     @Override
     public void setReconnectToServer(int ID) {
         sendEventVirtual(ID, new ReconnectPlayerEvent(ID));
+    }
+
+    @Override
+    public void clientPing(int ID) {
+        for (VirtualRmi virtualRmi : clientsRmi) {
+            if (virtualRmi.getPlayerID() == ID) {
+                virtualRmi.timeout();
+            }
+        }
     }
 }
 

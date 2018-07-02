@@ -19,10 +19,12 @@ import java.util.List;
 public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInterface {
 
     private View view;
+    private Ping ping;
 
-    protected RmiClientImpl(View view) throws RemoteException {
+    protected RmiClientImpl(View view, Ping ping) throws RemoteException {
         super();
         this.view = view;
+        this.ping = ping;
 
     }
 
@@ -32,6 +34,9 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     @Override
     public void remoteIDEvent(int ID) throws RemoteException {
         view.setPlayerID(ID);
+        ping.setID(ID);
+        Thread threadPing = new Thread(ping);
+        threadPing.start();
         view.showID();
     }
 

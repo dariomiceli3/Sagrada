@@ -16,17 +16,19 @@ public class RmiHandler implements ClientInterface {
 
     private RmiServerInterface stub;
     private View view;
+    private Ping ping;
 
     // creazione del collegamento con il lato server
 
-    public RmiHandler(View view) {
+    public RmiHandler(View view, Ping ping) {
 
         try {
             this.view = view;
+            this.ping = ping;
 
             this.stub = (RmiServerInterface) Naming.lookup("//localhost/Sagrada");
 
-            RmiClientImpl clientRmi = new RmiClientImpl(this.view);
+            RmiClientImpl clientRmi = new RmiClientImpl(this.view, ping);
 
             stub.registerRmiClient(clientRmi);
 
@@ -384,6 +386,15 @@ public class RmiHandler implements ClientInterface {
         }catch (RemoteException e) {
             System.out.println("Error in reconnect in the game");
             e.printStackTrace();
+        }
+    }
+
+    public void clientPing(int ID) {
+        try {
+            stub.clientPing(ID);
+        }
+        catch (RemoteException e) {
+            System.out.println("Error in client ping");
         }
     }
 }
