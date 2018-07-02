@@ -433,7 +433,7 @@ public class Game implements Observer {
         model.getPlayerFromID(playerID).setDisconnect(true);
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
-            if(model.getPlayerFromID(playerID).getPattern() == null){
+            if(model.getPlayerFromID(playerID).getPrivate() == null){
                 notEnded = false;
                 endMatch(false);
             }
