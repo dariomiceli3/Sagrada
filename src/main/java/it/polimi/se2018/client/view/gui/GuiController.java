@@ -1118,6 +1118,7 @@ public class GuiController extends View {
                 EndGameScene.setWinnerSingl(winner);
                 EndGameScene.setPlayerPoints(playerPoints);
                 EndGameScene.setGameThreshold(gameThreshold);
+                EndGameScene.setFinish(true);
                 try {
                     EndGameScene.display();
                 } catch (IOException e) {

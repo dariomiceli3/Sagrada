@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class TestRoundManager {
 
-    /* @Test
+    @Test
     public void testCalculatePrivate() {
         Player player = new Player();
         Player player1 = new Player();
@@ -49,8 +49,7 @@ public class TestRoundManager {
                 patternCard2.putDiceOnPattern(dice1, 4, patternCard2);
                 patternCard2.putDiceOnPattern(dice1, 8, patternCard2);
                 patternCard2.putDiceOnPattern(dice1, 12, patternCard2);
-            }
-            catch (InvalidMoveException e) {
+            } catch (InvalidMoveException e) {
                 //e.printStackTrace();
                 fail();
             }
@@ -70,18 +69,10 @@ public class TestRoundManager {
             assertEquals(3, result.get(0).intValue());
             assertEquals(12, player1.getPrivatePoints());
             assertEquals(12, result.get(1).intValue());
-            }
-            catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //e.printStackTrace();
-                fail();
+            fail();
         }
-
-
-
-
-
-
-
 
 
     }
@@ -195,6 +186,7 @@ public class TestRoundManager {
 
 
     }
+
     @Test
     public void testCalculatePoints() throws FileNotFoundException, InvalidMoveException {
         Player player = new Player();
@@ -377,7 +369,8 @@ public class TestRoundManager {
         assertEquals(22, players.get(2).getTokensNumber());
         assertEquals(20, players.get(3).getTokensNumber());
 
-    }*/
+    }
+}
 
    /* @Test
     public void testCalculatePrivateSInglePlayer() {

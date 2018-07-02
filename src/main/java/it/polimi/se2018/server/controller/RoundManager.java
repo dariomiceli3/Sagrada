@@ -8,7 +8,7 @@ import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.util.*;
 
-public class RoundManager  {
+class RoundManager  {
     private static final int VPOINTS = 3;
 
 
@@ -233,6 +233,15 @@ public class RoundManager  {
         player.setDisconnect(playerToCopy.isDisconnect());
         player.setRunningP(playerToCopy.isDisconnect());
         return player;
+    }
+
+    private class PointsComparator implements Comparator<Player> {
+
+        @Override
+        public int compare (Player o1, Player o2) {
+            return Integer.compare(o2.getFinalPoints(), o1.getFinalPoints());
+        }
+
     }
 
 
