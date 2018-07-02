@@ -231,15 +231,15 @@ public class CliView extends View implements Runnable {
                 }
 
             } else if (cliState == ViewState.CUSTOMPATTERN) {
-               try {
+               //try {
                    customPattern = new PatternCard();
-                   customPattern = customPattern.loadCard(filePath + input);
+                   //customPattern = customPattern.loadCard(filePath + input);
                    getConnection().setPatternCustomToServer(super.getPlayerID(), customPattern);
-               }
-               catch (IOException e) {
-                   System.out.println("error in loading file");
-                   showCustomCardPath();
-               }
+               //}
+               //catch (IOException e) {
+                   //System.out.println("error in loading file");
+                   //showCustomCardPath();
+               //}
 
 
             } else if (cliState == ViewState.ROLL) {

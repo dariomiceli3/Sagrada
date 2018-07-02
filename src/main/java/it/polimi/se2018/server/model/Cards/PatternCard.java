@@ -6,10 +6,7 @@ import it.polimi.se2018.server.model.Components.GlassBox;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -865,35 +862,37 @@ public class PatternCard implements Serializable {
 
 
      public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException {
-
-              final int NUMBER_OF_CARDS = 24;
+         InputStream input;
+         final int NUMBER_OF_CARDS = 24;
               ArrayList<PatternCard> patternList = new ArrayList<>();
 
-              File file = new File("./");
-              String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
 
+              //File file = new File("./");
+              //String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
+
+         //json/1.json
               for (int i = 1; i <= NUMBER_OF_CARDS; i++) {
 
-                  patternList.add(loadCard(filePath + i + ".json"));
+                  input = PatternCard.class.getResourceAsStream( "/json/" + i + ".json");
+                  patternList.add(loadCard(input));
               }
 
               return patternList;
               }
 
-     public PatternCard loadCard(String fileName) throws FileNotFoundException
+     public PatternCard loadCard(InputStream inputStream)
      {
           Gson gson = new Gson();
-          JsonReader reader = new JsonReader(new FileReader(fileName));
+          JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
           return gson.fromJson(reader, PatternCard.class);
 
      }
 
-     public PatternCard  loadPatternForTesting() throws FileNotFoundException {
-         File file = new File("./");
-         String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
-         return loadCard(filePath + "25" + ".json");
+    public PatternCard  loadPatternForTesting() throws FileNotFoundException {
 
-     }
+         InputStream input = PatternCard.class.getResourceAsStream("/json" + 25 + ".json");
+         return loadCard(input);
+    }
 
      @Override
     public String toString() {

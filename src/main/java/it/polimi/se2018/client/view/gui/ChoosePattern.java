@@ -568,7 +568,7 @@ public class ChoosePattern {
     private void renderingScheme(File file) throws FileNotFoundException {
 
         selfScheme = new PatternCard();
-        selfScheme = selfScheme.loadCard(file.getAbsolutePath());
+        //selfScheme = selfScheme.loadCard(file.getAbsolutePath());
         CustomCard.createCard(selfScheme);
     }
 
