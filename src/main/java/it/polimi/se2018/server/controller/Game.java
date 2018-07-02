@@ -270,11 +270,13 @@ public class Game implements Observer {
 
         System.out.println("tentata riconnessione");
         VirtualView viewRemove = null;
+        Player reconnectPlayer = null;
         for(Player player : model.getPlayerList()) {
 
             if(player.isDisconnect()) {
                 for (VirtualView virtualView : viewGame) {
                     if (virtualView.getPlayerID() == player.getPlayerID()) {
+                        reconnectPlayer = player;
                         viewRemove = virtualView;
                     }
                 }
@@ -293,7 +295,7 @@ public class Game implements Observer {
             view.sendEvent(new NotPlayerDisconnectedEvent());
         }else{
             setPlayerReconnect(view.getPlayerID());
-            view.sendEvent(new SuccessfulReconnectionEvent());
+            view.sendEvent(new SuccessfulReconnectionEvent(reconnectPlayer, singlePlayer, true, toolCardList, model.getPublicList(), model.getPlayerList()));
         }
 
 

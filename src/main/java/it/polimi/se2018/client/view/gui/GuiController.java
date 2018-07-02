@@ -1169,34 +1169,54 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showReload()  {
+    public void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    reloadScene();
+
+                    // private boolean gameStarted;
+                    // private boolean maxPlayers;
+                    //private boolean customCard;
+                    name = currPlayer.getPlayerName();
+                    singlePlayer = singlePlayerr;
+                    gameStarted = gameStartedd;
+                    toolList = toolListt;
+                    publicCardList = publicCardListt;
+                    privateCard = currPlayer.getPrivate();
+                    patternCurrent = currPlayer.getPattern();
+                    tokens = currPlayer.getTokensNumber();
+                    for(Player player : playerList) {
+                        if (player.getPlayerID() == 0) {
+                            patternID0 = player.getPattern();
+                            nameID0 = player.getPlayerName();
+                        }
+                        if (player.getPlayerID() == 1) {
+                            patternID1 = player.getPattern();
+                            nameID1 = player.getPlayerName();
+                        }
+                        if (player.getPlayerID() == 2) {
+                            patternID2 = player.getPattern();
+                            nameID2 = player.getPlayerName();
+                        }
+                        if (player.getPlayerID() == 3) {
+
+                            patternID3 = player.getPattern();
+                            nameID3 = player.getPlayerName();
+                        }
+
+                    }
+                    boardScene();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
         });
     }
 
+
     //-------------switch scene method----------
-
-    private void reloadScene() throws IOException {
-
-        BoardController.setMainController(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
-        Parent root3 = (Parent) loader.load();
-        Scene board = new Scene(root3);
-        stage.setTitle("Sagrada Main Board");
-        stage.setScene(board);
-        stage.setResizable(false);
-        stage.show();
-
-
-    }
 
 
     private void patternScene() throws IOException{

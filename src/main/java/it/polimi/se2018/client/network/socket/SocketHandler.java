@@ -418,10 +418,8 @@ public class SocketHandler implements ClientInterface, Runnable {
         }
         else if (event instanceof SuccessfulReconnectionEvent) {
             // todo gestire anche per rmi
-            view.showReload();
-        }
-
-        else {
+            view.showReload(((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
+        }else {
             System.out.println("Not understood the message");
         }
     }

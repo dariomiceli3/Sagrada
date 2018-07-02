@@ -1493,6 +1493,8 @@ public class BoardController {
         }
         else {
             reconnect.setVisible(false);
+            roll.setDisable(true);
+            next.setDisable(true);
             setToolCost();
             loadPanel();
             loadPattern();

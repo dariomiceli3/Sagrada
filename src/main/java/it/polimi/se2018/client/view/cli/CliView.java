@@ -1384,9 +1384,11 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showReload() {
-        // todo sistemare
+    public void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList) {
+
     }
+
+
 }
 
 

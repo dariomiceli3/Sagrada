@@ -34,7 +34,7 @@ public abstract class View implements Runnable {
         return playerName;
     }
 
-    public void setNameView(String nameView){
+    public void setNameView(String nameView) {
         this.playerName = nameView;
     }
 
@@ -179,7 +179,7 @@ public abstract class View implements Runnable {
 
     public abstract void showTapWheelEndTwo();
 
-    public abstract void showBoard(RoundTracker roundTracker,DraftPool draftPool);
+    public abstract void showBoard(RoundTracker roundTracker, DraftPool draftPool);
 
     public abstract void showInvalidMove(String msg);
 
@@ -211,5 +211,5 @@ public abstract class View implements Runnable {
 
     public abstract void showNotPermittedReconnection();
 
-    public abstract void showReload();
+    public abstract void showReload(Player currPlayer,boolean singlePlayerr, boolean gameStartedd, List<ToolCard> toolListt, List<PublicObjectiveCard> publicCardListt, List<Player> playerList);
 }
