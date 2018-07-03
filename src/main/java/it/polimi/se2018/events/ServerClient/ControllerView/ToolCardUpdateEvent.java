@@ -1,6 +1,6 @@
 package it.polimi.se2018.events.ServerClient.ControllerView;
 
-import it.polimi.se2018.server.controller.ToolCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.events.Event;
 
 import java.util.List;

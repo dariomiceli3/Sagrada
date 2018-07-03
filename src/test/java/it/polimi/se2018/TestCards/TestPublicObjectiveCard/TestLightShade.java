@@ -19,7 +19,6 @@ public class TestLightShade {
     @Test
     public void testRunPublic() throws InvalidMoveException {
         PatternCard pattern = new PatternCard();
-        //try {
             Dice dice = new Dice(4, DiceColor.GREEN);
             Dice dice1 = new Dice(3, DiceColor.YELLOW);
             Dice dice2 = new Dice(5, DiceColor.BLUE);
@@ -52,11 +51,6 @@ public class TestLightShade {
             PublicObjectiveCard publicCard = new PublicObjectiveCard(new LightShade(), "Light Shades");
             assertEquals(4, publicCard.executeEffect(pattern));
 
-
-            // todo sistemare
-        /*} catch(FileNotFoundException e) {
-            fail();
-        }*/
 
     }
 

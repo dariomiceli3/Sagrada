@@ -136,6 +136,23 @@ public class TestView {
                     setChanged();
                     notifyObservers(event);
                 }
+
+                if (event instanceof ExitEvent) {
+                    setChanged();
+                    notifyObservers(event);
+                }
+                if (event instanceof ReconnectPlayerEvent){
+                    setChanged();
+                    notifyObservers(event);
+                }
+                if (event instanceof DisconnectionEvent) {
+                    setChanged();
+                    notifyObservers(event);
+                }
+                if (event instanceof ReconnectionEvent) {
+                    setChanged();
+                    notifyObservers(event);
+                }
             }
 
             @Override
@@ -405,12 +422,73 @@ public class TestView {
         viewList.get(1).sendEvent(new PlayerDraftPoolEvent());
 
         viewList.get(1).sendEvent(new ExitEvent(1));
-        //viewList.get(1).sendEvent(new ReconnectPlayerEvent(1));
+        viewList.get(1).sendEvent(new ReconnectPlayerEvent(1));
+        viewList.get(1).sendEvent(new DisconnectionEvent(1));
+        viewList.get(1).sendEvent(new ReconnectionEvent());
+        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
 
-        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
-        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
-        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
-        //viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+    }
+
+    @Test
+    public void testDisconnectionEvent() throws FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+        viewList.get(1).sendEvent(new DisconnectionEvent(1));
+
+        //viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        //viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+
+
+
+    }
+
+    @Test
+    public void testDisconnectionPatternEvent() throws FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+        //viewList.get(1).sendEvent(new DisconnectionEvent(1));
+
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(1).sendEvent(new DisconnectionEvent(1));
+
+
+    }
+
+    @Test
+    public void testDisconnectionRollEvent() throws FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+        //viewList.get(1).sendEvent(new DisconnectionEvent(1));
+
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(1).sendEvent(new PlayerPatternEvent(0, 1));
+
+        viewList.get(0).sendEvent(new DisconnectionEvent(0));
+
 
     }
 
@@ -735,6 +813,8 @@ public class TestView {
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
     }
 
+
+
     @Test
     public void testCopperFoil() throws InvalidMoveException, FileNotFoundException {
         List<VirtualView> viewList = new ArrayList<>();
@@ -749,6 +829,37 @@ public class TestView {
 
         viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
         viewList.get(1).sendEvent(new PlayerPatternEvent(1, 2));
+
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+        viewList.get(0).getModel().getPlayerFromID(0).setPattern(patternCard);
+        // 1 round
+        viewList.get(0).sendEvent(new PlayerDraftPoolEvent());
+
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice,3,model.getPlayerFromID(0).getPattern());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,4,model.getPlayerFromID(0).getPattern());
+        viewList.get(0).sendEvent(new CopperFoilEvent(3,3));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCopperFoilInvalid() throws InvalidMoveException, FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+        Dice dice = new Dice(3, DiceColor.RED);
+        Dice dice1 = new Dice(4, DiceColor.GREEN);
+        viewList.get(0).sendEvent(new CopperFoilEvent(3,3));
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(1).sendEvent(new PlayerPatternEvent(1, 2));
+
 
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
 
@@ -794,6 +905,37 @@ public class TestView {
         viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,8,model.getPlayerFromID(0).getPattern());
         viewList.get(0).sendEvent(new LathekinEvent(3,7,8,8));
     }
+
+    /*@Test(expected = NullPointerException.class)
+    public void testLathekinInvalid1() throws InvalidMoveException, FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+        Dice dice = new Dice(3, DiceColor.RED);
+        Dice dice1 = new Dice(4, DiceColor.GREEN);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(0).getModel().getPlayerFromID(0).setPattern(patternCard);
+        System.out.println(viewList.get(0).getModel().getPlayerFromID(0).getPattern().toString());
+        viewList.get(1).sendEvent(new PlayerPatternEvent(1, 2));
+        // 1 round
+        viewList.get(0).sendEvent(new PlayerDraftPoolEvent());
+
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice,3,model.getPlayerFromID(0).getPattern());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,8,model.getPlayerFromID(0).getPattern());
+        viewList.get(0).sendEvent(new LathekinEvent(3,7,8,8));
+        viewList.get(0).sendEvent(new LathekinEvent(3,7,8,7));
+    }*/
 
     @Test
     public void testFluxBrush() throws InvalidMoveException, FileNotFoundException {
@@ -879,10 +1021,39 @@ public class TestView {
         viewList.get(0).sendEvent(new PlayerDraftPoolEvent());
         viewList.get(0).sendEvent(new RunningPliersEvent(0,0));
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
-
         viewList.get(1).sendEvent(new PlayerNextTurnEvent());
         viewList.get(1).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRunningPliersInvalid() throws InvalidMoveException, FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+        Dice dice = new Dice(3, DiceColor.RED);
+        Dice dice1 = new Dice(4, DiceColor.GREEN);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(0).getModel().getPlayerFromID(0).setPattern(patternCard);
+        System.out.println(viewList.get(0).getModel().getPlayerFromID(0).getPattern().toString());
+        viewList.get(1).sendEvent(new PlayerPatternEvent(1, 2));
+        // 1 round
+        viewList.get(0).sendEvent(new PlayerDraftPoolEvent());
+        viewList.get(0).sendEvent(new RunningPliersEvent(0,0));
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new RunningPliersEvent(0,0));
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+
 
     }
 
@@ -1058,6 +1229,61 @@ public class TestView {
         viewList.get(1).sendEvent(new PlayerNextTurnEvent());
 
     }
+
+    /*@Test(expected = NullPointerException.class)
+    public void testTapWheelInvalid() throws InvalidMoveException, FileNotFoundException {
+        List<VirtualView> viewList = new ArrayList<>();
+        viewList.add(createView(0));
+        viewList.add(createView(1));
+        Model model = new Model();
+        Game game = new Game(viewList, false, model);
+        viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
+        viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
+        Dice dice = new Dice(3, DiceColor.RED);
+        Dice dice1 = new Dice(4, DiceColor.GREEN);
+        PatternCard patternCard = new PatternCard().loadPatternForTesting();
+
+
+
+
+        viewList.get(0).sendEvent(new PlayerPatternEvent(0, 1));
+        viewList.get(0).getModel().getPlayerFromID(0).setPattern(patternCard);
+        System.out.println(viewList.get(0).getModel().getPlayerFromID(0).getPattern().toString());
+        viewList.get(1).sendEvent(new PlayerPatternEvent(1, 2));
+        // 1 round
+        viewList.get(0).sendEvent(new PlayerDraftPoolEvent());
+
+        ArrayList<Dice> diceArrayList = new ArrayList<>();
+
+        Dice dice3 = new Dice(5, DiceColor.YELLOW);
+        diceArrayList.add(dice3);
+        diceArrayList.add(dice1);
+        diceArrayList.add(dice);
+        viewList.get(0).getModel().getDraftPool().setDraftPool(diceArrayList);
+        viewList.get(0).getModel().getRoundTracker().setTracker(diceArrayList);
+        viewList.get(0).sendEvent(new TapWheelEvent(1,0,2,0,0));
+
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice,0,model.getPlayerFromID(0).getPattern());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,1,model.getPlayerFromID(0).getPattern());
+        viewList.get(0).sendEvent(new TapWheelEvent(1,0,2,0,0));
+        //viewList.get(0).sendEvent(new TapWheelEvent(1,0,2,0,0));
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+
+        viewList.get(1).sendEvent(new PlayerDraftPoolEvent());
+
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,3,model.getPlayerFromID(0).getPattern());
+        System.out.println(viewList.get(0).getModel().getPlayerFromID(0).getPattern().toString());
+        viewList.get(0).sendEvent(new TapWheelEvent(2,1,7,3,3));
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(0).sendEvent(new PlayerNextTurnEvent());
+        viewList.get(1).sendEvent(new PlayerNextTurnEvent());
+
+    }*/
 
     @Test
     public void testLensCutter() throws InvalidMoveException, FileNotFoundException {

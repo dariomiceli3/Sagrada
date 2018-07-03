@@ -885,7 +885,7 @@ public class PatternCard implements Serializable {
 
     public PatternCard  loadPatternForTesting() {
 
-         InputStream input = PatternCard.class.getResourceAsStream("/json" + 25 + ".json");
+         InputStream input = PatternCard.class.getResourceAsStream("/json/" + 25 + ".json");
          return loadCard(input);
     }
 

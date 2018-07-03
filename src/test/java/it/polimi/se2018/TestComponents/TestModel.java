@@ -125,7 +125,7 @@ public class TestModel {
         //model.setDraftPoolAndNotify(true);
         model.setEndRoundAndNotify();
         //model.setPatternAndNotify(1, 0);
-        // todo dario sistema!!!
+
         model.setFinalPointsAndNotify(playerArrayList, false);
         model.setPrivateSinglePlayerAndNotify(privateObjectiveCardArrayList);
         //model.setMoveAndNotify(1,0,0);

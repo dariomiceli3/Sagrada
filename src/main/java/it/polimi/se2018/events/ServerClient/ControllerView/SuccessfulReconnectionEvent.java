@@ -1,6 +1,6 @@
 package it.polimi.se2018.events.ServerClient.ControllerView;
 
-import it.polimi.se2018.server.controller.ToolCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.events.Event;
