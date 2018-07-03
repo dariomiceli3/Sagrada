@@ -31,13 +31,13 @@ public class TestPlayer {
         PatternCard pattern = new PatternCard();
         ArrayList<PatternCard> patternCards = new ArrayList<>();
         patternCards.add(pattern);
-        try {
+        //try {
 
             ArrayList<PatternCard> patternList = pattern.loadPatternList();
             pattern = patternList.get(4);
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
         player.setPattern(pattern);
         player.setPrivate(privateCard);
         player.setTokensNumber(tokens);

@@ -18,7 +18,7 @@ public class TestPatternCard {
     @Test
     public void testLoadPatternList() {
         PatternCard patternCard = new PatternCard();
-        try {
+        //try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             assertEquals(24, patternCardArrayList.size());
             assertEquals("Kaleidoscopic Dream",patternCardArrayList.get(0).getName());
@@ -93,10 +93,10 @@ public class TestPatternCard {
             assertEquals("Fulgor Del Cielo",patternCardArrayList.get(23).getName());
             assertEquals(5,patternCardArrayList.get(23).getDifficulty());
             assertEquals(20, patternCardArrayList.get(23).getPattern().size());
-        }
+        /*}
         catch (FileNotFoundException e){
             fail();
-        }
+        }*/
     }
 
     @Test(expected = InvalidMoveException.class)
@@ -104,14 +104,14 @@ public class TestPatternCard {
         PatternCard patternCard = new PatternCard();
         Dice dice = new Dice(3, DiceColor.YELLOW);
         Dice dice1 = new Dice(3, DiceColor.RED);
-        try {
+        //try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             patternCardArrayList.get(0).putDice(dice, 2);
             patternCardArrayList.get(0).putDice(dice1, 0);
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test
@@ -119,7 +119,7 @@ public class TestPatternCard {
         PatternCard patternCard = new PatternCard();
         Dice dice = new Dice(3, DiceColor.YELLOW);
         //Dice dice1 = new Dice(3, DiceColor.RED);
-        try {
+        //try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             try {
                 patternCardArrayList.get(0).putDice(dice, 2);
@@ -128,9 +128,9 @@ public class TestPatternCard {
             catch (InvalidMoveException e){
                 fail();
             }
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test
@@ -138,7 +138,7 @@ public class TestPatternCard {
         PatternCard patternCard = new PatternCard();
         Dice dice = new Dice(3, DiceColor.YELLOW);
         //Dice dice1 = new Dice(3, DiceColor.RED);
-        try {
+        //try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             try {
                 patternCardArrayList.get(0).putDice(dice, 2);
@@ -147,9 +147,9 @@ public class TestPatternCard {
             catch (InvalidMoveException e){
                 fail();
             }
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test
@@ -170,7 +170,7 @@ public class TestPatternCard {
         PatternCard patternCard2 = new PatternCard();
         PatternCard patternCard3 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -269,9 +269,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test
@@ -295,7 +295,7 @@ public class TestPatternCard {
         PatternCard patternCard4 = new PatternCard();
         PatternCard patternCard5 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -402,9 +402,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test (expected = InvalidMoveException.class)
@@ -684,7 +684,7 @@ public class TestPatternCard {
         PatternCard patternCard2 = new PatternCard();
         PatternCard patternCard3 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -778,9 +778,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
     @Test (expected = InvalidMoveException.class)
     public void testPutDiceOnPatternEglomiseException() throws InvalidMoveException {
@@ -792,7 +792,7 @@ public class TestPatternCard {
         PatternCard patternCard5 = new PatternCard();
         PatternCard patternCard33 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -905,9 +905,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test (expected = InvalidMoveException.class)
@@ -1216,7 +1216,7 @@ public class TestPatternCard {
         PatternCard patternCard2 = new PatternCard();
         PatternCard patternCard3 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -1309,9 +1309,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test (expected = InvalidMoveException.class)
@@ -1336,7 +1336,7 @@ public class TestPatternCard {
         PatternCard patternCard4 = new PatternCard();
         PatternCard patternCard5 = new PatternCard();
 
-        try {
+        //try {
             Dice diceYellow1 = new Dice(1, DiceColor.YELLOW);
             Dice diceYellow2 = new Dice(2, DiceColor.YELLOW);
             Dice diceYellow3 = new Dice(3, DiceColor.YELLOW);
@@ -1441,9 +1441,9 @@ public class TestPatternCard {
 
 
 
-        } catch (FileNotFoundException e) {
+        /*} catch (FileNotFoundException e) {
             fail();
-        }
+        }*/
     }
 
     @Test (expected = InvalidMoveException.class)

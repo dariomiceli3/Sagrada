@@ -1,16 +1,14 @@
 package it.polimi.se2018.server.network.rmi;
 
 
-import it.polimi.se2018.client.ClientInterface;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
-import it.polimi.se2018.server.Server;
+import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolCardSinglePlayerStartEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
+import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.Event;
+import it.polimi.se2018.events.SinglePlayer.SinglePlayerEvent;
+import it.polimi.se2018.events.SinglePlayer.ToolCardSinglePlayerStartEvent;
+import it.polimi.se2018.events.SinglePlayer.ToolNumberEvent;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

@@ -1,16 +1,15 @@
 package it.polimi.se2018.server.network.rmi;
 
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
-import it.polimi.se2018.server.Server;
-import it.polimi.se2018.server.VirtualView;
-import it.polimi.se2018.server.model.Events.ClientServer.DisconnectionEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.GrozingPliersEvent;
-import it.polimi.se2018.server.model.Events.ClientServer.ReconnectionEvent;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.*;
+import it.polimi.se2018.server.network.Server;
+import it.polimi.se2018.server.network.VirtualView;
+import it.polimi.se2018.events.ClientServer.DisconnectionEvent;
+import it.polimi.se2018.events.ClientServer.ReconnectionEvent;
+import it.polimi.se2018.events.Event;
+import it.polimi.se2018.events.InvalidMoveEvent;
+import it.polimi.se2018.events.ServerClient.ControllerView.*;
+import it.polimi.se2018.events.ServerClient.ModelView.*;
+import it.polimi.se2018.events.SinglePlayer.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;

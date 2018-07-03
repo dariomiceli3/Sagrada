@@ -1,18 +1,14 @@
 package it.polimi.se2018.client.view;
 
-import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Cards.PatternCard;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public abstract class View implements Runnable {
 

@@ -2,7 +2,7 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.ToolCardUpdateEvent;
+import it.polimi.se2018.events.ServerClient.ControllerView.ToolCardUpdateEvent;
 
 import java.util.List;
 import java.util.Random;

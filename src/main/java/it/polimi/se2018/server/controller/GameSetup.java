@@ -1,18 +1,15 @@
 package it.polimi.se2018.server.controller;
 
 
-import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
-import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.StartPatternEvent;
+import it.polimi.se2018.events.ServerClient.ControllerView.StartPatternEvent;
 
 
 import java.util.Random;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,11 +92,7 @@ public class GameSetup {
 
     private List<PatternCard> loadPatternCard() {
         PatternCard pattern = new PatternCard();
-        try {
-            listPattern = pattern.loadPatternList();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        listPattern = pattern.loadPatternList();
         return listPattern;
     }
 

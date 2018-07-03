@@ -1,6 +1,6 @@
 package it.polimi.se2018.client.view.cli;
 
-import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.controller.ToolCard;
@@ -9,8 +9,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 
@@ -173,11 +172,14 @@ public class CliView extends View implements Runnable {
             } else if (input.equalsIgnoreCase("exit")) {
                 if (cliState == ViewState.ROLL) {
                     getConnection().setDraftPoolToServer(super.getPlayerID());
+                    connected = false;
+                    System.out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
+                    getConnection().setExitToServer(super.getPlayerID());
+                    cliState = ViewState.NOTCONNECTED;
                 }
-                connected = false;
-                System.out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
-                getConnection().setExitToServer(super.getPlayerID());
-                cliState = ViewState.NOTCONNECTED;
+                if (cliState == ViewState.NAME || cliState == ViewState.PATTERN) {
+                    System.out.println("\n" + "It's not time for exit the game");
+                }
             } else if (cliState == ViewState.NOTAUTHORIZED) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     System.out.println("Please, it's not your turn! Waiting for your moment");
@@ -231,15 +233,17 @@ public class CliView extends View implements Runnable {
                 }
 
             } else if (cliState == ViewState.CUSTOMPATTERN) {
-               //try {
-                   customPattern = new PatternCard();
-                   //customPattern = customPattern.loadCard(filePath + input);
-                   getConnection().setPatternCustomToServer(super.getPlayerID(), customPattern);
-               //}
-               //catch (IOException e) {
-                   //System.out.println("error in loading file");
-                   //showCustomCardPath();
-               //}
+
+                try {
+                    InputStream inputStream = CliView.class.getResourceAsStream("/json/custom/" + input);
+                    customPattern = new PatternCard();
+                    customPattern = customPattern.loadCard(inputStream);
+                    getConnection().setPatternCustomToServer(super.getPlayerID(), customPattern);
+                }
+                catch (NullPointerException e) {
+                    System.out.println("Enter a correct name");
+                    showCustomCardPath();
+                }
 
 
             } else if (cliState == ViewState.ROLL) {
@@ -901,8 +905,7 @@ public class CliView extends View implements Runnable {
 
     public void showCustomCardPath() {
         System.out.println("Enter the path of the file .json");
-        File file = new File("./");
-        filePath = file.getAbsolutePath().replace(".", "src/main/res/");
+        filePath = "src/main/resources/json/custom/";
         System.out.print(filePath);
         cliState = ViewState.CUSTOMPATTERN;
     }
@@ -1360,7 +1363,7 @@ public class CliView extends View implements Runnable {
         }
     }
 
-    //------------------------disconnection
+    //----------------------------disconnection-----------------------------------------------------------------------
 
 
     @Override

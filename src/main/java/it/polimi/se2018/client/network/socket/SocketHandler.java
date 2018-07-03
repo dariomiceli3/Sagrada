@@ -1,14 +1,14 @@
 package it.polimi.se2018.client.network.socket;
 
-import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.*;
+import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.Event;
+import it.polimi.se2018.events.InvalidMoveEvent;
+import it.polimi.se2018.events.ServerClient.ControllerView.*;
+import it.polimi.se2018.events.ServerClient.ModelView.*;
+import it.polimi.se2018.events.SinglePlayer.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -22,117 +22,83 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class RoundTrackerBox {
 
     private static BoardController board;
-
     private static int round;
-
     private int selectedDice;
-
     private static Stage window;
+    private InputStream fileStream;
 
-    FileInputStream fileStream;
-
-    public static void setMainController(BoardController board){
+    static void setMainController(BoardController board){
         RoundTrackerBox.board = board;
     }
-
-    public static void setBoxRound(int round){
+    static void setBoxRound(int round){
         RoundTrackerBox.round = round;
     }
 
     public static void display()  throws IOException {
-
         window = new Stage();
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Dice of the round: " + round);
         FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/RoundTracker.fxml"));
-        Parent root1 = (Parent) loader.load();
+        Parent root1 = loader.load();
         Scene scene = new Scene(root1);
         window.setScene(scene);
         window.setResizable(false);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                window.showAndWait();
-            }
-        });
+        Platform.runLater(() -> window.showAndWait());
     }
 
     @FXML
     private ToggleButton button1;
-
     @FXML
     private ImageView dice1;
-
     @FXML
     private Button selectButton;
-
     @FXML
     private ToggleButton button2;
-
     @FXML
     private ImageView dice2;
-
     @FXML
     private ToggleButton button3;
-
     @FXML
     private ImageView dice3;
-
     @FXML
     private ToggleButton button4;
-
     @FXML
     private ImageView dice4;
-
     @FXML
     private ToggleButton button5;
-
     @FXML
     private ImageView dice5;
-
     @FXML
     private ToggleButton button6;
-
     @FXML
     private ImageView dice6;
-
     @FXML
     private ToggleButton button7;
-
     @FXML
     private ImageView dice7;
-
     @FXML
     private ToggleButton button8;
-
     @FXML
     private ImageView dice8;
-
     @FXML
     private ToggleButton button9;
-
     @FXML
     private ImageView dice9;
-
     @FXML
     private ToggleGroup buttonGroup;
 
     @FXML
     void selectMethod(MouseEvent event) {
-
         window.close();
-
     }
 
     @FXML
@@ -151,7 +117,6 @@ public class RoundTrackerBox {
                 button9.setBlendMode(BlendMode.SRC_OVER);
             } else {
                 if (buttonGroup.getSelectedToggle().equals(button1)) {
-
 
                         button1.setBlendMode(BlendMode.COLOR_BURN);
                         button2.setBlendMode(BlendMode.SRC_OVER);
@@ -274,167 +239,25 @@ public class RoundTrackerBox {
                         board.setIndexPosition(8);
                 }
             }
-        }catch(NullPointerException e){
+        }
+        catch(NullPointerException e){
         }
 
     }
 
     public void initialize() throws IOException {
-
-
         loadDice();
-
-        //selectButton.disableProperty().bind(Bindings.isNull(buttonGroup.selectedToggleProperty()));
-
-       /* button1.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button2.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button3.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button4.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button5.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button6.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button7.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button8.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button9.blendModeProperty().addListener(new ChangeListener<BlendMode>() {
-            @Override
-            public void changed(ObservableValue<? extends BlendMode> observable, BlendMode oldValue, BlendMode newValue) {
-
-            }
-
-        });
-        button1.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button1.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button2.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button3.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button4.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button5.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button6.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button7.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button8.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });
-        button9.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-            }
-
-        });*/
-
-
-
     }
 
     private void loadDice() throws IOException {
 
         for (int i = 0; i < board.getRoundTracker().getRoundDice(round).size(); i++) {
 
-            File file = new File("./");
             String fileName = board.getRoundTracker().getRoundDice(round).get(i).toStringGui();
-            String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/dice");
 
             try {
                 System.out.println("consegna dadi round tracker numero " + round);
-                fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
+                fileStream = RoundTrackerBox.class.getResourceAsStream("/images/dice/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
                     dice1.setImage(image);
@@ -472,9 +295,8 @@ public class RoundTrackerBox {
                     dice9.setImage(image);
                     button9.setVisible(true);
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
+            }
+            finally {
                 fileStream.close();
             }
 

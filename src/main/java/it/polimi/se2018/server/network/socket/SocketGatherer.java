@@ -1,7 +1,6 @@
 package it.polimi.se2018.server.network.socket;
 
-import it.polimi.se2018.server.Server;
-import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.network.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

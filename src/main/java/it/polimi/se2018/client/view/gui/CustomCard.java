@@ -10,7 +10,6 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -19,9 +18,7 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import static java.lang.String.*;
@@ -29,15 +26,11 @@ import static java.lang.String.*;
 public class CustomCard {
 
     private static WritableImage snapshot;
-
-    public static WritableImage getSnapshot() {
-        return snapshot;
-    }
     private static WritableImage wi;
 
 
 
-    public static void createCard(PatternCard patternCard){
+    static void createCard(PatternCard patternCard){
 
         Stage canvasWindow = new Stage();
 

@@ -1,7 +1,7 @@
 package it.polimi.se2018.client.view.gui;
 
 
-import it.polimi.se2018.client.ClientInterface;
+import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.network.rmi.Ping;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
@@ -11,15 +11,8 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.BooleanExpression;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -32,40 +25,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class GuiController extends View {
-
-
-    @FXML
-    private TextField txtName;
-    @FXML
-    private Button playButton;
-
-    //-----fxml single player----
-    @FXML
-    private ComboBox<Integer> comboBox;
-
-
 
     private ClientInterface connection;
     private static final int SOCKETPORT = 8888;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
     private static String host = "localhost";
+    private Stage stage;
+    private static BoardController board;
     private String name;
     private SimpleBooleanProperty nameSetted = new SimpleBooleanProperty(false);
-    private Stage stage;
+    private Integer selectedDifficulty;
     private boolean singlePlayer;
     private boolean gameStarted;
     private boolean maxPlayers;
+    private boolean customCard;
+    private int tokens;
     private List<ToolCard>  toolList;
     private List<PatternCard>  patternList;
     private List<PublicObjectiveCard>  publicCardList;
@@ -81,34 +62,104 @@ public class GuiController extends View {
     private String nameID1;
     private String nameID2;
     private String nameID3;
-    private int tokens;
-    private boolean customCard;
-    private static BoardController board;
-    private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
-    private Integer selectedDifficulty;
 
-    public static void setBoard(BoardController board) {
-        GuiController.board = board;
+
+    public Stage getStage() {
+        return stage;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public PrivateObjectiveCard getPrivateCard() {
+        return privateCard;
+    }
+
+    public List<PatternCard> getPatternList() {
+        return patternList;
+    }
+
+    public RoundTracker getRoundTracker(){
+        return roundTracker;
+    }
+
+    List<ToolCard> getToolList() {
+        return toolList;
+    }
+
+    List<PublicObjectiveCard> getPublicCardList() {
+        return publicCardList;
+    }
+
+    List<PrivateObjectiveCard> getPrivateCardSingle() {
+        return privateCardSingle;
+    }
+    PatternCard getPatternCurrent() {
+        return patternCurrent;
+    }
+    PatternCard getPatternID0() {
+        return patternID0;
+    }
+    PatternCard getPatternID1() {
+        return patternID1;
+    }
+    PatternCard getPatternID2() {
+        return patternID2;
+    }
+    PatternCard getPatternID3() {
+        return patternID3;
+    }
+    int getTokens() {
+        return tokens;
+    }
+    String getNameID0() {
+        return nameID0;
+    }
+    String getNameID1() {
+        return nameID1;
+    }
+    String getNameID2() {
+        return nameID2;
+    }
+    String getNameID3() {
+        return nameID3;
+    }
+    private void setNameID0(String nameID0) {
+        this.nameID0 = nameID0;
+    }
+    private void setNameID1(String nameID1) {
+        this.nameID1 = nameID1;
+    }
+    private void setNameID2(String nameID2) {
+        this.nameID2 = nameID2;
+    }
+    private void setNameID3(String nameID3) {
+        this.nameID3 = nameID3;
+    }
+
+    private void setTokens(int tokens) {
+        this.tokens = tokens;
+    }
+
+
+    static void setBoard(BoardController board) {
+        GuiController.board = board;
+    }
     public boolean isSinglePlayer() {
         return singlePlayer;
     }
-
     public Integer getSelectedDifficulty() {
         return selectedDifficulty;
     }
-
-    public boolean isCustomCard() {
+    boolean isCustomCard() {
         return customCard;
     }
-
-    public void setCustomCard(boolean customCard) {
+    private void setCustomCard(boolean customCard) {
         this.customCard = customCard;
     }
 
     //-------------------------gui start-----------------
-
 
     public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer) throws IOException{
 
@@ -146,8 +197,17 @@ public class GuiController extends View {
     //----------------mode.fxml controller----------------
 
 
-    public void initialize() {
+    @FXML
+    private TextField txtName;
+    @FXML
+    private Button playButton;
+    //-----fxml single player----
+    @FXML
+    private ComboBox<Integer> comboBox;
+    private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
 
+
+    public void initialize() {
 
         gameStarted = false;
         maxPlayers = false;
@@ -155,24 +215,16 @@ public class GuiController extends View {
         playButton.disableProperty().bind(txtName.textProperty().isEmpty().or(nameSetted));
 
         playButton.disableProperty().addListener(
-                new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                        System.out.println(newValue.toString());
-
-                    }
-                }
+                (observable, oldValue, newValue) -> System.out.println(newValue.toString())
 
         );
-
     }
+
 
     @FXML
     void handlePlayButton(ActionEvent event) {
 
         if (gameStarted) {
-
             if (singlePlayer) {
                 getConnection().setDifficultyToServer(getPlayerID(), selectedDifficulty);
             }
@@ -198,31 +250,25 @@ public class GuiController extends View {
 
     private void setMode() {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (singlePlayer) {
-                    getConnection().setSinglePlayerMode(getPlayerID(), true);
-                }
-                else {
-                    getConnection().setSinglePlayerMode(getPlayerID(), false);
+        Platform.runLater(() -> {
+            if (singlePlayer) {
+                getConnection().setSinglePlayerMode(getPlayerID(), true);
+            }
+            else {
+                getConnection().setSinglePlayerMode(getPlayerID(), false);
 
-                }
             }
         });
     }
 
 
     public void setPattern(int indexPattern){
-
         getConnection().setPatternCardToServer(indexPattern, getPlayerID());
     }
 
     public void setCustomPattern(PatternCard pattern, boolean customCard) {
-
         getConnection().setPatternCustomToServer(getPlayerID(), pattern);
         setCustomCard(customCard);
-
     }
 
 
@@ -237,98 +283,6 @@ public class GuiController extends View {
     @Override
     public ClientInterface getConnection() {
         return connection;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public PrivateObjectiveCard getPrivateCard() {
-        return privateCard;
-    }
-
-    public List<ToolCard> getToolList() {
-        return toolList;
-    }
-
-    public List<PublicObjectiveCard> getPublicCardList() {
-        return publicCardList;
-    }
-
-    public List<PatternCard> getPatternList() {
-        return patternList;
-    }
-
-    public List<PrivateObjectiveCard> getPrivateCardSingle() {
-        return privateCardSingle;
-    }
-
-    public RoundTracker getRoundTracker(){
-        return roundTracker;
-    }
-
-    public PatternCard getPatternCurrent() {
-        return patternCurrent;
-    }
-
-    public PatternCard getPatternID0() {
-        return patternID0;
-    }
-
-    public PatternCard getPatternID1() {
-        return patternID1;
-    }
-
-    public PatternCard getPatternID2() {
-        return patternID2;
-    }
-
-    public PatternCard getPatternID3() {
-        return patternID3;
-    }
-
-    public int getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(int tokens) {
-        this.tokens = tokens;
-    }
-
-    public String getNameID0() {
-        return nameID0;
-    }
-
-    public String getNameID1() {
-        return nameID1;
-    }
-
-    public String getNameID2() {
-        return nameID2;
-    }
-
-    public String getNameID3() {
-        return nameID3;
-    }
-
-    public void setNameID0(String nameID0) {
-        this.nameID0 = nameID0;
-    }
-
-    public void setNameID1(String nameID1) {
-        this.nameID1 = nameID1;
-    }
-
-    public void setNameID2(String nameID2) {
-        this.nameID2 = nameID2;
-    }
-
-    public void setNameID3(String nameID3) {
-        this.nameID3 = nameID3;
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
 
@@ -350,12 +304,9 @@ public class GuiController extends View {
 
         setMode();
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (!singlePlayer) {
-                    AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
-                }
+        Platform.runLater(() -> {
+            if (!singlePlayer) {
+                AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
             }
         });
 
@@ -366,21 +317,18 @@ public class GuiController extends View {
 
         gameStarted = true;
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (singlePlayer) {
-                    comboBoxData.add(1);
-                    comboBoxData.add(2);
-                    comboBoxData.add(3);
-                    comboBoxData.add(4);
-                    comboBoxData.add(5);
-                    comboBox.setItems(comboBoxData);
-                    comboBox.setVisible(true);
-                    txtName.setDisable(true);
-                }
-                AlertBox.display("Name Choose", "Game is started, enter your name");
+        Platform.runLater(() -> {
+            if (singlePlayer) {
+                comboBoxData.add(1);
+                comboBoxData.add(2);
+                comboBoxData.add(3);
+                comboBoxData.add(4);
+                comboBoxData.add(5);
+                comboBox.setItems(comboBoxData);
+                comboBox.setVisible(true);
+                txtName.setDisable(true);
             }
+            AlertBox.display("Name Choose", "Game is started, enter your name");
         });
     }
 
@@ -1117,7 +1065,7 @@ public class GuiController extends View {
             public void run() {
                 getConnection().setEndGameTimer(getPlayerID());
                 EndGameScene.setSinglePlayer(true);
-                EndGameScene.setWinnerSingl(winner);
+                EndGameScene.setWinnerSingle(winner);
                 EndGameScene.setPlayerPoints(playerPoints);
                 EndGameScene.setGameThreshold(gameThreshold);
                 EndGameScene.setFinish(true);
@@ -1251,9 +1199,9 @@ public class GuiController extends View {
         BoardController.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = (Parent) loader.load();
-        Scene board = new Scene(root2);
+        Scene gameBoard = new Scene(root2);
         stage.setTitle("Sagrada Main Board");
-        stage.setScene(board);
+        stage.setScene(gameBoard);
         stage.setResizable(false);
         stage.show();
     }

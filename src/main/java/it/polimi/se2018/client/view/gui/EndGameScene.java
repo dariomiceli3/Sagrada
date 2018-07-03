@@ -17,61 +17,46 @@ import java.util.List;
 
 public class EndGameScene {
 
+    private static boolean singlePlayer;
+    private static boolean winnerSingle;
+    private static int playerPoints;
+    private static int gameThreshold;
+    private static boolean finish;
+    private static List<Player> playerList;
+
     @FXML
     private TextField winnerText;
-
     @FXML
     private TextArea rankText1;
-
     @FXML
     private TextArea rankText2;
-
     @FXML
     private TextArea rankText3;
-
     @FXML
     private TextArea rankText4;
 
     //------Single Player instance variables and observer method-----------
 
-    private static boolean singlePlayer;
-
-    private static boolean winnerSingl;
-
-    private static int playerPoints;
-
-    private static int gameThreshold;
-
-    public static void setPlayerPoints(int playerPoints) {
-        EndGameScene.playerPoints = playerPoints;
-    }
-
-    public static void setGameThreshold(int gameThreshold) {
-        EndGameScene.gameThreshold = gameThreshold;
-    }
 
     public static void setSinglePlayer(boolean singlePlayer) {
         EndGameScene.singlePlayer = singlePlayer;
     }
-
-    public static void setWinnerSingl(boolean winnerSingl) {
-        EndGameScene.winnerSingl = winnerSingl;
+    static void setWinnerSingle(boolean winnerSingle) {
+        EndGameScene.winnerSingle = winnerSingle;
     }
-
-    //----------------------------------------------------
-
-    private static boolean finish;
-
-    private static List<Player> playerList;
-
+    static void setPlayerPoints(int playerPoints) {
+        EndGameScene.playerPoints = playerPoints;
+    }
+    static void setGameThreshold(int gameThreshold) {
+        EndGameScene.gameThreshold = gameThreshold;
+    }
+    static void setFinish(boolean finish) {
+        EndGameScene.finish = finish;
+    }
     protected static void setPlayerList(List<Player> playerList) {
-
         EndGameScene.playerList = playerList;
     }
 
-    public static void setFinish(boolean finish) {
-        EndGameScene.finish = finish;
-    }
 
     public static void display() throws IOException {
         Stage window = new Stage();
@@ -80,16 +65,11 @@ public class EndGameScene {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("GAME OVER");
         FXMLLoader loader = new FXMLLoader(EndGameScene.class.getResource("/EndGame.fxml"));
-        Parent root1 = (Parent) loader.load();
+        Parent root1 = loader.load();
         Scene scene = new Scene(root1);
         window.setScene(scene);
         window.setResizable(false);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                window.showAndWait();
-            }
-        });
+        Platform.runLater(window::showAndWait);
     }
 
     public void initialize() {
@@ -97,24 +77,20 @@ public class EndGameScene {
         if (finish) {
             if (singlePlayer) {
 
-                if (winnerSingl) {
+                if (winnerSingle) {
 
                     winnerText.setText("You Win!" + "   Score : " + playerPoints);
-
                     rankText2.setVisible(true);
                     rankText2.setText("Threshold : " + gameThreshold);
-
 
                 } else {
 
                     winnerText.setText("You Lose!" + "  Score : " + playerPoints);
-
                     rankText2.setVisible(true);
                     rankText2.setText("Threshold : " + gameThreshold);
-
                 }
-
-            } else {
+            }
+            else {
 
                 winnerText.setText("Winner: " + playerList.get(0).getPlayerName() + "     Score : " + playerList.get(0).getFinalPoints());
 
@@ -137,10 +113,9 @@ public class EndGameScene {
                     }
                 }
             }
-
-        } else {
+        }
+        else {
             winnerText.setText("Game never played");
         }
     }
-
 }

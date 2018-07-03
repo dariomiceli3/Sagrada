@@ -861,16 +861,11 @@ public class PatternCard implements Serializable {
      }
 
 
-     public ArrayList<PatternCard> loadPatternList() throws FileNotFoundException {
+     public ArrayList<PatternCard> loadPatternList() {
          InputStream input;
          final int NUMBER_OF_CARDS = 24;
               ArrayList<PatternCard> patternList = new ArrayList<>();
 
-
-              //File file = new File("./");
-              //String filePath = file.getAbsolutePath().replace(".", "src/main/res/json/");
-
-         //json/1.json
               for (int i = 1; i <= NUMBER_OF_CARDS; i++) {
 
                   input = PatternCard.class.getResourceAsStream( "/json/" + i + ".json");
@@ -888,7 +883,7 @@ public class PatternCard implements Serializable {
 
      }
 
-    public PatternCard  loadPatternForTesting() throws FileNotFoundException {
+    public PatternCard  loadPatternForTesting() {
 
          InputStream input = PatternCard.class.getResourceAsStream("/json" + 25 + ".json");
          return loadCard(input);

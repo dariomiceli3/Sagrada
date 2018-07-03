@@ -1,7 +1,6 @@
 package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Components.DiceColor;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;

@@ -21,31 +21,22 @@ public class LoginController {
 
     @FXML
     private ToggleButton socket;
-
     @FXML
     private ToggleButton cli;
-
     @FXML
     private ToggleButton gui;
-
     @FXML
     private ToggleButton rmi;
-
     @FXML
     private ToggleGroup viewToggleGroup;
-
     @FXML
     private ToggleGroup connectionToggleGroup;
-
     @FXML
     private ToggleButton multiButton;
-
     @FXML
     private ToggleGroup modeToggleGroup;
-
     @FXML
     private ToggleButton singleButton;
-
     @FXML
     private Button loginButton;
 

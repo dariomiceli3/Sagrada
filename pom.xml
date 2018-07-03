@@ -107,7 +107,7 @@
                         <appendAssemblyId>false</appendAssemblyId>
                         <archive>
                             <manifest>
-                                <mainClass>it.polimi.se2018.server.Server</mainClass>
+                                <mainClass>it.polimi.se2018.server.network.Server</mainClass>
                             </manifest>
                         </archive>
                         <descriptorRefs>

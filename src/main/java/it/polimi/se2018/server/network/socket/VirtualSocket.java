@@ -1,16 +1,14 @@
 package it.polimi.se2018.server.network.socket;
 
-import it.polimi.se2018.server.Server;
-import it.polimi.se2018.server.VirtualView;
-import it.polimi.se2018.server.controller.ToolCard;
-import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.GameStartedEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.PlayerIDEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePlayerRequestEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolCardSinglePlayerStartEvent;
-import it.polimi.se2018.server.model.Events.SinglePlayer.ToolNumberEvent;
+import it.polimi.se2018.server.network.Server;
+import it.polimi.se2018.server.network.VirtualView;
+import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.Event;
+import it.polimi.se2018.events.ServerClient.ModelView.PlayerIDEvent;
+import it.polimi.se2018.events.SinglePlayer.SinglePlayerEvent;
+import it.polimi.se2018.events.SinglePlayer.SinglePlayerRequestEvent;
+import it.polimi.se2018.events.SinglePlayer.ToolCardSinglePlayerStartEvent;
+import it.polimi.se2018.events.SinglePlayer.ToolNumberEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

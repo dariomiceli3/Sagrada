@@ -1,6 +1,6 @@
 package it.polimi.se2018.server.network.rmi;
 
-import it.polimi.se2018.server.Server;
+import it.polimi.se2018.server.network.Server;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

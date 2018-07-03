@@ -5,8 +5,8 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.SinglePrivateEvent;
+import it.polimi.se2018.events.ServerClient.ModelView.*;
+import it.polimi.se2018.events.SinglePlayer.SinglePrivateEvent;
 
 import java.util.ArrayList;
 import java.util.List;

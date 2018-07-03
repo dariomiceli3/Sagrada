@@ -1,7 +1,5 @@
 package it.polimi.se2018.client.network.rmi;
 
-import it.polimi.se2018.client.ClientInterface;
-
 public class Ping implements Runnable {
 
     private static final int DEFAULT = 999;

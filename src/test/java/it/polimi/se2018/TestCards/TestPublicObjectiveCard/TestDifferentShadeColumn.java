@@ -19,7 +19,7 @@ public class TestDifferentShadeColumn {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
-        try {
+        //try {
             Dice dice = new Dice(4, DiceColor.GREEN);
             Dice dice1 = new Dice(3, DiceColor.YELLOW);
             Dice dice2 = new Dice(5, DiceColor.BLUE);
@@ -53,9 +53,9 @@ public class TestDifferentShadeColumn {
             assertEquals(8, publicCard.executeEffect(pattern));
 
 
-        } catch(FileNotFoundException e) {
+        /*} catch(FileNotFoundException e) {
             fail();
-        }
+        }*/
 
     }
 

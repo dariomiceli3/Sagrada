@@ -1,19 +1,15 @@
 package it.polimi.se2018.TestController;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
-import it.polimi.se2018.server.model.Components.DraftPool;
 import it.polimi.se2018.server.model.Components.Model;
-import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.Event;
-import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
-import it.polimi.se2018.server.model.Events.ServerClient.ModelView.*;
-import it.polimi.se2018.server.model.Events.SinglePlayer.*;
+import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.Event;
+import it.polimi.se2018.events.SinglePlayer.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

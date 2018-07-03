@@ -1,11 +1,11 @@
 package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.VirtualView;
+import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.server.model.Events.ClientServer.*;
-import it.polimi.se2018.server.model.Events.InvalidMoveEvent;
-import it.polimi.se2018.server.model.Events.ServerClient.ControllerView.*;
+import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.InvalidMoveEvent;
+import it.polimi.se2018.events.ServerClient.ControllerView.*;
 
 import java.util.Observable;
 import java.util.Observer;
