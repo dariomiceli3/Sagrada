@@ -3,7 +3,8 @@ package it.polimi.se2018.client.network.rmi;
 public class Ping implements Runnable {
 
     private static final int DEFAULT = 999;
-    private static final int PINGSECONDS = 2;
+    private static final int PINGSECONDS = 2000;
+    private static final int SLEEPMILLIS = 250;
     private RmiHandler rmiHandler;
     private int ID;
 
@@ -32,12 +33,12 @@ public class Ping implements Runnable {
             try {
                 if (rmiHandler != null) {
                     if (ID != DEFAULT) {
-                        Thread.sleep(2000);
+                        Thread.sleep(PINGSECONDS);
                         getConnection().clientPing(ID);
                     }
                 }
                 else {
-                    Thread.sleep(250);
+                    Thread.sleep(SLEEPMILLIS);
                 }
             }
             catch (InterruptedException e) {

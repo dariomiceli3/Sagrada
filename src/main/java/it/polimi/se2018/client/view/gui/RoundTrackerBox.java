@@ -50,6 +50,9 @@ public class RoundTrackerBox {
         FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/RoundTracker.fxml"));
         Parent root1 = loader.load();
         Scene scene = new Scene(root1);
+        InputStream stream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(stream);
+        window.getIcons().add(image);
         window.setScene(scene);
         window.setResizable(false);
         Platform.runLater(() -> window.showAndWait());

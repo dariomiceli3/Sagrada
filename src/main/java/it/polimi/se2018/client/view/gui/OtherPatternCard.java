@@ -66,7 +66,11 @@ public class OtherPatternCard {
     }
 
     public void initialize() {
-        loadPattern();
+        try {
+            loadPattern();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (int i = 0; i < patternCard.getPattern().size(); i++) {
             if (!patternCard.getPattern().get(i).isBoxEmpty()) {
@@ -90,20 +94,28 @@ public class OtherPatternCard {
         FXMLLoader loader = new FXMLLoader(OtherPatternCard.class.getResource("/PatternOtherPlayer.fxml"));
         Parent root1 = loader.load();
         Scene scene = new Scene(root1);
+        InputStream fileStream = OtherPatternCard.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
         window.setScene(scene);
         window.setResizable(false);
         Platform.runLater(window::showAndWait);
     }
 
 
-    private void loadPattern() {
-        File file = new File("./");
+    private void loadPattern() throws IOException{
         String fileName = patternCard.getName();
-        String filePath = file.getAbsolutePath().replace(".", "src/main/resources/Images/pattern");
+
+        if (patternCard.isCustom()) {
+            File file = new File("src/main/resources/images/pattern/" + fileName + ".png");
+            fileStream = new FileInputStream(file);
+        }
+        else {
+            fileStream = BoardController.class.getResourceAsStream("/images/pattern/" + fileName + ".png");
+        }
 
         try {
             System.out.println("consegna pattern");
-            fileStream = new FileInputStream(filePath + "/" + fileName + ".png");
             Image image = new Image(fileStream);
             if (patternCard.isCustom()) {
                 pattern.setImage(image);
@@ -115,8 +127,9 @@ public class OtherPatternCard {
             } else {
                 pattern.setImage(image);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        }
+        finally {
+            fileStream.close();
         }
     }
 

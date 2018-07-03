@@ -15,6 +15,7 @@ public abstract class VirtualView extends Observable implements Observer {
     public VirtualView(int playerID) {
        this.playerID = playerID;
     }
+
     public String getName() {
         return name;
     }

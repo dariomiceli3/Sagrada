@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -67,6 +69,9 @@ public class EndGameScene {
         FXMLLoader loader = new FXMLLoader(EndGameScene.class.getResource("/EndGame.fxml"));
         Parent root1 = loader.load();
         Scene scene = new Scene(root1);
+        InputStream fileStream = EndGameScene.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
         window.setScene(scene);
         window.setResizable(false);
         Platform.runLater(window::showAndWait);

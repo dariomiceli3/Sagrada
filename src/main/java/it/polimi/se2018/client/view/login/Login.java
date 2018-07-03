@@ -5,9 +5,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
+import java.io.InputStream;
 
 public class Login extends Application {
 
@@ -20,7 +22,12 @@ public class Login extends Application {
         controller.setStage(primaryStage);
 
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Sagrada Login");
+
+        InputStream fileStream = Login.class.getResourceAsStream("/images/icon" + ".png");
+        Image icon = new Image(fileStream);
+        primaryStage.getIcons().add(icon);
+
+        primaryStage.setTitle("Welcome to Sagrada");
         primaryStage.setScene(scene);
         //primaryStage.setHeight(550);
        // primaryStage.setWidth(395);

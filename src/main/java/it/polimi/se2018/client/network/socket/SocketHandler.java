@@ -33,12 +33,7 @@ public class SocketHandler implements ClientInterface, Runnable {
 
         try {
             this.clientConnection = new Socket(host, port);
-            //this.socketIn = new ObjectInputStream(clientConnection.getInputStream());
-            //socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
             this.view = view;
-
-            //new Thread(this).start();
-
         }
         catch (IOException e) {
             System.out.println("Connection error socket");

@@ -1,7 +1,11 @@
 package it.polimi.se2018.server.controller;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -13,6 +17,8 @@ import it.polimi.se2018.events.ServerClient.ControllerView.*;
 import it.polimi.se2018.events.ServerClient.ModelView.PlayerIDEvent;
 import it.polimi.se2018.events.SinglePlayer.*;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Game implements Observer {
@@ -37,7 +43,7 @@ public class Game implements Observer {
     private int disconnectPlayerNumber;
     private List<String> activeNames;
     private boolean singlePlayer;
-    private int timePlayer;
+    private int TIMERTURN;
     private Timer timer;
     private ToolCardController toolController;
 
@@ -53,17 +59,21 @@ public class Game implements Observer {
 
     private void createGame(List<VirtualView> viewList, boolean singlePlayer, Model model) {
 
+        Gson gson = new Gson();
         this.model = model;
         this.viewGame = new ArrayList<>(viewList);
         this.setup = new GameSetup(this);
         this.roundManager = new RoundManager();
-        this.timePlayer = model.getTimeToPlay();
         this.toolController = new ToolCardController(this);
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
         this.activeNames = new ArrayList<>();
         this.currID = -1;
         this.notEnded = true;
+
+        InputStream fileStream = Game.class.getResourceAsStream("/json/settings" + ".json");
+        JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
+        TIMERTURN = jsonObject.get("timerTurn").getAsInt();
 
         List<Player> playerList = new ArrayList<>();
 
@@ -804,7 +814,7 @@ public class Game implements Observer {
                 nextTurn();
             }
 
-        }, (long) 3 * 1000);
+        }, TIMERTURN);
     }
 
 

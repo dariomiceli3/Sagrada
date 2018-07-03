@@ -12,10 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class LoginController {
 
@@ -45,6 +47,7 @@ public class LoginController {
     private String viewType;
     private Stage stage;
     private boolean singlePlayer;
+    private InputStream fileStream;
 
     public void setStage(Stage stage){
         this.stage = stage;
@@ -87,19 +90,20 @@ public class LoginController {
         if (viewType.equalsIgnoreCase("gui")) {
 
 
-                stage.setTitle("Sagrada Game");
+            stage.setTitle("Welcome to Sagrada");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
-                Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
+            Parent root = loader.load();
 
-                GuiController controller = (GuiController) loader.getController();
-                controller.setConnectionTypeAndStage(connectionType, stage, singlePlayer);
+            GuiController controller = (GuiController) loader.getController();
+            controller.setConnectionTypeAndStage(connectionType, stage, singlePlayer);
 
-                Scene scene1 = new Scene(root);
-                stage.setScene(scene1);
-                stage.show();
-
-
+            Scene scene1 = new Scene(root);
+            fileStream = LoginController.class.getResourceAsStream("/images/icon" + ".png");
+            Image icon = new Image(fileStream);
+            stage.getIcons().add(icon);
+            stage.setScene(scene1);
+            stage.show();
         }
 
     }

@@ -1,11 +1,15 @@
 package it.polimi.se2018.client.view.gui;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.network.rmi.Ping;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
 import it.polimi.se2018.client.view.View;
+import it.polimi.se2018.client.view.cli.ClientCli;
 import it.polimi.se2018.server.controller.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -28,15 +32,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class GuiController extends View {
 
     private ClientInterface connection;
-    private static final int SOCKETPORT = 8888;
+    private int SOCKETPORT;
+    private String host;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
-    private static String host = "localhost";
     private Stage stage;
     private static BoardController board;
     private String name;
@@ -162,6 +168,12 @@ public class GuiController extends View {
     //-------------------------gui start-----------------
 
     public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer) throws IOException{
+
+        Gson gson = new Gson();
+        InputStream fileStream = GuiController.class.getResourceAsStream("/json/settings" + ".json");
+        JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
+        this.SOCKETPORT = jsonObject.get("socketPort").getAsInt();
+        this.host = jsonObject.get("ipAddress").getAsString();
 
         this.stage = primaryStage;
         this.singlePlayer = singlePlayer;
@@ -1187,7 +1199,7 @@ public class GuiController extends View {
         Parent root1 = (Parent) loader.load();
 
         Scene scene = new Scene(root1);
-        stage.setTitle("Sagrada Pattern Choose");
+        stage.setTitle("Sagrada Game");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -1200,7 +1212,7 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = (Parent) loader.load();
         Scene gameBoard = new Scene(root2);
-        stage.setTitle("Sagrada Main Board");
+        stage.setTitle("Sagrada Game");
         stage.setScene(gameBoard);
         stage.setResizable(false);
         stage.show();

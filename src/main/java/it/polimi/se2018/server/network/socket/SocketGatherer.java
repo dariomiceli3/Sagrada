@@ -18,7 +18,7 @@ public class SocketGatherer implements Runnable {
 
         try {
             this.serverSocket = new ServerSocket(port);
-            System.out.println("Server socket started");
+            System.out.println("Server socket started on port: " + port);
 
         }
         catch (IOException e) {
@@ -58,10 +58,6 @@ public class SocketGatherer implements Runnable {
 
                 Thread vsThread = new Thread(virtualSocket);
                 vsThread.start();
-
-                //server.waitingOtherPlayers();
-                //  TODO waiting other connections method!!
-
 
                 }
             catch (IOException e) {

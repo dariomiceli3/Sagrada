@@ -26,7 +26,6 @@ public class Model extends Observable {
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
-    private int timeToPlay;
     private Dice dice;
 
 
@@ -36,7 +35,6 @@ public class Model extends Observable {
         this.draftPool = new DraftPool(diceBag);
         this.playerList = new ArrayList<>();
         this.numberPlayer = 0;
-        this.timeToPlay = 20;
 
     }
 
@@ -70,10 +68,6 @@ public class Model extends Observable {
 
     public void setPlayerList(List<Player> playerList){
         this.playerList = playerList;
-    }
-
-    public int getTimeToPlay() {
-        return timeToPlay;
     }
 
     public DiceBag getDiceBag() {

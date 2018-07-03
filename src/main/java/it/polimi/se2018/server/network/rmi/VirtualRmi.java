@@ -1,6 +1,10 @@
 package it.polimi.se2018.server.network.rmi;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
+import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.events.ClientServer.DisconnectionEvent;
@@ -12,6 +16,8 @@ import it.polimi.se2018.events.ServerClient.ModelView.*;
 import it.polimi.se2018.events.SinglePlayer.*;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Timer;
@@ -23,6 +29,7 @@ public class VirtualRmi extends VirtualView {
     private RmiClientInterface clientRmi;
     private boolean running;
     private Timer timer;
+    private final int TIMEOUTPLAYER;
 
     public VirtualRmi(RmiClientInterface clientRmi, Server server, int ID) {
         super(ID);
@@ -32,6 +39,11 @@ public class VirtualRmi extends VirtualView {
         sendEvent(new PlayerIDEvent(this.playerID));
         System.out.println("Send rmi id to the player " + this.playerID);
         sendEvent(new SinglePlayerRequestEvent(this.playerID));
+
+        Gson gson = new Gson();
+        InputStream fileStream = VirtualRmi.class.getResourceAsStream("/json/settings" + ".json");
+        JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
+        TIMEOUTPLAYER = jsonObject.get("timeoutPlayer").getAsInt();
 
     }
 
@@ -249,7 +261,7 @@ public class VirtualRmi extends VirtualView {
                 System.out.println("client rmi disconnected");
                 disconnectionRmi();
             }
-        }, (long) 3 * 1000);
+        }, TIMEOUTPLAYER);
     }
 
     private void disconnectionRmi() {

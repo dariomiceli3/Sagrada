@@ -1,5 +1,8 @@
 package it.polimi.se2018.server.network;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
 import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.network.rmi.RmiGatherer;
@@ -8,6 +11,8 @@ import it.polimi.se2018.server.network.rmi.VirtualRmi;
 import it.polimi.se2018.server.network.socket.SocketGatherer;
 import it.polimi.se2018.server.network.socket.VirtualSocket;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -15,10 +20,8 @@ import java.util.TimerTask;
 
 public class Server {
 
-    private static final int SOCKETPORT = 8888;
-    private static final int RMIPORT = 1099;
     private static final int MAXPLAYERS = 4;
-    private static final int SECONDS = 15;
+    private static final int DEFAULT = 0;
 
     private boolean mutex;
     private SocketGatherer socketGatherer;
@@ -28,16 +31,24 @@ public class Server {
     private boolean gameStarted;
     private static boolean singlePlayer;
     public static int idPlayer;
-    public static int multi;
+    private static int multi;
     private Game game;
     private Timer timer;
+    private final int TIMERLOGIN;
 
     public Server() {
 
-        idPlayer = 0;
+        Gson gson = new Gson();
+        InputStream fileStream = Server.class.getResourceAsStream("/json/settings" + ".json");
+        JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
+
+        final int SOCKETPORT = jsonObject.get("socketPort").getAsInt();
+        final int RMIPORT = jsonObject.get("rmiPort").getAsInt();
+        TIMERLOGIN = jsonObject.get("timerLogin").getAsInt();
+
+        this.idPlayer = DEFAULT;
 
         socketGatherer = new SocketGatherer(this, SOCKETPORT);
-
         rmiGatherer = new RmiGatherer(this, RMIPORT);
 
         Thread socketThread = new Thread(socketGatherer);
@@ -135,7 +146,6 @@ public class Server {
     public synchronized void waitingOtherPlayers() {
 
         System.out.println("in waiting the boolean of single player: " + singlePlayer);
-        //System.out.println(clients.size());
 
         if (singlePlayer) {
 
@@ -187,16 +197,8 @@ public class Server {
                         setGameStarted(true);
                         System.out.println("Started game");
                     }
-                    /*else {
-                        if (timer != null) {
-                            System.out.println("cancello timer");
-                            timer.cancel();
-                            mutex = false;
-                        }
-                    }*/
-
                 }
-            }, (long) SECONDS * 1000);
+            }, TIMERLOGIN);
 
         }
     }

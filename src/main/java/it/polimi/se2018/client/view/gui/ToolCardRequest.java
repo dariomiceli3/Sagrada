@@ -12,10 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ToolCardRequest {
 
@@ -227,13 +229,11 @@ public class ToolCardRequest {
         FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/ToolExtraRequest.fxml"));
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
+        InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
         window.setScene(scene);
         window.setResizable(false);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                window.showAndWait();
-            }
-        });
+        Platform.runLater(() -> window.showAndWait());
     }
 }
