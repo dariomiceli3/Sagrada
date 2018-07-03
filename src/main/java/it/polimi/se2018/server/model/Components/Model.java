@@ -7,6 +7,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.events.ServerClient.ModelView.*;
 import it.polimi.se2018.events.SinglePlayer.SinglePrivateEvent;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Model extends Observable {
 
     private static final int DRAFTSINGLE = 3;
     private RoundTracker roundTracker;
+    private List<ToolCard> toolCardList;
     private DraftPool draftPool;
     private DiceBag diceBag;
     private List<PublicObjectiveCard> publicList;
@@ -30,12 +32,21 @@ public class Model extends Observable {
 
 
     public Model() {
+        this.toolCardList = new ArrayList<>();
         this.roundTracker = new RoundTracker();
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool(diceBag);
         this.playerList = new ArrayList<>();
         this.numberPlayer = 0;
 
+    }
+
+    public List<ToolCard> getToolCardList() {
+        return toolCardList;
+    }
+
+    public void setToolCardList(List<ToolCard> toolCardList) {
+        this.toolCardList = toolCardList;
     }
 
     public int getNumberPlayer(){

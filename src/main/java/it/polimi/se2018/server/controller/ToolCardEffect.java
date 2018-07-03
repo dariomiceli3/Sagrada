@@ -37,7 +37,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
 
     }
@@ -51,7 +51,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
 
@@ -64,7 +64,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
 
@@ -92,7 +92,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
 
@@ -107,7 +107,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
 
 
@@ -124,7 +124,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
 
@@ -145,7 +145,7 @@ class ToolCardEffect {
             if(!game.isSinglePlayer()){
                 game.getModel().updateTokenAndNotify(iD);
             }else {
-                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
             }
         }
 
@@ -183,7 +183,7 @@ class ToolCardEffect {
             if(!game.isSinglePlayer()){
                 game.getModel().updateTokenAndNotify(iD);
             }else {
-                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+                game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
             }
         } else {
             throw new InvalidMoveException("Invalid turn moment");
@@ -199,7 +199,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
 
     }
@@ -216,7 +216,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
 
 
@@ -275,7 +275,7 @@ class ToolCardEffect {
         if(!game.isSinglePlayer()){
             game.getModel().updateTokenAndNotify(iD);
         }else {
-            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getToolCardList()));
+            game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
 

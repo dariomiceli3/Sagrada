@@ -1,4 +1,4 @@
-package it.polimi.se2018.server.controller;
+package it.polimi.se2018.server.model.Cards;
 
 import it.polimi.se2018.server.model.Components.DiceColor;
 
@@ -21,7 +21,7 @@ public class ToolCard implements Serializable {
         this.usage = 0;
     }
 
-    protected DiceColor getColor() {
+    public DiceColor getColor() {
         return color;
     }
 
@@ -29,11 +29,11 @@ public class ToolCard implements Serializable {
         return name;
     }
 
-    protected int getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    void setCost(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
@@ -41,15 +41,15 @@ public class ToolCard implements Serializable {
         return cost;
     }
 
-    int getUsage() {
+    public int getUsage() {
         return usage;
     }
 
-    void incrementUsage(){
+    public void incrementUsage(){
         this.usage = usage + 1;
     }
 
-    void setUsage(int usage) {
+    public void setUsage(int usage) {
         this.usage = usage;
     }
 

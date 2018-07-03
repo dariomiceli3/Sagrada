@@ -314,7 +314,7 @@ public class ToolCardController implements Observer {
         if(game.isSinglePlayer()) {
             game.getModel().getDraftPool().getDraftPool().add(game.getDiceToolSinglePlayer());
             game.getModel().updatePoolAndNotify();
-            game.getToolCardList().add(game.getToolRemoveSinglePlayer());
+            game.getModel().getToolCardList().add(game.getToolRemoveSinglePlayer());
         }else if(game.getTool(n).getUsage() == 1){
             game.getTool(n).setCost(1);
             int t = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getTokensNumber();

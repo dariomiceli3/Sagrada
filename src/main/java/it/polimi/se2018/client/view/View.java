@@ -1,7 +1,7 @@
 package it.polimi.se2018.client.view;
 
 import it.polimi.se2018.client.network.ClientInterface;
-import it.polimi.se2018.server.controller.ToolCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;

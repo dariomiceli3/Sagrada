@@ -1,11 +1,9 @@
 package it.polimi.se2018.TestController.TestToolCard;
 
-import it.polimi.se2018.server.controller.GameSetup;
-import it.polimi.se2018.server.controller.ToolCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import org.junit.Test;
 
-import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
 

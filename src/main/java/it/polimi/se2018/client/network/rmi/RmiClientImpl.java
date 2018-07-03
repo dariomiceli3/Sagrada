@@ -1,7 +1,7 @@
 package it.polimi.se2018.client.network.rmi;
 
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.controller.ToolCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
@@ -11,7 +11,6 @@ import it.polimi.se2018.server.model.Components.Player;
 import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;

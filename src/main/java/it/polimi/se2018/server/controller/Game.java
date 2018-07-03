@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.network.Server;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -28,7 +28,6 @@ public class Game implements Observer {
     private static final int END = 10;
     private static final int SET = 2;
     private Model model;
-    private List<ToolCard> toolCardList;
     private List<VirtualView> viewGame;
     private GameSetup setup;
     private RoundManager roundManager;
@@ -101,9 +100,6 @@ public class Game implements Observer {
     // protected relativo al cambiamento
     // update gestisce
 
-    List<ToolCard> getToolCardList(){
-        return toolCardList;
-    }
 
     protected Model getModel(){
         return model;
@@ -307,7 +303,7 @@ public class Game implements Observer {
             view.sendEvent(new NotPlayerDisconnectedEvent());
         }else{
             setPlayerReconnect(view.getPlayerID());
-            view.sendEvent(new SuccessfulReconnectionEvent(reconnectPlayer, singlePlayer, true, toolCardList, model.getPublicList(), model.getPlayerList()));
+            view.sendEvent(new SuccessfulReconnectionEvent(reconnectPlayer, singlePlayer, true, model.getToolCardList(), model.getPublicList(), model.getPlayerList()));
         }
 
 
@@ -487,10 +483,10 @@ public class Game implements Observer {
     private void startCard(){
 
         model.setNumberPlayer(0);
-        this.toolCardList = setup.setToolCard();
+        model.setToolCardList(setup.setToolCard());
         setup.setPublicCardModel();
         for (VirtualView view : viewGame) {
-            view.sendEvent(new ToolCardUpdateEvent(getToolCardList()));
+            view.sendEvent(new ToolCardUpdateEvent(model.getToolCardList()));
             setup.setPrivateCardModel(view);
             setup.startPatternCard(view);
 
@@ -611,9 +607,9 @@ public class Game implements Observer {
     void startTool(VirtualView view) {
 
         if(!singlePlayer){
-            view.sendEvent(new StartToolEvent(view.getPlayerID(), toolCardList));
+            view.sendEvent(new StartToolEvent(view.getPlayerID(), model.getToolCardList()));
         }else {
-            view.sendEvent( new StartToolSinglePlayerEvent(toolCardList, model.getDraftPool().getNowNumber()));
+            view.sendEvent( new StartToolSinglePlayerEvent(model.getToolCardList(), model.getDraftPool().getNowNumber()));
         }
 
 
@@ -683,7 +679,7 @@ public class Game implements Observer {
     }
 
     private void checkCost(VirtualView view, int indexTool){
-        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < toolCardList.get(indexTool).getCost()){
+        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < model.getToolCardList().get(indexTool).getCost()){
 
             view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
             startTool(view);
@@ -691,13 +687,13 @@ public class Game implements Observer {
         }else {
 
 
-            toolCardList.get(indexTool).incrementUsage();
-            toolController.toolCardEffectRequest(toolCardList.get(indexTool).getNumber(), view);
+            model.getToolCardList().get(indexTool).incrementUsage();
+            toolController.toolCardEffectRequest(model.getToolCardList().get(indexTool).getNumber(), view);
             int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
-            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - toolCardList.get(indexTool).getCost());
-            if (toolCardList.get(indexTool).getCost() == START) {
+            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - model.getToolCardList().get(indexTool).getCost());
+            if (model.getToolCardList().get(indexTool).getCost() == START) {
 
-                toolCardList.get(indexTool).setCost(SET);
+                model.getToolCardList().get(indexTool).setCost(SET);
             }
 
         }
@@ -743,7 +739,7 @@ public class Game implements Observer {
 
     ToolCard getTool(int n) {
 
-        for (ToolCard toolCard : toolCardList ) {
+        for (ToolCard toolCard : model.getToolCardList()) {
             if (toolCard.getNumber() == n) {
                 return toolCard;
             }
@@ -753,11 +749,11 @@ public class Game implements Observer {
 
     private void checkDice(VirtualView view, int indexTool, int indexPool){
 
-        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(toolCardList.get(indexTool).getColor().toString())){
+        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(model.getToolCardList().get(indexTool).getColor().toString())){
 
             diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
             model.updatePoolAndNotify();
-            toolRemoveSinglePlayer = toolCardList.remove(indexTool);
+            toolRemoveSinglePlayer = model.getToolCardList().remove(indexTool);
             toolController.toolCardEffectRequest(toolRemoveSinglePlayer.getNumber(), view);
 
 
