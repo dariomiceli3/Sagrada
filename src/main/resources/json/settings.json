@@ -1,0 +1,10 @@
+{
+  "socketPort": "8888",
+  "rmiPort": "1099",
+  "timerTurn": "90000",
+  "timerLogin": "15000",
+  "ipAddress" : "localhost",
+  "pingSeconds" : "2000",
+  "sleepMillis" : "250",
+  "timeoutPlayer" : "3000"
+}
