@@ -19,6 +19,11 @@ public class RoundTracker implements Serializable {
         this.listDice = new ArrayList();
     }
 
+    //copy constructor
+    public RoundTracker(RoundTracker roundTracker) {
+        this.listDice = roundTracker.listDice;
+    }
+
     /**
      * Get and remove from the round tracker the die on the specified position(from bottom to top) in the dice list belonging from the not used dice of the specified round
      * @param round the round where the die has been extracted

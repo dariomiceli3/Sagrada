@@ -17,16 +17,26 @@ public class PublicObjectiveCard implements Serializable {
         this.name = name;
     }
 
-    public int executeEffect(PatternCard pattern){
-            return effect.runPublic(pattern);
-        }
+    // copy constructor
+    public PublicObjectiveCard(PublicObjectiveCard publicCard) {
+        this.effect = publicCard.getEffect();
+        this.name = publicCard.getName();
+    }
 
     public String getName() {
         return name;
     }
 
+    private PublicEffects getEffect() {
+        return effect;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int executeEffect(PatternCard pattern){
+        return effect.runPublic(pattern);
     }
 
     @Override

@@ -92,7 +92,7 @@ public abstract class View implements Runnable {
 
     public abstract void showMoveCommand(int poolSize);
 
-    public abstract void showIndexPoolCommand(int poolsize);
+    public abstract void showIndexPoolCommand(int poolSize);
 
     public abstract void showIndexPatternCommand();
 

@@ -16,9 +16,14 @@ public class DraftPool implements Serializable {
     private DiceBag diceBag;
     private List<Dice> dicePlay;
 
-    /**
-     * Private Default class constructor
-     */
+    //copy constructor
+    public DraftPool(DraftPool draftPool) {
+        this.number = draftPool.getNowNumber();
+        this.diceBag = draftPool.getDiceBag();
+        this.dicePlay = draftPool.getDraftPool();
+    }
+
+
     public DraftPool(){
         this.number = DEFAULT;
         this.dicePlay = null;
@@ -48,6 +53,9 @@ public class DraftPool implements Serializable {
 
     }
 
+    public DiceBag getDiceBag() {
+        return diceBag;
+    }
 
     /**
      * Get number of dice content in the pool atm

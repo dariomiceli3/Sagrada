@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.lang.System.out;
@@ -376,29 +377,38 @@ public class GuiController extends View {
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-        Platform.runLater(() -> privateCard = privateObjectiveCard);
+        Platform.runLater(() -> privateCard = new PrivateObjectiveCard(privateObjectiveCard));
     }
 
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) {
-        Platform.runLater(() -> publicCardList = publicList);
+        Platform.runLater(() -> {
+            publicCardList = new ArrayList<>();
+            for (PublicObjectiveCard publicCard : publicList) {
+                publicCardList.add(new PublicObjectiveCard(publicCard));
+            }
+        });
     }
 
     @Override
     public void showPatternList(List<PatternCard> patternCards)  {
         Platform.runLater(() -> {
-            patternList = patternCards;
-        try {
-            patternScene();
-        }catch (IOException e){
-            log.warning(e.getMessage());
-        }
+            patternList = new ArrayList<>();
+            for (PatternCard pattern : patternCards) {
+                patternList.add(new PatternCard(pattern));
+            }
+            try {
+                patternScene();
+            }
+            catch (IOException e){
+                log.warning(e.getMessage());
+            }
         });
     }
 
     @Override
     public void showPattern(PatternCard patternCard)  {
-        Platform.runLater(() -> patternCurrent = patternCard);
+        Platform.runLater(() -> patternCurrent = new PatternCard(patternCard));
     }
 
     @Override
@@ -406,16 +416,16 @@ public class GuiController extends View {
 
         Platform.runLater(() -> {
             if (id == 0) {
-                patternID0 = patternCard;
+                patternID0 = new PatternCard(patternCard);
             }
             if (id == 1) {
-                patternID1 = patternCard;
+                patternID1 = new PatternCard(patternCard);
             }
             if (id == 2) {
-                patternID2 = patternCard;
+                patternID2 = new PatternCard(patternCard);
             }
             if (id == 3) {
-                patternID3 = patternCard;
+                patternID3 = new PatternCard(patternCard);
             }
         });
     }
@@ -425,19 +435,19 @@ public class GuiController extends View {
 
         Platform.runLater(() -> {
             if (id == 0) {
-                patternID0 = patternCard;
+                patternID0 = new PatternCard(patternCard);
                 setNameID0(playerName);
             }
             if (id == 1) {
-                patternID1 = patternCard;
+                patternID1 = new PatternCard(patternCard);
                 setNameID1(playerName);
             }
             if (id  == 2) {
-                patternID2 = patternCard;
+                patternID2 = new PatternCard(patternCard);
                 setNameID2(playerName);
             }
             if (id == 3) {
-                patternID3 = patternCard;
+                patternID3 = new PatternCard(patternCard);
                 setNameID3(playerName);
             }
         });
@@ -447,7 +457,7 @@ public class GuiController extends View {
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
 
-        Platform.runLater(() -> board.updatePattern(patternCard));
+        Platform.runLater(() -> board.updatePattern(new PatternCard(patternCard)));
     }
 
     @Override
@@ -493,7 +503,7 @@ public class GuiController extends View {
 
         Platform.runLater(() -> {
             try {
-                board.updateDraftPool(draftPool);
+                board.updateDraftPool(new DraftPool(draftPool));
             }
             catch (IOException e) {
                 log.warning(e.getMessage());
@@ -526,7 +536,7 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showIndexPoolCommand(int poolsize) {
+    public void showIndexPoolCommand(int poolSize) {
         log.info("pool size GUI");
     }
 
@@ -552,7 +562,7 @@ public class GuiController extends View {
 
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
-        Platform.runLater(() -> board.updateRoundTracker(roundTracker));
+        Platform.runLater(() -> board.updateRoundTracker(new RoundTracker(roundTracker)));
     }
 
     @Override
@@ -602,7 +612,12 @@ public class GuiController extends View {
 
     @Override
     public void showToolCards(List<ToolCard> toolCardList) {
-        Platform.runLater(() -> toolList = toolCardList);
+        Platform.runLater(() -> {
+            toolList = new ArrayList<>();
+            for (ToolCard tool : toolCardList) {
+                toolList.add(new ToolCard(tool));
+            }
+        });
     }
 
     @Override
@@ -753,8 +768,8 @@ public class GuiController extends View {
 
         Platform.runLater(() -> {
             try {
-                board.updateDraftPool(draftPool);
-                board.updateRoundTracker(roundTracker);
+                board.updateDraftPool(new DraftPool(draftPool));
+                board.updateRoundTracker(new RoundTracker(roundTracker));
             } catch (IOException e) {
                 log.warning(e.getMessage());
             }
@@ -780,7 +795,12 @@ public class GuiController extends View {
 
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
-        Platform.runLater(() -> privateCardSingle = publicList);
+        Platform.runLater(() -> {
+            privateCardSingle = new ArrayList<>();
+            for (PrivateObjectiveCard privateCardObjective : publicList) {
+                privateCardSingle.add(new PrivateObjectiveCard(privateCardObjective));
+            }
+        });
     }
 
     @Override
@@ -858,16 +878,22 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
+    public void showReload(Player currPlayer, boolean singlePlay, boolean gameStart, List<ToolCard> toolCards, List<PublicObjectiveCard> publicCard, List<Player> players) {
         Platform.runLater(() -> {
             try {
                 name = currPlayer.getPlayerName();
                 singlePlayer = singlePlay;
                 gameStarted = gameStart;
-                toolList = tool;
-                publicCardList = publicCard;
-                privateCard = currPlayer.getPrivate();
-                patternCurrent = currPlayer.getPattern();
+                toolList = new ArrayList<>();
+                for (ToolCard toolCard : toolCards){
+                    toolList.add(new ToolCard(toolCard));
+                }
+                publicCardList = new ArrayList<>();
+                for (PublicObjectiveCard card : publicCard) {
+                    publicCardList.add(new PublicObjectiveCard(card));
+                }
+                privateCard = new PrivateObjectiveCard(currPlayer.getPrivate());
+                patternCurrent = new PatternCard(currPlayer.getPattern());
                 customCard = patternCurrent.isCustom();
                 tokens = currPlayer.getTokensNumber();
                 for(Player player : players) {

@@ -23,6 +23,11 @@ public class PrivateObjectiveCard implements Serializable {
         this.colour = colour;
     }
 
+    // copy constructor
+    public PrivateObjectiveCard(PrivateObjectiveCard card) {
+        this.colour = card.getColour();
+    }
+
     public DiceColor getColour(){
         return colour;
     }

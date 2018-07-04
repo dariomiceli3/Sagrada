@@ -21,6 +21,15 @@ public class ToolCard implements Serializable {
         this.usage = 0;
     }
 
+    // copy constructor
+    public ToolCard(ToolCard toolCard) {
+        this.name = toolCard.getName();
+        this.color = toolCard.getColor();
+        this.number = toolCard.getNumber();
+        this.cost = toolCard.getCost();
+        this.usage = toolCard.getUsage();
+    }
+
     public DiceColor getColor() {
         return color;
     }

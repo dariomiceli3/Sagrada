@@ -19,18 +19,33 @@ public class PatternCard implements Serializable {
      private String name;
      private int difficulty;
      private ArrayList<GlassBox> pattern;
-     private Dice dice;
      private boolean custom = false;
 
-    public boolean isCustom() {
+     public PatternCard() {
+         this.name = null;
+         this.difficulty = 0;
+         this.pattern = null;
+         this.custom = false;
+     }
+
+     // copy constructor
+     public PatternCard(PatternCard patternCard) {
+         this.name = patternCard.getName();
+         this.difficulty = patternCard.getDifficulty();
+         this.pattern = patternCard.getPattern();
+         this.custom = patternCard.isCustom();
+     }
+
+
+     public boolean isCustom() {
         return custom;
     }
 
-    public void setCustom(boolean custom) {
+     public void setCustom(boolean custom) {
         this.custom = custom;
     }
 
-    public int getDifficulty(){
+     public int getDifficulty(){
           return difficulty;
      }
 
