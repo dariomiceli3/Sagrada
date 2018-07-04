@@ -1,11 +1,8 @@
 package it.polimi.se2018.TestComponents;
 
-import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.Assert.assertEquals;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 import  org.junit.Test;
 
 public class TestDice {

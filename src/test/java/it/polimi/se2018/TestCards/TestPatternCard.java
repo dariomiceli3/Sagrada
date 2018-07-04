@@ -18,6 +18,7 @@ public class TestPatternCard {
     @Test
     public void testLoadPatternList() {
         PatternCard patternCard = new PatternCard();
+        PatternCard patternCard1 = new PatternCard(patternCard);
         //try {
             ArrayList<PatternCard> patternCardArrayList = patternCard.loadPatternList();
             assertEquals(24, patternCardArrayList.size());

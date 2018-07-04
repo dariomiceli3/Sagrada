@@ -1,11 +1,11 @@
 package it.polimi.se2018.TestComponents;
 
 
-import it.polimi.se2018.exceptions.InvalidMoveException;
+
 import it.polimi.se2018.server.model.Components.*;
 import org.junit.Test;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -16,6 +16,7 @@ public class TestRoundTracker {
     public void testConstructor() {
 
         RoundTracker roundTracker = new RoundTracker();
+        RoundTracker roundTracker1= new RoundTracker(roundTracker);
 
         assertEquals(0,roundTracker.getRoundTracker().size());
 
@@ -44,11 +45,9 @@ public class TestRoundTracker {
         draftPool.createListDice();
         List<Dice> list = draftPool.cleanListDice();
         Dice dice = new Dice(3, DiceColor.PURPLE);
-        Dice dice1 = new Dice(3, DiceColor.PURPLE);
         RoundTracker roundTracker = new RoundTracker();
         roundTracker.setTracker(list);
         roundTracker.addDice(dice, 0);
-        //roundTracker.addDice(dice1, 2);
         assertEquals(6, roundTracker.getRoundDice(0).size());
 
     }

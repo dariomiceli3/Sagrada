@@ -137,38 +137,25 @@ public class TestGlassBox {
 
     @Test
     public void testSetter() {
-        GlassBox glassBox = new GlassBox();
+        GlassBox glassBox = new GlassBox(2);
+        GlassBox glassBox1 = new GlassBox("Green");
 
-        glassBox.setConstraintColor("Green");
-        glassBox.setConstraintValue(2);
 
         assertEquals(2, glassBox.getConstraintValue());
-        assertEquals("Green", glassBox.getConstraintColor());
+        assertEquals("Green", glassBox1.getConstraintColor());
     }
 
     @Test
     public void testToString() {
 
-        GlassBox glassBox = new GlassBox();
-        GlassBox glassBox1 = new GlassBox();
-        GlassBox glassBox2 = new GlassBox();
-        GlassBox glassBox3 = new GlassBox();
-        GlassBox glassBox4 = new GlassBox();
-        GlassBox glassBox5 = new GlassBox();
-        GlassBox glassBox6 = new GlassBox();
+        GlassBox glassBox = new GlassBox("red");
+        GlassBox glassBox1 = new GlassBox("purple");
+        GlassBox glassBox2 = new GlassBox(5);
+        GlassBox glassBox4 = new GlassBox("yellow");
+        GlassBox glassBox5 = new GlassBox("blue");
+        GlassBox glassBox6 = new GlassBox("green");
 
-        glassBox.setConstraintColor("red");
-        glassBox1.setConstraintColor("purple");
-        glassBox4.setConstraintColor("yellow");
-        glassBox5.setConstraintColor("blue");
-        glassBox6.setConstraintColor("green");
-        glassBox2.setConstraintValue(5);
-        glassBox3.setConstraintValue(6);
 
-        //System.out.println(glassBox.toString());
-        //System.out.println(glassBox1.toString());
-        //System.out.println(glassBox2.toString());
-        //System.out.println(glassBox3.toString());
 
         Dice diceRed1 = new Dice(1, DiceColor.RED);
         Dice diceRed2 = new Dice(2, DiceColor.RED);

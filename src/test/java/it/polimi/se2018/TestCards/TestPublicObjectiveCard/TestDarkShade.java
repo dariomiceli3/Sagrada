@@ -62,7 +62,7 @@ public class TestDarkShade {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentShadeRow(),"Deep Shades");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade(),"Deep Shades");
         System.out.println(publicCard.toString());
         publicCard.getName();
         publicCard.setName("Ciao");

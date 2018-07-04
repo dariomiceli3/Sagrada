@@ -1,6 +1,7 @@
 package it.polimi.se2018.TestController;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.model.Cards.PatternCard;
@@ -1700,4 +1701,14 @@ public class TestView {
         viewList.get(0).sendEvent(new CopperFoilEvent(2,3));
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
     }*/
+
+    @Test
+    public void test() {
+        ToolCard toolCard = new ToolCard("ciao", DiceColor.RED, 5);
+        ToolCard toolCard1 = new ToolCard(toolCard);
+        assertEquals("ciao",toolCard1.getName());
+        toolCard1.setUsage(4);
+        assertEquals(4,toolCard1.getUsage());
+        toolCard1.toString();
+    }
 }

@@ -27,7 +27,7 @@ public class PublicObjectiveCard implements Serializable {
         return name;
     }
 
-    private PublicEffects getEffect() {
+    public PublicEffects getEffect() {
         return effect;
     }
 

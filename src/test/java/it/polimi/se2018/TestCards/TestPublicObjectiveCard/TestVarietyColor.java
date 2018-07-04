@@ -51,6 +51,8 @@ public class TestVarietyColor {
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
             PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor(), "Color Variety");
+            PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(publicCard);
+            publicObjectiveCard.getEffect();
             assertEquals(8, publicCard.executeEffect(pattern));
 
 

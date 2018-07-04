@@ -1,6 +1,6 @@
 package it.polimi.se2018.TestComponents;
 
-import static junit.framework.TestCase.fail;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -10,7 +10,7 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Player;
 import  org.junit.Test;
 
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 public class TestPlayer {

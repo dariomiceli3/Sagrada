@@ -18,6 +18,9 @@ public class TestDraftPool {
         DiceBag diceBag = new DiceBag();
 
         DraftPool draftPool = new DraftPool();
+        DraftPool draftPool1 = new DraftPool(draftPool);
+
+        draftPool. getDiceBag();
 
         assertEquals(0, draftPool.getNowNumber());
         assertEquals(90, diceBag.getListBag().size());
@@ -84,16 +87,6 @@ public class TestDraftPool {
         assertEquals(4, draftPool.getNowNumber());
     }
 
-   /* @Test
-    public void testSetDraftPool() {
-        DraftPool draftPool = new DraftPool();
-        ArrayList<Dice> diceArrayList = new ArrayList<>();
-        Dice dice = new Dice(3, DiceColor.RED);
-        diceArrayList.add(dice);
-        draftPool.setDraftPool(diceArrayList);
-
-        assertEquals(1, draftPool.getNowNumber() );
-    }*/
 
     @Test
     public void testToString() {
