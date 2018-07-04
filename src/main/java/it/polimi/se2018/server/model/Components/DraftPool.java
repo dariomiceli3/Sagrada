@@ -139,7 +139,17 @@ public class DraftPool implements Serializable {
 
     @Override
     public String toString() {
-        return "Draft Pool: " + dicePlay.toString();
+        //return "Draft Pool: " + dicePlay.toString();
+        return "Draft Pool: " + listToString(dicePlay);
+    }
+
+    public static String listToString(List<?> list) {
+        String result = "{ ";
+        for (int i = 0; i < list.size(); i++) {
+            result += " " + list.get(i).toString();
+        }
+        result += " }";
+        return result;
     }
 
 }

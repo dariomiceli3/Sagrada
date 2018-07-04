@@ -42,7 +42,7 @@ public class CliView extends View implements Runnable {
     private static boolean connected = true;
 
     public CliView() {
-        AnsiConsole.systemInstall();
+        System.setProperty("jansi.passthrough", "true");
     }
 
     public static int getPoolSize() {
