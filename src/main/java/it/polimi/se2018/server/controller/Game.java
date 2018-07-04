@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.logging.Logger;
 
+
 public class Game implements Observer {
 
     private final Logger log = Logger.getLogger(Game.class.getName());
@@ -50,57 +51,28 @@ public class Game implements Observer {
     private ToolCardController toolController;
 
 
-    List<VirtualView> getViewGame(){
-        return viewGame;
-    }
-
-    Dice getDiceToolSinglePlayer(){
-        return diceToolSinglePlayer;
-    }
-
-    ToolCard getToolRemoveSinglePlayer(){
-        return toolRemoveSinglePlayer;
-    }
-
-    int getTurn(){
-        return turn;
-    }
-
-    int getStep(){
-        return step;
-    }
-
-    int getSinglePlayerDifficulty(){
-        return singlePlayerDifficulty;
-    }
-
-    private int getCurrID() {
-        return currID;
-    }
-
-    protected boolean isSinglePlayer(){
-        return singlePlayer;
-    }
-
-    protected Model getModel(){
-        return model;
-    }
-
-    private void setSinglePlayerDifficulty(int difficulty){
-        this.singlePlayerDifficulty = difficulty;
-    }
-
-
-
+    /**
+     * Class constructor for the game controller with a list of virtual view to link to the game and the game mode
+     * @param viewList list of virtual view connected to the game
+     * @param singlePlayer true if the game mode is single-player, else multi-player
+     */
     public Game(List<VirtualView> viewList, boolean singlePlayer) {
         Model modelGame = new Model();
         createGame(viewList, singlePlayer, modelGame);
     }
 
+    /**
+     * Class constructor for the game controller with a list of virtual view to link to the game and the game mode
+     * and the model linked to this controller
+     * @param viewList list of virtual view connected to the game
+     * @param singlePlayer true if the game mode is single-player, else multi-player
+     * @param model the model
+     */
     public Game(List<VirtualView> viewList, boolean singlePlayer, Model model) {
         createGame(viewList, singlePlayer, model);
     }
 
+    //todo javadoc
     private void createGame(List<VirtualView> viewList, boolean singlePlayer, Model model) {
 
         Gson gson = new Gson();
@@ -141,9 +113,94 @@ public class Game implements Observer {
 
     }
 
+    /**
+     * method that provides the caller the list of virtual views linked to the controller
+     * @return a list of virtual views
+     */
+    List<VirtualView> getViewGame(){
+        return viewGame;
+    }
+
+    /**
+     * method that provides the caller the dice selected by player in the single-player mode for using tool card
+     * @return a dice
+     */
+    Dice getDiceToolSinglePlayer(){
+        return diceToolSinglePlayer;
+    }
+
+    /**
+     * method that provides the caller the last tool card used by player in the single-player mode
+     * @return a tool card
+     */
+    ToolCard getToolRemoveSinglePlayer(){
+        return toolRemoveSinglePlayer;
+    }
+
+    /**
+     * method that provides the caller current turn number from 0 to number of player multiplied by 2
+     * @return current turn number
+     */
+    int getTurn(){
+        return turn;
+    }
+
+    /**
+     * method that provides the caller the current step of the player's turn:  0 using dice, 1 using tool card
+     * @return number identifier of current step of the turn
+     */
+    int getStep(){
+        return step;
+    }
+
+    /**
+     * method that provides the caller the difficulty of single-player mode chosen by the player, the difficulty
+     * goes from 1 to 5 indicates the number of tool card given at the start of the game
+     * @return difficulty number
+     */
+    int getSinglePlayerDifficulty(){
+        return singlePlayerDifficulty;
+    }
+
+    /**
+     * method that provides the caller the identifier number of the player that is playing in the current turn
+     * @return current player identifier
+     */
+    private int getCurrID() {
+        return currID;
+    }
+
+    /**
+     * method that provides the caller true if the mode of the game is single-player
+     * @return true if single-player mode
+     */
+    protected boolean isSinglePlayer(){
+        return singlePlayer;
+    }
+
+    /**
+     * method that provides the caller the model linked of this controller through which can access
+     * to the model's components and methods
+     * @return the model
+     */
+    protected Model getModel(){
+        return model;
+    }
+
+    /**
+     * method that allowed the caller to set the single-player mode difficulty, the difficulty goes from 1 to 5 and
+     * indicates the number of tool card given at the start of the game
+     * @param difficulty difficulty number
+     */
+    private void setSinglePlayerDifficulty(int difficulty){
+        this.singlePlayerDifficulty = difficulty;
+    }
+
+
 
     //------------------- update in base alla notify della view-------------------
 
+    //todo javadoc
     @Override
     public void update(Observable o, Object arg) {
 
@@ -234,6 +291,12 @@ public class Game implements Observer {
     //--------metodi che modificano model ed il model manda la notify alla view----------
 
 
+    /**
+     * method that allowed the caller to set the single-player mode difficulty, the difficulty goes from 1 to 5 and
+     * indicates the number of tool card given at the start of the game
+     * @param view
+     * @param name
+     */
     private void setPlayerNameModel(VirtualView view, String name) {
 
         if (activeNames.contains(name)) {
