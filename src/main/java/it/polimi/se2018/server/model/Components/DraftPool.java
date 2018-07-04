@@ -6,8 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class DrafPool: DP Singleton, the pool of dice from where the players take the die to be placed on their turn
- * @author Salvatrore Fadda
+ * Class DraftPool: representation in the game of the Draft Pool,contains the dice used by the players in the game, it
+ * is responsible for the creation and the clean of the pool in every round, it's associated with the Dice Bag,
+ * from where the pool draft the die
+ * @author fadda-miceli-mundo
+ * @see java.io.Serializable
  */
 public class DraftPool implements Serializable {
 
@@ -16,50 +19,58 @@ public class DraftPool implements Serializable {
     private DiceBag diceBag;
     private List<Dice> dicePlay;
 
-    //copy constructor
+
+    /**
+     * Class default constructor re-definition
+     */
+    public DraftPool(){
+        this.number = DEFAULT;
+        this.dicePlay = null;
+        this.diceBag = null;
+    }
+
+    /**
+     * Class constructor, create the Draft Pool of the current round associated with Dice Bag and the
+     * current number of players
+     * @param number number of player
+     * @param diceBag the Dice bag where draft the dice
+     */
+    public DraftPool(int number, DiceBag diceBag) {
+        this.number = number;
+        this.diceBag = diceBag;
+        this.dicePlay = new ArrayList<>();
+    }
+
+    /**
+     * Class constructor, create the Draft Pool of the current round and associate it to the Dice Bag
+     * @param diceBag the Dice Bag where draft the dice
+     */
+    public DraftPool(DiceBag diceBag) {
+        this.diceBag = diceBag;
+        this.dicePlay = new ArrayList<>();
+    }
+
+    /**
+     * Class copy constructor, create a new Draft Pool from an old Draft Pool,useful to create a safe copy
+      * @param draftPool the pool to copy
+     */
     public DraftPool(DraftPool draftPool) {
         this.number = draftPool.getNowNumber();
         this.diceBag = draftPool.getDiceBag();
         this.dicePlay = draftPool.getDraftPool();
     }
 
-
-    public DraftPool(){
-        this.number = DEFAULT;
-        this.dicePlay = null;
-        this.diceBag = null;
-
-    }
-
     /**
-     * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
-     * @param number number of player
-     * @param dicebag the dicebag from which to take the dice
+     * private method that provides the caller of the Bag associated with the Draft Pool
+     * @return the Dice Bag associated
      */
-    public DraftPool(int number, DiceBag dicebag) {
-        this.number = number;
-        this.diceBag = dicebag;
-        this.dicePlay = new ArrayList<>();
-
-    }
-
-    /**
-     * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
-     * @param dicebag the dicebag from which to take the dice
-     */
-    public DraftPool(DiceBag dicebag) {
-        this.diceBag = dicebag;
-        this.dicePlay = new ArrayList<>();
-
-    }
-
-    public DiceBag getDiceBag() {
+    private DiceBag getDiceBag() {
         return diceBag;
     }
 
     /**
-     * Get number of dice content in the pool atm
-     * @return number of dice
+     * method that provides the caller of the current number of dice available in the Draft Pool
+     * @return the number of dice
      */
     public int getNowNumber(){
         if (dicePlay == null) {
@@ -69,41 +80,54 @@ public class DraftPool implements Serializable {
     }
 
     /**
-     * Get a selected die from the pool and remove it from pool
-     * @return the selected die
+     * method that provides the caller with the current dice available in the Draft Pool
+     * @return a list of the Dice contained in the Draft Pool
      */
-    public Dice removeDice(int a) {
-        return dicePlay.remove(a);
+    public List<Dice> getDraftPool() {
+        return dicePlay;
     }
 
+
     /**
-     * Set the inizial size of draftpool
-     * @param number  the number of dice to rake from bag
+     * method that allow the caller to set the number of the dice in the Draft Pool to draft from the Bag
+     * @param number the number of dice to take from bag
      */
     public void setNumber(int number){
         this.number = number;
     }
 
-    //passare una copia della lista dei dadi della pool-------------------
-    public List<Dice> getDraftPool() {//clone necessaria
-        return dicePlay;
-    }
-
+    /**
+     * method that allow the caller to fill an empty Draft Pool with a list of dice
+     * @param diceList list of the dice to set
+     */
     public void setDraftPool(List<Dice> diceList){
         if(dicePlay.isEmpty()){
             this.dicePlay = diceList;
         }
-
     }
 
     /**
-     * Set die in the pool
+     * method that allow the caller to add a dice to the tail of the Draft Pool
      * @param dice die to add
      */
     public void setDice(Dice dice){
         dicePlay.add(dice);
     }
 
+    /**
+     * method that allow the caller to remove a dice from the Draft Pool and the calling to return
+     * the dice removed from the Draft Pool
+     * @param index the index of the dice in the list
+     * @return the selected die
+     */
+    public Dice removeDice(int index) {
+        return dicePlay.remove(index);
+    }
+
+    /**
+     * method that create the ArrayList implementation of the dice contained in the Draft Pool, drafting
+     * them directly from the Dice Bag
+     */
     public void createListDice(){
         if(dicePlay.isEmpty()){
         this.dicePlay = new ArrayList<>();
@@ -114,8 +138,8 @@ public class DraftPool implements Serializable {
     }
 
     /**
-     Get the list of dice present in the pool and clean the pool
-     @return the list of dice present in the pool atm
+     * method that remove the current dice contained in the pool and return it to the caller
+     * @return the list of dice removed
      */
     public List<Dice> cleanListDice() {
 
@@ -124,11 +148,14 @@ public class DraftPool implements Serializable {
         while (it.hasNext()) {
             listDice.add(it.next());
             it.remove();
-
         }
         return listDice;
     }
 
+    /**
+     * Override of the Object toString method to provide the caller of a String version of a Draft Pool
+     * @return string format of a draft pool
+     */
     @Override
     public String toString() {
         return "Draft Pool: " + dicePlay.toString();

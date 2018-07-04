@@ -1,8 +1,5 @@
 package it.polimi.se2018.server.model.Components;
 
-
-
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +7,10 @@ import java.util.Random;
 import java.util.ArrayList;
 
 /**
- * Class DiceBag:DP Singleton, the bag used for dice extraction
- * @author Salvatrore Fadda
+ * Class DiceBag: representation in the game of the Bag suited for draft the die to use in the game, it's responsible
+ * for the creation of the 90 dice of the game and of their shuffle
+ * @author fadda-miceli-mundo
+ * @see java.io.Serializable
  */
 public class DiceBag implements Serializable {
 
@@ -23,12 +22,13 @@ public class DiceBag implements Serializable {
 
 
     /**
-     * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour
+     * Class constructor, create a Dice Bag of 90 dice with random number value, 18 dice for each of the five color
+     * and then shuffle them
      */
-    public  DiceBag(){
+    public DiceBag(){
+
         this.listDice = new ArrayList<>();
 
-        //creazione dadi casuali, 18 per ogni colore
         Random random = new Random();
         for (int i = 0; i < (NUMBER / DIV); i++) {
 
@@ -38,21 +38,19 @@ public class DiceBag implements Serializable {
             this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.GREEN));
             this.listDice.add(new Dice(random.nextInt(MAX_VALUE) + 1, DiceColor.BLUE));
         }
-
-        //mischio la Bag
         Collections.shuffle(this.listDice);
-
-
     }
 
-    //ritorna la copia dell'arraylist associata alla Bag------------
+    /**
+     * method that provides the caller of the all the dice contained in the Dice Bag
+     * @return a list representation of the dice
+     */
     public List<Dice> getListBag() {
-
         return listDice;
     }
 
     /**
-     * Get the first die of the bag and remove it from the bag.
+     * method that provides the caller of the first dice of the bag and remove it
      * @return the die to get and remove
      */
     public Dice getDice() {
@@ -62,8 +60,8 @@ public class DiceBag implements Serializable {
     }
 
     /**
-     * Add an existing die from the bag and mixes it
-     * @param dice the die to add
+     * method that allowed the caller to add a dice in the bag and then shuffle the dice of the bag
+     * @param dice the dice to add
      */
     public void setDice(Dice dice) {
         listDice.add(dice);

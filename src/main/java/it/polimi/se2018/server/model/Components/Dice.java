@@ -6,10 +6,11 @@ import java.io.Serializable;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-/**
- * Class Dice: the die
- * @author Salvatrore Fadda
+/**Class Dice: representation of the dice, it is characterized by a value (int) and a color (enum)
+ * @author fadda-miceli-mundo
+ * @see java.io.Serializable
  */
+
 public class Dice implements Serializable {
 
     private static final String escapeDice1 = "\u2680";
@@ -31,9 +32,9 @@ public class Dice implements Serializable {
     }
 
     /**
-     * Class constructor, create a die with face number and colour specified
-     * @param value die face number
-     * @param color die colour
+     * Class constructor, create a die with a number and color
+     * @param value dice number
+     * @param color dice color
      */
     public Dice (int value, DiceColor color) {
         this.color = color;
@@ -41,42 +42,42 @@ public class Dice implements Serializable {
     }
 
     /**
-     * Get die colour
-     * @return die colour
+     * method that provides the caller the color of a Dice
+     * @return DiceColor dice color
      */
-    public DiceColor getColor ()
-    {
+    public DiceColor getColor() {
         return color;
     }
 
     /**
-     * Get die face number
-     * @return die face number
+     * method that provides the caller the value of a Dice
+     * @return int value of the dice number
      */
-    public int getValue ()
-    {
+    public int getValue () {
         return value;
     }
 
     /**
-     * Set die face number
-     * @param value die face number
+     * method that permits the caller to set the color of a Dice
+     * @param color dice color to set
      */
-    public void setValue(int value)
-    {
-            this.value = value;
-    }
-
-    /**
-     * Set die colour
-     * @param color  die colour
-     */
-    public void setColor(DiceColor color)
-    {
+    public void setColor(DiceColor color) {
         this.color = color;
     }
 
+    /**
+     * method that permits the caller to set the value of a Dice
+     * @param value dice number to set
+     */
+    public void setValue(int value) {
+        this.value = value;
+    }
 
+
+    /**
+     * Override of the Object toString method to provide the caller of a String version of a Dice
+     * @return string format of a dice
+     */
     @Override
     public String toString() {
 
@@ -192,8 +193,11 @@ public class Dice implements Serializable {
         }
 
 
-
-
+    /**
+     * method that provides the caller of a String version of the Dice in a format useful to load from file
+     * the Dice image
+     * @return String short version a dice
+     */
     public String toStringGui() {
 
         if (this.getColor().toString().equalsIgnoreCase("red")) {

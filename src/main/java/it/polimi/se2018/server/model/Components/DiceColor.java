@@ -1,8 +1,9 @@
 package it.polimi.se2018.server.model.Components;
 
-
-
-
+/**
+ * Enumeration useful to represent the color of the Dice
+ * @author fadda-miceli-mundo
+ */
 public enum DiceColor{
     RED, YELLOW, PURPLE, GREEN, BLUE, TEST;
 
@@ -22,7 +23,5 @@ public enum DiceColor{
         }
         return "";
     }
-
-
 }
 
