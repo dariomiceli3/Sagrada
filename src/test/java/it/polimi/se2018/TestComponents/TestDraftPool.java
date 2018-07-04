@@ -20,7 +20,7 @@ public class TestDraftPool {
         DraftPool draftPool = new DraftPool();
         DraftPool draftPool1 = new DraftPool(draftPool);
 
-        draftPool. getDiceBag();
+        draftPool.getDiceBag();
 
         assertEquals(0, draftPool.getNowNumber());
         assertEquals(90, diceBag.getListBag().size());

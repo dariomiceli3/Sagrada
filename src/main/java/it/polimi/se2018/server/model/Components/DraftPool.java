@@ -64,7 +64,7 @@ public class DraftPool implements Serializable {
      * private method that provides the caller of the Bag associated with the Draft Pool
      * @return the Dice Bag associated
      */
-    private DiceBag getDiceBag() {
+    public DiceBag getDiceBag() {
         return diceBag;
     }
 
