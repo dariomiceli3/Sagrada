@@ -5,7 +5,7 @@ import it.polimi.se2018.server.model.Components.GlassBox;
 import static java.lang.Math.min;
 
 import java.io.Serializable;
-import java.util.Iterator;
+
 
 /**
  * class used to count the number of points

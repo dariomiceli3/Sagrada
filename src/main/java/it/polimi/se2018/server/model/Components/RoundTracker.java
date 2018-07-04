@@ -10,41 +10,13 @@ import java.util.List;
  */
 public class RoundTracker implements Serializable {
 
-    //private static RoundTracker istanceRT;
     private List<List<Dice>> listDice;
-
-
 
     /**
      * Private Class constructor, create the round tracker where the first dice list is set
      */
     public RoundTracker(){
         this.listDice = new ArrayList();
-    }
-
-   /* public static RoundTracker getIstanceRT(){
-        if (istanceRT == null){
-            istanceRT = new RoundTracker();
-        }
-        return istanceRT;
-    }*/
-
-   public List<Integer> getRoundsSizes(){
-       List<Integer> listSizes = new ArrayList<>();
-       for(int i = 0; i < this.getRoundTracker().size(); i++) {
-           listSizes.add(this.getRoundDice(i).size());
-
-       }
-
-       return listSizes;
-   }
-
-    /**
-     * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
-     * @param listDice dice not used in the round
-     */
-    public void setTracker(List<Dice> listDice){
-        this.listDice.add(listDice);
     }
 
     /**
@@ -54,19 +26,18 @@ public class RoundTracker implements Serializable {
      * @return the die whitch has been removed
      */
     public Dice getDice(int round, int pos){
-
-            return listDice.get(round).remove(pos);
-
-            }
-
-    /**
-     * Add a die from the top of the list of dice not used in the specified round
-     * @param dice the die to add
-     * @param round the round where the die has been extracted
-     */
-    public void addDice(Dice dice, int round) {
-        listDice.get(round).add(dice);
+        return listDice.get(round).remove(pos);
     }
+
+
+   public List<Integer> getRoundsSizes(){
+       List<Integer> listSizes = new ArrayList<>();
+       for(int i = 0; i < this.getRoundTracker().size(); i++) {
+           listSizes.add(this.getRoundDice(i).size());
+
+       }
+       return listSizes;
+   }
 
     public List<List<Dice>> getRoundTracker(){
         return listDice;
@@ -78,6 +49,23 @@ public class RoundTracker implements Serializable {
         return listDice.get(round);
     }
 
+
+    /**
+     * Add a die from the top of the list of dice not used in the specified round
+     * @param dice the die to add
+     * @param round the round where the die has been extracted
+     */
+    public void addDice(Dice dice, int round) {
+        listDice.get(round).add(dice);
+    }
+
+    /**
+     * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
+     * @param listDice dice not used in the round
+     */
+    public void setTracker(List<Dice> listDice){
+        this.listDice.add(listDice);
+    }
 
 
     @Override
@@ -174,9 +162,6 @@ public class RoundTracker implements Serializable {
                     "Round 8 " + listDice.get(7).toString() + "\n" +
                     "Round 9 " + listDice.get(8).toString() + "\n" +
                     "Round 10 " + listDice.get(9).toString();
-
         }
-
     }
-
 }

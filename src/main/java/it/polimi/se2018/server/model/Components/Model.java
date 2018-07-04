@@ -5,13 +5,14 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.events.ServerClient.ModelView.*;
-import it.polimi.se2018.events.SinglePlayer.SinglePrivateEvent;
+import it.polimi.se2018.events.serverclient.modelview.*;
+import it.polimi.se2018.events.singleplayer.SinglePrivateEvent;
 import it.polimi.se2018.server.model.Cards.ToolCard;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.logging.Logger;
 
 /**
  * class that store reference to the model components and getter/setter methods for them
@@ -20,6 +21,7 @@ import java.util.Observable;
 
 public class Model extends Observable {
 
+    private final Logger log = Logger.getLogger(Model.class.getName());
     private static final int DRAFTSINGLE = 3;
     private RoundTracker roundTracker;
     private List<ToolCard> toolCardList;
@@ -28,8 +30,6 @@ public class Model extends Observable {
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
-    private Dice dice;
-
 
     public Model() {
         this.toolCardList = new ArrayList<>();
@@ -45,20 +45,16 @@ public class Model extends Observable {
         return toolCardList;
     }
 
-    public void setToolCardList(List<ToolCard> toolCardList) {
-        this.toolCardList = toolCardList;
-    }
-
     public int getNumberPlayer(){
         return numberPlayer;
     }
 
-    public void setNumberPlayer(int n){
-        this.numberPlayer = n;
-    }
-
     public RoundTracker getRoundTracker() {
         return roundTracker;
+    }
+
+    public DiceBag getDiceBag() {
+        return diceBag;
     }
 
     public DraftPool getDraftPool() {
@@ -69,85 +65,78 @@ public class Model extends Observable {
         return publicList;
     }
 
-    private void setPublicList(List<PublicObjectiveCard> publicList){
-        this.publicList = publicList;
-    }
-
     public List<Player> getPlayerList() {
         return playerList;
     }
 
-    public void setPlayerList(List<Player> playerList){
-        this.playerList = playerList;
-    }
-
-    public DiceBag getDiceBag() {
-        return diceBag;
-    }
-
-
-    public Player getPlayerFromID(int iD) {
+    public Player getPlayerFromID(int id) {
 
         for (Player player1 : playerList)
         {
-            if (player1.getPlayerID() == iD) {
+            if (player1.getPlayerID() == id) {
                 return player1;
             }
         }
         return null;
     }
+    public void setToolCardList(List<ToolCard> toolCardList) {
+        this.toolCardList = toolCardList;
+    }
+    public void setNumberPlayer(int numberPlayer){
+        this.numberPlayer = numberPlayer;
+    }
+    private void setPublicList(List<PublicObjectiveCard> publicList){
+        this.publicList = publicList;
+    }
+    public void setPlayerList(List<Player> playerList){
+        this.playerList = playerList;
+    }
 
+    //---------------metodi con notify
 
-    public void setPlayerAndNotify(int iD, String name) {
-
+    public void setPlayerAndNotify(int id, String name) {
         numberPlayer++;
-        getPlayerFromID(iD).setPlayerName(name);
-        System.out.println(getPlayerFromID(iD).getPlayerName());
+        getPlayerFromID(id).setPlayerName(name);
+        log.info(getPlayerFromID(id).getPlayerName());
         setChanged();
-        notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(iD).getPlayerName(), iD));
-
+        notifyObservers(new PlayerNameUpdateEvent(getPlayerFromID(id).getPlayerName(), id));
     }
 
-    public void setPrivateAndNotify(int iD, PrivateObjectiveCard privateCard){
-
-        getPlayerFromID(iD).setPrivate(privateCard);
+    public void setPrivateAndNotify(int id, PrivateObjectiveCard privateCard){
+        getPlayerFromID(id).setPrivate(privateCard);
         setChanged();
-        notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(iD).getPlayerID(), privateCard));
+        notifyObservers(new PlayerPrivateUpdateEvent(getPlayerFromID(id).getPlayerID(), privateCard));
     }
-
 
     public void setPublicAndNotify(List<PublicObjectiveCard> publicList){
-
         this.setPublicList(publicList);
         setChanged();
         notifyObservers(new PublicDrawEvent(this.publicList));
     }
 
-    public void setPatternAndNotify(int iD, int indexPatternChoose){
+    public void setPatternAndNotify(int id, int indexPatternChoose){
         numberPlayer++;
-        getPlayerFromID(iD).setPattern(getPlayerFromID(iD).getPatterChooseList().get(indexPatternChoose));
+        getPlayerFromID(id).setPattern(getPlayerFromID(id).getPatterChooseList().get(indexPatternChoose));
         setChanged();
-        notifyObservers(new PlayerPatternUpdateEvent(iD, getPlayerFromID(iD).getPattern()));
+        notifyObservers(new PlayerPatternUpdateEvent(id, getPlayerFromID(id).getPattern()));
     }
 
-    public void setCustomPatternAndNotify(int iD, PatternCard patternCard) {
+    public void setCustomPatternAndNotify(int id, PatternCard patternCard) {
         numberPlayer++;
-        getPlayerFromID(iD).setPattern(patternCard);
-        getPlayerFromID(iD).getPattern().setCustom(true);
+        getPlayerFromID(id).setPattern(patternCard);
+        getPlayerFromID(id).getPattern().setCustom(true);
         setChanged();
-        notifyObservers(new PlayerPatternUpdateEvent(iD, getPlayerFromID(iD).getPattern()));
+        notifyObservers(new PlayerPatternUpdateEvent(id, getPlayerFromID(id).getPattern()));
     }
 
-    public void setTokenAndNotify(int iD) {
-
-        Player player1 = getPlayerFromID(iD);
+    public void setTokenAndNotify(int id) {
+        Player player1 = getPlayerFromID(id);
         player1.setTokensNumber(player1.getPattern().getDifficulty());
         setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(iD, getPlayerFromID(iD).getTokensNumber()));
+        notifyObservers(new PlayerTokensUpdateEvent(id, getPlayerFromID(id).getTokensNumber()));
     }
 
     public void setDraftPoolAndNotify(boolean singlePlayer){
-
         if(singlePlayer){
             this.draftPool.setNumber(DRAFTSINGLE);
         }else {
@@ -158,31 +147,26 @@ public class Model extends Observable {
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
     }
 
-    public void setMoveAndNotify(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
-
-        dice = draftPool.removeDice(indexPool);
-        getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(iD).getPattern());
+    public void setMoveAndNotify(int id, int indexPool, int indexPattern) throws InvalidMoveException {
+        Dice dice = draftPool.removeDice(indexPool);
+        getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(id).getPattern());
         setChanged();
-        notifyObservers(new PatternUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getPattern(), getPlayerFromID(iD).getPlayerName()));
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(id).getPlayerID(), getPlayerFromID(id).getPattern(), getPlayerFromID(id).getPlayerName()));
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
         setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
-
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(id).getPlayerID(), getPlayerFromID(id).getTokensNumber()));
     }
 
     public void setEndRoundAndNotify(){
-
         roundTracker.setTracker(draftPool.cleanListDice());
         setChanged();
         notifyObservers(new RoundTrackerUpdateEvent(this.getRoundTracker()));
         setChanged();
         notifyObservers(new PlayerDraftPoolUpdateEvent(draftPool));
-
     }
 
     public void setFinalPointsAndNotify(List<Player> playerList, boolean finish){
-
         setPlayerList(playerList);
         setChanged();
         notifyObservers(new PlayerPointsUpdateEvent(this.getPlayerList(), finish));
@@ -194,19 +178,18 @@ public class Model extends Observable {
     }
 
     public void updateBoardAndNotify(){
-
         setChanged();
         notifyObservers(new UpdateBoardEvent(this.getRoundTracker(), this.getDraftPool()));
     }
 
-    public void updatePatternAndNotify(int iD){
+    public void updatePatternAndNotify(int id){
         setChanged();
-        notifyObservers(new PatternUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getPattern(), getPlayerFromID(iD).getPlayerName()));
+        notifyObservers(new PatternUpdateEvent(getPlayerFromID(id).getPlayerID(), getPlayerFromID(id).getPattern(), getPlayerFromID(id).getPlayerName()));
     }
 
-    public void updateTokenAndNotify(int iD){
+    public void updateTokenAndNotify(int id){
         setChanged();
-        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(iD).getPlayerID(), getPlayerFromID(iD).getTokensNumber()));
+        notifyObservers(new PlayerTokensUpdateEvent(getPlayerFromID(id).getPlayerID(), getPlayerFromID(id).getTokensNumber()));
     }
 
     public void setPrivateSinglePlayerAndNotify(List<PrivateObjectiveCard> listPrivate){

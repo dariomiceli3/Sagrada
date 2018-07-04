@@ -2,7 +2,6 @@ package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
@@ -24,6 +23,7 @@ import static java.lang.System.out;
 public class BoardController {
 
     private final Logger log = Logger.getLogger(BoardController.class.getName());
+    private static final String roundMsg = "Round";
     private static final int DEFAULT = 0;
     private static GuiController mainController;
     private static int indexPool;
@@ -44,9 +44,18 @@ public class BoardController {
     private int diceValue;
     private int numberDice;
 
+    protected DraftPool getDraftPool() {
+        return draftPool;
+    }
+
+    protected RoundTracker getRoundTracker() {
+        return roundTracker;
+    }
+
     static void setMainController(GuiController mainController){
         BoardController.mainController = mainController;
     }
+
     private static void setGuiState(ViewState state) {
         BoardController.guiState = state;
     }
@@ -127,16 +136,65 @@ public class BoardController {
         costTool3.setText("" + mainController.getToolList().get(2).getCost());
     }
 
-    private DraftPool getDraftPool() {
-        return draftPool;
+    //-----------------------initialize method---------------------------------------------------------------------
+
+    public void initialize() throws IOException {
+
+        GuiController.setBoard(this);
+        RoundTrackerBox.setMainController(this);
+        ToolCardRequest.setBoard(this);
+
+        if (mainController.isSinglePlayer()) {
+            exit.setDisable(true);
+            reconnect.setVisible(false);
+            circleTool1.setVisible(false);
+            circleTool2.setVisible(false);
+            circleTool3.setVisible(false);
+            patternPlayer2.setVisible(false);
+            patternPlayer3.setVisible(false);
+            patternPlayer4.setVisible(false);
+            txtPlayer2.setVisible(false);
+            txtPlayer3.setVisible(false);
+            txtPlayer4.setVisible(false);
+            textPrivateSingle.setVisible(true);
+            txtTokens.setVisible(false);
+            circleTokens.setVisible(false);
+            tokensNumber.setVisible(false);
+            loadPanel();
+            loadPattern();
+            loadPrivate();
+            loadPublicCard();
+            loadToolCard();
+
+        }
+        else {
+            reconnect.setVisible(false);
+            roll.setDisable(true);
+            next.setDisable(true);
+            skip.setDisable(true);
+            setToolCost();
+            loadPanel();
+            loadPattern();
+            loadTokensNumber();
+            loadPrivate();
+            loadPublicCard();
+            loadToolCard();
+            loadOtherPattern();
+        }
+
+        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+
+        publicCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+
+        toolCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
     }
 
-    protected RoundTracker getRoundTracker() {
-        return roundTracker;
-    }
 
-
-    //----start single player-----------------------
+    //------------------------------start single player-----------------------
 
     @FXML
     private TextField textPrivateSingle;
@@ -266,12 +324,12 @@ public class BoardController {
     }
 
     @FXML
-    void handleUnzoomTool4(MouseEvent event) {
+    void handleUnzoomTool4() {
         toolCardZoom4.setVisible(false);
     }
 
     @FXML
-    void handleUnzoomTool5(MouseEvent event) {
+    void handleUnzoomTool5() {
         toolCardZoom5.setVisible(false);
     }
 
@@ -478,60 +536,6 @@ public class BoardController {
     @FXML
     private Text costTool3;
 
-    public void initialize() throws IOException {
-
-        GuiController.setBoard(this);
-        RoundTrackerBox.setMainController(this);
-        ToolCardRequest.setBoard(this);
-
-        if (mainController.isSinglePlayer()) {
-            exit.setDisable(true);
-            reconnect.setVisible(false);
-            circleTool1.setVisible(false);
-            circleTool2.setVisible(false);
-            circleTool3.setVisible(false);
-            patternPlayer2.setVisible(false);
-            patternPlayer3.setVisible(false);
-            patternPlayer4.setVisible(false);
-            txtPlayer2.setVisible(false);
-            txtPlayer3.setVisible(false);
-            txtPlayer4.setVisible(false);
-            textPrivateSingle.setVisible(true);
-            txtTokens.setVisible(false);
-            circleTokens.setVisible(false);
-            tokensNumber.setVisible(false);
-            loadPanel();
-            loadPattern();
-            loadPrivate();
-            loadPublicCard();
-            loadToolCard();
-
-        }
-        else {
-            reconnect.setVisible(false);
-            roll.setDisable(true);
-            next.setDisable(true);
-            skip.setDisable(true);
-            setToolCost();
-            loadPanel();
-            loadPattern();
-            loadTokensNumber();
-            loadPrivate();
-            loadPublicCard();
-            loadToolCard();
-            loadOtherPattern();
-        }
-
-        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-
-        publicCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-        publicCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-        publicCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-
-        toolCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-        toolCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-        toolCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
-    }
 
     //---------------------------------------------enum for gui state
 
@@ -553,9 +557,9 @@ public class BoardController {
     }
 
 
-
+    //----------------------------fxml method controller
         @FXML
-    void handleCellEvent(ActionEvent event) {
+    void handleCellEvent() {
 
         disableTool();
         disablePool();
@@ -629,6 +633,8 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
+            log.info("null pointer catch");
+            log.warning(e.getMessage());
         }
 
         if (guiState == ViewState.EGLOMISEEND) {
@@ -673,7 +679,7 @@ public class BoardController {
         if (guiState == ViewState.TAPENDTWO) {
             setIndexPatternEndTwo(indexPattern);
             next.setDisable(false);
-            disablePattern();
+            handlePattern(true);
         }
         if (guiState == ViewState.TAPSTARTTWO) {
             setIndexPatternStartTwo(indexPattern);
@@ -682,7 +688,7 @@ public class BoardController {
         if (guiState == ViewState.TAPENDONE) {
             setIndexPatternEndOne(indexPattern);
             next.setDisable(false);
-            disablePattern();
+            handlePattern(true);
         }
         if (guiState == ViewState.TAPSTARTONE) {
             setIndexPatternStartOne(indexPattern);
@@ -691,7 +697,7 @@ public class BoardController {
     }
 
     @FXML
-    void handleDicePool(ActionEvent event) {
+    void handleDicePool() {
 
         if (guiState == ViewState.GROZINGPOOL) {
             next.setDisable(false);
@@ -702,9 +708,9 @@ public class BoardController {
         } else if (guiState == ViewState.LENSCUTTERPOOL) {
             disablePool();
         } else if (guiState == ViewState.RUNNINGPOOL) {
-            enablePattern();
+            handlePattern(false);
         } else if (guiState == ViewState.CORKPOOL) {
-            enablePattern();
+            handlePattern(false);
         } else if (guiState == ViewState.GRINDING) {
             next.setDisable(false);
         } else if (guiState == ViewState.FLUXPOOL) {
@@ -840,12 +846,13 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
+            log.info("null pointer");
             log.warning(e.getMessage());
         }
     }
 
     @FXML
-    void handleRoundButton(ActionEvent event) throws IOException {
+    void handleRoundButton() throws IOException {
 
         try {
             if (roundToggleGroup.getSelectedToggle().equals(round1)) {
@@ -877,6 +884,7 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
+            log.warning("pointer catch");
             log.warning(e.getMessage());
         }
         finally {
@@ -1046,7 +1054,7 @@ public class BoardController {
     }
 
     @FXML
-    void handleUnzoomTool1(MouseEvent event) {
+    void handleUnzoomTool1() {
         toolCardZoom1.setVisible(false);
         if (!mainController.isSinglePlayer()) {
             circleTool1.setVisible(true);
@@ -1054,7 +1062,7 @@ public class BoardController {
         }
     }
     @FXML
-    void handleUnzoomTool2(MouseEvent event) {
+    void handleUnzoomTool2() {
         toolCardZoom2.setVisible(false);
         if (!mainController.isSinglePlayer()) {
             circleTool2.setVisible(true);
@@ -1063,7 +1071,7 @@ public class BoardController {
 
     }
     @FXML
-    void handleUnzoomTool3(MouseEvent event) {
+    void handleUnzoomTool3() {
         toolCardZoom3.setVisible(false);
         if (!mainController.isSinglePlayer()) {
             circleTool3.setVisible(true);
@@ -1078,43 +1086,43 @@ public class BoardController {
 
     }
     @FXML
-    void handlePrivateUnzoom(MouseEvent event) {
+    void handlePrivateUnzoom() {
         privateCardZoom.setVisible(false);
 
     }
 
     @FXML
-    void handleZoomPublic1(MouseEvent event) {
+    void handleZoomPublic1() {
         publicCardZoom1.setVisible(true);
 
     }
     @FXML
-    void handleZoomPublic2(MouseEvent event) {
+    void handleZoomPublic2() {
         publicCardZoom2.setVisible(true);
     }
     @FXML
-    void handleZoomPublic3(MouseEvent event) {
+    void handleZoomPublic3() {
         publicCardZoom3.setVisible(true);
 
     }
     @FXML
-    void handleUnzoomPublic1(MouseEvent event) {
+    void handleUnzoomPublic1() {
         publicCardZoom1.setVisible(false);
 
     }
     @FXML
-    void handleUnzoomPublic2(MouseEvent event) {
+    void handleUnzoomPublic2() {
         publicCardZoom2.setVisible(false);
 
     }
     @FXML
-    void handleUnzoomPublic3(MouseEvent event) {
+    void handleUnzoomPublic3() {
         publicCardZoom3.setVisible(false);
 
     }
 
     @FXML
-    void handleUpdatePattern2(MouseEvent event) throws IOException {
+    void handleUpdatePattern2() throws IOException {
 
         if (mainController.getPlayerID() == 0){
             PatternCardBox.setPatternCard(mainController.getPatternID1());
@@ -1136,7 +1144,7 @@ public class BoardController {
     }
 
     @FXML
-    void handleUpdatePattern3(MouseEvent event) throws IOException {
+    void handleUpdatePattern3() throws IOException {
 
         if (mainController.getPlayerID() == 0){
             PatternCardBox.setPatternCard(mainController.getPatternID2());
@@ -1158,7 +1166,7 @@ public class BoardController {
     }
 
     @FXML
-    void handleUpdatePattern4(MouseEvent event) throws IOException{
+    void handleUpdatePattern4() throws IOException{
 
         if (mainController.getPlayerID() == 0){
             PatternCardBox.setPatternCard(mainController.getPatternID3());
@@ -1181,7 +1189,7 @@ public class BoardController {
 
 
     @FXML
-    void rollButtonSelected(ActionEvent event) {
+    void rollButtonSelected() {
 
         if (guiState == ViewState.GLAZINGHAMMER) {
             mainController.getConnection().useGlazingHammerToolCard(mainController.getPlayerID());
@@ -1192,7 +1200,7 @@ public class BoardController {
     }
 
     @FXML
-    void nextButtonSelected(ActionEvent event) {
+    void nextButtonSelected() {
 
         //---- single player
 
@@ -1221,7 +1229,7 @@ public class BoardController {
         if (guiState == ViewState.TOOLMOVESECOND) {
             if (mainController.isSinglePlayer()) {
                 textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
-                disablePattern();
+                handlePattern(true);
                 setGuiState(ViewState.TOOLSPDICE);
                 enablePool();
                 next.setDisable(true);
@@ -1311,24 +1319,24 @@ public class BoardController {
     }
 
     @FXML
-    void skipButtonSelected(ActionEvent event) {
+    void skipButtonSelected() {
         mainController.getConnection().setNextTurnToServer(mainController.getPlayerID());
     }
 
     @FXML
-    void exitButtonSelected(ActionEvent event) {
+    void exitButtonSelected() {
 
         if (guiState == ViewState.ROLL) {
             mainController.getConnection().setDraftPoolToServer(mainController.getPlayerID());
         }
         mainController.getConnection().setExitToServer(mainController.getPlayerID());
         disableTool();
-        disablePattern();
-        disableOtherPattern();
+        handlePattern(true);
+        handleOtherPattern(true);
         disablePool();
         disablePublic();
         disablePrivate();
-        disableRoundTracker();
+        handleRoundTracker(true);
         roll.setDisable(true);
         next.setDisable(true);
         skip.setDisable(true);
@@ -1338,16 +1346,16 @@ public class BoardController {
     }
 
     @FXML
-    void reconnectButtonSelected(ActionEvent event) {
+    void reconnectButtonSelected() {
 
         mainController.getConnection().setReconnectToServer(mainController.getPlayerID());
         enableTool();
-        enablePattern();
+        handlePattern(false);
         enablePool();
-        enableOtherPattern();
+        handleOtherPattern(false);
         enablePublic();
         enablePrivate();
-        enableRoundTracker();
+        handleRoundTracker(false);
         skip.setDisable(true);
         exit.setVisible(true);
         reconnect.setVisible(false);
@@ -1360,58 +1368,65 @@ public class BoardController {
 
     void updateRound(int round) {
 
-        textGame.setText("Round " + round + "is started");
+        textGame.setText(roundMsg + round + "is started");
         next.setDisable(true);
         skip.setDisable(true);
         roll.setDisable(true);
 
         if (round == 1) {
-            AlertBox.display("Round", "Round 1 is started");
+            AlertBox.display(roundMsg, "Round 1 is started");
         }
         if (round == 2) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round1.setVisible(true);
         }
         if (round == 3) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round2.setVisible(true);
         }
         if (round == 4) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round3.setVisible(true);
         }
         if (round == 5) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round4.setVisible(true);
         }
         if (round == 6) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round5.setVisible(true);
         }
         if (round == 7) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round6.setVisible(true);
         }
         if (round == 8) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " "+ round + " is started. Check the Round Tracker");
             round7.setVisible(true);
         }
         if (round == 9) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round8.setVisible(true);
         }
         if (round == 10) {
-            AlertBox.display("Round", "Round " + round + " is started. Check the Round Tracker");
+            AlertBox.display(roundMsg, roundMsg + " " + round + " is started. Check the Round Tracker");
             round9.setVisible(true);
         }
     }
 
 
     void updateTurn() {
+        toolCard1.setBlendMode(BlendMode.SRC_OVER);
+        toolCard2.setBlendMode(BlendMode.SRC_OVER);
+        toolCard3.setBlendMode(BlendMode.SRC_OVER);
+        if (mainController.isSinglePlayer()) {
+            toolCard4.setBlendMode(BlendMode.SRC_OVER);
+            toolCard5.setBlendMode(BlendMode.SRC_OVER);
+        }
         textGame.setText("It's your turn");
-        enablePattern();
+        handlePattern(false);
         enableTool();
-        enableRoundTracker();
+        handleRoundTracker(false);
         enablePool();
         reconnect.setDisable(false);
         next.setDisable(false);
@@ -1421,9 +1436,9 @@ public class BoardController {
 
     void updateOtherTurn(String name) {
         textGame.setText("It's " + name + " turn");
-        disablePattern();
+        handlePattern(true);
         disableTool();
-        disableRoundTracker();
+        handleRoundTracker(true);
         disablePool();
         reconnect.setDisable(false);
         next.setDisable(true);
@@ -1605,7 +1620,7 @@ public class BoardController {
         loadToolCard();
 
         enablePool();
-        enablePattern();
+        handlePattern(false);
         enableTool();
         skip.setDisable(false);
         roll.setDisable(true);
@@ -1629,7 +1644,7 @@ public class BoardController {
         loadToolCard();
 
         enablePool();
-        enablePattern();
+        handlePattern(false);
 
         if (guiState == ViewState.DICEMOVE) {
            mainController.getConnection().setMoveToServer(mainController.getPlayerID(), indexPool, indexPattern);
@@ -1658,7 +1673,7 @@ public class BoardController {
 
     void toolMoveMsg() {
 
-        disablePattern();
+        handlePattern(true);
         disablePool();
 
         if (guiState == ViewState.TOOLMOVE) {
@@ -1700,7 +1715,7 @@ public class BoardController {
     void textGrozingMsg() {
         enablePool();
         setToken(mainController.getTokens());
-        disablePattern();
+        handlePattern(true);
         roll.setDisable(true);
         next.setDisable(true);
         disableTool();
@@ -1710,7 +1725,7 @@ public class BoardController {
 
     void textEglomiseMsg() {
         disablePool();
-        enablePattern();
+        handlePattern(false);
         setToken(mainController.getTokens());
         roll.setDisable(true);
         next.setDisable(true);
@@ -1721,7 +1736,7 @@ public class BoardController {
 
     void textCopperFoilMsg() {
         disablePool();
-        enablePattern();
+        handlePattern(false);
         roll.setDisable(true);
         next.setDisable(true);
         disableTool();
@@ -1731,7 +1746,7 @@ public class BoardController {
 
     void textLathekinMsg() {
         disablePool();
-        enablePattern();
+        handlePattern(false);
         disableTool();
         roll.setDisable(true);
         next.setDisable(true);
@@ -1741,7 +1756,7 @@ public class BoardController {
 
     void textLensCutterMsg() {
         enablePool();
-        disablePattern();
+        handlePattern(true);
         disableTool();
         roll.setDisable(true);
         next.setDisable(true);
@@ -1751,7 +1766,7 @@ public class BoardController {
     }
 
     void textFluxBrushMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         enablePool();
         roll.setDisable(true);
@@ -1761,7 +1776,7 @@ public class BoardController {
     }
 
     void textGlazingHammerMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         disablePool();
         next.setDisable(true);
@@ -1771,7 +1786,7 @@ public class BoardController {
     }
 
     void textRunningPliersMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         enablePool();
         next.setDisable(true);
@@ -1781,7 +1796,7 @@ public class BoardController {
     }
 
     void textCorkBackedMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         enablePool();
         next.setDisable(true);
@@ -1791,7 +1806,7 @@ public class BoardController {
     }
 
     void textGrindingStoneMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         enablePool();
         next.setDisable(true);
@@ -1801,7 +1816,7 @@ public class BoardController {
     }
 
     void textFluxRemoverMsg(DiceColor color) {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         enablePool();
         next.setDisable(true);
@@ -1812,7 +1827,7 @@ public class BoardController {
     }
 
     void textTapWheelMsg() {
-        disablePattern();
+        handlePattern(true);
         disableTool();
         disablePool();
         next.setDisable(true);
@@ -1832,7 +1847,7 @@ public class BoardController {
     private void textTapWheelFirstDice() {
         disableTool();
         disablePool();
-        enablePattern();
+        handlePattern(false);
         next.setDisable(true);
         roll.setDisable(true);
         setGuiState(ViewState.TAPSTARTONE);
@@ -1842,7 +1857,7 @@ public class BoardController {
     private void textTapWheelSecondDice() {
         disableTool();
         disablePool();
-        enablePattern();
+        handlePattern(false);
         next.setDisable(true);
         roll.setDisable(true);
         setGuiState(ViewState.TAPSTARTTWO);
@@ -1852,12 +1867,12 @@ public class BoardController {
 
     void textToolSinglePlayerMsg() throws IOException{
         loadToolCard();
-        disablePattern();
+        handlePattern(true);
         disablePool();
 
         if (guiState == ViewState.TOOLMOVE) {
             textGame.setText("Click the dice that match the color of the Tool Card selected, then NEXT");
-            disablePattern();
+            handlePattern(true);
             disableTool();
             setGuiState(ViewState.TOOLSPDICE);
             enablePool();
@@ -2170,92 +2185,45 @@ public class BoardController {
         }
     }
 
-    private void disableRoundTracker() {
-        round1.setDisable(true);
-        round2.setDisable(true);
-        round3.setDisable(true);
-        round4.setDisable(true);
-        round5.setDisable(true);
-        round6.setDisable(true);
-        round7.setDisable(true);
-        round8.setDisable(true);
-        round9.setDisable(true);
-
+    private void handleRoundTracker(boolean disable) {
+        round1.setDisable(disable);
+        round2.setDisable(disable);
+        round3.setDisable(disable);
+        round4.setDisable(disable);
+        round5.setDisable(disable);
+        round6.setDisable(disable);
+        round7.setDisable(disable);
+        round8.setDisable(disable);
+        round9.setDisable(disable);
     }
 
-    private void enableRoundTracker() {
-        round1.setDisable(false);
-        round2.setDisable(false);
-        round3.setDisable(false);
-        round4.setDisable(false);
-        round5.setDisable(false);
-        round6.setDisable(false);
-        round7.setDisable(false);
-        round8.setDisable(false);
-        round9.setDisable(false);
+    private void handleOtherPattern(boolean disable) {
+        patternPlayer2.setDisable(disable);
+        patternPlayer3.setDisable(disable);
+        patternPlayer4.setDisable(disable);
     }
 
-    private void disableOtherPattern() {
-        patternPlayer2.setDisable(true);
-        patternPlayer3.setDisable(true);
-        patternPlayer4.setDisable(true);
-    }
-
-    private void enableOtherPattern() {
-        patternPlayer2.setDisable(false);
-        patternPlayer3.setDisable(false);
-        patternPlayer4.setDisable(false);
-    }
-
-    private void disablePattern() {
-
-        cell1.setDisable(true);
-        cell2.setDisable(true);
-        cell3.setDisable(true);
-        cell4.setDisable(true);
-        cell5.setDisable(true);
-        cell6.setDisable(true);
-        cell7.setDisable(true);
-        cell8.setDisable(true);
-        cell9.setDisable(true);
-        cell10.setDisable(true);
-        cell11.setDisable(true);
-        cell12.setDisable(true);
-        cell13.setDisable(true);
-        cell14.setDisable(true);
-        cell15.setDisable(true);
-        cell16.setDisable(true);
-        cell17.setDisable(true);
-        cell18.setDisable(true);
-        cell19.setDisable(true);
-        cell20.setDisable(true);
-
-
-    }
-
-    private void enablePattern() {
-
-        cell1.setDisable(false);
-        cell2.setDisable(false);
-        cell3.setDisable(false);
-        cell4.setDisable(false);
-        cell5.setDisable(false);
-        cell6.setDisable(false);
-        cell7.setDisable(false);
-        cell8.setDisable(false);
-        cell9.setDisable(false);
-        cell10.setDisable(false);
-        cell11.setDisable(false);
-        cell12.setDisable(false);
-        cell13.setDisable(false);
-        cell14.setDisable(false);
-        cell15.setDisable(false);
-        cell16.setDisable(false);
-        cell17.setDisable(false);
-        cell18.setDisable(false);
-        cell19.setDisable(false);
-        cell20.setDisable(false);
-
+    private void handlePattern(boolean disable) {
+        cell1.setDisable(disable);
+        cell2.setDisable(disable);
+        cell3.setDisable(disable);
+        cell4.setDisable(disable);
+        cell5.setDisable(disable);
+        cell6.setDisable(disable);
+        cell7.setDisable(disable);
+        cell8.setDisable(disable);
+        cell9.setDisable(disable);
+        cell10.setDisable(disable);
+        cell11.setDisable(disable);
+        cell12.setDisable(disable);
+        cell13.setDisable(disable);
+        cell14.setDisable(disable);
+        cell15.setDisable(disable);
+        cell16.setDisable(disable);
+        cell17.setDisable(disable);
+        cell18.setDisable(disable);
+        cell19.setDisable(disable);
+        cell20.setDisable(disable);
     }
 
     private void enablePool() {
@@ -2475,7 +2443,7 @@ public class BoardController {
             String fileName = mainController.getPublicCardList().get(i).getName();
 
             try {
-                log.info("consegna public board");
+                log.info("loading public card board");
                 fileStream = BoardController.class.getResourceAsStream("/images/public/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
@@ -2486,11 +2454,9 @@ public class BoardController {
                     publicCard2.setImage(image);
                     publicCardZoom2.setImage(image);
                 }
-                if (!mainController.isSinglePlayer()) {
-                    if (i == 2) {
-                        publicCard3.setImage(image);
-                        publicCardZoom3.setImage(image);
-                    }
+                if (!mainController.isSinglePlayer() && i == 2) {
+                    publicCard3.setImage(image);
+                    publicCardZoom3.setImage(image);
                 }
             }
             finally {
@@ -2509,7 +2475,7 @@ public class BoardController {
             String fileName = mainController.getToolList().get(i).getName();
 
             try {
-                log.info("consegna tool board");
+                log.info("loading tool card board");
                 fileStream = BoardController.class.getResourceAsStream("/images/tool/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
@@ -2579,6 +2545,7 @@ public class BoardController {
 
     }
 
+
     private void loadOtherPattern() throws IOException {
 
         if (mainController.getPlayerID() == 0) {
@@ -2591,10 +2558,9 @@ public class BoardController {
                     patternPlayer2.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer2.setImage(image);
+                    loadImageOther(fileName, 2);
                 }
-                log.info("setted player2-0");
+                log.info("set card player2-0");
                 fileStream.close();
             }
 
@@ -2607,10 +2573,9 @@ public class BoardController {
 
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer3.setImage(image);
+                    loadImageOther(fileName, 3);
                 }
-                log.info("setted player3-0");
+                log.info("set card player3-0");
                 fileStream.close();
             }
 
@@ -2622,10 +2587,9 @@ public class BoardController {
                     patternPlayer4.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer4.setImage(image);
+                    loadImageOther(fileName, 4);
                 }
-                log.info("setted player4-0");
+                log.info("set card player4-0");
                 fileStream.close();
             }
 
@@ -2641,10 +2605,9 @@ public class BoardController {
                     patternPlayer2.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer2.setImage(image);
+                    loadImageOther(fileName, 2);
                 }
-                log.info("setted player2-1");
+                log.info("set card player2-1");
                 fileStream.close();
             }
 
@@ -2656,10 +2619,9 @@ public class BoardController {
                     patternPlayer3.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer3.setImage(image);
+                    loadImageOther(fileName, 3);
                 }
-                log.info("setted player 3-1");
+                log.info("set card player 3-1");
                 fileStream.close();
             }
 
@@ -2671,10 +2633,9 @@ public class BoardController {
                     patternPlayer4.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer4.setImage(image);
+                    loadImageOther(fileName, 4);
                 }
-                log.info("setted player 4-1");
+                log.info("set card player 4-1");
                 fileStream.close();
             }
 
@@ -2690,10 +2651,9 @@ public class BoardController {
                     patternPlayer2.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer2.setImage(image);
+                    loadImageOther(fileName, 2);
                 }
-                log.info("setted player 2-2");
+                log.info("set card player 2-2");
                 fileStream.close();
             }
 
@@ -2705,10 +2665,9 @@ public class BoardController {
                     patternPlayer3.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer3.setImage(image);
+                    loadImageOther(fileName, 3);
                 }
-                log.info("setted player 3-2");
+                log.info("set card player 3-2");
                 fileStream.close();
             }
 
@@ -2720,10 +2679,9 @@ public class BoardController {
                     patternPlayer4.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer4.setImage(image);
+                    loadImageOther(fileName, 4);
                 }
-                log.info("setted player 4-2");
+                log.info("set card player 4-2");
                 fileStream.close();
             }
 
@@ -2739,10 +2697,9 @@ public class BoardController {
                     patternPlayer2.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer2.setImage(image);
+                    loadImageOther(fileName, 2);
                 }
-                log.info("setted player 2-3");
+                log.info("set card player 2-3");
                 fileStream.close();
             }
 
@@ -2754,10 +2711,9 @@ public class BoardController {
                     patternPlayer3.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer3.setImage(image);
+                    loadImageOther(fileName, 3);
                 }
-                log.info("setted player 3-3");
+                log.info("set card player 3-3");
                 fileStream.close();
             }
 
@@ -2769,10 +2725,9 @@ public class BoardController {
                     patternPlayer4.setRotate(360);
                 }
                 else {
-                    Image image = loadImage(fileName);
-                    patternPlayer4.setImage(image);
+                    loadImageOther(fileName, 4);
                 }
-                log.info("setted player 3-3 ");
+                log.info("set card player 3-3 ");
                 fileStream.close();
             }
 
@@ -2784,6 +2739,22 @@ public class BoardController {
 
         fileStream = BoardController.class.getResourceAsStream("/images/pattern/" + fileName + ".png");
         return new Image(fileStream);
+    }
+
+    private void loadImageOther(String filename, int id) {
+
+        Image image = loadImage(filename);
+
+        if (id == 2) {
+            patternPlayer2.setImage(image);
+        }
+        if (id == 3) {
+            patternPlayer3.setImage(image);
+        }
+        if (id == 4) {
+            patternPlayer4.setImage(image);
+        }
+
     }
 
 

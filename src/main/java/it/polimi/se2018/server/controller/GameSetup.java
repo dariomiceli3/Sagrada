@@ -7,7 +7,7 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.*;
 import it.polimi.se2018.server.model.Components.DiceColor;
-import it.polimi.se2018.events.ServerClient.ControllerView.StartPatternEvent;
+import it.polimi.se2018.events.serverclient.controllerview.StartPatternEvent;
 
 
 import java.util.Random;
@@ -16,7 +16,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GameSetup {
+
+class GameSetup {
+
     private static final int VALUE = 12;
     private Game game;
     private List<PrivateObjectiveCard> listPrivateCard;
@@ -34,7 +36,84 @@ public class GameSetup {
     }
 
 
+
+    void setPrivateCardModel(VirtualView view) {
+
+        if (game.isSinglePlayer()){
+            List<PrivateObjectiveCard> listPrivate = new ArrayList<>();
+            listPrivate.add(listPrivateCard.remove(0));
+            listPrivate.add(listPrivateCard.remove(0));
+            game.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
+        }else {
+            game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
+        }
+    }
+
+    void setPublicCardModel() {
+
+        List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
+        listPublic1.add(listPublicCard.remove(0));
+        listPublic1.add(listPublicCard.remove(0));
+        if(!game.isSinglePlayer()) {
+            listPublic1.add(listPublicCard.remove(0));
+        }
+        game.getModel().setPublicAndNotify(listPublic1);
+    }
+
+
+    List<ToolCard> setToolCard() {
+
+        List<ToolCard> toolCardList = this.loadToolCard();
+        List<ToolCard> toolCardList1 = new ArrayList<>();
+        if(!game.isSinglePlayer()) {
+
+            toolCardList1.add(toolCardList.remove(0));
+            toolCardList1.add(toolCardList.remove(0));
+            toolCardList1.add(toolCardList.remove(0));
+        }else {
+
+            for(int i = 0; i < game.getSinglePlayerDifficulty(); i++) {
+                toolCardList1.add(toolCardList.remove(0));
+            }
+        }
+        return toolCardList1;
+    }
+
+
+    void startPatternCard(VirtualView view) {
+
+        List<PatternCard> patternList = new ArrayList<>();
+        Random random = new Random();
+        int a;
+        for (int i = 0; i < 2; i++) {
+
+            a = ricorsiveMethod(random.nextInt(VALUE));
+            patternList.add(listPattern.get(a));
+            patternList.add(listPattern.get(a + VALUE));
+        }
+        game.getModel().getPlayerFromID(view.getPlayerID()).setPatterChooseList(patternList);
+
+        view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
+    }
+
+    private int ricorsiveMethod(int a) {
+        Random random = new Random();
+        if (!control[a]) {
+            control[a] = true;
+            return a;
+        } else return ricorsiveMethod(random.nextInt(VALUE));
+    }
+
+
+    void changeBagger() {
+        do {
+            game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
+        }
+        while (game.getModel().getPlayerList().get(0).isDisconnect());
+    }
+
     private List<PrivateObjectiveCard> loadPrivate() {
+
         List<PrivateObjectiveCard> list = new ArrayList<>();
         list.add(new PrivateObjectiveCard(DiceColor.BLUE));
         list.add(new PrivateObjectiveCard(DiceColor.RED));
@@ -43,10 +122,10 @@ public class GameSetup {
         list.add(new PrivateObjectiveCard(DiceColor.YELLOW));
         Collections.shuffle(list);
         return list;
-
     }
 
     private List<PublicObjectiveCard> loadPublic() {
+
         List<PublicObjectiveCard> list = new ArrayList<>();
         list.add(new PublicObjectiveCard(new DarkShade(), "Deep Shades"));
         list.add(new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals"));
@@ -62,75 +141,10 @@ public class GameSetup {
         return list;
     }
 
-    void setPrivateCardModel(VirtualView view) {
-
-        if (game.isSinglePlayer()){
-            List<PrivateObjectiveCard> listPrivate = new ArrayList<>();
-            listPrivate.add(listPrivateCard.remove(0));
-            listPrivate.add(listPrivateCard.remove(0));
-            game.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
-        }else {
-            game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
-        }
-
-
-    }
-
-    void setPublicCardModel() {
-
-        List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
-        listPublic1.add(listPublicCard.remove(0));
-        listPublic1.add(listPublicCard.remove(0));
-        if(!game.isSinglePlayer()) {
-            System.out.println("sono in multiplayer sulla consegna delle public");
-            listPublic1.add(listPublicCard.remove(0));
-        }
-
-        game.getModel().setPublicAndNotify(listPublic1);
-
-
-    }
-
     List<PatternCard> loadPatternCard() {
         PatternCard pattern = new PatternCard();
         listPattern = pattern.loadPatternList();
         return listPattern;
-    }
-
-    void startPatternCard(VirtualView view) {
-
-        List<PatternCard> patternList = new ArrayList<>();
-        Random random = new Random();
-        int a;
-        for (int i = 0; i < 2; i++) {
-
-            a = ricorsiveMethod(random.nextInt(VALUE));
-            patternList.add(listPattern.get(a));
-            patternList.add(listPattern.get(a + VALUE));
-        }
-
-        game.getModel().getPlayerFromID(view.getPlayerID()).setPatterChooseList(patternList);
-
-
-        view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
-    }
-
-    private int ricorsiveMethod(int a) {
-        Random random = new Random();
-        if (!control[a]) {
-            control[a] = true;
-            return a;
-        } else return ricorsiveMethod(random.nextInt(VALUE));
-    }
-
-
-    void changeBagger() {
-
-        do{
-
-            game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
-
-        }while (game.getModel().getPlayerList().get(0).isDisconnect());
     }
 
     private List<ToolCard> loadToolCard() {
@@ -157,24 +171,6 @@ public class GameSetup {
 
     }
 
-    List<ToolCard> setToolCard() {
-
-        List<ToolCard> toolCardList = this.loadToolCard();
-        List<ToolCard> toolCardList1 = new ArrayList<>();
-        if(!game.isSinglePlayer()) {
-
-            toolCardList1.add(toolCardList.remove(0));
-            toolCardList1.add(toolCardList.remove(0));
-            toolCardList1.add(toolCardList.remove(0));
-        }else {
-            System.out.println(game.getSinglePlayerDifficulty());
-            for(int i = 0; i < game.getSinglePlayerDifficulty(); i++) {
-
-                toolCardList1.add(toolCardList.remove(0));
-            }
-        }
-        return toolCardList1;
-    }
 }
 
 

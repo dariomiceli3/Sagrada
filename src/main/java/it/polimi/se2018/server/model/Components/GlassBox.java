@@ -12,6 +12,14 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 
 public class GlassBox implements Serializable {
+
+    private static final String escapeDice1 = "\u2680";
+    private static final String escapeDice2 = "\u2681";
+    private static final String escapeDice3 = "\u2682";
+    private static final String escapeDice4 = "\u2683";
+    private static final String escapeDice5 = "\u2684";
+    private static final String escapeDice6 = "\u2685";
+    private static final String escapeBlank = "\u25FC";
     private static final int DEFAULT = 0;
     private Dice dice;
     private int constraintValue;
@@ -177,35 +185,34 @@ public class GlassBox implements Serializable {
 
             if (this.constraintColor != null) {
                 if (this.constraintColor.equals("red")) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u25FC").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeBlank).reset());
                 } else if (this.constraintColor.equals("green")) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u25FC").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeBlank).reset());
                 } else if (this.constraintColor.equals("yellow")) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u25FC").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeBlank).reset());
                 } else if (this.constraintColor.equals("blue")) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u25FC").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeBlank).reset());
                 } else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u25FC").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeBlank).reset());
                 }
 
             }
-
             else if (this.constraintValue != DEFAULT) {
                 if (this.constraintValue == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice1).reset());
                 } else if (this.constraintValue == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice2).reset());
                 } else if (this.constraintValue == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice3).reset());
                 } else if (this.constraintValue == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice4).reset());
                 } else if (this.constraintValue == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice5).reset());
                 } else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeDice6).reset());
                 }
             } else {
-                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a("\u25FC").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.WHITE).a(escapeBlank).reset());
 
             }
         }
@@ -215,27 +222,27 @@ public class GlassBox implements Serializable {
             if (this.getDice().getColor().toString().equals("red")) {
 
                 if (this.getDice().getValue() == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice1).reset());
                 }
 
                 else if (this.getDice().getValue() == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice2).reset());
                 }
 
                 else if (this.getDice().getValue() == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice3).reset());
                 }
 
                 else if (this.getDice().getValue() == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice4).reset());
                 }
 
                 else if (this.getDice().getValue() == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice5).reset());
                 }
 
                 else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.RED).a(escapeDice6).reset());
                 }
 
 
@@ -245,27 +252,27 @@ public class GlassBox implements Serializable {
             else if (this.getDice().getColor().toString().equals("yellow")) {
 
                 if (this.getDice().getValue() == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice1).reset());
                 }
 
                 else if (this.getDice().getValue() == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice2).reset());
                 }
 
                 else if (this.getDice().getValue() == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice3).reset());
                 }
 
                 else if (this.getDice().getValue() == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice4).reset());
                 }
 
                 else if (this.getDice().getValue() == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice5).reset());
                 }
 
                 else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(escapeDice6).reset());
                 }
 
             }
@@ -273,27 +280,27 @@ public class GlassBox implements Serializable {
             else if (this.getDice().getColor().toString().equalsIgnoreCase("green")) {
 
                 if (this.getDice().getValue() == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice1).reset());
                 }
 
                 else if (this.getDice().getValue() == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice2).reset());
                 }
 
                 else if (this.getDice().getValue() == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice3).reset());
                 }
 
                 else if (this.getDice().getValue() == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice4).reset());
                 }
 
                 else if (this.getDice().getValue() == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice5).reset());
                 }
 
                 else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.GREEN).a(escapeDice6).reset());
                 }
 
             }
@@ -301,27 +308,27 @@ public class GlassBox implements Serializable {
             else if (this.getDice().getColor().toString().equalsIgnoreCase("blue")) {
 
                 if (this.getDice().getValue() == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice1).reset());
                 }
 
                 else if (this.getDice().getValue() == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice2).reset());
                 }
 
                 else if (this.getDice().getValue() == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice3).reset());
                 }
 
                 else if (this.getDice().getValue() == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice4).reset());
                 }
 
                 else if (this.getDice().getValue() == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice5).reset());
                 }
 
                 else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(escapeDice6).reset());
                 }
 
             }
@@ -330,27 +337,27 @@ public class GlassBox implements Serializable {
             else  {
 
                 if (this.getDice().getValue() == 1) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2680").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice1).reset());
                 }
 
                 else if (this.getDice().getValue() == 2) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2681").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice2).reset());
                 }
 
                 else if (this.getDice().getValue() == 3) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2682").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice3).reset());
                 }
 
                 else if (this.getDice().getValue() == 4) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2683").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice4).reset());
                 }
 
                 else if (this.getDice().getValue() == 5) {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2684").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice5).reset());
                 }
 
                 else {
-                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a("\u2685").reset());
+                    return String.valueOf(ansi().eraseScreen().fg(Ansi.Color.MAGENTA).a(escapeDice6).reset());
                 }
             }
 

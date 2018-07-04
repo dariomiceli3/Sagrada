@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @author Salvatrore Fadda
  */
 public class DifferentShadeColumn implements PublicEffects, Serializable {
+
     public static final int VPOINTS = 4;
     public static final String NAME = "Column Shade Variety";
 

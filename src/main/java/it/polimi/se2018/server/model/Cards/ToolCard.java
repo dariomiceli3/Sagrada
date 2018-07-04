@@ -5,13 +5,13 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import java.io.Serializable;
 
 public class ToolCard implements Serializable {
+
     private String name;
     private DiceColor color;
     private int number;
     private int cost;
     private int usage;
     private static final int DEFAULT = 1;
-
 
     public ToolCard (String name, DiceColor color, int number) {
         this.name = name;
@@ -147,8 +147,6 @@ public class ToolCard implements Serializable {
                     "You must obey all placement restrictions";
         }
     }
-
-
 
 }
 

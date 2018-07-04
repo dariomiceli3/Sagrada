@@ -12,6 +12,12 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class Dice implements Serializable {
 
+    private static final String escapeDice1 = "\u2680";
+    private static final String escapeDice2 = "\u2681";
+    private static final String escapeDice3 = "\u2682";
+    private static final String escapeDice4 = "\u2683";
+    private static final String escapeDice5 = "\u2684";
+    private static final String escapeDice6 = "\u2685";
     private static final int DEFAULT = 0;
     private int value;
     private DiceColor color;
@@ -74,113 +80,114 @@ public class Dice implements Serializable {
     @Override
     public String toString() {
 
+
         if (this.getColor().toString().equals("red")) {
 
             if (this.getValue() == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2680").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice1).reset());
             }
             else if (this.getValue() == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2681").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice2).reset());
             }
             else if (this.getValue() == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2682").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice3).reset());
             }
             else if (this.getValue() == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2683").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice4).reset());
             }
             else if (this.getValue() == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2684").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice5).reset());
             }
             else {
-                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.RED).a(escapeDice6).reset());
             }
         }
 
         else if (this.getColor().toString().equals("yellow")) {
 
             if (this.getValue() == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2680").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice1).reset());
             }
             else if (this.getValue() == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2681").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice2).reset());
             }
             else if (this.getValue() == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2682").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice3).reset());
             }
             else if (this.getValue() == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2683").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice4).reset());
             }
             else if (this.getValue() == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2684").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice5).reset());
             }
             else {
-                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.YELLOW).a(escapeDice6).reset());
             }
         }
 
         else if (this.getColor().toString().equals("blue")) {
 
             if (this.getValue() == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2680").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice1).reset());
             }
             else if (this.getValue() == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2681").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice2).reset());
             }
             else if (this.getValue() == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2682").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice3).reset());
             }
             else if (this.getValue() == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2683").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice4).reset());
             }
             else if (this.getValue() == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2684").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice5).reset());
             }
             else {
-                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.BLUE).a(escapeDice6).reset());
             }
         }
 
         else if (this.getColor().toString().equals("green")) {
 
             if (this.getValue() == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2680").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice1).reset());
             }
             else if (this.getValue() == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2681").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice2).reset());
             }
             else if (this.getValue() == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2682").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice3).reset());
             }
             else if (this.getValue() == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2683").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice4).reset());
             }
             else if (this.getValue() == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2684").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice5).reset());
             }
             else {
-                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.GREEN).a(escapeDice6).reset());
             }
         }
 
         else
 
             if (this.getValue() == 1) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2680").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice1).reset());
             }
             else if (this.getValue() == 2) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2681").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice2).reset());
             }
             else if (this.getValue() == 3) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2682").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice3).reset());
             }
             else if (this.getValue() == 4) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2683").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice4).reset());
             }
             else if (this.getValue() == 5) {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2684").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice5).reset());
             }
             else {
-                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a("\u2685").reset());
+                return String.valueOf(ansi().eraseScreen().fg(Color.MAGENTA).a(escapeDice6).reset());
             }
         }
 
@@ -277,9 +284,7 @@ public class Dice implements Serializable {
             }
         }
 
-        else
-
-        if (this.getValue() == 1) {
+        else if (this.getValue() == 1) {
             return "P1";
         }
         else if (this.getValue() == 2) {
@@ -300,8 +305,6 @@ public class Dice implements Serializable {
     }
 
 
-
-
-    }
+}
 
 

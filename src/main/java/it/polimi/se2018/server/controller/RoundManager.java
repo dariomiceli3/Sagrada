@@ -8,9 +8,10 @@ import it.polimi.se2018.server.model.Components.RoundTracker;
 
 import java.util.*;
 
-class RoundManager  {
-    private static final int VPOINTS = 3;
 
+class RoundManager  {
+
+    private static final int VPOINTS = 3;
 
     private List<Integer> calculatePrivate(List<Player> playerArrayList) {
         List<Integer> results = new ArrayList<>();
@@ -22,10 +23,10 @@ class RoundManager  {
             results.add(result);
         }
         return results;
-
     }
 
     private List<Integer> calculateTokens(List<Player> playerArrayList) {
+
         List<Integer> results = new ArrayList<>();
 
         for (Player aPlayerArrayList : playerArrayList) {
@@ -34,10 +35,10 @@ class RoundManager  {
             results.add(result);
         }
         return results;
-
     }
 
     private List<Integer> calculateEmptyBox(List<Player> playerArrayList) {
+
         PatternCard result;
         List<Integer> results = new ArrayList<>();
 
@@ -49,16 +50,14 @@ class RoundManager  {
                 if (result.getPattern().get(j).isBoxEmpty()) {
                     boxEmptyCounter++;
                 }
-
             }
-
             results.add(boxEmptyCounter);
         }
         return results;
-
     }
 
     private List<Integer> calculatePublic(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+
         List<Integer> results = new ArrayList<>();
 
         for (Player aPlayerArrayList : playerArrayList) {
@@ -70,36 +69,32 @@ class RoundManager  {
 
             }
             results.add(personalResult);
-
         }
         return results;
-
     }
 
- private List<Player> calculatePoints (List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList ) {
+    private List<Player> calculatePoints (List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList ) {
+
         List<Integer> result1;
         List<Integer> result2;
         List<Integer> result3;
         List<Integer> result4;
 
-
-
         result1 = calculateEmptyBox(playerArrayList);
         result2 = calculatePrivate(playerArrayList);
         result3 = calculateTokens(playerArrayList);
-        result4 = calculatePublic(playerArrayList, publicObjectiveCardArrayList );
+        result4 = calculatePublic(playerArrayList, publicObjectiveCardArrayList);
 
-        for (int i=0; i < result1.size(); i++) {
+        for (int i = 0; i < result1.size(); i++) {
             int sum;
             sum = result4.get(i) + result2.get(i) + result3.get(i) - result1.get(i);
             playerArrayList.get(i).setFinalPoints(sum);
         }
-
         return playerArrayList;
+    }
 
-     }
-        //TODO aggiungere ultima funzionalità dopo aver creato round
- private List<Player> checkPoints (List<Player> playerArrayList) {
+
+    private List<Player> checkPoints (List<Player> playerArrayList) {
         for (int k=0; k < playerArrayList.size(); k++) {
             for (int i = 0; i < playerArrayList.size() - 1; i++) {
                 if (playerArrayList.get(i).getFinalPoints() == playerArrayList.get(i + 1).getFinalPoints()) {
@@ -117,7 +112,7 @@ class RoundManager  {
                 }
             }
         }
-     for (int k=0; k < playerArrayList.size(); k++) {
+        for (int k=0; k < playerArrayList.size(); k++) {
             for (int i = 0; i < playerArrayList.size() - 1; i++) {
                 if (playerArrayList.get(i).getPrivatePoints() == playerArrayList.get(i + 1).getPrivatePoints()) {
 
@@ -134,10 +129,11 @@ class RoundManager  {
             }
 
         }
-     return playerArrayList;
- }
+        return playerArrayList;
+    }
 
- List<Player> calculateWinner(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
+
+    List<Player> calculateWinner(List<Player> playerArrayList, List<PublicObjectiveCard> publicObjectiveCardArrayList) {
         List<Player> unsortedPlayers;
         List<Player> sortedPlayers;
 
@@ -151,7 +147,6 @@ class RoundManager  {
 
         return  sortedPlayers;
     }
-
 
 
 
@@ -243,7 +238,6 @@ class RoundManager  {
         }
 
     }
-
 
 
 }

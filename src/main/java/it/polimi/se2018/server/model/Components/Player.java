@@ -12,6 +12,8 @@ import java.util.List;
  * @author Salvatrore Fadda
  */
 public class Player implements Serializable {
+
+
     private String playerName;
     private int playerID;
     private boolean runningP;
@@ -24,13 +26,9 @@ public class Player implements Serializable {
     private int privatePoints;
     private boolean disconnect;
 
-    /**
-     * Default class constructor
-     */
     public Player() {
         this.playerName = null;
     }
-
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -40,33 +38,26 @@ public class Player implements Serializable {
         this.playerID = playerID;
     }
 
-    /**
-     * Class setPattern, set at the player his pattern card
-     *
-     * @param pattern pattern card
-     */
-    public void setPattern(PatternCard pattern) {
-        this.pattern = pattern;
-    }
-
     public boolean isDisconnect() {
         return disconnect;
     }
 
-    public List<PatternCard> getPatterChooseList() {
-        return patterChooseList;
+    public boolean isRunningP() {
+        return runningP;
     }
 
-    public void setPatterChooseList(List<PatternCard> patterChooseList) {
-        this.patterChooseList = patterChooseList;
-    }
-
-    public void setDisconnect(boolean disconnect) {
-        this.disconnect = disconnect;
-    }
+    //-----------------getter methods--------------------------------------
 
     public String getPlayerName() {
         return playerName;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public List<PatternCard> getPatterChooseList() {
+        return patterChooseList;
     }
 
     public PatternCard getPattern() {
@@ -77,57 +68,12 @@ public class Player implements Serializable {
         return tokensNumber;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public int getPlayerID() {
-        return playerID;
-    }
-
-    public void setPlayerID(int iD) {
-        this.playerID = iD;
-    }
-
-    public void setRunningP(boolean runningP) {
-        this.runningP = runningP;
-    }
-
-    public boolean isRunningP() {
-        return runningP;
-    }
-
-    /**
-     * Class setPrivate, set at the player his private objective card
-     *
-     * @param privateCard pattern card
-     */
-    public void setPrivate(PrivateObjectiveCard privateCard) {
-        this.privateCard = privateCard;
-    }
-
     public PrivateObjectiveCard getPrivate() {
         return privateCard;
     }
 
-    void setPrivateSinglePlayer(List<PrivateObjectiveCard> privateCard){
-        this.privateListCard = privateCard;
-    }
-
     public List<PrivateObjectiveCard> getPrivateSinglePlayerCard(){
         return privateListCard;
-    }
-
-    public void setTokensNumber(int tokensNumber) {
-        this.tokensNumber = tokensNumber;
-    }
-
-    public void setFinalPoints(int finalPoints) {
-        this.finalPoints = finalPoints;
-    }
-
-    public void setPrivatePoints(int privatePoints) {
-        this.privatePoints = privatePoints;
     }
 
     public int getFinalPoints() {
@@ -138,9 +84,51 @@ public class Player implements Serializable {
         return privatePoints;
     }
 
+    //------------------setter methods-----------------------------------------
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 
+    public void setPlayerID(int iD) {
+        this.playerID = iD;
+    }
 
+    public void setPatterChooseList(List<PatternCard> patterChooseList) {
+        this.patterChooseList = patterChooseList;
+    }
+
+    public void setPattern(PatternCard pattern) {
+        this.pattern = pattern;
+    }
+
+    public void setTokensNumber(int tokensNumber) {
+        this.tokensNumber = tokensNumber;
+    }
+
+    public void setPrivate(PrivateObjectiveCard privateCard) {
+        this.privateCard = privateCard;
+    }
+
+    void setPrivateSinglePlayer(List<PrivateObjectiveCard> privateCard){
+        this.privateListCard = privateCard;
+    }
+
+    public void setFinalPoints(int finalPoints) {
+        this.finalPoints = finalPoints;
+    }
+
+    public void setPrivatePoints(int privatePoints) {
+        this.privatePoints = privatePoints;
+    }
+
+    public void setDisconnect(boolean disconnect) {
+        this.disconnect = disconnect;
+    }
+
+    public void setRunningP(boolean runningP) {
+        this.runningP = runningP;
+    }
 
 
     @Override
@@ -155,12 +143,10 @@ public class Player implements Serializable {
     }
 
     public String toStringTokens() {
-
         return "Player Tokens" + this.getTokensNumber();
     }
 
     public String toStringPoints(){
-
         return "The player " + getPlayerName() + " totalized " + this.getFinalPoints() + " points" + "\n";
     }
 

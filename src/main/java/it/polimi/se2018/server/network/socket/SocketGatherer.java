@@ -10,22 +10,19 @@ import java.util.logging.Logger;
 public class SocketGatherer implements Runnable {
 
     private final Logger log = Logger.getLogger(SocketGatherer.class.getName());
-
     private ServerSocket serverSocket;
     private final Server server;
-    private final int port;
 
     public SocketGatherer(Server server, int port) {
         this.server = server;
-        this.port = port;
 
         try {
             this.serverSocket = new ServerSocket(port);
-            log.info("Server socket started on port: { }" + port);
+            log.info("Server socket started on port: " + port);
         }
         catch (IOException e) {
-            System.out.println("Socket error in creation");
-            e.printStackTrace();
+            log.info("Socket error in creation");
+            log.warning(e.getMessage());
         }
 
     }
@@ -43,11 +40,11 @@ public class SocketGatherer implements Runnable {
 
             try {
                 clientConnection = serverSocket.accept();
-                System.out.println("New socket connected");
+                log.info("New socket connected");
 
                 VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, Server.getIdPlayer());
 
-                System.out.println("player id : " + Server.getIdPlayer());
+                log.info("player id : " + Server.getIdPlayer());
 
                 Server.setIdPlayer(Server.getIdPlayer() + 1);
 
@@ -63,8 +60,8 @@ public class SocketGatherer implements Runnable {
 
                 }
             catch (IOException e) {
-                System.out.println("Socket error in clients connection");
-                e.printStackTrace();
+                log.info("Socket error in clients connection");
+                log.warning(e.getMessage());
 
             }
         }

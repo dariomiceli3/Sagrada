@@ -243,7 +243,7 @@ public class ChoosePattern {
         }
 
         if (customCard) {
-            mainController.setCustomPattern(selfScheme, true);
+            mainController.setCustomPattern(selfScheme);
         }
     }
 

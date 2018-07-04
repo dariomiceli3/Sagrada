@@ -36,12 +36,8 @@ public class DifferentColorColumn implements PublicEffects, Serializable {
                }
             }
         }
-
-
         return points;
     }
-
-
 
     @Override
     public String toString(){

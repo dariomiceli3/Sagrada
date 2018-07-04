@@ -11,18 +11,20 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.Model;
 import it.polimi.se2018.server.model.Components.Player;
-import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.clientserver.*;
 import it.polimi.se2018.events.InvalidMoveEvent;
-import it.polimi.se2018.events.ServerClient.ControllerView.*;
-import it.polimi.se2018.events.ServerClient.ModelView.PlayerIDEvent;
-import it.polimi.se2018.events.SinglePlayer.*;
+import it.polimi.se2018.events.serverclient.controllerview.*;
+import it.polimi.se2018.events.serverclient.modelview.PlayerIDEvent;
+import it.polimi.se2018.events.singleplayer.*;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Game implements Observer {
 
+    private final Logger log = Logger.getLogger(Game.class.getName());
     private static final int DEFAULT = 0;
     private static final int START = 1;
     private static final int END = 10;
@@ -46,6 +48,48 @@ public class Game implements Observer {
     private int disconnectName;
     private Timer timer;
     private ToolCardController toolController;
+
+
+    List<VirtualView> getViewGame(){
+        return viewGame;
+    }
+
+    Dice getDiceToolSinglePlayer(){
+        return diceToolSinglePlayer;
+    }
+
+    ToolCard getToolRemoveSinglePlayer(){
+        return toolRemoveSinglePlayer;
+    }
+
+    int getTurn(){
+        return turn;
+    }
+
+    int getStep(){
+        return step;
+    }
+
+    int getSinglePlayerDifficulty(){
+        return singlePlayerDifficulty;
+    }
+
+    private int getCurrID() {
+        return currID;
+    }
+
+    protected boolean isSinglePlayer(){
+        return singlePlayer;
+    }
+
+    protected Model getModel(){
+        return model;
+    }
+
+    private void setSinglePlayerDifficulty(int difficulty){
+        this.singlePlayerDifficulty = difficulty;
+    }
+
 
 
     public Game(List<VirtualView> viewList, boolean singlePlayer) {
@@ -80,7 +124,7 @@ public class Game implements Observer {
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
-            System.out.println("Player id in new Game" + player.getPlayerID());
+            log.info("Player id in new Game" + player.getPlayerID());
             playerList.add(player);
         }
 
@@ -98,80 +142,24 @@ public class Game implements Observer {
     }
 
 
-    // ogni metodo che modifica il model deve essere gestito da update (unico metodo pubblico), e chiamare il metodo
-    // protected relativo al cambiamento
-    // update gestisce
-
-
-    protected Model getModel(){
-        return model;
-    }
-
-    List<VirtualView> getViewGame(){
-        return viewGame;
-    }
-
-    int getTurn(){
-        return turn;
-    }
-
-    int getStep(){
-        return step;
-    }
-
-    protected void setStep(int step){
-        this.step = step;
-    }
-
-    protected boolean isSinglePlayer(){
-        return singlePlayer;
-    }
-
-    int getSinglePlayerDifficulty(){
-        return singlePlayerDifficulty;
-    }
-
-    private void setSinglePlayerDifficulty(int difficulty){
-        this.singlePlayerDifficulty = difficulty;
-    }
-
-    Dice getDiceToolSinglePlayer(){
-        return diceToolSinglePlayer;
-    }
-
-    ToolCard getToolRemoveSinglePlayer(){
-        return toolRemoveSinglePlayer;
-    }
-
-
-    private int getCurrID() {
-        return currID;
-    }
-
-
-
-
-
     //------------------- update in base alla notify della view-------------------
+
     @Override
-    public void update(Observable o, Object arg){
+    public void update(Observable o, Object arg) {
 
         VirtualView virtualView = (VirtualView) o;
 
         if (arg instanceof PlayerNameEvent) {
-
             setPlayerNameModel(virtualView, ((PlayerNameEvent) arg).getName());
         }
-
-        if (arg instanceof ToolNumberEvent){
-            this.setSinglePlayerDifficulty(((ToolNumberEvent)arg).getDifficulty());
+        if (arg instanceof ToolNumberEvent) {
+            this.setSinglePlayerDifficulty(((ToolNumberEvent) arg).getDifficulty());
             startCard();
         }
-
-        if (arg instanceof PlayerPatternEvent){
+        if (arg instanceof PlayerPatternEvent) {
             setPatternCardModel(virtualView, ((PlayerPatternEvent) arg).getIndexPatternChoose());
 
-            for (VirtualView view : viewGame){
+            for (VirtualView view : viewGame) {
                 Player player = model.getPlayerFromID(view.getPlayerID());
                 if (player.isDisconnect() && player.getPattern() == null) {
                     setPatternCardModel(view, 0);
@@ -179,8 +167,7 @@ public class Game implements Observer {
                 }
             }
         }
-
-        if (arg instanceof PlayerDraftPoolEvent){
+        if (arg instanceof PlayerDraftPoolEvent) {
             setDraftPoolModel(virtualView);
         }
         if (arg instanceof PlayerMoveEvent) {
@@ -188,30 +175,29 @@ public class Game implements Observer {
             setMoveModel(virtualView, ((PlayerMoveEvent) arg).getIndexPool(), ((PlayerMoveEvent) arg).getIndexPattern());
 
         }
-        if (arg instanceof PlayerStartToolEvent){
+        if (arg instanceof PlayerStartToolEvent) {
 
             nextStepMove(virtualView);
         }
-
         if (arg instanceof PlayerNextTurnEvent) {
 
             nextStepTool(virtualView);
         }
-        if (arg instanceof ToolCardStartEvent){
+        if (arg instanceof ToolCardStartEvent) {
 
             checkCost(virtualView, ((ToolCardStartEvent) arg).getIndexTool());
 
         }
-        if (arg instanceof ToolCardSinglePlayerStartEvent){
+        if (arg instanceof ToolCardSinglePlayerStartEvent) {
 
-            checkDice(virtualView, ((ToolCardSinglePlayerStartEvent)arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent)arg).getIndexPool());
+            checkDice(virtualView, ((ToolCardSinglePlayerStartEvent) arg).getIndexTool(), ((ToolCardSinglePlayerStartEvent) arg).getIndexPool());
         }
-        if (arg instanceof PlayerChooseEvent){
+        if (arg instanceof PlayerChooseEvent) {
 
 
-            stepController(virtualView, ((PlayerChooseEvent)arg).getStep());
+            stepController(virtualView, ((PlayerChooseEvent) arg).getStep());
         }
-        if (arg instanceof PlayerNoTokenEvent){
+        if (arg instanceof PlayerNoTokenEvent) {
             startTool(virtualView);
         }
 
@@ -220,7 +206,7 @@ public class Game implements Observer {
         }
 
         if (arg instanceof CustomPatternEvent) {
-            setCustomPatternModel(virtualView, ((CustomPatternEvent)arg).getPatternCard());
+            setCustomPatternModel(virtualView, ((CustomPatternEvent) arg).getPatternCard());
 
         }
 
@@ -228,28 +214,413 @@ public class Game implements Observer {
 
         if (arg instanceof ExitEvent) {
             setPlayerDisconnection(((ExitEvent) arg).getPlayerID());
-            sendExitNotification( ((ExitEvent) arg).getPlayerID());
+            sendExitNotification(((ExitEvent) arg).getPlayerID());
         }
 
-        if (arg instanceof ReconnectPlayerEvent){
+        if (arg instanceof ReconnectPlayerEvent) {
             setPlayerReconnect(((ReconnectPlayerEvent) arg).getPlayerID());
         }
 
         if (arg instanceof DisconnectionEvent) {
-            handlingDisconnection( ((DisconnectionEvent)arg).getID(), virtualView);
+            handlingDisconnection(((DisconnectionEvent) arg).getID(), virtualView);
 
         }
         if (arg instanceof ReconnectionEvent) {
-            // arriva la riconnessione
-            // se c'è un player libero lo assegni
-            // altrimenti mi mandi evento in cui dici che non c'è nessuno libero
             handlingReconnection(virtualView);
         }
+    }
 
+
+    //--------metodi che modificano model ed il model manda la notify alla view----------
+
+
+    private void setPlayerNameModel(VirtualView view, String name) {
+
+        if (activeNames.contains(name)) {
+            view.sendEvent(new PlayerNameErrorEvent(view.getPlayerID()));
+        }
+        else {
+            activeNames.add(name);
+            model.setPlayerAndNotify((view.getPlayerID()), name);
+        }
+
+        if (singlePlayer){
+            setToolSinglePlayer();
+        }
+        else {
+            if (model.getNumberPlayer() == (model.getPlayerList().size() - disconnectName)) {
+                startCard();
+            }
+        }
+    }
+
+    private void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
+
+        model.setCustomPatternAndNotify(view.getPlayerID(), patternCard);
+
+        if(!singlePlayer) {
+            log.info("custom pattern setting controller");
+            setTokensModel(view);
+
+            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
+
+                for (VirtualView view1 : viewGame) {
+                    view1.sendEvent(new StartGameSceneEvent());
+                }
+
+                startTurn();
+            }
+        }else {
+            view.sendEvent(new StartGameSceneEvent());
+            singlePlayerTurn();
+        }
+    }
+
+
+    private void setPatternCardModel(VirtualView view, int indexPatternChoose){
+
+        model.setPatternAndNotify(view.getPlayerID(), indexPatternChoose);
+
+        if(!singlePlayer) {
+            setTokensModel(view);
+
+            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
+
+                for (VirtualView view1 : viewGame) {
+                    view1.sendEvent(new StartGameSceneEvent());
+                }
+
+                startTurn();
+            }
+        }else {
+            view.sendEvent(new StartGameSceneEvent());
+            singlePlayerTurn();
+        }
+    }
+
+    private void setTokensModel(VirtualView view) {
+        model.setTokenAndNotify(view.getPlayerID());
+    }
+
+    private void setDraftPoolModel(VirtualView view){
+        model.setDraftPoolAndNotify(singlePlayer);
+        startChoose(view);
+    }
+
+    private void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
+
+        Dice dice = model.getDraftPool().getDraftPool().get(indexPool);
+        try {
+            model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
+            nextStepMove(view);
+        }
+        catch (InvalidMoveException e) {
+            view.sendEvent(new InvalidMoveEvent(e.getMessage(), view.getPlayerID()));
+            model.getDraftPool().getDraftPool().add(dice);
+            model.updatePoolAndNotify();
+            startMove(view);
+        }
+    }
+
+    private void setEndRoundModel(){
+        model.setEndRoundAndNotify();
+    }
+
+    private void setFinalPointsModel(List<Player> playerList, boolean finish){
+        model.setFinalPointsAndNotify(playerList, finish);
+    }
+
+    private void setPlayerDisconnection(int playerID){
+
+        model.getPlayerFromID(playerID).setDisconnect(true);
+        disconnectPlayerNumber++;
+        if((viewGame.size() - disconnectPlayerNumber) < 2) {
+            for(Player player : model.getPlayerList()){
+
+                if(player.getPattern() == null){
+                    notEnded = false;
+                }
+            }
+            endMatch(notEnded);
+        }
+        else if (currID == playerID) {
+            nextTurn();
+        }
+    }
+
+    private void setPlayerReconnect(int playerID){
+        model.getPlayerFromID(playerID).setDisconnect(false);
+        disconnectPlayerNumber--;
+        sendReconnectNotification(playerID);
+    }
+
+
+
+    //---------------------------------logica applicativa---------------------------
+
+    private void startGame() {
+        model.setNumberPlayer(0);
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new GameStartedEvent(true));
+        }
+    }
+
+    private void setToolSinglePlayer(){
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new ToolNumberRequestEvent());
+        }
+    }
+
+    private void startCard(){
+        model.setNumberPlayer(0);
+        model.setToolCardList(setup.setToolCard());
+        setup.setPublicCardModel();
+        for (VirtualView view : viewGame) {
+            view.sendEvent(new ToolCardUpdateEvent(model.getToolCardList()));
+            setup.setPrivateCardModel(view);
+            setup.startPatternCard(view);
+
+        }
+    }
+
+    private void singlePlayerTurn(){
+        if(turn == DEFAULT){
+            viewGame.get(0).sendEvent(new StartRoundEvent(round));
+            if(round > START){
+                viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
+            }
+            viewGame.get(0).sendEvent(new RollDraftPoolEvent(viewGame.get(0).getPlayerID()));
+
+        }
+        else if(turn == START) {
+
+            viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
+            startChoose(viewGame.get(0));
+        }
+        else {
+            endRound();
+        }
+    }
+
+    private void startTurn(){
+
+        //startTimer();
+
+        if(turn == DEFAULT){
+            for (VirtualView view : viewGame) {
+                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
+                this.currID = model.getPlayerList().get(position).getPlayerID();
+
+                if (model.getPlayerFromID(currID).isDisconnect()) {
+
+                    nextTurn();
+
+                }else {
+
+                    view.sendEvent(new StartRoundEvent(round));
+                    view.sendEvent(new StartTurnEvent(currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                    if (round > START) {
+                        view.sendEvent(new TurnPatternEvent(currID, model.getPlayerFromID(currID).getPattern()));
+                    }
+                    view.sendEvent(new RollDraftPoolEvent(currID));
+
+                }
+            }
+        }
+        else if (turn > DEFAULT && turn < (model.getPlayerList().size()*2)){
+            for (VirtualView view : viewGame) {
+
+                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
+                this.currID = model.getPlayerList().get(position).getPlayerID();
+
+                if(model.getPlayerFromID(currID).isDisconnect()) {
+
+                    nextTurn();
+                }else {
+                    if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
+                        model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
+                        nextTurn();
+                    } else {
+                       if (turn != 0) {
+                           view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
+                           view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
+                           if (currID == view.getPlayerID()) {
+                               startChoose(view);
+                           }
+                       }
+                    }
+                }
+            }
+
+        }
+        else {
+            endRound();
+        }
+    }
+
+    private int calculatePlayerTurn(int turn, int numberOfPlayers) {
+        if (turn < numberOfPlayers) {
+            return turn;
+        } else if (turn == numberOfPlayers) {
+            return numberOfPlayers - 1;
+        } else {
+            return (2 * numberOfPlayers) - (turn + 1);
+        }
+    }
+
+    void nextTurn() {
+        step = SET;
+        turn++;
+
+        if(!singlePlayer) {
+
+            startTurn();
+        }else {
+            singlePlayerTurn();
+        }
+    }
+
+    private void startChoose(VirtualView view){
+        view.sendEvent(new StartChooseEvent(view.getPlayerID()));
+    }
+
+    private void startMove(VirtualView view){
+        view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
+    }
+
+    void startTool(VirtualView view) {
+        if(!singlePlayer){
+            view.sendEvent(new StartToolEvent(view.getPlayerID(), model.getToolCardList()));
+        }else {
+            view.sendEvent( new StartToolSinglePlayerEvent(model.getToolCardList(), model.getDraftPool().getNowNumber()));
+        }
+    }
+
+
+    //fa turn = 0, round++, e se round >10, allora
+    //chiama endMatch; gestisce inoltre tutti gli eventi della fine del round
+    private void endRound(){
+
+        setEndRoundModel();
+        round++;
+        if (round > END){
+            endMatch(true);
+        }else {
+            turn = DEFAULT;
+            if(!singlePlayer) {
+                setup.changeBagger();
+                log.info("end round");
+                startTurn();
+            }else {
+                singlePlayerTurn();
+            }
+        }
 
     }
 
+    private void endMatch(boolean finish){
+
+        if(!singlePlayer) {
+            if (finish) {
+                setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), true);
+                for (VirtualView view : viewGame) {
+                    view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
+                }
+            }
+            else {
+                setFinalPointsModel(null, false);
+            }
+        }
+        else {
+
+            int roundTrackerPoints = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
+            int playerPoints = model.getPlayerList().get(0).getFinalPoints();
+            if(playerPoints > roundTrackerPoints){
+                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(true, playerPoints, roundTrackerPoints));
+            }else {
+                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(false, playerPoints, roundTrackerPoints));
+            }
+        }
+
+    }
+
+    private void checkCost(VirtualView view, int indexTool){
+        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < model.getToolCardList().get(indexTool).getCost()){
+            view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
+            startTool(view);
+        }else {
+            model.getToolCardList().get(indexTool).incrementUsage();
+            toolController.toolCardEffectRequest(model.getToolCardList().get(indexTool).getNumber(), view);
+            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
+            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - model.getToolCardList().get(indexTool).getCost());
+            if (model.getToolCardList().get(indexTool).getCost() == START) {
+
+                model.getToolCardList().get(indexTool).setCost(SET);
+            }
+        }
+    }
+
+    private void stepController(VirtualView view, int step){
+
+        if(step == DEFAULT){
+            this.step = step;
+            startMove(view);
+
+        }else{
+            this.step = step;
+            startTool(view);
+        }
+    }
+
+    void nextStepTool(VirtualView view){
+
+        if(step == START){
+            startMove(view);
+            step++;
+        }
+        else {
+            nextTurn();
+        }
+    }
+
+    private void nextStepMove(VirtualView view){
+
+        if(step == DEFAULT){
+            startTool(view);
+        }
+        else {
+            nextTurn();
+        }
+    }
+
+    ToolCard getTool(int n) {
+        for (ToolCard toolCard : model.getToolCardList()) {
+            if (toolCard.getNumber() == n) {
+                return toolCard;
+            }
+        }
+        return null;
+    }
+
+    private void checkDice(VirtualView view, int indexTool, int indexPool){
+
+        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(model.getToolCardList().get(indexTool).getColor().toString())){
+
+            diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
+            model.updatePoolAndNotify();
+            toolRemoveSinglePlayer = model.getToolCardList().remove(indexTool);
+            toolController.toolCardEffectRequest(toolRemoveSinglePlayer.getNumber(), view);
+
+        }
+        else {
+            view.sendEvent(new NotMatchColorEvent());
+            startTool(view);
+        }
+    }
+
     private void handlingDisconnection(int id, VirtualView virtualView) {
+
+        log.info("disconnection in controller");
 
         if (model.getPlayerFromID(id).getPlayerName() == null) {
             setPlayerNameModel(virtualView, "default name");
@@ -283,7 +654,7 @@ public class Game implements Observer {
 
     private void handlingReconnection(VirtualView view) {
 
-        System.out.println("tentata riconnessione");
+        log.info("reconnection in progress");
         VirtualView viewRemove = null;
         Player reconnectPlayer = null;
         for(Player player : model.getPlayerList()) {
@@ -316,462 +687,6 @@ public class Game implements Observer {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //--------metodi che modificano model e mandano la notify alla view----------
-    private void setPlayerNameModel(VirtualView view, String name) {
-
-        if (activeNames.contains(name)) {
-            view.sendEvent(new PlayerNameErrorEvent(view.getPlayerID()));
-        }
-        else {
-            activeNames.add(name);
-            model.setPlayerAndNotify((view.getPlayerID()), name);
-        }
-
-
-
-        if (singlePlayer){
-            setToolSinglePlayer();
-        }else {
-            if (model.getNumberPlayer() == (model.getPlayerList().size() - disconnectName)) {
-                startCard();
-            }
-        }
-    }
-
-    private void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
-
-        model.setCustomPatternAndNotify(view.getPlayerID(), patternCard);
-
-        if(!singlePlayer) {
-            System.out.println("custom pattern setting controller");
-            setTokensModel(view);
-
-            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
-
-                for (VirtualView view1 : viewGame) {
-                    view1.sendEvent(new StartGameSceneEvent());
-                }
-
-                startTurn();
-            }
-        }else {
-            view.sendEvent(new StartGameSceneEvent());
-            singlePlayerTurn();
-        }
-
-    }
-
-
-    private void setPatternCardModel(VirtualView view, int indexPatternChoose){
-
-        model.setPatternAndNotify(view.getPlayerID(), indexPatternChoose);
-
-        if(!singlePlayer) {
-            setTokensModel(view);
-
-            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
-
-                for (VirtualView view1 : viewGame) {
-                    view1.sendEvent(new StartGameSceneEvent());
-                }
-
-                startTurn();
-            }
-        }else {
-            view.sendEvent(new StartGameSceneEvent());
-            singlePlayerTurn();
-        }
-
-    }
-
-    private void setTokensModel(VirtualView view) {
-
-        model.setTokenAndNotify(view.getPlayerID());
-
-
-    }
-
-    private void setDraftPoolModel(VirtualView view){
-
-
-        model.setDraftPoolAndNotify(singlePlayer);
-        startChoose(view);
-
-    }
-
-    private void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
-
-        Dice dice = model.getDraftPool().getDraftPool().get(indexPool);
-
-        try {
-            model.setMoveAndNotify(view.getPlayerID(), indexPool, indexPattern);
-            nextStepMove(view);
-        }
-        catch (InvalidMoveException e) {
-            view.sendEvent(new InvalidMoveEvent(e.getMessage(), view.getPlayerID()));
-            model.getDraftPool().getDraftPool().add(dice);
-            model.updatePoolAndNotify();
-            startMove(view);
-        }
-    }
-
-    private void setEndRoundModel(){
-
-        model.setEndRoundAndNotify();
-    }
-
-    private void setFinalPointsModel(List<Player> playerList, boolean finish){
-
-        model.setFinalPointsAndNotify(playerList, finish);
-
-    }
-
-    private void setPlayerDisconnection(int playerID){
-
-        model.getPlayerFromID(playerID).setDisconnect(true);
-        disconnectPlayerNumber++;
-        if((viewGame.size() - disconnectPlayerNumber) < 2){
-            for(Player player : model.getPlayerList()){
-
-                if(player.getPattern() == null){
-                    notEnded = false;
-                }
-            }
-            endMatch(notEnded);
-
-        }else if (currID == playerID) {
-            nextTurn();
-        }
-        else {
-        }
-    }
-
-    private void setPlayerReconnect(int playerID){
-
-        model.getPlayerFromID(playerID).setDisconnect(false);
-        disconnectPlayerNumber--;
-        sendReconnectNotification(playerID);
-
-    }
-
-
-
-    //---------------------------------logica applicativa---------------------------
-
-    private void startGame() {
-
-        model.setNumberPlayer(0);
-        for (VirtualView view : viewGame) {
-            view.sendEvent(new GameStartedEvent(true));
-        }
-
-    }
-
-    private void setToolSinglePlayer(){
-        for (VirtualView view : viewGame) {
-            view.sendEvent(new ToolNumberRequestEvent());
-        }
-    }
-
-    private void startCard(){
-
-        model.setNumberPlayer(0);
-        model.setToolCardList(setup.setToolCard());
-        setup.setPublicCardModel();
-        for (VirtualView view : viewGame) {
-            view.sendEvent(new ToolCardUpdateEvent(model.getToolCardList()));
-            setup.setPrivateCardModel(view);
-            setup.startPatternCard(view);
-
-        }
-    }
-
-
-    private void singlePlayerTurn(){
-        if(turn == DEFAULT){
-            viewGame.get(0).sendEvent(new StartRoundEvent(round));
-            if(round > START){
-                viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
-            }
-            viewGame.get(0).sendEvent(new RollDraftPoolEvent(viewGame.get(0).getPlayerID()));
-
-
-
-        }else if(turn == START) {
-
-            viewGame.get(0).sendEvent(new TurnPatternEvent(viewGame.get(0).getPlayerID(), model.getPlayerFromID(viewGame.get(0).getPlayerID()).getPattern()));
-            startChoose(viewGame.get(0));
-        }else {
-            endRound();
-        }
-    }
-
-    private void startTurn(){
-
-        //startTimer();
-
-        if(turn == DEFAULT){
-            for (VirtualView view : viewGame) {
-                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
-                this.currID = model.getPlayerList().get(position).getPlayerID();
-                System.out.println(currID);
-                if (model.getPlayerFromID(currID).isDisconnect()) {
-
-                    //setDraftPoolModel(view);
-                    nextTurn();
-
-                }else {
-
-                    view.sendEvent(new StartRoundEvent(round));
-                    view.sendEvent(new StartTurnEvent(currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                    if (round > START) {
-                        view.sendEvent(new TurnPatternEvent(currID, model.getPlayerFromID(currID).getPattern()));
-                    }
-                    view.sendEvent(new RollDraftPoolEvent(currID));
-                    System.out.println("roll");
-
-                }
-
-
-            }
-
-
-        }
-        else if (turn > DEFAULT && turn < (model.getPlayerList().size()*2)){
-            for (VirtualView view : viewGame) {
-
-                int position = calculatePlayerTurn(turn, model.getPlayerList().size());
-                this.currID = model.getPlayerList().get(position).getPlayerID();
-                System.out.println(currID);
-                if(model.getPlayerFromID(currID).isDisconnect()) {
-
-                    nextTurn();
-                }else {
-                    if (currID == view.getPlayerID() && model.getPlayerFromID(view.getPlayerID()).isRunningP()) {
-                        model.getPlayerFromID(view.getPlayerID()).setRunningP(false);
-                        nextTurn();
-                    } else {
-                       if (turn != 0) {
-                            System.out.println("turno strano " + turn);
-                            view.sendEvent(new StartTurnEvent(this.currID, this.model.getPlayerFromID(this.currID).getPlayerName()));
-                            view.sendEvent(new TurnPatternEvent(this.currID, model.getPlayerFromID(currID).getPattern()));
-                            if (currID == view.getPlayerID()) {
-                                startChoose(view);
-                                System.out.println(turn);
-                                System.out.println("startChoose");
-
-                            }
-                       }
-                    }
-                }
-
-            }
-
-        }else {
-
-            endRound();
-        }
-
-
-    }
-
-    private int calculatePlayerTurn(int turn, int numberOfPlayers) {
-        if (turn < numberOfPlayers) {
-            return turn;
-        } else if (turn == numberOfPlayers) {
-            return numberOfPlayers - 1;
-        } else {
-            return (2 * numberOfPlayers) - (turn + 1);
-        }
-    }
-
-    private void startChoose(VirtualView view){
-
-        view.sendEvent(new StartChooseEvent(view.getPlayerID()));
-    }
-
-    private void startMove(VirtualView view){
-
-        view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
-
-
-    }
-
-    void startTool(VirtualView view) {
-
-        if(!singlePlayer){
-            view.sendEvent(new StartToolEvent(view.getPlayerID(), model.getToolCardList()));
-        }else {
-            view.sendEvent( new StartToolSinglePlayerEvent(model.getToolCardList(), model.getDraftPool().getNowNumber()));
-        }
-
-
-    }
-
-
-
-    //fa turn = 0, round++, e se round >10, allora
-    //chiama endMatch; gestisce inoltre tutti gli eventi della fine del round
-    private void endRound(){
-
-        setEndRoundModel();
-        round++;
-        if (round > END){
-            endMatch(true);
-        }else {
-            turn = DEFAULT;
-            if(!singlePlayer) {
-                setup.changeBagger();
-                System.out.println("endround" + turn);
-                startTurn();
-            }else {
-                singlePlayerTurn();
-            }
-        }
-
-    }
-
-    private void endMatch(boolean finish){
-
-        if(!singlePlayer) {
-            if (finish) {
-                setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), true);
-                for (VirtualView view : viewGame) {
-                    view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
-                }
-            }
-            else {
-                setFinalPointsModel(null, false);
-            }
-        }
-        else {
-
-            int roundTrackerPoints = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
-            int playerPoints = model.getPlayerList().get(0).getFinalPoints();
-            if(playerPoints > roundTrackerPoints){
-                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(true, playerPoints, roundTrackerPoints));
-            }else {
-                viewGame.get(0).sendEvent(new EndSinglePlayerEvent(false, playerPoints, roundTrackerPoints));
-            }
-
-
-        }
-
-    }
-
-    void nextTurn() {
-        step = SET;
-        turn++;
-        System.out.println("turn++");
-        if(!singlePlayer) {
-            System.out.println(turn);
-            startTurn();
-        }else {
-            singlePlayerTurn();
-        }
-    }
-
-    private void checkCost(VirtualView view, int indexTool){
-        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < model.getToolCardList().get(indexTool).getCost()){
-
-            view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
-            startTool(view);
-
-        }else {
-
-
-            model.getToolCardList().get(indexTool).incrementUsage();
-            toolController.toolCardEffectRequest(model.getToolCardList().get(indexTool).getNumber(), view);
-            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
-            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - model.getToolCardList().get(indexTool).getCost());
-            if (model.getToolCardList().get(indexTool).getCost() == START) {
-
-                model.getToolCardList().get(indexTool).setCost(SET);
-            }
-
-        }
-    }
-
-    private void stepController(VirtualView view, int step){
-
-        if(step == DEFAULT){
-            this.step = step;
-            startMove(view);
-
-        }else{
-
-            this.step = step;
-            startTool(view);
-        }
-    }
-
-    void nextStepTool(VirtualView view){
-
-        if(step == START){
-
-            startMove(view);
-            step++;
-        }
-        else {
-            nextTurn();
-        }
-
-    }
-
-    private void nextStepMove(VirtualView view){
-
-        if(step == DEFAULT){
-
-            startTool(view);
-
-        }
-        else {
-            nextTurn();
-        }
-    }
-
-    ToolCard getTool(int n) {
-
-        for (ToolCard toolCard : model.getToolCardList()) {
-            if (toolCard.getNumber() == n) {
-                return toolCard;
-            }
-        }
-        return null;
-    }
-
-    private void checkDice(VirtualView view, int indexTool, int indexPool){
-
-        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(model.getToolCardList().get(indexTool).getColor().toString())){
-
-            diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
-            model.updatePoolAndNotify();
-            toolRemoveSinglePlayer = model.getToolCardList().remove(indexTool);
-            toolController.toolCardEffectRequest(toolRemoveSinglePlayer.getNumber(), view);
-
-
-
-        }else {
-            view.sendEvent(new NotMatchColorEvent());
-            startTool(view);
-        }
-    }
-
     private void sendExitNotification(int iD) {
         for (VirtualView view : viewGame) {
             if(notEnded) {
@@ -787,13 +702,6 @@ public class Game implements Observer {
 
     }
 
-
-    private void endTimer() {
-        if (timer != null) {
-            timer.cancel();
-        }
-    }
-
     protected void startTimer() {
 
         if (timer != null) {
@@ -805,7 +713,6 @@ public class Game implements Observer {
         {
             @Override
             public void run() {
-                //viewGame.get(getCurrID()).sendEvent(new TimerEndedEvent(getCurrID()));
 
                 for (VirtualView view : viewGame) {
                     if (view.getPlayerID() == getCurrID()) {
@@ -819,6 +726,12 @@ public class Game implements Observer {
             }
 
         }, TIMERTURN);
+    }
+
+    private void endTimer() {
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
 

@@ -13,6 +13,7 @@ import static java.lang.Math.min;
  */
 
 public class DifferentShade implements PublicEffects, Serializable {
+
     private static final int VPOINTS = 5;
     private static final String NAME = "Shade Variety";
     /**

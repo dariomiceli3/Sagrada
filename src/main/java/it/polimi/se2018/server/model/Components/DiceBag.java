@@ -15,20 +15,12 @@ import java.util.ArrayList;
  */
 public class DiceBag implements Serializable {
 
-    //private static DiceBag istanceDB;
     private static final int TOP = 0;
     private static final int MAX_VALUE = 6;
     private static final int NUMBER = 90;
     private static final int DIV = 5;
     private List<Dice> listDice;
 
-
-    /*public static DiceBag getIstanceDB(){
-        if (istanceDB == null){
-            istanceDB = new DiceBag();
-        }
-        return istanceDB;
-    }*/
 
     /**
      * Private DiceBag constructor, create a bag of 90 dice with random face number, 18 dice for each colour

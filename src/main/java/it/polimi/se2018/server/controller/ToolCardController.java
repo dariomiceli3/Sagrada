@@ -3,9 +3,9 @@ package it.polimi.se2018.server.controller;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.clientserver.*;
 import it.polimi.se2018.events.InvalidMoveEvent;
-import it.polimi.se2018.events.ServerClient.ControllerView.*;
+import it.polimi.se2018.events.serverclient.controllerview.*;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -24,55 +24,41 @@ public class ToolCardController implements Observer {
     void toolCardEffectRequest(int n, VirtualView view) {
 
        if (n == 1) {
-
             view.sendEvent(new GrozingPliersRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-        } else if (n == 2) {
-
+       } else if (n == 2) {
             view.sendEvent(new EglomiseBrushRequestEvent(view.getPlayerID()));
-
-        }else if (n == 3) {
-
+       }
+       else if (n == 3) {
             view.sendEvent(new CopperFoilRequestEvent(view.getPlayerID()));
-
-        }else if (n == 4) {
-
+       }
+       else if (n == 4) {
             view.sendEvent(new LathekinRequestEvent(view.getPlayerID()));
-
-        }else if (n == 5) {
-
+       }
+       else if (n == 5) {
             view.sendEvent(new LensCutterRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber(), game.getModel().getRoundTracker().getRoundsSizes()));
-
-        }else if (n == 6) {
-
+       }
+       else if (n == 6) {
             view.sendEvent(new FluxBrushRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-        } else if (n == 7) {
-
+       }
+       else if (n == 7) {
             view.sendEvent(new GlazingHammerRequestEvent(view.getPlayerID()));
-
-        } else if (n == 8) {
-
+       }
+       else if (n == 8) {
             view.sendEvent(new RunningPliersRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-        } else if (n == 9) {
-
+       }
+       else if (n == 9) {
             view.sendEvent(new CorkBackedRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-        } else if (n == 10) {
-
+       }
+       else if (n == 10) {
             view.sendEvent(new GrindingStoneRequestEvent(view.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-        }else if (n == 11) {
-
+       }
+       else if (n == 11) {
             dice = game.getModel().getDiceBag().getDice();
             view.sendEvent(new FluxRemoverRequestEvent(view.getPlayerID(), dice.getColor(), game.getModel().getDraftPool().getNowNumber()));
-
-        } else {
-
-            view.sendEvent(new TapWheelRequestEvent(view.getPlayerID()));
-
-        }
+       }
+       else {
+           view.sendEvent(new TapWheelRequestEvent(view.getPlayerID()));
+       }
     }
 
     @Override
@@ -92,10 +78,7 @@ public class ToolCardController implements Observer {
                 game.getModel().updatePoolAndNotify();
                 virtualView.sendEvent(new GrozingPliersRequestEvent(virtualView.getPlayerID(),game.getModel().getDraftPool().getNowNumber() ));
             }
-
-
         }
-
         if (arg instanceof EglomiseBrushEvent) {
 
             Dice eglomiseDice = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((EglomiseBrushEvent) arg).getIndexStart());
@@ -115,7 +98,6 @@ public class ToolCardController implements Observer {
                 invalidMove(virtualView, 2);
                 game.startTool(virtualView);
             }
-
         }
 
         if (arg instanceof CopperFoilEvent) {
@@ -138,13 +120,11 @@ public class ToolCardController implements Observer {
                 invalidMove(virtualView, 3);
                 game.startTool(virtualView);
             }
-
         }
-
         if (arg instanceof LathekinEvent) {
 
             Dice dice1 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((LathekinEvent) arg).getIndexStartOne());
-            Dice dice2 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((LathekinEvent) arg).getIndexStartTwo());
+
             try {
                toolCardEffect.lathekinEffect(virtualView.getPlayerID(), ((LathekinEvent)arg).getIndexStartOne(), ((LathekinEvent) arg).getIndexEndOne(), ((LathekinEvent)arg).getIndexStartTwo(), ((LathekinEvent) arg).getIndexEndTwo());
                 game.nextStepTool(virtualView);
@@ -172,21 +152,17 @@ public class ToolCardController implements Observer {
                 invalidMove(virtualView, 4);
                 game.startTool(virtualView);
             }
-
         }
-
         if (arg instanceof LensCutterEvent) {
 
             toolCardEffect.lensCutterEffect(virtualView.getPlayerID(), ((LensCutterEvent) arg).getIndexPool(), ((LensCutterEvent) arg).getIndexRound(), ((LensCutterEvent) arg).getIndexPosition());
             game.nextStepTool(virtualView);
         }
-
         if (arg instanceof FluxBrushEvent) {
 
             toolCardEffect.fluxBrushEffect(virtualView.getPlayerID(), ((FluxBrushEvent)arg).getIndexPool());
             game.nextStepTool(virtualView);
         }
-
         if (arg instanceof GlazingHammerEvent) {
 
             try {
@@ -197,9 +173,7 @@ public class ToolCardController implements Observer {
                 invalidMove(virtualView, 7);
                 game.startTool(virtualView);
             }
-
         }
-
         if (arg instanceof RunningPliersEvent) {
 
             Dice runningPDice = game.getModel().getDraftPool().getDraftPool().get( ((RunningPliersEvent) arg).getIndexPool());
@@ -214,17 +188,14 @@ public class ToolCardController implements Observer {
                     invalidMove(virtualView, 8);
                     game.startTool(virtualView);
                 }
-
                 else {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     game.getModel().getDraftPool().getDraftPool().add(runningPDice);
                     game.getModel().updatePoolAndNotify();
                     virtualView.sendEvent(new RunningPliersRequestEvent(virtualView.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
                 }
-
             }
         }
-
         if (arg instanceof CorkBackedEvent) {
 
             Dice corkDice = game.getModel().getDraftPool().getDraftPool().get( ((CorkBackedEvent) arg).getIndexPool() );
@@ -244,11 +215,8 @@ public class ToolCardController implements Observer {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     game.getModel().getDraftPool().getDraftPool().add(corkDice);
                     virtualView.sendEvent(new CorkBackedRequestEvent(virtualView.getPlayerID(), game.getModel().getDraftPool().getNowNumber()));
-
-
                 }
             }
-
         }
 
         if (arg instanceof GrindingStoneEvent) {
@@ -264,10 +232,6 @@ public class ToolCardController implements Observer {
         }
 
         if (arg instanceof TapWheelEvent) {
-
-            Dice dice1 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((TapWheelEvent)arg).getIndexStartOne());
-
-            Dice dice2 = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getPattern().getDice( ((TapWheelEvent)arg).getIndexStartTwo());
 
             try {
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(),((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
@@ -298,15 +262,8 @@ public class ToolCardController implements Observer {
                     virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));
 
                 }
-
-
-
             }
-
-
-
         }
-
     }
 
     private void invalidMove(VirtualView virtualView,int n){
@@ -315,12 +272,14 @@ public class ToolCardController implements Observer {
             game.getModel().getDraftPool().getDraftPool().add(game.getDiceToolSinglePlayer());
             game.getModel().updatePoolAndNotify();
             game.getModel().getToolCardList().add(game.getToolRemoveSinglePlayer());
-        }else if(game.getTool(n).getUsage() == 1){
+        }
+        else if(game.getTool(n).getUsage() == 1){
             game.getTool(n).setCost(1);
             int t = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getTokensNumber();
             game.getModel().getPlayerFromID(virtualView.getPlayerID()).setTokensNumber(t + 1);
             game.getTool(n).setUsage(0);
-        }else {
+        }
+        else {
             int t = game.getModel().getPlayerFromID(virtualView.getPlayerID()).getTokensNumber();
             game.getModel().getPlayerFromID(virtualView.getPlayerID()).setTokensNumber(t + 2);
         }

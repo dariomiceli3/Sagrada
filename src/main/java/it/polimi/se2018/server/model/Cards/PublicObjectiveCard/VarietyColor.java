@@ -14,6 +14,7 @@ import static java.lang.Math.min;
  * @author Salvatrore Fadda
  */
 public class VarietyColor implements PublicEffects, Serializable {
+
     private static final int VPOINTS = 4;
     private static final String NAME = "Color Variety";
     /**

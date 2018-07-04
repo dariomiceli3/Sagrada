@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class DraftPool implements Serializable {
 
-    //private static DraftPool istanceDP;
     private static final int DEFAULT = 0;
     private int number;
     private DiceBag diceBag;
@@ -26,14 +25,6 @@ public class DraftPool implements Serializable {
         this.diceBag = null;
 
     }
-
-    /*public static DraftPool getIstanceDP(){
-        if (istanceDP == null){
-            istanceDP = new DraftPool();
-        }
-        return istanceDP;
-
-    }*/
 
     /**
      * Class constructor, create the draftpool of the current round taking a number (=2*number+1) of dice from the dicebag
@@ -56,13 +47,6 @@ public class DraftPool implements Serializable {
         this.dicePlay = new ArrayList<>();
 
     }
-    /*public static DraftPool getIstanceDPWithParam(int number, DiceBag diceBag){
-        if (istanceDP == null){
-            istanceDP = new DraftPool(number, diceBag);
-        }
-        return istanceDP;
-
-    }*/
 
 
     /**
@@ -140,17 +124,6 @@ public class DraftPool implements Serializable {
     @Override
     public String toString() {
         return "Draft Pool: " + dicePlay.toString();
-        //return "Draft Pool: " + listToString(dicePlay);
-        //return "Draft Pool" + dicePlay.get(0).toString() + " " + dicePlay.get(1).toString();
     }
-
-    /*public static String listToString(List<?> list) {
-        String result = "{ ";
-        for (int i = 0; i < list.size(); i++) {
-            result += " " + list.get(i).toString();
-        }
-        result += " }";
-        return result;
-    }*/
 
 }

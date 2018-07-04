@@ -2,13 +2,13 @@ package it.polimi.se2018.server.network.socket;
 
 import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.network.VirtualView;
-import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.clientserver.*;
 import it.polimi.se2018.events.Event;
-import it.polimi.se2018.events.ServerClient.ModelView.PlayerIDEvent;
-import it.polimi.se2018.events.SinglePlayer.SinglePlayerEvent;
-import it.polimi.se2018.events.SinglePlayer.SinglePlayerRequestEvent;
-import it.polimi.se2018.events.SinglePlayer.ToolCardSinglePlayerStartEvent;
-import it.polimi.se2018.events.SinglePlayer.ToolNumberEvent;
+import it.polimi.se2018.events.serverclient.modelview.PlayerIDEvent;
+import it.polimi.se2018.events.singleplayer.SinglePlayerEvent;
+import it.polimi.se2018.events.singleplayer.SinglePlayerRequestEvent;
+import it.polimi.se2018.events.singleplayer.ToolCardSinglePlayerStartEvent;
+import it.polimi.se2018.events.singleplayer.ToolNumberEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,24 +16,23 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Observable;
+import java.util.logging.Logger;
 
 public class VirtualSocket extends VirtualView implements Runnable {
 
+    private final Logger log = Logger.getLogger(VirtualSocket.class.getName());
     private Socket clientConnection;
-    private ObjectInputStream socketIn;
-    private ObjectOutputStream socketOut;
     private boolean running;
     private Server server;
 
-    public VirtualSocket(Socket clientConnection, Server server, int ID) {
-            super(ID);
-            this.server = server;
-            this.clientConnection = clientConnection;
-            this.running = true;
-            sendEvent(new PlayerIDEvent(this.playerID));
-            System.out.println("Send socket id to the player");
-            sendEvent(new SinglePlayerRequestEvent(this.playerID));
-
+    VirtualSocket(Socket clientConnection, Server server, int id) {
+        super(id);
+        this.server = server;
+        this.clientConnection = clientConnection;
+        this.running = true;
+        sendEvent(new PlayerIDEvent(this.playerID));
+        log.info("Send socket id to the player");
+        sendEvent(new SinglePlayerRequestEvent(this.playerID));
     }
 
     // observable -> notify
@@ -43,16 +42,16 @@ public class VirtualSocket extends VirtualView implements Runnable {
     public void run() {
 
         try {
-            System.out.println("thread socket andato");
+            log.info("thread socket andato");
             while (this.isRunning()) {
 
                 Object received = null;
                 try {
-                     socketIn = new ObjectInputStream(clientConnection.getInputStream());
+                     ObjectInputStream socketIn = new ObjectInputStream(clientConnection.getInputStream());
                      received = socketIn.readObject();
                 }
                 catch (IOException e) {
-                    System.out.println("error socket: " + super.getPlayerID() + " disconnected from the game ");
+                    log.info("error socket: " + super.getPlayerID() + " disconnected from the game ");
                     if (getServer().getGame() == null) {
                         getServer().removeSocketClient(this);
                         getServer().removeClient(this);
@@ -86,7 +85,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                             Server.setSinglePlayer(true);
                         }
                         else {
-                            System.out.println("client socket extra in avvio multi come single ha provato a connettersi");
+                            log.info("client socket extra in start multi as single tried to connect");
                             getServer().removeSocketClient(this);
                             getServer().removeClient(this);
                             this.running = false;
@@ -96,7 +95,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     if (getServer().checkNumberPlayer()) {
                         if (getServer().isGameStarted()) {
 
-                            System.out.println("sono nel ramo della disconnessione");
+                            log.info("reconnection socket");
                             this.addObserver(getServer().getGame());
                             Server.setMulti(Server.getMulti() + 1);
                             setChanged();
@@ -108,7 +107,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         }
                     }
                     else {
-                        System.out.println("client socket extra ha provato a connettersi");
+                        log.info("client socket extra tried to connect");
                         getServer().removeSocketClient(this);
                         getServer().removeClient(this);
                         this.running = false;
@@ -253,8 +252,8 @@ public class VirtualSocket extends VirtualView implements Runnable {
             }
                 // add the disconnection if there's an exception
         } catch (ClassNotFoundException e) {
-            System.out.println("Error in finding classes");
-            e.printStackTrace();
+            log.info("Error in finding classes");
+            log.warning(e.getMessage());
         } finally {
             stopConnection();
             // devo rimuovere dall'array il client(?)
@@ -269,19 +268,19 @@ public class VirtualSocket extends VirtualView implements Runnable {
             if (this.isRunning()) {
 
                 try {
-                    socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
+                    ObjectOutputStream socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
                     socketOut.writeObject(event);
                     socketOut.flush();
                 }
                 catch (SocketException e) {
-                    System.out.println("error in send event virtual socket appena inserito");
+                    log.info("error in send event virtual socket");
                     this.running = false;
                 }
             }
         }
         catch (IOException e) {
-            System.out.println("Error in writing from virtual socket");
-            e.printStackTrace();
+            log.info("Error in writing from virtual socket");
+            log.warning(e.getMessage());
             this.running = false;
         }
 
@@ -303,19 +302,19 @@ public class VirtualSocket extends VirtualView implements Runnable {
 
     }
 
-    public boolean isRunning() {
+    private boolean isRunning() {
         return running;
     }
 
 
-    public void stopConnection () {
+    private void stopConnection () {
         try {
             clientConnection.close();
-            System.out.println("Closing connection virtual socket");
+            log.info("Closing connection virtual socket");
         }
         catch (IOException e) {
-            System.out.println("Error in closing connection");
-            e.printStackTrace();
+            log.info("Error in closing connection");
+            log.warning(e.getMessage());
         }
         running = false;
     }

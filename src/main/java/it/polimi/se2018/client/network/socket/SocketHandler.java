@@ -3,12 +3,12 @@ package it.polimi.se2018.client.network.socket;
 import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.clientserver.*;
 import it.polimi.se2018.events.Event;
 import it.polimi.se2018.events.InvalidMoveEvent;
-import it.polimi.se2018.events.ServerClient.ControllerView.*;
-import it.polimi.se2018.events.ServerClient.ModelView.*;
-import it.polimi.se2018.events.SinglePlayer.*;
+import it.polimi.se2018.events.serverclient.controllerview.*;
+import it.polimi.se2018.events.serverclient.modelview.*;
+import it.polimi.se2018.events.singleplayer.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,6 +30,8 @@ public class SocketHandler implements ClientInterface, Runnable {
     private View view;
 
     public SocketHandler(String host, int port, View view) {
+
+        log.info("connecting to ip socket: " + host);
 
         try {
             this.clientConnection = new Socket(host, port);

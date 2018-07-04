@@ -6,13 +6,13 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
 import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.network.VirtualView;
-import it.polimi.se2018.events.ClientServer.DisconnectionEvent;
-import it.polimi.se2018.events.ClientServer.ReconnectionEvent;
+import it.polimi.se2018.events.clientserver.DisconnectionEvent;
+import it.polimi.se2018.events.clientserver.ReconnectionEvent;
 import it.polimi.se2018.events.Event;
 import it.polimi.se2018.events.InvalidMoveEvent;
-import it.polimi.se2018.events.ServerClient.ControllerView.*;
-import it.polimi.se2018.events.ServerClient.ModelView.*;
-import it.polimi.se2018.events.SinglePlayer.*;
+import it.polimi.se2018.events.serverclient.controllerview.*;
+import it.polimi.se2018.events.serverclient.modelview.*;
+import it.polimi.se2018.events.singleplayer.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,22 +21,24 @@ import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class VirtualRmi extends VirtualView {
 
+    private final Logger log = Logger.getLogger(VirtualRmi.class.getName());
     private Server server;
     private RmiClientInterface clientRmi;
     private boolean running;
     private Timer timer;
     private final int TIMEKEEPER;
 
-    public VirtualRmi(RmiClientInterface clientRmi, Server server, int ID) {
-        super(ID);
+    public VirtualRmi(RmiClientInterface clientRmi, Server server, int id) {
+        super(id);
         this.server = server;
         this.running = true;
         this.clientRmi = clientRmi;
         sendEvent(new PlayerIDEvent(this.playerID));
-        System.out.println("Send rmi id to the player " + this.playerID);
+        log.info("Send rmi id to the player " + this.playerID);
         sendEvent(new SinglePlayerRequestEvent(this.playerID));
 
         Gson gson = new Gson();
@@ -63,7 +65,7 @@ public class VirtualRmi extends VirtualView {
                 } else if (((SinglePlayerEvent) event).isSinglePlayer() && Server.getMulti() == 0) {
                     Server.setSinglePlayer(true);
                 } else {
-                    System.out.println("client socket rmi in avvio multi come single ha provato a connettersi");
+                    log.info("client rmi in start multi as single tried to connect");
                     this.server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
                     this.server.removeClient(this);
                     this.running = false;
@@ -74,7 +76,7 @@ public class VirtualRmi extends VirtualView {
             if (server.checkNumberPlayer()) {
 
                 if (server.isGameStarted()) {
-                    System.out.println("ramo disconnessione rmi");
+                    log.info("rmi reconnection");
                     this.addObserver(server.getGame());
                     Server.setMulti(Server.getMulti() + 1);
                     setChanged();
@@ -84,14 +86,14 @@ public class VirtualRmi extends VirtualView {
                     this.server.waitingOtherPlayers();
                 }
             } else {
-                System.out.println("client rmi extra ha provato a connettersi");
+                log.info("extra client rmi tried to connect");
                 server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
                 server.removeClient(this);
                 this.running = false;
                 try {
                     clientRmi.remoteMaxPlayerLogin();
                 } catch (RemoteException e) {
-                    System.out.println("error rmi max player");
+                    log.info("error rmi max player");
                 }
             }
         } else {
@@ -174,7 +176,7 @@ public class VirtualRmi extends VirtualView {
                 } else if (event instanceof LensCutterRequestEvent) {
                     clientRmi.remoteLensCutterRequestEvent(((LensCutterRequestEvent) event).getId(), ((LensCutterRequestEvent) event).getPoolSize(), ((LensCutterRequestEvent) event).getRoundSizes());
                 } else if (event instanceof FluxBrushRequestEvent) {
-                    clientRmi.remoteFluxBrushRequesEvent(((FluxBrushRequestEvent) event).getId(), ((FluxRemoverRequestEvent) event).getPoolSize());
+                    clientRmi.remoteFluxBrushRequesEvent(((FluxBrushRequestEvent) event).getId(), ((FluxBrushRequestEvent) event).getPoolSize());
                 } else if (event instanceof GlazingHammerRequestEvent) {
                     clientRmi.remoteGlazingHammerRequestEvent(((GlazingHammerRequestEvent) event).getId());
                 } else if (event instanceof RunningPliersRequestEvent) {
@@ -183,7 +185,6 @@ public class VirtualRmi extends VirtualView {
                     clientRmi.remoteCorkBackedRequestEvent(((CorkBackedRequestEvent) event).getId(), ((CorkBackedRequestEvent) event).getPoolSize());
                 } else if (event instanceof GrindingStoneRequestEvent) {
                     clientRmi.remoteGrindingStoneRequestEvent(((GrindingStoneRequestEvent) event).getId(), ((GrindingStoneRequestEvent) event).getPoolSize());
-
                 } else if (event instanceof FluxRemoverRequestEvent) {
                     clientRmi.remoteFluxRemoverRequestEvent(((FluxRemoverRequestEvent) event).getId(), ((FluxRemoverRequestEvent) event).getDiceColor(), ((FluxRemoverRequestEvent) event).getPoolSize());
                 } else if (event instanceof TapWheelRequestEvent) {
@@ -221,12 +222,12 @@ public class VirtualRmi extends VirtualView {
                 } else if (event instanceof SuccessfulReconnectionEvent) {
                     clientRmi.remoteSuccessfulReconnection(((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
                 } else {
-                    System.out.println("Not understood the message");
+                    log.info("Not understood the message");
                 }
 
             }
         } catch (IOException e) {
-            System.out.println("Error I/O rmi");
+            log.info("Error I/O rmi");
             this.running = false;
 
         }
@@ -243,12 +244,10 @@ public class VirtualRmi extends VirtualView {
             if (arg instanceof Event) {
                 sendEvent((Event) arg);
             }
-
         }
-
     }
 
-    public void timeout() {
+    void timeout() {
 
         if (timer != null) {
             timer.cancel();
@@ -258,7 +257,7 @@ public class VirtualRmi extends VirtualView {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("client rmi disconnected");
+                log.info("client rmi disconnected");
                 disconnectionRmi();
             }
         }, TIMEKEEPER);
@@ -266,7 +265,7 @@ public class VirtualRmi extends VirtualView {
 
     private void disconnectionRmi() {
 
-        System.out.println("error rmi: " + super.getPlayerID() + "disconnected from the game");
+        log.info("error rmi: " + super.getPlayerID() + "disconnected from the game");
 
         if (server.getGame() == null) {
             server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);

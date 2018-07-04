@@ -237,9 +237,9 @@ public class GuiController extends View {
         getConnection().setPatternCardToServer(indexPattern, getPlayerID());
     }
 
-    void setCustomPattern(PatternCard pattern, boolean customCard) {
+    void setCustomPattern(PatternCard pattern) {
         getConnection().setPatternCustomToServer(getPlayerID(), pattern);
-        setCustomCard(customCard);
+        setCustomCard(true);
     }
 
 
@@ -568,9 +568,9 @@ public class GuiController extends View {
 
                 }else {
 
-                        EndGameScene.setFinish(ended);
-                        EndGameScene.setPlayerList(playerList);
-                        EndGameScene.display();
+                    EndGameScene.setFinish(false);
+                    EndGameScene.setPlayerList(playerList);
+                    EndGameScene.display();
                 }
             }
             catch (IOException e){

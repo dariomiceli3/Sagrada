@@ -3,7 +3,6 @@ package it.polimi.se2018.server.network.rmi;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.server.network.Server;
 
 import java.io.InputStream;
@@ -12,12 +11,13 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.logging.Logger;
 
 public class RmiGatherer {
 
     private RmiServerImpl serverRmi;
 
-    public RmiServerImpl getServerRmi() {
+    RmiServerImpl getServerRmi() {
         return serverRmi;
     }
 
@@ -25,18 +25,18 @@ public class RmiGatherer {
 
     public RmiGatherer(Server server, int port) {
 
+        final Logger log = Logger.getLogger(RmiGatherer.class.getName());
+
         try {
             LocateRegistry.createRegistry(port);
-
         }
         catch (RemoteException e) {
-            System.out.println("Registry yet present");
-            e.printStackTrace();
+           log.info("Registry yet present");
+           log.warning(e.getMessage());
         }
 
         try {
-            // todo check if everything is ok with this
-            /*RmiServerImpl*/ serverRmi = new RmiServerImpl(server);
+            serverRmi = new RmiServerImpl(server);
 
             Gson gson = new Gson();
             InputStream fileStream = RmiGatherer.class.getResourceAsStream("/json/settings" + ".json");
@@ -44,20 +44,21 @@ public class RmiGatherer {
 
             String ipAddress = jsonObject.get("ipAddress").getAsString();
 
+            log.info("ip address rmi: " + ipAddress);
+
             Naming.rebind("//" + ipAddress + "/Sagrada", serverRmi);
-            System.out.println("Server rmi started on port " + port);
+            log.info("Server rmi started on port " + port);
 
         }
         catch (MalformedURLException e) {
-            System.out.println("Impossible to register the object");
-            e.printStackTrace();
+            log.warning("Impossible to register the object");
+            log.info(e.getMessage());
 
         }
         catch (RemoteException e) {
-            System.out.println("Connection error server");
-            e.printStackTrace();
+           log.warning("Connection error server");
+           log.info(e.getMessage());
         }
-
     }
 }
 

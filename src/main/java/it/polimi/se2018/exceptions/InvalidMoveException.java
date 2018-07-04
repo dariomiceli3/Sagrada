@@ -5,7 +5,6 @@ public class InvalidMoveException extends Exception {
 
     public InvalidMoveException(String error) {
         super(error);
-        //System.out.println(error.toString());
     }
 
 

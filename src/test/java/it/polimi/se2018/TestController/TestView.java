@@ -7,9 +7,9 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.Model;
-import it.polimi.se2018.events.ClientServer.*;
+import it.polimi.se2018.events.clientserver.*;
 import it.polimi.se2018.events.Event;
-import it.polimi.se2018.events.SinglePlayer.*;
+import it.polimi.se2018.events.singleplayer.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

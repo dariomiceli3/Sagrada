@@ -2,7 +2,7 @@ package it.polimi.se2018.server.controller;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Components.Dice;
-import it.polimi.se2018.events.ServerClient.ControllerView.ToolCardUpdateEvent;
+import it.polimi.se2018.events.serverclient.controllerview.ToolCardUpdateEvent;
 
 import java.util.List;
 import java.util.Random;
@@ -157,20 +157,18 @@ class ToolCardEffect {
    //toolcard 8
    void runningPliers(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
 
-        if(game.getStep() == 0 && game.getTurn() < game.getViewGame().size()){
-            Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
-            game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, game.getModel().getPlayerFromID(iD).getPattern());
-            game.getModel().getPlayerFromID(iD).setRunningP(true);
-            game.getModel().updatePatternAndNotify(iD);
-            game.getModel().updateBoardAndNotify();
-            game.getModel().updateTokenAndNotify(iD);
+       if (game.getStep() == 0 && game.getTurn() < game.getViewGame().size()) {
+           Dice dice = game.getModel().getDraftPool().getDraftPool().remove(indexPool);
+           game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice, indexPattern, game.getModel().getPlayerFromID(iD).getPattern());
+           game.getModel().getPlayerFromID(iD).setRunningP(true);
+           game.getModel().updatePatternAndNotify(iD);
+           game.getModel().updateBoardAndNotify();
+           game.getModel().updateTokenAndNotify(iD);
 
-        }else {
-            throw new InvalidMoveException("Invalid turn moment");
-        }
-
-    }
-
+       } else {
+           throw new InvalidMoveException("Invalid turn moment");
+       }
+   }
 
     //toolcard 9
     void corkBackedStraightedgeEffect(int iD, int indexPool, int indexPattern) throws InvalidMoveException {
@@ -221,7 +219,7 @@ class ToolCardEffect {
 
 
 
-        }
+    }
 
 
     //toolcard 12
@@ -241,24 +239,24 @@ class ToolCardEffect {
 
             if (game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart1).getColor().equals(game.getModel().getPlayerFromID(iD).getPattern().getDice(indexStart2).getColor()))
             {
-            Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
-            try {
-                game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
-            }
-            catch (InvalidMoveException e) {
-                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
-                throw new InvalidMoveException("Error in the first dice");
-            }
-            Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
-            try {
-                game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
-            }
-            catch (InvalidMoveException e) {
-                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice2, indexStart2);
-                game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexEnd1);
-                game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
-                throw new InvalidMoveException("Error in the second dice");
-            }
+                Dice dice1 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart1);
+                try {
+                    game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice1, indexEnd1, game.getModel().getPlayerFromID(iD).getPattern());
+                }
+                catch (InvalidMoveException e) {
+                    game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
+                    throw new InvalidMoveException("Error in the first dice");
+                }
+                Dice dice2 = game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexStart2);
+                try {
+                    game.getModel().getPlayerFromID(iD).getPattern().putDiceOnPattern(dice2, indexEnd2, game.getModel().getPlayerFromID(iD).getPattern());
+                }
+                catch (InvalidMoveException e) {
+                    game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice2, indexStart2);
+                    game.getModel().getPlayerFromID(iD).getPattern().removeDice(indexEnd1);
+                    game.getModel().getPlayerFromID(iD).getPattern().putAnyDice(dice1, indexStart1);
+                    throw new InvalidMoveException("Error in the second dice");
+                }
             }
             else {
                 throw new InvalidMoveException("You choose two dice with different colors");
@@ -278,6 +276,8 @@ class ToolCardEffect {
             game.getViewGame().get(0).sendEvent(new ToolCardUpdateEvent(game.getModel().getToolCardList()));
         }
     }
+
+
 
 
 

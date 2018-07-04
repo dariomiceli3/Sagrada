@@ -17,8 +17,8 @@ import java.util.List;
 
 public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInterface {
 
-    private transient View view;
-    private transient Ping ping;
+    private View view;
+    private Ping ping;
 
     RmiClientImpl(View view, Ping ping) throws RemoteException {
         super();
