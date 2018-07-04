@@ -127,6 +127,12 @@ public class CliView extends View implements Runnable {
                 if (cliState == GameState.NAME || cliState == GameState.PATTERN) {
                     out.println("\n" + "It's not time for exit the game");
                 }
+                else{
+                    setConnected(false);
+                    out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
+                    getConnection().setExitToServer(super.getPlayerID());
+                    setCliState(GameState.NOTCONNECTED);
+                }
             } else if (cliState == GameState.NOTAUTHORIZED) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
                     out.println("Please, it's not your turn! Waiting for your moment");
@@ -891,14 +897,14 @@ public class CliView extends View implements Runnable {
     }
 
     @Override
-    public void showOtherPattern(PatternCard patternCard, String name,  int ID) {
+    public void showOtherPattern(PatternCard patternCard, String name,  int id) {
         out.println("\n" + "Now Pattern of" + name + "is: ");
         out.println(patternCard.toString());
 
     }
 
     @Override
-    public void showOtherStartPattern(PatternCard patternCard, int ID) {
+    public void showOtherStartPattern(PatternCard patternCard, int id) {
         out.println("The pattern of your enemy is: " + "\n");
         out.println(patternCard.toString());
         out.println("Choose your Pattern Card - Enter a number between 1 and 4");
