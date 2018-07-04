@@ -52,7 +52,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                      received = socketIn.readObject();
                 }
                 catch (IOException e) {
-                    System.out.println("error: " + super.getPlayerID() + " disconnected from the game ");
+                    System.out.println("error socket: " + super.getPlayerID() + " disconnected from the game ");
                     if (getServer().getGame() == null) {
                         getServer().removeSocketClient(this);
                         getServer().removeClient(this);
@@ -62,6 +62,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         }
                     }
                     else {
+                        Server.setMulti(Server.getMulti() - 1);
                         setChanged();
                         notifyObservers(new DisconnectionEvent(super.getPlayerID()));
                     }
@@ -79,10 +80,10 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     if (!getServer().isGameStarted()) {
 
                         if (!(((SinglePlayerEvent)received).isSinglePlayer())) {
-                            this.getServer().setSinglePlayer(false);
+                            Server.setSinglePlayer(false);
                         }
                         else if ( ((SinglePlayerEvent) received).isSinglePlayer() && Server.getMulti() == 0) {
-                            this.getServer().setSinglePlayer(true);
+                            Server.setSinglePlayer(true);
                         }
                         else {
                             System.out.println("client socket extra in avvio multi come single ha provato a connettersi");
@@ -91,19 +92,18 @@ public class VirtualSocket extends VirtualView implements Runnable {
                             this.running = false;
                         }
 
-                        //System.out.println("modalita settata " + getServer().isSinglePlayer());
                     }
                     if (getServer().checkNumberPlayer()) {
                         if (getServer().isGameStarted()) {
 
                             System.out.println("sono nel ramo della disconnessione");
                             this.addObserver(getServer().getGame());
+                            Server.setMulti(Server.getMulti() + 1);
                             setChanged();
                             notifyObservers(new ReconnectionEvent());
                         }
                         else {
                             Server.setMulti(Server.getMulti() + 1);
-                            System.out.println(Server.getMulti());
                             this.getServer().waitingOtherPlayers();
                         }
                     }

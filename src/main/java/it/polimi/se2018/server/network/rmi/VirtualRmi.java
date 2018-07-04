@@ -59,9 +59,9 @@ public class VirtualRmi extends VirtualView {
             if (!server.isGameStarted()) {
 
                 if (!(((SinglePlayerEvent) event).isSinglePlayer())) {
-                    this.server.setSinglePlayer(false);
+                    Server.setSinglePlayer(false);
                 } else if (((SinglePlayerEvent) event).isSinglePlayer() && Server.getMulti() == 0) {
-                    this.server.setSinglePlayer(true);
+                    Server.setSinglePlayer(true);
                 } else {
                     System.out.println("client socket rmi in avvio multi come single ha provato a connettersi");
                     this.server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
@@ -76,6 +76,7 @@ public class VirtualRmi extends VirtualView {
                 if (server.isGameStarted()) {
                     System.out.println("ramo disconnessione rmi");
                     this.addObserver(server.getGame());
+                    Server.setMulti(Server.getMulti() + 1);
                     setChanged();
                     notifyObservers(new ReconnectionEvent());
                 } else {
@@ -265,6 +266,8 @@ public class VirtualRmi extends VirtualView {
 
     private void disconnectionRmi() {
 
+        System.out.println("error rmi: " + super.getPlayerID() + "disconnected from the game");
+
         if (server.getGame() == null) {
             server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
             server.removeClient(this);
@@ -274,6 +277,7 @@ public class VirtualRmi extends VirtualView {
             }
         }
         else {
+            Server.setMulti(Server.getMulti() - 1);
             setChanged();
             notifyObservers(new DisconnectionEvent(super.getPlayerID()));
         }

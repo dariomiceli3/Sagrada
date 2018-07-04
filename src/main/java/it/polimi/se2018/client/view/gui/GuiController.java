@@ -360,17 +360,17 @@ public class GuiController extends View {
 
     @Override
     public void showName() {
-        log.info("Player name: " + super.getPlayerName());
+        nameSet.setValue(true);
     }
 
     @Override
     public void showNameOther(String playerName) {
-        log.info("Name other " + playerName);
-
+        log.info("Name other");
     }
 
     @Override
     public void showNameError() {
+        nameSet.setValue(false);
         Platform.runLater(() -> AlertBox.display(error, "Name already chosen"));
     }
 
