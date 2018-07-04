@@ -889,6 +889,8 @@ public class BoardController {
     void handleTool1(MouseEvent event) {
 
         if (event.getButton().equals(MouseButton.PRIMARY)) {
+
+
             disablePool();
             toolCard1.setBlendMode(BlendMode.OVERLAY);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
@@ -928,6 +930,8 @@ public class BoardController {
             }
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
+            circleTool1.setVisible(false);
+            costTool1.setVisible(false);
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom1.setVisible(true);
             next.setDisable(true);
@@ -938,6 +942,8 @@ public class BoardController {
     @FXML
     void handleTool2(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
+
+
             disablePool();
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.OVERLAY);
@@ -975,6 +981,8 @@ public class BoardController {
             }
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
+            circleTool2.setVisible(false);
+            costTool2.setVisible(false);
             enablePool();
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom2.setVisible(true);
@@ -988,6 +996,7 @@ public class BoardController {
     void handleTool3(MouseEvent event) {
 
         if (event.getButton().equals(MouseButton.PRIMARY)) {
+
             disablePool();
             toolCard1.setBlendMode(BlendMode.SRC_OVER);
             toolCard2.setBlendMode(BlendMode.SRC_OVER);
@@ -1026,6 +1035,8 @@ public class BoardController {
             }
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
+            circleTool3.setVisible(false);
+            costTool3.setVisible(false);
             toolCard3.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom3.setVisible(true);
             enablePool();
@@ -1037,15 +1048,27 @@ public class BoardController {
     @FXML
     void handleUnzoomTool1(MouseEvent event) {
         toolCardZoom1.setVisible(false);
+        if (!mainController.isSinglePlayer()) {
+            circleTool1.setVisible(true);
+            costTool1.setVisible(true);
+        }
     }
     @FXML
     void handleUnzoomTool2(MouseEvent event) {
         toolCardZoom2.setVisible(false);
+        if (!mainController.isSinglePlayer()) {
+            circleTool2.setVisible(true);
+            costTool2.setVisible(true);
+        }
 
     }
     @FXML
     void handleUnzoomTool3(MouseEvent event) {
         toolCardZoom3.setVisible(false);
+        if (!mainController.isSinglePlayer()) {
+            circleTool3.setVisible(true);
+            costTool3.setVisible(true);
+        }
 
     }
 
@@ -1094,21 +1117,21 @@ public class BoardController {
     void handleUpdatePattern2(MouseEvent event) throws IOException {
 
         if (mainController.getPlayerID() == 0){
-            OtherPatternCard.setPatternCard(mainController.getPatternID1());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+            PatternCardBox.setPatternCard(mainController.getPatternID1());
+            PatternCardBox.displayOtherPattern(mainController.getNameID1());
         }
         if (mainController.getPlayerID() == 1) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID0());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+            PatternCardBox.setPatternCard(mainController.getPatternID0());
+            PatternCardBox.displayOtherPattern(mainController.getNameID0());
         }
 
         if (mainController.getPlayerID() == 2) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID0());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+            PatternCardBox.setPatternCard(mainController.getPatternID0());
+            PatternCardBox.displayOtherPattern(mainController.getNameID0());
         }
         if (mainController.getPlayerID() == 3) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID0());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID0());
+            PatternCardBox.setPatternCard(mainController.getPatternID0());
+            PatternCardBox.displayOtherPattern(mainController.getNameID0());
         }
     }
 
@@ -1116,21 +1139,21 @@ public class BoardController {
     void handleUpdatePattern3(MouseEvent event) throws IOException {
 
         if (mainController.getPlayerID() == 0){
-            OtherPatternCard.setPatternCard(mainController.getPatternID2());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+            PatternCardBox.setPatternCard(mainController.getPatternID2());
+            PatternCardBox.displayOtherPattern(mainController.getNameID2());
         }
         if (mainController.getPlayerID() == 1) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID2());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+            PatternCardBox.setPatternCard(mainController.getPatternID2());
+            PatternCardBox.displayOtherPattern(mainController.getNameID2());
         }
 
         if (mainController.getPlayerID() == 2) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID1());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+            PatternCardBox.setPatternCard(mainController.getPatternID1());
+            PatternCardBox.displayOtherPattern(mainController.getNameID1());
         }
         if (mainController.getPlayerID() == 3) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID1());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID1());
+            PatternCardBox.setPatternCard(mainController.getPatternID1());
+            PatternCardBox.displayOtherPattern(mainController.getNameID1());
         }
     }
 
@@ -1138,21 +1161,21 @@ public class BoardController {
     void handleUpdatePattern4(MouseEvent event) throws IOException{
 
         if (mainController.getPlayerID() == 0){
-            OtherPatternCard.setPatternCard(mainController.getPatternID3());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+            PatternCardBox.setPatternCard(mainController.getPatternID3());
+            PatternCardBox.displayOtherPattern(mainController.getNameID3());
         }
         if (mainController.getPlayerID() == 1) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID3());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+            PatternCardBox.setPatternCard(mainController.getPatternID3());
+            PatternCardBox.displayOtherPattern(mainController.getNameID3());
         }
 
         if (mainController.getPlayerID() == 2) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID3());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID3());
+            PatternCardBox.setPatternCard(mainController.getPatternID3());
+            PatternCardBox.displayOtherPattern(mainController.getNameID3());
         }
         if (mainController.getPlayerID() == 3) {
-            OtherPatternCard.setPatternCard(mainController.getPatternID2());
-            OtherPatternCard.displayOtherPattern(mainController.getNameID2());
+            PatternCardBox.setPatternCard(mainController.getPatternID2());
+            PatternCardBox.displayOtherPattern(mainController.getNameID2());
         }
     }
 

@@ -19,13 +19,6 @@ import java.util.List;
 
 public class EndGameScene {
 
-    private static boolean singlePlayer;
-    private static boolean winnerSingle;
-    private static int playerPoints;
-    private static int gameThreshold;
-    private static boolean finish;
-    private static List<Player> playerList;
-
     @FXML
     private TextField winnerText;
     @FXML
@@ -37,44 +30,35 @@ public class EndGameScene {
     @FXML
     private TextArea rankText4;
 
-    //------Single Player instance variables and observer method-----------
 
+    private static boolean singlePlayer;
+    private static boolean winnerSingle;
+    private static int playerPoints;
+    private static int gameThreshold;
+    private static boolean finish;
+    private static List<Player> playerList;
 
     public static void setSinglePlayer(boolean singlePlayer) {
         EndGameScene.singlePlayer = singlePlayer;
     }
+
     static void setWinnerSingle(boolean winnerSingle) {
         EndGameScene.winnerSingle = winnerSingle;
     }
+
     static void setPlayerPoints(int playerPoints) {
         EndGameScene.playerPoints = playerPoints;
     }
+
     static void setGameThreshold(int gameThreshold) {
         EndGameScene.gameThreshold = gameThreshold;
     }
+
     static void setFinish(boolean finish) {
         EndGameScene.finish = finish;
     }
     protected static void setPlayerList(List<Player> playerList) {
         EndGameScene.playerList = playerList;
-    }
-
-
-    public static void display() throws IOException {
-        Stage window = new Stage();
-
-        //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("GAME OVER");
-        FXMLLoader loader = new FXMLLoader(EndGameScene.class.getResource("/EndGame.fxml"));
-        Parent root1 = loader.load();
-        Scene scene = new Scene(root1);
-        InputStream fileStream = EndGameScene.class.getResourceAsStream("/images/icon" + ".png");
-        Image image = new Image(fileStream);
-        window.getIcons().add(image);
-        window.setScene(scene);
-        window.setResizable(false);
-        Platform.runLater(window::showAndWait);
     }
 
     public void initialize() {
@@ -123,4 +107,23 @@ public class EndGameScene {
             winnerText.setText("Game never played");
         }
     }
+
+    public static void display() throws IOException {
+        Stage window = new Stage();
+
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("GAME OVER");
+        FXMLLoader loader = new FXMLLoader(EndGameScene.class.getResource("/EndGame.fxml"));
+        Parent root1 = loader.load();
+        Scene scene = new Scene(root1);
+        InputStream fileStream = EndGameScene.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
+        window.setScene(scene);
+        window.setResizable(false);
+        Platform.runLater(window::showAndWait);
+    }
+
+
 }

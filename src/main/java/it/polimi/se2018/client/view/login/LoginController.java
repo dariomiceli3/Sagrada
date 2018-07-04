@@ -3,23 +3,42 @@ package it.polimi.se2018.client.view.login;
 import it.polimi.se2018.client.view.cli.ClientCli;
 import it.polimi.se2018.client.view.gui.GuiController;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class LoginController {
+
+    private Stage stage;
+    private boolean singlePlayer;
+
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
+    public void initialize() {
+
+        gui.setUserData("gui");
+        cli.setUserData("cli");
+        rmi.setUserData("rmi");
+        socket.setUserData("socket");
+        multiButton.setUserData("multi");
+        singleButton.setUserData("single");
+
+        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty()))));
+        singleButton.disableProperty().bind(cli.selectedProperty());
+        multiButton.disableProperty().bind(cli.selectedProperty());
+    }
+
 
     @FXML
     private ToggleButton socket;
@@ -42,38 +61,13 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-
-    private String connectionType;
-    private String viewType;
-    private Stage stage;
-    private boolean singlePlayer;
-    private InputStream fileStream;
-
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
-
-
-    public void initialize() {
-
-        gui.setUserData("gui");
-        cli.setUserData("cli");
-        rmi.setUserData("rmi");
-        socket.setUserData("socket");
-        multiButton.setUserData("multi");
-        singleButton.setUserData("single");
-
-        loginButton.disableProperty().bind(Bindings.isNull(viewToggleGroup.selectedToggleProperty()).or(Bindings.isNull(connectionToggleGroup.selectedToggleProperty()).or(Bindings.isNull(modeToggleGroup.selectedToggleProperty()))));
-        singleButton.disableProperty().bind(cli.selectedProperty());
-        multiButton.disableProperty().bind(cli.selectedProperty());
-    }
-
+    // action event nel caso
 
     @FXML
-    void loginButtonSelected(ActionEvent event) throws IOException {
+    void loginButtonSelected() throws IOException {
 
-        this.connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
-        this.viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
+        String connectionType = connectionToggleGroup.getSelectedToggle().getUserData().toString();
+        String viewType = viewToggleGroup.getSelectedToggle().getUserData().toString();
 
         if (singleButton.isSelected()){
             singlePlayer = true;
@@ -95,11 +89,11 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mode.fxml"));
             Parent root = loader.load();
 
-            GuiController controller = (GuiController) loader.getController();
+            GuiController controller = loader.getController();
             controller.setConnectionTypeAndStage(connectionType, stage, singlePlayer);
 
             Scene scene1 = new Scene(root);
-            fileStream = LoginController.class.getResourceAsStream("/images/icon" + ".png");
+            InputStream fileStream = LoginController.class.getResourceAsStream("/images/icon" + ".png");
             Image icon = new Image(fileStream);
             stage.getIcons().add(icon);
             stage.setScene(scene1);

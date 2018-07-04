@@ -2,7 +2,6 @@ package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
@@ -10,28 +9,61 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-
 import java.io.*;
+import java.util.logging.Logger;
+import static java.lang.System.out;
 
 public class ChoosePattern {
 
-    private InputStream fileStream;
-    private int indexPattern;
+    private final Logger log = Logger.getLogger(ChoosePattern.class.getName());
+    private boolean customCard = false;
+    private static int indexPattern;
     private static GuiController mainController;
+    private InputStream fileStream;
     private SimpleBooleanProperty patternSetted = new SimpleBooleanProperty(false);
     private SimpleBooleanProperty customPlay = new SimpleBooleanProperty(true);
-    private boolean customCard = false;
     private PatternCard selfScheme;
 
     static void setMainController(GuiController mainController){
         ChoosePattern.mainController = mainController;
     }
 
+    public static void setIndexPattern(int indexPattern) {
+        ChoosePattern.indexPattern = indexPattern;
+    }
+
+    public void initialize () throws IOException {
+
+        if (mainController.isSinglePlayer()) {
+            loadFilePrivateSingle();
+            loadFileToolCard();
+            loadFilePublicCard();
+            loadFilePatternCard();
+        }
+        else {
+            loadFilePrivate();
+            loadFileToolCard();
+            loadFilePublicCard();
+            loadFilePatternCard();
+        }
+
+        playGameButton.disableProperty().bind((Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted)).and(customPlay));
+
+        playGameButton.disableProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+
+        toolCard1Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCard2Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCard3Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+
+        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCard3Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCard2Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCard1Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+    }
+
 
     //-----------single player fxml------------------
-
     @FXML
     private ImageView privateCardTwo;
     @FXML
@@ -46,38 +78,38 @@ public class ChoosePattern {
     private ImageView toolCard4Zoom;
 
     @FXML
-    void handlePrivateUnzoom2(MouseEvent event) {
+    void handlePrivateUnzoom2() {
         privateCardZoom2.setVisible(false);
 
     }
     @FXML
-    void handlePrivateZoomTwo(MouseEvent event) {
+    void handlePrivateZoomTwo() {
         privateCardZoom2.setVisible(true);
 
     }
     @FXML
-    void handleToolUnzoom4(MouseEvent event) {
+    void handleToolUnzoom4() {
         toolCard4Zoom.setVisible(false);
 
     }
     @FXML
-    void handleToolUnzoom5(MouseEvent event) {
+    void handleToolUnzoom5() {
         toolCard5Zoom.setVisible(false);
     }
     @FXML
-    void handleToolZoom4(MouseEvent event) {
+    void handleToolZoom4() {
         toolCard4Zoom.setVisible(true);
 
     }
     @FXML
-    void handleToolZoom5(MouseEvent event) {
+    void handleToolZoom5() {
         toolCard5Zoom.setVisible(true);
 
     }
 
+
+
     //-----------------multi player fxml
-
-
     @FXML
     private ImageView privateCard;
     @FXML
@@ -131,64 +163,64 @@ public class ChoosePattern {
 
 
     @FXML
-    void handlePrivateUnzoom (MouseEvent event){
+    void handlePrivateUnzoom (){
             privateCardZoom.setVisible(false);
         }
     @FXML
-    void handlePrivateZoom (MouseEvent event){
+    void handlePrivateZoom (){
         privateCardZoom.setVisible(true);
     }
     @FXML
-    void handlePublicUnzoom1 (MouseEvent event){
+    void handlePublicUnzoom1 (){
         publicCard1Zoom.setVisible(false);
     }
     @FXML
-    void handlePublicUnzoom2 (MouseEvent event){
+    void handlePublicUnzoom2 (){
         publicCard2Zoom.setVisible(false);
     }
     @FXML
-    void handlePublicUnzoom3 (MouseEvent event){
+    void handlePublicUnzoom3 (){
         publicCard3Zoom.setVisible(false);
     }
     @FXML
-    void handlePublicZoom1 (MouseEvent event){
+    void handlePublicZoom1 (){
         publicCard1Zoom.setVisible(true);
     }
     @FXML
-    void handlePublicZoom2 (MouseEvent event){
+    void handlePublicZoom2 (){
         publicCard2Zoom.setVisible(true);
     }
     @FXML
-    void handlePublicZoom3 (MouseEvent event){
+    void handlePublicZoom3 (){
         publicCard3Zoom.setVisible(true);
     }
     @FXML
-    void handleToolUnzoom1 (MouseEvent event){
+    void handleToolUnzoom1 (){
         toolCard1Zoom.setVisible(false);
     }
     @FXML
-    void handleToolUnzoom2 (MouseEvent event){
+    void handleToolUnzoom2 (){
         toolCard2Zoom.setVisible(false);
     }
     @FXML
-    void handleToolUnzoom3 (MouseEvent event){
+    void handleToolUnzoom3 (){
         toolCard3Zoom.setVisible(false);
     }
     @FXML
-    void handleToolZoom1 (MouseEvent event){
+    void handleToolZoom1 (){
         toolCard1Zoom.setVisible(true);
     }
     @FXML
-    void handleToolZoom2 (MouseEvent event){
+    void handleToolZoom2 (){
         toolCard2Zoom.setVisible(true);
     }
     @FXML
-    void handleToolZoom3 (MouseEvent event){
+    void handleToolZoom3 (){
         toolCard3Zoom.setVisible(true);
     }
 
     @FXML
-    void playButtonSelected(ActionEvent event) {
+    void playButtonSelected() {
 
         patternSetted.setValue(true);
 
@@ -196,17 +228,18 @@ public class ChoosePattern {
 
         try {
             if (patternToggleGroup.getSelectedToggle().equals(radioPatternFour)) {
-                indexPattern = 3;
+                setIndexPattern(3);
             } else if (patternToggleGroup.getSelectedToggle().equals(radioPatternThree)) {
-                indexPattern = 2;
+                setIndexPattern(2);
             } else if (patternToggleGroup.getSelectedToggle().equals(radioPatternTwo)) {
-                indexPattern = 1;
+                setIndexPattern(1);
             } else {
-                indexPattern = 0;
+                setIndexPattern(0);
             }
             mainController.setPattern(indexPattern);
         } catch (NullPointerException e) {
-            System.out.println("null pointer play button");
+            log.info("null pointer play button");
+            log.warning(e.getMessage());
         }
 
         if (customCard) {
@@ -215,7 +248,7 @@ public class ChoosePattern {
     }
 
     @FXML
-    void loadButtonSelected(ActionEvent event)  {
+    void loadButtonSelected()  {
 
         File file = null;
         String name = null;
@@ -232,7 +265,8 @@ public class ChoosePattern {
             while (!(file.getName().matches(".*[a-zA-Z0-9]+.*" + ".json")));
         }
         catch (NullPointerException e) {
-            System.out.println("closing file");
+            log.info("closing file");
+            log.warning(e.getMessage());
         }
         
         if (file != null) {
@@ -249,34 +283,7 @@ public class ChoosePattern {
         }
     }
 
-    public void initialize () throws IOException {
 
-        if (mainController.isSinglePlayer()) {
-            loadFilePrivateSingle();
-            loadFileToolCard();
-            loadFilePublicCard();
-            loadFilePatternCard();
-        }
-        else {
-            loadFilePrivate();
-            loadFileToolCard();
-            loadFilePublicCard();
-            loadFilePatternCard();
-        }
-
-        playGameButton.disableProperty().bind((Bindings.isNull(patternToggleGroup.selectedToggleProperty()).or(patternSetted)).and(customPlay));
-
-        playGameButton.disableProperty().addListener((observable, oldValue, newValue) -> { });
-
-        toolCard1Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        toolCard2Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        toolCard3Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-
-        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        publicCard3Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        publicCard2Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        publicCard1Zoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-    }
 
     private void loadFilePrivate() throws IOException {
 
@@ -360,7 +367,7 @@ public class ChoosePattern {
 
             else {
                 try {
-                    System.out.println("consegna tool");
+                    log.info("loading tool card");
 
                     fileStream = ChoosePattern.class.getResourceAsStream("/images/tool/" + fileName + ".png");
                     Image image = new Image(fileStream);
@@ -415,7 +422,7 @@ public class ChoosePattern {
 
             else{
                 try {
-                    System.out.println("consegna public");
+                    log.info("loading public card");
 
                     fileStream = ChoosePattern.class.getResourceAsStream("/images/public/" + fileName + ".png");
                     Image image = new Image(fileStream);
@@ -447,7 +454,7 @@ public class ChoosePattern {
             String fileName = mainController.getPatternList().get(i).getName();
 
             try {
-                System.out.println("consegna pattern");
+                log.info("loading pattern card");
 
                 fileStream = ChoosePattern.class.getResourceAsStream("/images/pattern/" + fileName + ".png");
                 Image image = new Image(fileStream);
@@ -468,7 +475,6 @@ public class ChoosePattern {
             finally {
                 fileStream.close();
             }
-
         }
     }
 

@@ -3,7 +3,6 @@ package it.polimi.se2018.client.view.gui;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,86 +17,84 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Logger;
 
 public class ToolCardRequest {
 
+    private final Logger log = Logger.getLogger(ToolCardRequest.class.getName());
+    private static final String logMsg = "Null pointer catch";
     private static int toolNumber;
+    private static DiceColor color;
+    private static BoardController board;
+    private static Stage window;
+    private int tool1;
+    private int tool11;
+    private int tool12;
 
-
-    public static void setToolNumber(int n){
+    static void setToolNumber(int n){
         ToolCardRequest.toolNumber = n;
     }
-
-    private static DiceColor color;
-
-
+    static void setBoard(BoardController board){
+        ToolCardRequest.board = board;
+    }
     public static void setColor(DiceColor color) {
         ToolCardRequest.color = color;
     }
 
-    private static BoardController board;
 
+    public static void display()  throws IOException {
 
-    public static void setBoard(BoardController board){
-        ToolCardRequest.board = board;
+        window = new Stage();
+
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/ToolExtraRequest.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
+        window.setScene(scene);
+        window.setResizable(false);
+        Platform.runLater(() -> window.showAndWait());
     }
-
-    private static Stage window;
-
-    private int tool1;
-
-    private int tool11;
-
-    private int tool12;
-
 
     @FXML
     private TextArea text;
-
     @FXML
     private Button select;
-
     @FXML
     private ToggleButton tool11Button1;
-
     @FXML
     private ToggleGroup tool11Group;
-
     @FXML
     private ToggleButton tool11Button2;
-
     @FXML
     private ToggleButton tool11Button3;
-
     @FXML
     private ToggleButton tool11Button4;
-
     @FXML
     private ToggleButton tool11Button5;
-
     @FXML
     private ToggleButton tool11Button6;
-
     @FXML
     private ToggleButton tool1ButtonPlus;
-
     @FXML
     private ToggleGroup tool1Group;
-
     @FXML
     private ToggleButton tool1ButtonMin;
-
     @FXML
     private ToggleButton tool12Button2;
-
     @FXML
     private ToggleGroup tool12Group;
-
     @FXML
     private ToggleButton tool12Button1;
 
+
+    //nel caso non funzionasse c'erano solo action event
+
     @FXML
-    void buttonSelected(ActionEvent event) {
+    void buttonSelected() {
 
         if(toolNumber == 1){
             board.setIncrease(tool1);
@@ -112,7 +109,7 @@ public class ToolCardRequest {
     }
 
     @FXML
-    void handleTool1(ActionEvent event) {
+    void handleTool1() {
 
         try {
             if (tool1Group.getSelectedToggle().equals(tool1ButtonMin)) {
@@ -123,13 +120,14 @@ public class ToolCardRequest {
                 tool1 = 1;
             }
         }
-        catch (NullPointerException e){
-
+        catch (NullPointerException e) {
+            log.info(logMsg);
+            log.warning(e.getMessage());
         }
     }
 
     @FXML
-    void handleTool11(ActionEvent event) {
+    void handleTool11() {
 
         try {
             if (tool11Group.getSelectedToggle().equals(tool11Button1)) {
@@ -158,26 +156,25 @@ public class ToolCardRequest {
             }
         }
         catch (NullPointerException e) {
-
+            log.info(logMsg);
+            log.warning(e.getMessage());
         }
-
     }
 
     @FXML
-    void handleTool12(ActionEvent event) {
+    void handleTool12() {
 
         try {
             if (tool12Group.getSelectedToggle().equals(tool12Button1)) {
-
                 tool12 = 1;
             }
             if (tool12Group.getSelectedToggle().equals(tool12Button2)) {
-
                 tool12 = 2;
             }
         }
         catch (NullPointerException e) {
-
+            log.info(logMsg);
+            log.warning(e.getMessage());
         }
 
     }
@@ -218,22 +215,5 @@ public class ToolCardRequest {
 
         }
 
-    }
-
-    public static void display()  throws IOException {
-
-        window = new Stage();
-
-        //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/ToolExtraRequest.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
-        Image image = new Image(fileStream);
-        window.getIcons().add(image);
-        window.setScene(scene);
-        window.setResizable(false);
-        Platform.runLater(() -> window.showAndWait());
     }
 }

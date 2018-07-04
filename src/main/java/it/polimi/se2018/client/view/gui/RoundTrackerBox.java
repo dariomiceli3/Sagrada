@@ -1,33 +1,28 @@
 package it.polimi.se2018.client.view.gui;
 
-import it.polimi.se2018.server.model.Components.RoundTracker;
+
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 import java.io.*;
+import java.util.logging.Logger;
 
 public class RoundTrackerBox {
 
+    private final Logger log = Logger.getLogger(RoundTrackerBox.class.getName());
+    private static final String logMsg = "Null pointer catch";
     private static BoardController board;
     private static int round;
     private int selectedDice;
@@ -39,6 +34,10 @@ public class RoundTrackerBox {
     }
     static void setBoxRound(int round){
         RoundTrackerBox.round = round;
+    }
+
+    public void initialize() throws IOException {
+        loadDice();
     }
 
     public static void display()  throws IOException {
@@ -99,13 +98,14 @@ public class RoundTrackerBox {
     @FXML
     private ToggleGroup buttonGroup;
 
+
     @FXML
-    void selectMethod(MouseEvent event) {
+    void selectMethod() {
         window.close();
     }
 
     @FXML
-    void selectedDice(MouseEvent event) {
+    void selectedDice() {
 
         try {
             if (buttonGroup.selectedToggleProperty().isNull().get()) {
@@ -244,13 +244,12 @@ public class RoundTrackerBox {
             }
         }
         catch(NullPointerException e){
+            log.info(logMsg);
+            log.warning(e.getMessage());
         }
 
     }
 
-    public void initialize() throws IOException {
-        loadDice();
-    }
 
     private void loadDice() throws IOException {
 
@@ -259,7 +258,7 @@ public class RoundTrackerBox {
             String fileName = board.getRoundTracker().getRoundDice(round).get(i).toStringGui();
 
             try {
-                System.out.println("consegna dadi round tracker numero " + round);
+                log.info("dice on the round tracker in round: " + round);
                 fileStream = RoundTrackerBox.class.getResourceAsStream("/images/dice/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
@@ -305,6 +304,4 @@ public class RoundTrackerBox {
 
         }
     }
-
-
 }

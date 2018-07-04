@@ -1,8 +1,5 @@
 package it.polimi.se2018.client.view.gui;
 
-import it.polimi.se2018.client.view.login.LoginController;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -11,9 +8,15 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 
 import java.io.InputStream;
+import java.util.logging.Logger;
 
 
 public class AlertBox {
+
+    private AlertBox() {
+        final Logger log = Logger.getLogger(AlertBox.class.getName());
+        log.info("private constructor");
+    }
 
 
     public static void display(String title, String message) {

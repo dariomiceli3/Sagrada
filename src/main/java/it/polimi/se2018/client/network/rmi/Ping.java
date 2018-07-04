@@ -39,7 +39,7 @@ public class Ping implements Runnable {
         this.rmiHandler = rmiHandler;
     }
 
-    public RmiHandler getConnection() {
+    private RmiHandler getConnection() {
         return rmiHandler;
     }
 
@@ -60,7 +60,7 @@ public class Ping implements Runnable {
                 }
             }
             catch (InterruptedException e) {
-                log.warning("Interrupted ping");
+                log.warning("Interrupted ping thread");
                 Thread.currentThread().interrupt();
             }
         }

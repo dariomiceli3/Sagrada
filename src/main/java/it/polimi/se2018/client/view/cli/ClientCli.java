@@ -6,14 +6,11 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.rmi.Ping;
 import it.polimi.se2018.client.network.rmi.RmiHandler;
 import it.polimi.se2018.client.network.socket.SocketHandler;
-import it.polimi.se2018.client.view.cli.CliView;
 import it.polimi.se2018.client.view.View;
-import it.polimi.se2018.server.network.Server;
-//import it.polimi.se2018.client.view.gui.GuiView;
+
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 import static java.lang.System.out;
 

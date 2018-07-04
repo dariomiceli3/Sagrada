@@ -14,9 +14,17 @@ public abstract class View implements Runnable {
 
     //qui metodi generici comportamentabili, ovveride nelle varie view e chiamati da fuori
 
-    protected String playerName;
-    protected boolean isStarted;
+    private String playerName;
+    private boolean isStarted;
     protected int playerID;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    protected boolean isStarted() {
+        return isStarted;
+    }
 
     public int getPlayerID() {
         return playerID;
@@ -26,28 +34,19 @@ public abstract class View implements Runnable {
         this.playerID = playerID;
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
     public void setNameView(String nameView) {
         this.playerName = nameView;
-    }
-
-    public boolean isStarted() {
-        return isStarted;
     }
 
     public void setStarted(boolean isStarted) {
         this.isStarted = isStarted;
     }
 
-    public abstract void setConnection(ClientInterface client);
+    //---------------------- abstract method , which implementation depends on the view (cli or gui)
 
     public abstract ClientInterface getConnection();
 
-
-    //---------------------- abstract method , which implementation depends on the view (cli or gui)
+    public abstract void setConnection(ClientInterface client);
 
     public abstract void showID();
 
@@ -69,9 +68,9 @@ public abstract class View implements Runnable {
 
     public abstract void showPattern(PatternCard patternCard) throws IOException;
 
-    public abstract void showOtherPattern(PatternCard patternCard, String playerName, int ID);
+    public abstract void showOtherPattern(PatternCard patternCard, String playerName, int id);
 
-    public abstract void showOtherStartPattern(PatternCard patternCard, int ID);
+    public abstract void showOtherStartPattern(PatternCard patternCard, int id);
 
     public abstract void showPatternUpdate(PatternCard patternCard);
 

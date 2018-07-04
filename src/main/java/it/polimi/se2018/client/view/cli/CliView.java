@@ -7,12 +7,10 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Components.*;
-import org.fusesource.jansi.AnsiConsole;
 
 import java.io.InputStream;
 import java.util.*;
 import java.util.List;
-
 import static java.lang.System.out;
 
 
@@ -41,121 +39,68 @@ public class CliView extends View implements Runnable {
     private ClientInterface connection;
     private static boolean connected = true;
 
-    public CliView() {
+    CliView() {
         System.setProperty("jansi.passthrough", "true");
     }
 
-    public static int getPoolSize() {
-        return poolSize;
-    }
-
-
-    public static int getIndexPool() {
-        return indexPool;
-    }
-
-    public static int getIndexPattern() {
-        return indexPattern;
-    }
-
-    public static List<Integer> getToolCost() {
+    private static List<Integer> getToolCost() {
         return toolCost;
     }
 
-    public static int getIndexTool() {
-        return indexTool;
+    private static void setConnected(boolean connected) {
+        CliView.connected = connected;
     }
 
-    public static int getIndexStartOne() {
-        return indexStartOne;
-    }
-
-    public static int getIndexStartTwo() {
-        return indexStartTwo;
-    }
-
-    public static int getIndexEndOne() {
-        return indexEndOne;
-    }
-
-    public static int getIndexEndTwo() {
-        return indexEndTwo;
-    }
-
-    public static int getIndexRound() {
-        return indexRound;
-    }
-
-    public static int getToolSingleNumber() {
-        return toolSingleNumber;
-    }
-
-    public static DiceColor getColorDice() {
-        return colorDice;
-    }
-
-    public static int getDiceNumber() {
-        return diceNumber;
-    }
-
-    public static void setToolCost(List<Integer> toolCoost) {
-        CliView.toolCost = toolCoost;
-    }
-
-    public static List<Integer> getRound() {
-        return roundList;
-    }
-
-    public static void setPoolSize(int poolSize) {
+    private static void setPoolSize(int poolSize) {
         CliView.poolSize = poolSize;
     }
 
-    public static void setIndexPool(int indexPool) {
+    private static void setIndexPool(int indexPool) {
         CliView.indexPool = indexPool;
     }
 
-    public static void setIndexPattern(int indexPattern) {
+    private static void setIndexPattern(int indexPattern) {
         CliView.indexPattern = indexPattern;
     }
 
-    public static void setIndexTool(int indexTool) {
+    private static void setIndexTool(int indexTool) {
         CliView.indexTool = indexTool;
     }
 
-    public static void setIndexStartOne(int indexStartOne) {
+    private static void setIndexStartOne(int indexStartOne) {
         CliView.indexStartOne = indexStartOne;
     }
 
-    public static void setIndexStartTwo(int indexStartTwo) {
+    private static void setIndexStartTwo(int indexStartTwo) {
         CliView.indexStartTwo = indexStartTwo;
     }
 
-    public static void setIndexEndOne(int indexEndOne) {
+    private static void setIndexEndOne(int indexEndOne) {
         CliView.indexEndOne = indexEndOne;
     }
 
-    public static void setIndexEndTwo(int indexEndTwo) {
+    private static void setIndexEndTwo(int indexEndTwo) {
         CliView.indexEndTwo = indexEndTwo;
     }
 
-    public static void setRound(List<Integer> round) {
-        CliView.roundList = round;
-    }
-
-    public static void setIndexRound(int indexRound) {
+    private static void setIndexRound(int indexRound) {
         CliView.indexRound = indexRound;
     }
 
-    public static void setColorDice(DiceColor colorDice) {
+    private static void setColorDice(DiceColor colorDice) {
         CliView.colorDice = colorDice;
     }
 
-    public static void setDiceNumber(int diceNumber) {
+    private static void setDiceNumber(int diceNumber) {
         CliView.diceNumber = diceNumber;
     }
 
-    public static void setToolSingleNumber(int toolSingleNumber) {
+    private static void setToolSingleNumber(int toolSingleNumber) {
         CliView.toolSingleNumber = toolSingleNumber;
+    }
+
+    private static void setCliState(GameState state) {
+        CliView.cliState = state;
     }
 
     @Override
@@ -174,10 +119,10 @@ public class CliView extends View implements Runnable {
             } else if (input.equalsIgnoreCase("exit")) {
                 if (cliState == GameState.ROLL) {
                     getConnection().setDraftPoolToServer(super.getPlayerID());
-                    connected = false;
+                    setConnected(false);
                     out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
                     getConnection().setExitToServer(super.getPlayerID());
-                    cliState = GameState.NOTCONNECTED;
+                    setCliState(GameState.NOTCONNECTED);
                 }
                 if (cliState == GameState.NAME || cliState == GameState.PATTERN) {
                     out.println("\n" + "It's not time for exit the game");
@@ -193,7 +138,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.NOTCONNECTED) {
                 if (input.equalsIgnoreCase("reconnect")) {
                     getConnection().setReconnectToServer(super.getPlayerID());
-                    connected = true;
+                    setConnected(true);
                     out.println("frow now you are in the game");
                 } else {
                     out.println("You cannot enter commands now, you are not in the game");
@@ -330,7 +275,7 @@ public class CliView extends View implements Runnable {
                     if (idTool >= 1 && idTool <= 3) {
                         idTool--;
                         setIndexTool(idTool);
-                        showToolCostCommand(toolCost, indexTool);
+                        showToolCostCommand(getToolCost(), indexTool);
                     }
 
                 } catch (NumberFormatException e) {
@@ -345,7 +290,7 @@ public class CliView extends View implements Runnable {
                     getConnection().setNoTokenToServer(super.getPlayerID());
                 } else {
                     out.println("You are entering the wrong command");
-                    showToolCostCommand(toolCost, indexTool);
+                    showToolCostCommand(getToolCost(), indexTool);
                 }
 
             }
@@ -513,7 +458,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.LENSCUTTERPOOL) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         showLensCutterRound(roundList);
@@ -528,7 +473,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.LENSCUTTERROUND) {
                 try {
                     int idRound = Integer.parseInt(input);
-                    if (idRound >= 1 && idRound <= getRound().size()) {
+                    if (idRound >= 1 && idRound <= roundList.size()) {
                         idRound--;
                         setIndexRound(idRound);
                         showLensCutterDice(roundList, indexRound);
@@ -557,7 +502,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.FLUXBRUSH) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         getConnection().useFluxBrushToolCard(super.getPlayerID(), indexPool);
@@ -578,7 +523,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.RUNNINGPOOL) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         showRunningPliersEnd();
@@ -610,7 +555,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.CORKPOOL) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         showCorkBackedEnd();
@@ -640,7 +585,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.GRINDING) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         getConnection().useGrindingStoneToolCard(super.getPlayerID(), indexPool);
@@ -656,7 +601,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.FLUXPOOL) {
                 try {
                     int idPool = Integer.parseInt(input);
-                    if (idPool >= 1 && idPool <= getPoolSize()) {
+                    if (idPool >= 1 && idPool <= poolSize) {
                         idPool--;
                         setIndexPool(idPool);
                         showFluxRemoverValue();
@@ -718,8 +663,8 @@ public class CliView extends View implements Runnable {
                         idEndOne--;
                         setIndexEndOne(idEndOne);
 
-                        if (getDiceNumber() == 1) {
-                            getConnection().useTapWheelToolCard(super.getPlayerID(), getDiceNumber(), indexStartOne, indexEndOne, 0, 0);
+                        if (diceNumber == 1) {
+                            getConnection().useTapWheelToolCard(super.getPlayerID(), diceNumber, indexStartOne, indexEndOne, 0, 0);
                         } else {
                             showTapWheelStartTwo();
                         }
@@ -753,7 +698,7 @@ public class CliView extends View implements Runnable {
                     if (idEndTwo >= 1 && idEndTwo <= 20) {
                         idEndTwo--;
                         setIndexEndTwo(idEndTwo);
-                        getConnection().useTapWheelToolCard(super.getPlayerID(), getDiceNumber(), indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+                        getConnection().useTapWheelToolCard(super.getPlayerID(), diceNumber, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
                     } else {
                         out.println("Please, enter the index correct for the range");
                         showTapWheelEndTwo();
@@ -791,7 +736,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.TOOLSPCHOOSE) {
                 try {
                     int index = Integer.parseInt(input);
-                    if (index >= 1 && index <= getToolSingleNumber()) {
+                    if (index >= 1 && index <= toolSingleNumber) {
                         index--;
                         setIndexTool(index);
                         showToolSingleDice();
@@ -806,7 +751,7 @@ public class CliView extends View implements Runnable {
             } else if (cliState == GameState.TOOLSPDICE) {
                 try {
                     int idDice = Integer.parseInt(input);
-                    if (idDice >= 1 && idDice <= getPoolSize()) {
+                    if (idDice >= 1 && idDice <= poolSize) {
                         idDice--;
                         setIndexPool(idDice);
                         getConnection().useToolSingleToServer(super.getPlayerID(), indexTool, indexPool);
@@ -872,7 +817,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showSinglePlayerRequest() {
-        cliState = GameState.MODE;
+        setCliState(GameState.MODE);
         out.println("How do you want to play: Single or Multi?");
     }
 
@@ -886,13 +831,13 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showNameChoose() {
-        cliState = GameState.NAME;
+        setCliState(GameState.NAME);
         out.println("\n" + "Enter your name ");
     }
 
     @Override
     public void showName() {
-        cliState = GameState.NOTAUTHORIZEDNAME;
+        setCliState(GameState.NOTAUTHORIZEDNAME);
         out.println("Name set as: " + super.getPlayerName());
     }
 
@@ -904,7 +849,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showNameError() {
-        cliState = GameState.ERRORNAME;
+        setCliState(GameState.ERRORNAME);
         out.println("This name is used by another player!");
     }
 
@@ -927,7 +872,7 @@ public class CliView extends View implements Runnable {
             out.println("\n" + patternCard.toString());
         }
 
-        cliState = GameState.PATTERN;
+        setCliState(GameState.PATTERN);
         out.println("\n" + "Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
     }
 
@@ -935,7 +880,7 @@ public class CliView extends View implements Runnable {
         out.println("Enter the path of the file .json");
         String filePath = "src/main/resources/json/custom/";
         out.print(filePath);
-        cliState = GameState.CUSTOMPATTERN;
+        setCliState(GameState.CUSTOMPATTERN);
     }
 
 
@@ -989,16 +934,16 @@ public class CliView extends View implements Runnable {
     @Override
     public void showOtherCurrentTurn(String username) {
         if (!connected) {
-            cliState = GameState.NOTCONNECTED;
+            setCliState(GameState.NOTCONNECTED);
         } else {
-            cliState = GameState.NOTAUTHORIZED;
+            setCliState(GameState.NOTAUTHORIZED);
         }
         out.println("\n" + "It's " + username + "'s turn");
     }
 
     @Override
     public void showRollCommand() {
-        cliState = GameState.ROLL;
+        setCliState(GameState.ROLL);
         out.println("Write the command ROLL to casually roll the draft pool");
     }
 
@@ -1009,7 +954,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showChooseCommand() {
-        cliState = GameState.CHOOSE;
+        setCliState(GameState.CHOOSE);
         out.println("\n" + "What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
 
     }
@@ -1017,7 +962,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showMoveCommand(int poolSize)  {
         setPoolSize(poolSize);
-        cliState = GameState.MOVE;
+        setCliState(GameState.MOVE);
         out.println("\n" + "Do you want to move a dice from the pool to the card? - Enter yes or no?");
 
     }
@@ -1025,13 +970,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showIndexPoolCommand(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.POOLINDEX;
-        out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + getPoolSize());
+        setCliState(GameState.POOLINDEX);
+        out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + CliView.poolSize);
     }
 
     @Override
     public void showIndexPatternCommand() {
-        cliState = GameState.PATTERNINDEX;
+        setCliState(GameState.PATTERNINDEX);
         out.println("\n" + "Enter the index of the Pattern Card - Enter a number between 1 and 20");
     }
 
@@ -1041,19 +986,19 @@ public class CliView extends View implements Runnable {
         for(ToolCard tool : toolCards) {
             toolCost.add(tool.getCost());
         }
-        cliState = GameState.TOOL;
+        setCliState(GameState.TOOL);
         out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
     public void showToolChooseCommand() {
-        cliState = GameState.TOOLINDEX;
+        setCliState(GameState.TOOLINDEX);
         out.println("\n" + "Which tool card do you want to use? - Enter a number from 1 to 3");
     }
 
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
-        cliState = GameState.TOOLCOST;
+        setCliState(GameState.TOOLCOST);
         int cost = toolCost.get(indexTool);
         out.println("\n" + "Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
     }
@@ -1077,13 +1022,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showWinner() {
         out.println("You win !!!!!!!!!");
-        cliState =  GameState.NOTAUTHORIZED;
+        setCliState(GameState.NOTAUTHORIZED);
     }
 
     @Override
     public void showLosers() {
         out.println("You lose maaaan!");
-        cliState =  GameState.NOTAUTHORIZED;
+        setCliState(GameState.NOTAUTHORIZED);
     }
 
     @Override
@@ -1117,14 +1062,14 @@ public class CliView extends View implements Runnable {
     @Override
     public void showGrozingRequest(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.GROZINGPOOL;
-        out.println("\n" + "Select a die from the pool - Enter a number between 1 and " + getPoolSize());
+        setCliState(GameState.GROZINGPOOL);
+        out.println("\n" + "Select a die from the pool - Enter a number between 1 and " + CliView.poolSize);
 
     }
 
     @Override
     public void showGrozingCommand() {
-        cliState = GameState.GROZINGCOMMAND;
+        setCliState(GameState.GROZINGCOMMAND);
         out.println("Do you want to increase (1) or decrease (0)");
     }
 
@@ -1133,13 +1078,13 @@ public class CliView extends View implements Runnable {
     // tool eglomise brush
     @Override
     public void showEglomiseStart() {
-        cliState = GameState.EGLOMISESTART;
+        setCliState(GameState.EGLOMISESTART);
         out.println("\n" + "Select a die from the pattern card to move - Enter a number between 1 and 20");
     }
 
     @Override
     public void showEglomiseEnd() {
-        cliState = GameState.EGLOMISEEND;
+        setCliState(GameState.EGLOMISEEND);
         out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
 
     }
@@ -1148,14 +1093,14 @@ public class CliView extends View implements Runnable {
     // tool copper foil burnisher
     @Override
     public void showCopperFoilStart() {
-        cliState = GameState.COPPERSTART;
+        setCliState(GameState.COPPERSTART);
         out.println("\n" + "Select ad die from the pattern card to move - Enter a number from 1 to 20");
 
     }
 
     @Override
     public void showCopperFoilEnd() {
-        cliState = GameState.COPPEREND;
+        setCliState(GameState.COPPEREND);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
@@ -1163,27 +1108,27 @@ public class CliView extends View implements Runnable {
     // tool lathekin
     @Override
     public void showLathekinStart() {
-        cliState = GameState.LATHEKINSTARTONE;
+        setCliState(GameState.LATHEKINSTARTONE);
         out.println("\n" + "Select the first die to move - Enter a number from 1 to 20");
     }
 
 
     @Override
     public void showLathekinEnd() {
-        cliState = GameState.LATHEKINENDONE;
+        setCliState(GameState.LATHEKINENDONE);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
 
     @Override
     public void showLathekinStartTwo() {
-        cliState = GameState.LATHEKINSTARTTWO;
+        setCliState(GameState.LATHEKINSTARTTWO);
         out.println("Select the second die to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showLathekinEndTwo() {
-        cliState = GameState.LATHEKINENDTWO;
+        setCliState(GameState.LATHEKINENDTWO);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
@@ -1193,23 +1138,21 @@ public class CliView extends View implements Runnable {
     @Override
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
         roundList = new ArrayList<>();
-        for (Integer integer : round) {
-            roundList.add(integer);
-        }
+        roundList.addAll(round);
         setPoolSize(poolSize);
-        cliState = GameState.LENSCUTTERPOOL;
-        out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.LENSCUTTERPOOL);
+        out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + CliView.poolSize);
     }
 
     @Override
     public void showLensCutterRound(List<Integer> round) {
-        cliState = GameState.LENSCUTTERROUND;
+        setCliState(GameState.LENSCUTTERROUND);
         out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
     }
 
     @Override
     public void showLensCutterDice(List<Integer> round, int roundIndex) {
-        cliState = GameState.LENSCUTTERDICE;
+        setCliState(GameState.LENSCUTTERDICE);
         out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(roundIndex).toString());
     }
 
@@ -1219,15 +1162,15 @@ public class CliView extends View implements Runnable {
     @Override
     public void showFluxBrushRequest(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.FLUXBRUSH;
-        out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + getPoolSize());
+        setCliState(GameState.FLUXBRUSH);
+        out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + CliView.poolSize);
     }
 
 
     // tool glazing hammer
     @Override
     public void showGlazingHammerRequest() {
-        cliState = GameState.GLAZINGHAMMER;
+        setCliState(GameState.GLAZINGHAMMER);
         out.println("\n" + "Enter START to roll the dice of the draft pool" );
     }
 
@@ -1235,14 +1178,14 @@ public class CliView extends View implements Runnable {
     @Override
     public void showRunningPliersPool(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.RUNNINGPOOL;
-        out.println("\n" + "Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.RUNNINGPOOL);
+        out.println("\n" + "Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + CliView.poolSize);
 
     }
 
     @Override
     public void showRunningPliersEnd() {
-        cliState = GameState.RUNNINGEND;
+        setCliState(GameState.RUNNINGEND);
         out.println("Enter the index where you want to put the dice - Enter a number between 1 and 20");
     }
 
@@ -1252,13 +1195,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showCorkBackedPool(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.CORKPOOL;
-        out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.CORKPOOL);
+        out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + CliView.poolSize);
     }
 
     @Override
     public void showCorkBackedEnd() {
-        cliState = GameState.CORKEND;
+        setCliState(GameState.CORKEND);
         out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
     }
 
@@ -1268,8 +1211,8 @@ public class CliView extends View implements Runnable {
     @Override
     public void showGrindingStoneRequest(int poolSize) {
         setPoolSize(poolSize);
-        cliState = GameState.GRINDING;
-        out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.GRINDING);
+        out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + CliView.poolSize);
     }
 
     // tool card flux remover
@@ -1277,45 +1220,45 @@ public class CliView extends View implements Runnable {
     public void showFluxRemoverPool(DiceColor color, int poolSize) {
         setPoolSize(poolSize);
         setColorDice(color);
-        cliState = GameState.FLUXPOOL;
-        out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.FLUXPOOL);
+        out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + CliView.poolSize);
     }
 
     @Override
     public void showFluxRemoverValue() {
-        cliState = GameState.FLUXVALUE;
-        out.println("The color of the die drafted from the bag is " + getColorDice().toString());
+        setCliState(GameState.FLUXVALUE);
+        out.println("The color of the die drafted from the bag is " + colorDice.toString());
         out.println("Which value do you want for the dice? - Enter a number from 1 to 6");
     }
 
     // tool card thap wheel
     @Override
     public void showTapWheelNumber() {
-        cliState = GameState.TAPNUMBER;
+        setCliState(GameState.TAPNUMBER);
         out.println("\n" + "Enter the number of dice that you want to move - Enter 1 or 2");
     }
 
     @Override
     public void showTapWheelStartOne() {
-        cliState = GameState.TAPSTARTONE;
+        setCliState(GameState.TAPSTARTONE);
         out.println("Enter the index of the 1st dice you want to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelEndOne() {
-        cliState = GameState.TAPENDONE;
+        setCliState(GameState.TAPENDONE);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelStartTwo() {
-        cliState = GameState.TAPSTARTTWO;
+        setCliState(GameState.TAPSTARTTWO);
         out.println("Enter the index of the 2nd dice you want to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelEndTwo() {
-        cliState = GameState.TAPENDTWO;
+        setCliState(GameState.TAPENDTWO);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
@@ -1340,7 +1283,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showDifficultyRequest() {
-        cliState = GameState.DIFFICULTYSP;
+        setCliState(GameState.DIFFICULTYSP);
         out.println("\n" + "You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
     }
 
@@ -1356,20 +1299,20 @@ public class CliView extends View implements Runnable {
     public void showToolSingleCommand(List<ToolCard> toolList, int poolSize) {
         setPoolSize(poolSize);
         setToolSingleNumber(toolList.size());
-        cliState = GameState.TOOLSP;
+        setCliState(GameState.TOOLSP);
         out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
     public void showToolSingleChoose() {
-        cliState = GameState.TOOLSPCHOOSE;
-        out.println("Which tool card do you want to use? - Enter a number from 1 to " + getToolSingleNumber());
+        setCliState(GameState.TOOLSPCHOOSE);
+        out.println("Which tool card do you want to use? - Enter a number from 1 to " + toolSingleNumber);
     }
 
     @Override
     public void showToolSingleDice() {
-        cliState = GameState.TOOLSPDICE;
-        out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + getPoolSize());
+        setCliState(GameState.TOOLSPDICE);
+        out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + poolSize);
     }
 
     @Override

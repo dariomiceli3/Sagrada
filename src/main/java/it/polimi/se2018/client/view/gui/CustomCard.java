@@ -2,42 +2,36 @@ package it.polimi.se2018.client.view.gui;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.GlassBox;
-import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.transform.Transform;
-import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static java.lang.String.*;
 
 public class CustomCard {
 
-    private static WritableImage snapshot;
-    private static File output;
-    private static Canvas canvas;
 
-    public static WritableImage getSnapshot() {
-        return snapshot;
+    private CustomCard() {
+        final Logger log = Logger.getLogger(CustomCard.class.getName());
+        log.info("private constructor");
     }
 
-    static void createCard(PatternCard patternCard){
+    private static Canvas canvas;
 
-        //Stage canvasWindow = new Stage();
+    static Image rendering(PatternCard patternCard) {
+        createCard(patternCard);
+        SnapshotParameters snap = new SnapshotParameters();
+        snap.setDepthBuffer(true);
+        return canvas.snapshot(snap, null);
+    }
+
+    private static void createCard(PatternCard patternCard){
 
         canvas = new Canvas();
 
@@ -84,58 +78,9 @@ public class CustomCard {
 
         cardParser(patternCard, gc);
 
-        //Close Button
-        /*Button button = new Button("Close");
-        Platform.runLater(() -> button.setOnAction((ActionEvent event) -> {
-           //try {
-
-               snapshot = canvas.snapshot(new SnapshotParameters(), null);
-               //output = new File("src/main/resources/images/pattern/" + patternCard.getName() + ".png");
-               //ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
-               canvasWindow.close();
-           //}
-           /*catch (IOException e){
-               e.printStackTrace();
-           }*/
-
-        /*
-        }));
-
-        button.setLayoutX(137);
-        button.setLayoutY(280);
-        button.setPrefSize(70, 20);
-
-        AnchorPane root = new AnchorPane();
-
-
-        // Set the Style-properties of the Pane
-        root.setStyle(
-                "-fx-background-color: #D3D3D3;"
-        );
-
-        // Add the Canvas to the Pane
-        root.getChildren().add(canvas);
-        root.getChildren().add(button);
-
-        Scene scene = new Scene(root);
-        InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
-        Image image = new Image(fileStream);
-        canvasWindow.getIcons().add(image);
-        canvasWindow.setResizable(false);
-        canvasWindow.setScene(scene);
-        canvasWindow.show();
-        */
-
-
-
     }
 
-    static Image rendering(PatternCard patternCard) {
-        createCard(patternCard);
-        SnapshotParameters snap = new SnapshotParameters();
-        snap.setDepthBuffer(true);
-        return canvas.snapshot(snap, null);
-    }
+
 
     private static void cardParser(PatternCard patternCard, GraphicsContext gc) {
 
@@ -287,8 +232,6 @@ public class CustomCard {
         if(i == 19){
             gc.fillText(contraintValue, 272, 219.5); //dado 20
         }
-
-
     }
 
     private static void setFillColor(String string, GraphicsContext gc){

@@ -12,11 +12,53 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.logging.Logger;
 
-public class OtherPatternCard {
+public class PatternCardBox {
 
+    private final Logger log = Logger.getLogger(PatternCardBox.class.getName());
     private static PatternCard patternCard;
     private InputStream fileStream;
+
+    public static void setPatternCard(PatternCard patternCard) {
+        PatternCardBox.patternCard = patternCard;
+    }
+
+    public void initialize() {
+
+        loadPattern();
+
+        for (int i = 0; i < patternCard.getPattern().size(); i++) {
+            if (!patternCard.getPattern().get(i).isBoxEmpty()) {
+                patternCard.getDice(i);
+                try {
+                    loadDice(i);
+                } catch (IOException e) {
+                    log.warning(e.getMessage());
+                }
+            }
+        }
+    }
+
+
+    static void displayOtherPattern(String name) throws IOException {
+        Stage window = new Stage();
+
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Pattern Card of : " + name);
+        FXMLLoader loader = new FXMLLoader(PatternCardBox.class.getResource("/PatternOtherPlayer.fxml"));
+        Parent root1 = loader.load();
+        Scene scene = new Scene(root1);
+        InputStream fileStream = PatternCardBox.class.getResourceAsStream("/images/icon" + ".png");
+        Image image = new Image(fileStream);
+        window.getIcons().add(image);
+        window.setScene(scene);
+        window.setResizable(false);
+        Platform.runLater(window::showAndWait);
+    }
+
+
 
     @FXML
     private ImageView pattern;
@@ -61,49 +103,10 @@ public class OtherPatternCard {
     @FXML
     private ImageView glassBox20;
 
-    public static void setPatternCard(PatternCard patternCard) {
-        OtherPatternCard.patternCard = patternCard;
-    }
-
-    public void initialize() {
-        try {
-            loadPattern();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < patternCard.getPattern().size(); i++) {
-            if (!patternCard.getPattern().get(i).isBoxEmpty()) {
-                patternCard.getDice(i);
-                try {
-                    loadDice(i);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 
-    static void displayOtherPattern(String name) throws IOException {
-        Stage window = new Stage();
 
-        //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Pattern Card of : " + name);
-        FXMLLoader loader = new FXMLLoader(OtherPatternCard.class.getResource("/PatternOtherPlayer.fxml"));
-        Parent root1 = loader.load();
-        Scene scene = new Scene(root1);
-        InputStream fileStream = OtherPatternCard.class.getResourceAsStream("/images/icon" + ".png");
-        Image image = new Image(fileStream);
-        window.getIcons().add(image);
-        window.setScene(scene);
-        window.setResizable(false);
-        Platform.runLater(window::showAndWait);
-    }
-
-
-    private void loadPattern() throws IOException {
+    private void loadPattern() {
         String fileName = patternCard.getName();
 
         if (patternCard.isCustom()) {
@@ -124,7 +127,7 @@ public class OtherPatternCard {
     private void loadDice(int indexPattern) throws IOException {
 
         String fileName = patternCard.getDice(indexPattern).toStringGui();
-        fileStream = OtherPatternCard.class.getResourceAsStream("images/dice/" + fileName + ".png");
+        fileStream = PatternCardBox.class.getResourceAsStream("/images/dice/" + fileName + ".png");
 
         try {
             Image image = new Image(fileStream);
