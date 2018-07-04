@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 public class RmiHandler implements ClientInterface {
 
-    private final Logger log = Logger.getLogger(RmiHandler.class.getName());
+     private final Logger log = Logger.getLogger(RmiHandler.class.getName());
     private RmiServerInterface stub;
     private View view;
     private Ping ping;
