@@ -91,7 +91,7 @@ public class GameSetup {
 
     }
 
-    private List<PatternCard> loadPatternCard() {
+    List<PatternCard> loadPatternCard() {
         PatternCard pattern = new PatternCard();
         listPattern = pattern.loadPatternList();
         return listPattern;

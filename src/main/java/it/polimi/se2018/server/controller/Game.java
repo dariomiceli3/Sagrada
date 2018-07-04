@@ -43,6 +43,7 @@ public class Game implements Observer {
     private List<String> activeNames;
     private boolean singlePlayer;
     private int TIMERTURN;
+    private int disconnectName;
     private Timer timer;
     private ToolCardController toolController;
 
@@ -69,6 +70,7 @@ public class Game implements Observer {
         this.activeNames = new ArrayList<>();
         this.currID = -1;
         this.notEnded = true;
+        this.disconnectName = DEFAULT;
 
         InputStream fileStream = Game.class.getResourceAsStream("/json/settings" + ".json");
         JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
@@ -256,6 +258,11 @@ public class Game implements Observer {
 
         }
         else if (model.getPlayerFromID(id).getPattern() == null) {
+            if(model.getPlayerFromID(id).getPatterChooseList() == null) {
+                model.setNumberPlayer(model.getNumberPlayer() - 2);
+                disconnectName++;
+                model.getPlayerFromID(id).setPatterChooseList(setup.loadPatternCard());
+            }
             setPatternCardModel(virtualView, 0);
             setPlayerDisconnection(id);
             sendExitNotification(id);
@@ -340,7 +347,7 @@ public class Game implements Observer {
         if (singlePlayer){
             setToolSinglePlayer();
         }else {
-            if (model.getNumberPlayer() == (model.getPlayerList().size())) {
+            if (model.getNumberPlayer() == (model.getPlayerList().size() - disconnectName)) {
                 startCard();
             }
         }
@@ -354,7 +361,7 @@ public class Game implements Observer {
             System.out.println("custom pattern setting controller");
             setTokensModel(view);
 
-            if (model.getNumberPlayer() == (getViewGame().size())) {
+            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
 
                 for (VirtualView view1 : viewGame) {
                     view1.sendEvent(new StartGameSceneEvent());
@@ -377,7 +384,7 @@ public class Game implements Observer {
         if(!singlePlayer) {
             setTokensModel(view);
 
-            if (model.getNumberPlayer() == (getViewGame().size())) {
+            if (model.getNumberPlayer() == (getViewGame().size() - disconnectName)) {
 
                 for (VirtualView view1 : viewGame) {
                     view1.sendEvent(new StartGameSceneEvent());
@@ -439,13 +446,14 @@ public class Game implements Observer {
         model.getPlayerFromID(playerID).setDisconnect(true);
         disconnectPlayerNumber++;
         if((viewGame.size() - disconnectPlayerNumber) < 2){
-            if(model.getPlayerFromID(playerID).getPrivate() == null){
-                notEnded = false;
-                endMatch(false);
+            for(Player player : model.getPlayerList()){
+
+                if(player.getPattern() == null){
+                    notEnded = false;
+                }
             }
-            else {
-                endMatch(true);
-            }
+            endMatch(notEnded);
+
         }else if (currID == playerID) {
             nextTurn();
         }
