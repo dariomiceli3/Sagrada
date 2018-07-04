@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BlendMode;
@@ -15,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Logger;
 
 public class RoundTrackerBox {
@@ -25,7 +24,6 @@ public class RoundTrackerBox {
     private static final String logMsg = "Null pointer catch";
     private static BoardController board;
     private static int round;
-    private int selectedDice;
     private static Stage window;
     private InputStream fileStream;
 
@@ -40,7 +38,7 @@ public class RoundTrackerBox {
         loadDice();
     }
 
-    public static void display()  throws IOException {
+    static void display()  throws IOException {
         window = new Stage();
 
         //Block events to other windows
@@ -61,8 +59,6 @@ public class RoundTrackerBox {
     private ToggleButton button1;
     @FXML
     private ImageView dice1;
-    @FXML
-    private Button selectButton;
     @FXML
     private ToggleButton button2;
     @FXML
@@ -258,7 +254,7 @@ public class RoundTrackerBox {
             String fileName = board.getRoundTracker().getRoundDice(round).get(i).toStringGui();
 
             try {
-                log.info("dice on the round tracker in round: " + round);
+
                 fileStream = RoundTrackerBox.class.getResourceAsStream("/images/dice/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
