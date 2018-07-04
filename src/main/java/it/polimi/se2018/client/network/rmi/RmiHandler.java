@@ -7,7 +7,6 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.ClientInterface;
 import it.polimi.se2018.client.view.View;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.network.Server;
 import it.polimi.se2018.server.network.rmi.RmiServerInterface;
 
 import java.io.InputStream;
@@ -16,9 +15,11 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Logger;
 
 public class RmiHandler implements ClientInterface {
 
+    private final Logger log = Logger.getLogger(RmiHandler.class.getName());
     private RmiServerInterface stub;
     private View view;
     private Ping ping;
@@ -39,21 +40,19 @@ public class RmiHandler implements ClientInterface {
 
             this.stub = (RmiServerInterface) Naming.lookup("//" + ipAddress+ "/Sagrada");
 
-            RmiClientImpl clientRmi = new RmiClientImpl(this.view, ping);
+            RmiClientImpl clientRmi = new RmiClientImpl(this.view, this.ping);
 
             stub.registerRmiClient(clientRmi);
-
         }
         catch (MalformedURLException e){
-            System.out.println("URL not found");
+            log.info("URL not found");
         }
         catch (RemoteException e) {
-            System.out.println("Connection error client");
+            log.info("Connection error client");
         }
         catch (NotBoundException e) {
-            System.out.println("Reference not correct");
+            log.info("Reference not correct");
         }
-
     }
 
 
@@ -68,105 +67,105 @@ public class RmiHandler implements ClientInterface {
         try {
             stub.setSinglePlayerMode(id, singlePlayer);
         } catch (RemoteException e) {
-            System.out.println("Error in setting player mode");
-            e.printStackTrace();
+            log.info("Error in setting player mode");
+            log.warning(e.getMessage());
         }
     }
 
 
     @Override
-    public void setPlayerNameToServer(String username, int iD) {
+    public void setPlayerNameToServer(String username, int id) {
         try{
-            stub.setPlayerNameToServer(username, iD);
+            stub.setPlayerNameToServer(username, id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting name");
-            e.printStackTrace();
+            log.info("Error in setting name");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void setPatternCardToServer(int indexPatternChoose, int ID) {
+    public void setPatternCardToServer(int indexPatternChoose, int id) {
         try {
-            stub.setPatternCardToServer(indexPatternChoose, ID);
+            stub.setPatternCardToServer(indexPatternChoose, id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting pattern card");
-            e.printStackTrace();
+            log.info("Error in setting pattern card");
+            log.warning(e.getMessage());
         }
 
 
     }
 
     @Override
-    public void setDraftPoolToServer(int ID) {
+    public void setDraftPoolToServer(int id) {
         try {
-            stub.setDraftPoolToServer(ID);
+            stub.setDraftPoolToServer(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting pattern card");
-            e.printStackTrace();
+            log.info("Error in setting pattern card");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void setChooseToServer(int ID, int step) {
+    public void setChooseToServer(int id, int step) {
         try{
-            stub.setChooseToServer(ID, step);
+            stub.setChooseToServer(id, step);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting choose");
-            e.printStackTrace();
+            log.info("Error in setting choose");
+            log.warning(e.getMessage());
         }
     }
 
     @Override
-    public void setMoveToServer(int ID, int indexPool, int indexPattern) {
+    public void setMoveToServer(int id, int indexPool, int indexPattern) {
         try{
-            stub.setMoveToServer(ID, indexPool, indexPattern);
+            stub.setMoveToServer(id, indexPool, indexPattern);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting move");
-            e.printStackTrace();
+            log.info("Error in setting move");
+            log.warning(e.getMessage());
         }
 
 
     }
 
     @Override
-    public void setStartToolToServer(int ID) {
+    public void setStartToolToServer(int id) {
         try{
-            stub.setStartToolToServer(ID);
+            stub.setStartToolToServer(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting tool");
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void setNextTurnToServer(int ID) {
-        try{
-            stub.setNextTurnToServer(ID);
-        }
-        catch (RemoteException e) {
-            System.out.println("Error in setting turn");
-            e.printStackTrace();
+            log.info("Error in setting tool");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void setNoTokenToServer(int ID) {
+    public void setNextTurnToServer(int id) {
         try{
-            stub.setNoTokenToServer(ID);
+            stub.setNextTurnToServer(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting no tool");
-            e.printStackTrace();
+            log.info("Error in setting turn");
+            log.warning(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void setNoTokenToServer(int id) {
+        try{
+            stub.setNoTokenToServer(id);
+        }
+        catch (RemoteException e) {
+            log.info("Error in setting no tool");
+            log.warning(e.getMessage());
         }
 
     }
@@ -177,163 +176,163 @@ public class RmiHandler implements ClientInterface {
             stub.useToolCardToServer(id, indexTool);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting using tool");
-            e.printStackTrace();
+            log.info("Error in setting using tool");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useGrozingToolCard(int ID, int indexPool, int increase) {
+    public void useGrozingToolCard(int id, int indexPool, int increase) {
         try{
-            stub.useGrozingToolCard(ID, indexPool, increase);
+            stub.useGrozingToolCard(id, indexPool, increase);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting grozing ");
-            e.printStackTrace();
+            log.info("Error in setting grozing ");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useEglomiseToolCard(int ID, int indexStart, int indexEnd) {
+    public void useEglomiseToolCard(int id, int indexStart, int indexEnd) {
         try{
-            stub.useEglomiseToolCard(ID, indexStart, indexEnd);
+            stub.useEglomiseToolCard(id, indexStart, indexEnd);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting eglomise");
-            e.printStackTrace();
+            log.info("Error in setting eglomise");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useCopperFoilToolCard(int ID, int indexStart, int indexEnd) {
+    public void useCopperFoilToolCard(int id, int indexStart, int indexEnd) {
         try{
-            stub.useCopperFoilToolCard(ID, indexStart, indexEnd);
+            stub.useCopperFoilToolCard(id, indexStart, indexEnd);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting copper foil");
-            e.printStackTrace();
+            log.info("Error in setting copper foil");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useLathekinToolCard(int ID, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useLathekinToolCard(int id, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         try{
-            stub.useLathekinToolCard(ID, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+            stub.useLathekinToolCard(id, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting lathekin");
-            e.printStackTrace();
+            log.info("Error in setting lathekin");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useLensCutterToolCard(int ID, int indexPool, int indexRound, int indexPosition) {
+    public void useLensCutterToolCard(int id, int indexPool, int indexRound, int indexPosition) {
         try{
-            stub.useLensCutterToolCard(ID, indexPool, indexRound, indexPosition);
+            stub.useLensCutterToolCard(id, indexPool, indexRound, indexPosition);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting lens cutter");
-            e.printStackTrace();
+            log.info("Error in setting lens cutter");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useFluxBrushToolCard(int ID, int indexPool) {
+    public void useFluxBrushToolCard(int id, int indexPool) {
         try{
-            stub.useFluxBrushToolCard(ID, indexPool);
+            stub.useFluxBrushToolCard(id, indexPool);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting flux brush");
-            e.printStackTrace();
+            log.info("Error in setting flux brush");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useGlazingHammerToolCard(int ID) {
+    public void useGlazingHammerToolCard(int id) {
         try{
-            stub.useGlazingHammerToolCard(ID);
+            stub.useGlazingHammerToolCard(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting glazing hammer");
-            e.printStackTrace();
+            log.info("Error in setting glazing hammer");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useRunningPliersToolCard(int ID, int indexPool, int indexPattern) {
+    public void useRunningPliersToolCard(int id, int indexPool, int indexPattern) {
         try{
-            stub.useRunningPliersToolCard(ID, indexPool, indexPattern);
+            stub.useRunningPliersToolCard(id, indexPool, indexPattern);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting running pliers");
-            e.printStackTrace();
+            log.info("Error in setting running pliers");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useCorkBackedToolCard(int ID, int indexPool, int indexPattern) {
+    public void useCorkBackedToolCard(int id, int indexPool, int indexPattern) {
         try{
-            stub.useCorkBackedToolCard(ID, indexPool, indexPattern);
+            stub.useCorkBackedToolCard(id, indexPool, indexPattern);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting cork backed");
-            e.printStackTrace();
+            log.info("Error in setting cork backed");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useGrindingStoneToolCard(int ID, int indexPool) {
+    public void useGrindingStoneToolCard(int id, int indexPool) {
         try{
-            stub.useGrindingStoneToolCard(ID, indexPool);
+            stub.useGrindingStoneToolCard(id, indexPool);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting grinding stone");
-            e.printStackTrace();
+            log.info("Error in setting grinding stone");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useFluxRemoverToolCard(int ID, int indexPool, int diceValue) {
+    public void useFluxRemoverToolCard(int id, int indexPool, int diceValue) {
         try {
-            stub.useFluxRemoverToolCard(ID, indexPool, diceValue);
+            stub.useFluxRemoverToolCard(id, indexPool, diceValue);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting flux remover");
-            e.printStackTrace();
+            log.info("Error in setting flux remover");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useTapWheelToolCard(int id, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         try{
-            stub.useTapWheelToolCard(ID, number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
+            stub.useTapWheelToolCard(id, number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting tap wheel");
-            e.printStackTrace();
+            log.info("Error in setting tap wheel");
+            log.warning(e.getMessage());
         }
     }
 
     @Override
-    public void setEndGameTimer(int ID) {
+    public void setEndGameTimer(int id) {
         try {
-            stub.setEndGameTimer(ID);
+            stub.setEndGameTimer(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting end game timer");
-            e.printStackTrace();
+            log.info("Error in setting end game timer");
+            log.warning(e.getMessage());
         }
     }
 
@@ -341,38 +340,38 @@ public class RmiHandler implements ClientInterface {
     //-------------------------single player----------------------
 
     @Override
-    public void setDifficultyToServer(int ID, int difficulty) {
+    public void setDifficultyToServer(int id, int difficulty) {
         try{
-            stub.setDifficultyToServer(ID, difficulty);
+            stub.setDifficultyToServer(id, difficulty);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting difficulty");
-            e.printStackTrace();
+            log.info("Error in setting difficulty");
+            log.warning(e.getMessage());
         }
 
     }
 
     @Override
-    public void useToolSingleToServer(int ID, int indexTool, int indexPool) {
+    public void useToolSingleToServer(int id, int indexTool, int indexPool) {
         try{
-            stub.useToolSingleToServer(ID, indexTool, indexPool);
+            stub.useToolSingleToServer(id, indexTool, indexPool);
         }
         catch (RemoteException e) {
-            System.out.println("Error in setting tool single player");
-            e.printStackTrace();
+            log.info("Error in setting tool single player");
+            log.warning(e.getMessage());
         }
     }
 
     //-----------------------custom card------------------------------------
 
     @Override
-    public void setPatternCustomToServer(int ID, PatternCard patternCard) {
+    public void setPatternCustomToServer(int id, PatternCard patternCard) {
         try {
-            stub.setPatternCustomToServer(ID, patternCard);
+            stub.setPatternCustomToServer(id, patternCard);
         }
         catch (RemoteException e) {
-            System.out.println("error in setting custom card");
-            e.printStackTrace();
+            log.info("error in setting custom card");
+            log.warning(e.getMessage());
         }
 
     }
@@ -380,32 +379,33 @@ public class RmiHandler implements ClientInterface {
     //----------------------disconnection------------------------------------
 
     @Override
-    public void setExitToServer(int ID) {
+    public void setExitToServer(int id) {
         try {
-            stub.setExitToServer(ID);
+            stub.setExitToServer(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in exit the game");
-            e.printStackTrace();
+            log.info("Error in exit the game");
+            log.warning(e.getMessage());
         }
     }
 
     @Override
-    public void setReconnectToServer(int ID) {
+    public void setReconnectToServer(int id) {
         try {
-            stub.setReconnectToServer(ID);
+            stub.setReconnectToServer(id);
         }catch (RemoteException e) {
-            System.out.println("Error in reconnect in the game");
-            e.printStackTrace();
+            log.info("Error in reconnect in the game");
+            log.warning(e.getMessage());
         }
     }
 
-    public void clientPing(int ID) {
+    void clientPing(int id) {
         try {
-            stub.clientPing(ID);
+            stub.clientPing(id);
         }
         catch (RemoteException e) {
-            System.out.println("Error in client ping");
+            log.info("Error in client ping");
+            log.warning(e.getMessage());
         }
     }
 }

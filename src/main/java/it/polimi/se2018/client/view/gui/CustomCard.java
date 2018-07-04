@@ -15,8 +15,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -28,22 +28,18 @@ import static java.lang.String.*;
 public class CustomCard {
 
     private static WritableImage snapshot;
-    private static WritableImage wi;
     private static File output;
+    private static Canvas canvas;
 
     public static WritableImage getSnapshot() {
         return snapshot;
     }
 
-    public static File getOutput() {
-        return output;
-    }
-
     static void createCard(PatternCard patternCard){
 
-        Stage canvasWindow = new Stage();
+        //Stage canvasWindow = new Stage();
 
-        Canvas canvas = new Canvas();
+        canvas = new Canvas();
 
         // Set the width of the Canvas
         canvas.setWidth(320);
@@ -89,21 +85,20 @@ public class CustomCard {
         cardParser(patternCard, gc);
 
         //Close Button
-        Button button = new Button("Close");
+        /*Button button = new Button("Close");
         Platform.runLater(() -> button.setOnAction((ActionEvent event) -> {
-           try {
-               SnapshotParameters params = new SnapshotParameters();
-               wi = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+           //try {
+
                snapshot = canvas.snapshot(new SnapshotParameters(), null);
-
-               output = new File("src/main/resources/images/pattern/" + patternCard.getName() + ".png");
-               ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+               //output = new File("src/main/resources/images/pattern/" + patternCard.getName() + ".png");
+               //ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                canvasWindow.close();
-           }
-           catch (IOException e){
+           //}
+           /*catch (IOException e){
                e.printStackTrace();
-           }
+           }*/
 
+        /*
         }));
 
         button.setLayoutX(137);
@@ -123,16 +118,23 @@ public class CustomCard {
         root.getChildren().add(button);
 
         Scene scene = new Scene(root);
-
         InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
         Image image = new Image(fileStream);
         canvasWindow.getIcons().add(image);
         canvasWindow.setResizable(false);
         canvasWindow.setScene(scene);
         canvasWindow.show();
+        */
 
 
 
+    }
+
+    static Image rendering(PatternCard patternCard) {
+        createCard(patternCard);
+        SnapshotParameters snap = new SnapshotParameters();
+        snap.setDepthBuffer(true);
+        return canvas.snapshot(snap, null);
     }
 
     private static void cardParser(PatternCard patternCard, GraphicsContext gc) {

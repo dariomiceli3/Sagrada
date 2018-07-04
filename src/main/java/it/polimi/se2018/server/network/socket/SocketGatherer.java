@@ -5,8 +5,11 @@ import it.polimi.se2018.server.network.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class SocketGatherer implements Runnable {
+
+    private final Logger log = Logger.getLogger(SocketGatherer.class.getName());
 
     private ServerSocket serverSocket;
     private final Server server;
@@ -18,8 +21,7 @@ public class SocketGatherer implements Runnable {
 
         try {
             this.serverSocket = new ServerSocket(port);
-            System.out.println("Server socket started on port: " + port);
-
+            log.info("Server socket started on port: { }" + port);
         }
         catch (IOException e) {
             System.out.println("Socket error in creation");
@@ -43,9 +45,9 @@ public class SocketGatherer implements Runnable {
                 clientConnection = serverSocket.accept();
                 System.out.println("New socket connected");
 
-                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, Server.idPlayer);
+                VirtualSocket virtualSocket = new VirtualSocket(clientConnection, server, Server.getIdPlayer());
 
-                System.out.println("player id : " + Server.idPlayer);
+                System.out.println("player id : " + Server.getIdPlayer());
 
                 Server.setIdPlayer(Server.getIdPlayer() + 1);
 

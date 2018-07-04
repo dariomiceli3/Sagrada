@@ -1027,7 +1027,8 @@ public class TestView {
 
     }
 
-    @Test(expected = NullPointerException.class)
+    // todo rivedere
+    /*@Test(expected = NullPointerException.class)
     public void testRunningPliersInvalid() throws InvalidMoveException, FileNotFoundException {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
@@ -1055,7 +1056,7 @@ public class TestView {
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
 
 
-    }
+    }*/
 
     /*@Test
     public void testCorkBacked() throws InvalidMoveException, FileNotFoundException {

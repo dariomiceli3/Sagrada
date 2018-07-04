@@ -237,7 +237,8 @@ public class ChoosePattern {
         
         if (file != null) {
             InputStream inputStream = ChoosePattern.class.getResourceAsStream("/json/custom/" + name);
-            renderingScheme(inputStream);
+            selfScheme = new PatternCard();
+            selfScheme = selfScheme.loadCard(inputStream);
             customCard = true;
             customPlay.setValue(false);
             radioPatternOne.setDisable(true);
@@ -246,13 +247,6 @@ public class ChoosePattern {
             radioPatternFour.setDisable(true);
             loadButton.setDisable(true);
         }
-    }
-
-    private void renderingScheme(InputStream inputStream)  {
-
-        selfScheme = new PatternCard();
-        selfScheme = selfScheme.loadCard(inputStream);
-        CustomCard.createCard(selfScheme);
     }
 
     public void initialize () throws IOException {

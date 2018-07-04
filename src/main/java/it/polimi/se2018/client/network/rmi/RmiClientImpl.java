@@ -17,10 +17,10 @@ import java.util.List;
 
 public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInterface {
 
-    private View view;
-    private Ping ping;
+    private transient View view;
+    private transient Ping ping;
 
-    protected RmiClientImpl(View view, Ping ping) throws RemoteException {
+    RmiClientImpl(View view, Ping ping) throws RemoteException {
         super();
         this.view = view;
         this.ping = ping;
@@ -31,22 +31,22 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     // devono fare view.show
 
     @Override
-    public void remoteIDEvent(int ID) throws RemoteException {
-        view.setPlayerID(ID);
-        ping.setID(ID);
+    public void remoteIDEvent(int id) {
+        view.setPlayerID(id);
+        ping.setID(id);
         Thread threadPing = new Thread(ping);
         threadPing.start();
         view.showID();
     }
 
     @Override
-    public void remoteSinglePlayerEvent(int ID) {
+    public void remoteSinglePlayerEvent(int id) {
         view.showSinglePlayerRequest();
     }
 
     @Override
-    public void remotePlayerNameUpdateEvent(int ID, String name) {
-        if (view.getPlayerID() == ID) {
+    public void remotePlayerNameUpdateEvent(int id, String name) {
+        if (view.getPlayerID() == id) {
             view.setNameView(name);
             view.showName();
         }
@@ -56,48 +56,48 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remotePlayerNameErrorEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remotePlayerNameErrorEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showNameError();
             view.showNameChoose();
         }
     }
 
     @Override
-    public void remoteGameStartedEvent(boolean started) throws RemoteException {
+    public void remoteGameStartedEvent(boolean started) {
         view.setStarted(started);
         view.showGameStarted();
         view.showNameChoose();
     }
 
     @Override
-    public void remotePlayerPrivateUpdateEvent(int ID, PrivateObjectiveCard privateCard) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remotePlayerPrivateUpdateEvent(int id, PrivateObjectiveCard privateCard) {
+        if (view.getPlayerID() == id) {
             view.showPrivateCard(privateCard);
         }
     }
 
     @Override
-    public void remoteStartPatternEvent(int ID, List<PatternCard> patternList) throws RemoteException, IOException {
-        if (view.getPlayerID() == ID) {
+    public void remoteStartPatternEvent(int id, List<PatternCard> patternList) throws IOException {
+        if (view.getPlayerID() == id) {
             view.showPatternList(patternList);
         }
 
     }
 
     @Override
-    public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws RemoteException, IOException {
+    public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws IOException {
         view.showPublicCard(publicList);
 
     }
 
     @Override
-    public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException, IOException {
-        if (view.getPlayerID() == ID) {
+    public void remotePlayerPatternUpdateEvent(int id, PatternCard patternCard) throws IOException {
+        if (view.getPlayerID() == id) {
             view.showPattern(patternCard);
         }
         else {
-            view.showOtherStartPattern(patternCard,ID);
+            view.showOtherStartPattern(patternCard,id);
         }
 
     }
@@ -108,20 +108,20 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remotePlayerTokensUpdateEvent(int ID, int numberTokens) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remotePlayerTokensUpdateEvent(int id, int numberTokens) {
+        if (view.getPlayerID() == id) {
             view.showTokens(numberTokens);
         }
     }
 
     @Override
-    public void remoteStartRoundEvent(int round) throws RemoteException {
+    public void remoteStartRoundEvent(int round) {
         view.showCurrentRound(round);
     }
 
     @Override
-    public void remoteStartTurnEvent(int ID, String name) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteStartTurnEvent(int id, String name) {
+        if (view.getPlayerID() == id) {
             view.showCurrentTurn();
         }
         else {
@@ -131,85 +131,85 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remoteRollDraftPoolEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteRollDraftPoolEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showRollCommand();
         }
 
     }
 
     @Override
-    public void remotePlayerDraftPoolUpdateEvent(DraftPool draftPool) throws RemoteException {
+    public void remotePlayerDraftPoolUpdateEvent(DraftPool draftPool) {
         view.showDraftPool(draftPool);
 
     }
 
     @Override
-    public void remoteStartChooseEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteStartChooseEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showChooseCommand();
         }
 
     }
 
     @Override
-    public void remoteStartMoveEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteStartMoveEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showMoveCommand(poolSize);
         }
 
     }
 
     @Override
-    public void remotePatternUpdateEvent(int ID, PatternCard patternCard, String name) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remotePatternUpdateEvent(int id, PatternCard patternCard, String name) {
+        if (view.getPlayerID() == id) {
             view.showPatternUpdate(patternCard);
         }
         else {
-            view.showOtherPattern(patternCard, name, ID);
+            view.showOtherPattern(patternCard, name, id);
         }
 
     }
 
     @Override
-    public void remoteRoundTrackerUpdateEvent(RoundTracker roundTracker) throws RemoteException {
+    public void remoteRoundTrackerUpdateEvent(RoundTracker roundTracker) {
         view.showRoundTracker(roundTracker);
 
     }
 
     @Override
-    public void remoteTurnPatternEvent(int ID, PatternCard patternCard) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteTurnPatternEvent(int id, PatternCard patternCard) {
+        if (view.getPlayerID() == id) {
             view.showPatternUpdate(patternCard);
         }
 
     }
 
     @Override
-    public void remoteStartToolEvent(int ID, List<ToolCard> toolCards) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteStartToolEvent(int id, List<ToolCard> toolCards) {
+        if (view.getPlayerID() == id) {
             view.showToolCommand(toolCards);
         }
 
     }
 
     @Override
-    public void remoteOutOfTokenEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteOutOfTokenEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showTokenError();
         }
 
     }
 
     @Override
-    public void remotePlayerPointsUpdateEvent(List<Player> playerList, boolean ended) throws RemoteException {
+    public void remotePlayerPointsUpdateEvent(List<Player> playerList, boolean ended) {
         view.showFinalRank(playerList,ended);
 
     }
 
     @Override
-    public void remoteWinnerEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteWinnerEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showWinner();
         }
         else {
@@ -219,189 +219,199 @@ public class RmiClientImpl extends UnicastRemoteObject implements RmiClientInter
     }
 
     @Override
-    public void remoteTimerEndedEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteTimerEndedEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showTimer();
         }
 
     }
 
     @Override
-    public void remoteTimerOtherEvent(String name) throws RemoteException {
+    public void remoteTimerOtherEvent(String name) {
         view.showOtherTimer(name);
 
     }
 
     @Override
-    public void remoteToolCardUpdateEvent(List<ToolCard> toolCards) throws RemoteException {
+    public void remoteToolCardUpdateEvent(List<ToolCard> toolCards) {
         view.showToolCards(toolCards);
     }
 
     @Override
-    public void remoteGrozingPliersRequestEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteGrozingPliersRequestEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showGrozingRequest(poolSize);
         }
 
     }
 
     @Override
-    public void remoteEglomiseBrushRequestEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteEglomiseBrushRequestEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showEglomiseStart();
         }
 
     }
 
     @Override
-    public void remoteCopperFoilRequestEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteCopperFoilRequestEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showCopperFoilStart();
         }
 
     }
 
     @Override
-    public void remoteLathekinRequestEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteLathekinRequestEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showLathekinStart();
         }
 
     }
 
     @Override
-    public void remoteLensCutterRequestEvent(int ID, int poolSize, List<Integer> roundSizes) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteLensCutterRequestEvent(int id, int poolSize, List<Integer> roundSizes) {
+        if (view.getPlayerID() == id) {
             view.showLensCutterRequest(poolSize, roundSizes);
         }
     }
 
     @Override
-    public void remoteFluxBrushRequesEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteFluxBrushRequesEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showFluxBrushRequest(poolSize);
         }
 
     }
 
     @Override
-    public void remoteGlazingHammerRequestEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteGlazingHammerRequestEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showGlazingHammerRequest();
         }
 
     }
 
     @Override
-    public void remoteRunningPliersRequestEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteRunningPliersRequestEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showRunningPliersPool(poolSize);
         }
 
     }
 
     @Override
-    public void remoteCorkBackedRequestEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteCorkBackedRequestEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showCorkBackedPool(poolSize);
         }
 
     }
 
     @Override
-    public void remoteGrindingStoneRequestEvent(int ID, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteGrindingStoneRequestEvent(int id, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showGrindingStoneRequest(poolSize);
         }
 
     }
 
     @Override
-    public void remoteFluxRemoverRequestEvent(int ID, DiceColor color, int poolSize) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteFluxRemoverRequestEvent(int id, DiceColor color, int poolSize) {
+        if (view.getPlayerID() == id) {
             view.showFluxRemoverPool(color, poolSize);
         }
 
     }
 
     @Override
-    public void remoteTapWheelRequestEvent(int ID) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteTapWheelRequestEvent(int id) {
+        if (view.getPlayerID() == id) {
             view.showTapWheelNumber();
         }
 
     }
 
     @Override
-    public void remoteUpdateBoardEvent(RoundTracker roundTracker, DraftPool draftPool) throws RemoteException {
+    public void remoteUpdateBoardEvent(RoundTracker roundTracker, DraftPool draftPool) {
         view.showBoard(roundTracker, draftPool);
     }
 
     @Override
-    public void remoteInvalidMoveEvent(int ID, String errorMsg) throws RemoteException {
-        if (view.getPlayerID() == ID) {
+    public void remoteInvalidMoveEvent(int id, String errorMsg) {
+        if (view.getPlayerID() == id) {
             view.showInvalidMove(errorMsg);
         }
 
     }
 
     @Override
-    public void remoteUpdatePoolEvent(DraftPool draftPool) throws RemoteException {
+    public void remoteUpdatePoolEvent(DraftPool draftPool) {
         view.showDraftPool(draftPool);
 
     }
 
     @Override
-    public void remoteToolNumberRequestEvent() throws RemoteException {
+    public void remoteToolNumberRequestEvent() {
         view.showDifficultyRequest();
 
     }
 
     @Override
-    public void remoteSinglePrivateEvent(List<PrivateObjectiveCard> privateList) throws RemoteException {
+    public void remoteSinglePrivateEvent(List<PrivateObjectiveCard> privateList) {
         view.showPrivateSingle(privateList);
 
     }
 
     @Override
-    public void remoteEndSinglePlayerEvent(boolean winner, int playerPoint, int threshold) throws RemoteException {
+    public void remoteEndSinglePlayerEvent(boolean winner, int playerPoint, int threshold) {
         view.showEndSinglePlayer(winner, playerPoint, threshold);
     }
 
     @Override
-    public void remoteStartToolSinglePlayer(List<ToolCard> toolCards, int poolSize) throws RemoteException {
+    public void remoteStartToolSinglePlayer(List<ToolCard> toolCards, int poolSize) {
         view.showToolSingleCommand(toolCards, poolSize);
     }
 
     @Override
-    public void remoteNotMatchColorEvent() throws RemoteException {
+    public void remoteNotMatchColorEvent() {
         view.showMatchError();
 
     }
 
     @Override
-    public void remoteMaxPlayerLogin() throws RemoteException {
+    public void remoteMaxPlayerLogin() {
         view.showMaxPlayerLogin();
     }
 
     @Override
-    public void remoteExitPlayer(String name) throws RemoteException {
+    public void remoteExitPlayer(String name) {
         view.showExitPlayer(name);
     }
 
     @Override
-    public void remoteReconnectPlayer(String name) throws RemoteException {
+    public void remoteReconnectPlayer(String name) {
         view.showReconnectPlayer(name);
     }
 
     @Override
-    public void remoteNotPermittedReconnection() throws RemoteException {
+    public void remoteNotPermittedReconnection() {
         view.showNotPermittedReconnection();
     }
 
     @Override
-    public void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) throws RemoteException {
+    public void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
         view.showReload(currPlayer, singlePlay, gameStart, tool, publicCard, players);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
 

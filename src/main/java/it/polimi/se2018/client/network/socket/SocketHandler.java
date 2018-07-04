@@ -25,8 +25,6 @@ import java.net.Socket;
 public class SocketHandler implements ClientInterface, Runnable {
 
     private Socket clientConnection;
-    private ObjectInputStream socketIn;
-    private ObjectOutputStream socketOut;
     private View view;
 
     public SocketHandler(String host, int port, View view) {
@@ -58,7 +56,7 @@ public class SocketHandler implements ClientInterface, Runnable {
 
             try {
 
-                socketIn = new ObjectInputStream(clientConnection.getInputStream());
+                ObjectInputStream socketIn = new ObjectInputStream(clientConnection.getInputStream());
                 Object object = socketIn.readObject();
 
                 if (object instanceof Event) {
@@ -429,7 +427,7 @@ public class SocketHandler implements ClientInterface, Runnable {
     public synchronized void sendEvent(Event event) {
 
         try {
-            socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
+            ObjectOutputStream socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
             socketOut.writeObject(event);
             socketOut.flush();
         }

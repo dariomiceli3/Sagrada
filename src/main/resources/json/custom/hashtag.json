@@ -1,0 +1,56 @@
+{
+  "name": "Hashtag",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue": "6"
+    },
+    {
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor" : "red"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor": "blue"
+    },
+    {
+      "constraintColor" : "yellow"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintValue" : "2"
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+    },
+    {
+    }
+  ]
+}

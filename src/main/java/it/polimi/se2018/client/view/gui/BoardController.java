@@ -1,10 +1,7 @@
 package it.polimi.se2018.client.view.gui;
 
-import it.polimi.se2018.client.view.ViewState;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,7 +15,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.List;
 
 
@@ -534,7 +530,28 @@ public class BoardController {
         toolCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
     }
 
-    @FXML
+    //---------------------------------------------enum for gui state
+
+    public enum ViewState {
+
+        ROLL,MOVE, TOOL,
+        GROZINGPOOL, GROZINGCOMMAND,
+        EGLOMISESTART, EGLOMISEEND,
+        COPPERSTART, COPPEREND,
+        LATHEKINSTARTONE, LATHEKINSTARTTWO, LATHEKINENDONE, LATHEKINENDTWO,
+        LENSCUTTERPOOL, FLUXBRUSH, GLAZINGHAMMER,
+        RUNNINGPOOL, CORKPOOL,
+        GRINDING, FLUXPOOL, FLUXVALUE, TAPNUMBER,
+        TAPSTARTONE, TAPENDONE, TAPSTARTTWO, TAPENDTWO,
+        TOOLSPDICE, ERRORMATCH,
+        DICEMOVE,DICEMOVESECOND,
+        TOOLMOVE, TOOLMOVESECOND,
+        ERRORDICE, ERRORTOOL
+    }
+
+
+
+        @FXML
     void handleCellEvent(ActionEvent event) {
 
         disableTool();
@@ -2406,9 +2423,7 @@ public class BoardController {
             System.out.println("consegna singola pattern");
 
             if (mainController.isCustomCard()) {
-                fileStream = new FileInputStream(CustomCard.getOutput());
-                Image custom = new Image(fileStream);
-                patternCard.setImage(custom);
+                patternCard.setImage(CustomCard.rendering(mainController.getPatternCurrent()));
                 patternCard.setLayoutX(58);
                 patternCard.setLayoutY(605);
                 patternCard.setRotate(360);
@@ -2548,8 +2563,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID1().getName();
 
                 if (mainController.getPatternID1().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer2.setImage(custom);
+                    patternPlayer2.setImage(CustomCard.rendering(mainController.getPatternID1()));
                     patternPlayer2.setRotate(360);
                 }
                 else {
@@ -2564,8 +2578,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID2().getName();
 
                 if (mainController.getPatternID2().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer3.setImage(custom);
+                    patternPlayer3.setImage(CustomCard.rendering(mainController.getPatternID2()));
                     patternPlayer3.setRotate(360);
 
                 }
@@ -2581,8 +2594,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID3().getName();
 
                 if (mainController.getPatternID3().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer4.setImage(custom);
+                    patternPlayer4.setImage(CustomCard.rendering(mainController.getPatternID3()));
                     patternPlayer4.setRotate(360);
                 }
                 else {
@@ -2601,8 +2613,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID0().getName();
 
                 if (mainController.getPatternID0().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer2.setImage(custom);
+                    patternPlayer2.setImage(CustomCard.rendering(mainController.getPatternID0()));
                     patternPlayer2.setRotate(360);
                 }
                 else {
@@ -2617,8 +2628,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID2().getName();
 
                 if (mainController.getPatternID2().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer3.setImage(custom);
+                    patternPlayer3.setImage(CustomCard.rendering(mainController.getPatternID2()));
                     patternPlayer3.setRotate(360);
                 }
                 else {
@@ -2633,8 +2643,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID3().getName();
 
                 if (mainController.getPatternID3().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer4.setImage(custom);
+                    patternPlayer4.setImage(CustomCard.rendering(mainController.getPatternID3()));
                     patternPlayer4.setRotate(360);
                 }
                 else {
@@ -2653,8 +2662,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID0().getName();
 
                 if (mainController.getPatternID0().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer2.setImage(custom);
+                    patternPlayer2.setImage(CustomCard.rendering(mainController.getPatternID0()));
                     patternPlayer2.setRotate(360);
                 }
                 else {
@@ -2669,8 +2677,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID1().getName();
 
                 if (mainController.getPatternID1().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer3.setImage(custom);
+                    patternPlayer3.setImage(CustomCard.rendering(mainController.getPatternID1()));
                     patternPlayer3.setRotate(360);
                 }
                 else {
@@ -2685,8 +2692,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID3().getName();
 
                 if (mainController.getPatternID3().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer4.setImage(custom);
+                    patternPlayer4.setImage(CustomCard.rendering(mainController.getPatternID3()));
                     patternPlayer4.setRotate(360);
                 }
                 else {
@@ -2705,8 +2711,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID0().getName();
 
                 if (mainController.getPatternID0().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer2.setImage(custom);
+                    patternPlayer2.setImage(CustomCard.rendering(mainController.getPatternID0()));
                     patternPlayer2.setRotate(360);
                 }
                 else {
@@ -2721,8 +2726,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID1().getName();
 
                 if (mainController.getPatternID1().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer3.setImage(custom);
+                    patternPlayer3.setImage(CustomCard.rendering(mainController.getPatternID1()));
                     patternPlayer3.setRotate(360);
                 }
                 else {
@@ -2737,8 +2741,7 @@ public class BoardController {
                 String fileName = mainController.getPatternID2().getName();
 
                 if (mainController.getPatternID2().isCustom()) {
-                    Image custom = loadImageCustom(fileName);
-                    patternPlayer4.setImage(custom);
+                    patternPlayer4.setImage(CustomCard.rendering(mainController.getPatternID2()));
                     patternPlayer4.setRotate(360);
                 }
                 else {
@@ -2759,11 +2762,7 @@ public class BoardController {
         return new Image(fileStream);
     }
 
-    protected Image loadImageCustom(String fileName) throws FileNotFoundException {
-        File file = new File("src/main/resources/images/pattern/" + fileName + ".png");
-        fileStream = new FileInputStream(file);
-        return new Image(fileStream);
-    }
+
 
 
 }

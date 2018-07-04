@@ -17,8 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class Server {
+
+    private final Logger log = Logger.getLogger(Server.class.getName());
 
     private static final int MAXPLAYERS = 4;
     private static final int DEFAULT = 0;
@@ -30,7 +33,7 @@ public class Server {
     private List<VirtualView> clients = new ArrayList<>();
     private boolean gameStarted;
     private static boolean singlePlayer;
-    public static int idPlayer;
+    private static int idPlayer;
     private static int multi;
     private Game game;
     private Timer timer;
@@ -46,7 +49,7 @@ public class Server {
         final int RMIPORT = jsonObject.get("rmiPort").getAsInt();
         TIMERLOGIN = jsonObject.get("timerLogin").getAsInt();
 
-        this.idPlayer = DEFAULT;
+        setIdPlayer(DEFAULT);
 
         socketGatherer = new SocketGatherer(this, SOCKETPORT);
         rmiGatherer = new RmiGatherer(this, RMIPORT);
@@ -59,6 +62,8 @@ public class Server {
     public static void main(String[] args) {
         new Server();
     }
+
+    //-------------------getter/setter
 
     public static int getIdPlayer() {
         return idPlayer;
@@ -76,12 +81,12 @@ public class Server {
         return multi;
     }
 
-    public void setGameStarted(boolean gameStarted) {
+    private void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
     }
 
-    public void setSinglePlayer(boolean singlePlayer) {
-        this.singlePlayer = singlePlayer;
+    public static void setSinglePlayer(boolean singlePlayer) {
+        Server.singlePlayer = singlePlayer;
     }
 
     public static void setIdPlayer(int idPlayer) {
@@ -103,10 +108,6 @@ public class Server {
     //-------------------------------methods for clients list -------------------------------------
 
 
-    public synchronized List<VirtualView> getSocketClients() {
-        return socketClients;
-    }
-
     public synchronized List<VirtualView> getClients() {
         return clients;
     }
@@ -122,13 +123,12 @@ public class Server {
         clients.add(virtualRmi);
     }
 
-
     public synchronized void removeSocketClient(VirtualSocket virtualSocket) {
         if (socketClients.contains(virtualSocket)) {
             socketClients.remove(virtualSocket);
         }
         else {
-            System.out.println("SocketClient not present");
+            log.info("SocketClient not present");
         }
     }
 
@@ -137,7 +137,7 @@ public class Server {
             clients.remove(virtualView);
         }
         else {
-            System.out.println("Client not present");
+            log.info("Client not present");
         }
     }
 
@@ -145,22 +145,17 @@ public class Server {
 
     public synchronized void waitingOtherPlayers() {
 
-        System.out.println("in waiting the boolean of single player: " + singlePlayer);
-
         if (singlePlayer) {
 
-            List<VirtualView> viewGame = new ArrayList<>();
-            viewGame.addAll(clients);
-            System.out.println(getClients().size());
+            List<VirtualView> viewGame = new ArrayList<>(clients);
             game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
-            System.out.println("Started single player");
+            log.info("Started single player");
         }
 
 
         if (getMulti() == MAXPLAYERS) {
-            List<VirtualView> viewGame = new ArrayList<>();
-            viewGame.addAll(clients);
+            List<VirtualView> viewGame = new ArrayList<>(clients);
             game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
         }
@@ -174,28 +169,26 @@ public class Server {
         }
         mutex = true;
 
-        System.out.println("superato mutex");
+        log.info("over mutex");
 
 
         if (getMulti() >= 2) {
 
 
-            System.out.println("Due client connessi");
-            System.out.println("Starting timer before the game");
+            log.info("Two clients connected");
+            log.info("Starting timer");
 
             timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
 
-                    //mutex = true;
+
                     if (getMulti() >= 2 && getMulti() < MAXPLAYERS) {
-                        System.out.println("sono nel ramo timer finito");
-                        List<VirtualView> viewGame = new ArrayList<>();
-                        viewGame.addAll(clients);
+                        List<VirtualView> viewGame = new ArrayList<>(clients);
                         game = new Game(viewGame, singlePlayer);
                         setGameStarted(true);
-                        System.out.println("Started game");
+                        log.info("Started game");
                     }
                 }
             }, TIMERLOGIN);
@@ -217,7 +210,7 @@ public class Server {
     public void endTimerLogin() {
 
         if (timer != null) {
-            System.out.println("cancello timer");
+            log.info("cancelling timer");
             timer.cancel();
             mutex = false;
         }

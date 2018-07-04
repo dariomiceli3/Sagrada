@@ -20,110 +20,110 @@ public interface RmiClientInterface extends Remote {
     //  segnature dei metodi
 
 
-    public void remoteIDEvent(int ID) throws RemoteException;
+    void remoteIDEvent(int id) throws RemoteException;
 
-    public void remoteSinglePlayerEvent(int ID) throws RemoteException;
+    void remoteSinglePlayerEvent(int id) throws RemoteException;
 
-    public void remotePlayerNameUpdateEvent(int ID, String name) throws RemoteException;
+    void remotePlayerNameUpdateEvent(int id, String name) throws RemoteException;
 
-    public void remotePlayerNameErrorEvent(int ID) throws RemoteException;
+    void remotePlayerNameErrorEvent(int id) throws RemoteException;
 
-    public void remoteGameStartedEvent(boolean started) throws RemoteException;
+    void remoteGameStartedEvent(boolean started) throws RemoteException;
 
-    public void remotePlayerPrivateUpdateEvent(int ID, PrivateObjectiveCard privateCard) throws RemoteException;
+    void remotePlayerPrivateUpdateEvent(int id, PrivateObjectiveCard privateCard) throws RemoteException;
 
-    public void remoteStartPatternEvent(int ID, List<PatternCard> patternList) throws RemoteException, IOException;
+    void remoteStartPatternEvent(int id, List<PatternCard> patternList) throws IOException;
 
-    public void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws RemoteException, IOException;
+    void remotePublicDrawEvent(List<PublicObjectiveCard> publicList) throws IOException;
 
-    public void remotePlayerPatternUpdateEvent(int ID, PatternCard patternCard) throws RemoteException, IOException;
+    void remotePlayerPatternUpdateEvent(int id, PatternCard patternCard) throws IOException;
 
-    public void remoteStartGameSceneEvent() throws RemoteException, IOException;
+    void remoteStartGameSceneEvent() throws IOException;
 
-    public void remotePlayerTokensUpdateEvent(int ID, int numberTokens) throws RemoteException;
+    void remotePlayerTokensUpdateEvent(int id, int numberTokens) throws RemoteException;
 
-    public void remoteStartRoundEvent(int round) throws RemoteException;
+    void remoteStartRoundEvent(int round) throws RemoteException;
 
-    public void remoteStartTurnEvent(int ID, String name) throws RemoteException;
+    void remoteStartTurnEvent(int id, String name) throws RemoteException;
 
-    public void remoteRollDraftPoolEvent(int ID) throws RemoteException;
+    void remoteRollDraftPoolEvent(int id) throws RemoteException;
 
-    public void remotePlayerDraftPoolUpdateEvent(DraftPool draftPool) throws RemoteException;
+    void remotePlayerDraftPoolUpdateEvent(DraftPool draftPool) throws RemoteException;
 
-    public void remoteStartChooseEvent(int ID) throws RemoteException;
+    void remoteStartChooseEvent(int id) throws RemoteException;
 
-    public void remoteStartMoveEvent(int ID, int poolSize) throws RemoteException;
+    void remoteStartMoveEvent(int id, int poolSize) throws RemoteException;
 
-    public void remotePatternUpdateEvent(int ID, PatternCard patternCard, String name) throws RemoteException;
+    void remotePatternUpdateEvent(int id, PatternCard patternCard, String name) throws RemoteException;
 
-    public void remoteRoundTrackerUpdateEvent(RoundTracker roundTracker) throws RemoteException;
+    void remoteRoundTrackerUpdateEvent(RoundTracker roundTracker) throws RemoteException;
 
-    public void remoteTurnPatternEvent(int ID, PatternCard patternCard) throws RemoteException;
+    void remoteTurnPatternEvent(int id, PatternCard patternCard) throws RemoteException;
 
-    public void remoteStartToolEvent(int ID, List<ToolCard> toolCards) throws RemoteException;
+    void remoteStartToolEvent(int id, List<ToolCard> toolCards) throws RemoteException;
 
-    public void remoteOutOfTokenEvent(int ID) throws RemoteException;
+    void remoteOutOfTokenEvent(int id) throws RemoteException;
 
-    public void remotePlayerPointsUpdateEvent(List<Player> playerList,boolean ended) throws RemoteException;
+    void remotePlayerPointsUpdateEvent(List<Player> playerList,boolean ended) throws RemoteException;
 
-    public void remoteWinnerEvent(int ID) throws RemoteException;
+    void remoteWinnerEvent(int id) throws RemoteException;
 
-    public void remoteTimerEndedEvent(int ID) throws RemoteException;
+    void remoteTimerEndedEvent(int id) throws RemoteException;
 
-    public void remoteTimerOtherEvent(String name) throws RemoteException;
+    void remoteTimerOtherEvent(String name) throws RemoteException;
 
-    public void remoteToolCardUpdateEvent(List<ToolCard> toolCards) throws RemoteException;
+    void remoteToolCardUpdateEvent(List<ToolCard> toolCards) throws RemoteException;
 
-    public void remoteGrozingPliersRequestEvent(int ID, int poolSize) throws RemoteException;
+    void remoteGrozingPliersRequestEvent(int id, int poolSize) throws RemoteException;
 
-    public void remoteEglomiseBrushRequestEvent(int ID) throws RemoteException;
+    void remoteEglomiseBrushRequestEvent(int id) throws RemoteException;
 
-    public void remoteCopperFoilRequestEvent(int ID) throws RemoteException;
+    void remoteCopperFoilRequestEvent(int id) throws RemoteException;
 
-    public void remoteLathekinRequestEvent(int ID) throws RemoteException;
+    void remoteLathekinRequestEvent(int id) throws RemoteException;
 
-    public void remoteLensCutterRequestEvent(int ID, int poolSize, List<Integer> roundSizes) throws RemoteException;
+    void remoteLensCutterRequestEvent(int id, int poolSize, List<Integer> roundSizes) throws RemoteException;
 
-    public void remoteFluxBrushRequesEvent(int ID, int poolSize) throws RemoteException;
+    void remoteFluxBrushRequesEvent(int id, int poolSize) throws RemoteException;
 
-    public void remoteGlazingHammerRequestEvent(int ID) throws RemoteException;
+    void remoteGlazingHammerRequestEvent(int id) throws RemoteException;
 
-    public void remoteRunningPliersRequestEvent(int ID, int poolSize) throws RemoteException;
+    void remoteRunningPliersRequestEvent(int id, int poolSize) throws RemoteException;
 
-    public void remoteCorkBackedRequestEvent(int ID, int poolSize) throws RemoteException;
+    void remoteCorkBackedRequestEvent(int id, int poolSize) throws RemoteException;
 
-    public void remoteGrindingStoneRequestEvent(int ID, int poolSize) throws RemoteException;
+    void remoteGrindingStoneRequestEvent(int id, int poolSize) throws RemoteException;
 
-    public void remoteFluxRemoverRequestEvent(int ID, DiceColor color, int poolSize) throws RemoteException;
+    void remoteFluxRemoverRequestEvent(int id, DiceColor color, int poolSize) throws RemoteException;
 
-    public void remoteTapWheelRequestEvent(int ID) throws RemoteException;
+    void remoteTapWheelRequestEvent(int id) throws RemoteException;
 
-    public void remoteUpdateBoardEvent(RoundTracker roundTracker, DraftPool draftPool) throws RemoteException;
+    void remoteUpdateBoardEvent(RoundTracker roundTracker, DraftPool draftPool) throws RemoteException;
 
-    public void remoteInvalidMoveEvent(int ID, String errorMsg) throws RemoteException;
+    void remoteInvalidMoveEvent(int id, String errorMsg) throws RemoteException;
 
-    public void remoteUpdatePoolEvent(DraftPool draftPool) throws RemoteException;
+    void remoteUpdatePoolEvent(DraftPool draftPool) throws RemoteException;
 
-    public void remoteToolNumberRequestEvent() throws RemoteException;
+    void remoteToolNumberRequestEvent() throws RemoteException;
 
-    public void remoteSinglePrivateEvent(List<PrivateObjectiveCard> privateList) throws RemoteException;
+    void remoteSinglePrivateEvent(List<PrivateObjectiveCard> privateList) throws RemoteException;
 
-    public void remoteEndSinglePlayerEvent(boolean winner, int playerPoint, int threshold) throws RemoteException;
+    void remoteEndSinglePlayerEvent(boolean winner, int playerPoint, int threshold) throws RemoteException;
 
-    public void remoteStartToolSinglePlayer(List<ToolCard> toolCards, int poolSize) throws RemoteException;
+    void remoteStartToolSinglePlayer(List<ToolCard> toolCards, int poolSize) throws RemoteException;
 
-    public void remoteNotMatchColorEvent() throws RemoteException;
+    void remoteNotMatchColorEvent() throws RemoteException;
 
     //-------------------------disconection----------------------------------------------------------------
 
-    public void remoteMaxPlayerLogin() throws RemoteException;
+    void remoteMaxPlayerLogin() throws RemoteException;
 
-    public void remoteExitPlayer(String name) throws RemoteException;
+    void remoteExitPlayer(String name) throws RemoteException;
 
-    public void remoteReconnectPlayer(String name) throws RemoteException;
+    void remoteReconnectPlayer(String name) throws RemoteException;
 
-    public void remoteNotPermittedReconnection() throws RemoteException;
+    void remoteNotPermittedReconnection() throws RemoteException;
 
-    public void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) throws RemoteException;
+    void remoteSuccessfulReconnection(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) throws RemoteException;
 
 }

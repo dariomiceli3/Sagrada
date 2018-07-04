@@ -103,35 +103,23 @@ public class OtherPatternCard {
     }
 
 
-    private void loadPattern() throws IOException{
+    private void loadPattern() throws IOException {
         String fileName = patternCard.getName();
 
         if (patternCard.isCustom()) {
-            File file = new File("src/main/resources/images/pattern/" + fileName + ".png");
-            fileStream = new FileInputStream(file);
-        }
-        else {
+            pattern.setImage(CustomCard.rendering(patternCard));
+            pattern.setLayoutX(123);
+            pattern.setLayoutY(63);
+            pattern.setRotate(360);
+            pattern.setFitHeight(280);
+            pattern.setFitWidth(366);
+        } else {
             fileStream = BoardController.class.getResourceAsStream("/images/pattern/" + fileName + ".png");
-        }
-
-        try {
-            System.out.println("consegna pattern");
             Image image = new Image(fileStream);
-            if (patternCard.isCustom()) {
-                pattern.setImage(image);
-                pattern.setLayoutX(123);
-                pattern.setLayoutY(63);
-                pattern.setRotate(360);
-                pattern.setFitHeight(280);
-                pattern.setFitWidth(366);
-            } else {
-                pattern.setImage(image);
-            }
-        }
-        finally {
-            fileStream.close();
+            pattern.setImage(image);
         }
     }
+
 
     private void loadDice(int indexPattern) throws IOException {
 
