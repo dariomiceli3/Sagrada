@@ -1,0 +1,59 @@
+{
+  "name": "Develop Sagradis",
+  "difficulty": 5,
+  "pattern": [
+    {
+      "constraintValue": "2"
+    },
+    {
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintColor" : "red"
+    },
+    {
+      "constraintValue" : "4"
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+      "constraintColor" : "yellow"
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+      "constraintValue" : "2"
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+      "constraintColor": "green"
+    },
+    {
+      "constraintValue" : "3"
+    },
+    {
+      "constraintColor": "red"
+    },
+    {
+      "constraintValue": "4"
+    },
+    {
+    }
+  ]
+}
