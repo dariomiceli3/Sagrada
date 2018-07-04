@@ -16,10 +16,14 @@ import javafx.scene.text.Text;
 
 import java.io.*;
 import java.util.List;
+import java.util.logging.Logger;
+
+import static java.lang.System.out;
 
 
 public class BoardController {
 
+    private final Logger log = Logger.getLogger(BoardController.class.getName());
     private static final int DEFAULT = 0;
     private static GuiController mainController;
     private static int indexPool;
@@ -34,7 +38,6 @@ public class BoardController {
     private DraftPool draftPool;
     private RoundTracker roundTracker;
     private int prevPoolSize = DEFAULT;
-    private int currPoolSize;
     private int increase;
     private int indexPosition;
     private int round;
@@ -253,7 +256,7 @@ public class BoardController {
             }
         }
         if (event.getButton().equals(MouseButton.SECONDARY)) {
-            System.out.println("toolcard5");
+            log.info("toolcard5");
             toolCard5.setBlendMode(BlendMode.SRC_OVER);
             toolCardZoom5.setVisible(true);
             enablePool();
@@ -519,15 +522,15 @@ public class BoardController {
             loadOtherPattern();
         }
 
-        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        privateCardZoom.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
 
-        publicCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        publicCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        publicCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        publicCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        publicCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
 
-        toolCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        toolCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        toolCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        toolCardZoom1.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCardZoom2.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
+        toolCardZoom3.visibleProperty().addListener((observable, oldValue, newValue) -> out.println(newValue));
     }
 
     //---------------------------------------------enum for gui state
@@ -715,7 +718,7 @@ public class BoardController {
         }
         try {
             if (poolToggleGroup.selectedToggleProperty().isNull().get()) {
-                System.out.println("reset dice");
+                log.info("reset dice");
                 dice1.setBlendMode(BlendMode.SRC_OVER);
                 dice2.setBlendMode(BlendMode.SRC_OVER);
                 dice3.setBlendMode(BlendMode.SRC_OVER);
@@ -837,6 +840,7 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
+            log.warning(e.getMessage());
         }
     }
 
@@ -873,7 +877,7 @@ public class BoardController {
             }
         }
         catch (NullPointerException e) {
-            //System.out.println(poolToggleGroup.getSelectedToggle().isSelected());
+            log.warning(e.getMessage());
         }
         finally {
             RoundTrackerBox.display();
@@ -1046,7 +1050,7 @@ public class BoardController {
     }
 
     @FXML
-    void handlePrivateZoom(MouseEvent event) {
+    void handlePrivateZoom() {
         privateCardZoom.setVisible(true);
 
     }
@@ -1222,7 +1226,7 @@ public class BoardController {
                 pane.setDisable(true);
                 ToolCardRequest.display();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         }
         if (guiState == ViewState.GROZINGCOMMAND) {
@@ -1260,7 +1264,7 @@ public class BoardController {
                 ToolCardRequest.display();
             }
             catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         }
         if (guiState == ViewState.FLUXVALUE) {
@@ -1395,9 +1399,6 @@ public class BoardController {
     void updateOtherTurn(String name) {
         textGame.setText("It's " + name + " turn");
         disablePattern();
-        //disableOtherPattern();
-        //disablePrivate();
-        //disablePublic();
         disableTool();
         disableRoundTracker();
         disablePool();
@@ -1483,7 +1484,7 @@ public class BoardController {
            }
        }
 
-       currPoolSize = getDraftPool().getDraftPool().size();
+       int currPoolSize = getDraftPool().getDraftPool().size();
 
        if (currPoolSize == 0) {
            cleanDraftPool();
@@ -1530,7 +1531,7 @@ public class BoardController {
                     loadDiceOnPattern(index, filename);
                 }
                 catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         }
@@ -1801,7 +1802,7 @@ public class BoardController {
             ToolCardRequest.display();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 
@@ -1863,7 +1864,7 @@ public class BoardController {
     private void loadDiceOnPattern(int indexPattern, String fileName) throws IOException {
 
         try {
-            System.out.println("updating  pattern");
+            log.info("updating  pattern");
             fileStream = BoardController.class.getResourceAsStream("/images/dice/" + fileName + ".png");
             Image image = new Image(fileStream);
 
@@ -2338,7 +2339,7 @@ public class BoardController {
     private void loadPanel() throws IOException {
 
         try {
-            System.out.println("consegna panel");
+            log.info("consegna panel");
             if ((mainController.getPlayerID() == 0)) {
                 if (mainController.isSinglePlayer()) {
                     fileStream = BoardController.class.getResourceAsStream("/images/panel/RedPanel.png");
@@ -2381,7 +2382,7 @@ public class BoardController {
             for (int i = 0; i < mainController.getPrivateCardSingle().size(); i++) {
                 String fileColor = mainController.getPrivateCardSingle().get(i).getColour().toString();
                 try {
-                    System.out.println("private single player");
+                    log.info("private single player");
                     fileStream = BoardController.class.getResourceAsStream("/images/private/" + fileColor + ".png");
                     Image image = new Image(fileStream);
 
@@ -2403,7 +2404,7 @@ public class BoardController {
         else {
             String fileColor = mainController.getPrivateCard().getColour().toString();
             try {
-                System.out.println("private multi player");
+                log.info("private multi player");
                 fileStream = BoardController.class.getResourceAsStream("/images/private/" + fileColor + ".png");
                 Image image = new Image(fileStream);
                 privateCard.setImage(image);
@@ -2420,7 +2421,7 @@ public class BoardController {
 
         String filePattern = mainController.getPatternCurrent().getName();
         try {
-            System.out.println("consegna singola pattern");
+            log.info("consegna singola pattern");
 
             if (mainController.isCustomCard()) {
                 patternCard.setImage(CustomCard.rendering(mainController.getPatternCurrent()));
@@ -2451,7 +2452,7 @@ public class BoardController {
             String fileName = mainController.getPublicCardList().get(i).getName();
 
             try {
-                System.out.println("consegna public board");
+                log.info("consegna public board");
                 fileStream = BoardController.class.getResourceAsStream("/images/public/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
@@ -2485,7 +2486,7 @@ public class BoardController {
             String fileName = mainController.getToolList().get(i).getName();
 
             try {
-                System.out.println("consegna tool board");
+                log.info("consegna tool board");
                 fileStream = BoardController.class.getResourceAsStream("/images/tool/" + fileName + ".png");
                 Image image = new Image(fileStream);
                 if (i == 0) {
@@ -2570,7 +2571,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer2.setImage(image);
                 }
-                System.out.println("setted player2-0");
+                log.info("setted player2-0");
                 fileStream.close();
             }
 
@@ -2586,7 +2587,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer3.setImage(image);
                 }
-                System.out.println("setted player3-0");
+                log.info("setted player3-0");
                 fileStream.close();
             }
 
@@ -2601,7 +2602,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer4.setImage(image);
                 }
-                System.out.println("setted player4-0");
+                log.info("setted player4-0");
                 fileStream.close();
             }
 
@@ -2620,7 +2621,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer2.setImage(image);
                 }
-                System.out.println("setted player2-1");
+                log.info("setted player2-1");
                 fileStream.close();
             }
 
@@ -2635,7 +2636,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer3.setImage(image);
                 }
-                System.out.println("setted player 3-1");
+                log.info("setted player 3-1");
                 fileStream.close();
             }
 
@@ -2650,7 +2651,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer4.setImage(image);
                 }
-                System.out.println("setted player 4-1");
+                log.info("setted player 4-1");
                 fileStream.close();
             }
 
@@ -2669,7 +2670,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer2.setImage(image);
                 }
-                System.out.println("setted player 2-2");
+                log.info("setted player 2-2");
                 fileStream.close();
             }
 
@@ -2684,7 +2685,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer3.setImage(image);
                 }
-                System.out.println("setted player 3-2");
+                log.info("setted player 3-2");
                 fileStream.close();
             }
 
@@ -2699,7 +2700,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer4.setImage(image);
                 }
-                System.out.println("setted player 4-2");
+                log.info("setted player 4-2");
                 fileStream.close();
             }
 
@@ -2718,7 +2719,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer2.setImage(image);
                 }
-                System.out.println("setted player 2-3");
+                log.info("setted player 2-3");
                 fileStream.close();
             }
 
@@ -2733,7 +2734,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer3.setImage(image);
                 }
-                System.out.println("setted player 3-3");
+                log.info("setted player 3-3");
                 fileStream.close();
             }
 
@@ -2748,7 +2749,7 @@ public class BoardController {
                     Image image = loadImage(fileName);
                     patternPlayer4.setImage(image);
                 }
-                System.out.println("setted player 3-3 ");
+                log.info("setted player 3-3 ");
                 fileStream.close();
             }
 

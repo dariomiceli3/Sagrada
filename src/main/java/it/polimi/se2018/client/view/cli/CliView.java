@@ -7,13 +7,17 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Components.*;
+import org.fusesource.jansi.AnsiConsole;
 
 import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 
+import static java.lang.System.out;
+
 
 public class CliView extends View implements Runnable {
+
 
     // ovveride dei metodi dell'interfaccia view con gli show per metodi comportamentali
     // metodi che in base alla scelta dell'utente mandano usando socket handler
@@ -35,11 +39,10 @@ public class CliView extends View implements Runnable {
     private static int diceNumber;
     private static int toolSingleNumber;
     private ClientInterface connection;
-    private PatternCard customPattern;
-    private String filePath;
     private static boolean connected = true;
 
     public CliView() {
+        AnsiConsole.systemInstall();
     }
 
     public static int getPoolSize() {
@@ -167,50 +170,50 @@ public class CliView extends View implements Runnable {
             input = reader.nextLine();
 
             if (input.isEmpty()) {
-                System.out.println("You are not writing nothing");
+                out.println("You are not writing nothing");
             } else if (input.equalsIgnoreCase("exit")) {
                 if (cliState == GameState.ROLL) {
                     getConnection().setDraftPoolToServer(super.getPlayerID());
                     connected = false;
-                    System.out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
+                    out.println("\n" + "from now you are suspended - enter RECONNECT to re-enter in the game");
                     getConnection().setExitToServer(super.getPlayerID());
                     cliState = GameState.NOTCONNECTED;
                 }
                 if (cliState == GameState.NAME || cliState == GameState.PATTERN) {
-                    System.out.println("\n" + "It's not time for exit the game");
+                    out.println("\n" + "It's not time for exit the game");
                 }
             } else if (cliState == GameState.NOTAUTHORIZED) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")){
-                    System.out.println("Please, it's not your turn! Waiting for your moment");
+                    out.println("Please, it's not your turn! Waiting for your moment");
                 }
             } else if (cliState == GameState.NOTAUTHORIZEDNAME) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")) {
-                    System.out.println("Please, you enter your name yet! Waiting for the game");
+                    out.println("Please, you enter your name yet! Waiting for the game");
                 }
             } else if (cliState == GameState.NOTCONNECTED) {
                 if (input.equalsIgnoreCase("reconnect")) {
                     getConnection().setReconnectToServer(super.getPlayerID());
                     connected = true;
-                    System.out.println("frow now you are in the game");
+                    out.println("frow now you are in the game");
                 } else {
-                    System.out.println("You cannot enter commands now, you are not in the game");
+                    out.println("You cannot enter commands now, you are not in the game");
                 }
             } else if (cliState == GameState.MODE) {
                 if (input.equalsIgnoreCase("multi")) {
-                    System.out.println("Please wait, the game will start soon");
+                    out.println("Please wait, the game will start soon");
                     getConnection().setSinglePlayerMode(super.getPlayerID(), false);
                 } else if (input.equalsIgnoreCase("single")) {
-                    System.out.println("\n" + "Now the game will start");
+                    out.println("\n" + "Now the game will start");
                     getConnection().setSinglePlayerMode(super.getPlayerID(), true);
                 } else {
-                    System.out.println("You are not choosing a mode to play");
+                    out.println("You are not choosing a mode to play");
                     showSinglePlayerRequest();
                 }
             } else if (cliState == GameState.NAME || cliState == GameState.ERRORNAME) {
                 if (input.matches(".*[a-zA-Z0-9]+.*")) {
                     getConnection().setPlayerNameToServer(input, super.getPlayerID());
                 } else {
-                    System.out.println("blank name");
+                    out.println("blank name");
                 }
 
             } else if (cliState == GameState.PATTERN) {
@@ -225,22 +228,22 @@ public class CliView extends View implements Runnable {
                         showCustomCardPath();
                     }
                     else {
-                        System.out.println("Please, decide which pattern to use");
+                        out.println("Please, decide which pattern to use");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a number between 1 and 4!");
+                    out.println("Please enter a number between 1 and 4!");
                 }
 
             } else if (cliState == GameState.CUSTOMPATTERN) {
 
                 try {
                     InputStream inputStream = CliView.class.getResourceAsStream("/json/custom/" + input);
-                    customPattern = new PatternCard();
+                    PatternCard customPattern = new PatternCard();
                     customPattern = customPattern.loadCard(inputStream);
                     getConnection().setPatternCustomToServer(super.getPlayerID(), customPattern);
                 }
                 catch (NullPointerException e) {
-                    System.out.println("Enter a correct name");
+                    out.println("Enter a correct name");
                     showCustomCardPath();
                 }
 
@@ -250,7 +253,7 @@ public class CliView extends View implements Runnable {
                 if (input.equalsIgnoreCase("roll")) {
                     getConnection().setDraftPoolToServer(super.getPlayerID());
                 } else {
-                    System.out.println("Please, enter the command ROLL");
+                    out.println("Please, enter the command ROLL");
                     showRollCommand();
                 }
 
@@ -260,12 +263,12 @@ public class CliView extends View implements Runnable {
                     if (command == 0 || command == 1) {
                         getConnection().setChooseToServer(super.getPlayerID(), command);
                     } else {
-                        System.out.println("Please enter the correct number");
+                        out.println("Please enter the correct number");
                         showChooseCommand();
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a number, 0 or 1!");
+                    out.println("Please enter a number, 0 or 1!");
                     showChooseCommand();
                 }
             } else if (cliState == GameState.MOVE) {
@@ -275,7 +278,7 @@ public class CliView extends View implements Runnable {
                 } else if (input.equalsIgnoreCase("no")) {
                     getConnection().setStartToolToServer(super.getPlayerID());
                 } else {
-                    System.out.println("You are not entering the expected command");
+                    out.println("You are not entering the expected command");
                     showMoveCommand(poolSize);
                 }
             } else if (cliState == GameState.POOLINDEX) {
@@ -286,11 +289,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showIndexPatternCommand();
                     } else {
-                        System.out.println("Please enter a right index");
+                        out.println("Please enter a right index");
                         showIndexPoolCommand(poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the command expected");
+                    out.println("You are not entering the command expected");
                     showIndexPoolCommand(poolSize);
                 }
             } else if (cliState == GameState.PATTERNINDEX) {
@@ -301,12 +304,12 @@ public class CliView extends View implements Runnable {
                         setIndexPattern(idPattern);
                         getConnection().setMoveToServer(super.getPlayerID(), indexPool, indexPattern);
                     } else {
-                        System.out.println("Please enter the correct number");
+                        out.println("Please enter the correct number");
                         showIndexPatternCommand();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are entering the wrong command");
-                    System.out.println("Enter the index of the Pattern Card - Enter a number between 1 and 20");
+                    out.println("You are entering the wrong command");
+                    out.println("Enter the index of the Pattern Card - Enter a number between 1 and 20");
 
                 }
             } else if (cliState == GameState.TOOL) {
@@ -317,8 +320,8 @@ public class CliView extends View implements Runnable {
                     getConnection().setNextTurnToServer(super.getPlayerID());
 
                 } else {
-                    System.out.println("You are not entering the right command");
-                    System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+                    out.println("You are not entering the right command");
+                    out.println("Do you want to use a Tool Card ? - Enter yes or no");
 
                 }
             } else if (cliState == GameState.TOOLINDEX) {
@@ -331,7 +334,7 @@ public class CliView extends View implements Runnable {
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are entering a wrong command");
+                    out.println("You are entering a wrong command");
                     showToolChooseCommand();
                 }
             } else if (cliState == GameState.TOOLCOST) {
@@ -341,7 +344,7 @@ public class CliView extends View implements Runnable {
                 } else if (input.equalsIgnoreCase("no")) {
                     getConnection().setNoTokenToServer(super.getPlayerID());
                 } else {
-                    System.out.println("You are entering the wrong command");
+                    out.println("You are entering the wrong command");
                     showToolCostCommand(toolCost, indexTool);
                 }
 
@@ -357,11 +360,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showGrozingCommand();
                     } else {
-                        System.out.println("Please enter a right index");
+                        out.println("Please enter a right index");
                         showGrozingRequest(poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the right command");
+                    out.println("You are not entering the right command");
                     showGrozingRequest(poolSize);
                 }
 
@@ -371,12 +374,12 @@ public class CliView extends View implements Runnable {
                     if (increase == 0 || increase == 1) {
                         getConnection().useGrozingToolCard(super.getPlayerID(), indexPool, increase);
                     } else {
-                        System.out.println("You are not choosing what to do");
+                        out.println("You are not choosing what to do");
                         showGrozingCommand();
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the correct number");
+                    out.println("You are not entering the correct number");
                     showGrozingCommand();
                 }
             } else if (cliState == GameState.EGLOMISESTART) {
@@ -387,12 +390,12 @@ public class CliView extends View implements Runnable {
                         setIndexStartOne(idOne);
                         showEglomiseEnd();
                     } else {
-                        System.out.println("Please enter the right index");
+                        out.println("Please enter the right index");
                         showEglomiseStart();
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a pattern card");
+                    out.println("You are not entering the index of a pattern card");
                     showEglomiseStart();
                 }
 
@@ -404,11 +407,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idTwo);
                         getConnection().useEglomiseToolCard(super.getPlayerID(), indexStartOne, indexEndOne);
                     } else {
-                        System.out.println("Please, enter the right index");
+                        out.println("Please, enter the right index");
                         showEglomiseEnd();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a Pattern Card");
+                    out.println("You are not entering the index of a Pattern Card");
                     showEglomiseEnd();
                 }
             } else if (cliState == GameState.COPPERSTART) {
@@ -419,11 +422,11 @@ public class CliView extends View implements Runnable {
                         setIndexStartOne(idOne);
                         showCopperFoilEnd();
                     } else {
-                        System.out.println("Please enter the right index");
+                        out.println("Please enter the right index");
                         showCopperFoilStart();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a pattern card");
+                    out.println("You are not entering the index of a pattern card");
                     showCopperFoilStart();
                 }
             } else if (cliState == GameState.COPPEREND) {
@@ -434,11 +437,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idTwo);
                         getConnection().useCopperFoilToolCard(super.getPlayerID(), indexStartOne, indexEndOne);
                     } else {
-                        System.out.println("Please, enter the right index");
+                        out.println("Please, enter the right index");
                         showCopperFoilEnd();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a Pattern Card");
+                    out.println("You are not entering the index of a Pattern Card");
                     showCopperFoilEnd();
                 }
             } else if (cliState == GameState.LATHEKINSTARTONE) {
@@ -449,11 +452,11 @@ public class CliView extends View implements Runnable {
                         setIndexStartOne(idOne);
                         showLathekinEnd();
                     } else {
-                        System.out.println("Please enter a right index");
+                        out.println("Please enter a right index");
                         showLathekinStart();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a Pattern Card");
+                    out.println("You are not entering the index of a Pattern Card");
                     showLathekinStart();
                 }
 
@@ -465,11 +468,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idEnd);
                         showLathekinStartTwo();
                     } else {
-                        System.out.println("Please enter the right index");
+                        out.println("Please enter the right index");
                         showLathekinEnd();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a Pattern Card");
+                    out.println("You are not entering the index of a Pattern Card");
                     showLathekinEnd();
                 }
 
@@ -481,11 +484,11 @@ public class CliView extends View implements Runnable {
                         setIndexStartTwo(idTwo);
                         showLathekinEndTwo();
                     } else {
-                        System.out.println("Please enter a right index");
+                        out.println("Please enter a right index");
                         showLathekinStartTwo();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a Pattern Card");
+                    out.println("You are not entering the index of a Pattern Card");
                     showLathekinStartTwo();
                 }
 
@@ -498,12 +501,12 @@ public class CliView extends View implements Runnable {
                         setIndexEndTwo(idEndTwo);
                         getConnection().useLathekinToolCard(super.getPlayerID(), indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
                     } else {
-                        System.out.println("Please enter a right index");
+                        out.println("Please enter a right index");
                         showLathekinEndTwo();
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index of the Pattern Card");
+                    out.println("You are not entering an index of the Pattern Card");
                     showLathekinEndTwo();
                 }
 
@@ -515,11 +518,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showLensCutterRound(roundList);
                     } else {
-                        System.out.println("Please enter an index in the correct range");
+                        out.println("Please enter an index in the correct range");
                         showLensCutterRequest(poolSize, roundList);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index of the pool");
+                    out.println("You are not entering an index of the pool");
                     showLensCutterRequest(poolSize, roundList);
                 }
             } else if (cliState == GameState.LENSCUTTERROUND) {
@@ -530,11 +533,11 @@ public class CliView extends View implements Runnable {
                         setIndexRound(idRound);
                         showLensCutterDice(roundList, indexRound);
                     } else {
-                        System.out.println("Please enter an index in the range");
+                        out.println("Please enter an index in the range");
                         showLensCutterRound(roundList);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a round");
+                    out.println("You are not entering the index of a round");
                     showLensCutterRound(roundList);
                 }
             } else if (cliState == GameState.LENSCUTTERDICE) {
@@ -544,11 +547,11 @@ public class CliView extends View implements Runnable {
                         idPos--;
                         getConnection().useLensCutterToolCard(super.getPlayerID(), indexPool, indexRound, idPos);
                     } else {
-                        System.out.println("Please enter a number in the range");
+                        out.println("Please enter a number in the range");
                         showLensCutterDice(roundList, indexRound);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the index of a dice");
+                    out.println("You are not entering the index of a dice");
                     showLensCutterDice(roundList, indexRound);
                 }
             } else if (cliState == GameState.FLUXBRUSH) {
@@ -559,18 +562,18 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         getConnection().useFluxBrushToolCard(super.getPlayerID(), indexPool);
                     } else {
-                        System.out.println("Please enter a number in the range");
+                        out.println("Please enter a number in the range");
                         showFluxBrushRequest(poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index in the range of the pool");
+                    out.println("You are not entering an index in the range of the pool");
                     showFluxBrushRequest(poolSize);
                 }
             } else if (cliState == GameState.GLAZINGHAMMER) {
                 if (input.equalsIgnoreCase("start")) {
                     getConnection().useGlazingHammerToolCard(super.getPlayerID());
                 } else {
-                    System.out.println("Command not recognized for this card");
+                    out.println("Command not recognized for this card");
                 }
             } else if (cliState == GameState.RUNNINGPOOL) {
                 try {
@@ -580,11 +583,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showRunningPliersEnd();
                     } else {
-                        System.out.println("Please enter a number in the range");
+                        out.println("Please enter a number in the range");
                         showRunningPliersPool(poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index in the correct range");
+                    out.println("You are not entering an index in the correct range");
                     showRunningPliersPool(poolSize);
                 }
 
@@ -596,11 +599,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idPattern);
                         getConnection().useRunningPliersToolCard(super.getPlayerID(), indexPool, indexEndOne);
                     } else {
-                        System.out.println("Please enter a number between 1 and 20");
+                        out.println("Please enter a number between 1 and 20");
                         showRunningPliersEnd();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You aren't entering an index correct");
+                    out.println("You aren't entering an index correct");
                     showRunningPliersEnd();
                 }
 
@@ -612,11 +615,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showCorkBackedEnd();
                     } else {
-                        System.out.println("Please, enter a number in the correct range");
+                        out.println("Please, enter a number in the correct range");
                         showCorkBackedPool(poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You aren't entering a correct index");
+                    out.println("You aren't entering a correct index");
                     showCorkBackedPool(poolSize);
                 }
             } else if (cliState == GameState.CORKEND) {
@@ -627,11 +630,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndOne(idPattern);
                         getConnection().useCorkBackedToolCard(super.getPlayerID(), indexPool, indexEndOne);
                     } else {
-                        System.out.println("Please, enter a number in the range");
+                        out.println("Please, enter a number in the range");
                         showCorkBackedEnd();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index of the card");
+                    out.println("You are not entering an index of the card");
                     showCorkBackedEnd();
                 }
             } else if (cliState == GameState.GRINDING) {
@@ -642,12 +645,12 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         getConnection().useGrindingStoneToolCard(super.getPlayerID(), indexPool);
                     } else {
-                        System.out.println("Please, enter a number in the range correct");
+                        out.println("Please, enter a number in the range correct");
                         showGrindingStoneRequest(poolSize);
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index for choosing the dice");
+                    out.println("You are not entering an index for choosing the dice");
                     showGrindingStoneRequest(poolSize);
                 }
             } else if (cliState == GameState.FLUXPOOL) {
@@ -658,11 +661,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idPool);
                         showFluxRemoverValue();
                     } else {
-                        System.out.println("Please, enter a number in the correct range to continue the game");
+                        out.println("Please, enter a number in the correct range to continue the game");
                         showFluxRemoverPool(colorDice, poolSize);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index of the draft pool");
+                    out.println("You are not entering an index of the draft pool");
                     showFluxRemoverPool(colorDice, poolSize);
                 }
             } else if (cliState == GameState.FLUXVALUE) {
@@ -671,11 +674,11 @@ public class CliView extends View implements Runnable {
                     if (value >= 1 && value <= 6) {
                         getConnection().useFluxRemoverToolCard(super.getPlayerID(), indexPool, value);
                     } else {
-                        System.out.println("Please, a dice should have as value" + value);
+                        out.println("Please, a dice should have as value" + value);
                         showFluxRemoverValue();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering a numeric value for the dice");
+                    out.println("You are not entering a numeric value for the dice");
                     showFluxRemoverValue();
                 }
 
@@ -686,11 +689,11 @@ public class CliView extends View implements Runnable {
                         setDiceNumber(num);
                         showTapWheelStartOne();
                     } else {
-                        System.out.println("Please, enter a correct value!");
+                        out.println("Please, enter a correct value!");
                         showTapWheelNumber();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the value expected");
+                    out.println("You are not entering the value expected");
                     showTapWheelNumber();
                 }
             } else if (cliState == GameState.TAPSTARTONE) {
@@ -701,11 +704,11 @@ public class CliView extends View implements Runnable {
                         setIndexStartOne(idStartOne);
                         showTapWheelEndOne();
                     } else {
-                        System.out.println("Please,enter a correct index for the pattern");
+                        out.println("Please,enter a correct index for the pattern");
                         showTapWheelStartOne();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the expected value");
+                    out.println("You are not entering the expected value");
                     showTapWheelStartOne();
                 }
             } else if (cliState == GameState.TAPENDONE) {
@@ -721,12 +724,12 @@ public class CliView extends View implements Runnable {
                             showTapWheelStartTwo();
                         }
                     } else {
-                        System.out.println("Please, enter a correct index for the range");
+                        out.println("Please, enter a correct index for the range");
                         showTapWheelEndOne();
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the correct index");
+                    out.println("You are not entering the correct index");
                     showTapWheelEndOne();
                 }
             } else if (cliState == GameState.TAPSTARTTWO) {
@@ -737,11 +740,11 @@ public class CliView extends View implements Runnable {
                         setIndexStartTwo(idStartTwo);
                         showTapWheelEndTwo();
                     } else {
-                        System.out.println("Please, enter the index for the range");
+                        out.println("Please, enter the index for the range");
                         showTapWheelStartTwo();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the correct index");
+                    out.println("You are not entering the correct index");
                     showTapWheelStartTwo();
                 }
             } else if (cliState == GameState.TAPENDTWO) {
@@ -752,11 +755,11 @@ public class CliView extends View implements Runnable {
                         setIndexEndTwo(idEndTwo);
                         getConnection().useTapWheelToolCard(super.getPlayerID(), getDiceNumber(), indexStartOne, indexEndOne, indexStartTwo, indexEndTwo);
                     } else {
-                        System.out.println("Please, enter the index correct for the range");
+                        out.println("Please, enter the index correct for the range");
                         showTapWheelEndTwo();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering the correct index");
+                    out.println("You are not entering the correct index");
                     showTapWheelEndTwo();
                 }
             }
@@ -769,11 +772,11 @@ public class CliView extends View implements Runnable {
                     if (difficulty >= 1 && difficulty <= 5) {
                         getConnection().setDifficultyToServer(super.getPlayerID(), difficulty);
                     } else {
-                        System.out.println("Please, enter the difficulty");
+                        out.println("Please, enter the difficulty");
                         showDifficultyRequest();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not choosing the difficulty");
+                    out.println("You are not choosing the difficulty");
                     showDifficultyRequest();
                 }
             } else if (cliState == GameState.TOOLSP) {
@@ -782,8 +785,8 @@ public class CliView extends View implements Runnable {
                 } else if (input.equalsIgnoreCase("no")) {
                     getConnection().setNextTurnToServer(super.getPlayerID());
                 } else {
-                    System.out.println("You are not entering the right command");
-                    System.out.println("Do you want to use a Tool Card ? - Enter yes or no");
+                    out.println("You are not entering the right command");
+                    out.println("Do you want to use a Tool Card ? - Enter yes or no");
                 }
             } else if (cliState == GameState.TOOLSPCHOOSE) {
                 try {
@@ -793,11 +796,11 @@ public class CliView extends View implements Runnable {
                         setIndexTool(index);
                         showToolSingleDice();
                     } else {
-                        System.out.println("Please, enter the right command");
+                        out.println("Please, enter the right command");
                         showToolSingleChoose();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not entering an index");
+                    out.println("You are not entering an index");
                     showToolSingleChoose();
                 }
             } else if (cliState == GameState.TOOLSPDICE) {
@@ -808,11 +811,11 @@ public class CliView extends View implements Runnable {
                         setIndexPool(idDice);
                         getConnection().useToolSingleToServer(super.getPlayerID(), indexTool, indexPool);
                     } else {
-                        System.out.println("Please, enter the right command");
+                        out.println("Please, enter the right command");
                         showToolSingleDice();
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("You are not choosing the dice");
+                    out.println("You are not choosing the dice");
                     showToolSingleDice();
                 }
             }
@@ -864,123 +867,123 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showID() {
-        System.out.println("Player id set " + super.getPlayerID());
+        out.println("Player id set " + super.getPlayerID());
     }
 
     @Override
     public void showSinglePlayerRequest() {
         cliState = GameState.MODE;
-        System.out.println("How do you want to play: Single or Multi?");
+        out.println("How do you want to play: Single or Multi?");
     }
 
 
 
     @Override
     public void showGameStarted() {
-        System.out.println("Game started: " + super.isStarted());
+        out.println("Game started: " + super.isStarted());
     }
 
 
     @Override
     public void showNameChoose() {
         cliState = GameState.NAME;
-        System.out.println("\n" + "Enter your name ");
+        out.println("\n" + "Enter your name ");
     }
 
     @Override
     public void showName() {
         cliState = GameState.NOTAUTHORIZEDNAME;
-        System.out.println("Name set as: " + super.getPlayerName());
+        out.println("Name set as: " + super.getPlayerName());
     }
 
     @Override
     public void showNameOther(String name) {
-        System.out.println("\n" + "Another player connected with name: " + name);
+        out.println("\n" + "Another player connected with name: " + name);
     }
 
 
     @Override
     public void showNameError() {
         cliState = GameState.ERRORNAME;
-        System.out.println("This name is used by another player!");
+        out.println("This name is used by another player!");
     }
 
 
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
-        System.out.println("\n" + privateObjectiveCard.toString());
+        out.println("\n" + privateObjectiveCard.toString());
     }
 
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) {
         for (PublicObjectiveCard publicCard : publicList) {
-            System.out.println("\n" + publicCard.toString());
+            out.println("\n" + publicCard.toString());
         }
     }
 
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
         for (PatternCard patternCard : patternCards) {
-            System.out.println("\n" + patternCard.toString());
+            out.println("\n" + patternCard.toString());
         }
 
         cliState = GameState.PATTERN;
-        System.out.println("\n" + "Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
+        out.println("\n" + "Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
     }
 
     public void showCustomCardPath() {
-        System.out.println("Enter the path of the file .json");
-        filePath = "src/main/resources/json/custom/";
-        System.out.print(filePath);
+        out.println("Enter the path of the file .json");
+        String filePath = "src/main/resources/json/custom/";
+        out.print(filePath);
         cliState = GameState.CUSTOMPATTERN;
     }
 
 
     @Override
     public void showPattern(PatternCard patternCard) {
-        System.out.println("\n" + "This is the PatternCard you will use ");
-        System.out.println(patternCard.toString());
+        out.println("\n" + "This is the PatternCard you will use ");
+        out.println(patternCard.toString());
     }
 
     @Override
     public void showOtherPattern(PatternCard patternCard, String name,  int ID) {
-        System.out.println("\n" + "Now Pattern of" + name + "is: ");
-        System.out.println(patternCard.toString());
+        out.println("\n" + "Now Pattern of" + name + "is: ");
+        out.println(patternCard.toString());
 
     }
 
     @Override
     public void showOtherStartPattern(PatternCard patternCard, int ID) {
-        System.out.println("The pattern of your enemy is: " + "\n");
-        System.out.println(patternCard.toString());
-        System.out.println("Choose your Pattern Card - Enter a number between 1 and 4");
+        out.println("The pattern of your enemy is: " + "\n");
+        out.println(patternCard.toString());
+        out.println("Choose your Pattern Card - Enter a number between 1 and 4");
     }
 
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
-        System.out.println("Now you're Pattern Card is" + "\n");
-        System.out.println(patternCard.toString());
+        out.println("Now you're Pattern Card is" + "\n");
+        out.println(patternCard.toString());
 
     }
 
     @Override
     public void showTokens(int tokensNumber) {
-        System.out.println("\n" + "This your number of favor tokens available: " + tokensNumber);
+        out.println("\n" + "This your number of favor tokens available: " + tokensNumber);
     }
 
     @Override
     public void showStartScene() {
-        System.out.println("Time to take the gloves off and build your own window!" + "\n");
+        out.println("Time to take the gloves off and build your own window!" + "\n");
     }
 
     @Override
     public void showCurrentRound(int round) {
-        System.out.println("Round " + round + " is started");
+        out.println("Round " + round + " is started");
     }
 
     @Override
     public void showCurrentTurn() {
-        System.out.println("\n" + "It's your turn");
+        out.println("\n" + "It's your turn");
     }
 
     @Override
@@ -990,24 +993,24 @@ public class CliView extends View implements Runnable {
         } else {
             cliState = GameState.NOTAUTHORIZED;
         }
-        System.out.println("\n" + "It's " + username + "'s turn");
+        out.println("\n" + "It's " + username + "'s turn");
     }
 
     @Override
     public void showRollCommand() {
         cliState = GameState.ROLL;
-        System.out.println("Write the command ROLL to casually roll the draft pool");
+        out.println("Write the command ROLL to casually roll the draft pool");
     }
 
     @Override
     public void showDraftPool(DraftPool draftPool) {
-        System.out.println("\n" + draftPool.toString());
+        out.println("\n" + draftPool.toString());
     }
 
     @Override
     public void showChooseCommand() {
         cliState = GameState.CHOOSE;
-        System.out.println("\n" + "What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
+        out.println("\n" + "What do you want to do: ? - Enter 0 to put dice, 1 to use a tool card");
 
     }
 
@@ -1015,7 +1018,7 @@ public class CliView extends View implements Runnable {
     public void showMoveCommand(int poolSize)  {
         setPoolSize(poolSize);
         cliState = GameState.MOVE;
-        System.out.println("\n" + "Do you want to move a dice from the pool to the card? - Enter yes or no?");
+        out.println("\n" + "Do you want to move a dice from the pool to the card? - Enter yes or no?");
 
     }
 
@@ -1023,13 +1026,13 @@ public class CliView extends View implements Runnable {
     public void showIndexPoolCommand(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.POOLINDEX;
-        System.out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + getPoolSize());
+        out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + getPoolSize());
     }
 
     @Override
     public void showIndexPatternCommand() {
         cliState = GameState.PATTERNINDEX;
-        System.out.println("\n" + "Enter the index of the Pattern Card - Enter a number between 1 and 20");
+        out.println("\n" + "Enter the index of the Pattern Card - Enter a number between 1 and 20");
     }
 
     @Override
@@ -1039,70 +1042,70 @@ public class CliView extends View implements Runnable {
             toolCost.add(tool.getCost());
         }
         cliState = GameState.TOOL;
-        System.out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
+        out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
     public void showToolChooseCommand() {
         cliState = GameState.TOOLINDEX;
-        System.out.println("\n" + "Which tool card do you want to use? - Enter a number from 1 to 3");
+        out.println("\n" + "Which tool card do you want to use? - Enter a number from 1 to 3");
     }
 
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
         cliState = GameState.TOOLCOST;
         int cost = toolCost.get(indexTool);
-        System.out.println("\n" + "Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
+        out.println("\n" + "Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
     }
 
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
-        System.out.println("End of the round");
-        System.out.println(roundTracker.toString());
+        out.println("End of the round");
+        out.println(roundTracker.toString());
 
     }
 
     @Override
     public void showFinalRank(List<Player> playerList, boolean ended) {
-        System.out.println("Final Rank:" + "\n" );
+        out.println("Final Rank:" + "\n" );
         for (Player player : playerList) {
-            System.out.println(player.toStringPoints());
+            out.println(player.toStringPoints());
         }
         getConnection().setEndGameTimer(super.getPlayerID());
     }
 
     @Override
     public void showWinner() {
-        System.out.println("You win !!!!!!!!!");
+        out.println("You win !!!!!!!!!");
         cliState =  GameState.NOTAUTHORIZED;
     }
 
     @Override
     public void showLosers() {
-        System.out.println("You lose maaaan!");
+        out.println("You lose maaaan!");
         cliState =  GameState.NOTAUTHORIZED;
     }
 
     @Override
     public void showTimer() {
-        System.out.println("\n" + "You'r time is over");
+        out.println("\n" + "You'r time is over");
     }
 
     @Override
     public void showOtherTimer(String playerName) {
-        System.out.println("\n" + playerName + " turn time is ended");
+        out.println("\n" + playerName + " turn time is ended");
     }
 
     @Override
     public  void showToolCards(List<ToolCard> toolCardList) {
         for (ToolCard toolCard : toolCardList) {
-            System.out.println("\n" + toolCard.toString());
+            out.println("\n" + toolCard.toString());
         }
     }
 
     @Override
     public void showTokenError() {
-        System.out.println("You have not enough favor tokens to use this tool card");
+        out.println("You have not enough favor tokens to use this tool card");
     }
 
 
@@ -1115,14 +1118,14 @@ public class CliView extends View implements Runnable {
     public void showGrozingRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.GROZINGPOOL;
-        System.out.println("\n" + "Select a die from the pool - Enter a number between 1 and " + getPoolSize());
+        out.println("\n" + "Select a die from the pool - Enter a number between 1 and " + getPoolSize());
 
     }
 
     @Override
     public void showGrozingCommand() {
         cliState = GameState.GROZINGCOMMAND;
-        System.out.println("Do you want to increase (1) or decrease (0)");
+        out.println("Do you want to increase (1) or decrease (0)");
     }
 
 
@@ -1131,13 +1134,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showEglomiseStart() {
         cliState = GameState.EGLOMISESTART;
-        System.out.println("\n" + "Select a die from the pattern card to move - Enter a number between 1 and 20");
+        out.println("\n" + "Select a die from the pattern card to move - Enter a number between 1 and 20");
     }
 
     @Override
     public void showEglomiseEnd() {
         cliState = GameState.EGLOMISEEND;
-        System.out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
+        out.println("Enter the index where you want to move it - Enter a number between 1 and 20");
 
     }
 
@@ -1146,14 +1149,14 @@ public class CliView extends View implements Runnable {
     @Override
     public void showCopperFoilStart() {
         cliState = GameState.COPPERSTART;
-        System.out.println("\n" + "Select ad die from the pattern card to move - Enter a number from 1 to 20");
+        out.println("\n" + "Select ad die from the pattern card to move - Enter a number from 1 to 20");
 
     }
 
     @Override
     public void showCopperFoilEnd() {
         cliState = GameState.COPPEREND;
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
 
@@ -1161,27 +1164,27 @@ public class CliView extends View implements Runnable {
     @Override
     public void showLathekinStart() {
         cliState = GameState.LATHEKINSTARTONE;
-        System.out.println("\n" + "Select the first die to move - Enter a number from 1 to 20");
+        out.println("\n" + "Select the first die to move - Enter a number from 1 to 20");
     }
 
 
     @Override
     public void showLathekinEnd() {
         cliState = GameState.LATHEKINENDONE;
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
 
     @Override
     public void showLathekinStartTwo() {
         cliState = GameState.LATHEKINSTARTTWO;
-        System.out.println("Select the second die to move - Enter a number from 1 to 20");
+        out.println("Select the second die to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showLathekinEndTwo() {
         cliState = GameState.LATHEKINENDTWO;
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
 
@@ -1195,19 +1198,19 @@ public class CliView extends View implements Runnable {
         }
         setPoolSize(poolSize);
         cliState = GameState.LENSCUTTERPOOL;
-        System.out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
     public void showLensCutterRound(List<Integer> round) {
         cliState = GameState.LENSCUTTERROUND;
-        System.out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
+        out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
     }
 
     @Override
     public void showLensCutterDice(List<Integer> round, int roundIndex) {
         cliState = GameState.LENSCUTTERDICE;
-        System.out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(roundIndex).toString());
+        out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(roundIndex).toString());
     }
 
 
@@ -1217,7 +1220,7 @@ public class CliView extends View implements Runnable {
     public void showFluxBrushRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.FLUXBRUSH;
-        System.out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + getPoolSize());
+        out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + getPoolSize());
     }
 
 
@@ -1225,7 +1228,7 @@ public class CliView extends View implements Runnable {
     @Override
     public void showGlazingHammerRequest() {
         cliState = GameState.GLAZINGHAMMER;
-        System.out.println("\n" + "Enter START to roll the dice of the draft pool" );
+        out.println("\n" + "Enter START to roll the dice of the draft pool" );
     }
 
     // tool running pliers
@@ -1233,14 +1236,14 @@ public class CliView extends View implements Runnable {
     public void showRunningPliersPool(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.RUNNINGPOOL;
-        System.out.println("\n" + "Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Selected a dice from the pool, but you'll skip your next turn - Enter a number from 1 to " + getPoolSize());
 
     }
 
     @Override
     public void showRunningPliersEnd() {
         cliState = GameState.RUNNINGEND;
-        System.out.println("Enter the index where you want to put the dice - Enter a number between 1 and 20");
+        out.println("Enter the index where you want to put the dice - Enter a number between 1 and 20");
     }
 
 
@@ -1250,13 +1253,13 @@ public class CliView extends View implements Runnable {
     public void showCorkBackedPool(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.CORKPOOL;
-        System.out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
     public void showCorkBackedEnd() {
         cliState = GameState.CORKEND;
-        System.out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
+        out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
     }
 
 
@@ -1266,7 +1269,7 @@ public class CliView extends View implements Runnable {
     public void showGrindingStoneRequest(int poolSize) {
         setPoolSize(poolSize);
         cliState = GameState.GRINDING;
-        System.out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + getPoolSize());
     }
 
     // tool card flux remover
@@ -1275,59 +1278,59 @@ public class CliView extends View implements Runnable {
         setPoolSize(poolSize);
         setColorDice(color);
         cliState = GameState.FLUXPOOL;
-        System.out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
     public void showFluxRemoverValue() {
         cliState = GameState.FLUXVALUE;
-        System.out.println("The color of the die drafted from the bag is " + getColorDice().toString());
-        System.out.println("Which value do you want for the dice? - Enter a number from 1 to 6");
+        out.println("The color of the die drafted from the bag is " + getColorDice().toString());
+        out.println("Which value do you want for the dice? - Enter a number from 1 to 6");
     }
 
     // tool card thap wheel
     @Override
     public void showTapWheelNumber() {
         cliState = GameState.TAPNUMBER;
-        System.out.println("\n" + "Enter the number of dice that you want to move - Enter 1 or 2");
+        out.println("\n" + "Enter the number of dice that you want to move - Enter 1 or 2");
     }
 
     @Override
     public void showTapWheelStartOne() {
         cliState = GameState.TAPSTARTONE;
-        System.out.println("Enter the index of the 1st dice you want to move - Enter a number from 1 to 20");
+        out.println("Enter the index of the 1st dice you want to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelEndOne() {
         cliState = GameState.TAPENDONE;
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelStartTwo() {
         cliState = GameState.TAPSTARTTWO;
-        System.out.println("Enter the index of the 2nd dice you want to move - Enter a number from 1 to 20");
+        out.println("Enter the index of the 2nd dice you want to move - Enter a number from 1 to 20");
     }
 
     @Override
     public void showTapWheelEndTwo() {
         cliState = GameState.TAPENDTWO;
-        System.out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
+        out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
 
     @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
-        System.out.println("\n" + "Now Round Tracker is:");
-        System.out.println(roundTracker.toString());
-        System.out.println("\n" + "Now Draft Pool is: ");
-        System.out.println(draftPool.toString());
+        out.println("\n" + "Now Round Tracker is:");
+        out.println(roundTracker.toString());
+        out.println("\n" + "Now Draft Pool is: ");
+        out.println(draftPool.toString());
     }
 
     @Override
     public void showInvalidMove(String msg) {
-        System.out.println("\n" + "ERROR: " + msg);
+        out.println("\n" + "ERROR: " + msg);
     }
 
 
@@ -1338,13 +1341,13 @@ public class CliView extends View implements Runnable {
     @Override
     public void showDifficultyRequest() {
         cliState = GameState.DIFFICULTYSP;
-        System.out.println("\n" + "You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
+        out.println("\n" + "You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
     }
 
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
         for (PrivateObjectiveCard privateCard : publicList) {
-            System.out.println("\n" + privateCard.toString());
+            out.println("\n" + privateCard.toString());
         }
 
     }
@@ -1354,37 +1357,37 @@ public class CliView extends View implements Runnable {
         setPoolSize(poolSize);
         setToolSingleNumber(toolList.size());
         cliState = GameState.TOOLSP;
-        System.out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
+        out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
     @Override
     public void showToolSingleChoose() {
         cliState = GameState.TOOLSPCHOOSE;
-        System.out.println("Which tool card do you want to use? - Enter a number from 1 to " + getToolSingleNumber());
+        out.println("Which tool card do you want to use? - Enter a number from 1 to " + getToolSingleNumber());
     }
 
     @Override
     public void showToolSingleDice() {
         cliState = GameState.TOOLSPDICE;
-        System.out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + getPoolSize());
+        out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + getPoolSize());
     }
 
     @Override
     public void showMatchError() {
-        System.out.println("\n" + "You are choosed a not right dice, it doesn't match the color of the tool card");
+        out.println("\n" + "You are choosed a not right dice, it doesn't match the color of the tool card");
     }
 
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
         if (winner) {
-            System.out.println("\n" + "You win");
-            System.out.println("You scored: " + playerPoints);
-            System.out.println("The threshold of the round tracker is: " + gameThreshold);
+            out.println("\n" + "You win");
+            out.println("You scored: " + playerPoints);
+            out.println("The threshold of the round tracker is: " + gameThreshold);
         }
         else {
-            System.out.println("\n" + "You lose maaan!");
-            System.out.println("You scored: " + playerPoints);
-            System.out.println("The threshold of the round tracker is: " + gameThreshold);
+            out.println("\n" + "You lose maaan!");
+            out.println("You scored: " + playerPoints);
+            out.println("The threshold of the round tracker is: " + gameThreshold);
         }
     }
 
@@ -1393,27 +1396,27 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showMaxPlayerLogin() {
-        System.out.println("The number of player reached the maximum, retry later!");
+        out.println("The number of player reached the maximum, retry later!");
     }
 
     @Override
     public void showExitPlayer(String playerName) {
-        System.out.println("\n" + "The player " + playerName + " disconnected from the game");
+        out.println("\n" + "The player " + playerName + " disconnected from the game");
     }
 
     @Override
     public void showReconnectPlayer(String playerName) {
-        System.out.println("\n" + "The player " + playerName + " reconnected to the game");
+        out.println("\n" + "The player " + playerName + " reconnected to the game");
     }
 
     @Override
     public void showNotPermittedReconnection() {
-        System.out.println("\n" + "There's no player available to reconnect");
+        out.println("\n" + "There's no player available to reconnect");
     }
 
     @Override
     public void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
-        System.out.println("\n" + "You are returned to the game!");
+        out.println("\n" + "You are returned to the game!");
 
     }
 

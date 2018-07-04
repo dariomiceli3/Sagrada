@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 // this class must do:
 // create the new socket connection and get the input/output stream
@@ -24,6 +25,7 @@ import java.net.Socket;
 
 public class SocketHandler implements ClientInterface, Runnable {
 
+    private final Logger log = Logger.getLogger(SocketHandler.class.getName());
     private Socket clientConnection;
     private View view;
 
@@ -34,8 +36,8 @@ public class SocketHandler implements ClientInterface, Runnable {
             this.view = view;
         }
         catch (IOException e) {
-            System.out.println("Connection error socket");
-            e.printStackTrace();
+            log.info("Connection error socket");
+            log.warning(e.getMessage());
         }
 
     }
@@ -63,25 +65,25 @@ public class SocketHandler implements ClientInterface, Runnable {
                     readEvent((Event) object);
                 }
                 else {
-                    System.out.println("Not received an object");
+                    log.info("Not received an object");
                 }
 
             }
             catch (IOException e) {
-                System.out.println("Error in I/O socket");
+                log.info("Error in I/O socket");
                 loop = false;
                 view.showMaxPlayerLogin();
             }
             catch (ClassNotFoundException e) {
-                System.out.println("Error loading class socket");
-                e.printStackTrace();
+                log.info("Error loading class socket");
+                log.warning(e.getMessage());
             }
         }
 
     }
 
     // metodo per leggere evento chiamato dal socket INPUT e in base all'evento fare la cosa giusta
-    public void readEvent(Event event) throws IOException {
+    private void readEvent(Event event) throws IOException {
 
         if (event instanceof PlayerIDEvent) {
             view.setPlayerID(((PlayerIDEvent) event).getPlayerID());
@@ -412,7 +414,7 @@ public class SocketHandler implements ClientInterface, Runnable {
         else if (event instanceof SuccessfulReconnectionEvent) {
             view.showReload(((SuccessfulReconnectionEvent) event).getCurrPlayer(), ((SuccessfulReconnectionEvent) event).isSinglePlayer(), ((SuccessfulReconnectionEvent) event).isGameStarted(), ((SuccessfulReconnectionEvent) event).getToolList(), ((SuccessfulReconnectionEvent) event).getPublicCardList(), ((SuccessfulReconnectionEvent) event).getPlayerList());
         }else {
-            System.out.println("Not understood the message");
+            log.info("Not understood the message");
         }
     }
 
@@ -420,11 +422,10 @@ public class SocketHandler implements ClientInterface, Runnable {
     /**
      * sendEvent represent the Socket Handler Output mode, it is used to send the event invoked by the client
      * across the network, catch IOException if something goes wrong
-     * @param event
-     * @author adrianomundo
+     *
      *
      */
-    public synchronized void sendEvent(Event event) {
+    private synchronized void sendEvent(Event event) {
 
         try {
             ObjectOutputStream socketOut = new ObjectOutputStream(clientConnection.getOutputStream());
@@ -432,8 +433,8 @@ public class SocketHandler implements ClientInterface, Runnable {
             socketOut.flush();
         }
         catch (IOException e) {
-            System.out.println("Error in writing object in socket");
-            e.printStackTrace();
+            log.info("Error in writing object in socket");
+            log.warning(e.getMessage());
         }
     }
 
@@ -462,103 +463,103 @@ public class SocketHandler implements ClientInterface, Runnable {
     }
 
     @Override
-    public void setDraftPoolToServer(int ID) {
+    public void setDraftPoolToServer(int id) {
         sendEvent(new PlayerDraftPoolEvent());
     }
 
     @Override
-    public void setChooseToServer(int ID, int step) {
+    public void setChooseToServer(int id, int step) {
         sendEvent(new PlayerChooseEvent(step));
     }
 
     @Override
-    public void setMoveToServer(int ID, int indexPool, int indexPattern) {
+    public void setMoveToServer(int id, int indexPool, int indexPattern) {
         sendEvent(new PlayerMoveEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void setStartToolToServer(int ID) {
+    public void setStartToolToServer(int id) {
         sendEvent(new PlayerStartToolEvent());
     }
 
     @Override
-    public void setNextTurnToServer(int ID) {
+    public void setNextTurnToServer(int id) {
         sendEvent(new PlayerNextTurnEvent());
     }
 
     @Override
-    public void setNoTokenToServer(int ID) {
+    public void setNoTokenToServer(int id) {
         sendEvent(new PlayerNoTokenEvent());
     }
 
     @Override
-    public void useToolCardToServer(int ID, int indexTool) {
+    public void useToolCardToServer(int id, int indexTool) {
         sendEvent(new ToolCardStartEvent(indexTool));
     }
 
     @Override
-    public void useGrozingToolCard(int ID, int indexPool, int increase) {
+    public void useGrozingToolCard(int id, int indexPool, int increase) {
         sendEvent(new GrozingPliersEvent(indexPool,increase));
     }
 
     @Override
-    public void useEglomiseToolCard(int ID, int indexStart, int indexEnd) {
+    public void useEglomiseToolCard(int id, int indexStart, int indexEnd) {
         sendEvent(new EglomiseBrushEvent(indexStart, indexEnd));
     }
 
     @Override
-    public void useCopperFoilToolCard(int ID, int indexStart, int indexEnd) {
+    public void useCopperFoilToolCard(int id, int indexStart, int indexEnd) {
         sendEvent(new CopperFoilEvent(indexStart, indexEnd));
     }
 
     @Override
-    public void useLathekinToolCard(int ID, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useLathekinToolCard(int id, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new LathekinEvent(indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
     }
 
     @Override
-    public void useLensCutterToolCard(int ID, int indexPool, int indexRound, int indexPosition) {
+    public void useLensCutterToolCard(int id, int indexPool, int indexRound, int indexPosition) {
         sendEvent(new LensCutterEvent(indexPool, indexRound, indexPosition));
     }
 
     @Override
-    public void useFluxBrushToolCard(int ID, int indexPool) {
+    public void useFluxBrushToolCard(int id, int indexPool) {
         sendEvent(new FluxBrushEvent(indexPool));
     }
 
     @Override
-    public void useGlazingHammerToolCard(int ID) {
+    public void useGlazingHammerToolCard(int id) {
         sendEvent(new GlazingHammerEvent());
     }
 
     @Override
-    public void useRunningPliersToolCard(int ID, int indexPool, int indexPattern) {
+    public void useRunningPliersToolCard(int id, int indexPool, int indexPattern) {
         sendEvent(new RunningPliersEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void useCorkBackedToolCard(int ID, int indexPool, int indexPattern) {
+    public void useCorkBackedToolCard(int id, int indexPool, int indexPattern) {
         sendEvent(new CorkBackedEvent(indexPool, indexPattern));
     }
 
     @Override
-    public void useGrindingStoneToolCard(int ID, int indexPool) {
+    public void useGrindingStoneToolCard(int id, int indexPool) {
         sendEvent(new GrindingStoneEvent(indexPool));
     }
 
     @Override
-    public void useFluxRemoverToolCard(int ID, int indexPool, int diceValue) {
+    public void useFluxRemoverToolCard(int id, int indexPool, int diceValue) {
         sendEvent(new FluxRemoverEvent(indexPool, diceValue));
     }
 
     @Override
-    public void useTapWheelToolCard(int ID, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
+    public void useTapWheelToolCard(int id, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         sendEvent(new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
 
     }
 
     @Override
-    public void setEndGameTimer(int ID) {
+    public void setEndGameTimer(int id) {
         sendEvent(new EndGameTimerEvent());
     }
 
@@ -566,12 +567,12 @@ public class SocketHandler implements ClientInterface, Runnable {
 
 
     @Override
-    public void setDifficultyToServer(int ID, int difficulty) {
+    public void setDifficultyToServer(int id, int difficulty) {
         sendEvent(new ToolNumberEvent(difficulty));
     }
 
     @Override
-    public void useToolSingleToServer(int ID, int indexTool, int indexPool) {
+    public void useToolSingleToServer(int id, int indexTool, int indexPool) {
         sendEvent(new ToolCardSinglePlayerStartEvent(indexTool,indexPool));
     }
 
@@ -579,20 +580,20 @@ public class SocketHandler implements ClientInterface, Runnable {
 
 
     @Override
-    public void setPatternCustomToServer(int ID, PatternCard patternCard) {
+    public void setPatternCustomToServer(int id, PatternCard patternCard) {
         sendEvent(new CustomPatternEvent(patternCard));
     }
 
     //--------------------------disconnection-----------------------------------------------
 
     @Override
-    public void setExitToServer(int ID) {
-        sendEvent(new ExitEvent(ID));
+    public void setExitToServer(int id) {
+        sendEvent(new ExitEvent(id));
 
     }
 
     @Override
-    public void setReconnectToServer(int ID) {
-        sendEvent(new ReconnectPlayerEvent(ID));
+    public void setReconnectToServer(int id) {
+        sendEvent(new ReconnectPlayerEvent(id));
     }
 }

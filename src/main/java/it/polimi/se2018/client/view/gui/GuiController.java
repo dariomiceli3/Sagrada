@@ -32,9 +32,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class GuiController extends View {
 
+    private final Logger log = Logger.getLogger(GuiController.class.getName());
     private ClientInterface connection;
     private int SOCKETPORT;
     private String host;
@@ -224,7 +226,7 @@ public class GuiController extends View {
         playButton.disableProperty().bind(txtName.textProperty().isEmpty().or(nameSetted));
 
         playButton.disableProperty().addListener(
-                (observable, oldValue, newValue) -> System.out.println(newValue.toString())
+                (observable, oldValue, newValue) -> log.info(newValue.toString())
 
         );
     }
@@ -350,7 +352,7 @@ public class GuiController extends View {
     @Override
     public void showName() {
 
-        System.out.println("Player name: " + super.getPlayerName());
+        log.info("Player name: " + super.getPlayerName());
 
     }
 
@@ -381,7 +383,7 @@ public class GuiController extends View {
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
 
-        System.out.println(privateObjectiveCard.getColour().toString());
+        log.info(privateObjectiveCard.getColour().toString());
 
         Platform.runLater(new Runnable() {
             @Override
@@ -416,7 +418,7 @@ public class GuiController extends View {
             try {
                 patternScene();
             }catch (IOException e){
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
 
 
@@ -516,7 +518,7 @@ public class GuiController extends View {
                 try {
                     boardScene();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -583,7 +585,7 @@ public class GuiController extends View {
                     board.updateDraftPool(draftPool);
                 }
                 catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -599,7 +601,7 @@ public class GuiController extends View {
                 try {
                     board.textChooseMsg();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -614,7 +616,7 @@ public class GuiController extends View {
                 try {
                     board.textMoveMsg();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -688,7 +690,7 @@ public class GuiController extends View {
                     }
                 }
                 catch (IOException e){
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -984,7 +986,7 @@ public class GuiController extends View {
                     board.updateDraftPool(draftPool);
                     board.updateRoundTracker(roundTracker);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -1035,7 +1037,7 @@ public class GuiController extends View {
                 try {
                     board.textToolSinglePlayerMsg();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -1081,7 +1083,7 @@ public class GuiController extends View {
                 try {
                     EndGameScene.display();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
         });
@@ -1179,7 +1181,7 @@ public class GuiController extends View {
                     }
                     boardScene();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.warning(e.getMessage());
                 }
             }
 

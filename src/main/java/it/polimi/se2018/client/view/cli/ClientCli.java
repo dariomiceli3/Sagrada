@@ -15,28 +15,27 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public class ClientCli {
 
     private int SOCKETPORT;
     private String host;
     private static SocketHandler serverSocket;
     private static RmiHandler serverRmi;
-    private String connectionType;
     private View view;
     private Ping ping;
 
 
     public ClientCli(String connectionType) {
 
-        System.out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n" +
+        out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n" +
                 " ####      #      ###     ###     #     ###      #        " + "\n" +
                 "#         # #    #   #    #  #   # #    #  #    # #       " + "\n" +
                 " ####    #####   #        ###   #####   #   #  #####      " + "\n" +
                 "     #   #   #   #  ###   # #   #   #   #  #   #   #      " + "\n" +
                 " ####    #   #    ###     #  #  #   #   ###    #   #      " + "\n");
 
-
-        this.connectionType = connectionType;
         Gson gson = new Gson();
         InputStream fileStream = ClientCli.class.getResourceAsStream("/json/settings" + ".json");
         JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
