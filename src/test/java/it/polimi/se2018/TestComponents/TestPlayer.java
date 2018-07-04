@@ -16,9 +16,8 @@ import java.util.ArrayList;
 public class TestPlayer {
     @Test
     public void testConstructor() {
-        String ID = "Buonasera";
-        Player player = new Player(ID);
-        assertEquals("Buonasera", player.getPlayerName());
+        Player player = new Player();
+        //assertEquals("Buonasera", player.getPlayerName());
     }
 
     @Test
@@ -56,7 +55,6 @@ public class TestPlayer {
         assertEquals(privatePoints, player.getPrivatePoints());
         assertEquals(2, player.getPlayerID());
         assertEquals("Dario", player.getPlayerName());
-        assertEquals("Player Tokens6",player.toStringTokens());
         assertEquals(patternCards, player.getPatterChooseList());
         assertEquals(true, player.isDisconnect());
     }
@@ -73,11 +71,10 @@ public class TestPlayer {
     @Test
     public void testToString(){
 
-        String string = "Dario";
-        //PlayerColour playerColour = PlayerColour.BLUE;
+
         int ID = 1;
 
-        Player player1 = new Player(string);
+        Player player1 = new Player();
         player1.setPlayerID(ID);
         player1.setPrivate(new PrivateObjectiveCard(DiceColor.RED));
         player1.setTokensNumber(6);
