@@ -23,6 +23,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
+/**
+ * Class VirtualSocket: the class is a subclass of the Virtual View, so it implements the same features, but it's
+ * responsible to effectively manage the communication with the rmi technology. The class runs a timeout timer for
+ * the rmi client disconnection, it's responsible to send the event of the remote client method call directly
+ * to the controller and of calling the remote method on the skeleton of the client
+ * @see it.polimi.se2018.server.network.VirtualView
+ * @author fadda-miceli-mundo
+ */
 public class VirtualRmi extends VirtualView {
 
     private final Logger log = Logger.getLogger(VirtualRmi.class.getName());
@@ -32,6 +40,14 @@ public class VirtualRmi extends VirtualView {
     private Timer timer;
     private final int TIMEKEEPER;
 
+    /**
+     * Class constructor for a new Virtual rmi associated with a unique id, that runs on the Server and associated with
+     * the rmi client interfare to call the remote method, it also load from a settings file the timeout of the rmi player
+     * for the disconnection
+     * @param clientRmi for the remote call
+     * @param server where te virtual rmi is running
+     * @param id the unique id associated
+     */
     public VirtualRmi(RmiClientInterface clientRmi, Server server, int id) {
         super(id);
         this.server = server;
@@ -48,12 +64,19 @@ public class VirtualRmi extends VirtualView {
 
     }
 
+    /**
+     * method that provide the caller of the current state of the virtual rmi
+     * @return a boolean that represents the state
+     */
     private boolean isRunning() {
         return running;
     }
 
 
-    // metodo per inoltrare i messaggi al controller (chiamato dalla RmiServerImpl)
+    /**
+     * method used to send the notification to the controller of the user input (Observable)
+     * @param event to send to the controller
+     */
     void sendEventController(Event event) {
 
         if (event instanceof SinglePlayerEvent) {
@@ -71,7 +94,6 @@ public class VirtualRmi extends VirtualView {
                     this.running = false;
                 }
             }
-
 
             if (server.checkNumberPlayer()) {
 
@@ -104,6 +126,12 @@ public class VirtualRmi extends VirtualView {
 
 
     // mandare al client -> fare una serie di instanceof con view.metodo della RmiClientImpl
+
+    /**
+     * Override of the method of the superclass, the method is responsible of calling the remote method responsible
+     * of the event obtained as parameter
+     * @param event to send to the client
+     */
     @Override
     public void sendEvent(Event event) {
 
@@ -114,7 +142,6 @@ public class VirtualRmi extends VirtualView {
                     clientRmi.remoteIDEvent(((PlayerIDEvent) event).getPlayerID());
                 } else if (event instanceof SinglePlayerRequestEvent) {
                     clientRmi.remoteSinglePlayerEvent(((SinglePlayerRequestEvent) event).getId());
-
                 } else if (event instanceof PlayerNameUpdateEvent) {
                     clientRmi.remotePlayerNameUpdateEvent(((PlayerNameUpdateEvent) event).getID(), ((PlayerNameUpdateEvent) event).getName());
                 } else if (event instanceof PlayerNameErrorEvent) {
@@ -229,13 +256,17 @@ public class VirtualRmi extends VirtualView {
         } catch (IOException e) {
             log.info("Error I/O rmi");
             this.running = false;
-
         }
-
-
     }
 
     // aggiorna in base alla notify del model e usa send event per chiamare in remoto su client
+
+    /**
+     * Override of the built-in method of the Observer class, it's called after a notify of the model, so that the
+     * virtual rmi can update after a modification of the model and call the remote method on the client (Observer)
+     * @param o the observable
+     * @param arg the object of the update
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -247,6 +278,10 @@ public class VirtualRmi extends VirtualView {
         }
     }
 
+    /**
+     * method that runs a new timer for waiting TIMEKEEPER seconds, after that the rmi client is considered disconnected
+     * if no ping arrives
+     */
     void timeout() {
 
         if (timer != null) {
@@ -263,6 +298,10 @@ public class VirtualRmi extends VirtualView {
         }, TIMEKEEPER);
     }
 
+    /**
+     * method responsible of handling the rmi disconnection of the client, both the case of the disconnection
+     * before the game started and the disconnection during the game
+     */
     private void disconnectionRmi() {
 
         log.info("error rmi: " + super.getPlayerID() + "disconnected from the game");
@@ -277,8 +316,7 @@ public class VirtualRmi extends VirtualView {
         }
         else {
             Server.setMulti(Server.getMulti() - 1);
-            setChanged();
-            notifyObservers(new DisconnectionEvent(super.getPlayerID()));
+            sendEventController(new DisconnectionEvent(super.getPlayerID()));
         }
 
     }

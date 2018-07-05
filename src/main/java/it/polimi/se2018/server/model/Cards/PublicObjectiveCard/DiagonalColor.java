@@ -6,12 +6,19 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * Class DiagonalColor: Public Objective Card
- * @author Salvatrore Fadda
+ * Class DiagonalColor: it represents the public card Diagonal Color of the game and its effect
+ * @author fadda-miceli-mundo
  */
 public class DiagonalColor implements PublicEffects, Serializable {
 
 private static final String NAME = "Color Diagonals";
+
+   /**
+    * Override of the method of the interface for the DP Strategy with the algorithms of the Diagonal Color card, that
+    * sums the values of the dice found diagonally adjacent
+    * @param pattern where to run the effect
+    * @return the points calculated by running this effect
+    */
    @Override
    public int runPublic(PatternCard pattern) {
       int points = 0;
@@ -48,6 +55,10 @@ private static final String NAME = "Color Diagonals";
       return points;
    }
 
+   /**
+    * Override of the Object toString method to provide the caller of a String version of a Diagonal Color card
+    * @return string format of the card
+    */
    @Override
    public String toString(){
       return NAME + "\n"

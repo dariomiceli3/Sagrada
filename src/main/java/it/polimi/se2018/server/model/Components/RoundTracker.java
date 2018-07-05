@@ -5,58 +5,80 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class RoundTracker: DP Singleton, the round tracker is the table used to keep track of the current round and the die or dice not used in each round
- * @author Salvatrore Fadda
+ * Class RoundTracker: represents the Round Tracker of the game, it contains the various list of the different dice remained
+ * in the draft pool at the end of every round.
+ * @author fadda-miceli-mundo
  */
 public class RoundTracker implements Serializable {
 
     private List<List<Dice>> listDice;
 
     /**
-     * Private Class constructor, create the round tracker where the first dice list is set
+     * Class default constructor, create the round tracker list dice
      */
     public RoundTracker(){
-        this.listDice = new ArrayList();
+        this.listDice = new ArrayList<>();
     }
 
-    //copy constructor
+    /**
+     * Class copy constructor, create a new Round Tracker from an old Round Tracker,useful to create a safe copy
+     * @param roundTracker the round tracker to copy
+     */
     public RoundTracker(RoundTracker roundTracker) {
         this.listDice = roundTracker.listDice;
     }
 
     /**
-     * Get and remove from the round tracker the die on the specified position(from bottom to top) in the dice list belonging from the not used dice of the specified round
-     * @param round the round where the die has been extracted
-     * @param pos the die position in the list of dice (from bottom to top)
-     * @return the die whitch has been removed
+     * method that provide the caller of a dice from the round tracker at a specified position of a specific round
+     * @param round the round where the dice will be extracted
+     * @param pos the die position in the list of dice
+     * @return the die that has been removed
      */
     public Dice getDice(int round, int pos){
         return listDice.get(round).remove(pos);
     }
 
-
-   public List<Integer> getRoundsSizes(){
+    /**
+     * method that provide the caller of a list of the size of the different rounds of the game
+     * @return a list of the size of the rounds
+     */
+    public List<Integer> getRoundsSizes(){
        List<Integer> listSizes = new ArrayList<>();
        for(int i = 0; i < this.getRoundTracker().size(); i++) {
            listSizes.add(this.getRoundDice(i).size());
 
        }
        return listSizes;
-   }
+    }
 
+    /**
+     * method that provide the caller the current state of the Round Tracker
+     * @return a list of a list of dice in the round tracker
+     */
     public List<List<Dice>> getRoundTracker(){
         return listDice;
     }
 
-    //restituisce una copia della lista di dadi del round indicato se gia giocato----------------
-    //eccezioni e controlli ancora da gestire
+    /**
+     * method that provide the caller the list of the dice of a specified round as parameter
+     * @param round of the list
+     * @return the list of the dice
+     */
     public List<Dice> getRoundDice(int round){
         return listDice.get(round);
     }
 
+    /**
+     * method that allow the caller to set a list of dice in the round tracker
+     * @param listDice to set
+     */
+    public void setTracker(List<Dice> listDice){
+        this.listDice.add(listDice);
+    }
+
 
     /**
-     * Add a die from the top of the list of dice not used in the specified round
+     * method that allow the caller to add a dice at the tail of the list of a specified round list
      * @param dice the die to add
      * @param round the round where the die has been extracted
      */
@@ -64,54 +86,43 @@ public class RoundTracker implements Serializable {
         listDice.get(round).add(dice);
     }
 
+
     /**
-     * Class SetDice: add at the round tracker the new list of dice corresponding to the list of the the round ended in the last turn
-     * @param listDice dice not used in the round
+     * Override of the Object toString method to provide the caller of a String version of a Round Tracker
+     * @return string format of a player
      */
-    public void setTracker(List<Dice> listDice){
-        this.listDice.add(listDice);
-    }
-
-
     @Override
     public String toString() {
 
         if (listDice.isEmpty()) {
             return "Round Tracker not generated";
-        }
-
-        else if (listDice.size() == 1) {
+        } else if (listDice.size() == 1) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString();
-        }
-        else if (listDice.size() == 2) {
+        } else if (listDice.size() == 2) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString();
 
-        }
-        else if (listDice.size() == 3) {
+        } else if (listDice.size() == 3) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
                     "Round 3 " + listDice.get(2).toString();
-        }
-        else if (listDice.size() == 4) {
+        } else if (listDice.size() == 4) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
                     "Round 3 " + listDice.get(2).toString() + "\n" +
                     "Round 4 " + listDice.get(3).toString();
-        }
-        else if (listDice.size() == 5) {
+        } else if (listDice.size() == 5) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
                     "Round 3 " + listDice.get(2).toString() + "\n" +
                     "Round 4 " + listDice.get(3).toString() + "\n" +
                     "Round 5 " + listDice.get(4).toString();
-        }
-        else if (listDice.size() == 6) {
+        } else if (listDice.size() == 6) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
@@ -119,8 +130,7 @@ public class RoundTracker implements Serializable {
                     "Round 4 " + listDice.get(3).toString() + "\n" +
                     "Round 5 " + listDice.get(4).toString() + "\n" +
                     "Round 6 " + listDice.get(5).toString();
-        }
-        else if (listDice.size() == 7) {
+        } else if (listDice.size() == 7) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
@@ -130,8 +140,7 @@ public class RoundTracker implements Serializable {
                     "Round 6 " + listDice.get(5).toString() + "\n" +
                     "Round 7 " + listDice.get(6).toString();
 
-        }
-        else if (listDice.size() == 8) {
+        } else if (listDice.size() == 8) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
@@ -142,8 +151,7 @@ public class RoundTracker implements Serializable {
                     "Round 7 " + listDice.get(6).toString() + "\n" +
                     "Round 8 " + listDice.get(7).toString();
 
-        }
-        else if (listDice.size() == 9) {
+        } else if (listDice.size() == 9) {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +
@@ -154,8 +162,7 @@ public class RoundTracker implements Serializable {
                     "Round 7 " + listDice.get(6).toString() + "\n" +
                     "Round 8 " + listDice.get(7).toString() + "\n" +
                     "Round 9 " + listDice.get(8).toString();
-        }
-        else {
+        } else {
             return "Round Tracker : " + "\n" +
                     "Round 1 " + listDice.get(0).toString() + "\n" +
                     "Round 2 " + listDice.get(1).toString() + "\n" +

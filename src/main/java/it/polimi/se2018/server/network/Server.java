@@ -19,12 +19,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
+
+/**
+ * Class Server: the class represents the Server, responsible for handling and manage the user connection, it's the class
+ * responsible for the creation of the controller and the handling of the timer at the start of the game
+ * @author fadda-miceli-mundo
+ */
 public class Server {
 
     private final Logger log = Logger.getLogger(Server.class.getName());
 
     private static final int MAXPLAYERS = 4;
     private static final int DEFAULT = 0;
+    private static final int SINGLEPLAY = 1;
 
     private boolean mutex;
     private SocketGatherer socketGatherer;
@@ -39,6 +46,10 @@ public class Server {
     private Timer timer;
     private final int TIMERLOGIN;
 
+    /**
+     * Class constructor: load from a settings file the socket and rmi port for the user connection and the timer of the login
+     * it's responsible for the creation of the socket and rmi gatherer that handle the connection
+     */
     public Server() {
 
         Gson gson = new Gson();
@@ -59,15 +70,14 @@ public class Server {
 
     }
 
+    /**
+     * method main that start a new Server instance
+     * @param args
+     */
     public static void main(String[] args) {
         new Server();
     }
 
-    //-------------------getter/setter
-
-    public static int getIdPlayer() {
-        return idPlayer;
-    }
 
     public boolean isGameStarted() {
         return gameStarted;
@@ -76,46 +86,95 @@ public class Server {
     public boolean isSinglePlayer() {
         return singlePlayer;
     }
+    /**
+     * method that provide the caller of the available id to set to the player
+     * @return int value of the id
+     */
+    public static int getIdPlayer() {
+        return idPlayer;
+    }
 
+    /**
+     * method that provide the caller of the current number of player in the multiplayer mode game
+     * @return int value of the number
+     */
     public static int getMulti() {
         return multi;
     }
 
-    private void setGameStarted(boolean gameStarted) {
-        this.gameStarted = gameStarted;
-    }
-
-    public static void setSinglePlayer(boolean singlePlayer) {
-        Server.singlePlayer = singlePlayer;
-    }
-
-    public static void setIdPlayer(int idPlayer) {
-        Server.idPlayer = idPlayer;
-    }
-
-    public static void setMulti(int multi) {
-        Server.multi = multi;
-    }
-
+    /**
+     * method that provide the caller of the current game controller
+     * @return Game
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * method that provide the caller of the rmi gatherer
+     * @return the Rmi gatherer
+     */
     public RmiGatherer getRmiGatherer() {
         return rmiGatherer;
     }
 
-    //-------------------------------methods for clients list -------------------------------------
-
-
+    /**
+     * synchronized method that provide the caller of the current list of clients connected to the server
+     * @return a list of the virtual view connected
+     */
     public synchronized List<VirtualView> getClients() {
         return clients;
     }
 
+    /**
+     * method that allow the caller to set the game state to started or not
+     * @param gameStarted state of the current game
+     */
+    private void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    /**
+     * method that allow the caller to set if the modality of the game is single player or not
+     * @param singlePlayer boolean value of the current game mode
+     */
+    public static void setSinglePlayer(boolean singlePlayer) {
+        Server.singlePlayer = singlePlayer;
+    }
+
+    /**
+     * method that allow the caller to set the next id available to assign to a player
+     * @param idPlayer to set to a player
+     */
+    public static void setIdPlayer(int idPlayer) {
+        Server.idPlayer = idPlayer;
+    }
+
+    /**
+     * method that allow the caller to set the current number player in the multiplayer game mode
+     * @param multi number of player in the current game
+     */
+    public static void setMulti(int multi) {
+        Server.multi = multi;
+    }
+
+
+    //-----------------methods for managing the socket and rmi clients----------------------------------
+
+
+    /**
+     * synchronized method that add a new virtual socket to the list of the socket clients connected to the server
+     * @param virtualSocket to add to the clients connected
+     */
     public synchronized void addSocketClient(VirtualSocket virtualSocket) {
         socketClients.add(virtualSocket);
     }
 
+    /**
+     * synchronized method that create a virtual rmi and add it to the list of the rmi clients connected to the server
+     * @param clientRmi to add to the clients connected
+     * @param rmiServer where the rmi client tried to connect
+     */
     public synchronized void addRmiClient(RmiClientInterface clientRmi, RmiServerImpl rmiServer) {
         VirtualRmi virtualRmi = new VirtualRmi(clientRmi, this, Server.idPlayer);
         Server.setIdPlayer(Server.getIdPlayer() + 1);
@@ -123,6 +182,10 @@ public class Server {
         clients.add(virtualRmi);
     }
 
+    /**
+     * synchronized method that remove a virtual socket from the list of the socket clients connected to the server
+     * @param virtualSocket to remove from the clients
+     */
     public synchronized void removeSocketClient(VirtualSocket virtualSocket) {
         if (socketClients.contains(virtualSocket)) {
             socketClients.remove(virtualSocket);
@@ -132,6 +195,11 @@ public class Server {
         }
     }
 
+    /**
+     * synchronized method that remove a virtual view from the list of the clients connected to the server if the
+     * server contains it
+     * @param virtualView to remove from the clients
+     */
     public synchronized void removeClient(VirtualView virtualView) {
         if (clients.contains(virtualView)) {
             clients.remove(virtualView);
@@ -141,39 +209,35 @@ public class Server {
         }
     }
 
-
-
+    /**
+     * synchronized method responsible for the waiting of the connections of the other players, if the player are >= 2
+     * start a timer for waiting other players to connect, at the end of the timer create e new instance of the controller
+     * and set the game started to true,while if the game mode is single player jump the timer and directly start a new game.
+     * It immediately start a game if the players connected are 4
+     */
     public synchronized void waitingOtherPlayers() {
 
         if (singlePlayer) {
-
             List<VirtualView> viewGame = new ArrayList<>(clients);
             game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
             log.info("Started single player");
         }
-
-
         if (getMulti() == MAXPLAYERS) {
             List<VirtualView> viewGame = new ArrayList<>(clients);
             game = new Game(viewGame, singlePlayer);
             setGameStarted(true);
         }
-
         if (getMulti() < 2) {
             return;
         }
-
         if (mutex) {
             return;
         }
         mutex = true;
-
         log.info("over mutex");
 
-
         if (getMulti() >= 2) {
-
 
             log.info("Two clients connected");
             log.info("Starting timer");
@@ -192,21 +256,27 @@ public class Server {
                     }
                 }
             }, TIMERLOGIN);
-
         }
     }
 
+    /**
+     * method helper the check if the number of players have reached the maximum
+     * @return boolean of (un)successful check
+     */
     public boolean checkNumberPlayer() {
 
         if (singlePlayer) {
-             return getMulti() < 1;
+             return getMulti() < SINGLEPLAY;
         }
         else {
-            return getMulti() < 4;
+            return getMulti() < MAXPLAYERS;
 
         }
     }
 
+    /**
+     * method that stop the login timer if there's an instance created yet
+     */
     public void endTimerLogin() {
 
         if (timer != null) {
@@ -215,10 +285,6 @@ public class Server {
             mutex = false;
         }
     }
-
-
-
-
 
 
 }

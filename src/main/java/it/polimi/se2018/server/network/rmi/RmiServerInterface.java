@@ -6,9 +6,12 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * interface RmiServerInterface : the interface have the same method signature of the ClientInterface, and it's
+ * necessary to enable the remote call of the client on the Server
+ * @author fadda-miceli-mundo
+ */
 public interface RmiServerInterface extends Remote {
-
-    // segnature metodi della client interface + registerRMIClient
 
     void registerRmiClient(RmiClientInterface clientRmi) throws RemoteException;
 

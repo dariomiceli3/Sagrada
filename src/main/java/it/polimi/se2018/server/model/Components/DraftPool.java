@@ -52,7 +52,7 @@ public class DraftPool implements Serializable {
 
     /**
      * Class copy constructor, create a new Draft Pool from an old Draft Pool,useful to create a safe copy
-      * @param draftPool the pool to copy
+     * @param draftPool the pool to copy
      */
     public DraftPool(DraftPool draftPool) {
         this.number = draftPool.getNowNumber();

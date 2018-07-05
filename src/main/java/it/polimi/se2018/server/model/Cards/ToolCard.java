@@ -4,6 +4,12 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 
 import java.io.Serializable;
 
+/**
+ * Class ToolCard: the class represents a tool card in the game model, it's characterized by a name and a color useful for
+ * the single player mode. Every tool card has a number,a cost and a usage associated with them, that depends on the
+ * state of the game
+ * @author fadda-miceli-mundo
+ */
 public class ToolCard implements Serializable {
 
     private String name;
@@ -13,6 +19,12 @@ public class ToolCard implements Serializable {
     private int usage;
     private static final int DEFAULT = 1;
 
+    /**
+     * Class constructor for a tool with a name, a color and a number
+     * @param name the name of the card
+     * @param color associated with the use of the card
+     * @param number the number of the card
+     */
     public ToolCard (String name, DiceColor color, int number) {
         this.name = name;
         this.color = color;
@@ -21,7 +33,10 @@ public class ToolCard implements Serializable {
         this.usage = 0;
     }
 
-    // copy constructor
+    /**
+     * Class copy constructor, create a new Tool Card from an old one,useful to create a safe copy
+      * @param toolCard to copy
+     */
     public ToolCard(ToolCard toolCard) {
         this.name = toolCard.getName();
         this.color = toolCard.getColor();
@@ -30,38 +45,74 @@ public class ToolCard implements Serializable {
         this.usage = toolCard.getUsage();
     }
 
+    /**
+     * method that provide the caller of the color of the tool card selected
+     * @return DiceColor associated with the card
+     */
     public DiceColor getColor() {
         return color;
     }
 
+    /**
+     * method that provide the caller of the name of the tool card selected
+     * @return String format of the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * method that provide the caller of the number of the tool card selected
+     * @return int value of the number
+     */
     public int getNumber() {
         return number;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
+    /**
+     * method that provide the caller of the cost of the tool card selected
+     * @return int value of the cost
+     */
     public int getCost() {
         return cost;
     }
 
+    /**
+     * method that provide the caller of the usage of the tool card selected
+     * @return int value of the usage
+     */
     public int getUsage() {
         return usage;
     }
 
-    public void incrementUsage(){
-        this.usage = usage + 1;
+    /**
+     * method that allow the caller to set the cost of the tool card selected
+     * @param cost to set to the tool card
+     */
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
+    /**
+     * method that allow the caller to set the usage of the tool card selected
+     * @param usage to set to the tool card
+     */
     public void setUsage(int usage) {
         this.usage = usage;
     }
 
+    /**
+     * method that allow the caller to increment by one the usage of the tool card selected
+     */
+    public void incrementUsage(){
+        this.usage = usage + 1;
+    }
+
+
+    /**
+     * Override of the Object toString method to provide the caller of a String version of a Tool Card
+     * @return String format of a tool card
+     */
     @Override
     public String toString(){
 

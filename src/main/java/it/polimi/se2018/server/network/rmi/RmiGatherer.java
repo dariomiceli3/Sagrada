@@ -13,16 +13,22 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.logging.Logger;
 
+/**
+ * Class RmiGatherer: the class is responsible of the creation of the Registry in the Server where the Rmi gatherer is
+ * running and managing the connection of new rmi clients
+ * @author fadda-miceli-mundo
+ */
 public class RmiGatherer {
 
     private RmiServerImpl serverRmi;
 
-    RmiServerImpl getServerRmi() {
-        return serverRmi;
-    }
-
-    // crea registry e si collega all'impl lato server
-
+    /**
+     * Class constructor responsible of the creation of the registry on a specified port on the Server, then create a new
+     * Rmi server implementation in the server, loading from a settings file the ip address where the rmi clients have to
+     * connect and catch the relative exception
+     * @param server where the Rmi gatherer have to run
+     * @param port where the Rmi gatherer have to wait
+     */
     public RmiGatherer(Server server, int port) {
 
         final Logger log = Logger.getLogger(RmiGatherer.class.getName());
@@ -59,6 +65,15 @@ public class RmiGatherer {
            log.warning("Connection error server");
            log.info(e.getMessage());
         }
+    }
+
+
+    /**
+     * method that provide to the caller the Rmi Server Implementation associated with the current rmi gatherer
+     * @return the Rmi Server implementation
+     */
+    RmiServerImpl getServerRmi() {
+        return serverRmi;
     }
 }
 

@@ -10,19 +10,21 @@ import java.util.Iterator;
 import static java.lang.Math.min;
 
 /**
- * Class VarietyColor: Public Objective Card
- * @author Salvatrore Fadda
+ * Class VarietyColor: it represents the public card Color Variety of the game and its effect
+ * @author fadda-miceli-mundo
  */
 public class VarietyColor implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 4;
     private static final String NAME = "Color Variety";
-    /**
-     *
-     * @param pattern scheme card of a player
-     * @return number of sets of one of each value
-     */
 
+
+    /**
+     * Override of the method of the interface for the DP Strategy with the algorithms of the Color Variety card, that
+     * count the set of one of each color anywhere
+     * @param pattern where to run the effect
+     * @return the points calculated by running this effect
+     */
     @Override
     public int runPublic(PatternCard pattern){
         int points;
@@ -66,6 +68,10 @@ public class VarietyColor implements PublicEffects, Serializable {
         return points;
     }
 
+    /**
+     * Override of the Object toString method to provide the caller of a String version of a Color Variety card
+     * @return string format of the card
+     */
     @Override
     public String toString(){
         return NAME + "\n"

@@ -7,12 +7,24 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+/**
+ * Class SocketGatherer : the class it's the real handler of the multiple connection of the client with the socket technology,
+ * and to do this task, the socket gatherer runs in a thread and every time receives a new connection, it's responsible for
+ * the creation of the virtual socket associated with it
+ * @see java.lang.Runnable
+ * @author fadda-miceli-mundo
+ */
 public class SocketGatherer implements Runnable {
 
     private final Logger log = Logger.getLogger(SocketGatherer.class.getName());
     private ServerSocket serverSocket;
     private final Server server;
 
+    /**
+     * Class constructor of the Gatherer in a specific port on a Server
+     * @param server the server where is running
+     * @param port on which is waiting the connection
+     */
     public SocketGatherer(Server server, int port) {
         this.server = server;
 
@@ -28,7 +40,10 @@ public class SocketGatherer implements Runnable {
     }
 
 
-    // thread socket server, in loop waiting connections of the new clients
+    /**
+     * Override of the method run, create an infinite loop in waiting the connection of new socket clients, after that
+     * create the relative virtual socket and add it to the clients in the Server
+     */
     @Override
     public void run() {
 
@@ -65,11 +80,6 @@ public class SocketGatherer implements Runnable {
 
             }
         }
-
-
-
     }
-
-
 
 }
