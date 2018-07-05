@@ -8,6 +8,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
+/**
+ * Class Ping: class that runs a thread for every rmi client and ping the server to alert that an rmi client
+ * is connected, from the moment the client disconnected from the game, the thread stop to ping the server, so
+ * the server knows the rmi client is not available anymore
+ * @see java.lang.Runnable
+ * @author fadda-miceli-mundo
+ */
 public class Ping implements Runnable {
 
     private final Logger log = Logger.getLogger(Ping.class.getName());
@@ -18,6 +25,10 @@ public class Ping implements Runnable {
     private RmiHandler rmiHandler;
     private int id;
 
+    /**
+     * Class constructor: create a Ping type and load from file its settings, so the seconds between every ping of the server
+     * and the sleep milliseconds
+     */
     public Ping() {
 
         Gson gson = new Gson();
@@ -31,18 +42,37 @@ public class Ping implements Runnable {
         this.id = DEFAULT;
     }
 
-    public void setID(int id) {
-        this.id = id;
-    }
 
-    public void setConnection(RmiHandler rmiHandler) {
-        this.rmiHandler = rmiHandler;
-    }
-
+    /**
+     * method that provide the caller of the rmi handler associated with the ping classe
+     * @return the rmi handler responsible of the connection
+     */
     private RmiHandler getConnection() {
         return rmiHandler;
     }
 
+    /**
+     * method that allow the caller to set the id of the ping, that must be equal to the id of the rmi client
+     * @param id of the player
+     */
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    /**
+     * method that allow the caller to set the handler associated with the ping class
+     * @param rmiHandler to set to the ping
+     */
+    public void setConnection(RmiHandler rmiHandler) {
+        this.rmiHandler = rmiHandler;
+    }
+
+
+    /**
+     * Override methods of the Runnable interface, the thread ping the server if the rmi handler and id aren't null thanks
+     * to a remote method client ping that try to call in the server, in this way if the call doesn't work as expected
+     * is easy to understand
+     */
     @Override
     public void run() {
         boolean loop =  true;

@@ -17,6 +17,14 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Logger;
 
+
+/**
+ * Class Rmi Handler: represents the connection link between the client and the server,the rmi handler is responsible to
+ * take the input provided by the client and try to invoke the remote method on the server stub using the rmi middleware
+ * technologies for the communication. It creates the connection with the server loading the settings from file
+ * @see it.polimi.se2018.client.network.ClientInterface
+ * @author fadda-miceli-mundo
+ */
 public class RmiHandler implements ClientInterface {
 
     private final Logger log = Logger.getLogger(RmiHandler.class.getName());
@@ -24,8 +32,12 @@ public class RmiHandler implements ClientInterface {
     private View view;
     private Ping ping;
 
-    // creazione del collegamento con il lato server
-
+    /**
+     * Class constructor responsible of the creation of a new Rmi Handler, load its settings from a json file (ip address),
+     * connect the client to the rmi serve interface (stub) and register the rmi client on it
+     * @param view associated with the rmi handler
+     * @param ping the thread to understand if the client is disconnected from the game
+     */
     public RmiHandler(View view, Ping ping) {
 
         try {
@@ -57,11 +69,13 @@ public class RmiHandler implements ClientInterface {
 
 
 
-    //---------------------ovveride metodi di client interface-------------------------
-    // metodi invocabili dal client sul server
+    //---------------------ovveride client inteface-------methods invoked on the stub-------------------------------
 
-
-
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param singlePlayer mode game
+     */
     @Override
     public void setSinglePlayerMode(int id, boolean singlePlayer) {
         try {
@@ -72,7 +86,11 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
-
+    /**
+     * @see ClientInterface
+     * @param username name to set
+     * @param id of the player
+     */
     @Override
     public void setPlayerNameToServer(String username, int id) {
         try{
@@ -82,9 +100,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting name");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param indexPatternChoose index of the player's pattern  card list
+     * @param id of the player
+     */
     @Override
     public void setPatternCardToServer(int indexPatternChoose, int id) {
         try {
@@ -94,10 +117,12 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting pattern card");
             log.warning(e.getMessage());
         }
-
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setDraftPoolToServer(int id) {
         try {
@@ -110,6 +135,11 @@ public class RmiHandler implements ClientInterface {
 
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param step first move chose of the player
+     */
     @Override
     public void setChooseToServer(int id, int step) {
         try{
@@ -121,6 +151,12 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexPattern index of the box of the pattern card
+     */
     @Override
     public void setMoveToServer(int id, int indexPool, int indexPattern) {
         try{
@@ -130,10 +166,13 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting move");
             log.warning(e.getMessage());
         }
-
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setStartToolToServer(int id) {
         try{
@@ -143,9 +182,12 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting tool");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setNextTurnToServer(int id) {
         try{
@@ -155,9 +197,13 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting turn");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id player id
+     */
     @Override
     public void setNoTokenToServer(int id) {
         try{
@@ -167,9 +213,13 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting no tool");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexTool index of the tool card list
+     */
     @Override
     public void useToolCardToServer(int id, int indexTool) {
         try{
@@ -179,9 +229,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting using tool");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param increase increase or decrease decision of the player
+     */
     @Override
     public void useGrozingToolCard(int id, int indexPool, int increase) {
         try{
@@ -191,9 +246,15 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting grozing ");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexStart index of the dice to move
+     * @param indexEnd index of where to move the dice
+     */
     @Override
     public void useEglomiseToolCard(int id, int indexStart, int indexEnd) {
         try{
@@ -203,9 +264,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting eglomise");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexStart index of the dice to move
+     * @param indexEnd index of where to move the dice
+     */
     @Override
     public void useCopperFoilToolCard(int id, int indexStart, int indexEnd) {
         try{
@@ -215,9 +281,16 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting copper foil");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexStartOne index of the first dice to move
+     * @param indexEndOne index of where to move the first dice
+     * @param indexStartTwo index of the second dice to move
+     * @param indexEndTwo index of where to move the second dice
+     */
     @Override
     public void useLathekinToolCard(int id, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         try{
@@ -227,9 +300,15 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting lathekin");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexRound index of the round
+     * @param indexPosition index of the position of the dice in the round list
+     */
     @Override
     public void useLensCutterToolCard(int id, int indexPool, int indexRound, int indexPosition) {
         try{
@@ -239,9 +318,13 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting lens cutter");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     */
     @Override
     public void useFluxBrushToolCard(int id, int indexPool) {
         try{
@@ -251,9 +334,12 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting flux brush");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void useGlazingHammerToolCard(int id) {
         try{
@@ -263,9 +349,15 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting glazing hammer");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexPattern index of the box of the pattern card
+     */
     @Override
     public void useRunningPliersToolCard(int id, int indexPool, int indexPattern) {
         try{
@@ -275,9 +367,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting running pliers");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexPattern index of the box of the pattern card
+     */
     @Override
     public void useCorkBackedToolCard(int id, int indexPool, int indexPattern) {
         try{
@@ -287,9 +384,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting cork backed");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     */
     @Override
     public void useGrindingStoneToolCard(int id, int indexPool) {
         try{
@@ -299,9 +401,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting grinding stone");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param diceValue the value to change the dice
+     */
     @Override
     public void useFluxRemoverToolCard(int id, int indexPool, int diceValue) {
         try {
@@ -311,9 +418,18 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting flux remover");
             log.warning(e.getMessage());
         }
-
     }
 
+
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param number of dice to move
+     * @param indexStartOne index of the first dice to move
+     * @param indexEndOne index where to move the first dice
+     * @param indexStartTwo index of the second dice to move
+     * @param indexEndTwo index where to move the second dice
+     */
     @Override
     public void useTapWheelToolCard(int id, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo) {
         try{
@@ -325,6 +441,10 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setEndGameTimer(int id) {
         try {
@@ -339,6 +459,11 @@ public class RmiHandler implements ClientInterface {
 
     //-------------------------single player----------------------
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param difficulty value of the difficulty
+     */
     @Override
     public void setDifficultyToServer(int id, int difficulty) {
         try{
@@ -348,9 +473,14 @@ public class RmiHandler implements ClientInterface {
             log.info("Error in setting difficulty");
             log.warning(e.getMessage());
         }
-
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     * @param indexTool index of the tool card in tool card list
+     * @param indexPool index of the the dice in the draft pool
+     */
     @Override
     public void useToolSingleToServer(int id, int indexTool, int indexPool) {
         try{
@@ -364,6 +494,11 @@ public class RmiHandler implements ClientInterface {
 
     //-----------------------custom card------------------------------------
 
+    /**
+     * @see ClientInterface
+     * @param id player id
+     * @param patternCard pattern card to set to the player
+     */
     @Override
     public void setPatternCustomToServer(int id, PatternCard patternCard) {
         try {
@@ -373,11 +508,14 @@ public class RmiHandler implements ClientInterface {
             log.info("error in setting custom card");
             log.warning(e.getMessage());
         }
-
     }
 
     //----------------------disconnection------------------------------------
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setExitToServer(int id) {
         try {
@@ -389,6 +527,10 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
+    /**
+     * @see ClientInterface
+     * @param id of the player
+     */
     @Override
     public void setReconnectToServer(int id) {
         try {
@@ -399,6 +541,10 @@ public class RmiHandler implements ClientInterface {
         }
     }
 
+    /**
+     * method to ping the server to alert that the client is still connected
+     * @param id of the player
+     */
     void clientPing(int id) {
         try {
             stub.clientPing(id);

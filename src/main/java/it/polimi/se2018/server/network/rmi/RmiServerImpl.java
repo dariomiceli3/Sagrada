@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Class RmiServerImpl: the class is a subclass of RmiServerInterface, so it's responsible of the implementation of all
- * the abstract method of the interface, the Impl is linked to the Server where it's running and have a list of the clients
+ * the method of the interface, the Impl is linked to the Server where it's running and have a list of the clients
  * rmi connected to the server. The methods of the class are remotely called by the client
  * @see it.polimi.se2018.server.network.rmi.RmiServerInterface
  * @author fadda-miceli-mundo
@@ -62,9 +62,8 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
 
     //-------------------------------override interface methods---------------------------------------------------------
 
-
     /**
-     * method that add an rmi client to the list of clients in the server
+     * @see RmiServerInterface
      * @param clientRmi that have to be added
      */
     @Override
@@ -73,7 +72,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that add to the server an rmi virtual to the list of the rmi clients
+     * @see RmiServerInterface
      * @param virtualRmi that have to be added
      */
     @Override
@@ -82,7 +81,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server if the game mode chose is single player or not
+     * @see RmiServerInterface
      * @param id of the player
      * @param singlePlayer mode game
      */
@@ -91,9 +90,8 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
         sendEventVirtual(id, new SinglePlayerEvent(id, singlePlayer));
     }
 
-
     /**
-     * method that set to the server the name of the player with the id obtained as parameter
+     * @see RmiServerInterface
      * @param username name to set
      * @param id of the player
      */
@@ -104,8 +102,8 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the Pattern Card used by the player for the rest of the game
-     * @param indexPatternChoose index of the list of pattern of the player
+     * @see RmiServerInterface
+     * @param indexPatternChoose index of the player's pattern card list
      * @param id of the player
      */
     @Override
@@ -115,7 +113,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that alert to the server to roll the draft pool
+     * @see RmiServerInterface
      * @param id of the player
      */
     @Override
@@ -125,7 +123,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the choose of the first move of the player with that id
+     * @see RmiServerInterface
      * @param id of the player
      * @param step first move chose of the player
      */
@@ -136,7 +134,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the move of a dice to the pattern done by the player
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexPool index of the dice in the draft pool
      * @param indexPattern index of the box of the pattern card
@@ -148,7 +146,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that alert to the server that the player decided to use a tool card
+     * @see RmiServerInterface
      * @param id of the player
      */
     @Override
@@ -158,7 +156,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that alert of the next turn to the server
+     * @see RmiServerInterface
      * @param id of the player
      */
     @Override
@@ -168,8 +166,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that alert to the server that the player decided to not perform a tool card move
-     * because of the cost
+     * @see RmiServerInterface
      * @param id player id
      */
     @Override
@@ -179,7 +176,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that alert to the server that the player decided to use the tool card obtained as parameter
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexTool index of the tool card list
      */
@@ -190,7 +187,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses the Grozing Pliers tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexPool index of the dice in the draft pool
      * @param increase increase or decrease decision of the player
@@ -201,7 +198,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses the Eglomise Brush tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexStart index of the dice to move
      * @param indexEnd index of where to move the dice
@@ -212,7 +209,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses the Copper Foil Burnisher tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexStart index of the dice to move
      * @param indexEnd index of where to move the dice
@@ -223,7 +220,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses Lathekin tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexStartOne index of the first dice to move
      * @param indexEndOne index of where to move the first dice
@@ -236,7 +233,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses Lens Cutter tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexPool index of the dice in the draft pool
      * @param indexRound index of the round
@@ -248,7 +245,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server the player uses Flux Brush tool card
+     * @see RmiServerInterface
      * @param id of the player
      * @param indexPool index of the dice in the draft pool
      */
@@ -258,39 +255,75 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     }
 
     /**
-     * method that set to the server
-     * @param id
+     * @see RmiServerInterface
+     * @param id of the player
      */
     @Override
     public void useGlazingHammerToolCard(int id)  {
         sendEventVirtual(id, new GlazingHammerEvent());
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexPattern index of the box of the pattern card
+     */
     @Override
     public void useRunningPliersToolCard(int id, int indexPool, int indexPattern)  {
         sendEventVirtual(id, new RunningPliersEvent(indexPool, indexPattern));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param indexPattern index of the box of the pattern card
+     */
     @Override
     public void useCorkBackedToolCard(int id, int indexPool, int indexPattern)  {
         sendEventVirtual(id, new CorkBackedEvent(indexPool, indexPattern));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     */
     @Override
     public void useGrindingStoneToolCard(int id, int indexPool)  {
         sendEventVirtual(id, new GrindingStoneEvent(indexPool));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param indexPool index of the dice in the draft pool
+     * @param diceValue the value to change the dice
+     */
     @Override
     public void useFluxRemoverToolCard(int id, int indexPool, int diceValue)  {
         sendEventVirtual(id, new FluxRemoverEvent(indexPool, diceValue));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param number of dice to move
+     * @param indexStartOne index of the first dice to move
+     * @param indexEndOne index where to move the first dice
+     * @param indexStartTwo index of the second dice to move
+     * @param indexEndTwo index where to move the second dice
+     */
     @Override
     public void useTapWheelToolCard(int id, int number, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo)  {
         sendEventVirtual(id, new TapWheelEvent(number, indexStartOne, indexEndOne, indexStartTwo, indexEndTwo));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     */
     @Override
     public void setEndGameTimer(int id) {
         sendEventVirtual(id, new EndGameTimerEvent());
@@ -298,11 +331,22 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
 
     //---------------------------single player methods-------------------------------------------
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param difficulty value of the difficulty
+     */
     @Override
     public void setDifficultyToServer(int id, int difficulty)  {
         sendEventVirtual(id, new ToolNumberEvent(difficulty));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     * @param indexTool index of the tool card in tool card list
+     * @param indexPool index of the the dice in the draft pool
+     */
     @Override
     public void useToolSingleToServer(int id, int indexTool, int indexPool)  {
         sendEventVirtual(id, new ToolCardSinglePlayerStartEvent(indexTool, indexPool));
@@ -311,6 +355,11 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     //----------------------------card custom-----------------------------------------
 
 
+    /**
+     * @see RmiServerInterface
+     * @param id player id
+     * @param patternCard pattern card to set to the player
+     */
     @Override
     public void setPatternCustomToServer(int id, PatternCard patternCard)  {
         sendEventVirtual(id, new CustomPatternEvent(patternCard));
@@ -319,16 +368,28 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     //------------------------------disconnection----------------------------------------
 
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     */
     @Override
     public void setExitToServer(int id) {
         sendEventVirtual(id, new ExitEvent(id));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     */
     @Override
     public void setReconnectToServer(int id) {
         sendEventVirtual(id, new ReconnectPlayerEvent(id));
     }
 
+    /**
+     * @see RmiServerInterface
+     * @param id of the player
+     */
     @Override
     public void clientPing(int id) {
         for (VirtualRmi virtualRmi : clientsRmi) {
