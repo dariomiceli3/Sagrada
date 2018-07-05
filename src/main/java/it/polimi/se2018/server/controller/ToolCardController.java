@@ -273,11 +273,11 @@ public class ToolCardController implements Observer {
             gameController.getModel().updatePoolAndNotify();
             gameController.getModel().getToolCardList().add(gameController.getToolRemoveSinglePlayer());
         }
-        else if(gameController.getTool(n).getUsage() == 1){
-            gameController.getTool(n).setCost(1);
+        else if(gameController.getModel().getTool(n).getUsage() == 1){
+            gameController.getModel().getTool(n).setCost(1);
             int t = gameController.getModel().getPlayerFromID(virtualView.getPlayerID()).getTokensNumber();
             gameController.getModel().getPlayerFromID(virtualView.getPlayerID()).setTokensNumber(t + 1);
-            gameController.getTool(n).setUsage(0);
+            gameController.getModel().getTool(n).setUsage(0);
         }
         else {
             int t = gameController.getModel().getPlayerFromID(virtualView.getPlayerID()).getTokensNumber();

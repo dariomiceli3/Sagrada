@@ -121,6 +121,19 @@ public class Model extends Observable {
     }
 
     /**
+     * method that provides the toolcard corresponding to the specified index in the toolCardList
+     * @param indexTool the index of the tool card in the toolCardList
+     */
+    public ToolCard getTool(int indexTool) {
+        for (ToolCard toolCard : getToolCardList()) {
+            if (toolCard.getNumber() == indexTool) {
+                return toolCard;
+            }
+        }
+        return null;
+    }
+
+    /**
      * method that allow the caller to set the Tool Card list stored in the model
      * @param toolCardList to set in the model
      */

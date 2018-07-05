@@ -292,10 +292,10 @@ public class GameController implements Observer {
 
 
     /**
-     * method that allowed the caller to set the single-player mode difficulty, the difficulty goes from 1 to 5 and
-     * indicates the number of tool card given at the start of the game
-     * @param view
-     * @param name
+     * method that checks if the name set by player is valid, in affirmative case send the name to the model otherwise
+     * it signals the error, if all players set name it starts the pattern card chose
+     * @param view the virtual view corresponding to the client that has inserted name
+     * @param name the name chosen
      */
     private void setPlayerNameModel(VirtualView view, String name) {
 
@@ -317,6 +317,12 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that checks if custom pattern card inserted by player is valid, in affirmative case send that to the model
+     * if all player chose pattern card it starts the first round
+     * @param view the virtual view corresponding to the client that has inserted the custom pattern
+     * @param patternCard the custom pattern inserted
+     */
     private void setCustomPatternModel(VirtualView view, PatternCard patternCard) {
 
         model.setCustomPatternAndNotify(view.getPlayerID(), patternCard);
@@ -340,6 +346,12 @@ public class GameController implements Observer {
     }
 
 
+    /**
+     * method that send to the model the pattern card chose by the player,
+     * if all player chose pattern card it starts the first round
+     * @param view the virtual view corresponding to the client that has chosen the pattern
+     * @param indexPatternChoose the index in the list of pattern cards delivered to the player
+     */
     private void setPatternCardModel(VirtualView view, int indexPatternChoose){
 
         model.setPatternAndNotify(view.getPlayerID(), indexPatternChoose);
@@ -361,15 +373,32 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send to the model the current tokens of the player
+     * @param view the virtual view corresponding to the client whose tokens has to be modified
+     */
     private void setTokensModel(VirtualView view) {
         model.setTokenAndNotify(view.getPlayerID());
     }
 
+    /**
+     * method that send to the model that the draft pool has to be rolled
+     * @param view the virtual view corresponding to the client that rolls draft pool
+     */
     private void setDraftPoolModel(VirtualView view){
         model.setDraftPoolAndNotify(singlePlayer);
         startChoose(view);
     }
 
+    /**
+     * method that send to the model that the player has played his move where the index pool corresponds
+     * to the index in the draft pool of the dice chosen by player and the index pattern corresponds to the index
+     * of the pattern card where the dice has to be inserted, if model notifies the controller of an InvalidMoveException,
+     * the method restarts the step else goes to the next step
+     * @param view the virtual view corresponding to the client
+     * @param indexPattern the index in the draft pool of the dice chosen by player
+     * @param indexPool the index pattern corresponds to the index of the pattern card where the dice has to be inserted
+     */
     private void setMoveModel(VirtualView view, int indexPool, int indexPattern)  {
 
         Dice dice = model.getDraftPool().getDraftPool().get(indexPool);
@@ -385,14 +414,29 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send to the model that the round ended
+     */
     private void setEndRoundModel(){
         model.setEndRoundAndNotify();
     }
 
+    /**
+     * method that send to the model the final points of each player through a list of player and signals through
+     * a boolean if the current points correspond to the end game rank or an interruption before the game has started
+     * @param playerList list that contains players sorted in descending order  by points
+     * @param finish false if the game endx for an interruption before the game has started
+     */
     private void setFinalPointsModel(List<Player> playerList, boolean finish){
         model.setFinalPointsAndNotify(playerList, finish);
     }
 
+    /**
+     * method that send to the model that the player, having the indicated ID, disconnected from the game and
+     * increase the number of disconnected players by one. If the number of player is minor of 2  it calls the endMatch,
+     * else calls the NextTurn
+     * @param playerID the ID of the disconnected player
+     */
     private void setPlayerDisconnection(int playerID){
 
         model.getPlayerFromID(playerID).setDisconnect(true);
@@ -411,6 +455,11 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send to the model that the player, having the indicated ID, reconnected from the game and
+     * decrease the number of disconnected players by one
+     * @param playerID he ID of the reconnected player
+     */
     private void setPlayerReconnect(int playerID){
         model.getPlayerFromID(playerID).setDisconnect(false);
         disconnectPlayerNumber--;
@@ -421,6 +470,9 @@ public class GameController implements Observer {
 
     //---------------------------------logica applicativa---------------------------
 
+    /**
+     * method that send the started game event from each virtual view
+     */
     private void startGame() {
         model.setNumberPlayer(0);
         for (VirtualView view : viewGame) {
@@ -428,12 +480,18 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send the request of the difficulty of the game from single-player virtual view
+     */
     private void setToolSinglePlayer(){
         for (VirtualView view : viewGame) {
             view.sendEvent(new ToolNumberRequestEvent());
         }
     }
 
+    /**
+     * method that send to the model the cards of the game from each virtual view
+     */
     private void startCard(){
         model.setNumberPlayer(0);
         model.setToolCardList(setup.setToolCard());
@@ -446,6 +504,9 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method starts the turn of single-player mode, if turn is the last plus one calls the endRound method
+     */
     private void singlePlayerTurn(){
         if(turn == DEFAULT){
             viewGame.get(0).sendEvent(new StartRoundEvent(round));
@@ -465,6 +526,10 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method starts the turn of multi-player mode, if turn is the last plus one calls the endRound method else
+     * calls the startChose method on virtual view of the player that has to play
+     */
     private void startTurn(){
 
         //startTimer();
@@ -521,6 +586,12 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that calculate the id of the player that has to play in the specified turn using the number of players
+     * that are playing the game
+     * @param turn current turn
+     * @param numberOfPlayers number of players that are playing the game
+     */
     private int calculatePlayerTurn(int turn, int numberOfPlayers) {
         if (turn < numberOfPlayers) {
             return turn;
@@ -531,6 +602,9 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that increase the turn by one and calls the startTurn method if multi-player mode, else singlePlayerTurn method
+     */
     void nextTurn() {
         step = SET;
         turn++;
@@ -543,14 +617,26 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send the chose, of to use tool card or to do a move, to the player
+     * @param view the virtual view corresponding to the client that has to chose
+     */
     private void startChoose(VirtualView view){
         view.sendEvent(new StartChooseEvent(view.getPlayerID()));
     }
 
+    /**
+     * method that starts the move step
+     * @param view the virtual view corresponding to the client that has to do move
+     */
     private void startMove(VirtualView view){
         view.sendEvent(new StartMoveEvent(view.getPlayerID(), model.getDraftPool().getNowNumber()));
     }
 
+    /**
+     * method that starts the tool card step
+     * @param view the virtual view corresponding to the client that has to chose tool card
+     */
     void startTool(VirtualView view) {
         if(!singlePlayer){
             view.sendEvent(new StartToolEvent(view.getPlayerID(), model.getToolCardList()));
@@ -560,8 +646,10 @@ public class GameController implements Observer {
     }
 
 
-    //fa turn = 0, round++, e se round >10, allora
-    //chiama endMatch; gestisce inoltre tutti gli eventi della fine del round
+    /**
+     * method that increase the round by one and calls the endMatch method if the game finish else
+     * calls the startTurn method setting the turn to zero
+     */
     private void endRound(){
 
         setEndRoundModel();
@@ -581,6 +669,10 @@ public class GameController implements Observer {
 
     }
 
+
+    /**
+     * method that send to the model that the game was finish
+     */
     private void endMatch(boolean finish){
 
         if(!singlePlayer) {
@@ -607,6 +699,11 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * method use only in multi-player mode that checks if the tokens of the player are enough to use the selected tool card
+     * @param view the virtual view corresponding to the client that has chosen to use tool card
+     * @param indexTool the chosen tool card
+     */
     private void checkCost(VirtualView view, int indexTool){
         if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < model.getToolCardList().get(indexTool).getCost()){
             view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
@@ -623,6 +720,11 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that manage the step on the turn using nextStepTool method and nextStepMove method
+     * @param view the virtual view corresponding to the client that have to do next step
+     * @param step current step
+     */
     private void stepController(VirtualView view, int step){
 
         if(step == DEFAULT){
@@ -635,6 +737,10 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that manage the next step of turn after a tool card step
+     * @param view the virtual view corresponding to the client that have to do next step
+     */
     void nextStepTool(VirtualView view){
 
         if(step == START){
@@ -646,6 +752,10 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that manage the next step of turn after a move
+     * @param view the virtual view corresponding to the client that have to do next step
+     */
     private void nextStepMove(VirtualView view){
 
         if(step == DEFAULT){
@@ -656,15 +766,13 @@ public class GameController implements Observer {
         }
     }
 
-    ToolCard getTool(int n) {
-        for (ToolCard toolCard : model.getToolCardList()) {
-            if (toolCard.getNumber() == n) {
-                return toolCard;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * method use only in single-player mode that checks if the dice selected by the player is of the same color
+     * of the selected tool card
+     * @param view the virtual view corresponding to the client that has chosen to use tool card
+     * @param indexTool the chosen tool card
+     * @param indexPool the index of the draft pool corresponding to the selected dice
+     */
     private void checkDice(VirtualView view, int indexTool, int indexPool){
 
         if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(model.getToolCardList().get(indexTool).getColor().toString())){
@@ -681,6 +789,12 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that manage the disconnection of the client on the basis of the current game moment, handle also the case of the
+     * player doesn't set name or doesn't chose pattern card or both
+     * @param virtualView the virtual view corresponds to the disconnected client
+     * @param id the id corresponds to the disconnect player
+     */
     private void handlingDisconnection(int id, VirtualView virtualView) {
 
         log.info("disconnection in controller");
@@ -715,6 +829,10 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * method that manage the reconnection of the client linking the new virtual view with that one previously disconnected
+     * @param view the virtual view corresponding to the reconnected client
+     */
     private void handlingReconnection(VirtualView view) {
 
         log.info("reconnection in progress");
@@ -750,6 +868,10 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * method that send to the model the id of the player that  has decided to exit from the game
+     * @param iD iD of the player that  has decided to exit from the game
+     */
     private void sendExitNotification(int iD) {
         for (VirtualView view : viewGame) {
             if(notEnded) {
@@ -758,6 +880,11 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * method that send to the model the id of the player that  has decided to reconnect to the game
+     * after to be exited
+     * @param iD iD of the player that  has decided reconnect to the game
+     */
     private void sendReconnectNotification(int iD) {
         for (VirtualView view : viewGame) {
             view.sendEvent(new ReconnectionMsgEvent(iD, model.getPlayerFromID(iD).getPlayerName()));
@@ -765,6 +892,7 @@ public class GameController implements Observer {
 
     }
 
+    //todo javadoc
     protected void startTimer() {
 
         if (timer != null) {
@@ -791,6 +919,7 @@ public class GameController implements Observer {
         }, TIMERTURN);
     }
 
+    //todo javadoc
     private void endTimer() {
         if (timer != null) {
             timer.cancel();
