@@ -1,24 +1,23 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
-import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentShadeColumn;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DeepShades;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
+import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestLightShade {
+public class TestDeepShades {
     @Test
-    public void testRunPublic() throws InvalidMoveException {
+    public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
+        //try {
             Dice dice = new Dice(4, DiceColor.GREEN);
             Dice dice1 = new Dice(3, DiceColor.YELLOW);
             Dice dice2 = new Dice(5, DiceColor.BLUE);
@@ -48,17 +47,21 @@ public class TestLightShade {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new LightShade(), "Light Shades");
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DeepShades(), "Deep Shades");
             assertEquals(4, publicCard.executeEffect(pattern));
 
+
+        /*} catch(FileNotFoundException e) {
+            fail();
+        }*/
 
     }
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new LightShade(), "Light Shades");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DeepShades(),"Deep Shades");
         System.out.println(publicCard.toString());
+        publicCard.getName();
+       // publicCard.setName("Ciao");
     }
-
-
 }

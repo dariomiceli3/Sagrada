@@ -1,21 +1,19 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DiagonalColor;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorColumn;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ColumnColorVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestDifferentColorColumn {
+public class TestColumnColorVariety {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
@@ -48,7 +46,7 @@ public class TestDifferentColorColumn {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety");
             assertEquals(10, publicCard.executeEffect(pattern));
 
 
@@ -89,7 +87,7 @@ public class TestDifferentColorColumn {
         Pattern.putDiceOnPattern(diceBlue3, 14, Pattern);
         Pattern.putDiceOnPattern(diceGreen4, 19, Pattern);
 
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety");
         publicCard.executeEffect(Pattern);
 
 
@@ -130,7 +128,7 @@ public class TestDifferentColorColumn {
         Pattern.putDiceOnPattern(diceBlue3, 14, Pattern);
         Pattern.putDiceOnPattern(diceGreen4, 19, Pattern);
 
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety");
         publicCard.executeEffect(Pattern);
 
 
@@ -138,7 +136,7 @@ public class TestDifferentColorColumn {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety");
         System.out.println(publicCard.toString());
     }
 }

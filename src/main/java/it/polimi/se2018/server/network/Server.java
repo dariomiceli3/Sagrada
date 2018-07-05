@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.client.network.rmi.RmiClientInterface;
-import it.polimi.se2018.server.controller.Game;
+import it.polimi.se2018.server.controller.GameController;
 import it.polimi.se2018.server.network.rmi.RmiGatherer;
 import it.polimi.se2018.server.network.rmi.RmiServerImpl;
 import it.polimi.se2018.server.network.rmi.VirtualRmi;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 /**
  * Class Server: the class represents the Server, responsible for handling and manage the user connection, it's the class
- * responsible for the creation of the controller and the handling of the timer at the start of the game
+ * responsible for the creation of the controller and the handling of the timer at the start of the gameController
  * @author fadda-miceli-mundo
  */
 public class Server {
@@ -42,7 +42,7 @@ public class Server {
     private static boolean singlePlayer;
     private static int idPlayer;
     private static int multi;
-    private Game game;
+    private GameController gameController;
     private Timer timer;
     private final int TIMERLOGIN;
 
@@ -95,7 +95,7 @@ public class Server {
     }
 
     /**
-     * method that provide the caller of the current number of player in the multiplayer mode game
+     * method that provide the caller of the current number of player in the multiplayer mode gameController
      * @return int value of the number
      */
     public static int getMulti() {
@@ -103,11 +103,11 @@ public class Server {
     }
 
     /**
-     * method that provide the caller of the current game controller
-     * @return Game
+     * method that provide the caller of the current gameController controller
+     * @return GameController
      */
-    public Game getGame() {
-        return game;
+    public GameController getGameController() {
+        return gameController;
     }
 
     /**
@@ -127,16 +127,16 @@ public class Server {
     }
 
     /**
-     * method that allow the caller to set the game state to started or not
-     * @param gameStarted state of the current game
+     * method that allow the caller to set the gameController state to started or not
+     * @param gameStarted state of the current gameController
      */
     private void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
     }
 
     /**
-     * method that allow the caller to set if the modality of the game is single player or not
-     * @param singlePlayer boolean value of the current game mode
+     * method that allow the caller to set if the modality of the gameController is single player or not
+     * @param singlePlayer boolean value of the current gameController mode
      */
     public static void setSinglePlayer(boolean singlePlayer) {
         Server.singlePlayer = singlePlayer;
@@ -151,8 +151,8 @@ public class Server {
     }
 
     /**
-     * method that allow the caller to set the current number player in the multiplayer game mode
-     * @param multi number of player in the current game
+     * method that allow the caller to set the current number player in the multiplayer gameController mode
+     * @param multi number of player in the current gameController
      */
     public static void setMulti(int multi) {
         Server.multi = multi;
@@ -212,20 +212,20 @@ public class Server {
     /**
      * synchronized method responsible for the waiting of the connections of the other players, if the player are >= 2
      * start a timer for waiting other players to connect, at the end of the timer create e new instance of the controller
-     * and set the game started to true,while if the game mode is single player jump the timer and directly start a new game.
-     * It immediately start a game if the players connected are 4
+     * and set the gameController started to true,while if the gameController mode is single player jump the timer and directly start a new gameController.
+     * It immediately start a gameController if the players connected are 4
      */
     public synchronized void waitingOtherPlayers() {
 
         if (singlePlayer) {
             List<VirtualView> viewGame = new ArrayList<>(clients);
-            game = new Game(viewGame, singlePlayer);
+            gameController = new GameController(viewGame, singlePlayer);
             setGameStarted(true);
             log.info("Started single player");
         }
         if (getMulti() == MAXPLAYERS) {
             List<VirtualView> viewGame = new ArrayList<>(clients);
-            game = new Game(viewGame, singlePlayer);
+            gameController = new GameController(viewGame, singlePlayer);
             setGameStarted(true);
         }
         if (getMulti() < 2) {
@@ -250,9 +250,9 @@ public class Server {
 
                     if (getMulti() >= 2 && getMulti() < MAXPLAYERS) {
                         List<VirtualView> viewGame = new ArrayList<>(clients);
-                        game = new Game(viewGame, singlePlayer);
+                        gameController = new GameController(viewGame, singlePlayer);
                         setGameStarted(true);
-                        log.info("Started game");
+                        log.info("Started gameController");
                     }
                 }
             }, TIMERLOGIN);

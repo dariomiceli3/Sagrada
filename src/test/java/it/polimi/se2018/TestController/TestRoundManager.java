@@ -3,7 +3,7 @@
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DarkShade;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DeepShades;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DiagonalColor;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -132,7 +132,7 @@ public class TestRoundManager {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor());
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade());
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DeepShades());
 
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
@@ -222,7 +222,7 @@ public class TestRoundManager {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor());
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade());
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DeepShades());
 
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
@@ -351,7 +351,7 @@ public class TestRoundManager {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor());
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade());
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DeepShades());
 
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
@@ -436,7 +436,7 @@ public class TestRoundManager {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor(),"Diagonal Color");
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade(), "Dark Shade");
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DeepShades(), "Dark Shade");
 
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
@@ -534,7 +534,7 @@ public class TestRoundManager {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor(),"Diagonal Color");
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DarkShade(), "Dark Shade");
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DeepShades(), "Dark Shade");
 
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);

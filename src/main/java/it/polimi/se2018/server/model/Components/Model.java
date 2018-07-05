@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * because it's observable by the virtual view in case of modification.
  * The model store the references to the model components and use getter and setter methods to access them.
  * The model is responsible of modification of the components and after that send a notification to the virtual view.
- * The model methods are accessible and callable only by the controller Game to modify the components
+ * The model methods are accessible and callable only by the controller GameController to modify the components
  * @author fadda-miceli-mundo
  */
 public class Model extends Observable {

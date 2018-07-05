@@ -831,7 +831,7 @@ public class CliView extends View implements Runnable {
 
     @Override
     public void showGameStarted() {
-        out.println("Game started: " + super.isStarted());
+        out.println("GameController started: " + super.isStarted());
     }
 
 

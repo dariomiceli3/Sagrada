@@ -8,10 +8,10 @@ import java.io.Serializable;
 
 
 /**
- * Class DarkShade: it represents the public card Deep Shades of the game and its effect
+ * Class DeepShades: it represents the public card Deep Shades of the game and its effect
  * @author fadda-miceli-mundo
  */
-public class DarkShade implements PublicEffects, Serializable {
+public class DeepShades implements PublicEffects, Serializable {
     private static final int VPOINTS = 2;
     private static final String NAME = "Deep Shades";
 

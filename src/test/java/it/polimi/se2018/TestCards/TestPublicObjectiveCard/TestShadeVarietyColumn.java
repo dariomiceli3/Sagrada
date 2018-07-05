@@ -1,9 +1,8 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
+
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DarkShade;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentShadeColumn;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentShadeRow;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ColumnShadeVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestDarkShade {
+public class TestShadeVarietyColumn {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
@@ -50,8 +49,8 @@ public class TestDarkShade {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade(), "Deep Shades");
-            assertEquals(4, publicCard.executeEffect(pattern));
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnShadeVariety(), "Column Shade Variety");
+            assertEquals(8, publicCard.executeEffect(pattern));
 
 
         /*} catch(FileNotFoundException e) {
@@ -61,10 +60,48 @@ public class TestDarkShade {
     }
 
     @Test
+        public void test() throws FileNotFoundException, InvalidMoveException {
+            PatternCard patternCard = new PatternCard();
+            PatternCard Pattern = patternCard.loadPatternForTesting();
+            Dice diceBlue1 = new Dice(1, DiceColor.BLUE);
+            Dice diceGreen2 = new Dice(2, DiceColor.GREEN);
+            Dice diceBlue3 = new Dice(3, DiceColor.BLUE);
+            Dice diceGreen4 = new Dice(4, DiceColor.GREEN);
+
+
+
+            Pattern.putDiceOnPattern(diceBlue1,0,Pattern);
+            Pattern.putDiceOnPattern(diceGreen2,5,Pattern);
+            Pattern.putDiceOnPattern(diceBlue3,10,Pattern);
+            Pattern.putDiceOnPattern(diceGreen4,15,Pattern);
+
+            Pattern.putDiceOnPattern(diceGreen4,1,Pattern);
+            Pattern.putDiceOnPattern(diceBlue3,6,Pattern);
+            Pattern.putDiceOnPattern(diceGreen2,11,Pattern);
+            Pattern.putDiceOnPattern(diceBlue1,16,Pattern);
+
+            Pattern.putDiceOnPattern(diceBlue1,2,Pattern);
+            Pattern.putDiceOnPattern(diceGreen2,7,Pattern);
+            Pattern.putDiceOnPattern(diceBlue3,12,Pattern);
+            Pattern.putDiceOnPattern(diceGreen4,17,Pattern);
+
+            Pattern.putDiceOnPattern(diceGreen4,3,Pattern);
+            Pattern.putDiceOnPattern(diceBlue3,8,Pattern);
+            Pattern.putDiceOnPattern(diceGreen2,13,Pattern);
+            Pattern.putDiceOnPattern(diceBlue1,18,Pattern);
+
+            Pattern.putDiceOnPattern(diceBlue1,4,Pattern);
+            Pattern.putDiceOnPattern(diceGreen2,9,Pattern);
+            Pattern.putDiceOnPattern(diceBlue3,14,Pattern);
+            Pattern.putDiceOnPattern(diceGreen4,19,Pattern);
+
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnShadeVariety(), "Column Shade Variety");
+        publicCard.executeEffect(Pattern);
+    }
+
+    @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DarkShade(),"Deep Shades");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnShadeVariety(), "Column Shade Variety");
         System.out.println(publicCard.toString());
-        publicCard.getName();
-        publicCard.setName("Ciao");
     }
 }

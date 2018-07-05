@@ -9,7 +9,7 @@ import it.polimi.se2018.server.model.Components.RoundTracker;
 import java.util.*;
 
 
-class RoundManager  {
+class PointsManager {
 
     private static final int VPOINTS = 3;
 

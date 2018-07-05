@@ -1,9 +1,9 @@
 package it.polimi.se2018.TestController;
 
 import it.polimi.se2018.exceptions.InvalidMoveException;
+import it.polimi.se2018.server.controller.GameController;
 import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.network.VirtualView;
-import it.polimi.se2018.server.controller.Game;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
@@ -172,13 +172,13 @@ public class TestView {
         viewList.add(createView(1));
         viewList.add(createView(2));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 2));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         assertEquals("Michele",model.getPlayerFromID(1).getPlayerName());
-        Game game1 = new Game(viewList,false);
+        GameController gameController1 = new GameController(viewList,false);
 
     }
 
@@ -188,7 +188,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -204,7 +204,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -220,7 +220,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -238,7 +238,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -258,7 +258,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -280,7 +280,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -304,7 +304,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -330,7 +330,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -350,7 +350,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -372,7 +372,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
@@ -396,7 +396,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
@@ -439,7 +439,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
 
         viewList.get(1).sendEvent(new DisconnectionEvent(1));
@@ -457,7 +457,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
 
         //viewList.get(1).sendEvent(new DisconnectionEvent(1));
@@ -477,7 +477,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
 
         //viewList.get(1).sendEvent(new DisconnectionEvent(1));
@@ -499,7 +499,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -602,7 +602,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
     }
@@ -614,7 +614,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
 
@@ -633,7 +633,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -653,7 +653,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -727,7 +727,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -761,7 +761,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
 
@@ -795,7 +795,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -822,7 +822,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -852,7 +852,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -883,7 +883,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -913,7 +913,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController game = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -944,7 +944,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -975,7 +975,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1006,7 +1006,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1035,7 +1035,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController game = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1065,7 +1065,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController game = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1116,7 +1116,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1145,7 +1145,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController game = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1185,7 +1185,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1238,7 +1238,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController game = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1293,7 +1293,7 @@ public class TestView {
         viewList.add(createView(0));
         viewList.add(createView(1));
         Model model = new Model();
-        Game game = new Game(viewList, false, model);
+        GameController gameController = new GameController(viewList, false, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         viewList.get(1).sendEvent(new PlayerNameEvent("Michele", 1));
         Dice dice = new Dice(3, DiceColor.RED);
@@ -1343,7 +1343,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1381,7 +1381,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1413,7 +1413,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1450,7 +1450,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1489,7 +1489,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1525,7 +1525,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1561,7 +1561,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1600,7 +1600,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1637,7 +1637,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController gameController = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();
@@ -1675,7 +1675,7 @@ public class TestView {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
         Model model = new Model();
-        Game game = new Game(viewList, true, model);
+        GameController game = new GameController(viewList, true, model);
         viewList.get(0).sendEvent(new PlayerNameEvent("Luigi", 0));
         assertEquals("Luigi", model.getPlayerFromID(0).getPlayerName());
         PatternCard patternCard = new PatternCard().loadPatternForTesting();

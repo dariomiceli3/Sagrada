@@ -5,10 +5,10 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import java.io.Serializable;
 
 /**
- * Class DifferentShadeColumn: it represents the public card Column Shade Variety of the game and its effect
+ * Class ColumnShadeVariety: it represents the public card Column Shade Variety of the game and its effect
  * @author fadda-miceli-mundo
  */
-public class DifferentShadeColumn implements PublicEffects, Serializable {
+public class ColumnShadeVariety implements PublicEffects, Serializable {
 
     public static final int VPOINTS = 4;
     public static final String NAME = "Column Shade Variety";

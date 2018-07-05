@@ -99,7 +99,7 @@ public class VirtualRmi extends VirtualView {
 
                 if (server.isGameStarted()) {
                     log.info("rmi reconnection");
-                    this.addObserver(server.getGame());
+                    this.addObserver(server.getGameController());
                     Server.setMulti(Server.getMulti() + 1);
                     setChanged();
                     notifyObservers(new ReconnectionEvent());
@@ -306,7 +306,7 @@ public class VirtualRmi extends VirtualView {
 
         log.info("error rmi: " + super.getPlayerID() + "disconnected from the game");
 
-        if (server.getGame() == null) {
+        if (server.getGameController() == null) {
             server.getRmiGatherer().getServerRmi().getClientsRmi().remove(this);
             server.removeClient(this);
             Server.setMulti(Server.getMulti() - 1);

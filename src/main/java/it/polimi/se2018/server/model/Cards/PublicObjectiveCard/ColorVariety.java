@@ -10,10 +10,10 @@ import java.util.Iterator;
 import static java.lang.Math.min;
 
 /**
- * Class VarietyColor: it represents the public card Color Variety of the game and its effect
+ * Class ColorVariety: it represents the public card Color Variety of the game and its effect
  * @author fadda-miceli-mundo
  */
-public class VarietyColor implements PublicEffects, Serializable {
+public class ColorVariety implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 4;
     private static final String NAME = "Color Variety";

@@ -1,22 +1,21 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 
+
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorColumn;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorRow;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ShadeVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestDifferentColorRow {
+public class TestShadeVariety {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
@@ -50,8 +49,8 @@ public class TestDifferentColorRow {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorRow(), "Row Color Variety");
-            assertEquals(6, publicCard.executeEffect(pattern));
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new ShadeVariety(), "Shade Variety");
+            assertEquals(10, publicCard.executeEffect(pattern));
 
 
         /*} catch(FileNotFoundException e) {
@@ -60,12 +59,15 @@ public class TestDifferentColorRow {
 
     }
 
-
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new DifferentColorRow(), "Row Color Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ShadeVariety(), "Shade Variety");
         System.out.println(publicCard.toString());
     }
+
+    @Test
+    public void testGetName() {
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ShadeVariety(), "Shade Variety");
+        assertEquals("Shade Variety",  publicCard.getName());
+    }
 }
-
-

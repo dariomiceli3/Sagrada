@@ -104,7 +104,7 @@ public class EndGameScene {
             }
         }
         else {
-            winnerText.setText("Game never played");
+            winnerText.setText("GameController never played");
         }
     }
 

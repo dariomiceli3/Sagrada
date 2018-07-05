@@ -4,7 +4,7 @@ import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DiagonalColor;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DifferentColorColumn;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ColumnColorVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.*;
 import org.junit.Test;
@@ -71,7 +71,7 @@ public class TestModel {
 
         ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
         PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals");
-        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety");
+        PublicObjectiveCard publicObjectiveCard1 = new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety");
         publicObjectiveCards.add(publicObjectiveCard);
         publicObjectiveCards.add(publicObjectiveCard1);
 

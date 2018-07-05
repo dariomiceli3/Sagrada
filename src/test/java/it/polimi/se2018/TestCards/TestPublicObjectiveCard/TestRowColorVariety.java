@@ -2,21 +2,19 @@ package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.RowColorVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.VarietyColor;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestVarietyColor {
+public class TestRowColorVariety {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
@@ -50,10 +48,8 @@ public class TestVarietyColor {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor(), "Color Variety");
-            PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(publicCard);
-            publicObjectiveCard.getEffect();
-            assertEquals(8, publicCard.executeEffect(pattern));
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new RowColorVariety(), "Row Color Variety");
+            assertEquals(6, publicCard.executeEffect(pattern));
 
 
         /*} catch(FileNotFoundException e) {
@@ -61,9 +57,13 @@ public class TestVarietyColor {
         }*/
 
     }
+
+
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new VarietyColor(), "Color Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new RowColorVariety(), "Row Color Variety");
         System.out.println(publicCard.toString());
     }
 }
+
+

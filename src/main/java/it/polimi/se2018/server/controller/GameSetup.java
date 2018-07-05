@@ -20,14 +20,14 @@ import java.util.List;
 class GameSetup {
 
     private static final int VALUE = 12;
-    private Game game;
+    private GameController gameController;
     private List<PrivateObjectiveCard> listPrivateCard;
     private List<PublicObjectiveCard> listPublicCard;
     private List<PatternCard> listPattern;
     private boolean[] control;
 
-    GameSetup(Game game) {
-        this.game = game;
+    GameSetup(GameController gameController) {
+        this.gameController = gameController;
         this.listPrivateCard = this.loadPrivate();
         this.listPublicCard = this.loadPublic();
         this.listPattern = this.loadPatternCard();
@@ -39,13 +39,13 @@ class GameSetup {
 
     void setPrivateCardModel(VirtualView view) {
 
-        if (game.isSinglePlayer()){
+        if (gameController.isSinglePlayer()){
             List<PrivateObjectiveCard> listPrivate = new ArrayList<>();
             listPrivate.add(listPrivateCard.remove(0));
             listPrivate.add(listPrivateCard.remove(0));
-            game.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
+            gameController.getModel().setPrivateSinglePlayerAndNotify(listPrivate);
         }else {
-            game.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
+            gameController.getModel().setPrivateAndNotify((view.getPlayerID()), listPrivateCard.remove(0));
         }
     }
 
@@ -54,10 +54,10 @@ class GameSetup {
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
         listPublic1.add(listPublicCard.remove(0));
         listPublic1.add(listPublicCard.remove(0));
-        if(!game.isSinglePlayer()) {
+        if(!gameController.isSinglePlayer()) {
             listPublic1.add(listPublicCard.remove(0));
         }
-        game.getModel().setPublicAndNotify(listPublic1);
+        gameController.getModel().setPublicAndNotify(listPublic1);
     }
 
 
@@ -65,14 +65,14 @@ class GameSetup {
 
         List<ToolCard> toolCardList = this.loadToolCard();
         List<ToolCard> toolCardList1 = new ArrayList<>();
-        if(!game.isSinglePlayer()) {
+        if(!gameController.isSinglePlayer()) {
 
             toolCardList1.add(toolCardList.remove(0));
             toolCardList1.add(toolCardList.remove(0));
             toolCardList1.add(toolCardList.remove(0));
         }else {
 
-            for(int i = 0; i < game.getSinglePlayerDifficulty(); i++) {
+            for(int i = 0; i < gameController.getSinglePlayerDifficulty(); i++) {
                 toolCardList1.add(toolCardList.remove(0));
             }
         }
@@ -91,7 +91,7 @@ class GameSetup {
             patternList.add(listPattern.get(a));
             patternList.add(listPattern.get(a + VALUE));
         }
-        game.getModel().getPlayerFromID(view.getPlayerID()).setPatterChooseList(patternList);
+        gameController.getModel().getPlayerFromID(view.getPlayerID()).setPatterChooseList(patternList);
 
         view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
     }
@@ -107,9 +107,9 @@ class GameSetup {
 
     void changeBagger() {
         do {
-            game.getModel().getPlayerList().add(game.getModel().getPlayerList().remove(0));
+            gameController.getModel().getPlayerList().add(gameController.getModel().getPlayerList().remove(0));
         }
-        while (game.getModel().getPlayerList().get(0).isDisconnect());
+        while (gameController.getModel().getPlayerList().get(0).isDisconnect());
     }
 
     private List<PrivateObjectiveCard> loadPrivate() {
@@ -127,16 +127,16 @@ class GameSetup {
     private List<PublicObjectiveCard> loadPublic() {
 
         List<PublicObjectiveCard> list = new ArrayList<>();
-        list.add(new PublicObjectiveCard(new DarkShade(), "Deep Shades"));
+        list.add(new PublicObjectiveCard(new DeepShades(), "Deep Shades"));
         list.add(new PublicObjectiveCard(new DiagonalColor(), "Color Diagonals"));
-        list.add(new PublicObjectiveCard(new DifferentColorColumn(), "Column Color Variety"));
-        list.add(new PublicObjectiveCard(new DifferentColorRow(), "Row Color Variety"));
-        list.add(new PublicObjectiveCard(new DifferentShade(), "Shade Variety"));
-        list.add(new PublicObjectiveCard(new DifferentShadeRow(), "Row Shade Variety"));
-        list.add(new PublicObjectiveCard(new DifferentShadeColumn(), "Column Shade Variety"));
-        list.add(new PublicObjectiveCard(new LightShade(), "Light Shades"));
-        list.add(new PublicObjectiveCard(new MediumShade(), "Medium Shades"));
-        list.add(new PublicObjectiveCard(new VarietyColor(), "Color Variety"));
+        list.add(new PublicObjectiveCard(new ColumnColorVariety(), "Column Color Variety"));
+        list.add(new PublicObjectiveCard(new RowColorVariety(), "Row Color Variety"));
+        list.add(new PublicObjectiveCard(new ShadeVariety(), "Shade Variety"));
+        list.add(new PublicObjectiveCard(new RowShadeVariety(), "Row Shade Variety"));
+        list.add(new PublicObjectiveCard(new ColumnShadeVariety(), "Column Shade Variety"));
+        list.add(new PublicObjectiveCard(new LightShades(), "Light Shades"));
+        list.add(new PublicObjectiveCard(new MediumShades(), "Medium Shades"));
+        list.add(new PublicObjectiveCard(new ColorVariety(), "Color Variety"));
         Collections.shuffle(list);
         return list;
     }
@@ -157,7 +157,7 @@ class GameSetup {
         list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
         list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
-        if(!game.isSinglePlayer()) {
+        if(!gameController.isSinglePlayer()) {
             list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));
         }
         list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));

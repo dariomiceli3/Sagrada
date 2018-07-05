@@ -23,9 +23,9 @@ import java.util.*;
 import java.util.logging.Logger;
 
 
-public class Game implements Observer {
+public class GameController implements Observer {
 
-    private final Logger log = Logger.getLogger(Game.class.getName());
+    private final Logger log = Logger.getLogger(GameController.class.getName());
     private static final int DEFAULT = 0;
     private static final int START = 1;
     private static final int END = 10;
@@ -33,7 +33,7 @@ public class Game implements Observer {
     private Model model;
     private List<VirtualView> viewGame;
     private GameSetup setup;
-    private RoundManager roundManager;
+    private PointsManager pointsManager;
     private int turn = DEFAULT;
     private int round = START;
     private int currID;
@@ -56,7 +56,7 @@ public class Game implements Observer {
      * @param viewList list of virtual view connected to the game
      * @param singlePlayer true if the game mode is single-player, else multi-player
      */
-    public Game(List<VirtualView> viewList, boolean singlePlayer) {
+    public GameController(List<VirtualView> viewList, boolean singlePlayer) {
         Model modelGame = new Model();
         createGame(viewList, singlePlayer, modelGame);
     }
@@ -68,7 +68,7 @@ public class Game implements Observer {
      * @param singlePlayer true if the game mode is single-player, else multi-player
      * @param model the model
      */
-    public Game(List<VirtualView> viewList, boolean singlePlayer, Model model) {
+    public GameController(List<VirtualView> viewList, boolean singlePlayer, Model model) {
         createGame(viewList, singlePlayer, model);
     }
 
@@ -79,7 +79,7 @@ public class Game implements Observer {
         this.model = model;
         this.viewGame = new ArrayList<>(viewList);
         this.setup = new GameSetup(this);
-        this.roundManager = new RoundManager();
+        this.pointsManager = new PointsManager();
         this.toolController = new ToolCardController(this);
         this.singlePlayer = singlePlayer;
         this.disconnectPlayerNumber = DEFAULT;
@@ -88,7 +88,7 @@ public class Game implements Observer {
         this.notEnded = true;
         this.disconnectName = DEFAULT;
 
-        InputStream fileStream = Game.class.getResourceAsStream("/json/settings" + ".json");
+        InputStream fileStream = GameController.class.getResourceAsStream("/json/settings" + ".json");
         JsonObject jsonObject = gson.fromJson(new JsonReader(new InputStreamReader(fileStream)), JsonObject.class);
         TIMERTURN = jsonObject.get("timerTurn").getAsInt();
 
@@ -96,7 +96,7 @@ public class Game implements Observer {
 
         for (VirtualView view: viewGame) {
             Player player = new Player(view.getPlayerID());
-            log.info("Player id in new Game" + player.getPlayerID());
+            log.info("Player id in new GameController" + player.getPlayerID());
             playerList.add(player);
         }
 
@@ -585,7 +585,7 @@ public class Game implements Observer {
 
         if(!singlePlayer) {
             if (finish) {
-                setFinalPointsModel(roundManager.calculateWinner(model.getPlayerList(), model.getPublicList()), true);
+                setFinalPointsModel(pointsManager.calculateWinner(model.getPlayerList(), model.getPublicList()), true);
                 for (VirtualView view : viewGame) {
                     view.sendEvent(new WinnerEvent(model.getPlayerList().get(0).getPlayerID()));
                 }
@@ -596,7 +596,7 @@ public class Game implements Observer {
         }
         else {
 
-            int roundTrackerPoints = roundManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
+            int roundTrackerPoints = pointsManager.calculateWinnerSinglePlayer(model.getPlayerList().get(0), model.getPublicList(), model.getPlayerList().get(0).getPrivateSinglePlayerCard(), model.getRoundTracker());
             int playerPoints = model.getPlayerList().get(0).getFinalPoints();
             if(playerPoints > roundTrackerPoints){
                 viewGame.get(0).sendEvent(new EndSinglePlayerEvent(true, playerPoints, roundTrackerPoints));

@@ -5,10 +5,10 @@ import it.polimi.se2018.server.model.Cards.PatternCard;
 import java.io.Serializable;
 
 /**
- * Class DifferentColorRow: it represents the public card Row Color Variety of the game and its effect
+ * Class RowColorVarietyw: it represents the public card Row Color Variety of the game and its effect
  * @author fadda-miceli-mundo
  */
-public class DifferentColorRow implements PublicEffects, Serializable {
+public class RowColorVariety implements PublicEffects, Serializable {
     private static final int  VPOINTS = 6;
     private static final String NAME = "Row Color Variety";
 

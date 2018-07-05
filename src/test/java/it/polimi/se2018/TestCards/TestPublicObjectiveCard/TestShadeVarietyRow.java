@@ -1,21 +1,21 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
+
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.LightShade;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.MediumShade;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ColumnShadeVariety;
+import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.RowShadeVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
 import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
-public class TestMediumShade {
+public class TestShadeVarietyRow {
     @Test
     public void testRunPublic() throws InvalidMoveException{
         PatternCard pattern = new PatternCard();
@@ -49,8 +49,8 @@ public class TestMediumShade {
             pattern.putDiceOnPattern(dice5, 17, pattern);
             pattern.putDiceOnPattern(dice2, 18, pattern);
             pattern.putDiceOnPattern(dice1, 19, pattern);
-            PublicObjectiveCard publicCard = new PublicObjectiveCard(new MediumShade(), "Medium Shades");
-            assertEquals(8, publicCard.executeEffect(pattern));
+            PublicObjectiveCard publicCard = new PublicObjectiveCard(new RowShadeVariety(), "Row Shade Variety");
+            assertEquals(5, publicCard.executeEffect(pattern));
 
 
         /*} catch(FileNotFoundException e) {
@@ -61,7 +61,7 @@ public class TestMediumShade {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new MediumShade(), "Medium Shades");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnShadeVariety(), "Row Shade Variety");
         System.out.println(publicCard.toString());
     }
 }

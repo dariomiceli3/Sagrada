@@ -199,7 +199,7 @@ public class GuiController extends View {
         Parent root1 = loader.load();
 
         Scene scene = new Scene(root1);
-        stage.setTitle("Sagrada Game");
+        stage.setTitle("Sagrada GameController");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -212,7 +212,7 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = loader.load();
         Scene gameBoard = new Scene(root2);
-        stage.setTitle("Sagrada Game");
+        stage.setTitle("Sagrada GameController");
         stage.setScene(gameBoard);
         stage.setResizable(false);
         stage.show();
@@ -350,7 +350,7 @@ public class GuiController extends View {
                 comboBox.setVisible(true);
                 txtName.setDisable(true);
             }
-            AlertBox.display("Name Choose", "Game is started, enter your name");
+            AlertBox.display("Name Choose", "GameController is started, enter your name");
         });
     }
 

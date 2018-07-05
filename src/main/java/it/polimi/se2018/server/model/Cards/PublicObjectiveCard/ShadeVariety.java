@@ -8,11 +8,11 @@ import java.util.Iterator;
 import static java.lang.Math.min;
 
 /**
- * Class DifferentShade: it represents the public card Shade Variety of the game and its effect
+ * Class ShadeVariety: it represents the public card Shade Variety of the game and its effect
  * @author fadda-miceli-mundo
  */
 
-public class DifferentShade implements PublicEffects, Serializable {
+public class ShadeVariety implements PublicEffects, Serializable {
 
     private static final int VPOINTS = 5;
     private static final String NAME = "Shade Variety";

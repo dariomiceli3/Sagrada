@@ -1,7 +1,6 @@
 package it.polimi.se2018.TestCards.TestPublicObjectiveCard;
 
 import it.polimi.se2018.server.model.Cards.PatternCard;
-import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DarkShade;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DiagonalColor;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -9,7 +8,6 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;

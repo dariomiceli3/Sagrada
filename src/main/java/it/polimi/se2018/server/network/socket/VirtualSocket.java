@@ -84,7 +84,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                     received = socketIn.readObject();
                 } catch (IOException e) {
                     log.info("error socket: " + super.getPlayerID() + " disconnected from the game ");
-                    if (getServer().getGame() == null) {
+                    if (getServer().getGameController() == null) {
                         getServer().removeSocketClient(this);
                         getServer().removeClient(this);
                         Server.setMulti(Server.getMulti() - 1);
@@ -123,7 +123,7 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         if (getServer().isGameStarted()) {
 
                             log.info("reconnection socket");
-                            this.addObserver(getServer().getGame());
+                            this.addObserver(getServer().getGameController());
                             Server.setMulti(Server.getMulti() + 1);
                             setChanged();
                             notifyObservers(new ReconnectionEvent());
