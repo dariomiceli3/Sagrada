@@ -61,7 +61,7 @@ public class TestShadeVarietyRow {
 
     @Test
     public void testToString(){
-        PublicObjectiveCard publicCard = new PublicObjectiveCard(new ColumnShadeVariety(), "Row Shade Variety");
+        PublicObjectiveCard publicCard = new PublicObjectiveCard(new RowShadeVariety(), "Row Shade Variety");
         System.out.println(publicCard.toString());
     }
 }

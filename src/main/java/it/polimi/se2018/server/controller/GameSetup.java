@@ -16,7 +16,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Class GameSetup: representation of the first part of the game. It handles to load, to shuffle
+ * and to deliver all the cards to the selected virtual view
+ */
 class GameSetup {
 
     private static final int VALUE = 12;
@@ -26,6 +29,10 @@ class GameSetup {
     private List<PatternCard> listPattern;
     private boolean[] control;
 
+    /**
+     * Class constructor: create the final step of a game delivering all the cards(publics, private, tool card)
+     * @param gameController game linked to the setup
+     */
     GameSetup(GameController gameController) {
         this.gameController = gameController;
         this.listPrivateCard = this.loadPrivate();
@@ -36,7 +43,11 @@ class GameSetup {
     }
 
 
-
+    /**
+     * method that delivers one private card to the virtual view if the mode is multi player,
+     * otherwise the method delivers three private cards
+     * @param view the virtual view corresponding to the client
+     */
     void setPrivateCardModel(VirtualView view) {
 
         if (gameController.isSinglePlayer()){
@@ -49,6 +60,10 @@ class GameSetup {
         }
     }
 
+    /**
+     * method that delivers three public cards if the mode is multi player,
+     * otherwise the method delivers two public cards
+     */
     void setPublicCardModel() {
 
         List<PublicObjectiveCard> listPublic1 = new ArrayList<>();
@@ -60,7 +75,11 @@ class GameSetup {
         gameController.getModel().setPublicAndNotify(listPublic1);
     }
 
-
+    /**
+     * method that delivers three tool cards if the mode is multi player,
+     * otherwise the method delivers tool cards as much as the difficulty chosen by the player
+     * @return list of the tool cards delivered
+     */
     List<ToolCard> setToolCard() {
 
         List<ToolCard> toolCardList = this.loadToolCard();
@@ -79,7 +98,10 @@ class GameSetup {
         return toolCardList1;
     }
 
-
+    /**
+     * method that delivers to the virtual view four pattern cards
+     * @param view the virtual view corresponding to the client
+     */
     void startPatternCard(VirtualView view) {
 
         List<PatternCard> patternList = new ArrayList<>();
@@ -96,6 +118,7 @@ class GameSetup {
         view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
     }
 
+    //todo adriano
     private int ricorsiveMethod(int a) {
         Random random = new Random();
         if (!control[a]) {
@@ -104,7 +127,7 @@ class GameSetup {
         } else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
-
+    //todo adriano
     void changeBagger() {
         do {
             gameController.getModel().getPlayerList().add(gameController.getModel().getPlayerList().remove(0));
@@ -112,6 +135,10 @@ class GameSetup {
         while (gameController.getModel().getPlayerList().get(0).isDisconnect());
     }
 
+    /**
+     * method that loads and shuffles all the private cards
+     * @return list of the private cards
+     */
     private List<PrivateObjectiveCard> loadPrivate() {
 
         List<PrivateObjectiveCard> list = new ArrayList<>();
@@ -124,6 +151,10 @@ class GameSetup {
         return list;
     }
 
+    /**
+     * method that loads and shuffles all the public cards
+     * @return list of public cards
+     */
     private List<PublicObjectiveCard> loadPublic() {
 
         List<PublicObjectiveCard> list = new ArrayList<>();
@@ -141,12 +172,20 @@ class GameSetup {
         return list;
     }
 
+    /**
+     * method that loads all the 24 pattern cards
+     * @return list of pattern cards
+     */
     List<PatternCard> loadPatternCard() {
         PatternCard pattern = new PatternCard();
         listPattern = pattern.loadPatternList();
         return listPattern;
     }
 
+    /**
+     * method that loads and shuffles all the tool cards
+     * @return list of tool cards
+     */
     private List<ToolCard> loadToolCard() {
         List<ToolCard> list = new ArrayList<>();
 
