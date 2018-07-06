@@ -239,7 +239,7 @@ public class TestModel {
 
     }
 
-    @Test(expected = InvalidMoveException.class)
+    /*@Test(expected = InvalidMoveException.class)
     public void testPutFirstDice8() throws InvalidMoveException {
         Model model = new Model();
 
@@ -272,5 +272,5 @@ public class TestModel {
 
         model.putDiceToolCard(0, 0, 0, 8);
 
-    }
+    }*/
 }

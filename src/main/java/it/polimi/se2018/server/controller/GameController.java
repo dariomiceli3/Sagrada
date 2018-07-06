@@ -534,7 +534,7 @@ public class GameController implements Observer {
      */
     private void startTurn(){
 
-        //startTimer();
+        startTimer();
 
         if(turn == DEFAULT){
             for (VirtualView view : viewGame) {

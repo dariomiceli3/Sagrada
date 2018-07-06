@@ -846,7 +846,7 @@ public class TestView {
         viewList.get(0).sendEvent(new CopperFoilEvent(3,3));
     }
 
-    @Test(expected = NullPointerException.class)
+   /* @Test(expected = NullPointerException.class)
     public void testCopperFoilInvalid() throws InvalidMoveException, FileNotFoundException {
         List<VirtualView> viewList = new ArrayList<>();
         viewList.add(createView(0));
@@ -875,7 +875,7 @@ public class TestView {
         viewList.get(0).sendEvent(new PlayerNextTurnEvent());
         viewList.get(0).getModel().getPlayerFromID(0).getPattern().putDiceOnPattern(dice1,4,model.getPlayerFromID(0).getPattern());
         viewList.get(0).sendEvent(new CopperFoilEvent(3,3));
-    }
+    }*/
 
     @Test
     public void testLathekin() throws InvalidMoveException, FileNotFoundException {
