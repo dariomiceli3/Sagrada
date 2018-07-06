@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.logging.Logger;
 import static java.lang.System.out;
 
+/**
+ * Class GuiController: //todo
+ */
 public class GuiController extends View {
 
     private final Logger log = Logger.getLogger(GuiController.class.getName());
@@ -65,95 +68,219 @@ public class GuiController extends View {
     private String nameID2;
     private String nameID3;
 
-
+    /**
+     * method that provides the caller the stage of the game
+     * @return stage of the game
+     */
     Stage getStage() {
         return stage;
     }
 
+    /**
+     * method that provides the caller the list of the tool cards
+     * @return list of the tool cards
+     */
     List<ToolCard> getToolList() {
         return toolList;
     }
+
+    /**
+     * method that provides the caller the list of the public cards
+     * @return list of the public cards
+     */
     List<PublicObjectiveCard> getPublicCardList() {
         return publicCardList;
     }
+
+    /**
+     * method that provides the caller the list of the private cards in single player mode
+     * @return list of private cards
+     */
     List<PrivateObjectiveCard> getPrivateCardSingle() {
         return privateCardSingle;
     }
 
+    /**
+     * method that provides the caller the current pattern
+     * @return current pattern
+     */
     PatternCard getPatternCurrent() {
         return patternCurrent;
     }
+
+    /**
+     * method that provides the caller the pattern of the player with id 0
+     * @return pattern card
+     */
     PatternCard getPatternID0() {
         return patternID0;
     }
+    /**
+     * method that provides the caller the pattern of the player with id 1
+     * @return pattern card
+     */
     PatternCard getPatternID1() {
         return patternID1;
     }
+    /**
+     * method that provides the caller the pattern of the player with id 2
+     * @return pattern card
+     */
     PatternCard getPatternID2() {
         return patternID2;
     }
+    /**
+     * method that provides the caller the pattern of the player with id 3
+     * @return pattern card
+     */
     PatternCard getPatternID3() {
         return patternID3;
     }
 
+    /**
+     * method that provides the caller the name of the player with id 0
+     * @return name of the player
+     */
     String getNameID0() {
         return nameID0;
     }
+    /**
+     * method that provides the caller the name of the player with id 1
+     * @return name of the player
+     */
     String getNameID1() {
         return nameID1;
     }
+
+    /**
+     * method that provides the caller the name of the player with id 2
+     * @return name of the player
+     */
     String getNameID2() {
         return nameID2;
     }
+
+    /**
+     * method that provides the caller the name of the player with id 3
+     * @return name of the player
+     */
     String getNameID3() {
         return nameID3;
     }
+
+    /**
+     * method that provides the caller the number of tokens
+     * @return number of tokens
+     */
     int getTokens() {
         return tokens;
     }
+
+    /**
+     * method that allows to set the controller
+     * @param board board of the game
+     */
     static void setBoard(BoardController board) {
         GuiController.board = board;
     }
+
+    /**
+     * method that provides the caller if the player use a custom card
+     * @return boolean custom card
+     */
     boolean isCustomCard() {
         return customCard;
     }
 
 
-
+    /**
+     * method that provides the caller if the modality is in single player
+     * @return boolean single player
+     */
     public boolean isSinglePlayer() {
         return singlePlayer;
     }
+
+    /**
+     * method that provides the caller the name of the player
+     * @return name of the player
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * method that provides the caller the private card
+     * @return private card
+     */
     public PrivateObjectiveCard getPrivateCard() {
         return privateCard;
     }
+
+    /**
+     * method that provides the caller the list of the pattern cards
+     * @return list of the pattern cards
+     */
     public List<PatternCard> getPatternList() {
         return patternList;
     }
 
+    /**
+     * method that allows to set the name of the player with id 0
+     * @param nameID0 name of the player
+     */
     private void setNameID0(String nameID0) {
         this.nameID0 = nameID0;
     }
+
+    /**
+     * method that allows to set the name of the player with id 1
+     * @param nameID1 name of the player
+     */
     private void setNameID1(String nameID1) {
         this.nameID1 = nameID1;
     }
+
+    /**
+     * method that allows to set the name of the player with id 2
+     * @param nameID2 name of the player
+     */
     private void setNameID2(String nameID2) {
         this.nameID2 = nameID2;
     }
+
+    /**
+     * method that allows to set the name of the player with id 3
+     * @param nameID3 name of the player
+     */
     private void setNameID3(String nameID3) {
         this.nameID3 = nameID3;
     }
+
+    /**
+     * method that allows to set the number of tokens
+     * @param tokens number of tokens
+     */
     private void setTokens(int tokens) {
         this.tokens = tokens;
     }
+
+    /**
+     * method that allows to set if the pattern card used by the player is custom or not
+     * @param customCard boolean custom vard
+     */
     private void setCustomCard(boolean customCard) {
         this.customCard = customCard;
     }
 
     //-------------------------gui start-----------------
 
+    /**
+     * method that allows to set the type of the connection, the stage and the mode of the game
+     * @param connectionType type of the connection
+     * @param primaryStage stage of the game
+     * @param singlePlayer boolean that indicates if the mode is single player
+     */
     public void setConnectionTypeAndStage(String connectionType, Stage primaryStage,boolean singlePlayer) {
 
         Gson gson = new Gson();
@@ -174,8 +301,6 @@ public class GuiController extends View {
             Thread socketThread = new Thread(serverSocket);
             socketThread.start();
 
-            //Thread viewSocketThread = new Thread(this);
-            //viewSocketThread.start();
         }
 
         if (connectionType.equalsIgnoreCase("rmi")) {
@@ -192,7 +317,10 @@ public class GuiController extends View {
 
     //-------------switch scene method--------------------------------
 
-
+    /**
+     * method that allows to set the pattern scene
+     * @throws IOException Something goes wrong
+     */
     private void patternScene() throws IOException{
         ChoosePattern.setMainController(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardDraw.fxml"));
@@ -206,6 +334,10 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that allows to set the board scene
+     * @throws IOException Something goes wrong
+     */
     private void boardScene() throws IOException {
 
         BoardController.setMainController(this);
@@ -220,6 +352,9 @@ public class GuiController extends View {
 
     //----------------methods for setting----------------------------------
 
+    /**
+     * method that allows to set the mode
+     */
     private void setMode() {
 
         Platform.runLater(() -> {
@@ -233,11 +368,18 @@ public class GuiController extends View {
         });
     }
 
-
+    /**
+     * method that allows to set the pattern
+     * @param indexPattern index of the pattern
+     */
     public void setPattern(int indexPattern){
         getConnection().setPatternCardToServer(indexPattern, getPlayerID());
     }
 
+    /**
+     * method that allows to set the custom pattern
+     * @param pattern pattern card to set
+     */
     void setCustomPattern(PatternCard pattern) {
         getConnection().setPatternCustomToServer(getPlayerID(), pattern);
         setCustomCard(true);
@@ -246,6 +388,9 @@ public class GuiController extends View {
 
     //----------------mode.fxml controller----------------
 
+    /***
+     * method that initializes the scene
+     */
     public void initialize() {
 
         gameStarted = false;
@@ -269,7 +414,9 @@ public class GuiController extends View {
     private ComboBox<Integer> comboBox;
     private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
 
-
+    /**
+     * method that handle //todo
+     */
     @FXML
     void handlePlayButton() {
 
@@ -291,7 +438,7 @@ public class GuiController extends View {
 
     }
 
-    @FXML
+    @FXML// todo
     void handleDifficultyBox() {
         this.selectedDifficulty = comboBox.getSelectionModel().getSelectedItem();
         txtName.setDisable(false);
@@ -300,7 +447,7 @@ public class GuiController extends View {
 
     //-----------------ovveride di view methods
 
-    @Override
+    @Override //todo
     public void run() {
         log.info("runner run");
     }
@@ -315,7 +462,9 @@ public class GuiController extends View {
         return connection;
     }
 
-
+    /**
+     * @see View
+     */
     @Override
     public void showID() {
         log.info("Player GUI id set");
@@ -363,6 +512,7 @@ public class GuiController extends View {
     public void showName() {
         nameSet.setValue(true);
     }
+
 
     @Override
     public void showNameOther(String playerName) {

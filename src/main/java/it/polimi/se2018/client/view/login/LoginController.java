@@ -16,15 +16,26 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Class LoginController: Login Controller handles all the choices made by the player in the login's scene.
+ * @author fadda-miceli-mundo
+ */
 public class LoginController {
 
     private Stage stage;
     private boolean singlePlayer;
 
+    /**
+     * method that allows the set the stage of the view
+     * @param stage stage of the view
+     */
     public void setStage(Stage stage){
         this.stage = stage;
     }
 
+    /**
+     * method that initializes all the properties of the buttons at the beginning of the game
+     */
     public void initialize() {
 
         gui.setUserData("gui");
@@ -63,6 +74,10 @@ public class LoginController {
 
     // action event nel caso
 
+    /**
+     * method that allows to switch scene after choosing the type of the connection and the modality of the game
+     * @throws IOException
+     */
     @FXML
     void loginButtonSelected() throws IOException {
 

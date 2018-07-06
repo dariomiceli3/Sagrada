@@ -14,16 +14,27 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.logging.Logger;
 
+/**
+ * Class PatternCardBox: class that handles to display the other player's pattern during the turn of the current player
+ * @author fadda-miceli-mundo
+ */
 public class PatternCardBox {
 
     private final Logger log = Logger.getLogger(PatternCardBox.class.getName());
     private static PatternCard patternCard;
     private InputStream fileStream;
 
+    /**
+     * method that allows to set the pattern card
+     * @param patternCard pattern card
+     */
     public static void setPatternCard(PatternCard patternCard) {
         PatternCardBox.patternCard = patternCard;
     }
 
+    /**
+     * method that handles to initialize the window loading the pattern empty
+     */
     public void initialize() {
 
         loadPattern();
@@ -40,7 +51,11 @@ public class PatternCardBox {
         }
     }
 
-
+    /**
+     * method that displays the pattern of the selected player
+     * @param name name of the selected player
+     * @throws IOException
+     */
     static void displayOtherPattern(String name) throws IOException {
         Stage window = new Stage();
 
@@ -104,8 +119,9 @@ public class PatternCardBox {
     private ImageView glassBox20;
 
 
-
-
+    /**
+     * method that allows to load the pattern
+     */
     private void loadPattern() {
         String fileName = patternCard.getName();
 
@@ -123,7 +139,10 @@ public class PatternCardBox {
         }
     }
 
-
+    /**
+     * method that allows to load a dice in the pattern
+     * @param indexPattern index of the pattern where to load the dice
+     */
     private void loadDice(int indexPattern) throws IOException {
 
         String fileName = patternCard.getDice(indexPattern).toStringGui();

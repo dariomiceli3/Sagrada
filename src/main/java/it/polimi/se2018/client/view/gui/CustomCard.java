@@ -14,9 +14,15 @@ import java.util.logging.Logger;
 
 import static java.lang.String.*;
 
+/**
+ * Class CustomCard: this class handles to create a custom card
+ * @author fadda-miceli-mundo
+ */
 public class CustomCard {
 
-
+    /**
+     * Class constructor
+     */
     private CustomCard() {
         final Logger log = Logger.getLogger(CustomCard.class.getName());
         log.info("private constructor");
@@ -24,6 +30,11 @@ public class CustomCard {
 
     private static Canvas canvas;
 
+    /**
+     * method that allows to rendering a pattern card
+     * @param patternCard pattern card
+     * @return image of the pattern card
+     */
     static Image rendering(PatternCard patternCard) {
         createCard(patternCard);
         SnapshotParameters snap = new SnapshotParameters();
@@ -31,6 +42,10 @@ public class CustomCard {
         return canvas.snapshot(snap, null);
     }
 
+    /**
+     * method that allows to create a pattern card
+     * @param patternCard pattern card to create
+     */
     private static void createCard(PatternCard patternCard){
 
         canvas = new Canvas();
@@ -81,7 +96,11 @@ public class CustomCard {
     }
 
 
-
+    /**
+     * method that allows to create dynamically a pattern card using a graphic context
+     * @param patternCard pattern card to create
+     * @param gc graphic context
+     */
     private static void cardParser(PatternCard patternCard, GraphicsContext gc) {
 
 
@@ -102,6 +121,11 @@ public class CustomCard {
 
     }
 
+    /**
+     * method that allows to display the color of one box of the pattern
+     * @param i number of the cell
+     * @param gc graphic context
+     */
     private static void parserColor(int i, GraphicsContext gc){
 
         if(i == 0){
@@ -167,6 +191,12 @@ public class CustomCard {
 
     }
 
+    /**
+     * method that allows to display the number of one box of the pattern
+     * @param contraintValue value to display
+     * @param i number of the cell
+     * @param gc graphic context
+     */
     private static void parserNum(String contraintValue, int i, GraphicsContext gc){
 
         gc.setFont(Font.font("Arial", 50));
@@ -234,6 +264,11 @@ public class CustomCard {
         }
     }
 
+    /**
+     * method that allows to fill the boxes of the pattern card
+     * @param string color of the box
+     * @param gc graphic context
+     */
     private static void setFillColor(String string, GraphicsContext gc){
 
         if(string.equalsIgnoreCase("yellow")){

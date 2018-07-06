@@ -14,6 +14,10 @@ import java.io.*;
 import java.util.logging.Logger;
 import static java.lang.System.out;
 
+/**
+ * Class ChoosePattern: class that handles the choice of the pattern card by the player
+ * @author fadda-miceli-mundo
+ */
 public class ChoosePattern {
 
     private final Logger log = Logger.getLogger(ChoosePattern.class.getName());
@@ -25,14 +29,27 @@ public class ChoosePattern {
     private SimpleBooleanProperty customPlay = new SimpleBooleanProperty(true);
     private PatternCard selfScheme;
 
+    /**
+     * /**
+     * method that allows to set the controller in that scene
+     * @param mainController controller of the scene
+     */
     static void setMainController(GuiController mainController){
         ChoosePattern.mainController = mainController;
     }
 
+    /**
+     * method that allows to set the index of the pattern
+     * @param indexPattern index of the pattern
+     */
     public static void setIndexPattern(int indexPattern) {
         ChoosePattern.indexPattern = indexPattern;
     }
 
+    /**
+     * method that allows to initialize loading all the cards in the scene
+     * @throws IOException
+     */
     public void initialize () throws IOException {
 
         if (mainController.isSinglePlayer()) {
@@ -77,30 +94,48 @@ public class ChoosePattern {
     @FXML
     private ImageView toolCard4Zoom;
 
+    /**
+     * method that allows to unzoom the second private
+     */
     @FXML
     void handlePrivateUnzoom2() {
         privateCardZoom2.setVisible(false);
 
     }
+    /**
+     * method that allows to zoom the second private
+     */
     @FXML
     void handlePrivateZoomTwo() {
         privateCardZoom2.setVisible(true);
 
     }
+    /**
+     * method that allows to unzoom the fourth tool card
+     */
     @FXML
     void handleToolUnzoom4() {
         toolCard4Zoom.setVisible(false);
 
     }
+    /**
+     * method that allows to unzoom the fifth tool card
+     */
     @FXML
     void handleToolUnzoom5() {
         toolCard5Zoom.setVisible(false);
     }
+    /**
+     * method that allows to zoom the fourth tool card
+     */
     @FXML
     void handleToolZoom4() {
         toolCard4Zoom.setVisible(true);
 
     }
+    /**
+     * method that allows to zoom the fourth tool card
+     */
     @FXML
     void handleToolZoom5() {
         toolCard5Zoom.setVisible(true);
@@ -161,64 +196,123 @@ public class ChoosePattern {
     @FXML
     private ToggleGroup patternToggleGroup;
 
-
+    /**
+     * method that allows to unzoom the first private card
+     */
     @FXML
     void handlePrivateUnzoom (){
             privateCardZoom.setVisible(false);
         }
+
+    /**
+     * method that allows to zoom the first private card
+     */
     @FXML
     void handlePrivateZoom (){
         privateCardZoom.setVisible(true);
     }
+
+    /**
+     * method that allows to unzoom the first public card
+     */
     @FXML
     void handlePublicUnzoom1 (){
         publicCard1Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to unzoom the second public card
+     */
     @FXML
     void handlePublicUnzoom2 (){
         publicCard2Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to unzoom the third public card
+     */
     @FXML
     void handlePublicUnzoom3 (){
         publicCard3Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to zoom the first public card
+     */
     @FXML
     void handlePublicZoom1 (){
         publicCard1Zoom.setVisible(true);
     }
+
+    /**
+     * method that allows to zoom the second public card
+     */
     @FXML
     void handlePublicZoom2 (){
         publicCard2Zoom.setVisible(true);
     }
+
+    /**
+     * method that allows to zoom the third public card
+     */
     @FXML
     void handlePublicZoom3 (){
         publicCard3Zoom.setVisible(true);
     }
+
+    /**
+     * method that allows to unzoom the first tool card
+     */
     @FXML
     void handleToolUnzoom1 (){
         toolCard1Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to unzoom the second tool card
+     */
     @FXML
     void handleToolUnzoom2 (){
         toolCard2Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to unzoom the third tool card
+     */
     @FXML
     void handleToolUnzoom3 (){
         toolCard3Zoom.setVisible(false);
     }
+
+    /**
+     * method that allows to zoom the first tool card
+     */
     @FXML
     void handleToolZoom1 (){
         toolCard1Zoom.setVisible(true);
     }
+
+    /**
+     * method that allows to zoom the second tool card
+     */
     @FXML
     void handleToolZoom2 (){
         toolCard2Zoom.setVisible(true);
     }
+
+
+    /**
+     * method that allows to zoom the third tool card
+     */
     @FXML
     void handleToolZoom3 (){
         toolCard3Zoom.setVisible(true);
     }
 
+
+    /**
+     * method that allows to set the pattern card after the choise of the player
+     */
     @FXML
     void playButtonSelected() {
 
@@ -247,6 +341,10 @@ public class ChoosePattern {
         }
     }
 
+
+    /**
+     * method that allows to load a custom pattern card
+     */
     @FXML
     void loadButtonSelected()  {
 
@@ -284,7 +382,10 @@ public class ChoosePattern {
     }
 
 
-
+    /**
+     * method that allows to load the private card from a file
+     * @throws IOException
+     */
     private void loadFilePrivate() throws IOException {
 
         String fileColor = mainController.getPrivateCard().getColour().toString();
@@ -300,6 +401,10 @@ public class ChoosePattern {
         }
     }
 
+    /**
+     * method that allows to load the two private card from a file in single player mode
+     * @throws IOException
+     */
     private void loadFilePrivateSingle() throws IOException {
 
         for (int i = 0; i < mainController.getPrivateCardSingle().size(); i++) {
@@ -326,6 +431,10 @@ public class ChoosePattern {
         }
     }
 
+    /**
+     * method that allows to load the tool card card from a file
+     * @throws IOException
+     */
     private void loadFileToolCard() throws IOException  {
 
         for (int i = 0; i < mainController.getToolList().size(); i++) {
@@ -393,6 +502,10 @@ public class ChoosePattern {
         }
     }
 
+    /**
+     * method that allows to load the public card from a file
+     * @throws IOException
+     */
     private void loadFilePublicCard() throws IOException  {
 
         for (int i = 0; i < mainController.getPublicCardList().size(); i++) {
@@ -447,6 +560,10 @@ public class ChoosePattern {
         }
     }
 
+    /**
+     * method that allows to load the pattern cards from a file
+     * @throws IOException
+     */
     private void loadFilePatternCard() throws IOException  {
 
         for (int i = 0; i < mainController.getPatternList().size(); i++) {

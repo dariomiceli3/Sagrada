@@ -8,9 +8,17 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.InputStream;
 
-
+/**
+ * Class Login: Login represents the first scene of the gui
+ * @author fadda-miceli-mundo
+ */
 public class Login extends Application {
 
+    /**
+     * method that allows to launch the gui starting the scene of the login
+     * @param primaryStage stage of the gui
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 

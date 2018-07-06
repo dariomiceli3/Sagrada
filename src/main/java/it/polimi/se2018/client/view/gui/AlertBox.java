@@ -10,15 +10,25 @@ import javafx.geometry.*;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
-
+/**
+ * Class AlertBox: AlertBox used during the game to warns players of a message
+ * @author fadda-miceli-mundo
+ */
 public class AlertBox {
 
+    /**
+     * Class constructor
+     */
     private AlertBox() {
         final Logger log = Logger.getLogger(AlertBox.class.getName());
         log.info("private constructor");
     }
 
-
+    /**
+     * method that allows to display the alert box with the title of the window and the message to display
+     * @param title title of the window
+     * @param message message to display
+     */
     public static void display(String title, String message) {
         InputStream fileStream;
         Stage window = new Stage();

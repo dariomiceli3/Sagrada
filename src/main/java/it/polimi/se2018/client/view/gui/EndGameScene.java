@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-
+/**
+ * Class EndGameScene: class that handles to rank the final points of the players at the end of the game
+ * @author fadda-miceli-mundo
+ */
 public class EndGameScene {
 
     @FXML
@@ -38,29 +41,57 @@ public class EndGameScene {
     private static boolean finish;
     private static List<Player> playerList;
 
+    /**
+     *  method that allows to set the modality of the game
+     * @param singlePlayer boolean that indicates if the mode is single player
+     */
     public static void setSinglePlayer(boolean singlePlayer) {
         EndGameScene.singlePlayer = singlePlayer;
     }
 
+    /**
+     * method that allows to set if the player won or not
+     * @param winnerSingle boolean that indicates if the player won
+     */
     static void setWinnerSingle(boolean winnerSingle) {
         EndGameScene.winnerSingle = winnerSingle;
     }
 
+    /**
+     * method that allows to set the total points of the player
+     * @param playerPoints points of the player
+     */
     static void setPlayerPoints(int playerPoints) {
         EndGameScene.playerPoints = playerPoints;
     }
 
+    /**
+     * method that allows to set the threshold for the single player mode
+     * @param gameThreshold threshold of the game
+     */
     static void setGameThreshold(int gameThreshold) {
         EndGameScene.gameThreshold = gameThreshold;
     }
 
+    /**
+     * method that allows to set if the game is finished or not
+     * @param finish boolean that indicates if the game is finished
+     */
     static void setFinish(boolean finish) {
         EndGameScene.finish = finish;
     }
+
+    /**
+     * method that allows to set the list of all players
+     * @param playerList list of all players
+     */
     protected static void setPlayerList(List<Player> playerList) {
         EndGameScene.playerList = playerList;
     }
 
+    /**
+     * method that initializes the scene of the final rank
+     */
     public void initialize() {
 
         if (finish) {
@@ -108,6 +139,10 @@ public class EndGameScene {
         }
     }
 
+    /**
+     * method that display the end of the game
+     * @throws IOException
+     */
     public static void display() throws IOException {
         Stage window = new Stage();
 

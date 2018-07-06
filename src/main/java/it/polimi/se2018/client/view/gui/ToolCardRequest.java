@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
+/**
+ * Class ToolCardRequest: class that handles to request tool cards
+ * @author fadda-miceli-mundo
+ */
 public class ToolCardRequest {
 
     private final Logger log = Logger.getLogger(ToolCardRequest.class.getName());
@@ -31,20 +35,42 @@ public class ToolCardRequest {
     private int tool11;
     private int tool12;
 
+    /**
+     * method that allows to set the number of the tool card
+     * @param n number of the tool card
+     */
     static void setToolNumber(int n){
         ToolCardRequest.toolNumber = n;
     }
+
+    /**
+     * method that allows to set the controller
+     * @param board board of the game
+     */
     static void setBoard(BoardController board){
         ToolCardRequest.board = board;
     }
+
+    /**
+     * method that allows to set the color of the request for the tool card
+     * @param color color of the tool card
+     */
     public static void setColor(DiceColor color) {
         ToolCardRequest.color = color;
     }
 
+    /**
+     * method that allows to set the tool 11
+     * @param tool11 tool 11
+     */
     public void setTool11(int tool11) {
         this.tool11 = tool11;
     }
 
+    /**
+     * method that allows to display the request of the tool card
+     * @throws IOException
+     */
     public static void display()  throws IOException {
 
         window = new Stage();
@@ -96,6 +122,9 @@ public class ToolCardRequest {
 
     //nel caso non funzionasse c'erano solo action event
 
+    /**
+     * method that allows to select the button
+     */
     @FXML
     void buttonSelected() {
 
@@ -112,6 +141,9 @@ public class ToolCardRequest {
     }
 
 
+    /**
+     * method that allows to select a tool
+     */
     @FXML
     void handleToolEleven() {
 
@@ -142,17 +174,18 @@ public class ToolCardRequest {
         }
     }
 
+    /**
+     * method that allows to select the tool 1
+     */
     @FXML
     void handleTool1() {
 
         try {
             if (tool1Group.getSelectedToggle().equals(tool1ButtonMin)) {
                 tool1 = 0;
-                System.out.println("entro in 1");
             }
             if (tool1Group.getSelectedToggle().equals(tool1ButtonPlus)) {
                 tool1 = 1;
-                System.out.println("entro in 2");
             }
         }
         catch (NullPointerException e) {
@@ -161,6 +194,9 @@ public class ToolCardRequest {
         }
     }
 
+    /**
+     * method that allows to select the tool 12
+     */
     @FXML
     void handleTool12() {
 
@@ -179,6 +215,9 @@ public class ToolCardRequest {
 
     }
 
+    /**
+     * method that initializes the tool card number 1, 11 and 12
+     */
     public void initialize(){
 
         if(toolNumber == 1){

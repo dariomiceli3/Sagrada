@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
+/**
+ * Class RoundTrackerBox: class that handles the display the dice of the round in round tracker
+ * @author fadda-miceli-mundo
+ */
 public class RoundTrackerBox {
 
     private final Logger log = Logger.getLogger(RoundTrackerBox.class.getName());
@@ -27,17 +31,34 @@ public class RoundTrackerBox {
     private static Stage window;
     private InputStream fileStream;
 
+    /**
+     * method that allows to set the controller in that scene
+     * @param board board of the game
+     */
     static void setMainController(BoardController board){
         RoundTrackerBox.board = board;
     }
+
+    /**
+     * method that allows to seet the number of the round
+     * @param round round of the round tracker
+     */
     static void setBoxRound(int round){
         RoundTrackerBox.round = round;
     }
 
+    /**
+     * method that handles to load dice
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         loadDice();
     }
 
+    /**
+     * method that allows to display all the dice of the selected round
+     * @throws IOException
+     */
     static void display()  throws IOException {
         window = new Stage();
 
@@ -94,12 +115,17 @@ public class RoundTrackerBox {
     @FXML
     private ToggleGroup buttonGroup;
 
-
+    /**
+     * method that allows to close the window
+     */
     @FXML
     void selectMethod() {
         window.close();
     }
 
+    /**
+     * method that allows to view the selected dice
+     */
     @FXML
     void selectedDice() {
 
@@ -246,7 +272,10 @@ public class RoundTrackerBox {
 
     }
 
-
+    /**
+     * method that allows to load the dice in the round tracker
+     * @throws IOException
+     */
     private void loadDice() throws IOException {
 
         for (int i = 0; i < board.getRoundTracker().getRoundDice(round).size(); i++) {

@@ -6,6 +6,7 @@ import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.DiagonalColor;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.ColumnColorVariety;
 import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCard;
+import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Components.*;
 import org.junit.Test;
 
@@ -156,6 +157,120 @@ public class TestModel {
         model.setMoveAndNotify(0,0,0);
         PatternCard patternCard1 = patternCards.get(0);
         model.setCustomPatternAndNotify(0, patternCard1);
+
+    }
+
+    @Test
+    public void testTool() {
+        Model model = new Model();
+
+        ArrayList<ToolCard> toolCards = new ArrayList<>();
+        ToolCard toolCard = new ToolCard("name", DiceColor.RED, 1);
+        toolCards.add(toolCard);
+
+        model.setToolCardList(toolCards);
+        assertEquals("name", model.getTool(1).getName());
+    }
+
+    @Test
+    public void testTokensFactor() {
+        Model model = new Model();
+
+        ArrayList<ToolCard> toolCards = new ArrayList<>();
+        ToolCard toolCard = new ToolCard("name", DiceColor.RED, 1);
+        toolCards.add(toolCard);
+
+        model.setToolCardList(toolCards);
+
+        ArrayList<Player> playerArrayList = new ArrayList<>();
+        Player player = new Player();
+
+        Player player1  = new Player();
+
+        player.setPlayerID(0);
+        player1.setPlayerID(1);
+        playerArrayList.add(player);
+        playerArrayList.add(player1);
+        model.setPlayerList(playerArrayList);
+
+        model.tokenRefactor(false, 0, 1);
+        model.getTool(1).setUsage(1);
+        model.tokenRefactor(false, 0, 1);
+
+        Dice dice = new Dice(3,DiceColor.RED);
+        model.setDraftPoolAndNotify(false);
+        model.exchangePoolBag(0,1, dice);
+
+    }
+
+    @Test(expected = InvalidMoveException.class)
+    public void testPutFirstDice() throws InvalidMoveException {
+        Model model = new Model();
+
+        ArrayList<ToolCard> toolCards = new ArrayList<>();
+        ToolCard toolCard = new ToolCard("name", DiceColor.RED, 1);
+        toolCards.add(toolCard);
+
+        model.setToolCardList(toolCards);
+
+        ArrayList<Player> playerArrayList = new ArrayList<>();
+        Player player = new Player();
+
+        Player player1  = new Player();
+
+        player.setPlayerID(0);
+        player1.setPlayerID(1);
+        playerArrayList.add(player);
+        playerArrayList.add(player1);
+        model.setPlayerList(playerArrayList);
+
+        PatternCard patternCard = new PatternCard();
+        patternCard = patternCard.loadPatternForTesting();
+        player.setPattern(patternCard);
+
+        model.setDraftPoolAndNotify(false);
+        model.putDiceToolCard(0, 3, 4, 9);
+
+        Dice dice = new Dice(4, DiceColor.YELLOW);
+        patternCard.putDice(dice,0);
+        player1.setPattern(patternCard);
+
+        model.putDiceToolCard(1, 0, 0, 9);
+
+    }
+
+    @Test(expected = InvalidMoveException.class)
+    public void testPutFirstDice8() throws InvalidMoveException {
+        Model model = new Model();
+
+        ArrayList<ToolCard> toolCards = new ArrayList<>();
+        ToolCard toolCard = new ToolCard("name", DiceColor.RED, 1);
+        toolCards.add(toolCard);
+
+        model.setToolCardList(toolCards);
+
+        ArrayList<Player> playerArrayList = new ArrayList<>();
+        Player player = new Player();
+
+        Player player1  = new Player();
+
+        player.setPlayerID(0);
+        player1.setPlayerID(1);
+        playerArrayList.add(player);
+        playerArrayList.add(player1);
+        model.setPlayerList(playerArrayList);
+
+        PatternCard patternCard = new PatternCard();
+        patternCard = patternCard.loadPatternForTesting();
+        player.setPattern(patternCard);
+
+        model.setDraftPoolAndNotify(false);
+
+        Dice dice = new Dice(4, DiceColor.YELLOW);
+        patternCard.putDice(dice,0);
+        player1.setPattern(patternCard);
+
+        model.putDiceToolCard(0, 0, 0, 8);
 
     }
 }
