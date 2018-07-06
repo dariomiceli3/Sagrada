@@ -11,13 +11,14 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class View: // todo adriano
+ * Class View: the class represents an abstract view with the generics and behavioural methods to show to the client the
+ * update depending on the event received from the server. The abstract methods are used to update the scene of a generic
+ * view that extends the abstract class. A subclass that extends and implement the abstract method of the view has the garantee
+ * to work perfectly with the rest of the class in the mvc patterns
  * @author fadda-miceli-mundo
  * @see Runnable
  */
 public abstract class View implements Runnable {
-
-    //qui metodi generici comportamentabili, ovveride nelle varie view e chiamati da fuori
 
     private String playerName;
     private boolean isStarted;
@@ -464,8 +465,8 @@ public abstract class View implements Runnable {
     public abstract void showDifficultyRequest();
 
     /**
-     * method that allows to show the list of the public cards
-     * @param publicList list of publi cards
+     * method that allows to show the list of the private cards
+     * @param publicList list of private cards
      */
     public abstract void showPrivateSingle(List<PrivateObjectiveCard> publicList);
 
@@ -519,7 +520,7 @@ public abstract class View implements Runnable {
     public abstract void showReconnectPlayer(String playerName);
 
     /**
-     * method that allows to show that a player can't reconnect to a game because no players exite
+     * method that allows to show that a player can't reconnect to a game because no players exit
      */
     public abstract void showNotPermittedReconnection();
 

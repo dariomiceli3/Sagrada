@@ -48,7 +48,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to initialize loading all the cards in the scene
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     public void initialize () throws IOException {
 
@@ -384,7 +384,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to load the private card from a file
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadFilePrivate() throws IOException {
 
@@ -403,7 +403,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to load the two private card from a file in single player mode
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadFilePrivateSingle() throws IOException {
 
@@ -433,7 +433,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to load the tool card card from a file
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadFileToolCard() throws IOException  {
 
@@ -504,7 +504,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to load the public card from a file
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadFilePublicCard() throws IOException  {
 
@@ -562,7 +562,7 @@ public class ChoosePattern {
 
     /**
      * method that allows to load the pattern cards from a file
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadFilePatternCard() throws IOException  {
 

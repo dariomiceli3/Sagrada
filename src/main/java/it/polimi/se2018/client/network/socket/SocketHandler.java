@@ -91,7 +91,7 @@ public class SocketHandler implements ClientInterface, Runnable {
      * method that read the event passed as parameter and depending on the type of the event received let the view
      * with the correct id use their generics and  behavioural show methods to show output to the client
      * @param event to read
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void readEvent(Event event) throws IOException {
         if (event instanceof PlayerIDEvent) {

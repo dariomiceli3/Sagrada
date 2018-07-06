@@ -285,7 +285,7 @@ public class Model extends Observable {
      * @param id of the player
      * @param indexPool index of the dice in the pool
      * @param indexPattern index of the box of the pattern card
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void setMoveAndNotify(int id, int indexPool, int indexPattern) throws InvalidMoveException {
         Dice dice = draftPool.removeDice(indexPool);
@@ -483,7 +483,7 @@ public class Model extends Observable {
      * @param indexPool index of the dice in the draft pool
      * @param increase indicates if increase or decrease the value of a dice
      * @param number the tool card on which run the effect
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void setDiceValue(int indexPool, int increase, int number) throws InvalidMoveException  {
 
@@ -658,7 +658,7 @@ public class Model extends Observable {
      * @param indexStartTwo where to take the second dice
      * @param indexEndTwo where to move the second dice
      * @param number of the tool card used
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void putSecondDiceToolCard(int id, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo, int number) throws InvalidMoveException {
         if (number == 4) {
@@ -716,7 +716,7 @@ public class Model extends Observable {
      * @param indexPool index of the dice in the draft pool
      * @param indexPattern index of the box of the pattern card where to put the dice
      * @param number of the tool card used
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void putDiceToolCard(int id, int indexPool, int indexPattern, int number) throws InvalidMoveException {
 

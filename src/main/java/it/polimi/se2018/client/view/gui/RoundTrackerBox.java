@@ -49,7 +49,7 @@ public class RoundTrackerBox {
 
     /**
      * method that handles to load dice
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     public void initialize() throws IOException {
         loadDice();
@@ -57,7 +57,7 @@ public class RoundTrackerBox {
 
     /**
      * method that allows to display all the dice of the selected round
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     static void display()  throws IOException {
         window = new Stage();
@@ -274,7 +274,7 @@ public class RoundTrackerBox {
 
     /**
      * method that allows to load the dice in the round tracker
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     private void loadDice() throws IOException {
 

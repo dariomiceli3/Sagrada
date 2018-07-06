@@ -76,7 +76,7 @@ public class LoginController {
 
     /**
      * method that allows to switch scene after choosing the type of the connection and the modality of the game
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     @FXML
     void loginButtonSelected() throws IOException {

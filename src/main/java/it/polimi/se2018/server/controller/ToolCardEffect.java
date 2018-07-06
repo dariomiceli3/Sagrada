@@ -28,7 +28,7 @@ class ToolCardEffect {
      * @param id of tha player
      * @param indexPool index of the dice in the card
      * @param increase increase or decrease decision by the player
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void grozingPliersEffect(int id, int indexPool, int increase) throws InvalidMoveException  {
         if (increase == 0) {
@@ -58,7 +58,7 @@ class ToolCardEffect {
      * @param indexStart index where to take the dice
      * @param indexEnd index where to move it
      * @param number of the tool card on which the effect is running
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void moveOneDiceEffect(int id, int indexStart, int indexEnd, int number) throws InvalidMoveException {
         if (number == 2) {
@@ -78,7 +78,7 @@ class ToolCardEffect {
      * @param indexEnd1 where to move the first dice
      * @param indexStart2 where to take the second dice
      * @param indexEnd2 where to move the second dice
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void lathekinEffect(int id, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
         gameController.getModel().putFirstDiceToolCard(id, indexStart1, indexEnd1, 4);
@@ -103,7 +103,7 @@ class ToolCardEffect {
     /**
      * method responsible of the effect of the shuffling all the dice in the draft pool at the moment of the cal
      * @param id of the player
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void glazingHammerEffect(int id) throws InvalidMoveException{
         if (gameController.getTurn() > (gameController.getViewGame().size() - 1)) {
@@ -121,7 +121,7 @@ class ToolCardEffect {
      * @param id of the player
      * @param indexPool index of the dice in draft pool
      * @param indexPattern index of pattern box list where to put the dice
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
    void runningPliers(int id, int indexPool, int indexPattern) throws InvalidMoveException {
        try {
@@ -143,7 +143,7 @@ class ToolCardEffect {
      * @param id of the player
      * @param indexPool index of the dice in the draft pool
      * @param indexPattern index of the pattern box list where to put the dice
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void corkBackedStraightedgeEffect(int id, int indexPool, int indexPattern) throws InvalidMoveException {
 
@@ -212,7 +212,7 @@ class ToolCardEffect {
      * @param indexEnd1 index where to move the first dice
      * @param indexStart2 index of the second dice to move
      * @param indexEnd2 index where to move the second dice
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     void tapWheelEffect(int id, int numberOfDice, int indexStart1, int indexEnd1, int indexStart2, int indexEnd2) throws InvalidMoveException {
 

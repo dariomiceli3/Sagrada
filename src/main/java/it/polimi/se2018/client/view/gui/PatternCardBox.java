@@ -54,7 +54,7 @@ public class PatternCardBox {
     /**
      * method that displays the pattern of the selected player
      * @param name name of the selected player
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     static void displayOtherPattern(String name) throws IOException {
         Stage window = new Stage();

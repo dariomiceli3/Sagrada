@@ -115,7 +115,7 @@ public class PatternCard implements Serializable {
      * method that allow the user to put the dice on the box checking the constraint color or value
      * @param dice to put on the box
      * @param index of the box list
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
      // put dice on the box, but doing a check of the contrainst color or value
      public void putDice(Dice dice, int index) throws InvalidMoveException {
@@ -132,7 +132,7 @@ public class PatternCard implements Serializable {
      * method that allow the user to put the dice on the box ignoring color restrictions
      * @param dice to put on the box
      * @param index of the box list
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void putDiceEglomise(Dice dice, int index) throws InvalidMoveException {
 
@@ -149,7 +149,7 @@ public class PatternCard implements Serializable {
      * method that allow the user to put the dice on the box ignoring shade restrictions
      * @param dice to put on the box
      * @param index of the box list
-     * @throws InvalidMoveException
+     * @throws InvalidMoveException if something goes wrong
      */
     public void putDiceCopper(Dice dice, int index) throws InvalidMoveException {
 

@@ -23,7 +23,7 @@ public abstract class VirtualView extends Observable implements Observer {
 
     /**
      * Class constructor to create a virtual view associated with a unique id
-     * @param playerID
+     * @param playerID id of the player
      */
     public VirtualView(int playerID) {
        this.playerID = playerID;

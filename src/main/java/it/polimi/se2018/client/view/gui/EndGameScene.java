@@ -141,7 +141,7 @@ public class EndGameScene {
 
     /**
      * method that display the end of the game
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     public static void display() throws IOException {
         Stage window = new Stage();

@@ -5,7 +5,6 @@ import it.polimi.se2018.server.model.Components.DiceColor;
 import it.polimi.se2018.server.model.Components.GlassBox;
 
 import java.io.Serializable;
-import java.util.Iterator;
 
 import static java.lang.Math.min;
 

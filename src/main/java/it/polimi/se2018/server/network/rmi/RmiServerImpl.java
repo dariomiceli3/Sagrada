@@ -30,7 +30,7 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
     /**
      * Class constructor that create a new Rmi Server Impl on the Server
      * @param server where the Impl is running
-     * @throws RemoteException
+     * @throws RemoteException if something goes wrong
      */
     RmiServerImpl(Server server) throws RemoteException {
         super(0);

@@ -14,6 +14,12 @@ import java.io.InputStreamReader;
 
 import static java.lang.System.out;
 
+/**
+ * Class ClientCli: the class is responsible of the the launch of a client from the command line interface, and then let the
+ * player choose between the different modality of the game. It's responsible of the connection to the server, both socket and
+ * rmi and at the end start the thread of the cli view
+ * @author fadda-miceli-mundo
+ */
 public class ClientCli {
 
     private int SOCKETPORT;
@@ -24,6 +30,10 @@ public class ClientCli {
     private Ping ping;
 
 
+    /**
+     * Class constructor with the connection type decided bu the user in the login scene
+     * @param connectionType technologies, both socket and rmi
+     */
     public ClientCli(String connectionType) {
 
         out.println("\t" + "\t" + "\t" + "Welcome to the game of " + "\n" + "\n" +
@@ -46,14 +56,11 @@ public class ClientCli {
 
             serverSocket = new SocketHandler(host, SOCKETPORT, view);
 
-            //  necessario
             view.setConnection(serverSocket);
 
-            //decidere se così o dentro sockethandler
             Thread socketThread = new Thread(serverSocket);
             socketThread.start();
 
-            // start of the thread of the selected cli
             Thread viewSocketThread = new Thread(view);
             viewSocketThread.start();
 

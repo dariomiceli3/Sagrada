@@ -63,11 +63,8 @@ public class SocketGatherer implements Runnable {
 
                 Server.setIdPlayer(Server.getIdPlayer() + 1);
 
-
-                // add arraylist di socket
                 server.addSocketClient(virtualSocket);
 
-                // add arraylist unico
                 server.getClients().add(virtualSocket);
 
                 Thread vsThread = new Thread(virtualSocket);

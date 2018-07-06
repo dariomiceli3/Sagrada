@@ -17,7 +17,7 @@ public class Login extends Application {
     /**
      * method that allows to launch the gui starting the scene of the login
      * @param primaryStage stage of the gui
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Override
     public void start(Stage primaryStage) throws Exception {

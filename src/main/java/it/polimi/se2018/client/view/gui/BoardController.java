@@ -19,7 +19,12 @@ import java.util.logging.Logger;
 
 import static java.lang.System.out;
 
-
+/**
+ * Class BoardController: the class represents the main board of the game, where the player does his moves. It's responsible
+ * of update the scene, depending on the state of the game received from the server and it has the duty  of send the input
+ * of the user to the server
+ * @author fadda-miceli-mundo
+ */
 public class BoardController {
 
     private final Logger log = Logger.getLogger(BoardController.class.getName());
@@ -44,55 +49,114 @@ public class BoardController {
     private int diceValue;
     private int numberDice;
 
+    /**
+     * method that provide the caller the state of the draft pool
+     * @return the draft pool updated
+     */
     protected DraftPool getDraftPool() {
         return draftPool;
     }
 
+    /**
+     * method that provide the caller the state of the draft pool
+     * @return the round tracker updated
+     */
     protected RoundTracker getRoundTracker() {
         return roundTracker;
     }
 
+    /**
+     * static method that allow the caller to set the gui controller of the main board
+     * @param mainController to set
+     */
     static void setMainController(GuiController mainController){
         BoardController.mainController = mainController;
     }
 
+    /**
+     * method that allow the caller to set the gui state of the board view
+     * @param state of the game
+     */
     private static void setGuiState(ViewState state) {
         BoardController.guiState = state;
     }
 
+    /**
+     * method that allow the caller to set the current index pool based on the input of the user
+     * @param indexPool of the draft pool
+     */
     private static void setIndexPool(int indexPool) {
         BoardController.indexPool = indexPool;
     }
 
+    /**
+     * method that allow the caller to set the current index tool based on the input of the user
+     * @param indexTool  of the tool list
+     */
     private static void setIndexTool(int indexTool) {
         BoardController.indexTool = indexTool;
     }
 
+    /**
+     * method that allow the caller to set the current index cell box based on the input of the user
+     * @param indexPattern of the pattern
+     */
     private static void setIndexPattern(int indexPattern) {
         BoardController.indexPattern = indexPattern;
     }
 
+    /**
+     * method that allow the caller to set the first index of the box list based on the input of the user
+     * @param indexPatternStartOne of the pattern
+     */
     private static void setIndexPatternStartOne(int indexPatternStartOne) {
         BoardController.indexPatternStartOne = indexPatternStartOne;
     }
+
+    /**
+     * method that allow the caller to set the first end index of the box list based on the input of the user
+     * @param indexPatternEndOne of the pattern
+     */
     private static void setIndexPatternEndOne(int indexPatternEndOne) {
         BoardController.indexPatternEndOne = indexPatternEndOne;
     }
+
+    /**
+     * method that allow the caller to set the second index of the box list based on the input of the user
+     * @param indexPatternStartTwo of the pattern
+     */
     private static void setIndexPatternStartTwo(int indexPatternStartTwo) {
         BoardController.indexPatternStartTwo = indexPatternStartTwo;
     }
+
+    /**
+     * method that allow the caller to set the second end index of the box list based on the input of the user
+     * @param indexPatternEndTwo of the pattern
+     */
     private static void setIndexPatternEndTwo(int indexPatternEndTwo) {
         BoardController.indexPatternEndTwo = indexPatternEndTwo;
     }
 
+    /**
+     * method that allow the caller to set the draft pool t based on the input of the user
+     * @param draftPool current
+     */
     private void setDraftPool(DraftPool draftPool) {
         this.draftPool = draftPool;
     }
 
+    /**
+     * method that allow the caller to set the round tracker based on the input of the user
+     * @param roundTracker current
+     */
     protected void setRoundTracker(RoundTracker roundTracker){
         this.roundTracker = roundTracker;
     }
 
+    /**
+     * method that set the increase or decrease command for the grozing pliers tool card
+     * @param increase decision of the player to increase or decrease a dice
+     */
     protected void setIncrease(int increase) {
         setGuiState(ViewState.GROZINGCOMMAND);
         pane.setDisable(false);
@@ -101,6 +165,10 @@ public class BoardController {
         this.increase = increase;
     }
 
+    /**
+     * method that set the index for the position of the dice in the current round list
+     * @param index of the dice in the round
+     */
     void setIndexPosition(int index) {
         if (guiState == ViewState.LENSCUTTERPOOL) {
             this.indexPosition = index;
@@ -108,6 +176,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that set the new dice value that the player decided for the dice removed from the bag
+     * @param diceValue of the dice
+     */
     void setDiceValue(int diceValue) {
         setGuiState(ViewState.FLUXVALUE);
         pane.setDisable(false);
@@ -116,6 +188,10 @@ public class BoardController {
         this.diceValue = diceValue;
     }
 
+    /**
+     * method that set the number of dice the player decided to move for the tap wheel tool card
+     * @param numberDice to move
+     */
     void setNumberDice(int numberDice) {
 
         if (guiState == ViewState.TAPNUMBER) {
@@ -125,10 +201,17 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that set the round based on the game state
+     * @param round current
+     */
     protected void setRound(int round) {
         this.round = round;
     }
 
+    /**
+     * method that set the cost of the tool card in the view
+     */
     private void setToolCost() {
 
         costTool1.setText("" + mainController.getToolList().get(0).getCost());
@@ -138,6 +221,11 @@ public class BoardController {
 
     //-----------------------initialize method---------------------------------------------------------------------
 
+    /**
+     * method that initialize the board game scene, load from file the image and set the settings depending on the
+     * game mode set by the player at the start of the game
+     * @throws IOException
+     */
     public void initialize() throws IOException {
 
         GuiController.setBoard(this);
@@ -223,6 +311,11 @@ public class BoardController {
     @FXML
     private TextField txtTokens;
 
+    /**
+     * method that handle the click of the tool card 4 in the board and manage what to do
+     * depending on the state of the game
+     * @param event of the click
+     */
     @FXML
     void handleTool4(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -273,6 +366,11 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the tool card 5 in the board and manage what to do
+     * depending on the state of the game
+     * @param event of the click
+     */
     @FXML
     void handleTool5(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -323,11 +421,17 @@ public class BoardController {
 
     }
 
+    /**
+     * method that handle the click for the unzoom of the tool card 4
+     */
     @FXML
     void handleUnzoomTool4() {
         toolCardZoom4.setVisible(false);
     }
 
+    /**
+    * method that handle the click for the unzoom of the tool card 5
+     */
     @FXML
     void handleUnzoomTool5() {
         toolCardZoom5.setVisible(false);
@@ -539,6 +643,9 @@ public class BoardController {
 
     //---------------------------------------------enum for gui state
 
+    /**
+     * enum for the state of the view during the game
+     */
     public enum ViewState {
 
         ROLL,MOVE, TOOL,
@@ -558,7 +665,11 @@ public class BoardController {
 
 
     //----------------------------fxml method controller
-        @FXML
+
+    /**
+     * method that handle the cell clicked by the player on the pattern card depending on the state of the game
+     */
+    @FXML
     void handleCellEvent() {
 
         disableTool();
@@ -699,6 +810,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the dice clicked by the player in the draft pool depending on the state of the game
+     */
     @FXML
     void handleDicePool() {
 
@@ -854,6 +968,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the round button clicked by the player on the round tracker depending on the state of the game
+     */
     @FXML
     void handleRoundButton() throws IOException {
 
@@ -895,7 +1012,11 @@ public class BoardController {
         }
     }
 
-
+    /**
+     * method that handle the click of the tool card 5 in the board and manage what to do
+     * depending on the state of the game
+     * @param event of the click
+     */
     @FXML
     void handleTool1(MouseEvent event) {
 
@@ -950,6 +1071,11 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the tool card 5 in the board and manage what to do
+     * depending on the state of the game
+     * @param event of the click
+     */
     @FXML
     void handleTool2(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -1003,6 +1129,11 @@ public class BoardController {
 
     }
 
+    /**
+     * method that handle the click of the tool card 5 in the board and manage what to do
+     * depending on the state of the game
+     * @param event of the click
+     */
     @FXML
     void handleTool3(MouseEvent event) {
 
@@ -1056,6 +1187,9 @@ public class BoardController {
 
     }
 
+    /**
+     * method that handle the click for the unzoom of the tool card 1
+     */
     @FXML
     void handleUnzoomTool1() {
         toolCardZoom1.setVisible(false);
@@ -1064,6 +1198,10 @@ public class BoardController {
             costTool1.setVisible(true);
         }
     }
+
+    /**
+     * method that handle the click for the unzoom of the tool card 2
+     */
     @FXML
     void handleUnzoomTool2() {
         toolCardZoom2.setVisible(false);
@@ -1073,6 +1211,10 @@ public class BoardController {
         }
 
     }
+
+    /**
+     * method that handle the click for the unzoom of the tool card 5
+     */
     @FXML
     void handleUnzoomTool3() {
         toolCardZoom3.setVisible(false);
@@ -1083,47 +1225,76 @@ public class BoardController {
 
     }
 
+    /**
+     * method that handle the click for the zoom of the private card
+     */
     @FXML
     void handlePrivateZoom() {
         privateCardZoom.setVisible(true);
 
     }
+
+    /**
+     * method that handle the click for the unzoom of the private card
+     */
     @FXML
     void handlePrivateUnzoom() {
         privateCardZoom.setVisible(false);
 
     }
 
+    /**
+     * method that handle the click for the zoom of the private card
+     */
     @FXML
     void handleZoomPublic1() {
         publicCardZoom1.setVisible(true);
 
     }
+    /**
+     * method that handle the click for the zoom of the private card
+     */
     @FXML
     void handleZoomPublic2() {
         publicCardZoom2.setVisible(true);
     }
+    /**
+     * method that handle the click for the zoom of the private card
+     */
     @FXML
     void handleZoomPublic3() {
         publicCardZoom3.setVisible(true);
 
     }
+    /**
+     * method that handle the click for the unzoom of the public card 1
+     */
     @FXML
     void handleUnzoomPublic1() {
         publicCardZoom1.setVisible(false);
 
     }
+    /**
+     * method that handle the click for the unzoom of the public card 2
+     */
     @FXML
     void handleUnzoomPublic2() {
         publicCardZoom2.setVisible(false);
 
     }
+    /**
+     * method that handle the click for the unzoom of the public card 3
+     */
     @FXML
     void handleUnzoomPublic3() {
         publicCardZoom3.setVisible(false);
 
     }
 
+    /**
+     * method that handle the click of the pattern card of enemy player 2
+     * @throws IOException if something goes wrong
+     */
     @FXML
     void handleUpdatePattern2() throws IOException {
 
@@ -1146,6 +1317,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the pattern card of enemy player 3
+     * @throws IOException if something goes wrong
+     */
     @FXML
     void handleUpdatePattern3() throws IOException {
 
@@ -1168,6 +1343,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the pattern card of enemy player 4
+     * @throws IOException if something goes wrong
+     */
     @FXML
     void handleUpdatePattern4() throws IOException{
 
@@ -1191,6 +1370,9 @@ public class BoardController {
     }
 
 
+    /**
+     * method that handle the click of the roll button to shuffle the dice in the draft pool
+     */
     @FXML
     void rollButtonSelected() {
 
@@ -1202,6 +1384,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the next button at the end of a move made by the player to send the input
+     * to the server and change the state of the game
+     */
     @FXML
     void nextButtonSelected() {
 
@@ -1322,11 +1508,17 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the click of the skip button to skip the turn
+     */
     @FXML
     void skipButtonSelected() {
         mainController.getConnection().setNextTurnToServer(mainController.getPlayerID());
     }
 
+    /**
+     * method that handle the click of the exit button to set a player in standby state and exit from the current match
+     */
     @FXML
     void exitButtonSelected() {
 
@@ -1349,6 +1541,10 @@ public class BoardController {
         exit.setVisible(false);
     }
 
+    /**
+     * method that handle the click of the reconnect button to set a player again in the match from which he decides to
+     * exit
+     */
     @FXML
     void reconnectButtonSelected() {
 
@@ -1370,8 +1566,11 @@ public class BoardController {
     //-----------------aggiornamenti della view (update)
 
 
+    /**
+     * method that update the current round of the game in the scene
+     * @param round current of the game
+     */
     void updateRound(int round) {
-
 
         textGame.setText(roundMsg + round + "is started");
         next.setDisable(true);
@@ -1420,9 +1619,10 @@ public class BoardController {
     }
 
 
+    /**
+     * method that update the current turn of the game in the scene to the current player
+     */
     void updateTurn() {
-
-
 
         toolCard1.setBlendMode(BlendMode.SRC_OVER);
         toolCard2.setBlendMode(BlendMode.SRC_OVER);
@@ -1442,6 +1642,11 @@ public class BoardController {
         roll.setDisable(true);
     }
 
+    /**
+     * method that update the turn of the game, notify the player that's the turn of the player of the name passed
+     * as parameter
+     * @param name of the player in the current turn
+     */
     void updateOtherTurn(String name) {
         textGame.setText("It's " + name + " turn");
         handlePattern(true);
@@ -1455,6 +1660,9 @@ public class BoardController {
         exit.setDisable(false);
     }
 
+    /**
+     * method that show to the player that have the task to draft the die from the bag and shuffle them
+     */
     void textRollMsg() {
         setGuiState(ViewState.ROLL);
         textGame.setText("Click the roll button to roll the draft pool");
@@ -1465,9 +1673,12 @@ public class BoardController {
         roll.setDisable(false);
     }
 
+    /**
+     * method that update the draft pool of the scene depeding on the state of the game
+     * @param draftPool updated
+     * @throws IOException if something goes wrong
+     */
     void updateDraftPool(DraftPool draftPool) throws IOException {
-
-
 
         setToken(mainController.getTokens());
 
@@ -1549,10 +1760,18 @@ public class BoardController {
     }
 
 
+    /**
+     * method that set the new number of tokens to the player depending on the state
+     * @param token number of tokens
+     */
     private void setToken(int token) {
         tokensNumber.setText("" + token);
     }
 
+    /**
+     * method that update the pattern card of the player depending on the update of the card with the new dices
+     * @param patternCard the card updated
+     */
     void updatePattern(PatternCard patternCard) {
 
         setToken(mainController.getTokens());
@@ -1592,6 +1811,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that update the cost of the tool card at a specified index
+     * @param toolIndex of the card
+     */
     private void updateCost(int toolIndex) {
 
         if (toolIndex == 0) {
@@ -1626,12 +1849,18 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that update the round tracker on the scene depending on the current round tracker of the game
+     * @param roundTracker updated
+     */
     void updateRoundTracker(RoundTracker roundTracker) {
-
         setRoundTracker(roundTracker);
-
     }
 
+    /**
+     * method that provide to the player the choose of what to do next in the game
+     * @throws IOException if something goes wrong
+     */
     void textChooseMsg() throws IOException {
 
         loadToolCard();
@@ -1646,8 +1875,10 @@ public class BoardController {
         textGame.setText("Click a Dice & the Card position or a Tool, then NEXT");
     }
 
+    /**
+     * method that provide to the player the event that he used a wrong dice and updated the game scene
+     */
     void errorStateDice() {
-
 
         if (guiState == ViewState.GLAZINGHAMMER) {
             setGuiState(ViewState.ERRORTOOL);
@@ -1658,6 +1889,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that provide to the player the move to do next in the game
+     * @throws IOException if something goes wrong
+     */
     void textMoveMsg() throws IOException {
 
         loadToolCard();
@@ -1686,16 +1921,22 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that set the error state of a tool card in the game
+     */
     void errorStateTool() {
         setGuiState(ViewState.ERRORTOOL);
     }
 
+    /**
+     * method that provide to the player the move of the tool card to do next in the game
+     */
     void toolMoveMsg() {
 
         try {
             loadToolCard();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
 
         handlePattern(true);
@@ -1720,14 +1961,27 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that alter the player that the time for his turn is ended
+     */
     void endTimer() {
         AlertBox.display("Timer", "You're time is over man!");
     }
 
+    /**
+     * method that alter the other player the timer of ther turn of the playername is ende
+     * @param playerName the player of which the turn is ended
+     */
     void endOtherTimer(String playerName) {
         AlertBox.display("Timer", "The time of " + playerName + " ended");
     }
 
+    /**
+     * method that show to the player the final rank at the end of a match
+     * @param playerList of the game
+     * @param ended state of the game
+     * @throws IOException
+     */
     void showRank(List<Player> playerList, boolean ended) throws IOException{
         pane.setDisable(true);
         EndGameScene.setFinish(ended);
@@ -1737,6 +1991,9 @@ public class BoardController {
 
     //-----------------tool card---------------------------
 
+    /**
+     * method that provide the player what to do next for the use of the grozing pliers tool card
+     */
     void textGrozingMsg() {
         enablePool();
         setToken(mainController.getTokens());
@@ -1748,6 +2005,9 @@ public class BoardController {
         textGame.setText("Click the dice you want to increase/decrease, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the eglomise brush tool card
+     */
     void textEglomiseMsg() {
         disablePool();
         handlePattern(false);
@@ -1759,6 +2019,9 @@ public class BoardController {
         textGame.setText("Click the dice you want to move, and where you want to move it, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the copper foil burnisher tool card
+     */
     void textCopperFoilMsg() {
         disablePool();
         handlePattern(false);
@@ -1769,6 +2032,9 @@ public class BoardController {
         textGame.setText("Click the dice you want to move, and where you want to move it, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the lathekin tool card
+     */
     void textLathekinMsg() {
         disablePool();
         handlePattern(false);
@@ -1779,6 +2045,9 @@ public class BoardController {
         textGame.setText("Click the 1st dice you want to move, and where you want to move it");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the lens cutter  tool card
+     */
     void textLensCutterMsg() {
         enablePool();
         handlePattern(true);
@@ -1789,7 +2058,9 @@ public class BoardController {
         textGame.setText("Click the dice in the Draft Pool, and in the Round Tracker, then NEXT");
 
     }
-
+    /**
+     * method that provide the player what to do next for the use of the flux brush  tool card
+     */
     void textFluxBrushMsg() {
         handlePattern(true);
         disableTool();
@@ -1800,6 +2071,9 @@ public class BoardController {
         textGame.setText("Click the dice you want to re-roll, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the glazing hammer tool card
+     */
     void textGlazingHammerMsg() {
         handlePattern(true);
         disableTool();
@@ -1810,6 +2084,9 @@ public class BoardController {
         roll.setDisable(false);
     }
 
+    /**
+     * method that provide the player what to do next for the use of the running  pliers tool card
+     */
     void textRunningPliersMsg() {
         handlePattern(true);
         disableTool();
@@ -1820,6 +2097,9 @@ public class BoardController {
         textGame.setText("Click a dice and the position, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the cork backed straightedge tool card
+     */
     void textCorkBackedMsg() {
         handlePattern(true);
         disableTool();
@@ -1830,6 +2110,9 @@ public class BoardController {
         textGame.setText("Click the dice in the pool and a position not adjacent, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the grinding stone tool card
+     */
     void textGrindingStoneMsg() {
         handlePattern(true);
         disableTool();
@@ -1840,6 +2123,9 @@ public class BoardController {
         textGame.setText("Click the dice you want to flip, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the flux remover tool card
+     */
     void textFluxRemoverMsg(DiceColor color) {
         handlePattern(true);
         disableTool();
@@ -1851,6 +2137,9 @@ public class BoardController {
         textGame.setText("Select the dice you want to return to the Dice Bag, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for the use of the tap wheel tool card
+     */
     void textTapWheelMsg() {
         handlePattern(true);
         disableTool();
@@ -1869,6 +2158,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that provide the player what to do next for chose the first dice to move
+     */
     private void textTapWheelFirstDice() {
         disableTool();
         disablePool();
@@ -1879,6 +2171,9 @@ public class BoardController {
         textGame.setText("Click the 1st dice and where you want to move it, then NEXT");
     }
 
+    /**
+     * method that provide the player what to do next for chose the second dice to move
+     */
     private void textTapWheelSecondDice() {
         disableTool();
         disablePool();
@@ -1890,6 +2185,9 @@ public class BoardController {
 
     }
 
+    /**
+     * method that provide the player what to do next for the use of a tool card
+     */
     void textToolSinglePlayerMsg() throws IOException{
         loadToolCard();
         handlePattern(true);
@@ -1917,7 +2215,9 @@ public class BoardController {
         }
     }
 
-
+    /**
+     * method that show the error match of the color of dice of the tool card and the one chose by the player
+     */
     void errorMatchDice() {
 
         setGuiState(ViewState.ERRORMATCH);
@@ -1925,6 +2225,12 @@ public class BoardController {
 
     //--------------------metodi helper---------------------------------------------------------------
 
+    /**
+     * method that load from file the dice position on the pattern card
+     * @param indexPattern of the box list
+     * @param fileName the name of the card
+     * @throws IOException if something goes wrong
+     */
     private void loadDiceOnPattern(int indexPattern, String fileName) throws IOException {
 
         try {
@@ -2019,6 +2325,10 @@ public class BoardController {
 
     }
 
+    /**
+     * method that remove the image of the dice from the pattern card of the player
+     * @param index of the dice in the pattern
+     */
     private void removeDiceOnPattern(int index) {
 
         if (index == 0) {
@@ -2180,6 +2490,10 @@ public class BoardController {
 
     }
 
+    /**
+     * method that let the draft pool become unvisible when it's not used in the game
+     * @param size of the current draft pool
+     */
     private void unvisibleDraftPool(int size) {
 
         if (size == 1) {
@@ -2211,6 +2525,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method  that handle the disable of the round tracker
+     * @param disable state
+     */
     private void handleRoundTracker(boolean disable) {
         round1.setDisable(disable);
         round2.setDisable(disable);
@@ -2223,12 +2541,20 @@ public class BoardController {
         round9.setDisable(disable);
     }
 
+    /**
+     * method  that handle the disable of the pattern card of the other player
+     * @param disable state
+     */
     private void handleOtherPattern(boolean disable) {
         patternPlayer2.setDisable(disable);
         patternPlayer3.setDisable(disable);
         patternPlayer4.setDisable(disable);
     }
 
+    /**
+     * method  that handle the disable of the pattern card of the player
+     * @param disable state
+     */
     private void handlePattern(boolean disable) {
         cell1.setDisable(disable);
         cell2.setDisable(disable);
@@ -2252,6 +2578,9 @@ public class BoardController {
         cell20.setDisable(disable);
     }
 
+    /**
+     * method that handle the enable of the draft pool
+     */
     private void enablePool() {
         dice1.setDisable(false);
         dice2.setDisable(false);
@@ -2264,6 +2593,9 @@ public class BoardController {
         dice9.setDisable(false);
     }
 
+    /**
+     * method that handle the enable of the draft pool
+     */
     private void disablePool(){
         dice1.setDisable(true);
         dice2.setDisable(true);
@@ -2276,6 +2608,9 @@ public class BoardController {
         dice9.setDisable(true);
     }
 
+    /**
+     * method that handle the disable of the private card
+     */
     private void disablePrivate() {
         if (mainController.isSinglePlayer()) {
             privateCard.setDisable(true);
@@ -2286,6 +2621,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the enable of the private card
+     */
     private void enablePrivate() {
         if (mainController.isSinglePlayer()) {
             privateCard.setDisable(false);
@@ -2296,6 +2634,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that handle the disable of the public card
+     */
     private void disablePublic() {
         if (mainController.isSinglePlayer()) {
             publicCard1.setDisable(true);
@@ -2308,6 +2649,10 @@ public class BoardController {
         }
     }
 
+
+    /**
+     * method that handle the enable of the public card
+     */
     private void enablePublic() {
         if (mainController.isSinglePlayer()) {
             publicCard1.setDisable(false);
@@ -2320,6 +2665,10 @@ public class BoardController {
         }
     }
 
+
+    /**
+     * method that handle the enable of the tool card
+     */
     private void enableTool() {
         if (mainController.isSinglePlayer()) {
             toolCard1.setDisable(false);
@@ -2335,6 +2684,10 @@ public class BoardController {
         }
     }
 
+
+    /**
+     * method that handle the disable of the tool card
+     */
     private void disableTool() {
         if (mainController.isSinglePlayer()) {
             toolCard1.setDisable(true);
@@ -2353,6 +2706,10 @@ public class BoardController {
 
     //---------------caricamenti da file---------------------------------------------------------------------
 
+    /**
+     * method that load the panel for the player from file
+     * @throws IOException if something goes wrong
+     */
     private void loadPanel() throws IOException {
 
         try {
@@ -2392,6 +2749,11 @@ public class BoardController {
 
     }
 
+
+    /**
+     * method that load the private for the player from file
+     * @throws IOException if something goes wrong
+     */
     private void loadPrivate() throws IOException {
 
         if (mainController.isSinglePlayer()) {
@@ -2433,7 +2795,10 @@ public class BoardController {
         }
     }
 
-
+    /**
+     * method that load the patter card for the player from file
+     * @throws IOException if something goes wrong
+     */
     private void loadPattern() throws IOException {
 
         String filePattern = mainController.getPatternCurrent().getName();
@@ -2459,10 +2824,17 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that load the tokens for the player
+     */
     private void loadTokensNumber() {
         tokensNumber.setText("" + mainController.getPatternCurrent().getDifficulty());
     }
 
+    /**
+     * method that load the public card for the player from file
+     * @throws IOException if something goes wrong
+     */
     private void loadPublicCard() throws IOException  {
 
         for (int i = 0; i < mainController.getPublicCardList().size(); i++) {
@@ -2492,6 +2864,10 @@ public class BoardController {
         }
     }
 
+    /**
+     * method that load the tool card for the game from file
+     * @throws IOException if something goes wrong
+     */
     private void loadToolCard() throws IOException {
 
         updateToolCard();
@@ -2539,6 +2915,10 @@ public class BoardController {
 
     }
 
+
+    /**
+     * method that update the tool card depending on the game play mode
+     */
     private void updateToolCard() {
 
         if (mainController.isSinglePlayer()) {
@@ -2587,6 +2967,10 @@ public class BoardController {
     }
 
 
+    /**
+     * method that load the other pattern of the player from file
+     * @throws IOException if something goes wrong
+     */
     private void loadOtherPattern() throws IOException {
 
         if (mainController.getPlayerID() == 0) {
@@ -2776,12 +3160,22 @@ public class BoardController {
 
     }
 
+    /**
+     * helper method to load image from file
+     * @param fileName of the card
+     * @return an Image loaded from file
+     */
     private Image loadImage(String fileName) {
 
         fileStream = BoardController.class.getResourceAsStream("/images/pattern/" + fileName + ".png");
         return new Image(fileStream);
     }
 
+    /**
+     * helper method to load image from file for a specific player
+     * @param filename of the card
+     * @param id of the player
+     */
     private void loadImageOther(String filename, int id) {
 
         Image image = loadImage(filename);

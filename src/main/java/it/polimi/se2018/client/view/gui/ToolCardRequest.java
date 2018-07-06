@@ -69,7 +69,7 @@ public class ToolCardRequest {
 
     /**
      * method that allows to display the request of the tool card
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     public static void display()  throws IOException {
 

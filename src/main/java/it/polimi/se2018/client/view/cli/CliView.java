@@ -8,18 +8,22 @@ import it.polimi.se2018.server.model.Cards.PublicObjectiveCard.PublicObjectiveCa
 import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.model.Components.*;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 import static java.lang.System.out;
 
-// todo adri
+/**
+ * Class CliView: the class is a subclass of the abstract class View, show it's responsible of the override of all the methods
+ * of the view, to respect the contract with the superclass and have the safety to work with the the rest of MVC pattern
+ * and the network. The cli view runs in a thread, where an infinite loop is responsible of receive the input from the keyboard
+ * of the user and in basis of that call the proper method and send it to class responsible to send the input across the network
+ * @see java.lang.Runnable
+ * @see it.polimi.se2018.client.view.View
+ * @author fadda-miceli-mundo
+ */
 public class CliView extends View implements Runnable {
-
-
-    // ovveride dei metodi dell'interfaccia view con gli show per metodi comportamentali
-    // metodi che in base alla scelta dell'utente mandano usando socket handler
-
 
     private static GameState cliState;
     private static int poolSize;
@@ -95,45 +99,82 @@ public class CliView extends View implements Runnable {
     }
 
     /**
-     * method that allows to set the first index where to move the dice
-     * @param indexStartOne  first index //todo
+     * method that allows to set the first index where to take the dice
+     * @param indexStartOne  first index of the box
      */
     private static void setIndexStartOne(int indexStartOne) {
         CliView.indexStartOne = indexStartOne;
     }
 
+    /**
+     * method that allows to set the second index where to take the dice
+     * @param indexStartTwo  second index of the box
+     */
     private static void setIndexStartTwo(int indexStartTwo) {
         CliView.indexStartTwo = indexStartTwo;
     }
 
+    /**
+     * method that allows to set the second index where to move the dice
+     * @param indexEndOne index of the box
+     */
     private static void setIndexEndOne(int indexEndOne) {
         CliView.indexEndOne = indexEndOne;
     }
 
+    /**
+     * method that allows to set the second index where to move the dice
+     * @param indexEndTwo index of the box
+     */
     private static void setIndexEndTwo(int indexEndTwo) {
         CliView.indexEndTwo = indexEndTwo;
     }
 
+    /**
+     * method that allow the caller to set the index of the round
+     * @param indexRound index of the round
+     */
     private static void setIndexRound(int indexRound) {
         CliView.indexRound = indexRound;
     }
 
+    /**
+     * method that allow the caller to set the color of the dice
+     * @param colorDice dice color
+     */
     private static void setColorDice(DiceColor colorDice) {
         CliView.colorDice = colorDice;
     }
 
+    /**
+     * method that allow the caller to set the dice number value
+     * @param diceNumber number of dice to move
+     */
     private static void setDiceNumber(int diceNumber) {
         CliView.diceNumber = diceNumber;
     }
 
+    /**
+     * method that allow the caller to set the number of tool card in the single plyer mode
+     * @param toolSingleNumber number of card
+     */
     private static void setToolSingleNumber(int toolSingleNumber) {
         CliView.toolSingleNumber = toolSingleNumber;
     }
 
+    /**
+     * method the allow the caller to set the cli state depending on the game state
+     * @param state of the game
+     */
     private static void setCliState(GameState state) {
         CliView.cliState = state;
     }
 
+    /**
+     * Override of the method run of Runnable class, the method is a thread with an infinite loop waiting for the input
+     * from the user and depending on the input call the proper method to execute the action the clients requests to the
+     * server
+     */
     @Override
     public void run() {
 
@@ -810,6 +851,9 @@ public class CliView extends View implements Runnable {
 
     //---------------------------enum for cli state--------------------------------------------------------
 
+    /**
+     * enum for the cli state
+     */
     public enum GameState {
 
         MODE, NAME, ERRORNAME,
@@ -837,65 +881,98 @@ public class CliView extends View implements Runnable {
 
     //---------------------------ovveride metodi mostrano su view---------------------------------
 
+    /**
+     * method that provides the caller the connection
+     * @return clientConnection
+     */
     @Override
     public ClientInterface getConnection() {
         return connection;
     }
 
+    /**
+     * method that allows to set the connection of the client
+     * @param connection client to set
+     */
     @Override
     public void setConnection(ClientInterface connection) {
         this.connection = connection;
     }
 
+    /**
+     * method that allows to show the id of the player
+     */
     @Override
     public void showID() {
         out.println("Player id set " + super.getPlayerID());
     }
 
+    /**
+     * method that allows to show request for the single player mode
+     */
     @Override
     public void showSinglePlayerRequest() {
         setCliState(GameState.MODE);
         out.println("How do you want to play: Single or Multi?");
     }
 
-
-
+    /**
+     * method that allows to show that the game is started
+     */
     @Override
     public void showGameStarted() {
         out.println("Match is started: " + super.isStarted());
     }
 
-
+    /**
+     * method that allows to show the choise of the name
+     */
     @Override
     public void showNameChoose() {
         setCliState(GameState.NAME);
         out.println("\n" + "Enter your name ");
     }
 
+    /**
+     * method that allows to show the name
+     */
     @Override
     public void showName() {
         setCliState(GameState.NOTAUTHORIZEDNAME);
         out.println("Name set as: " + super.getPlayerName());
     }
 
+    /**
+     * method that allows to show the current name to the other players
+     * @param name name of the current player
+     */
     @Override
     public void showNameOther(String name) {
         out.println("\n" + "Another player connected with name: " + name);
     }
 
-
+    /**
+     * method that allows to show that the current name is not permitted
+     */
     @Override
     public void showNameError() {
         setCliState(GameState.ERRORNAME);
         out.println("This name is used by another player!");
     }
 
-
+    /**
+     *  method that allows to show the private card
+     * @param privateObjectiveCard private card to show
+     */
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
         out.println("\n" + privateObjectiveCard.toString());
     }
 
+    /**
+     *  method that allows to show the list of the public cards
+     * @param publicList list of public cards
+     */
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) {
         for (PublicObjectiveCard publicCard : publicList) {
@@ -903,6 +980,10 @@ public class CliView extends View implements Runnable {
         }
     }
 
+    /**
+     * method that allows to show the list of the pattern cards
+     * @param patternCards list of pattern cards
+     */
     @Override
     public void showPatternList(List<PatternCard> patternCards) {
         for (PatternCard patternCard : patternCards) {
@@ -913,6 +994,9 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Choose your Pattern Card - Enter a number between 1 and 4 - or 0 to enter your custom card");
     }
 
+    /**
+     * method that show the user the path of the custom file he inteded to use
+     */
     public void showCustomCardPath() {
         out.println("Enter the path of the file .json");
         String filePath = "src/main/resources/json/custom/";
@@ -920,13 +1004,22 @@ public class CliView extends View implements Runnable {
         setCliState(GameState.CUSTOMPATTERN);
     }
 
-
+    /**
+     *  method that allows to show the pattern the player chose
+     * @param patternCard pattern chosen by the player
+     */
     @Override
     public void showPattern(PatternCard patternCard) {
         out.println("\n" + "This is the PatternCard you will use ");
         out.println(patternCard.toString());
     }
 
+    /**
+     *  method that allows to show the pattern during the game
+     * @param patternCard pattern card of a player
+     * @param name name of the player
+     * @param id id of the player
+     */
     @Override
     public void showOtherPattern(PatternCard patternCard, String name,  int id) {
         out.println("\n" + "Now Pattern of" + name + "is: ");
@@ -934,6 +1027,11 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show the pattern of the current player to other players
+     * @param patternCard pattern card chosen by the player
+     * @param id id of the player
+     */
     @Override
     public void showOtherStartPattern(PatternCard patternCard, int id) {
         out.println("The pattern of your enemy is: " + "\n");
@@ -941,6 +1039,10 @@ public class CliView extends View implements Runnable {
         out.println("Choose your Pattern Card - Enter a number between 1 and 4");
     }
 
+    /**
+     * method that allows to show update of a selected pattern card
+     * @param patternCard pattern card of a player
+     */
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
         out.println("Now you're Pattern Card is" + "\n");
@@ -948,26 +1050,44 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show the tokens of a player
+     * @param tokensNumber number of tokens
+     */
     @Override
     public void showTokens(int tokensNumber) {
         out.println("\n" + "This your number of favor tokens available: " + tokensNumber);
     }
 
+    /**
+     * method that allows to show the start of a scene
+     */
     @Override
     public void showStartScene() {
         out.println("Time to take the gloves off and build your own window!" + "\n");
     }
 
+    /**
+     * method that allows to show the current round during the game
+     * @param round int round of the game
+     */
     @Override
     public void showCurrentRound(int round) {
         out.println("Round " + round + " is started");
     }
 
+    /**
+     * method that allows to show the current turn during the game
+     */
     @Override
     public void showCurrentTurn() {
         out.println("\n" + "It's your turn");
     }
 
+    /**
+     * method that allows to show to the other players, the current turn of the selected player
+     * @param username name of the selected player
+     */
     @Override
     public void showOtherCurrentTurn(String username) {
         if (!connected) {
@@ -978,17 +1098,28 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "It's " + username + "'s turn");
     }
 
+
+    /**
+     * method that allows to show to the current player  the command to rool the draft pool
+     */
     @Override
     public void showRollCommand() {
         setCliState(GameState.ROLL);
         out.println("Write the command ROLL to casually roll the draft pool");
     }
 
+    /**
+     * method that allows to show the draft pool
+     * @param draftPool draft pool of the game
+     */
     @Override
     public void showDraftPool(DraftPool draftPool) {
         out.println("\n" + draftPool.toString());
     }
 
+    /**
+     * method that allows to show to the current player the command to choose
+     */
     @Override
     public void showChooseCommand() {
         setCliState(GameState.CHOOSE);
@@ -996,14 +1127,21 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show to the current player the command to move a dice
+     * @param poolSize size of the pool
+     */
     @Override
     public void showMoveCommand(int poolSize)  {
         setPoolSize(poolSize);
         setCliState(GameState.MOVE);
         out.println("\n" + "Do you want to move a dice from the pool to the card? - Enter yes or no?");
-
     }
 
+    /**
+     * method that allows to show the index of the pool of the dice the player wants to move
+     * @param poolSize size of the pool
+     */
     @Override
     public void showIndexPoolCommand(int poolSize) {
         setPoolSize(poolSize);
@@ -1011,12 +1149,19 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Enter the index of the dice from the pool - from 1 to " + CliView.poolSize);
     }
 
+    /**
+     * method that allows to show the index of the patten where the player wants to move the dice
+     */
     @Override
     public void showIndexPatternCommand() {
         setCliState(GameState.PATTERNINDEX);
         out.println("\n" + "Enter the index of the Pattern Card - Enter a number between 1 and 20");
     }
 
+    /**
+     * method that allows to show the command of the tool card
+     * @param toolCards list of tool cards
+     */
     @Override
     public void showToolCommand(List<ToolCard> toolCards) {
         toolCost = new ArrayList<>();
@@ -1027,12 +1172,20 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
+    /**
+     * method that allows to show the selected tool card by the player
+     */
     @Override
     public void showToolChooseCommand() {
         setCliState(GameState.TOOLINDEX);
         out.println("\n" + "Which tool card do you want to use? - Enter a number from 1 to 3");
     }
 
+    /**
+     * method that allows to show the cost of the selected tool card
+     * @param toolCost list of tool card's costs
+     * @param indexTool index of the selected tool
+     */
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
         setCliState(GameState.TOOLCOST);
@@ -1040,6 +1193,10 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Do you want to use " + cost + " tokens to use this card? - Enter yes or no");
     }
 
+    /**
+     * method that allows to show the round tracker
+     * @param roundTracker round tracker of the game
+     */
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
         out.println("End of the round");
@@ -1047,6 +1204,11 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show the final rank at the end of the game
+     * @param playerList list of the players
+     * @param ended boolean that indicates if the game is ended
+     */
     @Override
     public void showFinalRank(List<Player> playerList, boolean ended) {
         out.println("Final Rank:" + "\n" );
@@ -1056,28 +1218,45 @@ public class CliView extends View implements Runnable {
         getConnection().setEndGameTimer(super.getPlayerID());
     }
 
+    /**
+     * method that allows to show the player who won
+     */
     @Override
     public void showWinner() {
         out.println("You win !!!!!!!!!");
         setCliState(GameState.NOTAUTHORIZED);
     }
 
+    /**
+     * method that allows to show the players who lost
+     */
     @Override
     public void showLosers() {
         out.println("You lose maaaan!");
         setCliState(GameState.NOTAUTHORIZED);
     }
 
+    /**
+     * method that allows to show the timer is ended to the current player
+     */
     @Override
     public void showTimer() {
         out.println("\n" + "You'r time is over");
     }
 
+    /**
+     * method that allows to show the current player's timer is ended to the other players
+     * @param playerName name of the current player
+     */
     @Override
     public void showOtherTimer(String playerName) {
         out.println("\n" + playerName + " turn time is ended");
     }
 
+    /**
+     * method that allows to show the list of tool cards
+     * @param toolCardList list of tool cards
+     */
     @Override
     public  void showToolCards(List<ToolCard> toolCardList) {
         for (ToolCard toolCard : toolCardList) {
@@ -1085,6 +1264,9 @@ public class CliView extends View implements Runnable {
         }
     }
 
+    /**
+     * method that allows to show that tokens isn't enough to use a tool card
+     */
     @Override
     public void showTokenError() {
         out.println("You have not enough favor tokens to use this tool card");
@@ -1096,6 +1278,10 @@ public class CliView extends View implements Runnable {
 
 
     // tool grozing pliers
+    /**
+     * method that allows to show the request for the Grozing tool card
+     * @param poolSize size of the pool
+     */
     @Override
     public void showGrozingRequest(int poolSize) {
         setPoolSize(poolSize);
@@ -1104,21 +1290,29 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show the command to use Grozing tool card
+     */
     @Override
     public void showGrozingCommand() {
         setCliState(GameState.GROZINGCOMMAND);
         out.println("Do you want to increase (1) or decrease (0)");
     }
 
-
-
     // tool eglomise brush
+
+    /**
+     * method that allows to show the start index for the Eglomise tool card
+     */
     @Override
     public void showEglomiseStart() {
         setCliState(GameState.EGLOMISESTART);
         out.println("\n" + "Select a die from the pattern card to move - Enter a number between 1 and 20");
     }
 
+    /**
+     * method that allows to show the end index for the Eglomise tool card
+     */
     @Override
     public void showEglomiseEnd() {
         setCliState(GameState.EGLOMISEEND);
@@ -1126,8 +1320,9 @@ public class CliView extends View implements Runnable {
 
     }
 
-
-    // tool copper foil burnisher
+    /**
+     * method that allows to show the start index for the CopperFoil tool card
+     */
     @Override
     public void showCopperFoilStart() {
         setCliState(GameState.COPPERSTART);
@@ -1135,6 +1330,9 @@ public class CliView extends View implements Runnable {
 
     }
 
+    /**
+     * method that allows to show the end index for the Copper Foil tool card
+     */
     @Override
     public void showCopperFoilEnd() {
         setCliState(GameState.COPPEREND);
@@ -1142,27 +1340,36 @@ public class CliView extends View implements Runnable {
     }
 
 
-    // tool lathekin
+    /**
+     * method that allows to show the first index where to pick up the dice in Lathekin tool card
+     */
     @Override
     public void showLathekinStart() {
         setCliState(GameState.LATHEKINSTARTONE);
         out.println("\n" + "Select the first die to move - Enter a number from 1 to 20");
     }
 
-
+    /**
+     * method that allows to show the second index where to pick up the dice in Lathekin tool card
+     */
     @Override
     public void showLathekinEnd() {
         setCliState(GameState.LATHEKINENDONE);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
-
+    /**
+     * method that allows to show the first index where to move the dice in Lathekin tool card
+     */
     @Override
     public void showLathekinStartTwo() {
         setCliState(GameState.LATHEKINSTARTTWO);
         out.println("Select the second die to move - Enter a number from 1 to 20");
     }
 
+    /**
+     * method that allows to show the second index where to move the dice in Lathekin tool card
+     */
     @Override
     public void showLathekinEndTwo() {
         setCliState(GameState.LATHEKINENDTWO);
@@ -1170,8 +1377,11 @@ public class CliView extends View implements Runnable {
     }
 
 
-
-    // tool lens cutter
+    /**
+     * method that allows to show the Lens Cutter tool card request
+     * @param poolSize size of the pool
+     * @param round round of the game
+     */
     @Override
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
         roundList = new ArrayList<>();
@@ -1181,21 +1391,31 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Selected the die from the draft pool you want to change - Enter a number from 1 to " + CliView.poolSize);
     }
 
+    /**
+     * method that allows to show the round of the round tracker for the Lens Cutter tool card
+     * @param round round of the round tracker
+     */
     @Override
     public void showLensCutterRound(List<Integer> round) {
         setCliState(GameState.LENSCUTTERROUND);
         out.println("Select the number of the round where you want to change - Enter a number from 1 to " + round.size());
     }
 
+    /**
+     * method that allows to show the dice in the round tracker for the Lens Cutter tool card
+     * @param round round of the round tracker
+     * @param roundIndex index of the round
+     */
     @Override
     public void showLensCutterDice(List<Integer> round, int roundIndex) {
         setCliState(GameState.LENSCUTTERDICE);
         out.println("Selected the die of the round selected - Enter a number from 1 to " + round.get(roundIndex).toString());
     }
 
-
-
-    // tool flux brush
+    /**
+     * method that allows to show request for the Flux Brush tool card
+     * @param poolSize size of the pool
+     */
     @Override
     public void showFluxBrushRequest(int poolSize) {
         setPoolSize(poolSize);
@@ -1203,15 +1423,19 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Selected the die to re-roll from the pool: - Enter a number between 1 and " + CliView.poolSize);
     }
 
-
-    // tool glazing hammer
+    /**
+     * method that allows to show request for the Glazing Hammer tool card
+     */
     @Override
     public void showGlazingHammerRequest() {
         setCliState(GameState.GLAZINGHAMMER);
         out.println("\n" + "Enter START to roll the dice of the draft pool" );
     }
 
-    // tool running pliers
+    /**
+     * method that allows to show the index of the pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showRunningPliersPool(int poolSize) {
         setPoolSize(poolSize);
@@ -1220,6 +1444,10 @@ public class CliView extends View implements Runnable {
 
     }
 
+
+    /**
+     * method that allows to show the index where to move the dice in the pattern card
+     */
     @Override
     public void showRunningPliersEnd() {
         setCliState(GameState.RUNNINGEND);
@@ -1227,8 +1455,10 @@ public class CliView extends View implements Runnable {
     }
 
 
-
-    // tool card cork backed straightedge
+    /**
+     * method that allows to show the index of the pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showCorkBackedPool(int poolSize) {
         setPoolSize(poolSize);
@@ -1236,23 +1466,30 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Select a die from the pool - Enter a number from 1 to " + CliView.poolSize);
     }
 
+    /**
+     * method that allows to show the index where to move the dice in the pattern card
+     */
     @Override
     public void showCorkBackedEnd() {
         setCliState(GameState.CORKEND);
         out.println("Enter where you want to put the dice in the pattern card - Enter a number from 1 to 20");
     }
 
-
-
-    // tool card grinding stone
+    /**
+     * method that allows to show the request for Cork Backed tool card
+     * @param poolSize size of the pool
+     */
     @Override
     public void showGrindingStoneRequest(int poolSize) {
         setPoolSize(poolSize);
         setCliState(GameState.GRINDING);
         out.println("\n" + "Select a die from the pool that should be flipped - Enter a number from 1 to " + CliView.poolSize);
     }
-
-    // tool card flux remover
+    /**
+     * method that allows to show the color of the selected dice e the index of the pool
+     * @param color color of the selected dice
+     * @param poolSize index of the pool
+     */
     @Override
     public void showFluxRemoverPool(DiceColor color, int poolSize) {
         setPoolSize(poolSize);
@@ -1261,6 +1498,9 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Select the die you want to return from the pool - Enter a number from 1 to " + CliView.poolSize);
     }
 
+    /**
+     * method that allows to show the new value of the selected dice
+     */
     @Override
     public void showFluxRemoverValue() {
         setCliState(GameState.FLUXVALUE);
@@ -1268,38 +1508,58 @@ public class CliView extends View implements Runnable {
         out.println("Which value do you want for the dice? - Enter a number from 1 to 6");
     }
 
-    // tool card thap wheel
+
+    /**
+     * method that allows to show the number of dice the player wants to move
+     */
     @Override
     public void showTapWheelNumber() {
         setCliState(GameState.TAPNUMBER);
         out.println("\n" + "Enter the number of dice that you want to move - Enter 1 or 2");
     }
 
+    /**
+     * method that allows to show the first index where to pick up the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelStartOne() {
         setCliState(GameState.TAPSTARTONE);
         out.println("Enter the index of the 1st dice you want to move - Enter a number from 1 to 20");
     }
 
+    /**
+     * method that allows to show the first index where to move the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelEndOne() {
         setCliState(GameState.TAPENDONE);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
+
+    /**
+     * method that allows to show the second index where to pick up the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelStartTwo() {
         setCliState(GameState.TAPSTARTTWO);
         out.println("Enter the index of the 2nd dice you want to move - Enter a number from 1 to 20");
     }
 
+    /**
+     * method that allows to show the second index where to move the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelEndTwo() {
         setCliState(GameState.TAPENDTWO);
         out.println("Enter the index where you want to move it - Enter a number from 1 to 20");
     }
 
-
+    /**
+     * method that allows to show the board of the game
+     * @param roundTracker round tracker of the game
+     * @param draftPool draft pool of the game
+     */
     @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
         out.println("\n" + "Now Round Tracker is:");
@@ -1308,6 +1568,10 @@ public class CliView extends View implements Runnable {
         out.println(draftPool.toString());
     }
 
+    /**
+     * method that allows to show an invalid move
+     * @param msg message to show
+     */
     @Override
     public void showInvalidMove(String msg) {
         out.println("\n" + "ERROR: " + msg);
@@ -1318,20 +1582,31 @@ public class CliView extends View implements Runnable {
     //---------------------------------------single player-------------------------------------------------------------
 
 
+    /**
+     * method that allows to show the difficulty chosen by the player
+     */
     @Override
     public void showDifficultyRequest() {
         setCliState(GameState.DIFFICULTYSP);
         out.println("\n" + "You have to choose the difficulty - Enter a number from 1 to 5 - This will change the number of the Tool Card");
     }
 
+    /**
+     * method that allows to show the list of the private cards
+     * @param publicList list of private cards
+     */
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
         for (PrivateObjectiveCard privateCard : publicList) {
             out.println("\n" + privateCard.toString());
         }
-
     }
 
+    /**
+     * method that allows to show the possiblity to choose a tool card
+     * @param toolList list of the tool cards
+     * @param poolSize size of the pool
+     */
     @Override
     public void showToolSingleCommand(List<ToolCard> toolList, int poolSize) {
         setPoolSize(poolSize);
@@ -1340,23 +1615,38 @@ public class CliView extends View implements Runnable {
         out.println("\n" + "Do you want to use a Tool Card ? - Enter yes or no");
     }
 
+    /**
+     * method that allows to show the selected tool card by the player
+     */
     @Override
     public void showToolSingleChoose() {
         setCliState(GameState.TOOLSPCHOOSE);
         out.println("Which tool card do you want to use? - Enter a number from 1 to " + toolSingleNumber);
     }
 
+    /**
+     * method that allows to show the selected dice to use the tool card
+     */
     @Override
     public void showToolSingleDice() {
         setCliState(GameState.TOOLSPDICE);
         out.println("\n" + "Select a die from the pool, which has the same color of the Tool Card - Enter a number from 1 to " + poolSize);
     }
 
+    /**
+     * method that allows to show that the selected dice isn't right to use the tool card
+     */
     @Override
     public void showMatchError() {
         out.println("\n" + "You are choosed a not right dice, it doesn't match the color of the tool card");
     }
 
+    /**
+     * method that allows to show if the player won the game
+     * @param winner boolean that indicates if the player won
+     * @param playerPoints total points of the player
+     * @param gameThreshold threshold to overcome to win
+     */
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
         if (winner) {
@@ -1374,26 +1664,50 @@ public class CliView extends View implements Runnable {
     //----------------------------disconnection-----------------------------------------------------------------------
 
 
+    /**
+     * method that allows to show that the limit of the player reached the maximum
+     */
     @Override
     public void showMaxPlayerLogin() {
         out.println("The number of player reached the maximum, retry later!");
     }
 
+
+    /**
+     * method that allows to show the player that exited the game
+     * @param playerName name of the player who exited the game
+     */
     @Override
     public void showExitPlayer(String playerName) {
         out.println("\n" + "The player " + playerName + " disconnected from the game");
     }
 
+    /**
+     * method that allows to show the player that reconnected to the game
+     * @param playerName name of the player that reconnected to the game
+     */
     @Override
     public void showReconnectPlayer(String playerName) {
         out.println("\n" + "The player " + playerName + " reconnected to the game");
     }
 
+    /**
+     * method that allows to show that a player can't reconnect to a game because no players exit
+     */
     @Override
     public void showNotPermittedReconnection() {
         out.println("\n" + "There's no player available to reconnect");
     }
 
+    /**
+     * method that allows to reload all the scene of the player who reconnected to the game
+     * @param currPlayer current player
+     * @param singlePlay boolean that indicates if the modality is single player
+     * @param gameStart boolean that indicates if the game is started
+     * @param tool list of tool cards
+     * @param publicCard list of public cards
+     * @param players list of players
+     */
     @Override
     public void showReload(Player currPlayer,boolean singlePlay, boolean gameStart, List<ToolCard> tool, List<PublicObjectiveCard> publicCard, List<Player> players) {
         out.println("\n" + "You are returned to the game!");

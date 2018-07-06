@@ -36,7 +36,11 @@ import java.util.logging.Logger;
 import static java.lang.System.out;
 
 /**
- * Class GuiController: //todo
+ * Class GuiController: the class responsible of starting the gui, establish a connection with the server and of the switch
+ * of the scene depending on the state of the game. The class extends the abstract class and implements all the generics
+ * method to update the view depending on the event received from the server
+ * @see java.lang.Runnable
+ * @author fadda-miceli-mundo
  */
 public class GuiController extends View {
 
@@ -415,7 +419,7 @@ public class GuiController extends View {
     private ObservableList<Integer> comboBoxData = FXCollections.observableArrayList();
 
     /**
-     * method that handle //todo
+     * method that handle the click of the play button to set the name of the player to the server
      */
     @FXML
     void handlePlayButton() {
@@ -438,38 +442,51 @@ public class GuiController extends View {
 
     }
 
-    @FXML// todo
+    /**
+     * method that handle the difficulty selected from the user in the combo box for the single player mode
+     */
+    @FXML
     void handleDifficultyBox() {
         this.selectedDifficulty = comboBox.getSelectionModel().getSelectedItem();
         txtName.setDisable(false);
     }
 
 
-    //-----------------ovveride di view methods
+    //-------------------override of the view's abstract class methods
 
-    @Override //todo
+    @Override
     public void run() {
         log.info("runner run");
     }
 
+    /**
+     * method that allows to set the connection of the client
+     * @param connection client to set
+     */
     @Override
     public void setConnection(ClientInterface connection) {
         this.connection = connection;
     }
 
+    /**
+     * method that allows to show the id of the player
+     */
     @Override
     public ClientInterface getConnection() {
         return connection;
     }
 
     /**
-     * @see View
+     * method that allows to show the id of the player
      */
     @Override
     public void showID() {
         log.info("Player GUI id set");
     }
 
+    /**
+     * method that allows the request for the single player mode
+     */
     @Override
     public void showSinglePlayerRequest() {
 
@@ -483,6 +500,9 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that alert the game is started
+     */
     @Override
     public void showGameStarted() {
 
@@ -503,33 +523,53 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that alter of the choose of the name
+     */
     @Override
     public void showNameChoose() {
         log.info("name choose GUI");
     }
 
+    /**
+     * method that alert the name is set
+     */
     @Override
     public void showName() {
         nameSet.setValue(true);
     }
 
-
+    /**
+     * method that alert the name of the player is setted
+     * @param playerName of the other player
+     */
     @Override
     public void showNameOther(String playerName) {
         log.info("Name other");
     }
 
+    /**
+     * method that alert that the chosen name is already used
+     */
     @Override
     public void showNameError() {
         nameSet.setValue(false);
         Platform.runLater(() -> AlertBox.display(error, "Name already chosen"));
     }
 
+    /**
+     * method that provide the private card to the view
+     * @param privateObjectiveCard private card to show
+     */
     @Override
     public void showPrivateCard(PrivateObjectiveCard privateObjectiveCard) {
         Platform.runLater(() -> privateCard = new PrivateObjectiveCard(privateObjectiveCard));
     }
 
+    /**
+     * method that provide the public card to the view
+     * @param publicList list of public cards
+     */
     @Override
     public void showPublicCard(List<PublicObjectiveCard> publicList) {
         Platform.runLater(() -> {
@@ -540,6 +580,10 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that provide the patter card to the view
+     * @param patternCards list of pattern cards
+     */
     @Override
     public void showPatternList(List<PatternCard> patternCards)  {
         Platform.runLater(() -> {
@@ -556,11 +600,20 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that provide the pattern card chose
+     * @param patternCard pattern chosen by the player
+     */
     @Override
     public void showPattern(PatternCard patternCard)  {
         Platform.runLater(() -> patternCurrent = new PatternCard(patternCard));
     }
 
+    /**
+     * method that show the pattern chosen by the other player
+     * @param patternCard pattern card chosen by the player
+     * @param id id of the player
+     */
     @Override
     public void showOtherStartPattern(PatternCard patternCard, int id) {
 
@@ -580,6 +633,12 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that shows the update of the  pattern card of the other player during the name
+     * @param patternCard pattern card of a player
+     * @param playerName name of the player
+     * @param id id of the player
+     */
     @Override
     public void showOtherPattern(PatternCard patternCard, String playerName, int id) {
 
@@ -604,17 +663,28 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that update the pattern card of the player
+     * @param patternCard pattern card of a player
+     */
     @Override
     public void showPatternUpdate(PatternCard patternCard) {
 
         Platform.runLater(() -> board.updatePattern(new PatternCard(patternCard)));
     }
 
+    /**
+     * method that update the number of tokens of the player
+     * @param tokensNumber number of tokens
+     */
     @Override
     public void showTokens(int tokensNumber) {
         setTokens(tokensNumber);
     }
 
+    /**
+     * method that alter that the game board is ready to show
+     */
     @Override
     public void showStartScene() {
 
@@ -628,26 +698,44 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that alert of the current round in the game
+     * @param round int round of the game
+     */
     @Override
     public void showCurrentRound(int round) {
         Platform.runLater(() -> board.updateRound(round));
     }
 
+    /**
+     * method that alert of the current turn in the game
+     */
     @Override
     public void showCurrentTurn() {
         Platform.runLater(() -> board.updateTurn());
     }
 
+    /**
+     * method that alert the other player of current turn player name
+     * @param username name of the selected player
+     */
     @Override
     public void showOtherCurrentTurn(String username) {
         Platform.runLater(() -> board.updateOtherTurn(username));
     }
 
+    /**
+     * method that alert the player to roll the draft pool
+     */
     @Override
     public void showRollCommand() {
         Platform.runLater(() -> board.textRollMsg());
     }
 
+    /**
+     * method that show the update of the draft pool
+     * @param draftPool draft pool of the game
+     */
     @Override
     public void showDraftPool(DraftPool draftPool) {
 
@@ -661,6 +749,9 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that show the user the choose of the move to do
+     */
     @Override
     public void showChooseCommand() {
 
@@ -673,6 +764,10 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that show the player the dice move message
+     * @param poolSize size of the pool
+     */
     @Override
     public void showMoveCommand(int poolSize) {
 
@@ -685,36 +780,64 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that show the player to choose a dice from the pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showIndexPoolCommand(int poolSize) {
         log.info("pool size GUI");
     }
 
+    /**
+     * method that show the player where to put the dice
+     */
     @Override
     public void showIndexPatternCommand() {
         log.info("index pattern command GUI");
     }
 
+    /**
+     * method that show the tool command to the player
+     * @param toolCards list of tool cards
+     */
     @Override
     public void showToolCommand(List<ToolCard> toolCards) {
         Platform.runLater(() -> board.toolMoveMsg());
     }
 
+    /**
+     * method that show the player the choose of the tool card to use
+     */
     @Override
     public void showToolChooseCommand() {
         log.info("tool choose command received GUI");
     }
 
+    /**
+     * method that show the player the cost a tool card to use
+     * @param toolCost list of tool card's costs
+     * @param indexTool index of the selected tool
+     */
     @Override
     public void showToolCostCommand(List<Integer> toolCost, int indexTool) {
         log.info("tool cost received GUI");
     }
 
+    /**
+     * method that show the round tracker
+     * @param roundTracker round tracker of the game
+     */
     @Override
     public void showRoundTracker(RoundTracker roundTracker) {
         Platform.runLater(() -> board.updateRoundTracker(new RoundTracker(roundTracker)));
     }
 
+    /**
+     * method that show the final rank of the game
+     * @param playerList list of the players
+     * @param ended boolean that indicates if the game is ended
+     */
     @Override
     public void showFinalRank(List<Player> playerList, boolean ended) {
 
@@ -740,26 +863,42 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that show the winner
+     */
     @Override
     public void showWinner() {
         log.info("show winner received GUI");
     }
 
+    /**
+     * method that show the loser
+     */
     @Override
     public void showLosers() {
         log.info("show losers received GUI");
     }
 
+    /**
+     * method that show the end of the timer to the player
+     */
     @Override
     public void showTimer() {
         Platform.runLater(() -> board.endTimer());
     }
 
+    /**
+     * method that show the end of the timer of a player
+     */
     @Override
     public void showOtherTimer(String playerName) {
         Platform.runLater(() -> board.endOtherTimer(playerName));
     }
 
+    /**
+     * method that show the tool cards list to the player
+     * @param toolCardList list of tool cards
+     */
     @Override
     public void showToolCards(List<ToolCard> toolCardList) {
         Platform.runLater(() -> {
@@ -770,6 +909,9 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that show the error of the use of a tool card
+     */
     @Override
     public void showTokenError() {
 
@@ -778,141 +920,238 @@ public class GuiController extends View {
         Platform.runLater(() -> AlertBox.display(error, "You have NOT enough tokens!"));
     }
 
+    /**
+     * method that show the grozing pliers request tool card
+     * @param poolSize size of the pool
+     */
     @Override
     public void showGrozingRequest(int poolSize) {
         Platform.runLater(() -> board.textGrozingMsg());
     }
 
+    /**
+     * method that show the grozing pliers command to do for the tool card
+     */
     @Override
     public void showGrozingCommand() {
         log.info("grozing command gui received");
     }
 
+    /**
+     * method that show the eglomise brush tool card dice to move
+     */
     @Override
     public void showEglomiseStart() {
         Platform.runLater(() -> board.textEglomiseMsg());
     }
 
+    /**
+     * method that show the eglomise brush tool card where to move the dice
+     */
     @Override
     public void showEglomiseEnd() {
         log.info("eglomise end gui received");
     }
 
+    /**
+     * method that show the copper foil tool card dice to move
+     */
     @Override
     public void showCopperFoilStart() {
         Platform.runLater(() -> board.textCopperFoilMsg());
     }
 
+    /**
+     * method that show the copper foil tool card where to move the dice
+     */
     @Override
     public void showCopperFoilEnd() {
         log.info("copper foil end received");
     }
 
+    /**
+     * method that show the lathekin first dice to move
+     */
     @Override
     public void showLathekinStart() {
         Platform.runLater(() -> board.textLathekinMsg());
     }
 
+    /**
+     * method that show the lathekin second dice to move
+     */
     @Override
     public void showLathekinStartTwo() {
         log.info("lathekin start two");
     }
 
+    /**
+     * method that show the lathekin tool card where to move the dice
+     */
     @Override
     public void showLathekinEnd() {
         log.info("lathekin end one");
     }
 
+    /**
+     * method that show the lathekin tool card where to move the dice
+     */
     @Override
     public void showLathekinEndTwo() {
         log.info("lathekin end two");
     }
 
+    /**
+     * method that show the lens cutter tool card the dice to use
+     */
     @Override
     public void showLensCutterRequest(int poolSize, List<Integer> round) {
         Platform.runLater(() -> board.textLensCutterMsg());
     }
 
+    /**
+     * method that show the decision of the round in the round tracker
+     * @param round round of the round tracker
+     */
     @Override
     public void showLensCutterRound(List<Integer> round) {
         log.info("lens cutter round");
     }
 
+    /**
+     * method that show the choose of the dice in the current round
+     * @param round round of the round tracker
+     * @param roundIndex index of the round
+     */
     @Override
     public void showLensCutterDice(List<Integer> round, int roundIndex) {
         log.info("lens cutter dice");
     }
 
+    /**
+     * method that show the flux brush tool card request for deciding which dice from the pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showFluxBrushRequest(int poolSize) {
         Platform.runLater(() -> board.textFluxBrushMsg());
     }
 
+    /**
+     * method that show the glazing hammer tool card request to re-shuffle the dice in the pool
+     */
     @Override
     public void showGlazingHammerRequest() {
         Platform.runLater(() -> board.textGlazingHammerMsg());
     }
 
+    /**
+     * method that show the running pliers tool card request command for the draft pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showRunningPliersPool(int poolSize) {
         Platform.runLater(() -> board.textRunningPliersMsg());
     }
 
+    /**
+     * method that show the request where to put the dice chose in the draft pool
+     */
     @Override
     public void showRunningPliersEnd() {
         log.info("running pliers end");
     }
 
+    /**
+     * method that allows to show the index of the pool
+     * @param poolSize size of the pool
+     */
     @Override
     public void showCorkBackedPool(int poolSize) {
         Platform.runLater(() -> board.textCorkBackedMsg());
     }
 
+    /**
+     * method that allows to show the index where to move the dice in the pattern card
+     */
     @Override
     public void showCorkBackedEnd() {
         log.info("corkbacked end");
     }
 
+    /**
+     * method that allows to show the request for Cork Backed tool card
+     * @param poolSize size of the pool
+     */
     @Override
     public void showGrindingStoneRequest(int poolSize) {
         Platform.runLater(() -> board.textGrindingStoneMsg());
     }
 
+    /**
+     * method that allows to show the color of the selected dice e the index of the pool
+     * @param color color of the selected dice
+     * @param poolSize index of the pool
+     */
     @Override
     public void showFluxRemoverPool(DiceColor color, int poolSize) {
         Platform.runLater(() -> board.textFluxRemoverMsg(color));
     }
 
+    /**
+     * method that allows to show the new value of the selected dice
+     */
     @Override
     public void showFluxRemoverValue() {
         log.info("flux remover value");
     }
 
+    /**
+     * method that allows to show the number of dice the player wants to move
+     */
     @Override
     public void showTapWheelNumber() {
         Platform.runLater(() -> board.textTapWheelMsg());
     }
 
+
+    /**
+     * method that allows to show the first index where to pick up the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelStartOne() {
         log.info("tap wheel start one");
     }
 
+    /**
+     * method that allows to show the first index where to move the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelEndOne() {
         log.info("tap wheel end one");
     }
 
+    /**
+     * method that allows to show the second index where to pick up the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelStartTwo() {
         log.info("tap wheel start two");
     }
 
+    /**
+     * method that allows to show the second index where to move the dice in Tap Wheel tool card
+     */
     @Override
     public void showTapWheelEndTwo() {
         log.info("tap wheel end two");
     }
 
+    /**
+     * method that allows to show the board of the game
+     * @param roundTracker round tracker of the game
+     * @param draftPool draft pool of the game
+     */
     @Override
     public void showBoard(RoundTracker roundTracker, DraftPool draftPool) {
 
@@ -927,6 +1166,10 @@ public class GuiController extends View {
 
     }
 
+    /**
+     * method that allows to show an invalid move
+     * @param msg message to show
+     */
     @Override
     public void showInvalidMove(String msg) {
 
@@ -938,11 +1181,19 @@ public class GuiController extends View {
 
     //------------single  player----------------------------------------------------
 
+    /**
+     * method that allows to show request for the single player mode
+     */
     @Override
     public void showDifficultyRequest() {
         log.info("difficulty single player gui");
     }
 
+
+    /**
+     * method that allows to show the list of the private cards
+     * @param publicList list of private cards
+     */
     @Override
     public void showPrivateSingle(List<PrivateObjectiveCard> publicList) {
         Platform.runLater(() -> {
@@ -953,6 +1204,11 @@ public class GuiController extends View {
         });
     }
 
+    /**
+     * method that allows to show the possiblity to choose a tool card
+     * @param toolListCard list of the tool cards
+     * @param poolSize size of the pool
+     */
     @Override
     public void showToolSingleCommand(List<ToolCard> toolListCard, int poolSize) {
 
@@ -970,16 +1226,27 @@ public class GuiController extends View {
 
     }
 
+
+    /**
+     * method that allows to show the selected tool card by the player
+     */
     @Override
     public void showToolSingleChoose() {
         log.info("tool single choose");
     }
 
+
+    /**
+     * method that allows to show the selected dice to use the tool card
+     */
     @Override
     public void showToolSingleDice() {
         log.info("tool single dice");
     }
 
+    /**
+     * method that allows to show that the selected dice isn't right to use the tool card
+     */
     @Override
     public void showMatchError() {
 
@@ -988,6 +1255,12 @@ public class GuiController extends View {
         Platform.runLater(() -> AlertBox.display(error, "The dice selected doesn't match the color of the tool card"));
     }
 
+    /**
+     * method that allows to show if the player won the game
+     * @param winner boolean that indicates if the player won
+     * @param playerPoints total points of the player
+     * @param gameThreshold threshold to overcome to win
+     */
     @Override
     public void showEndSinglePlayer(boolean winner, int playerPoints, int gameThreshold) {
 
@@ -1008,6 +1281,9 @@ public class GuiController extends View {
 
     //---------------disconnection---------------------------------------------
 
+    /**
+     * method that allows to show that the limit of the player reached the maximum
+     */
     @Override
     public void showMaxPlayerLogin() {
 
@@ -1016,21 +1292,41 @@ public class GuiController extends View {
         Platform.runLater(() -> AlertBox.display(error, "The number of player reached the maximum, retry later!"));
     }
 
+    /**
+     * method that allows to show the player that exited the game
+     * @param playerName name of the player who exited the game
+     */
     @Override
     public void showExitPlayer(String playerName) {
         Platform.runLater(() -> AlertBox.display("Event",  "The player " + playerName + " disconnected from the game"));
     }
 
+    /**
+     * method that allows to show the player that reconnected to the game
+     * @param playerName name of the player that reconnected to the game
+     */
     @Override
     public void showReconnectPlayer(String playerName) {
         Platform.runLater(() -> AlertBox.display("Event", "The player " + playerName + " reconnected to the game"));
     }
 
+    /**
+     * method that allows to show that a player can't reconnect to a game because no players exit
+     */
     @Override
     public void showNotPermittedReconnection() {
         Platform.runLater(() -> AlertBox.display(error, "There's no available player to reconnect"));
     }
 
+    /**
+     * method that allows to reload all the scene of the player who reconnected to the game
+     * @param currPlayer current player
+     * @param singlePlay boolean that indicates if the modality is single player
+     * @param gameStart boolean that indicates if the game is started
+     * @param toolCards list of tool cards
+     * @param publicCard list of public cards
+     * @param players list of players
+     */
     @Override
     public void showReload(Player currPlayer, boolean singlePlay, boolean gameStart, List<ToolCard> toolCards, List<PublicObjectiveCard> publicCard, List<Player> players) {
         Platform.runLater(() -> {
