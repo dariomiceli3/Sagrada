@@ -477,7 +477,6 @@ public class Model extends Observable {
     }
 
     // for tool card 1,6,10
-
     /**
      * method that manage the modification of the the value of a dice, depending on the different tool card used that have
      * similar effects on the value of the dice
@@ -523,8 +522,58 @@ public class Model extends Observable {
         }
     }
 
-    // for tool card 2,3,4,12
+    //for toolcard 5
+    /**
+     * method responsible to make an exchange between a dice in the draft pool and one in the Round Tracker
+     * @param id of the player
+     * @param indexPool of the dice in the draft pool
+     * @param indexRound of the round at the moment of the call
+     * @param indexPosition index of the dice in the current round
+     */
+    public void exchangePoolRoundTracker(int id, int indexPool, int indexRound, int indexPosition) {
+        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
+        Dice dice2 = getRoundTracker().getDice(indexRound, indexPosition);
+        getDraftPool().setDice(dice2);
+        getRoundTracker().addDice(dice1, indexRound);
+        updateBoardAndNotify();
+    }
 
+
+    //for toolcard 7
+    /**
+     * method responsible to clean and re-roll all the dice in the draft pool
+     */
+    public void shufflePool() {
+
+        List<Dice> diceList = getDraftPool().cleanListDice();
+        for (Dice dice : diceList) {
+            Random random = new Random();
+            int value = random.nextInt(6) + 1;
+            dice.setValue(value);
+            getDraftPool().setDice(dice);
+        }
+        updateBoardAndNotify();
+    }
+
+
+    //for toolcard 11
+    /**
+     * method responsible to make an exchange between a dice in the draft pool and one in the Dice Bag
+     * @param indexPool of the dice in the draft pool
+     * @param value of the new dice drafted from the bag
+     * @param dice to put in the pool
+     */
+    public void exchangePoolBag(int indexPool, int value, Dice dice) {
+        dice.setValue(value);
+        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
+        getDiceBag().setDice(dice1);
+        getDraftPool().setDice(dice);
+        updateBoardAndNotify();
+    }
+
+
+
+    // for tool card 2,3,4,12
     /**
      * method that manage the put of the first dice on the pattern card of a player depending on the different tool card
      * that have similar effects on moving and putting dice on the card
@@ -702,57 +751,7 @@ public class Model extends Observable {
         }
     }
 
-    //for toolcard 5
 
-    /**
-     * method responsible to make an exchange between a dice in the draft pool and one in the Round Tracker
-     * @param id of the player
-     * @param indexPool of the dice in the draft pool
-     * @param indexRound of the round at the moment of the call
-     * @param indexPosition index of the dice in the current round
-     */
-    public void exchangePoolRoundTracker(int id, int indexPool, int indexRound, int indexPosition) {
-        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
-        Dice dice2 = getRoundTracker().getDice(indexRound, indexPosition);
-        getDraftPool().setDice(dice2);
-        getRoundTracker().addDice(dice1, indexRound);
-        updateBoardAndNotify();
-    }
-
-
-    //for toolcard 11
-
-    /**
-     * method responsible to make an exchange between a dice in the draft pool and one in the Dice Bag
-     * @param indexPool of the dice in the draft pool
-     * @param value of the new dice drafted from the bag
-     * @param dice to put in the pool
-     */
-    public void exchangePoolBag(int indexPool, int value, Dice dice) {
-        dice.setValue(value);
-        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
-        getDiceBag().setDice(dice1);
-        getDraftPool().setDice(dice);
-        updateBoardAndNotify();
-    }
-
-
-    //for toolcard 7
-
-    /**
-     * method responsible to clean and re-roll all the dice in the draft pool
-     */
-    public void shufflePool() {
-
-        List<Dice> diceList = getDraftPool().cleanListDice();
-        for (Dice dice : diceList) {
-            Random random = new Random();
-            int value = random.nextInt(6) + 1;
-            dice.setValue(value);
-            getDraftPool().setDice(dice);
-        }
-        updateBoardAndNotify();
-    }
 
 
 

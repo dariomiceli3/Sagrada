@@ -10,17 +10,36 @@ import it.polimi.se2018.events.serverclient.controllerview.*;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Class ToolCardController: the class represents the controller of the tool card effect, decide which effect to call depending
+ * on the the runtime event received from the notification of the virtual view e let the effect do the rest, and decide which
+ * request send to the player depending on the tool card the player decide to use. The tool card controller has the same features
+ * of the controller (Observer of the virtual view) of the MVC pattern, but it's purpose is to separate from the main controller
+ * of the game, the handling of the tool card events
+ * @see java.util.Observer
+ * @author fadda-miceli-mundo
+ */
 public class ToolCardController implements Observer {
 
     private GameController gameController;
     private ToolCardEffect toolCardEffect;
     private Dice dice;
 
+    /**
+     * Class constructor linked with the main controller of the project
+     * @param gameController to link the controller
+     */
     ToolCardController(GameController gameController) {
         this.gameController = gameController;
         this.toolCardEffect = new ToolCardEffect(gameController);
     }
 
+    /**
+     * method that send to the virtual view an event containing the request of the different tool card depending on
+     * the choose of the player
+     * @param n the number of the tool card
+     * @param view the virtual view to send the message
+     */
     void toolCardEffectRequest(int n, VirtualView view) {
 
         if (n == 1) {
@@ -51,6 +70,13 @@ public class ToolCardController implements Observer {
         }
     }
 
+    /**
+     * Override of the update Observer method, the method is invoked after the tool card controller has received a notification from the virtual view
+     * that the player want to use a tool card to update its state and call the effect depending on the tool card chose by the player, it handles
+     * the invalid move event if something goes wrong
+     * @param o observable virtual view
+     * @param arg the object received
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -190,18 +216,18 @@ public class ToolCardController implements Observer {
                 toolCardEffect.tapWheelEffect(virtualView.getPlayerID(), ((TapWheelEvent) arg).getNumberDice(), ((TapWheelEvent) arg).getIndexStartOne(), ((TapWheelEvent) arg).getIndexEndOne(),
                         ((TapWheelEvent) arg).getIndexStartTwo(), ((TapWheelEvent) arg).getIndexEndTwo());
                 gameController.nextStepTool(virtualView);
-            } catch (NullPointerException e) {
+            }
+            catch (NullPointerException e) {
                 virtualView.sendEvent(new InvalidMoveEvent("There' s no dice to move in the start index", virtualView.getPlayerID()));
                 gameController.getModel().tokenRefactor(gameController.isSinglePlayer(), virtualView.getPlayerID(), 12);
                 gameController.startTool(virtualView);
-            } catch (InvalidMoveException e) {
-
+            }
+            catch (InvalidMoveException e) {
                 if (e.getMessage().equalsIgnoreCase("There's no dice on the Round Tracker of the same color") || e.getMessage().equalsIgnoreCase("You choose two dice with different colors")) {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     gameController.getModel().tokenRefactor(gameController.isSinglePlayer(), virtualView.getPlayerID(), 12);
                     gameController.startTool(virtualView);
                 }
-
                 if ((e.getMessage().equalsIgnoreCase("Error first dice 12")) || e.getMessage().equalsIgnoreCase("Error second dice 12")) {
                     virtualView.sendEvent(new InvalidMoveEvent(e.getMessage(), virtualView.getPlayerID()));
                     virtualView.sendEvent(new TapWheelRequestEvent(virtualView.getPlayerID()));

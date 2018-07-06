@@ -1558,6 +1558,13 @@ public class BoardController {
             removeDiceOnPattern(indexPatternStartOne);
             removeDiceOnPattern(indexPatternStartTwo);
         }
+        if (guiState == ViewState.TAPENDTWO) {
+            removeDiceOnPattern(indexPatternStartOne);
+            removeDiceOnPattern(indexPatternStartTwo);
+        }
+        if (guiState == ViewState.TAPENDONE) {
+            removeDiceOnPattern(indexPatternStartOne);
+        }
 
 
         for (int index = 0; index < patternCard.getPattern().size(); index++) {
