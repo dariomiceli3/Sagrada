@@ -217,7 +217,7 @@ public class Server {
     }
 
     /**
-     * synchronized method responsible for the waiting of the connections of the other players, if the player are >= 2
+     * synchronized method responsible for the waiting of the connections of the other players, if the player are greater than or equal to 2
      * start a timer for waiting other players to connect, at the end of the timer create e new instance of the controller
      * and set the gameController started to true,while if the gameController mode is single player jump the timer and directly start a new gameController.
      * It immediately start a gameController if the players connected are 4

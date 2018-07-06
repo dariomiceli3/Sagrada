@@ -306,7 +306,6 @@ class PointsManager {
 
     /**
      * Class PointsComparator: class used to compare final points of players
-     * @sse java.util.Comparator<>
      */
     private class PointsComparator implements Comparator<Player> {
 

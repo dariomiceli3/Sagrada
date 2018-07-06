@@ -20,7 +20,7 @@ public class DisconnectionEvent implements Event {
 
     /**
      * method that provides the caller the id of the player that tried to disconnect
-     * @return
+     * @return player id
      */
     public int getID() {
         return id;

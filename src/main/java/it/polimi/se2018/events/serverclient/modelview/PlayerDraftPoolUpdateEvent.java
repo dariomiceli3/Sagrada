@@ -13,7 +13,7 @@ public class PlayerDraftPoolUpdateEvent implements Event {
 
     /**
      * class constructor with the draft pool
-     * @param draftPool
+     * @param draftPool the new draft pool
      */
     public PlayerDraftPoolUpdateEvent(DraftPool draftPool) {
         this.draftPool = draftPool;
