@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.List;
 import static java.lang.System.out;
 
-
+// todo adri
 public class CliView extends View implements Runnable {
 
 
@@ -39,34 +39,65 @@ public class CliView extends View implements Runnable {
     private ClientInterface connection;
     private static boolean connected = true;
 
+    /**
+     * class constructor
+     */
     CliView() {
         System.setProperty("jansi.passthrough", "true");
     }
 
+    /**
+     * method that provides the caller the list of the cost of the tool
+     * @return list of the cost of the tool
+     */
     private static List<Integer> getToolCost() {
         return toolCost;
     }
 
+    /**
+     * method that allows to set if the client is connected or not
+     * @param connected boolean connected
+     */
     private static void setConnected(boolean connected) {
         CliView.connected = connected;
     }
 
+    /**
+     * method that allows to set the size of the pool
+     * @param poolSize size of the pool
+     */
     private static void setPoolSize(int poolSize) {
         CliView.poolSize = poolSize;
     }
 
+    /**
+     * method that allows to set the index of the pool
+     * @param indexPool index of the pool
+     */
     private static void setIndexPool(int indexPool) {
         CliView.indexPool = indexPool;
     }
 
+    /**
+     * method that allows to set the index of the pattern
+     * @param indexPattern index of the pattern
+     */
     private static void setIndexPattern(int indexPattern) {
         CliView.indexPattern = indexPattern;
     }
 
+    /**
+     * method that allows to set the index of the tool card
+     * @param indexTool index of the tool card
+     */
     private static void setIndexTool(int indexTool) {
         CliView.indexTool = indexTool;
     }
 
+    /**
+     * method that allows to set the first index where to move the dice
+     * @param indexStartOne  first index //todo
+     */
     private static void setIndexStartOne(int indexStartOne) {
         CliView.indexStartOne = indexStartOne;
     }
