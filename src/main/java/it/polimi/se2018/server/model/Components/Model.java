@@ -427,7 +427,7 @@ public class Model extends Observable {
                     dice.setValue(dice.getValue() + increase);
                 }
             }
-            if (increase == -1) {
+            if (increase == 0) {
                 if (dice.getValue() == 6) {
                     updatePoolAndNotify();
                     try {
@@ -437,10 +437,9 @@ public class Model extends Observable {
                     }
                 }
                 else {
-                    dice.setValue(dice.getValue() + increase);
+                    dice.setValue(dice.getValue() - 1);
                 }
             }
-            getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() + increase);
             updateBoardAndNotify();
         }
         if (number == 10) {

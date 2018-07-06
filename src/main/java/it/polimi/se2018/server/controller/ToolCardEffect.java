@@ -15,7 +15,7 @@ class ToolCardEffect {
     void grozingPliersEffect(int id, int indexPool, int increase) throws InvalidMoveException {
 
         if (increase == 0) {
-            gameController.getModel().setDiceValue(indexPool, -1, 1);
+            gameController.getModel().setDiceValue(indexPool, 0, 1);
         }
         if (increase == 1) {
             gameController.getModel().setDiceValue(indexPool, 1, 1);
@@ -66,7 +66,7 @@ class ToolCardEffect {
    //toolcard 8
    void runningPliers(int id, int indexPool, int indexPattern) throws InvalidMoveException {
 
-       if (gameController.getStep() == 0 && gameController.getTurn() < gameController.getViewGame().size()) {
+       if (gameController.getTurn() < gameController.getViewGame().size()) {
            gameController.getModel().putDiceToolCard(id, indexPool, indexPattern, 8);
        }
        else {

@@ -199,7 +199,7 @@ public class GuiController extends View {
         Parent root1 = loader.load();
 
         Scene scene = new Scene(root1);
-        stage.setTitle("Sagrada GameController");
+        stage.setTitle("Sagrada Game");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -212,7 +212,7 @@ public class GuiController extends View {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         Parent root2 = loader.load();
         Scene gameBoard = new Scene(root2);
-        stage.setTitle("Sagrada GameController");
+        stage.setTitle("Sagrada Game");
         stage.setScene(gameBoard);
         stage.setResizable(false);
         stage.show();
@@ -286,7 +286,7 @@ public class GuiController extends View {
             AlertBox.display(error, "The number of player reached the maximum, retry later!");
         }
         else {
-            AlertBox.display(error, "You have to wait till the game is started!");
+            AlertBox.display(error, "You have to wait till the match is started!");
         }
 
     }
@@ -328,7 +328,7 @@ public class GuiController extends View {
 
         Platform.runLater(() -> {
             if (!singlePlayer) {
-                AlertBox.display("Name Choose", "Please wait, the game will start in a few seconds");
+                AlertBox.display("Name Choose", "Please wait, the match will start in a few seconds");
             }
         });
 
@@ -350,7 +350,7 @@ public class GuiController extends View {
                 comboBox.setVisible(true);
                 txtName.setDisable(true);
             }
-            AlertBox.display("Name Choose", "GameController is started, enter your name");
+            AlertBox.display("Name Choose", "Match is started, enter your name");
         });
     }
 
