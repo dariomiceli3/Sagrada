@@ -633,7 +633,7 @@ public class Model extends Observable {
             Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStart);
             try {
                 getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEnd, getPlayerFromID(id).getPattern());
-                updatePatternAndNotify(id);
+                //updatePatternAndNotify(id);
             }
             catch (InvalidMoveException e) {
                 getPlayerFromID(id).getPattern().putAnyDice(dice, indexStart);
@@ -686,25 +686,23 @@ public class Model extends Observable {
             Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStartTwo);
             try {
                 getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEndTwo, getPlayerFromID(id).getPattern());
-
+                updatePatternAndNotify(id);
             }
             catch (InvalidMoveException e) {
                 Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
                 getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
-                getPlayerFromID(id).getPattern().putAnyDice(dice, indexEndTwo);
-
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStartTwo);
+                updatePatternAndNotify(id);
                 throw new InvalidMoveException("Error second dice 12");
             }
             catch (NullPointerException e) {
                 Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
                 getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
-                getPlayerFromID(id).getPattern().putAnyDice(dice, indexEndTwo);
-
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStartTwo);
+                updatePatternAndNotify(id);
                 throw new NullPointerException(e.getMessage());
             }
-            finally {
-                updatePatternAndNotify(id);
-            }
+
 
         }
     }

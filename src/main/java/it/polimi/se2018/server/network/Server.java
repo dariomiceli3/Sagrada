@@ -75,7 +75,10 @@ public class Server {
         new Server();
     }
 
-
+    /**
+     * method that provide the caller of the state of started game at the moment of the call
+     * @return the state of the game
+     */
     public boolean isGameStarted() {
         return gameStarted;
     }
@@ -148,13 +151,17 @@ public class Server {
     }
 
     /**
-     * method that allow the caller to set the current number player in the multiplayer gameController mode
+     * method that allow the caller to set the current number player in the multi player gameController mode
      * @param multi number of player in the current gameController
      */
     public static void setMulti(int multi) {
         Server.multi = multi;
     }
 
+    /**
+     * method that allow the caller to set the controller of a match
+     * @param gameController to set
+     */
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
     }
@@ -299,6 +306,7 @@ public class Server {
         clients = new ArrayList<>();
         socketClients = null;
         socketClients = new ArrayList<>();
+        setIdPlayer(0);
     }
 
 

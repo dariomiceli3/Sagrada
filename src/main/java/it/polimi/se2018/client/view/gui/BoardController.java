@@ -1372,6 +1372,7 @@ public class BoardController {
 
     void updateRound(int round) {
 
+
         textGame.setText(roundMsg + round + "is started");
         next.setDisable(true);
         skip.setDisable(true);
@@ -1420,6 +1421,9 @@ public class BoardController {
 
 
     void updateTurn() {
+
+
+
         toolCard1.setBlendMode(BlendMode.SRC_OVER);
         toolCard2.setBlendMode(BlendMode.SRC_OVER);
         toolCard3.setBlendMode(BlendMode.SRC_OVER);
@@ -1462,6 +1466,8 @@ public class BoardController {
     }
 
     void updateDraftPool(DraftPool draftPool) throws IOException {
+
+
 
         setToken(mainController.getTokens());
 
@@ -1641,6 +1647,8 @@ public class BoardController {
     }
 
     void errorStateDice() {
+
+
         if (guiState == ViewState.GLAZINGHAMMER) {
             setGuiState(ViewState.ERRORTOOL);
             roll.setDisable(true);
@@ -1683,6 +1691,12 @@ public class BoardController {
     }
 
     void toolMoveMsg() {
+
+        try {
+            loadToolCard();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         handlePattern(true);
         disablePool();
@@ -1905,6 +1919,7 @@ public class BoardController {
 
 
     void errorMatchDice() {
+
         setGuiState(ViewState.ERRORMATCH);
     }
 
@@ -2488,25 +2503,29 @@ public class BoardController {
             try {
                 log.info("loading tool card board");
                 fileStream = BoardController.class.getResourceAsStream("/images/tool/" + fileName + ".png");
-                Image image = new Image(fileStream);
                 if (i == 0) {
+                    Image image = new Image(fileStream);
                     toolCard1.setImage(image);
                     toolCardZoom1.setImage(image);
                 }
                 if (i == 1) {
+                    Image image = new Image(fileStream);
                     toolCard2.setImage(image);
                     toolCardZoom2.setImage(image);
                 }
                 if (i == 2) {
+                    Image image = new Image(fileStream);
                     toolCard3.setImage(image);
                     toolCardZoom3.setImage(image);
                 }
                 if (i == 3) {
+                    Image image = new Image(fileStream);
                     toolCard4.setImage(image);
                     toolCardZoom4.setImage(image);
                     toolCard4.setVisible(true);
                 }
                 if (i == 4) {
+                    Image image = new Image(fileStream);
                     toolCard5.setImage(image);
                     toolCardZoom5.setImage(image);
                     toolCard5.setVisible(true);

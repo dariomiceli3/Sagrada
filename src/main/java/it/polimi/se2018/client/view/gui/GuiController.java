@@ -804,10 +804,14 @@ public class GuiController extends View {
     }
 
     @Override
-    public void showToolSingleCommand(List<ToolCard> toolList, int poolSize) {
+    public void showToolSingleCommand(List<ToolCard> toolListCard, int poolSize) {
 
         Platform.runLater(() -> {
             try {
+                toolList = new ArrayList<>();
+                for (ToolCard tool : toolListCard) {
+                    toolList.add(new ToolCard(tool));
+                }
                 board.textToolSinglePlayerMsg();
             } catch (IOException e) {
                 log.warning(e.getMessage());
