@@ -107,7 +107,7 @@
                         <appendAssemblyId>false</appendAssemblyId>
                         <archive>
                             <manifest>
-                                <mainClass>it.polimi.se2018.server.network.Server</mainClass>
+                                <mainClass>it.polimi.se2018.client.view.login.Login</mainClass>
                             </manifest>
                         </archive>
                         <descriptorRefs>
