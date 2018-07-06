@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import it.polimi.se2018.exceptions.InvalidMoveException;
-import it.polimi.se2018.server.model.Cards.ToolCard;
 import it.polimi.se2018.server.network.VirtualView;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Components.Dice;
@@ -22,7 +21,15 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.logging.Logger;
 
-
+/**
+ * Class GameController: the class represents the controller of the MVC pattern used for this project, the class implements
+ * the interface Observer because receives the notify from the view, from which the controller updates its state and
+ * knows how to modify the model to obey to the user input. The class is responsible of the creation of the new game and
+ * of the settings of the observer/observable and the model of the different virtual view connected to the game. The class
+ * is used to managing the application logic and the state of the game
+ * @see java.util.Observer
+ * @author fadda-miceli-mundo
+ */
 public class GameController implements Observer {
 
     private final Logger log = Logger.getLogger(GameController.class.getName());
@@ -70,7 +77,16 @@ public class GameController implements Observer {
         createGame(viewList, singlePlayer, model);
     }
 
-    //todo javadoc
+    /**
+     * method responsible for the creation of every aspects of the Game and the game controller, the method load from
+     * a file json the useful settings (timer of the turn), and create the list of the virtual view in the game composed by
+     * the different virtual view connected to the game, independently by the technology used to connect to the server.
+     * The method also set the model for the current controller instance, set the observer and the model of the virtual view
+     * and at the start a new game
+     * @param viewList of virtual view connected
+     * @param singlePlayer game mode
+     * @param model model associated with the controller
+     */
     private void createGame(List<VirtualView> viewList, boolean singlePlayer, Model model) {
 
         Gson gson = new Gson();
@@ -180,9 +196,16 @@ public class GameController implements Observer {
 
 
 
-    //------------------- update in base alla notify della view-------------------
+    //------------------- update depeding on the notify of the view-------------------
 
-    //todo javadoc
+    /**
+     * Override of the method update of the interface Observer. The methods is the responsible of receiving all the
+     * the notification from the virtual view (representation of the view in the server), as observer of the view.
+     * Depending on the runtime events received from the view,the controller updates its state and then changes the model
+     * using the methods that manipulate the application logic
+     * @param o the observable virtual view
+     * @param arg the object received
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -255,11 +278,9 @@ public class GameController implements Observer {
             setPlayerDisconnection(((ExitEvent) arg).getPlayerID());
             sendExitNotification(((ExitEvent) arg).getPlayerID());
         }
-
         if (arg instanceof ReconnectPlayerEvent) {
             setPlayerReconnect(((ReconnectPlayerEvent) arg).getPlayerID());
         }
-
         if (arg instanceof DisconnectionEvent) {
             handlingDisconnection(((DisconnectionEvent) arg).getID(), virtualView);
 
@@ -270,7 +291,7 @@ public class GameController implements Observer {
     }
 
 
-    //--------metodi che modificano model ed il model manda la notify alla view----------
+    //-------------methods that manipulate the application logic (model)----------------------------------------
 
 
     /**
@@ -865,7 +886,11 @@ public class GameController implements Observer {
 
     }
 
-    //todo javadoc
+
+    /**
+     * method responsible of starting the timer of the player's turn and let the player TIMERTURN seconds to do
+     * the move, after that switch to the next turn ignoring the current player
+      */
     protected void startTimer() {
 
         if (timer != null) {
@@ -892,7 +917,9 @@ public class GameController implements Observer {
         }, TIMERTURN);
     }
 
-    //todo javadoc
+    /**
+     * method that stop the timer if there's one currently running
+     */
     private void endTimer() {
         if (timer != null) {
             timer.cancel();

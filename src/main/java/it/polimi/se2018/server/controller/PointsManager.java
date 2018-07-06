@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * class PointsManager: class used to calculate the final points of players at the end of the
  * game in both of two mode(multi player and single player)
- *
+ * @author fadda-miceli-mundo
  */
 class PointsManager {
 

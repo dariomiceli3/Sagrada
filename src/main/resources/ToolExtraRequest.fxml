@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2018.client.view.gui.ToolCardRequest">
    <children>
       <ImageView fitHeight="420.0" fitWidth="600.0" layoutX="-1.0" pickOnBounds="true">
@@ -19,39 +18,6 @@
       </ImageView>
       <TextArea fx:id="text" editable="false" focusTraversable="false" layoutX="39.0" layoutY="14.0" mouseTransparent="true" prefHeight="53.0" prefWidth="518.0" />
       <Button fx:id="select" layoutX="230.0" layoutY="288.0" mnemonicParsing="false" onAction="#buttonSelected" prefHeight="53.0" prefWidth="140.0" text="Select" />
-      <ToggleButton fx:id="tool11Button1" layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="1" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="tool11Group" />
-         </toggleGroup>
-      </ToggleButton>
-      <ToggleButton fx:id="tool11Button2" layoutX="130.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="2" toggleGroup="$tool11Group" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="tool11Button3" layoutX="230.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="3" toggleGroup="$tool11Group" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="tool11Button4" layoutX="330.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="4" toggleGroup="$tool11Group" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="tool11Button5" layoutX="420.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="5" toggleGroup="$tool11Group" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="tool11Button6" layoutX="503.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleTool11" prefHeight="46.0" prefWidth="54.0" text="6" toggleGroup="$tool11Group" visible="false">
-         <font>
-            <Font name="Silom" size="24.0" />
-         </font>
-      </ToggleButton>
       <ToggleButton fx:id="tool1ButtonPlus" layoutX="357.0" layoutY="191.0" mnemonicParsing="false" onAction="#handleTool1" prefHeight="53.0" prefWidth="112.0" text="+" visible="false">
          <font>
             <Font size="36.0" />
@@ -78,5 +44,15 @@
             <Font name="Silom" size="24.0" />
          </font>
       </ToggleButton>
+      <ToggleButton fx:id="toolEleven1" layoutX="26.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="1" visible="false">
+         <toggleGroup>
+            <ToggleGroup fx:id="toolElevenGroup" />
+         </toggleGroup>
+      </ToggleButton>
+      <ToggleButton fx:id="toolEleven2" layoutX="120.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="2" toggleGroup="$toolElevenGroup" visible="false" />
+      <ToggleButton fx:id="toolEleven3" layoutX="219.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="3" toggleGroup="$toolElevenGroup" visible="false" />
+      <ToggleButton fx:id="toolEleven4" layoutX="312.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="4" toggleGroup="$toolElevenGroup" visible="false" />
+      <ToggleButton fx:id="toolEleven5" layoutX="407.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="5" toggleGroup="$toolElevenGroup" visible="false" />
+      <ToggleButton fx:id="toolEleven6" layoutX="500.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleToolEleven" prefHeight="66.0" prefWidth="77.0" text="6" toggleGroup="$toolElevenGroup" visible="false" />
    </children>
 </AnchorPane>

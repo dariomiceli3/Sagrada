@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * Class GameSetup: representation of the first part of the game. It handles to load, to shuffle
  * and to deliver all the cards to the selected virtual view
+ * @author fadda-miceli-mundo
  */
 class GameSetup {
 
@@ -118,7 +119,11 @@ class GameSetup {
         view.sendEvent(new StartPatternEvent(view.getPlayerID(), patternList));
     }
 
-    //todo adriano
+    /**
+     * helper recursive method used to check that the pattern card distributed to the player are not the same
+     * @param a int
+     * @return an int
+     */
     private int ricorsiveMethod(int a) {
         Random random = new Random();
         if (!control[a]) {
@@ -127,7 +132,9 @@ class GameSetup {
         } else return ricorsiveMethod(random.nextInt(VALUE));
     }
 
-    //todo adriano
+    /**
+     * helper method used to change the player responsible of drafting the die from the bag and roll the dice
+     */
     void changeBagger() {
         do {
             gameController.getModel().getPlayerList().add(gameController.getModel().getPlayerList().remove(0));
@@ -190,19 +197,19 @@ class GameSetup {
         List<ToolCard> list = new ArrayList<>();
 
         list.add(new ToolCard("Grozing Pliers", DiceColor.PURPLE, 1));
-        //list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
+        list.add(new ToolCard("Eglomise Brush", DiceColor.BLUE, 2));
         list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
-        //list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
-        //list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
+        list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
+        list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
         list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
-        //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
+        list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
        /* if(!gameController.isSinglePlayer()) {
             list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));
         } */
-        //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
-        //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
-        //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
-        //list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
+        list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
+        list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
+        list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
+        list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
 
 
         Collections.shuffle(list);

@@ -1287,6 +1287,9 @@ public class BoardController {
         if (guiState == ViewState.GRINDING) {
             mainController.getConnection().useGrindingStoneToolCard(mainController.getPlayerID(), indexPool);
         }
+        if (guiState == ViewState.FLUXVALUE) {
+            mainController.getConnection().useFluxRemoverToolCard(mainController.getPlayerID(), indexPool, this.diceValue);
+        }
         if (guiState == ViewState.FLUXPOOL) {
             next.setDisable(true);
             ToolCardRequest.setToolNumber(11);
@@ -1298,9 +1301,7 @@ public class BoardController {
                 log.warning(e.getMessage());
             }
         }
-        if (guiState == ViewState.FLUXVALUE) {
-            mainController.getConnection().useFluxRemoverToolCard(mainController.getPlayerID(), indexPool, diceValue);
-        }
+
         if (guiState == ViewState.TAPNUMBER) {
             next.setDisable(true);
             textTapWheelFirstDice();
@@ -2512,6 +2513,18 @@ public class BoardController {
     private void updateToolCard() {
 
         if (mainController.isSinglePlayer()) {
+            if (mainController.getToolList().isEmpty()) {
+                toolCard1.setImage(null);
+                toolCard1.setVisible(false);
+                toolCard2.setImage(null);
+                toolCard2.setVisible(false);
+                toolCard3.setImage(null);
+                toolCard3.setVisible(false);
+                toolCard4.setImage(null);
+                toolCard4.setVisible(false);
+                toolCard5.setImage(null);
+                toolCard5.setVisible(false);
+            }
             if (mainController.getToolList().size() == 1) {
                 toolCard2.setImage(null);
                 toolCard2.setVisible(false);
@@ -2529,7 +2542,6 @@ public class BoardController {
                 toolCard5.setVisible(false);
                 toolCard3.setImage(null);
                 toolCard3.setVisible(false);
-
             }
             if (mainController.getToolList().size() == 3) {
                 toolCard4.setImage(null);

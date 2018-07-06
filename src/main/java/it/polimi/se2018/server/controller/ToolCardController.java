@@ -141,7 +141,7 @@ public class ToolCardController implements Observer {
 
             try {
                 toolCardEffect.runningPliers(virtualView.getPlayerID(), ((RunningPliersEvent) arg).getIndexPool(), ((RunningPliersEvent) arg).getIndexPattern());
-                gameController.nextTurn();
+                gameController.nextStepTool(virtualView);
             } catch (InvalidMoveException e) {
 
                 if (e.getMessage().equalsIgnoreCase("Invalid turn moment")) {

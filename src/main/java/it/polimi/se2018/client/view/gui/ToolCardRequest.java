@@ -41,6 +41,9 @@ public class ToolCardRequest {
         ToolCardRequest.color = color;
     }
 
+    public void setTool11(int tool11) {
+        this.tool11 = tool11;
+    }
 
     public static void display()  throws IOException {
 
@@ -48,10 +51,10 @@ public class ToolCardRequest {
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(RoundTrackerBox.class.getResource("/ToolExtraRequest.fxml"));
+        FXMLLoader loader = new FXMLLoader(ToolCardRequest.class.getResource("/ToolExtraRequest.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        InputStream fileStream = CustomCard.class.getResourceAsStream("/images/icon" + ".png");
+        InputStream fileStream = ToolCardRequest.class.getResourceAsStream("/images/icon" + ".png");
         Image image = new Image(fileStream);
         window.getIcons().add(image);
         window.setScene(scene);
@@ -64,19 +67,19 @@ public class ToolCardRequest {
     @FXML
     private Button select;
     @FXML
-    private ToggleButton tool11Button1;
+    private ToggleGroup toolElevenGroup;
     @FXML
-    private ToggleGroup tool11Group;
+    private ToggleButton toolEleven1;
     @FXML
-    private ToggleButton tool11Button2;
+    private ToggleButton toolEleven2;
     @FXML
-    private ToggleButton tool11Button3;
+    private ToggleButton toolEleven3;
     @FXML
-    private ToggleButton tool11Button4;
+    private ToggleButton toolEleven4;
     @FXML
-    private ToggleButton tool11Button5;
+    private ToggleButton toolEleven5;
     @FXML
-    private ToggleButton tool11Button6;
+    private ToggleButton toolEleven6;
     @FXML
     private ToggleButton tool1ButtonPlus;
     @FXML
@@ -108,17 +111,30 @@ public class ToolCardRequest {
         window.close();
     }
 
+
     @FXML
-    void handleTool1() {
+    void handleToolEleven() {
 
         try {
-            if (tool1Group.getSelectedToggle().equals(tool1ButtonMin)) {
-                tool1 = 0;
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven1)) {
+                setTool11(1);
             }
-            if (tool1Group.getSelectedToggle().equals(tool1ButtonPlus)) {
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven2)) {
+                setTool11(2);
+            }
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven3)) {
+                setTool11(3);
+            }
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven4)) {
+                setTool11(4);
+            }
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven5)) {
+                setTool11(5);
+            }
+            if (toolElevenGroup.getSelectedToggle().equals(toolEleven6)) {
+                setTool11(6);
+            }
 
-                tool1 = 1;
-            }
         }
         catch (NullPointerException e) {
             log.info(logMsg);
@@ -127,32 +143,16 @@ public class ToolCardRequest {
     }
 
     @FXML
-    void handleTool11() {
+    void handleTool1() {
 
         try {
-            if (tool11Group.getSelectedToggle().equals(tool11Button1)) {
-
-                tool11 = 1;
+            if (tool1Group.getSelectedToggle().equals(tool1ButtonMin)) {
+                tool1 = 0;
+                System.out.println("entro in 1");
             }
-            if (tool1Group.getSelectedToggle().equals(tool11Button2)) {
-
-                tool11 = 2;
-            }
-            if (tool11Group.getSelectedToggle().equals(tool11Button3)) {
-
-                tool11 = 3;
-            }
-            if (tool1Group.getSelectedToggle().equals(tool11Button4)) {
-
-                tool11 = 4;
-            }
-            if (tool11Group.getSelectedToggle().equals(tool11Button5)) {
-
-                tool11 = 5;
-            }
-            if (tool1Group.getSelectedToggle().equals(tool11Button6)) {
-
-                tool11 = 6;
+            if (tool1Group.getSelectedToggle().equals(tool1ButtonPlus)) {
+                tool1 = 1;
+                System.out.println("entro in 2");
             }
         }
         catch (NullPointerException e) {
@@ -194,14 +194,14 @@ public class ToolCardRequest {
 
             text.setText("Color of the dice is: " + color + ". Click the value for the selected dice, then SELECT");
 
-            select.disableProperty().bind(Bindings.isNull(tool11Group.selectedToggleProperty()));
+            select.disableProperty().bind(Bindings.isNull(toolElevenGroup.selectedToggleProperty()));
 
-            tool11Button1.setVisible(true);
-            tool11Button2.setVisible(true);
-            tool11Button3.setVisible(true);
-            tool11Button4.setVisible(true);
-            tool11Button5.setVisible(true);
-            tool11Button6.setVisible(true);
+            toolEleven1.setVisible(true);
+            toolEleven2.setVisible(true);
+            toolEleven3.setVisible(true);
+            toolEleven4.setVisible(true);
+            toolEleven5.setVisible(true);
+            toolEleven6.setVisible(true);
 
         }
         if(toolNumber == 12){

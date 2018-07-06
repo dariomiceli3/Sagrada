@@ -125,8 +125,7 @@ public class PatternCard implements Serializable {
           if (box.isBoxValid(dice)) {
                pattern.set(index, box);
           }
-          else
-               throw new InvalidMoveException("Invalid Constraint Value or Color");
+          else throw new InvalidMoveException("Invalid Constraint Value or Color");
      }
 
     /**
