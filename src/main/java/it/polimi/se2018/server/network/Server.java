@@ -13,10 +13,7 @@ import it.polimi.se2018.server.network.socket.VirtualSocket;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -72,7 +69,7 @@ public class Server {
 
     /**
      * method main that start a new Server instance
-     * @param args
+     * @param args command line parameter
      */
     public static void main(String[] args) {
         new Server();
@@ -158,6 +155,9 @@ public class Server {
         Server.multi = multi;
     }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
 
     //-----------------methods for managing the socket and rmi clients----------------------------------
 
@@ -284,6 +284,21 @@ public class Server {
             timer.cancel();
             mutex = false;
         }
+    }
+
+    /**
+     * method that eliminate the clients and the controller instance at the end of a match and when
+     * no player remain connected to the server
+     */
+    public void endGame() {
+        setGameController(null);
+        mutex = false;
+        gameStarted = false;
+        Server.setSinglePlayer(false);
+        clients = null;
+        clients = new ArrayList<>();
+        socketClients = null;
+        socketClients = new ArrayList<>();
     }
 
 

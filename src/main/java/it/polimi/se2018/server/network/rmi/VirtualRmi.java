@@ -316,7 +316,13 @@ public class VirtualRmi extends VirtualView {
         }
         else {
             Server.setMulti(Server.getMulti() - 1);
-            sendEventController(new DisconnectionEvent(super.getPlayerID()));
+            if (Server.getMulti() == 0) {
+                server.getRmiGatherer().getServerRmi().setClientsRmi(null);
+                server.endGame();
+            }
+            else {
+                sendEventController(new DisconnectionEvent(super.getPlayerID()));
+            }
         }
 
     }

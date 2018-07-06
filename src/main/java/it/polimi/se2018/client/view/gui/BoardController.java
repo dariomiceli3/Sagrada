@@ -570,6 +570,9 @@ public class BoardController {
         if (guiState == ViewState.DICEMOVE) {
             next.setDisable(false);
         }
+        if (guiState == ViewState.MOVE) {
+            enablePool();
+        }
         try {
             if (patternToggleGroup.getSelectedToggle().equals(cell1)) {
                 setIndexPattern(0);

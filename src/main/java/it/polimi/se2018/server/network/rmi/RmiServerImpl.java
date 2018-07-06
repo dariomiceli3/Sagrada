@@ -46,6 +46,11 @@ public class RmiServerImpl extends UnicastRemoteObject implements RmiServerInter
         return clientsRmi;
     }
 
+    public void setClientsRmi(List<VirtualRmi> clientsRmi) {
+        this.clientsRmi = clientsRmi;
+        this.clientsRmi = new ArrayList<>();
+    }
+
     /**
      * method responsible of send the event of the remote call from client to the virtual rmi that match
      * the id of the client

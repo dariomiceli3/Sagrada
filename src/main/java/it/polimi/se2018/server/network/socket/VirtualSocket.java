@@ -65,7 +65,6 @@ public class VirtualSocket extends VirtualView implements Runnable {
         return server;
     }
 
-
     /**
      * Override of the method run to start a virtual socket thread. The method is responsible to receive the event from
      * the socket handler of the client, read the object associated with them and send the notification to the controller,
@@ -93,8 +92,14 @@ public class VirtualSocket extends VirtualView implements Runnable {
                         }
                     } else {
                         Server.setMulti(Server.getMulti() - 1);
-                        setChanged();
-                        notifyObservers(new DisconnectionEvent(super.getPlayerID()));
+                        if (Server.getMulti() == 0) {
+                            getServer().endGame();
+                        }
+                        else {
+                            setChanged();
+                            notifyObservers(new DisconnectionEvent(super.getPlayerID()));
+                        }
+
                     }
                     this.running = false;
                 }
