@@ -194,15 +194,15 @@ class GameSetup {
         list.add(new ToolCard("Copper Foil Burnisher", DiceColor.RED, 3));
         list.add(new ToolCard("Lathekin", DiceColor.YELLOW, 4));
         list.add(new ToolCard("Lens Cutter", DiceColor.GREEN, 5));
-        list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
-        list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
+        //list.add(new ToolCard("Flux Brush", DiceColor.PURPLE, 6));
+        //list.add(new ToolCard("Glazing Hammer", DiceColor.BLUE, 7));
         if(!gameController.isSinglePlayer()) {
             list.add(new ToolCard("Running Pliers", DiceColor.RED, 8));
         }
-        list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
-        list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
-        list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
-        list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
+        //list.add(new ToolCard("Cork-backed Straightedge", DiceColor.YELLOW, 9));
+        //list.add(new ToolCard("Grinding Stone", DiceColor.GREEN, 10));
+        //list.add(new ToolCard("Flux Remover", DiceColor.PURPLE, 11));
+        //list.add(new ToolCard("Tap Wheel", DiceColor.BLUE, 12));
 
 
         Collections.shuffle(list);

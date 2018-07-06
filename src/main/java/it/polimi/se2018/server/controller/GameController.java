@@ -38,8 +38,6 @@ public class GameController implements Observer {
     private int round = START;
     private int currID;
     private boolean notEnded;
-    private Dice diceToolSinglePlayer;
-    private ToolCard toolRemoveSinglePlayer;
     private int singlePlayerDifficulty;
     private int step;
     private int disconnectPlayerNumber;
@@ -119,22 +117,6 @@ public class GameController implements Observer {
      */
     List<VirtualView> getViewGame(){
         return viewGame;
-    }
-
-    /**
-     * method that provides the caller the dice selected by player in the single-player mode for using tool card
-     * @return a dice
-     */
-    Dice getDiceToolSinglePlayer(){
-        return diceToolSinglePlayer;
-    }
-
-    /**
-     * method that provides the caller the last tool card used by player in the single-player mode
-     * @return a tool card
-     */
-    ToolCard getToolRemoveSinglePlayer(){
-        return toolRemoveSinglePlayer;
     }
 
     /**
@@ -408,8 +390,7 @@ public class GameController implements Observer {
         }
         catch (InvalidMoveException e) {
             view.sendEvent(new InvalidMoveEvent(e.getMessage(), view.getPlayerID()));
-            model.getDraftPool().getDraftPool().add(dice);
-            model.updatePoolAndNotify();
+            model.addDicePool(dice);
             startMove(view);
         }
     }
@@ -704,19 +685,15 @@ public class GameController implements Observer {
      * @param view the virtual view corresponding to the client that has chosen to use tool card
      * @param indexTool the chosen tool card
      */
-    private void checkCost(VirtualView view, int indexTool){
-        if(model.getPlayerFromID(view.getPlayerID()).getTokensNumber() < model.getToolCardList().get(indexTool).getCost()){
+    private void checkCost(VirtualView view, int indexTool) {
+
+        if (model.checkCostModel(view.getPlayerID(), indexTool)) {
             view.sendEvent(new OutOfTokenEvent(view.getPlayerID()));
             startTool(view);
-        }else {
-            model.getToolCardList().get(indexTool).incrementUsage();
+        }
+        else {
             toolController.toolCardEffectRequest(model.getToolCardList().get(indexTool).getNumber(), view);
-            int n = model.getPlayerFromID(view.getPlayerID()).getTokensNumber();
-            model.getPlayerFromID(view.getPlayerID()).setTokensNumber(n - model.getToolCardList().get(indexTool).getCost());
-            if (model.getToolCardList().get(indexTool).getCost() == START) {
-
-                model.getToolCardList().get(indexTool).setCost(SET);
-            }
+            model.setUsageToolCard(view.getPlayerID(), indexTool);
         }
     }
 
@@ -767,21 +744,17 @@ public class GameController implements Observer {
     }
 
     /**
-     * method use only in single-player mode that checks if the dice selected by the player is of the same color
-     * of the selected tool card
+     * method used only in single-player mode that checks if the dice selected by the player is of the same color
+     * of the selected tool card using model
      * @param view the virtual view corresponding to the client that has chosen to use tool card
      * @param indexTool the chosen tool card
      * @param indexPool the index of the draft pool corresponding to the selected dice
      */
     private void checkDice(VirtualView view, int indexTool, int indexPool){
 
-        if(model.getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(model.getToolCardList().get(indexTool).getColor().toString())){
-
-            diceToolSinglePlayer = model.getDraftPool().removeDice(indexPool);
-            model.updatePoolAndNotify();
-            toolRemoveSinglePlayer = model.getToolCardList().remove(indexTool);
-            toolController.toolCardEffectRequest(toolRemoveSinglePlayer.getNumber(), view);
-
+        if (model.checkDiceModel(indexPool, indexTool)) {
+            model.removeToolSingle(indexPool, indexTool);
+            toolController.toolCardEffectRequest(model.getToolRemoveSinglePlayer().getNumber(), view);
         }
         else {
             view.sendEvent(new NotMatchColorEvent());

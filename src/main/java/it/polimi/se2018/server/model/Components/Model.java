@@ -1,6 +1,7 @@
 package it.polimi.se2018.server.model.Components;
 
 
+import it.polimi.se2018.events.serverclient.controllerview.ToolCardUpdateEvent;
 import it.polimi.se2018.exceptions.InvalidMoveException;
 import it.polimi.se2018.server.model.Cards.PatternCard;
 import it.polimi.se2018.server.model.Cards.PrivateObjectiveCard;
@@ -12,6 +13,7 @@ import it.polimi.se2018.server.model.Cards.ToolCard;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -33,6 +35,8 @@ public class Model extends Observable {
     private List<PublicObjectiveCard> publicList;
     private List<Player> playerList;
     private int numberPlayer;
+    private Dice diceToolSinglePlayer;
+    private ToolCard toolRemoveSinglePlayer;
 
     /**
      * Class default constructor re-definition
@@ -132,6 +136,23 @@ public class Model extends Observable {
         }
         return null;
     }
+
+    /**
+     * method that provides the caller the dice selected by player in the single-player mode for using tool card
+     * @return a dice
+     */
+    public Dice getDiceToolSinglePlayer(){
+        return diceToolSinglePlayer;
+    }
+
+    /**
+     * method that provides the caller the last tool card used by player in the single-player mode
+     * @return a tool card
+     */
+    public ToolCard getToolRemoveSinglePlayer(){
+        return toolRemoveSinglePlayer;
+    }
+
 
     /**
      * method that allow the caller to set the Tool Card list stored in the model
@@ -345,5 +366,289 @@ public class Model extends Observable {
         setChanged();
         notifyObservers(new SinglePrivateEvent(playerList.get(0).getPrivateSinglePlayerCard()));
     }
+
+    public void addDicePool(Dice dice) {
+        this.getDraftPool().getDraftPool().add(dice);
+        updatePoolAndNotify();
+    }
+
+    public boolean checkDiceModel(int indexPool, int indexTool) {
+        return (getDraftPool().getDraftPool().get(indexPool).getColor().toString().equals(getToolCardList().get(indexTool).getColor().toString()));
+    }
+
+    public boolean checkCostModel(int id, int indexTool) {
+         return getPlayerFromID(id).getTokensNumber() < getToolCardList().get(indexTool).getCost();
+    }
+    public boolean checkEqualsDice(int id, int indexStart, int indexStartTwo) {
+        return getPlayerFromID(id).getPattern().getDice(indexStart).getColor().equals(getPlayerFromID(id).getPattern().getDice(indexStartTwo).getColor());
+    }
+
+    public void removeToolSingle(int indexPool, int indexTool) {
+        diceToolSinglePlayer = getDraftPool().removeDice(indexPool);
+        updatePoolAndNotify();
+        toolRemoveSinglePlayer = getToolCardList().remove(indexTool);
+    }
+
+    public void setUsageToolCard(int id, int indexTool) {
+        getToolCardList().get(indexTool).incrementUsage();
+        int token = getPlayerFromID(id).getTokensNumber();
+        getPlayerFromID(id).setTokensNumber(token - getToolCardList().get(indexTool).getCost());
+        if (getToolCardList().get(indexTool).getCost() == 1) {
+            getToolCardList().get(indexTool).setCost(2);
+        }
+    }
+
+    public void endToolCard(boolean singlePlayer, int id) {
+
+        if (!singlePlayer) {
+            updateTokenAndNotify(id);
+        }
+        else {
+            setChanged();
+            notifyObservers(new ToolCardUpdateEvent(getToolCardList()));
+        }
+    }
+
+    // for tool card 1,6,10
+    public void setDiceValue(int indexPool, int increase, int number)  {
+
+        if (number == 1) {
+            Dice dice = getDraftPool().getDraftPool().get(indexPool);
+            if (increase == 1) {
+                if (dice.getValue() == 1) {
+                    updatePoolAndNotify();
+                    try {
+                        throw new InvalidMoveException("Not valid decrease if value is 1");
+                    } catch (InvalidMoveException e) {
+                        log.warning(e.getMessage());
+                    }
+                }
+                else {
+                    dice.setValue(dice.getValue() + increase);
+                }
+            }
+            if (increase == -1) {
+                if (dice.getValue() == 6) {
+                    updatePoolAndNotify();
+                    try {
+                        throw new InvalidMoveException("Not valid increase if value is 6");
+                    } catch (InvalidMoveException e) {
+                        log.warning(e.getMessage());
+                    }
+                }
+                else {
+                    dice.setValue(dice.getValue() + increase);
+                }
+            }
+            getDraftPool().getDraftPool().get(indexPool).setValue(dice.getValue() + increase);
+            updateBoardAndNotify();
+        }
+        if (number == 10) {
+            int value = getDraftPool().getDraftPool().get(indexPool).getValue();
+            getDraftPool().getDraftPool().get(indexPool).setValue(7 - value);
+            updateBoardAndNotify();
+        }
+        if (number == 6) {
+            Random random = new Random();
+            int newValue = random.nextInt(6) + 1;
+            getDraftPool().getDraftPool().get(indexPool).setValue(newValue);
+            updateBoardAndNotify();
+        }
+    }
+
+    // for tool card 2,3,4,12
+    public void putFirstDiceToolCard(int id, int indexStart, int indexEnd, int number) throws InvalidMoveException {
+        if (number == 2) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStart);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPatternEglomise(dice, indexEnd, getPlayerFromID(id).getPattern());
+                updatePatternAndNotify(id);
+            }
+            catch (InvalidMoveException e) {
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStart);
+                throw new InvalidMoveException(e.getMessage());
+            }
+            catch (NullPointerException e) {
+                updatePatternAndNotify(id);
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+        if (number == 3) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStart);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPatternCopper(dice, indexEnd, getPlayerFromID(id).getPattern());
+                updatePatternAndNotify(id);
+            }
+            catch (InvalidMoveException e) {
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStart);
+                throw new InvalidMoveException(e.getMessage());
+            }
+            catch (NullPointerException  e) {
+                updatePatternAndNotify(id);
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+        if (number == 4) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStart);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEnd, getPlayerFromID(id).getPattern());
+            }
+            catch (InvalidMoveException e) {
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStart);
+                updatePatternAndNotify(id);
+                throw new InvalidMoveException("Error first dice 4");
+            }
+            catch (NullPointerException e) {
+                updatePatternAndNotify(id);
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+        if (number == 12) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStart);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEnd, getPlayerFromID(id).getPattern());
+                updatePatternAndNotify(id);
+            }
+            catch (InvalidMoveException e) {
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStart);
+                updatePatternAndNotify(id);
+                throw new InvalidMoveException("Error first dice 12");
+            }
+            catch (NullPointerException e) {
+                updatePatternAndNotify(id);
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+    }
+
+    // for tool card 4,12
+    public void putSecondDiceToolCard(int id, int indexStartOne, int indexEndOne, int indexStartTwo, int indexEndTwo, int number) throws InvalidMoveException {
+        if (number == 4) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStartTwo);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEndTwo, getPlayerFromID(id).getPattern());
+                updatePatternAndNotify(id);
+            }
+            catch (InvalidMoveException e) {
+                Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStartTwo);
+                updatePatternAndNotify(id);
+                throw new InvalidMoveException("Error second dice 4");
+            }
+            catch (NullPointerException e) {
+                Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexStartTwo);
+                updatePatternAndNotify(id);
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+        if (number == 12) {
+            Dice dice = getPlayerFromID(id).getPattern().removeDice(indexStartTwo);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexEndTwo, getPlayerFromID(id).getPattern());
+
+            }
+            catch (InvalidMoveException e) {
+                Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexEndTwo);
+
+                throw new InvalidMoveException("Error second dice 12");
+            }
+            catch (NullPointerException e) {
+                Dice dice1 = getPlayerFromID(id).getPattern().removeDice(indexEndOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice1, indexStartOne);
+                getPlayerFromID(id).getPattern().putAnyDice(dice, indexEndTwo);
+
+                throw new NullPointerException(e.getMessage());
+            }
+            finally {
+                updatePatternAndNotify(id);
+            }
+
+        }
+    }
+
+    //for tool card 8-9
+    public void putDiceToolCard(int id, int indexPool, int indexPattern, int number) {
+
+        if (number == 8) {
+            Dice dice = getDraftPool().getDraftPool().remove(indexPool);
+            try {
+                getPlayerFromID(id).getPattern().putDiceOnPattern(dice, indexPattern, getPlayerFromID(id).getPattern());
+                getPlayerFromID(id).setRunningP(true);
+                updatePatternAndNotify(id);
+                updateBoardAndNotify();
+                updateTokenAndNotify(id);
+            }
+            catch (InvalidMoveException e) {
+                getDraftPool().getDraftPool().add(dice);
+                updatePoolAndNotify();
+            }
+        }
+        if (number == 9) {
+            Dice dice = getDraftPool().getDraftPool().remove(indexPool);
+            try {
+                getPlayerFromID(id).getPattern().putDice(dice, indexPattern);
+                updatePatternAndNotify(id);
+                updateBoardAndNotify();
+            }
+            catch (InvalidMoveException e) {
+                getDraftPool().getDraftPool().add(dice);
+            }
+        }
+    }
+
+    //for toolcard 5
+    public void exchangePoolRoundTracker(int id, int indexPool, int indexRound, int indexPosition) {
+        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
+        Dice dice2 = getRoundTracker().getDice(indexRound, indexPosition);
+        getDraftPool().setDice(dice2);
+        getRoundTracker().addDice(dice1, indexRound);
+        updateBoardAndNotify();
+    }
+
+    //for toolcard 7
+    public void reRollPool() {
+
+        List<Dice> diceList = getDraftPool().cleanListDice();
+        for (Dice dice : diceList) {
+            Random random = new Random();
+            int value = random.nextInt(6) + 1;
+            dice.setValue(value);
+            getDraftPool().setDice(dice);
+        }
+        updateBoardAndNotify();
+    }
+
+    //for toolcard 11
+    public void exchangePoolBag(int indexPool, int value, Dice dice) {
+        dice.setValue(value);
+        Dice dice1 = getDraftPool().getDraftPool().remove(indexPool);
+        getDiceBag().setDice(dice1);
+        getDraftPool().setDice(dice);
+        updateBoardAndNotify();
+    }
+
+    public void tokenRefactor(boolean singlePlayer, int id, int toolNumber) {
+        if (singlePlayer) {
+            getDraftPool().getDraftPool().add(getDiceToolSinglePlayer());
+            updatePoolAndNotify();
+            getToolCardList().add(getToolRemoveSinglePlayer());
+        }
+        else if (getTool(toolNumber).getUsage() == 1) {
+            getTool(toolNumber).setCost(1);
+            int token = getPlayerFromID(id).getTokensNumber();
+            getPlayerFromID(id).setTokensNumber(token + 1);
+            getTool(toolNumber).setUsage(0);
+        }
+        else {
+            int tokenNumber = getPlayerFromID(id).getTokensNumber();
+            getPlayerFromID(id).setTokensNumber(tokenNumber + 2);
+        }
+    }
+
 
 }
