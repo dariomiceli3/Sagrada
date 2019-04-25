@@ -3,7 +3,7 @@
 <img src="https://ksr-ugc.imgix.net/assets/013/393/383/88f9cae91e41ef71ac2b06fb2fa564de_original.jpg?crop=faces&w=1552&h=873&fit=crop&v=1473272732&auto=format&q=92&s=49635f0025d51f0ffe4d3b820b04c854" width="700" height="350"></img>
 
 ## Getting Started
-> Sagrada is a game of Dice Drafting and Window Crafting for 1 to 4 players that plays in about 30 minutes. You can find more information [here]
+> Sagrada is a game of Dice Drafting and Window Crafting for 1 to 4 players that plays in about 30 minutes. Developer as a final project of Software Engineering course A.Y. 2017/2018 at Politecnico di Milano (also as Bachelor thesis). You can find more information [here]
 
 
 ## Usage
