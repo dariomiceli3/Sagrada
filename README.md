@@ -102,3 +102,4 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE] file f
    [jUnit]: <https://junit.org/junit5/>
    [JavaFX]: <https://openjfx.io>
    [SonarQube]: <https://www.sonarqube.org>
+   [SceneBuilder]: <https://gluonhq.com/products/scene-builder/>
