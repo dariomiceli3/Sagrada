@@ -70,7 +70,7 @@ The external libraries we used to implement some game's features are linked belo
 - Modeling: [UML]
 - Design: [MVC Pattern]
 
-##Build With
+## Build With
 * [Intellij IDEA] - Java IDE
 * [Java 8 SE] - version of SDK used
 * [Maven] - dependency management 
