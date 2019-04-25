@@ -94,7 +94,7 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE] file f
    [Java 8 SE]: <https://www.java.com/it/download/>
    [here]: <http://www.craniocreations.it/prodotto/sagrada/>
    [LICENSE]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/blob/master/LICENSE>
-   [file]: <>
+   [file]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/blob/master/LICENSE>
    [UML]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/tree/master/deliveries/UML/final>
    [MVC Pattern]: <https://en.wikipedia.org/wiki/Model–view–controller>
    [Intellij IDEA]: <https://www.jetbrains.com/idea/>
