@@ -2,7 +2,7 @@
 
 <img src="https://ksr-ugc.imgix.net/assets/013/393/383/88f9cae91e41ef71ac2b06fb2fa564de_original.jpg?crop=faces&w=1552&h=873&fit=crop&v=1473272732&auto=format&q=92&s=49635f0025d51f0ffe4d3b820b04c854" width="700" height="350"></img>
 
-##Getting Started
+## Getting Started
 > Sagrada is a game of Dice Drafting and Window Crafting for 1 to 4 players that plays in about 30 minutes. You can find more information [here]
 
 
@@ -94,7 +94,7 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE] file f
    [Java 8 SE]: <https://www.java.com/it/download/>
    [here]: <http://www.craniocreations.it/prodotto/sagrada/>
    [LICENSE]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/blob/master/LICENSE>
-   [file]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/blob/master/LICENSE>
+   [file]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/blob/master/Requirements.pdf>
    [UML]: <https://github.com/adrianomundo/ing-sw-2018-fadda-miceli-mundo/tree/master/deliveries/UML/final>
    [MVC Pattern]: <https://en.wikipedia.org/wiki/Model–view–controller>
    [Intellij IDEA]: <https://www.jetbrains.com/idea/>
